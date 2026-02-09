@@ -47,12 +47,45 @@ export default function OurValues() {
                                 <p className="text-secondary text-sm mt-3">Our commitment to sustainability enhances our reliability. As trusted partners, we promise only the best in our supply chain and community engagements, fostering collective growth.</p>
                             </div>
                         </div>
+
+                        <div className="bg-[#FDF5F3] rounded-xl p-8 flex flex-col gap-6">
+                            <Image src="/morethancopper.png" alt="Icon" width={300} height={90} />
+                            <h1 className="text-2xl font-semibold text-primary">More Than Cooper</h1>
+
+                        </div>
+
+                        <div className="bg-[#FDF5F3] rounded-xl p-8 flex flex-col gap-6">
+                            <Image src="/careforfuture.png" alt="Icon" width={80} height={0} />
+                            <div>
+                                <h1 className="text-2xl font-semibold text-primary">Care For The Future</h1>
+                                <p className="text-secondary text-sm mt-3">While focusing on innovation, we stay mindful of our environmental footprint. We strive to minimize our carbon footprint and set an example for responsible manufacturing across the industry.</p>
+                            </div>
+                        </div>
+
+                        <div className="bg-[#FDF5F3] rounded-xl p-8 flex flex-col gap-6">
+                            <Image src="/grow.png" alt="Icon" width={80} height={0} />
+                            <div>
+                                <h1 className="text-2xl font-semibold text-primary">Grow Together</h1>
+                                <p className="text-secondary text-sm mt-3">We strive to partner with those who share a genuine commitment to excellence. We work towards building long-term relationships that make a positive difference to society.</p>
+                            </div>
+                        </div>
                     </div>
 
 
 
 
                 </div>
+            </div>
+
+
+            {/* people */}
+            <div className="min-h-screen  bg-[url('/people.png')] bg-cover  bg-bottom bg-no-repeat">
+
+                <div className="flex flex-col items-center gap-5">
+                    <Badge title="people" />
+                    <h1 className='text-4xl mb-8 text-[#5F5F66]'>Treating all employees with respect and dignity</h1>
+                </div>
+
             </div>
         </div>
     )
