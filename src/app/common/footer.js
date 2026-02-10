@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import { WhiteBadge } from "./badge";
 
@@ -50,12 +51,18 @@ export default function Footer() {
                 </div>
 
                 {/* Navigation Links */}
-                <div className='flex justify-center gap-8 pt-6 border-t border-gray-200'>
-                    <a href="#" className='text-primary font-medium text-sm hover:text-opacity-80'>Home</a>
-                    <a href="#" className='text-primary font-medium text-sm hover:text-opacity-80'>About us</a>
-                    <a href="#" className='text-primary font-medium text-sm hover:text-opacity-80'>Products</a>
-                    <a href="#" className='text-primary font-medium text-sm hover:text-opacity-80'>Logistics</a>
-                    <a href="#" className='text-primary font-medium text-sm hover:text-opacity-80'>Contact Us</a>
+                <div className='flex justify-center gap-12 pt-8 border-t border-gray-200'>
+                    <Link href="/" className='text-primary font-medium text-sm hover:text-opacity-80 transition-opacity'>Home</Link>
+                    <div className='w-px bg-gray-300'></div>
+                    <Link href="/aboutus" className='text-primary font-medium text-sm hover:text-opacity-80 transition-opacity'>About us</Link>
+                    <div className='w-px bg-gray-300'></div>
+                    <Link href="/OurValues" className='text-primary font-medium text-sm hover:text-opacity-80 transition-opacity'>Values</Link>
+                    <div className='w-px bg-gray-300'></div>
+                    <Link href="#" className='text-primary font-medium text-sm hover:text-opacity-80 transition-opacity'>Products</Link>
+                    <div className='w-px bg-gray-300'></div>
+                    <Link href="#" className='text-primary font-medium text-sm hover:text-opacity-80 transition-opacity'>Logistics</Link>
+                    <div className='w-px bg-gray-300'></div>
+                    <Link href="#" className='text-primary font-medium text-sm hover:text-opacity-80 transition-opacity'>Contact Us</Link>
                 </div>
             </div>
         </div>

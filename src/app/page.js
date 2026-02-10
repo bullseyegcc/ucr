@@ -1,69 +1,54 @@
 import Image from "next/image";
 import { ArrowRight } from 'lucide-react';
 import coppericon from './../../public/coppericon.png';
+import badge_icon from '../../public/badge.png';
 
-
-import {Badge} from "./common/badge.js";
-import {WhiteBadge} from "./common/badge.js";
+import { Badge } from "./common/badge.js";
+import { WhiteBadge } from "./common/badge.js";
+import StatsCard from "./components/StatsCard.js";
 
 export default function Home() {
   return (
     <div>
-      <div className="flex min-h-screen items-center justify-center bg-black font-sans dark:bg-black">
-        <h1 className="text-6xl font-bold text-white font-inter">UCR shapping the future</h1>
+      <div className="flex min-h-[90vh] pt-60 font-medium  justify-center bg-black font-sans dark:bg-black">
+        <h1 className="text-6xl  text-white font-inter">UCR shapping the future</h1>
       </div>
 
-      <div className="min-h-screen flex  px-10 py-20 gap-6">
-        <div className="w-[65%] flex flex-col gap-10">
+      <div className=" relative h-[70vh] flex   px-10 pt-20 gap-6">
+        <div className="w-[70%] flex flex-col gap-10">
           <Badge title="About Us" />
 
-          <h1 className="font-inter text-primary text-4xl">Our UAE factory combines Advance technology with global <span className="text-secondary">experties to produce  hight-quality copper product that meet international standards</span></h1>
+          <h1 className="font-helvetica-now text-primary text-5xl">Our UAE factory combines Advanced technology with global <span className="text-secondary">experties to produce  hight-quality copper product that meet international standards</span></h1>
 
-          <button className="bg-primary  w-40 px-5 py-2 text-white flex justify-between gap-3 rounded-2xl">Know more <ArrowRight size={18} color='white' /></button>
+          <button className="bg-primary  w-44 px-5 py-3 text-white flex justify-between gap-3 rounded-full">Know more <ArrowRight size={18} color='white' /></button>
         </div>
 
-        <div className="w-[50%]">
+        <div className="w-[50%] abolute right-0 top-0">
           <Image src="/aboutside.png" alt="Factory Image" width={900} height={800} className="w-full object-contain" />
         </div>
       </div>
 
       <div className="grid grid-cols-4 px-10 pb-20">
-
-        <div className="flex flex-col  gap-8 px-4">
-          <h1 className="text-primary text-6xl font-semibold">2009</h1>
-          <hr className="border-t border-secondary shadow-2xl"></hr>
-          <div>
-            <h1 className="font-semibold">Established In</h1>
-            <p className="text-sm text-secondary mt-2">Since then, our excellence has made us a trusted name in copper manufacturing.</p>
-          </div>
-        </div>
-
-        <div className="flex flex-col  gap-8 px-4">
-          <h1 className="text-primary text-6xl font-semibold">2009</h1>
-          <hr className="border-t border-secondary shadow-2xl"></hr>
-          <div>
-            <h1 className="font-semibold">Established In</h1>
-            <p className="text-sm text-secondary mt-2">Since then, our excellence has made us a trusted name in copper manufacturing.</p>
-          </div>
-        </div>
-
-        <div className="flex flex-col  gap-8 px-4">
-          <h1 className="text-primary text-6xl font-semibold">2009</h1>
-          <hr className="border-t border-secondary shadow-2xl"></hr>
-          <div>
-            <h1 className="font-semibold">Established In</h1>
-            <p className="text-sm text-secondary mt-2">Since then, our excellence has made us a trusted name in copper manufacturing.</p>
-          </div>
-        </div>
-
-        <div className="flex flex-col  gap-8 px-4">
-          <h1 className="text-primary text-6xl font-semibold">2009</h1>
-          <hr className="border-t border-secondary shadow-2xl"></hr>
-          <div>
-            <h1 className="font-semibold">Established In</h1>
-            <p className="text-sm text-secondary mt-2">Since then, our excellence has made us a trusted name in copper manufacturing.</p>
-          </div>
-        </div>
+        <StatsCard 
+          mainHeading="2009" 
+          subHeading="Established In" 
+          description="Since then, our excellence has made us a trusted name in copper manufacturing."
+        />
+        <StatsCard 
+          mainHeading="20K+" 
+          subHeading="MT/Annum" 
+          description="Produces 20,000 metric tons of copper per year."
+        />
+        <StatsCard 
+          mainHeading="150+" 
+          subHeading="Employees" 
+          description="With over 150 experienced employees, we deliver quality and reliability every day."
+        />
+        <StatsCard 
+          mainHeading="50+" 
+          subHeading="Global sales" 
+          description="With a presence in 50+ countries, we serve clients on every continent."
+        />
       </div>
 
 
@@ -71,18 +56,18 @@ export default function Home() {
 
         <div className="w-1/2 m-2 relative bg-[#6A3120] p-8 flex flex-col justify-end mb-20 gap-5 rounded-xl bg-[url('/moreabout.png')] bg-contain bg-top bg-no-repeat">
           <WhiteBadge title="more about" className='z-190' />
-          <h1 className="text-3xl text-white z-90">Union Copper Rod is undeniable the most trusted copper rod manufacturer in region</h1>
-          <button className='mt-6 z-90 flex items-center gap-2 w-60 text-white border  border-secondary rounded-2xl px-3 py-2 justify-between'>Contact Us <ArrowRight size={18} color='white' /></button>
-          <div className="h-90 bg-gradient-to-t rounded-xl from-[#6A3120] to-[#6a3120] mt-10 absolute bottom-0 left-0 w-full z-0 bg-[url('/bg.png')] bg-cover bg-center">
+          <h1 className="text-5xl text-white z-90 font-helvetica-now">Union Copper Rod is undeniable the most trusted copper rod manufacturer in region</h1>
+          <button className='rounded-full mt-6 z-90 text-lg flex items-center gap-2 w-55 text-white border  border-secondary rounded-2xl px-5 py-3 justify-between'>Company Profile <ArrowRight size={18} color='white' /></button>
+          <div className="h-[85%] bg-gradient-to-t rounded-xl from-[#6A3120] to-[#6a3120] mt-10 absolute bottom-0 left-0 w-full z-0 bg-[url('/bg.png')] bg-cover bg-center">
           </div>
 
         </div>
 
         <div className="w-1/2 m-2 relative bg-[#6A3120] p-8 flex flex-col justify-end mb-20 gap-5 rounded-xl bg-[url('/supplychain.png')] bg-contain bg-top bg-no-repeat">
           <WhiteBadge title="more about" className='z-190' />
-          <h1 className="text-3xl text-white z-90">Union Copper Rod is undeniable the most trusted copper rod manufacturer in region</h1>
-          <button className='mt-6 z-90 flex items-center gap-2 w-60 text-white border  border-secondary rounded-2xl px-3 py-2 justify-between'>Contact Us <ArrowRight size={18} color='white' /></button>
-          <div className="h-90 bg-gradient-to-t rounded-xl from-[#6A3120] to-[#6a3120] mt-10 absolute bottom-0 left-0 w-full z-0 bg-[url('/bg.png')] bg-cover bg-center">
+          <h1 className="text-5xl text-white z-90 font-helvetica-now">Union Copper Rod is undeniable the most trusted copper rod manufacturer in region</h1>
+          <button className='rounded-full mt-6 z-90 text-lg flex items-center gap-2 w-46 text-white border  border-secondary rounded-2xl px-5 py-3 justify-between'>Know More <ArrowRight size={18} color='white' /></button>
+          <div className="h-[85%] bg-gradient-to-t rounded-xl from-[#6A3120] to-[#6a3120] mt-10 absolute bottom-0 left-0 w-full z-0 bg-[url('/bg.png')] bg-cover bg-center">
           </div>
 
         </div>
@@ -95,19 +80,22 @@ export default function Home() {
 
         <div className="relative top-8 bottom-5 bg-white p-8 flex flex-col gap-26 w-[45%] max-h-[90%] min-h-[90%] mx-10 rounded-xl">
           <div className="flex flex-col gap-5">
-            <Badge title="Featured Products" />
+            <div className="flex gap-3 text-white z-300">
+              <Image src={badge_icon} alt="Badge Icon" width={24} height={24} className='object-contain' />
+              <span className='text-black uppercase'>Featured Products</span>
+            </div>
             <div className="flex flex-col gap-4">
-              <h1 className="text-3xl text-primary">
+              <h1 className="text-5xl text-primary mt-5">
                 Copper Rods and Wires
                 <Image src={coppericon} alt="Badge Icon" width={50} height={50} className='object-contain inline-block ml-3' />
               </h1>
 
-              <h1 className="text-3xl text-secondary my-2">Cooper Sheets</h1>
-              <h1 className="text-3xl text-secondary my-2">Customized components</h1>
+              <h1 className="text-4xl text-secondary my-2">Cooper Sheets</h1>
+              <h1 className="text-4xl text-secondary my-2">Customized components</h1>
             </div>
           </div>
 
-          <button className="w-50 flex gap-2 justify-between text-primary text-lg items-center border border-primary rounded-xl px-5 py-2">Know More <ArrowRight size={18} className="text-primary" /></button>
+          <button className="w-50 flex gap-2 justify-between text-primary text-lg items-center border border-primary rounded-full px-5 py-3">Know More <ArrowRight size={18} className="text-primary" /></button>
 
           <div className="flex gap-2 mt-6 absolute bottom-5 left-5">
             <div className="w-6 h-3 rounded-full bg-primary"></div>

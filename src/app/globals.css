@@ -1,8 +1,24 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Helvetica';
+  src: url('/fonts/helvetica.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url('/fonts/helvetica-now-display.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-helvetica: 'Helvetica', sans-serif;
+  --font-helvetica-now: 'Helvetica Now Display', sans-serif;
 }
 
 @theme inline {
@@ -10,10 +26,9 @@
   --color-foreground: var(--foreground);
   --color-primary: #FA6E43;
   --color-secondary: #C0C0C0;
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-geist-mono);
   --font-inter: var(--font-inter);
-  --font-display: var(--font-display);
+  --font-helvetica: var(--font-helvetica);
+  --font-helvetica-now: var(--font-helvetica-now);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -34,8 +49,12 @@ body {
     font-family: var(--font-inter), sans-serif;
   }
   
-  .font-display {
-    font-family: var(--font-display), sans-serif;
+  .font-helvetica {
+    font-family: var(--font-helvetica);
+  }
+  
+  .font-helvetica-now {
+    font-family: var(--font-helvetica-now);
   }
   
   .shadow-inset-primary {

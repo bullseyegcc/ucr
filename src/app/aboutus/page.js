@@ -1,5 +1,8 @@
 import { Badge, Badgetextwhite } from "../common/badge"
 import { WhiteBadge } from "../common/badge"
+import badge_icon from '../../../public/badge.png';
+
+
 import { ArrowRight } from 'lucide-react';
 
 import Image from "next/image"
@@ -31,21 +34,87 @@ export default function AboutUs() {
 
             <div className="min-h-[60vh] my-8 w-full flex justify-between gap-6 items-starts px-10">
 
-                <div className="max-h-90  rounded-xl w-1/2 px-10 py-8 flex flex-col justify-between bg-[url('/missionbg.png')] bg-cover bg-top bg-no-repeat">
-                        <WhiteBadge title="our mission" className='ml-10 mt-10' />
-                        <h1 className="text-4xl ">To deliver  premium copper product and services that power progress and add value to a sustainable future</h1>
+                <div className="max-h-90  text-white rounded-xl w-1/2 px-10 py-8 flex flex-col justify-between bg-[url('/missionbg.png')] bg-cover bg-top bg-no-repeat">
+                    <WhiteBadge title="our mission" className='ml-10 mt-10' />
+                    <h1 className="text-4xl ">To deliver  premium copper product and services that power progress and add value to a sustainable future</h1>
                 </div>
 
-                 <div className="min-h-90 max-h-90  rounded-xl w-1/2 px-10 py-8 flex flex-col justify-between bg-[#F5F5F5] self-end">
-                        <Badge title="our values" className='ml-10 mt-10' />
-                        <h1 className="text-4xl ">To deliver  premium copper product and services that power progress and add value to a sustainable future</h1>
+                <div className="min-h-90 max-h-90  rounded-xl w-1/2 px-10 py-8 flex flex-col justify-between bg-[#F5F5F5] self-end">
+                    <Badge title="our values" className='ml-10 mt-10' />
+                    <h1 className="text-4xl ">To deliver  premium copper product and services that power progress and add value to a sustainable future</h1>
                 </div>
 
-                
-                
+
+
 
             </div>
 
+
+            {/* parent company */}
+
+            <div className="h-screen relative">
+                <div className="min-h-1/2 w-full  bg-[url('/parentcompanybg.png')] bg-cover bg-top bg-no-repeat rounded-xl flex items-center px-16  backdrop-brightness-75 backdrop-blur-xl">
+
+                    <div className="flex gap-3 text-white z-300 mt-16">
+                        <Image src={badge_icon} alt="Badge Icon" width={34} height={34} className='object-contain' />
+                        <span className=' text-4xl uppercase '>Parent Company</span>
+                    </div>
+                </div>
+                <div className="h-1/2 bg-[#FEF7F4] w-full px-16 py-8">
+                    <h1 className="text-4xl text-[#212225]">Our Core Sectors</h1>
+
+                    <div className="text-primary text-2xl flex flex-col gap-2 mt-6 underline">
+
+                        <h1>Manufacturing</h1>
+                        <h1>Trading</h1>
+                        <h1>Construction</h1>
+                        <h1>Services</h1>
+                    </div>
+
+                </div>
+
+
+                <div className="h-[80vh] rounded-t-2xl bg-white absolute right-0 bottom-0 w-1/2 px-10 pt-16 flex flex-col pt-16 items-center gap-16 ">
+
+                    <p className="text-2xl text-center">Itihad International Investment LLC is a private holding and multi-disciplinary conglometrate ,engaged in a woide spectrum of economic activities in the MENA region</p>
+
+                    <Image src="/itihad.png" alt="Itihad Logo" width={200} height={100} className='mt-4' />
+
+                </div>
+            </div>
+
+
+            <div className="h-screen bg-[url('/journeygradient.png')] bg-cover bg-top bg-no-repeat flex flex-col ">
+
+                <div className="flex flex-col items-center justify-center  py-18">
+
+                    <Badge title="our Story" className='ml-10 mt-10' />
+                    <h1 className="text-4xl mt-4 ">Over The Years</h1>
+                </div>
+
+
+                <div className="h-[80vh] mt-6">
+
+             
+                    <div className="w-full h-[90%] flex justify-center px-30">
+                        
+                        <div className="h-full w-1/2 bg-[url('/2009img.png')] bg-cover  rounded-l-2xl   bg-top bg-no-repeat bg-bottom"></div>
+                        <div className="h-full w-1/2 bg-primary bg-[url('/2009img2.png')] bg-contain rounded-r-2xl bg-top-right  bg-no-repeat px-10 py-26 flex flex-col justify-between gap-9">
+
+                        <h1 className="text-8xl font-semibold  text-white  ">2009</h1>
+
+                        <div className="w-[80%]">
+                            <h1 className="text-4xl text-white">Founded With Vision</h1>
+                            <p className="text-sm text-white pr-8 mt-6">Founded with a steadfast dedication to accuracy, quality, and innovation, our journey in copper production began with a clear purpose — to set new benchmarks in the industry.Every process, from sourcing to refinement, reflects our pursuit of perfection and reliability.</p>
+                        </div>
+                        </div>
+
+                    </div>
+            
+                        
+                </div>
+
+            </div>
 
 
             <div className="flex justify-center min-h-screen px-10">
@@ -70,7 +139,7 @@ export default function AboutUs() {
 
             </div>
 
-            <div className="w-full h-[80vh] pt-16 px-10 bg-[url('/expertisebg.png')] bg-contain bg-top bg-no-repeat bg-cover flex flex-col justify-between">
+            <div className="w-full h-[80vh] pt-16 px-10 mb-8 bg-[url('/expertisebg.png')] bg-contain bg-top bg-no-repeat bg-cover flex flex-col justify-between">
 
                 <div>
                     <Badge title="our expertise" />
