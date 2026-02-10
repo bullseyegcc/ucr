@@ -5,11 +5,11 @@ import { WhiteBadge } from "./badge";
 export default function Footer() {
     return (
         <div className='min-h-screen bg-[url("/footer-bg.png")] bg-cover bg-center flex flex-col justify-end items-center '>
-            <div className='w-full max-w-6xl bg-white rounded-xl p-16 flex flex-col gap-12'>
+            <div className='w-[80%] bg-white rounded-xl p-16 flex flex-col gap-12'>
                 {/* Header Section */}
                 <div className='flex justify-between items-center'>
                     <div className='flex items-center gap-3'>
-                        <Image src="/logo.png" alt="UCR Logo" width={300} height={90} className='object-contain' />
+                        <Image src="/clogo.png" alt="UCR Logo" width={300} height={90} className='object-contain' />
                     </div>
                     <div className='flex gap-4'>
                         <Facebook size={24} className='text-primary cursor-pointer' />

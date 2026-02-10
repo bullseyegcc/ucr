@@ -1,0 +1,136 @@
+import { Badge, Badgetextwhite } from "../common/badge"
+import { WhiteBadge } from "../common/badge"
+import { ArrowRight } from 'lucide-react';
+
+import Image from "next/image"
+export default function AboutUs() {
+
+    return (
+        <div className="">
+            <div className=" mb-[30%] relative flex min-h-[80vh] items-center justify-center bg-black font-sans bg-primary flex flex-col gap-10">
+
+                <Badgetextwhite title="About Us" />
+
+                <h1 className=" w-[70%]  text-center text-5xl font-bold text-white font-inter">Leading the region’s copper transformation with cutting edge technology </h1>
+                <Image src="/aboutimg.png" alt="About Us Image" width={800} height={600} className='absolute -bottom-[55%] w-[75%]' />
+            </div>
+
+            <div className="px-10 py-20 flex flex-col items-center justify-center">
+                <Badge title="Who we are" />
+
+                <p className="text-center text-4xl leading-relaxed px-10 mt-8">
+                    <span className="text-[#FF7A5C]">Since 2008, we've delivered reliable, high performance copper solutions to </span>
+                    <span className="bg-gradient-to-r from-[#FF7A5C] to-[#8A8A8A] bg-clip-text text-transparent">industries across more than 30 countries, supported by advanced </span>
+                    <span className="text-[#8A8A8A]">technology and a strong focus on environmental responsibility. Guided by our core values, we work to elevate industry standards and help shape a greener, more efficient future.</span>
+                </p>
+            </div>
+
+
+            {/* Our Mission & Our Values */}
+
+
+            <div className="min-h-[60vh] my-8 w-full flex justify-between gap-6 items-starts px-10">
+
+                <div className="max-h-90  rounded-xl w-1/2 px-10 py-8 flex flex-col justify-between bg-[url('/missionbg.png')] bg-cover bg-top bg-no-repeat">
+                        <WhiteBadge title="our mission" className='ml-10 mt-10' />
+                        <h1 className="text-4xl ">To deliver  premium copper product and services that power progress and add value to a sustainable future</h1>
+                </div>
+
+                 <div className="min-h-90 max-h-90  rounded-xl w-1/2 px-10 py-8 flex flex-col justify-between bg-[#F5F5F5] self-end">
+                        <Badge title="our values" className='ml-10 mt-10' />
+                        <h1 className="text-4xl ">To deliver  premium copper product and services that power progress and add value to a sustainable future</h1>
+                </div>
+
+                
+                
+
+            </div>
+
+
+
+            <div className="flex justify-center min-h-screen px-10">
+
+                <div className="w-1/2 m-2 relative bg-[#6A3120] p-8 flex flex-col justify-end mb-20 gap-5 rounded-xl bg-[url('/ourcompany.png')] bg-contain bg-top bg-no-repeat">
+                    <WhiteBadge title="more about" className='z-190' />
+                    <h1 className="text-3xl text-white z-90">Union Copper Rod is undeniable the most trusted copper rod manufacturer in region</h1>
+                    <button className='mt-6 z-90 flex items-center gap-2 w-60 text-white border  border-secondary rounded-2xl px-3 py-2 justify-between'>Contact Us <ArrowRight size={18} color='white' /></button>
+                    <div className="h-90 bg-gradient-to-t rounded-xl from-[#6A3120] to-[#6a3120] mt-10 absolute bottom-0 left-0 w-full z-0 bg-[url('/bg.png')] bg-cover bg-center">
+                    </div>
+
+                </div>
+
+                <div className="w-1/2 m-2 relative bg-[#6A3120] p-8 flex flex-col justify-end mb-20 gap-5 rounded-xl bg-[url('/sustain.png')] bg-contain bg-top bg-no-repeat">
+                    <WhiteBadge title="more about" className='z-190' />
+                    <h1 className="text-3xl text-white z-90">Union Copper Rod is undeniable the most trusted copper rod manufacturer in region</h1>
+                    <button className='mt-6 z-90 flex items-center gap-2 w-60 text-white border  border-secondary rounded-2xl px-3 py-2 justify-between'>Contact Us <ArrowRight size={18} color='white' /></button>
+                    <div className="h-90 bg-gradient-to-t rounded-xl from-[#6A3120] to-[#6a3120] mt-10 absolute bottom-0 left-0 w-full z-0 bg-[url('/bg.png')] bg-cover bg-center">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div className="w-full h-[80vh] pt-16 px-10 bg-[url('/expertisebg.png')] bg-contain bg-top bg-no-repeat bg-cover flex flex-col justify-between">
+
+                <div>
+                    <Badge title="our expertise" />
+                    <h1 className="text-4xl mt-4 font-semibold ">Our Expertise & Experiance</h1>
+
+                </div>
+                <div className="flex gap-6 items-end">
+
+                    <div className="h-[55vh] rounded-xl w-[30%] bg-white px-5 pt-16 relative flex flex-col gap-8">
+                        <h1 className="text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4">200k+ <hr className="text-primary w-[90%] shadow  " /></h1>
+
+
+                        <div className="relative z-10">
+                            <h1 className="text-3xl font-bold mb-2">MT/Anum</h1>
+                            <p className=" pr-4">200,000 metric tons
+                                copper production line that is the largest of its kind in the Middle East. </p>
+
+                        </div>
+
+                        <Image src="/anum.png" alt="Expertise Icon" width={290} height={80} className='w-full absolute -bottom-0 right-0 z-0' />
+
+                    </div>
+
+                    <div className="h-[50vh] rounded-xl w-[30%] bg-white px-5 pt-16 relative flex flex-col gap-8">
+                        <h1 className="text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4">150+ <hr className="text-primary w-[90%] shadow  " /></h1>
+
+
+                        <div className="relative z-10">
+                            <h1 className="text-3xl font-bold mb-2">Employees</h1>
+                            <p className="w-70">With over 150 experienced employees, we deliver quality and reliability every day.</p>
+
+                        </div>
+
+                        <Image src="/employees.png" alt="Expertise Icon" width={330} height={80} className=' absolute -bottom-0 right-0 z-0' />
+
+                    </div>
+
+                    <div className="h-[45vh] rounded-xl w-[30%] bg-white px-5 pt-16 relative flex flex-col gap-8">
+                        <h1 className="text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4">30+ <hr className="text-primary w-[90%] shadow  " /></h1>
+
+
+                        <div className="relative z-10">
+                            <h1 className="text-3xl font-bold mb-2">Global Sales</h1>
+                            <p className=" w-80 pr-4">We supplies products, services and solutions across over 30 countries in Australia, Asia, Africa, and the Middle East  </p>
+
+                        </div>
+
+                        <Image src="/globalsales.png" alt="Expertise Icon" width={240} height={80} className=' absolute -bottom-0 right-0 z-0' />
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    )
+}
