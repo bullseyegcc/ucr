@@ -150,11 +150,11 @@ export default function AboutUs() {
                 <div className="flex gap-6 items-end">
 
                     <div className="h-[55vh] rounded-xl w-[30%] bg-white px-5 pt-16 relative flex flex-col gap-8">
-                        <h1 className="text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4">200k+ <hr className="text-primary w-[90%] shadow  " /></h1>
+                        <h1 className="text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">200k+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
                         <div className="relative z-10">
-                            <h1 className="text-3xl font-bold mb-2">MT/Anum</h1>
+                            <h1 className="text-3xl font-bold mb-2 ">MT/Anum</h1>
                             <p className=" pr-4">200,000 metric tons
                                 copper production line that is the largest of its kind in the Middle East. </p>
 
@@ -165,7 +165,7 @@ export default function AboutUs() {
                     </div>
 
                     <div className="h-[50vh] rounded-xl w-[30%] bg-white px-5 pt-16 relative flex flex-col gap-8">
-                        <h1 className="text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4">150+ <hr className="text-primary w-[90%] shadow  " /></h1>
+                        <h1 className="text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">150+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
                         <div className="relative z-10">
@@ -179,7 +179,7 @@ export default function AboutUs() {
                     </div>
 
                     <div className="h-[45vh] rounded-xl w-[30%] bg-white px-5 pt-16 relative flex flex-col gap-8">
-                        <h1 className="text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4">30+ <hr className="text-primary w-[90%] shadow  " /></h1>
+                        <h1 className="text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">30+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
                         <div className="relative z-10">

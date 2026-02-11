@@ -7,12 +7,14 @@ import { Badge } from "./common/badge.js";
 import { WhiteBadge } from "./common/badge.js";
 import StatsCard from "./components/StatsCard.js";
 import FeaturedProducts from "./components/FeaturedProducts.js";
+import { VideoPlayer } from "./common/video";
 
 export default function Home() {
   return (
     <div>
-      <div className="flex min-h-[90vh] pt-60 font-medium  justify-center bg-black font-sans dark:bg-black">
-        <h1 className="text-6xl  text-white font-inter">UCR shapping the future</h1>
+      <div className="flex min-h-[80vh]  font-medium  justify-center bg-black font-sans dark:bg-black">
+        <VideoPlayer src="/hero.mp4" className=" object-cover " />
+        <h1 className="absolute top-[40%] text-6xl  text-white font-inter">UCR shapping the future</h1>
       </div>
 
       <div className=" relative h-[70vh] flex   px-10 pt-20 gap-6">
@@ -30,24 +32,24 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-4 px-10 pb-20">
-        <StatsCard 
-          mainHeading="2009" 
-          subHeading="Established In" 
+        <StatsCard
+          mainHeading="2009"
+          subHeading="Established In"
           description="Since then, our excellence has made us a trusted name in copper manufacturing."
         />
-        <StatsCard 
-          mainHeading="20K+" 
-          subHeading="MT/Annum" 
+        <StatsCard
+          mainHeading="20K+"
+          subHeading="MT/Annum"
           description="Produces 20,000 metric tons of copper per year."
         />
-        <StatsCard 
-          mainHeading="150+" 
-          subHeading="Employees" 
+        <StatsCard
+          mainHeading="150+"
+          subHeading="Employees"
           description="With over 150 experienced employees, we deliver quality and reliability every day."
         />
-        <StatsCard 
-          mainHeading="50+" 
-          subHeading="Global sales" 
+        <StatsCard
+          mainHeading="50+"
+          subHeading="Global sales"
           description="With a presence in 50+ countries, we serve clients on every continent."
         />
       </div>
@@ -55,20 +57,27 @@ export default function Home() {
 
       <div className="flex justify-center min-h-screen px-10">
 
-        <div className="w-1/2 m-2 relative bg-[#6A3120] p-8 flex flex-col justify-end mb-20 gap-5 rounded-xl bg-[url('/moreabout.png')] bg-contain bg-top bg-no-repeat">
-          <WhiteBadge title="more about" className='z-190' />
-          <h1 className="text-5xl text-white z-90 font-helvetica-now">Union Copper Rod is undeniable the most trusted copper rod manufacturer in region</h1>
-          <button className='rounded-full mt-6 z-90 text-lg flex items-center gap-2 w-55 text-white border  border-secondary rounded-2xl px-5 py-3 justify-between'>Company Profile <ArrowRight size={18} color='white' /></button>
-          <div className="h-[85%] bg-gradient-to-t rounded-xl from-[#6A3120] to-[#6a3120] mt-10 absolute bottom-0 left-0 w-full z-0 bg-[url('/bg.png')] bg-cover bg-center">
+        <div className="w-1/2 m-2 relative bg-[#6A3120] flex flex-col justify-end mb-20 gap-5 rounded-xl">
+          <VideoPlayer src="/moreabout.mp4" className=" object-contain rounded-xl " />
+          <div className="absolute bottom-0 left-0 p-8 flex flex-col justify-end gap-5 ">
+            <WhiteBadge title="more about" className='z-190' />
+            <h1 className="text-5xl text-white z-90 font-helvetica-now">Union Copper Rod is undeniable the most trusted copper rod manufacturer in region</h1>
+            <button className='rounded-full mt-6 z-90 text-lg flex items-center gap-2 w-55 text-white border  border-secondary rounded-2xl px-5 py-3 justify-between'>Company Profile <ArrowRight size={18} color='white' /></button>
+            <div className="h-[85%] bg-gradient-to-t rounded-xl from-[#6A3120] to-[#6a3120] mt-10 absolute bottom-0 left-0 w-full z-0 bg-[url('/bg.png')] bg-cover bg-center">
+            </div>
           </div>
 
         </div>
 
-        <div className="w-1/2 m-2 relative bg-[#6A3120] p-8 flex flex-col justify-end mb-20 gap-5 rounded-xl bg-[url('/supplychain.png')] bg-contain bg-top bg-no-repeat">
-          <WhiteBadge title="more about" className='z-190' />
-          <h1 className="text-5xl text-white z-90 font-helvetica-now">Union Copper Rod is undeniable the most trusted copper rod manufacturer in region</h1>
-          <button className='rounded-full mt-6 z-90 text-lg flex items-center gap-2 w-46 text-white border  border-secondary rounded-2xl px-5 py-3 justify-between'>Know More <ArrowRight size={18} color='white' /></button>
-          <div className="h-[85%] bg-gradient-to-t rounded-xl from-[#6A3120] to-[#6a3120] mt-10 absolute bottom-0 left-0 w-full z-0 bg-[url('/bg.png')] bg-cover bg-center">
+        <div className="w-1/2 m-2 relative bg-[#6A3120] flex flex-col justify-end mb-20 gap-5 rounded-xl bg-[url('/supplychain.png')] bg-contain bg-top bg-no-repeat">
+          <VideoPlayer src="/supplychain.mp4" className=" object-contain rounded-xl " />
+
+          <div className="absolute bottom-0 left-0 p-8 flex flex-col justify-end gap-5 ">
+            <WhiteBadge title="more about" className='z-190' />
+            <h1 className="text-5xl text-white z-90 font-helvetica-now">Union Copper Rod is undeniable the most trusted copper rod manufacturer in region</h1>
+            <button className='rounded-full mt-6 z-90 text-lg flex items-center gap-2 w-46 text-white border  border-secondary rounded-2xl px-5 py-3 justify-between'>Know More <ArrowRight size={18} color='white' /></button>
+            <div className="h-[85%] bg-gradient-to-t rounded-xl from-[#6A3120] to-[#6a3120] mt-10 absolute bottom-0 left-0 w-full z-0 bg-[url('/bg.png')] bg-cover bg-center">
+            </div>
           </div>
 
         </div>
@@ -78,12 +87,14 @@ export default function Home() {
 
       <FeaturedProducts />
 
-      <div className="min-h-[90vh] flex flex-col justify-between  bg-[url('/care.jpg')] bg-cover bg-center mx-10 p-10 my-5 rounded-xl">
-        <div>
+      <div className="relative h-[90vh] flex flex-col justify-between  bg-[url('/care.jpg')] bg-cover bg-center mx-10 my-5 rounded-xl">
+        <VideoPlayer src="/sustain.mp4" className=" object-contain rounded-xl " />
+
+        <div className="absolute top-15 px-10">
           <WhiteBadge title="What we Care" />
           <h1 className="text-4xl text-white font-semibold mt-5">Sustainability</h1>
         </div>
-        <div className="grid grid-cols-3 ">
+        <div className="grid grid-cols-3 absolute bottom-4 px-10">
 
           <div className="bg-white/4  backdrop-blur-sm text-center flex flex-col items-center py-12 px-10 mx-2 rounded-xl gap-3">
             <Image src="/recycle.png" alt="Care Image" width={140} height={130} />
@@ -147,13 +158,16 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-3 grid-rows-2 gap-6">
-          <div className="flex px-6 py-12 flex-col justify-between items-start row-span-2  bg-[url('/excellence.png')] bg-cover bg-center ml-10 rounded-xl">
-            <Image src="/sign.png" alt="Icon" width={80} height={0} className="mb-6" />
+          <div className="relative flex flex-col justify-between items-start row-span-2  bg-[url('/excellence.png')] bg-cover bg-center ml-10 rounded-xl">
+            <VideoPlayer src="/excellence.mp4" className=" object-contain rounded-2xl " />
 
-            <div className="text-white">
-              <h1 className="text-2xl">UAE excellence</h1>
+            <Image src="/sign.png" alt="Icon" width={80} height={0} className=" absolute top-5 px-10" />
+
+            <div className="text-white absolute bottom-10 px-10">
+              <h1 className="text-3xl">UAE excellence</h1>
               <p className="text-sm mt-2">Factory in a world-class industrial hub</p>
             </div>
+
           </div>
           <div className="bg-white rounded-xl p-8 flex flex-col gap-4 shadow-lg">
             <Image src="/gn.png" alt="Icon" width={80} height={0} className="mb-6" />
@@ -193,11 +207,16 @@ export default function Home() {
         </div>
       </div>
 
-      <div className='min-h-screen bg-[url("/globalreach.png")] bg-cover bg-center rounded-xl  my-20 flex flex-col items-center pt-20 p-10 gap-5'>
-        <Badge title="Global Reach" className='z-190' />
-        <h1 className='text-4xl text-primary z-90'>Our global reach </h1>
+      <div className='relative h-screen rounded-xl  my-20 flex flex-col items-center   gap-5'>
+        
+        <VideoPlayer src="/cta.mp4" className=" object-contain rounded-xl " />
+        
+        <div className="absolute top-20 text-center flex flex-col items-center gap-5">
+          <Badge title="Global Reach" className='z-190' />
+          <h1 className='text-4xl text-primary z-90'>Our global reach </h1>
 
-        <h1 className='text-5xl text-white z-90'>From UAE to the world </h1>
+          <h1 className='text-5xl text-white z-90'>From UAE to the world </h1>
+        </div>
       </div>
 
       <div>

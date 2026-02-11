@@ -68,7 +68,7 @@ export default function Footer() {
                     <div className='w-px bg-gray-300'></div>
                     <Link href="#" className='text-primary font-medium text-sm hover:text-opacity-80 transition-opacity'>Products</Link>
                     <div className='w-px bg-gray-300'></div>
-                    <Link href="#" className='text-primary font-medium text-sm hover:text-opacity-80 transition-opacity'>Logistics</Link>
+                    <Link href="/logistics" className='text-primary font-medium text-sm hover:text-opacity-80 transition-opacity'>Logistics</Link>
                     <div className='w-px bg-gray-300'></div>
                     <Link href="#" className='text-primary font-medium text-sm hover:text-opacity-80 transition-opacity'>Contact Us</Link>
                 </div>
