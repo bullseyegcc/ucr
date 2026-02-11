@@ -10,9 +10,9 @@ export default function AboutUs() {
 
     return (
         <div className="">
-            <div className=" mb-[30%] relative flex min-h-[80vh] items-center justify-center bg-black font-sans bg-primary flex flex-col gap-10">
+            <div className=" mb-[30%] relative flex min-h-[80vh] items-center pt-46 bg-black font-sans bg-primary flex flex-col gap-10">
 
-                <Badgetextwhite title="About Us" />
+                <Badgetextwhite title="Crafting Sustainable progress,one cooper solution at a time" />
 
                 <h1 className=" w-[70%]  text-center text-5xl font-bold text-white font-inter">Leading the region’s copper transformation with cutting edge technology </h1>
                 <Image src="/aboutimg.png" alt="About Us Image" width={800} height={600} className='absolute -bottom-[55%] w-[75%]' />
@@ -121,20 +121,21 @@ export default function AboutUs() {
 
                 <div className="w-1/2 m-2 relative bg-[#6A3120] p-8 flex flex-col justify-end mb-20 gap-5 rounded-xl bg-[url('/ourcompany.png')] bg-contain bg-top bg-no-repeat">
                     <WhiteBadge title="more about" className='z-190' />
-                    <h1 className="text-3xl text-white z-90">Union Copper Rod is undeniable the most trusted copper rod manufacturer in region</h1>
-                    <button className='mt-6 z-90 flex items-center gap-2 w-60 text-white border  border-secondary rounded-2xl px-3 py-2 justify-between'>Contact Us <ArrowRight size={18} color='white' /></button>
-                    <div className="h-90 bg-gradient-to-t rounded-xl from-[#6A3120] to-[#6a3120] mt-10 absolute bottom-0 left-0 w-full z-0 bg-[url('/bg.png')] bg-cover bg-center">
+                    <h1 className="text-5xl text-white z-90 font-helvetica-now">Union Copper Rod is undeniably the most trusted copper rod manufacturer in the region</h1>
+          <button className='rounded-full mt-6 z-90 text-lg flex items-center gap-2 w-55 text-white border  border-secondary rounded-2xl px-5 py-3 justify-between'>Company Profile <ArrowRight size={18} color='white' /></button>
+                    <div className="h-[85%] bg-gradient-to-t rounded-xl from-[#6A3120] to-[#6a3120] mt-10 absolute bottom-0 left-0 w-full z-0 bg-[url('/bg.png')] bg-cover bg-center">
                     </div>
 
                 </div>
 
                 <div className="w-1/2 m-2 relative bg-[#6A3120] p-8 flex flex-col justify-end mb-20 gap-5 rounded-xl bg-[url('/sustain.png')] bg-contain bg-top bg-no-repeat">
                     <WhiteBadge title="more about" className='z-190' />
-                    <h1 className="text-3xl text-white z-90">Union Copper Rod is undeniable the most trusted copper rod manufacturer in region</h1>
-                    <button className='mt-6 z-90 flex items-center gap-2 w-60 text-white border  border-secondary rounded-2xl px-3 py-2 justify-between'>Contact Us <ArrowRight size={18} color='white' /></button>
-                    <div className="h-90 bg-gradient-to-t rounded-xl from-[#6A3120] to-[#6a3120] mt-10 absolute bottom-0 left-0 w-full z-0 bg-[url('/bg.png')] bg-cover bg-center">
-                    </div>
+                    <h1 className="text-5xl text-white z-90 font-helvetica-now">Union Copper Rod is undeniably the most trusted copper rod manufacturer in the region</h1>
+                              <button className='rounded-full mt-6 z-90 text-lg flex items-center gap-2 w-55 text-white border  border-secondary rounded-2xl px-5 py-3 justify-between'>Download Report <ArrowRight size={18} color='white' /></button>
 
+                    <div className="h-[85%] bg-gradient-to-t rounded-xl from-[#6A3120] to-[#6a3120] mt-10 absolute bottom-0 left-0 w-full z-0 bg-[url('/bg.png')] bg-cover bg-center">
+                    </div>
+ 
                 </div>
 
             </div>

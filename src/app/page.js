@@ -6,6 +6,7 @@ import badge_icon from '../../public/badge.png';
 import { Badge } from "./common/badge.js";
 import { WhiteBadge } from "./common/badge.js";
 import StatsCard from "./components/StatsCard.js";
+import FeaturedProducts from "./components/FeaturedProducts.js";
 
 export default function Home() {
   return (
@@ -75,45 +76,12 @@ export default function Home() {
       </div>
 
 
-      <div className=" h-[90vh]   rounded-xl mx-10 bg-[url('/fp.png')] bg-cover">
-
-
-        <div className="relative top-8 bottom-5 bg-white p-8 flex flex-col gap-26 w-[45%] max-h-[90%] min-h-[90%] mx-10 rounded-xl">
-          <div className="flex flex-col gap-5">
-            <div className="flex gap-3 text-white z-300">
-              <Image src={badge_icon} alt="Badge Icon" width={24} height={24} className='object-contain' />
-              <span className='text-black uppercase'>Featured Products</span>
-            </div>
-            <div className="flex flex-col gap-4">
-              <h1 className="text-5xl text-primary mt-5">
-                Copper Rods and Wires
-                <Image src={coppericon} alt="Badge Icon" width={50} height={50} className='object-contain inline-block ml-3' />
-              </h1>
-
-              <h1 className="text-4xl text-secondary my-2">Cooper Sheets</h1>
-              <h1 className="text-4xl text-secondary my-2">Customized components</h1>
-            </div>
-          </div>
-
-          <button className="w-50 flex gap-2 justify-between text-primary text-lg items-center border border-primary rounded-full px-5 py-3">Know More <ArrowRight size={18} className="text-primary" /></button>
-
-          <div className="flex gap-2 mt-6 absolute bottom-5 left-5">
-            <div className="w-6 h-3 rounded-full bg-primary"></div>
-            <div className="w-3 h-3 rounded-full bg-gray-300"></div>
-            <div className="w-3 h-3 rounded-full bg-gray-300"></div>
-            <div className="w-3 h-3 rounded-full bg-gray-300"></div>
-          </div>
-
-        </div>
-
-
-
-      </div>
+      <FeaturedProducts />
 
       <div className="min-h-[90vh] flex flex-col justify-between  bg-[url('/care.jpg')] bg-cover bg-center mx-10 p-10 my-5 rounded-xl">
         <div>
           <WhiteBadge title="What we Care" />
-          <h1 className="text-4xl text-white font-semibold">Sustainability</h1>
+          <h1 className="text-4xl text-white font-semibold mt-5">Sustainability</h1>
         </div>
         <div className="grid grid-cols-3 ">
 
@@ -141,10 +109,10 @@ export default function Home() {
 
 
       <div className="min-h-screen flex gap-1 mx-10">
-        <div className="min-h-screen w-1/2 bg-primary rounded-xl px-8 py-4 flex flex-col gap-12 ">
-          <div>
+        <div className="min-h-screen w-1/2 bg-[#FA6E43] rounded-xl px-8 py-4 flex flex-col gap-12 ">
+          <div className="mt-8">
             <WhiteBadge title="Core Strength" className='z-190' />
-            <h1 className="text-4xl text-white font-semibold  ">Our technology</h1>
+            <h1 className="text-4xl text-white font-semibold mt-4  ">Our technology</h1>
 
           </div>
 
@@ -159,9 +127,9 @@ export default function Home() {
 
             </div>
 
-            <div className="flex flex-col gap-6 mt-10">
-              <h1 className="flex gap-4 items-center  text-xl text-white"><ArrowRight size={18} className="text-white" />Cooper treatments</h1>
-              <h1 className="flex gap-4 items-center  text-xl text-white"><ArrowRight size={18} className="text-white" />NexGen Solutions</h1>
+            <div className="flex flex-col gap-6 mt-20 gap-5">
+              <h1 className="flex gap-4 items-center  text-4xl text-white"><ArrowRight size={34} className="text-white" />Cooper treatments</h1>
+              <h1 className="flex gap-4 items-center  text-4xl text-white"><ArrowRight size={34} className="text-white" />NexGen Solutions</h1>
 
             </div>
 
@@ -190,25 +158,25 @@ export default function Home() {
           <div className="bg-white rounded-xl p-8 flex flex-col gap-4 shadow-lg">
             <Image src="/gn.png" alt="Icon" width={80} height={0} className="mb-6" />
             <h1 className="text-2xl font-semibold text-black">Global network</h1>
-            <p className="text-secondary text-sm">Factory in a world-class industrial hub</p>
+            <p className="text-sm">Factory in a world-class industrial hub</p>
           </div>
 
           <div className="bg-white rounded-xl p-8 flex flex-col gap-4 shadow-lg">
             <Image src="/tn.png" alt="Icon" width={80} height={40} className="mb-6" />
             <h1 className="text-2xl font-semibold text-black">Top-notch certified</h1>
-            <p className="text-secondary text-sm">Factory in a world-class industrial hub</p>
+            <p className=" text-sm">Factory in a world-class industrial hub</p>
           </div>
 
           <div className="bg-white rounded-xl p-8 flex flex-col gap-4 shadow-lg">
             <Image src="/sf.png" alt="Icon" width={80} height={40} className="mb-6" />
             <h1 className="text-2xl font-semibold text-black">Sustainable future</h1>
-            <p className="text-secondary text-sm">Factory in a world-class industrial hub</p>
+            <p className=" text-sm">Factory in a world-class industrial hub</p>
           </div>
 
           <div className="bg-white rounded-xl p-8 flex flex-col gap-4 shadow-lg">
             <Image src="/p.png" alt="Icon" width={80} height={40} className="mb-6" />
             <h1 className="text-2xl font-semibold text-black">Partnership approach</h1>
-            <p className="text-secondary text-sm">Factory in a world-class industrial hub</p>
+            <p className=" text-sm">Factory in a world-class industrial hub</p>
           </div>
         </div>
 
@@ -240,10 +208,10 @@ export default function Home() {
 
 
       <div className="min-h-screen flex gap-1 mx-10 items-start mb-4">
-        <div className="min-h-screen max-h-screen w-1/2 bg-primary rounded-xl px-10 py-4 flex flex-col gap-8 ">
+        <div className="min-h-screen max-h-screen w-1/2 bg-[#FE5D0A] rounded-xl px-10 py-4 flex flex-col gap-8 ">
           <div className='mt-6'>
-            <WhiteBadge title="Blogs & Articles" className='z-190' />
-            <h1 className="text-4xl text-white font-semibold mt-5 ">Latest News</h1>
+            <WhiteBadge title="Blogs & Articles" className='z-190 mb-5' />
+            <h1 className="text-5xl my-3 text-white font-semibold mt-5 ">Latest News</h1>
 
 
           </div>
@@ -255,7 +223,7 @@ export default function Home() {
               <span>Monday,April 28,2026</span>
             </div>
 
-            <h1 className="z-500 text-xl pl-4 text-white">UAE Copper Producer Expands Global Supply Network Across Asia & Europe</h1>
+            <h1 className="z-500 text-4xl pl-4 text-white">UAE Copper Producer Expands Global Supply Network Across Asia & Europe</h1>
 
             <button className=' z-90 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4  bg-white rounded-lg px-3 py-2 '> <ArrowRight size={18} color='black' /></button>
 
@@ -269,7 +237,7 @@ export default function Home() {
               <span>Monday,April 28,2026</span>
             </div>
 
-            <h1 className="z-500 text-2xl pl-4 text-white">Company Launches New High-Conductivity Copper Rods for Energy Sector</h1>
+            <h1 className="z-500 text-3xl pl-4 text-white">Company Launches New High-Conductivity Copper Rods for Energy Sector</h1>
             <div className="rounded-xl h-26 pl-0 absolute top-0 w-full z-0 bg-gradient-to-b from-[#FA6E43] to-transparent"></div>
 
           </div>
@@ -280,7 +248,7 @@ export default function Home() {
               <span>Monday,April 28,2026</span>
             </div>
 
-            <h1 className="z-500 text-2xl pl-4 text-white">Company Launches New High-Conductivity Copper Rods for Energy Sector</h1>
+            <h1 className="z-500 text-3xl pl-4 text-white">Company Launches New High-Conductivity Copper Rods for Energy Sector</h1>
             <div className="rounded-xl h-26 pl-0 absolute top-0 w-full z-0 bg-gradient-to-b from-[#FA6E43] to-transparent"></div>
 
           </div>

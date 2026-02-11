@@ -2,11 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import { WhiteBadge } from "./badge";
+import { VideoPlayer } from "./video";
 
 export default function Footer() {
     return (
-        <div className='min-h-screen bg-[url("/footer-bg.png")] bg-cover bg-center flex flex-col justify-end items-center '>
-            <div className='w-[80%] bg-white rounded-xl p-16 flex flex-col gap-12'>
+        <div className='relative min-h-[90vh] flex flex-col justify-end items-center '>
+           
+            <div className='relative w-full'>
+                <VideoPlayer src="/footer.mp4" width={600} height={800} className='w-full h-full' />
+                <div className='absolute inset-0' style={{ background: "linear-gradient(0deg, rgba(250, 110, 67, 0.15) 0%, rgba(250, 110, 67, 0.15) 100%)" }}></div>
+            </div>
+
+
+            <div className='absolute w-[80%] bg-white rounded-xl p-16 flex flex-col gap-12'>
                 {/* Header Section */}
                 <div className='flex justify-between items-center'>
                     <div className='flex items-center gap-3'>

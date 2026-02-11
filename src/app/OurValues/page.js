@@ -83,7 +83,7 @@ export default function OurValues() {
 
                 <div className="flex flex-col items-center gap-5">
                     <Badge title="people" />
-                    <h1 className='text-4xl mb-8 text-[#5F5F66]'>Treating all employees with respect and dignity</h1>
+                    <h1 className='text-5xl mb-8 text-[#5F5F66]'>Treating all employees with respect and dignity</h1>
                 </div>
 
             </div>

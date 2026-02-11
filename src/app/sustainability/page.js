@@ -1,0 +1,121 @@
+import { Badge, Badgetextwhite } from "../common/badge"
+import Image from "next/image"
+import { VideoPlayer } from "../common/video"
+
+export default function sustainability() {
+    return (
+        <div>
+            <div className="rouned-b-2xl flex flex-col text-center min-h-[80vh] items-center justify-center font-sans dark:bg-black gap-6" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/sustainbg.png') lightgray 50% / cover no-repeat" }}>
+                <Badgetextwhite title="Sustainability" />
+                <h1 className="w-[80%] text-7xl font-medium text-white font-inter ">Creating value with a differentiated approch</h1>
+            </div>
+
+
+            {/* Our Mission */}
+
+            <div className="min-h-screen flex  px-10 py-20 font-medium bg-gray-200 shadow-lg backdrop-blur-sm">
+
+                <div className="flex flex-col  gap-28 w-90 ">
+                    <Image src="/mission1.png" alt="Icon" width={300} height={0} className="ml-9" />
+                    <Image src="/mission2.png" alt="Icon" width={400} height={0} />
+                </div>
+
+                <div className="flex flex-col justify-center items-center font-medium">
+                    <Badge title="Core Strength" />
+                    <h1 className="text-6xl mt-2 flex items-baseline font-helvitica-now leading-tight">
+                        Our mission <Image src="/natureglobe.png" alt="Icon" width={80} height={0} /> is to create
+                    </h1>
+                    <h1 className="text-6xl w-[60%] text-center leading-tight">
+                        <span className="text-[#4F7363]">eco-friendly solutions </span> that promote recycling and green leaving
+                    </h1>
+
+                    <p className="max-w-lg mt-8 text-xl  ">We believe in a future where style and sustainability
+                        coexist harmoniously.</p>
+                </div>
+
+                <div className="flex flex-col  justify-between items-end w-90 gap-8">
+                    <Image src="/mission3.png" alt="Icon" width={280} height={0} />
+                    <Image src="/mission4.png" alt="Icon" width={330} height={0} className="mr-20" />
+                </div>
+
+            </div>
+
+
+            <div className="min-h-[85vh] flex flex-col items-center px-10 py-20 ">
+
+                <h1 className="text-primary text-xl font-medium uppercase">Build on integrity, powered by innovation</h1>
+                <h1 className="w-[60%] text-center text-5xl mt-4 font-semibold mt-5">Eco-friendly designs & recycling innovations.</h1>
+
+                <div className="grid grid-cols-3 gap-2 my-16">
+
+                    <div className=" flex flex-col  px-10 gap-3">
+                        <Image src="/eco1.png" alt="Icon" width={300} height={0} className="w-full" />
+                        <h1 className="text-2xl font-medium text-primary text-left ">Lower Electricity Consumption</h1>
+                        <p className="text-sm">Helio leverages modern data centers with a Power Usage Effectiveness (PUE) as low as 1.02 — far better than the 2.6 average of local render farms. Less waste, smarter cooling, dramatically lower energy demand.</p>
+
+                    </div>
+
+                      <div className=" flex flex-col  px-10 gap-3">
+                        <Image src="/eco2.png" alt="Icon" width={300} height={0} className="w-full" />
+                        <h1 className="text-2xl font-medium text-primary ">CO₂ reports & carbon capture</h1>
+                        <p className="text-sm">Helio utilizes cutting-edge rendering algorithms that significantly reduce processing time while maintaining high-quality outputs. This technology optimizes resource usage, allowing for more projects to be completed in less time.</p>
+
+                    </div>
+
+                      <div className=" flex flex-col  px-10 gap-3">
+                        <Image src="/eco3.png" alt="Icon" width={300} height={0} className="w-full" />
+                        <h1 className="text-2xl font-medium text-primary ">Energy conservation</h1>
+                        <p className="text-sm">With Helio, users can easily scale their rendering capabilities up or down based on project requirements. This flexibility ensures that clients only pay for the resources they need, enhancing cost efficiency.</p>
+
+                    </div>
+
+                </div>   
+            </div>
+
+
+            <div className="min-h-screen  px-10 py-20">
+            
+                    <div className="text-center mb-16 flex flex-col items-center">
+                      <Badge title="Core Strength" />
+                      <h1 className="text-4xl font-semibold text-black mt-6">Why choose us</h1>
+                    </div>
+            
+                    <div className="grid grid-cols-3 grid-rows-2 gap-6">
+                      <div className=" row-span-2  ml-10 rounded-xl overflow-hidden relative">
+                      <VideoPlayer src="/wecarethenature.mp4" width={600} height={800} className='w-full h-full' />
+                    
+                          <h1 className="text-3xl text-white absolute bottom-9 left-6">We care the Nature</h1>
+                   
+                     
+                      </div>
+                      <div className="bg-white rounded-xl p-8 flex flex-col gap-4 shadow-lg">
+                        <Image src="/ecofeature1.png" alt="Icon" width={80} height={0} className="mb-6" />
+                        <h1 className="text-2xl font-semibold text-black">Sustainable Materials</h1>
+                        <p className="text-sm">We prioritize recyclable, low-impact materials</p>
+                      </div>
+            
+                      <div className="bg-white rounded-xl p-8 flex flex-col gap-4 shadow-lg">
+                        <Image src="/ecofeature2.png" alt="Icon" width={80} height={40} className="mb-6" />
+                        <h1 className="text-2xl font-semibold text-black">Energy-Efficient Processes</h1>
+                        <p className=" text-sm">manufacturing powered by energy-saving technologies</p>
+                      </div>
+            
+                      <div className="bg-white rounded-xl p-8 flex flex-col gap-4 shadow-lg">
+                        <Image src="/ecofeature3.png" alt="Icon" width={80} height={40} className="mb-6" />
+                        <h1 className="text-2xl font-semibold text-black">Reduced Carbon Emissions</h1>
+                        <p className=" text-sm">Commitment to lowering CO₂ emissions</p>
+                      </div>
+            
+                      <div className="bg-white rounded-xl p-8 flex flex-col gap-4 shadow-lg">
+                        <Image src="/ecofeature4.png" alt="Icon" width={80} height={40} className="mb-6" />
+                        <h1 className="text-2xl font-semibold text-black">Future-Focused Innovation</h1>
+                        <p className=" text-sm">Continuous investment in green technologies</p>
+                      </div>
+                    </div>
+            
+            
+                  </div>
+            
+        </div >
+    )
+}
