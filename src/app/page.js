@@ -236,7 +236,7 @@ export default function Home() {
           </div>
 
 
-          <div className="w-full h-[900px]  relative  p-3  flex flex-col justify-start mx-2  gap-5 rounded-xl bg-[url('/blog1.png')] bg-cover bg-top bg-no-repeat">
+          <div className="w-full h-[900px]  relative  p-3  flex flex-col justify-start mx-2  gap-5 rounded-xl bg-[url('/hblog1.png')] bg-cover bg-top bg-no-repeat">
             <div className='z-500 px-4 text-white flex justify-between text-sm font-light pt-9'>
               <span>Writen by Bruce Sommers's</span>
               <span>Monday,April 28,2026</span>
@@ -250,7 +250,7 @@ export default function Home() {
 
         </div>
         <div className="h-screen w-1/2 rounded-xl flex flex-col justify-between ">
-          <div className="w-full h-1/2 mb-5 relative bg-[#6A3120] flex flex-col justify-start gap-5 rounded-xl bg-[url('/blog2.png')] bg-cover bg-center bg-no-repeat">
+          <div className="w-full h-1/2 mb-5 relative bg-[#6A3120] flex flex-col justify-start gap-5 rounded-xl bg-[url('/hblog2.png')] bg-cover bg-center bg-no-repeat">
             <div className='z-500 px-4 text-white flex justify-between text-sm font-light pt-9'>
               <span>Writen by Bruce Sommers's</span>
               <span>Monday,April 28,2026</span>

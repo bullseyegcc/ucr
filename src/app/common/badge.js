@@ -29,3 +29,12 @@ export function Badgetextwhite({ title }) {
         </div>
     )
 }
+
+export function Badgetextblack({ title }) {
+    return (
+        <div className="inline-flex gap-3 text-black z-300">   
+            <Image src={badge_icon} alt="Badge Icon" width={24} height={24} className='object-contain' />
+            <span className=' uppercase font-medium'>{title}</span>
+        </div>
+    )
+}
