@@ -1,6 +1,38 @@
 export const blogs = [
   {
     id: 1,
+    slug: "uae-copper-producer-expands-global-supply",
+    title: "UAE Copper Producer Expands Global Supply Network Across Asia & Europe",
+    excerpt: "Union Copper Rod strengthens its international presence with expanded distribution networks reaching key markets in Asia and Europe.",
+    image: "/hblog1.png",
+    date: "2025-02-10",
+    category: "Company",
+    author: "Bruce Sommers",
+    content: [
+      { type: "paragraph", text: "Union Copper Rod has announced a significant expansion of its global supply network, establishing new distribution partnerships across Asia and Europe." },
+      { type: "image", src: "/hblog1.png", alt: "Global Supply Network" },
+      { type: "paragraph", text: "This strategic expansion enables the company to better serve its growing international customer base and reduce delivery times across key markets. The initiative reflects UCR's commitment to becoming a truly global copper rod supplier." },
+      { type: "paragraph", text: "The new partnerships will enhance supply chain efficiency and provide customers with more direct access to premium quality copper products." },
+    ],
+  },
+  {
+    id: 2,
+    slug: "high-conductivity-copper-rods-energy-sector",
+    title: "Company Launches New High-Conductivity Copper Rods for Energy Sector",
+    excerpt: "Advanced copper rod technology designed specifically for renewable energy and power transmission applications.",
+    image: "/hblog2.png",
+    date: "2025-02-15",
+    category: "Technology",
+    author: "Bruce Sommers",
+    content: [
+      { type: "paragraph", text: "Union Copper Rod has successfully launched a new line of high-conductivity copper rods specifically engineered for the energy sector." },
+      { type: "image", src: "/hblog2.png", alt: "High-Conductivity Copper Rods" },
+      { type: "paragraph", text: "These advanced rods feature enhanced electrical conductivity and superior mechanical properties, making them ideal for renewable energy installations, power transmission lines, and modern electrical infrastructure." },
+      { type: "paragraph", text: "The development of this product line demonstrates UCR's commitment to innovation and supporting the global transition to clean energy." },
+    ],
+  },
+  {
+    id: 3,
     slug: "celebrating-10th-anniversary",
     title: "Celebrating 10th Anniversary in 2025",
     excerpt: "A look back at the growth and milestones that shaped our decade-long journey.",
@@ -14,7 +46,7 @@ export const blogs = [
     ],
   },
   {
-    id: 2,
+    id: 4,
     slug: "expected-supply-deficit-copper-prices",
     title: "Expected Supply Deficit To Upset Copper Prices",
     excerpt: "Market analysis shows supply constraints that could push copper prices higher.",
@@ -22,12 +54,15 @@ export const blogs = [
     date: "2025-02-02",
     category: "Market",
     content: [
-      { type: "paragraph", text: "Analysts warn that supply deficits in key regions may cause upward pressure on copper prices this year." },
-      { type: "paragraph", text: "Demand from renewable and electrification projects remains strong, intensifying competition for material." },
+      { type: "paragraph", text: "Analysts warn that supply deficits in key regions may cause upward pressure on copper prices this year. The global copper market faces unprecedented challenges as production constraints collide with surging demand across emerging markets." },
+      { type: "image", src: "/blog2-chart.png", alt: "Copper price analysis chart" },
+      { type: "paragraph", text: "Demand from renewable and electrification projects remains strong, intensifying competition for material. Wind turbines, solar installations, and EV charging infrastructure all require significant amounts of high-quality copper rod." },
+      { type: "paragraph", text: "Regional production bottlenecks, particularly in key mining areas, continue to tighten supply. Industry experts project that without new capacity additions, the deficit could persist through 2026, supporting higher price levels." },
+      { type: "image", src: "/blog2-supply.png", alt: "Global supply chain visualization" },
     ],
   },
   {
-    id: 3,
+    id: 5,
     slug: "copper-industry-green-shoots",
     title: "Copper industry sees green shoots of demand",
     excerpt: "New end-use demand is emerging as economies rebalance their infrastructure spend.",
@@ -39,7 +74,7 @@ export const blogs = [
     ],
   },
   {
-    id: 4,
+    id: 6,
     slug: "million-tons-copper-why-it-matters",
     title: "A Million Tons of Copper to the Way: Why It Matters",
     excerpt: "How large-scale production impacts supply chains and downstream markets.",
@@ -51,7 +86,7 @@ export const blogs = [
     ],
   },
   {
-    id: 5,
+    id: 7,
     slug: "new-plant-efficiency-quality",
     title: "New Plant Increases Efficiency and Quality",
     excerpt: "Investments in automation deliver measurable gains across production lines.",
@@ -63,7 +98,7 @@ export const blogs = [
     ],
   },
   {
-    id: 6,
+    id: 8,
     slug: "global-demand-forecast-update",
     title: "Global Copper Demand Forecast Update",
     excerpt: "Analysts revise forecasts following policy shifts and supply disruptions.",
@@ -75,7 +110,7 @@ export const blogs = [
     ],
   },
   {
-    id: 7,
+    id: 9,
     slug: "sustainable-practices-cathode-production",
     title: "Sustainable Practices in Cathode Production",
     excerpt: "New methods reduce waste and energy intensity across our operations.",
@@ -87,7 +122,7 @@ export const blogs = [
     ],
   },
   {
-    id: 8,
+    id: 10,
     slug: "copper-recycling-circular-opportunities",
     title: "Copper Recycling: Circular Opportunities",
     excerpt: "Recycling initiatives create value while meeting environmental targets.",
@@ -99,7 +134,7 @@ export const blogs = [
     ],
   },
   {
-    id: 9,
+    id: 11,
     slug: "innovation-next-gen-casting",
     title: "Innovation: Next-gen Casting Technologies",
     excerpt: "How new casting tech improves rod quality and throughput.",

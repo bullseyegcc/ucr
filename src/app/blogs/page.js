@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Badgetextwhite } from "../common/badge";
+import { Badgetextwhite } from "../../common/badge";
 import { blogs } from "../../assets/blogs";
 
 export default function BlogsPage() {
@@ -11,25 +11,25 @@ export default function BlogsPage() {
         <div>
             <div className="rouned-b-2xl flex flex-col text-center min-h-[80vh] items-center justify-center font-sans dark:bg-black gap-6" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/blogsbg.png') lightgray 50% / cover no-repeat" }}>
                 <Badgetextwhite title="Things to Read" />
-                <h1 className="w-[80%] text-7xl font-medium text-white font-inter ">News</h1>
+                <h1 className="w-[80%] text-7xl font-medium text-white">News</h1>
             </div>
 
             <div className="min-h-screen px-10 py-20">
 
                 {/* Header Section */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-6 mb-12 md:mb-16 leading-tight">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 mb-12 lg:mb-16 leading-tight">
                     <div>
-                        <p className="uppercase text-[#FA6E43] text-xs md:text-lg font-semibold uppercase tracking-widest mb-3 md:mb-4 font-inter">Our Blogs</p>
-                        <h2 className="text-3xl md:text-4xl font-bold lg:text-6xl font-bold text-black font-inter leading-tight">Latest News & Insights</h2>
+                        <p className="uppercase text-[#FA6E43] text-xs lg:text-lg font-semibold uppercase tracking-widest mb-3 lg:mb-4">Our Blogs</p>
+                        <h2 className="text-3xl lg:text-4xl font-bold lg:text-6xl font-bold text-black leading-tight">Latest News & Insights</h2>
                     </div>
                     <div className="flex items-start self-center">
-                        <p className="text-gray-700 text-sm md:text-2xl leading-relaxed  lg:text-left max-w-lg leading-tight ml-auto">Dive deep into fresh ideas, expert advice,
+                        <p className="text-gray-700 text-sm lg:text-2xl leading-relaxed  lg:text-left max-w-lg leading-tight ml-auto">Dive deep into fresh ideas, expert advice,
                             and behind-the-scenes thinking.</p>
                     </div>
                 </div>
 
                 {/* Blogs */}
-                <div className="w-full px-10 pt-20">
+                <div className="w-full  lg:px-10 pt-20">
                     {/* Desktop-only 4-column grid: left large spans 2 cols x 2 rows; two top-right cards in cols 3-4 */}
                     <div className="grid gap-6 lg:grid-cols-4 lg:auto-rows-min">
                         {featured[0] && (

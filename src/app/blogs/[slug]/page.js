@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { blogs } from "../../../assets/blogs";
-import { Badgetextwhite } from "../../common/badge";
+import { Badgetextwhite } from "../../../common/badge";
 import Link from "next/link";
 
 export default async function BlogDetail({ params }) {
@@ -14,7 +14,7 @@ export default async function BlogDetail({ params }) {
         <div>
             <div className="rouned-b-2xl flex flex-col text-center min-h-[80vh] items-center justify-center font-sans dark:bg-black gap-6" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/blogsbg.png') lightgray 50% / cover no-repeat" }}>
                 <Badgetextwhite title="Things to Read" />
-                <h1 className="w-[80%] text-7xl font-medium text-white font-inter ">News</h1>
+                <h1 className="w-[80%] text-7xl font-medium text-white">News</h1>
             </div>
             <div className="min-h-screen px-8 md:px-20 py-16">
 
@@ -29,14 +29,28 @@ export default async function BlogDetail({ params }) {
                         </div>
                     )}
 
-                    <article className="prose prose-md md:prose-lg max-w-none mt-8 text-gray-700">
+                    <article className="space-y-8 mt-8 text-gray-700">
                         {post.content.map((block, i) => {
-                            if (block.type === "paragraph") return <p key={i}>{block.text}</p>;
-                            if (block.type === "image") return (
-                                <div key={i} className="my-6 rounded overflow-hidden">
-                                    <Image src={block.src} alt={block.alt || post.title} width={1200} height={700} className="w-full object-cover" />
-                                </div>
-                            );
+                            if (block.type === "paragraph") {
+                                return (
+                                    <p key={i} className="text-base md:text-lg leading-relaxed">
+                                        {block.text}
+                                    </p>
+                                );
+                            }
+                            if (block.type === "image") {
+                                return (
+                                    <div key={i} className="rounded-lg overflow-hidden shadow-md">
+                                        <Image 
+                                            src={block.src} 
+                                            alt={block.alt || post.title} 
+                                            width={1200} 
+                                            height={700} 
+                                            className="w-full h-auto object-cover" 
+                                        />
+                                    </div>
+                                );
+                            }
                             return null;
                         })}
                     </article>
@@ -46,9 +60,9 @@ export default async function BlogDetail({ params }) {
 
             <section className="my-20">
                 <div className="w-full px-10 mx-auto px-8">
-                    <div className="flex items-start justify-between mb-8">
+                    <div className="flex  flex-col md:flex-row gap-2 items-start justify-between mb-8">
                         <div>
-                            <p className="uppercase text-[#FA6E43] text-xs md:text-lg font-semibold uppercase tracking-widest mb-3 md:mb-4 font-inter">Our Blogs</p>
+                            <p className="uppercase text-[#FA6E43] text-xs md:text-lg font-semibold uppercase tracking-widest mb-3 md:mb-4">Our Blogs</p>
 
                             <h2 className="text-4xl md:text-5xl font-bold">Latest news & insights</h2>
                         </div>

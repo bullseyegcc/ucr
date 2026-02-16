@@ -1,5 +1,5 @@
-import { VideoPlayer } from "../common/video";
-import { Badge, Badgetextwhite } from "../common/badge";
+import { VideoPlayer } from "../../common/video";
+import { Badge, Badgetextwhite } from "../../common/badge";
 import Image from "next/image";
 
 export default function Logistics() {
@@ -7,12 +7,12 @@ export default function Logistics() {
         <div className="bg-[#F5F5F5]">
 
             {/* header */}
-            <div className=" mb-[30%] bg-[url('/logisticsbg.png')]  bg-cover  bg-bottom bg-no-repeat relative flex min-h-[80vh] items-center pt-46 bg-black font-sans bg-primary flex flex-col gap-10">
+            <div className=" mb-[40%] md:mb-[30%] bg-[url('/logisticsbg.png')]  bg-cover  bg-bottom bg-no-repeat relative flex  min-h-[55vh] sm:min-h-[80vh] items-center pt-[30%] md:pt-[15%] bg-black font-sans bg-primary flex flex-col items-center gap-10">
 
                 <Badgetextwhite title="Our Logistics" />
 
-                <h1 className=" w-[70%]  text-center text-5xl font-bold text-white font-inter leading-tight">UCR has a higher delivery capacity in the Copper Industry</h1>
-                <div className='absolute -bottom-[55%] w-[75%] h-[70vh] w-[95%] ' >
+                <h1 className=" w-[65%]  h-full text-center text-xl sm:text-5xl lg:font-bold text-white leading-tight">UCR has a higher delivery capacity in the Copper Industry</h1>
+                <div className='absolute -bottom-[50%] lg:-bottom-[65%] w-[75%] h-60 sm:h-[70vh] w-[95%] ' >
                     <VideoPlayer src="/logisticsvid.mp4" className="rounded-4xl " />
                 </div>
 
@@ -27,19 +27,19 @@ export default function Logistics() {
                 {/* header */}
                 <div className="flex flex-col items-center justify-center text-center py-10 pb-20 ">
                     <Badge title="Strength" />
-                    <h1 className="font-medium text-6xl mt-4">What we're capable of</h1>
+                    <h1 className="font-medium text-3xl lg:text-6xl mt-4">What we're capable of</h1>
                 </div>
 
 
-                <div className=" px-10 py-10 flex justify-center gap-6 items-end">
+                <div className=" px-6 lg:px-10 py-8 lg:py-10 flex flex-col lg:flex-row justify-center gap-6 items-end">
 
-                    <div className="h-[55vh] rounded-xl w-[30%] bg-white px-5 pt-16 relative flex flex-col gap-8">
-                        <h1 className="text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">200k+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <div className="min-h-[55vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8">
+                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">200k+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
                         <div className="relative z-10">
-                            <h1 className="text-3xl font-bold mb-2 ">MT/Anum</h1>
-                            <p className=" pr-4">200,000 metric tons
+                            <h1 className="text-3xl lg:text-xl lg:text-3xl font-bold mb-2 ">MT/Anum</h1>
+                            <p className="w-4/5 pr-4 text-sm lg:text-base">200,000 metric tons
                                 copper production line that is the largest of its kind in the Middle East. </p>
 
                         </div>
@@ -48,13 +48,13 @@ export default function Logistics() {
 
                     </div>
 
-                    <div className="h-[50vh] rounded-xl w-[30%] bg-white px-5 pt-16 relative flex flex-col gap-8">
-                        <h1 className="text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">150+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <div className="min-h-[55vh] lg:h-[50vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8">
+                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">150+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
                         <div className="relative z-10">
-                            <h1 className="text-3xl font-bold mb-2">Employees</h1>
-                            <p className="w-70">With over 150 experienced employees, we deliver quality and reliability every day.</p>
+                            <h1 className="text-3xl lg:text-3xl font-bold mb-2">Employees</h1>
+                            <p className="w-[60%] lg:w-70 text-sm lg:text-base">With over 150 experienced employees, we deliver quality and reliability every day.</p>
 
                         </div>
 
@@ -62,13 +62,13 @@ export default function Logistics() {
 
                     </div>
 
-                    <div className="h-[45vh] rounded-xl w-[30%] bg-white px-5 pt-16 relative flex flex-col gap-8">
-                        <h1 className="text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">30+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <div className="min-h-[55vh] lg:h-[45vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8">
+                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">30+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
                         <div className="relative z-10">
-                            <h1 className="text-3xl font-bold mb-2">Global Sales</h1>
-                            <p className=" w-80 pr-4">We supplies products, services and solutions across over 30 countries in Australia, Asia, Africa, and the Middle East  </p>
+                            <h1 className="text-3xl lg:text-3xl font-bold mb-2">Global Sales</h1>
+                            <p className=" w-4/5 lg:w-80 pr-4 text-sm lg:text-base">We supplies products, services and solutions across over 30 countries in Australia, Asia, Africa, and the Middle East  </p>
 
                         </div>
 
@@ -83,15 +83,15 @@ export default function Logistics() {
 
 
 
-                <div className=" px-10 py-10 flex justify-center gap-6 items-end">
+                <div className=" px-6 lg:px-10 py-8 lg:py-10 flex flex-col lg:flex-row justify-center gap-6 items-end">
 
-                    <div className="h-[45vh] rounded-xl w-[30%] bg-white px-5 pt-16 relative flex flex-col gap-8">
-                        <h1 className="text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">200k+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <div className="min-h-[55vh] lg:h-[45vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8">
+                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">200k+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
                         <div className="relative z-10">
-                            <h1 className="text-3xl font-bold mb-2 ">MT/Anum</h1>
-                            <p className=" pr-4">200,000 metric tons
+                            <h1 className="text-3xl lg:text-3xl font-bold mb-2 ">MT/Anum</h1>
+                            <p className=" w-4/5 pr-4 text-sm lg:text-base">200,000 metric tons
                                 copper production line that is the largest of its kind in the Middle East. </p>
 
                         </div>
@@ -100,13 +100,13 @@ export default function Logistics() {
 
                     </div>
 
-                    <div className="h-[50vh] rounded-xl w-[30%] bg-white px-5 pt-16 relative flex flex-col gap-8">
-                        <h1 className="text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">150+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <div className="min-h-[55vh] lg:h-[50vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8">
+                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">150+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
                         <div className="relative z-10">
-                            <h1 className="text-3xl font-bold mb-2">Employees</h1>
-                            <p className="w-70">With over 150 experienced employees, we deliver quality and reliability every day.</p>
+                            <h1 className="text-3xl lg:text-3xl font-bold mb-2">Employees</h1>
+                            <p className="w-1/2 lg:w-70 text-sm lg:text-base">With over 150 experienced employees, we deliver quality and reliability every day.</p>
 
                         </div>
 
@@ -114,13 +114,13 @@ export default function Logistics() {
 
                     </div>
 
-                    <div className="h-[55vh] rounded-xl w-[30%] bg-white px-5 pt-16 relative flex flex-col gap-8">
-                        <h1 className="text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">30+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <div className="min-h-[55vh] lg:h-[55vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8">
+                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">30+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
                         <div className="relative z-10">
-                            <h1 className="text-3xl font-bold mb-2">Global Sales</h1>
-                            <p className=" w-80 pr-4">We supplies products, services and solutions across over 30 countries in Australia, Asia, Africa, and the Middle East  </p>
+                            <h1 className="text-3xl lg:text-3xl font-bold mb-2">Global Sales</h1>
+                            <p className=" w-4/5 lg:w-80 pr-4 text-sm lg:text-base">We supplies products, services and solutions across over 30 countries in Australia, Asia, Africa, and the Middle East  </p>
 
                         </div>
 
@@ -135,22 +135,22 @@ export default function Logistics() {
 
 
 
-            <div className="min-h-screen bg-white  pt-20 flex flex-col items-center justify-center ">
+            <div className=" min-h-[80vh] lg:min-h-screen bg-white  pt-20 flex flex-col items-center justify-center ">
 
                 {/* Header */}
-                <div className="flex px-10 flex-col md:flex-row md:justify-between md:items-start gap-6 md:gap-8 lg:gap-12 mb-12 md:mb-16 lg:mb-20">
-                    
+                <div className="flex px-10 flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-8 lg:gap-12 mb-12 lg:mb-16 lg:mb-20">
+
                     <div className="flex-1">
-                        <h1 className='text-lg md:text-xl lg:text-2xl text-primary font-helvetica'>Global Presence</h1>
-                        <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-black mt-4 md:mt-5 lg:mt-6 leading-tight md:leading-snug">Global Reach</h1>
+                        <h1 className='text-lg lg:text-xl lg:text-2xl text-primary'>Global Presence</h1>
+                        <h1 className="text-3xl lg:text-4xl lg:text-5xl font-semibold text-black mt-4 lg:mt-5 lg:mt-6 leading-tight lg:leading-snug">Global Reach</h1>
                     </div>
 
-                    <div className="  self-end flex-1 text-xs md:text-sm text-gray-600 md:pt-8 lg:pt-12">
+                    <div className="  self-end flex-1 text-xs lg:text-sm text-gray-600 lg:pt-8 lg:pt-12">
                         <p className=' text-xl'>We don't just produce copper — we shape reliability, innovation, and sustainability into every product we deliver.</p>
                     </div>
                 </div>
 
-                <div className="w-full h-screen relative z-50">
+                <div className="w-full h-[60vh] lg:h-screen relative z-50">
 
                     <VideoPlayer src="/globalpresence.mp4" className="" />
 
@@ -163,41 +163,45 @@ export default function Logistics() {
 
                 <Image src="/vector.png" alt="Logistics End Image" width={300} height={0} className="absolute -top-20 -right-10 z-0 " />
 
-                <div className="w-full text-left px-10">
-                    <h1 className='text-lg md:text-xl lg:text-2xl text-primary font-helvetica uppercase'>Global Presence</h1>
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-black mt-2 md:mt-5 lg:mt-2 leading-tight md:leading-snug">Global Reach</h1>
+                <div className="w-full text-left px-6 lg:px-10">
+                    <h1 className='text-sm lg:text-xl lg:text-2xl text-primary uppercase'>Global Presence</h1>
+                    <h1 className="text-2xl lg:text-4xl lg:text-5xl font-semibold text-black mt-2 lg:mt-5 lg:mt-2 leading-tight lg:leading-snug">Global Reach</h1>
                 </div>
 
 
                 {/* wrapper */}
-                <div className="flex flex-row gap-8 w-full mt-20 px-10 z-900 ">
+                <div className="flex pb-12 lg:pb-0 flex-col lg:flex-row gap-6 lg:gap-8 w-full mt-12 lg:mt-20 px-6 lg:px-10 z-900 ">
 
                     {/* column 1 */}
-                    <div className="w-1/3 flex flex-col gap-10 ">
+                    <div className="w-full lg:w-1/3 flex flex-col gap-8 lg:gap-10 ">
 
                         {/* card 1 */}
-                        <div className="border-t-2 border-primary flex gap-9 pt-9 ">
+                        <div className="border-t-2 border-primary flex gap-6 lg:gap-9 pt-6 lg:pt-9 ">
 
-                            <h1 className="text-primary text-6xl">01</h1>
+                            <h1 className="text-primary text-4xl lg:text-6xl min-w-fit">01</h1>
 
                             <div className="flex flex-col gap-4">
-                                <h1 className="text-2xl font-semibold ">Higher Delivery Capacity</h1>
-                                <p className="text-lg">UCR’s state-of-the-art facility is Middle East’s largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum.
+                                <h1 className="text-lg lg:text-2xl font-semibold ">Higher Delivery Capacity</h1>
+                                <p className="text-sm lg:text-lg">UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum.
                                 </p>
                             </div>
 
 
                         </div>
 
+                        <div className="block lg:hidden w-full  h-[40vh] lg:h-[80vh] bg-[url('/advantagecol3.png')] bg-cover  bg-bottom bg-no-repeat">
+
+                        </div>
+
                         {/* card 3 */}
 
-                        <div className="border-t-2 border-secondary hover:border-primary flex gap-5 pt-9 ">
+                        <div className="hidden border-t-2 border-secondary hover:border-primary lg:flex gap-6 lg:gap-5 pt-6 lg:pt-9 ">
 
-                            <h1 className="text-secondary hover:text-primary text-6xl">03</h1>
+                            <h1 className="text-secondary hover:text-primary text-4xl lg:text-6xl min-w-fit">03</h1>
 
                             <div className="flex flex-col gap-4">
-                                <h1 className="text-2xl font-semibold ">Higher Delivery Capacity</h1>
-                                <p className="text-lg">UCR’s state-of-the-art facility is Middle East’s largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum.
+                                <h1 className="text-lg lg:text-2xl font-semibold ">Higher Delivery Capacity</h1>
+                                <p className="text-sm lg:text-lg">UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum.
                                 </p>
                             </div>
 
@@ -207,30 +211,44 @@ export default function Logistics() {
                     </div>
 
                     {/* column 2 */}
-                    <div className="w-1/3 flex flex-col gap-10 ">
-                       
-                       {/* card 2 */}
-                        <div className="border-t-2 border-primary flex gap-5 pt-9 ">
+                    <div className="w-full lg:w-1/3 flex flex-col gap-8 lg:gap-10 ">
 
-                            <h1 className="text-primary text-6xl">02</h1>
+                        {/* card 2 */}
+                        <div className="border-t-2 border-primary flex gap-6 lg:gap-5 pt-6 lg:pt-9 ">
+
+                            <h1 className="text-primary text-4xl lg:text-6xl min-w-fit">02</h1>
 
                             <div className="flex flex-col gap-4">
-                                <h1 className="text-2xl font-semibold ">Higher Delivery Capacity</h1>
-                                <p className="text-lg">UCR’s state-of-the-art facility is Middle East’s largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum.
+                                <h1 className="text-lg lg:text-2xl font-semibold ">Higher Delivery Capacity</h1>
+                                <p className="text-sm lg:text-lg">UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum.
+                                </p>
+                            </div>
+
+
+                        </div>
+                                        
+                        <div className="lg:hidden border-t-2 border-secondary hover:border-primary flex gap-6 lg:gap-5 pt-6 lg:pt-9 ">
+
+                            <h1 className="text-secondary hover:text-primary text-4xl lg:text-6xl min-w-fit">03</h1>
+
+                            <div className="flex flex-col gap-4">
+                                <h1 className="text-lg lg:text-2xl font-semibold ">Higher Delivery Capacity</h1>
+                                <p className="text-sm lg:text-lg">UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum.
                                 </p>
                             </div>
 
 
                         </div>
 
-{/* card 4 */}
-                        <div className="border-t-2 border-secondary hover:border-primary flex gap-5 pt-9 ">
 
-                            <h1 className="text-secondary hover:text-primary text-6xl">03</h1>
+                        {/* card 4 */}
+                        <div className="border-t-2 border-secondary hover:border-primary flex gap-6 lg:gap-5 pt-6 lg:pt-9 ">
+
+                            <h1 className="text-secondary hover:text-primary text-4xl lg:text-6xl min-w-fit">04</h1>
 
                             <div className="flex flex-col gap-4">
-                                <h1 className="text-2xl font-semibold ">Higher Delivery Capacity</h1>
-                                <p className="text-lg">UCR’s state-of-the-art facility is Middle East’s largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum.
+                                <h1 className="text-lg lg:text-2xl font-semibold ">Higher Delivery Capacity</h1>
+                                <p className="text-sm lg:text-lg">UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum.
                                 </p>
                             </div>
 
@@ -239,7 +257,7 @@ export default function Logistics() {
 
                     </div>
 
-                    <div className="w-1/3 h-[80vh] bg-[url('/advantagecol3.png')] bg-cover  bg-bottom bg-no-repeat">
+                    <div className="hidden lg:block w-full lg:w-1/3 h-[40vh] lg:h-[80vh] bg-[url('/advantagecol3.png')] bg-cover  bg-bottom bg-no-repeat">
 
                     </div>
 
