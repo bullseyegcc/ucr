@@ -14,10 +14,13 @@ import OurTechnology from "../components/home/OurTechnology.js";
 import CTA from "../components/home/CTA.js";
 import Articles from "../components/home/Articles.js";
 import { VideoPlayer } from "../common/video";
+import ParallaxSection from "../components/ParallaxSection.js";
+import SplashOverlay from "../components/SplashOverlay.js";
 
 export default function Home() {
   return (
     <div>
+      <SplashOverlay />
 
       {/* header */}
       <div className="relative flex min-h-[80vh] sm:min-h-[90vh] font-medium justify-center bg-black font-sans dark:bg-black overflow-hidden">
@@ -26,10 +29,13 @@ export default function Home() {
       </div>
 
 
-      <About />
+      <ParallaxSection index={-1}>
+        <About />
+      </ParallaxSection>
 
       {/* video Cards */}
-      <div className="flex flex-col lg:flex-row justify-center min-h-auto lg:min-h-screen px-4 lg:px-10 gap-1 lg:gap-2 lg:py-8 lg:py-0">
+      <ParallaxSection index={0}>
+        <div className="flex flex-col lg:flex-row justify-center min-h-screen px-4 lg:px-10 gap-1 lg:gap-2 lg:py-8 bg-white">
         <VideoCard
           videoSrc="/moreabout.mp4"
           badgeTitle="more about"
@@ -43,28 +49,39 @@ export default function Home() {
           heading="UCR leads the region in copper rod production and has its sights on vastly expanding its enterprise"
           buttonText="Know More"
         />
-      </div>
-
-
-      <FeaturedProducts />
-
-      <WeCareSection />
-
-      <OurTechnology />
-
-      <div className="max-h-[50vh] flex items-center justify-center  py-20 bg-white overflow-hidden">
-        <div className="flex gap-8 rounded-2xl">
-          <Image src="/slide1.png" alt="Product 1" width={500} height={400} className="rounded-2xl object-cover" />
-          <Image src="/slide2.png" alt="Product 1" width={900} height={600} className="rounded-2xl object-cover" />
-          <Image src="/slide3.png" alt="Product 1" width={500} height={400} className="rounded-2xl object-cover" />
-
-
         </div>
-      </div>
+      </ParallaxSection>
 
-      <CTA />
 
-      <Articles />
+      <ParallaxSection index={1}>
+        <FeaturedProducts />
+      </ParallaxSection>
+
+      <ParallaxSection index={2}>
+        <WeCareSection />
+      </ParallaxSection>
+
+      <ParallaxSection index={3}>
+        <OurTechnology />
+      </ParallaxSection>
+
+      <ParallaxSection index={4}>
+        <div className="max-h-[50vh] flex items-center justify-center  py-20 bg-white overflow-hidden">
+          <div className="flex gap-8 rounded-2xl">
+            <Image src="/slide1.png" alt="Product 1" width={500} height={400} className="rounded-2xl object-cover" />
+            <Image src="/slide2.png" alt="Product 1" width={900} height={600} className="rounded-2xl object-cover" />
+            <Image src="/slide3.png" alt="Product 1" width={500} height={400} className="rounded-2xl object-cover" />
+          </div>
+        </div>
+      </ParallaxSection>
+
+      <ParallaxSection index={5}>
+        <CTA />
+      </ParallaxSection>
+
+      <ParallaxSection index={6} parallaxAmount={-30}>
+        <Articles />
+      </ParallaxSection>
 
     </div>
 

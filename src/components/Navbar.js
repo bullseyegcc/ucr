@@ -20,6 +20,7 @@ export const Navbar = () => {
             type: 'section',
             items: [
                 { label: 'About', href: '/aboutus' },
+                { label: 'Our Team', href: '/team' },
                 { label: 'Our Parent Company', href: '/parentCompany' },
                 { label: 'Our Values', href: '/OurValues' }
             ]

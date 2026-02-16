@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowRight } from 'lucide-react';
 import { Badge } from "../../common/badge.js";
 import StatsCard from "../StatsCard.js";
+import TextReveal from "../TextReveal.js";
 
 export default function About() {
   return (
@@ -11,7 +12,9 @@ export default function About() {
         <div className="w-full md:w-[80%] flex flex-col gap-8 md:gap-10">
           <Badge title="About Us" />
 
-          <h1 className="text-primary text-2xl md:text-5xl leading-snug md:leading-tight">Our UAE factory combines Advanced technology with global <span className="text-secondary">experties to produce hight-quality copper product that meet international standards</span></h1>
+          <TextReveal>
+            <h1 className="text-primary text-2xl md:text-5xl leading-snug md:leading-tight">Our UAE factory combines Advanced technology with global <span className="text-secondary">experties to produce hight-quality copper product that meet international standards</span></h1>
+          </TextReveal>
 
           <button className="bg-primary w-44 md:w-60 px-5 md:px-8 py-3 text-white md:text-xl flex justify-between items-center gap-3 rounded-full">Know more <ArrowRight size={24} color='white' /></button>
         </div>
