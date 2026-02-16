@@ -1,6 +1,7 @@
 import { Badge, Badgetextwhite } from "../../common/badge"
 import Image from "next/image"
 import { VideoPlayer } from "../../common/video"
+import ParallaxSection from "../../components/ParallaxSection"
 
 export default function sustainability() {
     return (
@@ -13,6 +14,7 @@ export default function sustainability() {
 
             {/* Our Mission */}
 
+            <ParallaxSection index={0}>
             <div className=" overflow-x-hidden relative min-h-auto lg:min-h-screen flex flex-col lg:flex-row px-6 lg:px-10 py-12 lg:py-20 font-medium bg-gray-200 shadow-lg backdrop-blur-sm gap-8 lg:gap-0">
                                      
                 <div className="hidden lg:flex flex-col gap-28 w-90">
@@ -124,6 +126,7 @@ export default function sustainability() {
             
                   </div>
             
+            </ParallaxSection>
         </div >
     )
 }

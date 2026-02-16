@@ -3,12 +3,15 @@ import { WhiteBadge } from "../../common/badge"
 import { VideoCard } from "../../common/VideoCard.js";
 import badge_icon from '../../../public/badge.png';
 
-
 import { ArrowRight } from 'lucide-react';
 
 import Image from "next/image"
 import { VideoPlayer } from "../../common/video";
 import JourneySection from "../../components/JourneySection"
+import ParallaxSection from "../../components/ParallaxSection"
+import TextReveal from "../../components/TextReveal"
+import MissionValuesSection from "../../components/MissionValuesSection"
+
 export default function AboutUs() {
 
     return (
@@ -35,32 +38,18 @@ export default function AboutUs() {
                     <span className="bg-gradient-to-r from-[#FF7A5C] to-[#8A8A8A] bg-clip-text text-transparent">industries across more than 30 countries, supported by advanced </span>
                     <span className="text-[#8A8A8A]">technology and a strong focus on environmental responsibility. Guided by our core values, we work to elevate industry standards and help shape a greener, more efficient future.</span>
                 </p>
+            
             </div>
 
 
             {/* Our Mission & Our Values */}
 
-
-            <div className="min-h-[60vh] my-8 w-full flex flex-col  lg:flex-row lg:justify-between gap-6 items-starts px-2 lg:px-10">
-
-                <div className="min-h-90 lg:max-h-90  text-white rounded-xl w-full lg:w-1/2 px-10 py-8 flex flex-col justify-between bg-[url('/missionbg.png')] bg-cover bg-top bg-no-repeat">
-                    <WhiteBadge title="our mission" className='ml-10 mt-10' />
-                    <h1 className="text-2xl lg:text-4xl ">To deliver  premium copper product and services that power progress and add value to a sustainable future</h1>
-                </div>
-
-                <div className="min-h-90 max-h-90  rounded-xl w-full lg:w-1/2 px-5 lg:px-10 py-8 flex flex-col justify-between bg-[#F5F5F5] self-end">
-                    <Badge title="our values" className='ml-10 mt-10' />
-                    <h1 className="text-2xl lg:text-4xl ">To deliver  premium copper product and services that power progress and add value to a sustainable future</h1>
-                </div>
-
-
-
-
-            </div>
+            <MissionValuesSection />
 
 
             {/* parent company */}
 
+            <ParallaxSection index={1}>
             <div className="min-h-screen relative">
                 <div className="min-h-[50vh] w-full  bg-[url('/parentcompanybg.png')] bg-cover bg-top bg-no-repeat rounded-xl flex flex-col justify-center lg:justify-start lg:flex-row lg:items-center px-5 lg:px-16  backdrop-brightness-75 backdrop-blur-xl">
 
@@ -91,12 +80,14 @@ export default function AboutUs() {
 
                 </div>
             </div>
+            </ParallaxSection>
 
 
             <JourneySection />
 
 
 
+            <ParallaxSection index={2}>
             <div className="w-full pb-7 h-auto lg:h-[80vh] pt-12 lg:pt-16 px-4 lg:px-10 mb-8 bg-[url('/expertisebg.png')] bg-contain bg-top bg-no-repeat bg-cover flex flex-col justify-between">
 
                 <div className="mb-4">
@@ -153,8 +144,10 @@ export default function AboutUs() {
                 </div>
 
             </div>
+            </ParallaxSection>
 
 
+            <ParallaxSection index={3}>
             <div className="flex flex-col lg:flex-row justify-center min-h-auto lg:min-h-screen px-4 lg:px-10 gap-1 lg:gap-2 lg:py-8 lg:py-0">
                 <VideoCard
                     videoSrc="/moreabout.mp4"
@@ -170,6 +163,7 @@ export default function AboutUs() {
                     buttonText="Know More"
                 />
             </div>
+            </ParallaxSection>
 
         </div>
     )

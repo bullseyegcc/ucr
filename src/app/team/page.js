@@ -2,6 +2,7 @@ import { Badgetextwhite, Badge } from "../../common/badge"
 import Image from "next/image"
 import SuccessStrengthSection from "../../components/SuccessStrengthSection"
 import TeamMemoriesSection from "../../components/TeamMemoriesSection"
+import ParallaxSection from "../../components/ParallaxSection"
 
 export default function Team() {
 
@@ -22,8 +23,7 @@ export default function Team() {
 
             <div className="relative w-full overflow-x-hidden bg-[#F5F5F5]">
 
-                <Image src="/gradientcircle.png" alt="Wave Image" width={1920} height={1080} className="w-[40%] absolute  top-80  right-0 opacity-70 z-0" />
-                <div className="relative z-10">
+                <Image src="/gradientcircle.png" alt="Wave Image" width={1920} height={1080} className="w-[40%] absolute  top-80  right-0 opacity-70 z-0" />                <ParallaxSection index={0}>                <div className="relative z-10">
                     <SuccessStrengthSection />
                 </div>
 
@@ -100,8 +100,11 @@ export default function Team() {
 
 
             </div>
+            </ParallaxSection>
 
+            <ParallaxSection index={1}>
             <TeamMemoriesSection />
+            </ParallaxSection>
         </div>
     )
 }

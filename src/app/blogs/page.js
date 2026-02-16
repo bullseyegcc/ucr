@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Badgetextwhite } from "../../common/badge";
 import { blogs } from "../../assets/blogs";
+import ParallaxSection from "../../components/ParallaxSection";
 
 export default function BlogsPage() {
     const featured = blogs.slice(0, 3);
@@ -14,6 +15,7 @@ export default function BlogsPage() {
                 <h1 className="w-[80%] text-7xl font-medium text-white">News</h1>
             </div>
 
+            <ParallaxSection index={0}>
             <div className="min-h-screen px-10 py-20">
 
                 {/* Header Section */}
@@ -93,6 +95,7 @@ export default function BlogsPage() {
                 
 
             </div>
+            </ParallaxSection>
         </div>
     )
 }

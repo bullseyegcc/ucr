@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import { products } from "../../assets/products"
 import { Menu, ArrowRight, ArrowDown } from 'lucide-react';
 import UcrLaboratoryToolsSection from "../../components/UcrLaboratoryToolsSection"
+import ParallaxSection from "../../components/ParallaxSection"
 
 export default function blogs() {
     const router = useRouter();
@@ -27,6 +28,7 @@ export default function blogs() {
             </div>
 
 
+            <ParallaxSection index={0}>
             <div className=" relative overflow-hidden min-h-[80vh] flex flex-col justify-center items-center px-5 lg:px-10 pt-20">
                 <div className="absolute top-16  flex flex-col items-center gap-4">
 
@@ -46,8 +48,10 @@ export default function blogs() {
                     <Image src="/weproduce.png" alt="Icon" width={900} height={0} className="object-cover w-full h-full" />
                 </div>
             </div>
+            </ParallaxSection>
 
 
+            <ParallaxSection index={1}>
             <div className="bg-[#F5F4F4] min-h-screen flex flex-col items-center justify-center lg:px-10 py-20 gap-10">
 
                 {/* Header */}
@@ -92,9 +96,11 @@ export default function blogs() {
                 </div>
 
             </div>
+            </ParallaxSection>
 
             {/* certifications */}
 
+            <ParallaxSection index={2}>
             <div className="relative min-h-[60vh] lg:min-h-screen mt-8">
 
                 {/* header */}
@@ -111,8 +117,10 @@ export default function blogs() {
                 </div>
 
             </div>
+            </ParallaxSection>
             {/* cta */}
 
+            <ParallaxSection index={3}>
             <div className="min-h-[85vh] px-4 lg:min-h-[60vh] lg:min-h-[70vh] relative bg-[#272A2A] flex lg:flex-row flex-col-reverse  justify-center lg:justify-start   items-center  lg:px-10 lg:py-20 mt-8 rounded-lg overflow-hidden">
 
                 <Image src='/gradientcircle.png' alt="Icon" width={1200} height={0} className="  h-[90vh]  top-[0%]  absolute top-[26%]   bottom-0 right-20  top-6 left-0 lg:right-0 lg:rotate-180" />
@@ -127,8 +135,11 @@ export default function blogs() {
                     <button className="self-center lg:self-start text-xl text-center w-90  mt-[34vh] lg:mt-6 bg-white hover:bg-gray-100 text-black px-6 py-6 lg:py-4 rounded-full font-semibold transition-all duration-300 ease-in-out flex items-center justify-center  gap-2">Download Our Brocher<ArrowDown size={24} color='black' /></button>
                 </div>
             </div>
+            </ParallaxSection>
             
+            <ParallaxSection index={4}>
             <UcrLaboratoryToolsSection />
+            </ParallaxSection>
 
         </div>
     )

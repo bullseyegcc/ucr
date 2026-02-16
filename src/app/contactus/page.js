@@ -1,4 +1,5 @@
 import { Badgetextwhite } from "../../common/badge"
+import ParallaxSection from "../../components/ParallaxSection"
 
 export default function contactus() {
     return (
@@ -9,6 +10,7 @@ export default function contactus() {
             </div>
 
             {/* Let's Connect Section */}
+            <ParallaxSection index={0}>
             <div className="w-full px-4 lg:px-10 lg:px-20 py-12 lg:py-16 lg:py-20 bg-[#F5F5F5] leading-tight">
                 {/* Header Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 mb-12 lg:mb-16 leading-tight">
@@ -139,6 +141,7 @@ export default function contactus() {
                     </div>
                 </div>
             </div>
+            </ParallaxSection>
         </div>
     )
 }

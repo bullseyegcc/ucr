@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { VideoPlayer } from "../../common/video"
 import { Badgetextblack, Badgetextwhite } from "../../common/badge"
+import ParallaxSection from "../../components/ParallaxSection"
 
 export default function Technology() {
     return (
@@ -16,6 +17,7 @@ export default function Technology() {
             </div>
 
             {/* Header */}
+            <ParallaxSection index={0}>
             <div className=" overflow-x-hidden relative flex flex-col px-6 sm:px-10 py-12 lg:py-20 lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-8 lg:gap-12 mb-12 lg:mb-16 lg:mb-20">
                 <div className="flex-1 sm:mb-30">
                     <Badgetextblack title="Top notch Technology" />
@@ -31,7 +33,11 @@ export default function Technology() {
 
             {/* cards */}
 
+            </div>
+            </ParallaxSection>
+
             {/* card one  */}
+            <ParallaxSection index={1}>
             <div className="bg-white px-6 sm:px-8 lg:px-10 rounded-xl min-h-screen lg:min-h-[80vh] mx-6 sm:mx-8 lg:mx-10">
 
                 {/* card header */}
@@ -176,6 +182,7 @@ export default function Technology() {
 
 
             </div>
+            </ParallaxSection>
         </div>
     )
 }

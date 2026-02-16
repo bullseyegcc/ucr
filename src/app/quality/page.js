@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Badgetextblack, Badgetextwhite, Badge } from "../../common/badge"
+import ParallaxSection from "../../components/ParallaxSection"
 
 export default function Quality() {
     return (
@@ -16,6 +17,7 @@ export default function Quality() {
 
             {/* certifications */}
 
+            <ParallaxSection index={0}>
             <div className="relative lg:min-h-screen bg-[rgba(255,255,255,0.77)]">
 
                 {/* header */}
@@ -34,8 +36,10 @@ export default function Quality() {
                 </div>
 
             </div>
+            </ParallaxSection>
             {/* Achivements */}
 
+            <ParallaxSection index={1}>
             <div className="relative z-20 flex min-h-screen lg:min-h-[80vh] flex-col gap-10 sm:gap-12 lg:gap-16 items-center justify-center py-12 sm:py-16 lg:py-20   bg-[#FFF8F4] backdrop-blur-sm sm:px-6">
 
                 <div className="flex flex-col items-center text-center">
@@ -79,8 +83,9 @@ export default function Quality() {
 
 
             </div>
+            </ParallaxSection>
 
-
+            <ParallaxSection index={2}>
             <div className="min-h-[60vh] lg:min-h-[80vh] rounded-t-lg bg-[linear-gradient(174deg,#FA6E43_-22.99%,#FFF_94.94%)] flex flex-col items-center justify-center gap-4 lg:gap-6 px-6 text-center py-12 lg:py-20">
 
                 <div className="flex flex-col w-full lg:w-[80%]">
@@ -98,6 +103,7 @@ export default function Quality() {
                 </div>
 
             </div>
+            </ParallaxSection>
         </div>
     )
 }

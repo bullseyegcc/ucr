@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,16 +11,19 @@ gsap.registerPlugin(ScrollTrigger);
 export default function SplashOverlay() {
   const overlayRef = useRef(null);
   const logoRef = useRef(null);
-  const hasPlayedRef = useRef(false);
+  const pathname = usePathname();
+  const isHomepage = pathname === '/';
 
   useEffect(() => {
     const overlay = overlayRef.current;
     const logo = logoRef.current;
     if (!overlay || !logo) return;
 
-    // Only run animation on first load
-    if (hasPlayedRef.current) return;
-    hasPlayedRef.current = true;
+    // Only show splash on homepage
+    if (!isHomepage) {
+      gsap.set(overlay, { display: 'none', pointerEvents: 'none' });
+      return;
+    }
 
     const timer = setTimeout(() => {
       // Create timeline for initial splash animation
@@ -89,12 +93,12 @@ export default function SplashOverlay() {
     }, 100);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isHomepage]);
 
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 bg-black z-[9999] flex items-center justify-center"
+      className="fixed inset-0 bg-[#FE5D0A] z-[9999] flex items-center justify-center"
       style={{
         transition: 'opacity 0.3s ease-out',
       }}
@@ -107,10 +111,10 @@ export default function SplashOverlay() {
         }}
       >
         <Image
-          src="/anilogo.png"
+          src="/logo.png"
           alt="UCR Logo"
-          width={120}
-          height={120}
+          width={2000}
+          height={2000}
           className="w-32 h-32 md:w-40 md:h-40 object-contain"
         />
       </div>
