@@ -18,58 +18,101 @@ export default function ParallaxSection({ children, index = 0, parallaxAmount = 
     // Give DOM time to settle before creating ScrollTrigger
     const timer = setTimeout(() => {
       if (section && section.parentElement) {
-        // Main entry animation with premium easing
+        // ============ PREMIUM ENTRANCE ANIMATION ============
+        // Multi-stage sophisticated reveal with refined easing
         const entranceTl = gsap.timeline({
           scrollTrigger: {
             trigger: section,
-            start: 'top 110%',
-            end: 'top 10%',
-            scrub: 2.5,
+            start: 'top 120%',
+            end: 'top 0%',
+            scrub: 1.8,
             markers: false,
           },
         });
 
-        // Complex scale animation for premium feel
+        // Stage 1: Subtle transition (refined)
         entranceTl.fromTo(
           content,
           {
-            y: 100,
-            scale: 0.98,
-            opacity: 0.95,
+            opacity: 0.4,
           },
           {
-            y: 0,
-            scale: 1,
-            opacity: 1,
+            opacity: 0.85,
+            duration: 0.5,
             ease: 'power1.inOut',
           },
           0
         );
 
-        // Subtle blur effect animation via GSAP
+        // Stage 2: Elegant scale with Y translation
         entranceTl.fromTo(
           content,
           {
-            filter: 'blur(2px)',
+            y: 80,
+            scale: 0.95,
           },
           {
-            filter: 'blur(0px)',
-            ease: 'power2.inOut',
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            ease: 'cubic.out',
+          },
+          0.05
+        );
+
+        // Stage 3: Final opacity refinement for elegance
+        entranceTl.fromTo(
+          content,
+          {
+            opacity: 0.85,
+          },
+          {
+            opacity: 1,
+            duration: 0.35,
+            ease: 'sine.out',
+          },
+          0.35
+        );
+
+        // ============ SOPHISTICATED PARALLAX MOVEMENT ============
+        const movement = parallaxAmount !== null ? parallaxAmount : -16 * (index + 1);
+
+        const parallaxTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 45%',
+            end: 'bottom -25%',
+            scrub: 2.2,
+            markers: false,
+          },
+        });
+
+        // Smooth, refined parallax drift
+        parallaxTl.to(
+          content,
+          {
+            y: movement,
+            ease: 'none',
           },
           0
         );
 
-        // Calculate parallax movement
-        const movement = parallaxAmount !== null ? parallaxAmount : -12 * (index + 1);
-
-        // Parallax drift effect - continues throughout scroll
+        // ============ REFINED SCALE PULSE (OPTIONAL MICRO-INTERACTION) ============
+        // Ultra-subtle scale shift as section moves through viewport
         gsap.to(content, {
-          y: movement,
           scrollTrigger: {
             trigger: section,
-            start: 'top 60%',
-            end: 'bottom -20%',
-            scrub: 2.5,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 2,
+            onUpdate: (self) => {
+              const progress = self.progress;
+              // Barely perceptible: 1 at center, 0.98 at edges
+              const scaleValue = 0.99 + Math.sin((progress - 0.5) * Math.PI) * 0.01;
+              gsap.set(content, {
+                '--parallax-scale': scaleValue,
+              });
+            },
             markers: false,
           },
         });
@@ -94,11 +137,16 @@ export default function ParallaxSection({ children, index = 0, parallaxAmount = 
       style={{ 
         zIndex: 10 + index,
       }}
-      className="relative w-full"
+      className="relative w-full overflow-hidden -mb-1"
     >
       <div 
         ref={contentRef}
-        className="will-change-transform origin-top"
+        className="will-change-transform origin-center backface-hidden"
+        style={{
+          perspective: '1500px',
+          transformStyle: 'preserve-3d',
+          transform: 'var(--parallax-scale, 1)',
+        }}
       >
         {children}
       </div>

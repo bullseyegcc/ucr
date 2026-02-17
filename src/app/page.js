@@ -16,6 +16,8 @@ import Articles from "../components/home/Articles.js";
 import { VideoPlayer } from "../common/video";
 import ParallaxSection from "../components/ParallaxSection.js";
 import SplashOverlay from "../components/SplashOverlay.js";
+import HorizontalScrollGallery from "../components/HorizontalScrollGallery.js";
+import WhyChooseUs from "../components/home/WhyChooseUs.js";
 
 export default function Home() {
   return (
@@ -66,20 +68,20 @@ export default function Home() {
       </ParallaxSection>
 
       <ParallaxSection index={4}>
-        <div className="max-h-[50vh] flex items-center justify-center  py-20 bg-white overflow-hidden">
-          <div className="flex gap-8 rounded-2xl">
-            <Image src="/slide1.png" alt="Product 1" width={500} height={400} className="rounded-2xl object-cover" />
-            <Image src="/slide2.png" alt="Product 1" width={900} height={600} className="rounded-2xl object-cover" />
-            <Image src="/slide3.png" alt="Product 1" width={500} height={400} className="rounded-2xl object-cover" />
-          </div>
-        </div>
+        <WhyChooseUs />
       </ParallaxSection>
 
       <ParallaxSection index={5}>
+        <HorizontalScrollGallery 
+          images={['/slide1.png', '/slide2.png', '/slide3.png']}
+        />
+      </ParallaxSection>
+
+      <ParallaxSection index={6}>
         <CTA />
       </ParallaxSection>
 
-      <ParallaxSection index={6} parallaxAmount={-30}>
+      <ParallaxSection index={7} parallaxAmount={-30}>
         <Articles />
       </ParallaxSection>
 

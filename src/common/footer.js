@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import { WhiteBadge } from "./badge";
 import { VideoPlayer } from "./video";
+import Shuffle from "../components/Shuffle";
 
 export default function Footer() {
     return (
@@ -60,15 +61,100 @@ export default function Footer() {
 
                 {/* Navigation Links */}
                 <div className='flex flex-col md:flex-row md:justify-center gap-4 md:gap-12 pt-6 md:pt-8 border-t border-gray-200'>
-                    <Link href="/" className='text-primary font-medium text-sm md:text-sm hover:text-opacity-80 transition-opacity text-center'>Home</Link>
+                    <Link href="/" className='text-center'>
+                        <Shuffle
+                            text="Home"
+                            tag="span"
+                            className="text-primary text-sm md:text-sm"
+                            shuffleDirection="up"
+                            duration={0.35}
+                            animationMode="evenodd"
+                            shuffleTimes={1}
+                            ease="power3.out"
+                            stagger={0.03}
+                            threshold={0.1}
+                            triggerOnce={false}
+                            triggerOnHover={true}
+                            respectReducedMotion={true}
+                            loop={false}
+                        />
+                    </Link>
                     <div className='hidden md:block w-px bg-gray-300'></div>
-                    <Link href="/aboutus" className='text-primary font-medium text-sm md:text-sm hover:text-opacity-80 transition-opacity text-center'>About us</Link>
+                    <Link href="/aboutus" className='text-center'>
+                        <Shuffle
+                            text="About us"
+                            tag="span"
+                            className="text-primary text-sm md:text-sm"
+                            shuffleDirection="up"
+                            duration={0.35}
+                            animationMode="evenodd"
+                            shuffleTimes={1}
+                            ease="power3.out"
+                            stagger={0.03}
+                            threshold={0.1}
+                            triggerOnce={false}
+                            triggerOnHover={true}
+                            respectReducedMotion={true}
+                            loop={false}
+                        />
+                    </Link>
                     <div className='hidden md:block w-px bg-gray-300'></div>
-                    <Link href="/products" className='text-primary font-medium text-sm md:text-sm hover:text-opacity-80 transition-opacity text-center'>Products</Link>
+                    <Link href="/products" className='text-center'>
+                        <Shuffle
+                            text="Products"
+                            tag="span"
+                            className="text-primary text-sm md:text-sm"
+                            shuffleDirection="up"
+                            duration={0.35}
+                            animationMode="evenodd"
+                            shuffleTimes={1}
+                            ease="power3.out"
+                            stagger={0.03}
+                            threshold={0.1}
+                            triggerOnce={false}
+                            triggerOnHover={true}
+                            respectReducedMotion={true}
+                            loop={false}
+                        />
+                    </Link>
                     <div className='hidden md:block w-px bg-gray-300'></div>
-                    <Link href="/logistics" className='text-primary font-medium text-sm md:text-sm hover:text-opacity-80 transition-opacity text-center'>Logistics</Link>
+                    <Link href="/logistics" className='text-center'>
+                        <Shuffle
+                            text="Logistics"
+                            tag="span"
+                            className="text-primary text-sm md:text-sm"
+                            shuffleDirection="up"
+                            duration={0.35}
+                            animationMode="evenodd"
+                            shuffleTimes={1}
+                            ease="power3.out"
+                            stagger={0.03}
+                            threshold={0.1}
+                            triggerOnce={false}
+                            triggerOnHover={true}
+                            respectReducedMotion={true}
+                            loop={false}
+                        />
+                    </Link>
                     <div className='hidden md:block w-px bg-gray-300'></div>
-                    <Link href="/contactus" className='text-primary font-medium text-sm md:text-sm hover:text-opacity-80 transition-opacity text-center'>Contact Us</Link>
+                    <Link href="/contactus" className='text-center'>
+                        <Shuffle
+                            text="Contact Us"
+                            tag="span"
+                            className="text-primary text-sm md:text-sm"
+                            shuffleDirection="up"
+                            duration={0.35}
+                            animationMode="evenodd"
+                            shuffleTimes={1}
+                            ease="power3.out"
+                            stagger={0.03}
+                            threshold={0.1}
+                            triggerOnce={false}
+                            triggerOnHover={true}
+                            respectReducedMotion={true}
+                            loop={false}
+                        />
+                    </Link>
                 </div>
             </div>
         </div>

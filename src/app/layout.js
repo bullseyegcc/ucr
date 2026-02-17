@@ -11,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="antialiased m-0">
+      <body className="antialiased m-0 bg-white " >
         <SmoothScroll />
         <Navbar/>
         {children}

@@ -1,5 +1,4 @@
 import { Badgetextwhite } from "../../common/badge"
-import ParallaxSection from "../../components/ParallaxSection"
 
 export default function contactus() {
     return (
@@ -10,7 +9,6 @@ export default function contactus() {
             </div>
 
             {/* Let's Connect Section */}
-            <ParallaxSection index={0}>
             <div className="w-full px-4 lg:px-10 lg:px-20 py-12 lg:py-16 lg:py-20 bg-[#F5F5F5] leading-tight">
                 {/* Header Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 mb-12 lg:mb-16 leading-tight">
@@ -28,7 +26,7 @@ export default function contactus() {
                     {/* Left Column */}
                     <div>
                         {/* Person Card */}
-                        <div className="bg-white rounded-lg p-4 lg:p-8 mb-8 lg:mb-12">
+                        <div className="bg-white rounded-lg p-4 lg:p-8 mb-8 lg:mb-12 group hover:shadow-xl hover:scale-105 transition-all duration-400">
                             <div className="flex items-start gap-3 lg:gap-6">
                                 <img src="/person.png" alt="Team member" className="w-16 lg:w-40 h-16 lg:h-40 rounded-lg object-cover flex-shrink-0" />
                                 <div className="flex-1">
@@ -45,32 +43,32 @@ export default function contactus() {
                         {/* Contact Details - 2x2 Grid */}
                         <div className="grid grid-cols-2 gap-3 lg:gap-6">
                             {/* Box 1: Connect */}
-                            <div className="bg-white rounded-lg p-3 lg:p-6">
+                            <div className="bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
                                 <h4 className="text-gray-900 font-semibold text-xs lg:text-base mb-2 lg:mb-4">Connect</h4>
                                 <div className="space-y-1">
-                                    <a href="#" className="text-gray-700 text-xs lg:text-sm hover:text-[#FA6E43] transition-colors block underline">Instagram</a>
-                                    <a href="#" className="text-gray-700 text-xs lg:text-sm hover:text-[#FA6E43] transition-colors block underline">LinkedIn</a>
-                                    <a href="#" className="text-gray-700 text-xs lg:text-sm hover:text-[#FA6E43] transition-colors block underline">Twitter</a>
+                                    <a href="#" className="text-gray-700 text-xs lg:text-sm hover:text-[#FA6E43] transition-colors duration-300 block underline">Instagram</a>
+                                    <a href="#" className="text-gray-700 text-xs lg:text-sm hover:text-[#FA6E43] transition-colors duration-300 block underline">LinkedIn</a>
+                                    <a href="#" className="text-gray-700 text-xs lg:text-sm hover:text-[#FA6E43] transition-colors duration-300 block underline">Twitter</a>
                                 </div>
                             </div>
 
                             {/* Box 2: Fax */}
-                            <div className="flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6">
+                            <div className="flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
                                 <h4 className="text-gray-900 font-semibold text-xs lg:text-base mb-2 lg:mb-3">Fax</h4>
                                 <p className="text-[#FA6E43] text-xs lg:text-sm font-semibold">+971 2 550 3240</p>
                             </div>
 
                             {/* Box 3: Reach Out */}
-                            <div className="bg-white rounded-lg p-3 lg:p-6 flex flex-col justify-between">
+                            <div className="bg-white rounded-lg p-3 lg:p-6 flex flex-col justify-between group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
                                 <h4 className="text-gray-900 font-semibold text-xs lg:text-base mb-2 lg:mb-4">Reach Out</h4>
                                 <div className="space-y-2 lg:space-y-4">
-                                    <a href="mailto:info@ucrccopper.ae" className="text-[#FA6E43] text-xs lg:text-sm font-semibold hover:underline block">info@ucrccopper.ae</a>
-                                    <a href="tel:+971255033240" className="text-[#FA6E43] text-xs lg:text-sm font-semibold block">+971 2 550 3240</a>
+                                    <a href="mailto:info@ucrccopper.ae" className="text-[#FA6E43] text-xs lg:text-sm font-semibold hover:text-orange-600 transition-colors duration-300 block">info@ucrccopper.ae</a>
+                                    <a href="tel:+971255033240" className="text-[#FA6E43] text-xs lg:text-sm font-semibold hover:text-orange-600 transition-colors duration-300 block">+971 2 550 3240</a>
                                 </div>
                             </div>
 
                             {/* Box 4: Office */}
-                            <div className="flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6">
+                            <div className="flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
                                 <h5 className="text-gray-900 font-semibold text-xs lg:text-base mb-2 lg:mb-3">Office</h5>
                                 <div className="space-y-1 text-gray-600 text-xs lg:text-sm leading-tight lg:leading-relaxed">
                                     <p>Mussafah,</p>
@@ -83,7 +81,7 @@ export default function contactus() {
                     </div>
 
                     {/* Right Column - Contact Form */}
-                    <div className="bg-white rounded-lg p-4 lg:p-12">
+                    <div className="bg-white rounded-lg p-4 lg:p-12 group hover:shadow-xl transition-all duration-300">
                         <h3 className="text-xl lg:text-4xl font-bold text-gray-900 mb-5 lg:mb-8">Contact us</h3>
                         
                         <form className="space-y-3 lg:space-y-5">
@@ -92,7 +90,7 @@ export default function contactus() {
                                 <input 
                                     type="text" 
                                     placeholder="First Name"
-                                    className="w-full px-0 py-2 lg:py-3 border-b border-gray-300 text-xs lg:text-sm focus:outline-none focus:border-[#FA6E43] bg-white placeholder-gray-400"
+                                    className="w-full px-0 py-2 lg:py-3 border-b border-gray-300 text-xs lg:text-sm focus:outline-none focus:border-[#FA6E43] focus:shadow-sm bg-white placeholder-gray-400 transition-all duration-300"
                                 />
                             </div>
 
@@ -101,7 +99,7 @@ export default function contactus() {
                                 <input 
                                     type="email" 
                                     placeholder="Email"
-                                    className="w-full px-0 py-2 lg:py-3 border-b border-gray-300 text-xs lg:text-sm focus:outline-none focus:border-[#FA6E43] bg-white placeholder-gray-400"
+                                    className="w-full px-0 py-2 lg:py-3 border-b border-gray-300 text-xs lg:text-sm focus:outline-none focus:border-[#FA6E43] focus:shadow-sm bg-white placeholder-gray-400 transition-all duration-300"
                                 />
                             </div>
 
@@ -110,7 +108,7 @@ export default function contactus() {
                                 <input 
                                     type="tel" 
                                     placeholder="Phone"
-                                    className="w-full px-0 py-2 lg:py-3 border-b border-gray-300 text-xs lg:text-sm focus:outline-none focus:border-[#FA6E43] bg-white placeholder-gray-400"
+                                    className="w-full px-0 py-2 lg:py-3 border-b border-gray-300 text-xs lg:text-sm focus:outline-none focus:border-[#FA6E43] focus:shadow-sm bg-white placeholder-gray-400 transition-all duration-300"
                                 />
                             </div>
 
@@ -119,7 +117,7 @@ export default function contactus() {
                                 <textarea 
                                     placeholder="Message"
                                     rows="4"
-                                    className="w-full px-0 py-2 lg:py-3 border-b border-gray-300 text-xs lg:text-sm focus:outline-none focus:border-[#FA6E43] bg-white placeholder-gray-400 resize-none"
+                                    className="w-full px-0 py-2 lg:py-3 border-b border-gray-300 text-xs lg:text-sm focus:outline-none focus:border-[#FA6E43] focus:shadow-sm bg-white placeholder-gray-400 resize-none transition-all duration-300"
                                 ></textarea>
                             </div>
 
@@ -127,7 +125,7 @@ export default function contactus() {
                             <div className="pt-4 lg:pt-8">
                                 <button 
                                     type="submit"
-                                    className="w-full bg-black hover:bg-gray-900 text-white py-3 lg:py-4 rounded-full font-semibold text-xs lg:text-sm transition-colors duration-300"
+                                    className="w-full bg-black hover:bg-[#FA6E43] text-white py-3 lg:py-4 rounded-full font-semibold text-xs lg:text-sm transition-all duration-300 hover:shadow-lg hover:scale-105"
                                 >
                                     Submit
                                 </button>
@@ -136,12 +134,11 @@ export default function contactus() {
 
                         {/* Privacy Notice */}
                         <p className="text-gray-600 text-xs lg:text-sm text-center mt-3 lg:mt-6 leading-tight lg:leading-relaxed">
-                            By submitting, you agree to our <a href="#" className="underline hover:text-gray-900">Terms & Privacy Policy</a>
+                            By submitting, you agree to our <a href="#" className="underline hover:text-[#FA6E43] transition-colors duration-300">Terms & Privacy Policy</a>
                         </p>
                     </div>
                 </div>
             </div>
-            </ParallaxSection>
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { Badgetextblack, Badgetextwhite, Badge } from "../../common/badge"
 import ParallaxSection from "../../components/ParallaxSection"
+import TextReveal from "../../components/TextReveal"
 
 export default function Quality() {
     return (
@@ -40,7 +41,7 @@ export default function Quality() {
             {/* Achivements */}
 
             <ParallaxSection index={1}>
-            <div className="relative z-20 flex min-h-screen lg:min-h-[80vh] flex-col gap-10 sm:gap-12 lg:gap-16 items-center justify-center py-12 sm:py-16 lg:py-20   bg-[#FFF8F4] backdrop-blur-sm sm:px-6">
+            <div className="relative z-20 flex min-h-screen lg:min-h-[80vh] flex-col gap-10 sm:gap-12 lg:gap-16 items-center justify-center py-12 sm:py-16 lg:py-20   bg-[#FFF8F4] sm:px-6">
 
                 <div className="flex flex-col items-center text-center">
                     <Badgetextblack title="More certifications" />
@@ -91,7 +92,9 @@ export default function Quality() {
                 <div className="flex flex-col w-full lg:w-[80%]">
 
                     <Image src="/quote.png" alt="Icon" width={40} height={0} className="w-8 lg:w-[60px]" />
-                    <p className="pl-3 lg:pl-5 text-lg lg:text-3xl italic leading-relaxed">At UCR, we are grounded in vision, trust, and a commitment to excellence. We believe success is measured not just by financial gains but by the positive impact we have on our communities and future generations.We have broadened our investments across various sectors with a clear strategy. As global markets change, we remain focused on responsible growth, continuous innovation, and delivering lasting value.</p>
+                    <TextReveal>
+                      <p className="pl-3 lg:pl-5 text-lg lg:text-3xl italic leading-relaxed">At UCR, we are grounded in vision, trust, and a commitment to excellence. We believe success is measured not just by financial gains but by the positive impact we have on our communities and future generations.We have broadened our investments across various sectors with a clear strategy. As global markets change, we remain focused on responsible growth, continuous innovation, and delivering lasting value.</p>
+                    </TextReveal>
                     <Image src="/quote.png" alt="Icon" width={40} height={0} className="self-end w-8 lg:w-[60px]" />
 
                 </div>

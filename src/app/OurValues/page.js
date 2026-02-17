@@ -24,46 +24,46 @@ export default function OurValues() {
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
-                        <div className="bg-[#FDF5F3] rounded-xl p-6 lg:p-8 flex flex-col gap-6">
-                            <Image src="/excel.png" alt="Icon" width={80} height={0} />
+                        <div className="bg-[#FDF5F3] rounded-xl p-6 lg:p-8 flex flex-col gap-6 animate-reveal group hover:scale-105 transition-all duration-400">
+                            <Image src="/excel.png" alt="Icon" width={80} height={0} className="group-hover:scale-110 group-hover:rotate-10 transition-transform duration-400" />
                             <div>
                                 <h1 className="overflow-hidden text-[#FA6E43] font-medium text-[32px] leading-[64px] tracking-[-1.4px] capitalize">Excel Always</h1>
                                 <p className="text-[rgba(33,34,37,0.82)] text-xs lg:text-sm mt-3">We ensure that every product we make and service we offer reaches our clients with meticulous attention to detail and quality checks.</p>
                             </div>
                         </div>
 
-                        <div className="bg-[#FDF5F3] rounded-xl p-6 lg:p-8 flex flex-col gap-6">
-                            <Image src="/path.png" alt="Icon" width={80} height={0} />
+                        <div className="bg-[#FDF5F3] rounded-xl p-6 lg:p-8 flex flex-col gap-6 animate-reveal group hover:scale-105 transition-all duration-400">
+                            <Image src="/path.png" alt="Icon" width={80} height={0} className="group-hover:scale-110 group-hover:rotate-10 transition-transform duration-400" />
                             <div>
                                 <h1 className="overflow-hidden text-[#FA6E43] font-medium text-[32px] leading-[64px] tracking-[-1.4px] capitalize">Create New Paths</h1>
                                 <p className="text-[rgba(33,34,37,0.82)] text-xs lg:text-sm mt-3">To ensure the best quality we embrace the best innovation. We aim to redefine industry benchmarks, and lead the way in developing smart, efficient solutions.</p>
                             </div>
                         </div>
 
-                        <div className="bg-[#FDF5F3] rounded-xl p-6 lg:p-8 flex flex-col gap-6">
-                            <Image src="/reliable.png" alt="Icon" width={80} height={0} />
+                        <div className="bg-[#FDF5F3] rounded-xl p-6 lg:p-8 flex flex-col gap-6 animate-reveal group hover:scale-105 transition-all duration-400">
+                            <Image src="/reliable.png" alt="Icon" width={80} height={0} className="group-hover:scale-110 group-hover:rotate-10 transition-transform duration-400" />
                             <div>
                                 <h1 className="overflow-hidden text-[#FA6E43] font-medium text-[32px] leading-[64px] tracking-[-1.4px] capitalize">Be Reliable</h1>
                                 <p className="text-[rgba(33,34,37,0.82)] text-xs lg:text-sm mt-3">Our commitment to sustainability enhances our reliability. As trusted partners, we promise only the best in our supply chain and community engagements, fostering collective growth.</p>
                             </div>
                         </div>
 
-                        <div className="bg-[#FDF5F3] text-center rounded-xl p-6 lg:p-8 flex flex-col items-center gap-6">
-                            <Image src="/morethancopper.png" alt="Icon" width={300} height={90} />
+                        <div className="bg-[#FDF5F3] text-center rounded-xl p-6 lg:p-8 flex flex-col items-center gap-6 animate-reveal group hover:scale-105 transition-all duration-400">
+                            <Image src="/morethancopper.png" alt="Icon" width={300} height={90} className="group-hover:scale-110 group-hover:rotate-10 transition-transform duration-400" />
                             <h1 className="overflow-hidden text-[#FA6E43] font-medium text-[32px] leading-[64px] tracking-[-1.4px] capitalize">More Than Cooper</h1>
 
                         </div>
 
-                        <div className=" bg-[#FDF5F3] rounded-xl p-6 lg:p-8 flex flex-col gap-6">
-                            <Image src="/careforfuture.png" alt="Icon" width={80} height={0} />
+                        <div className=" bg-[#FDF5F3] rounded-xl p-6 lg:p-8 flex flex-col gap-6 animate-reveal group hover:scale-105 transition-all duration-400">
+                            <Image src="/careforfuture.png" alt="Icon" width={80} height={0} className="group-hover:scale-110 group-hover:rotate-10 transition-transform duration-400" />
                             <div>
                                 <h1 className="overflow-hidden text-[#FA6E43] font-medium text-[32px] leading-[64px] tracking-[-1.4px] capitalize">Care For The Future</h1>
                                 <p className="text-[rgba(33,34,37,0.82)] text-xs lg:text-sm mt-3">While focusing on innovation, we stay mindful of our environmental footprint. We strive to minimize our carbon footprint and set an example for responsible manufacturing across the industry.</p>
                             </div>
                         </div>
 
-                        <div className="bg-[#FDF5F3] rounded-xl p-6 lg:p-8 flex flex-col gap-6">
-                            <Image src="/grow.png" alt="Icon" width={80} height={0} />
+                        <div className="bg-[#FDF5F3] rounded-xl p-6 lg:p-8 flex flex-col gap-6 animate-reveal group hover:scale-105 transition-all duration-400">
+                            <Image src="/grow.png" alt="Icon" width={80} height={0} className="group-hover:scale-110 group-hover:rotate-10 transition-transform duration-400" />
                             <div>
                                 <h1 className="overflow-hidden text-[#FA6E43] font-medium text-[32px] leading-[64px] tracking-[-1.4px] capitalize">Grow Together</h1>
                                 <p className="text-[rgba(33,34,37,0.82)] text-xs lg:text-sm mt-3">We strive to partner with those who share a genuine commitment to excellence. We work towards building long-term relationships that make a positive difference to society.</p>

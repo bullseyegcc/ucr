@@ -14,74 +14,87 @@ export default function TextReveal({ children, className = '' }) {
     if (!container) return;
 
     const timer = setTimeout(() => {
-      // Get all text nodes and wrap them in spans
       const wordSpans = [];
-      const walker = document.createTreeWalker(
-        container,
-        NodeFilter.SHOW_TEXT,
-        null,
-        false
-      );
-
-      let node;
-      const nodesToProcess = [];
       
-      // Collect all text nodes first (including those in span tags)
-      while ((node = walker.nextNode())) {
-        if (node.textContent.trim()) {
-          nodesToProcess.push(node);
-        }
-      }
+      // Function to get all computed styles from an element
+      const getComputedStyles = (element) => {
+        const computed = window.getComputedStyle(element);
+        return {
+          color: computed.color,
+          backgroundColor: computed.backgroundColor,
+          backgroundImage: computed.backgroundImage,
+          backgroundClip: computed.backgroundClip,
+          WebkitBackgroundClip: computed.WebkitBackgroundClip,
+          WebkitTextFillColor: computed.WebkitTextFillColor,
+          fontSize: computed.fontSize,
+          fontWeight: computed.fontWeight,
+          fontFamily: computed.fontFamily,
+        };
+      };
 
-      // Process nodes in reverse to avoid index issues
-      nodesToProcess.reverse().forEach((textNode) => {
-        const text = textNode.textContent;
-        const parent = textNode.parentNode;
-        const fragment = document.createDocumentFragment();
-        const nodeWords = [];
+      // Function to apply styles to word span
+      const applyStyles = (wordSpan, parentStyles) => {
+        Object.assign(wordSpan.style, parentStyles);
+        wordSpan.style.display = 'inline';
+        wordSpan.style.opacity = '0';
+        wordSpan.style.filter = 'blur(10px)';
+      };
 
-        text.split(/\s+/).forEach((word) => {
-          const span = document.createElement('span');
-          span.textContent = word;
-          span.style.display = 'inline-block';
-          span.style.marginRight = '0.25em';
-          span.className = 'word-span';
-          fragment.appendChild(span);
-          nodeWords.push(span);
+      // Function to recursively process all text nodes while preserving element styles
+      const processElement = (element) => {
+        const parentStyles = getComputedStyles(element);
+        
+        Array.from(element.childNodes).forEach(node => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            // Text node - wrap words
+            const text = node.textContent;
+            if (text.trim()) {
+              const fragment = document.createDocumentFragment();
+              const words = text.split(/(\s+)/);
+              
+              words.forEach((word) => {
+                if (word.trim()) {
+                  const wordSpan = document.createElement('span');
+                  wordSpan.textContent = word;
+                  wordSpan.className = 'word-span';
+                  applyStyles(wordSpan, parentStyles);
+                  fragment.appendChild(wordSpan);
+                  wordSpans.push(wordSpan);
+                } else if (word) {
+                  fragment.appendChild(document.createTextNode(word));
+                }
+              });
+              
+              node.parentNode.replaceChild(fragment, node);
+            }
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            // Element node - recurse into it
+            processElement(node);
+          }
         });
+      };
 
-        // Add words to main array in correct order
-        wordSpans.unshift(...nodeWords);
-        parent.replaceChild(fragment, textNode);
-      });
+      // Start processing from the container
+      processElement(container);
 
       if (wordSpans.length > 0) {
-        // Initialize all words as completely blurred and transparent
-        gsap.set(wordSpans, {
-          filter: 'blur(8px)',
-          opacity: 0,
+        // Animate all words in sequence
+        gsap.to(wordSpans, {
+          opacity: 1,
+          filter: 'blur(0px)',
+          stagger: {
+            each: 0.04,
+            from: 'start',
+          },
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: container,
+            start: 'top 85%',
+            end: 'top 25%',
+            scrub: 1.2,
+            markers: false,
+          },
         });
-
-        // Animate on scroll - word by word reveal
-        gsap.to(
-          wordSpans,
-          {
-            filter: 'blur(0px)',
-            opacity: 1,
-            stagger: {
-              each: 0.04,
-              from: 'start',
-            },
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: container,
-              start: 'top 85%',
-              end: 'top 25%',
-              scrub: 1.2,
-              markers: false,
-            },
-          }
-        );
 
         ScrollTrigger.refresh();
       }

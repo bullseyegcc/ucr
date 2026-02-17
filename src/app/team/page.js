@@ -3,6 +3,7 @@ import Image from "next/image"
 import SuccessStrengthSection from "../../components/SuccessStrengthSection"
 import TeamMemoriesSection from "../../components/TeamMemoriesSection"
 import ParallaxSection from "../../components/ParallaxSection"
+import TextReveal from "../../components/TextReveal"
 
 export default function Team() {
 
@@ -46,7 +47,7 @@ export default function Team() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6  py-8 justify-center">
 
                         {/* card 1 */}
-                        <div className="h-full">
+                        <div className="h-full animate-reveal group hover:scale-105 transition-all duration-400">
                             <Image src="/chairman.png" alt="Team member" width={1000} height={1000} className="w-full rounded-lg object-contain" />
 
                             <h1 className="text-2xl lg:text-3xl mt-2 font-medium">Diam O'Sullivan</h1>
@@ -54,7 +55,7 @@ export default function Team() {
                         </div>
 
                         {/* card 2 */}
-                        <div className="h-full items-center">
+                        <div className="h-full items-center animate-reveal group hover:scale-105 transition-all duration-400">
                             <Image src="/cofounder.png" alt="Team member" width={1000} height={1000} className=" w-full rounded-lg object-contain" />
 
                             <h1 className="text-2xl lg:text-3xl mt-2 font-medium">Diam O'Sullivan</h1>
@@ -62,7 +63,7 @@ export default function Team() {
                         </div>
 
                         {/* card 2 */}
-                        <div className="h-full">
+                        <div className="h-full animate-reveal group hover:scale-105 transition-all duration-400">
                             <Image src="/cheftechnology.png" alt="Team member" width={1000} height={1000} className=" w-full rounded-lg object-contain" />
 
                             <h1 className="text-2xl lg:text-3xl mt-2 font-medium">Diam O'Sullivan</h1>
@@ -76,7 +77,7 @@ export default function Team() {
 
                 </div>
 
-
+                </ParallaxSection>
 
             </div>
             {/* quote section  */}
@@ -86,7 +87,9 @@ export default function Team() {
                 <div className="flex flex-col w-full lg:w-[80%]">
 
                     <Image src="/quote.png" alt="Icon" width={40} height={0} className="w-8 lg:w-[60px]" />
-                    <p className="pl-3 lg:pl-5 text-lg lg:text-3xl italic leading-relaxed">At UCR, we are grounded in vision, trust, and a commitment to excellence. We believe success is measured not just by financial gains but by the positive impact we have on our communities and future generations.We have broadened our investments across various sectors with a clear strategy. As global markets change, we remain focused on responsible growth, continuous innovation, and delivering lasting value.</p>
+                    <TextReveal>
+                        <p className="pl-3 lg:pl-5 text-lg lg:text-3xl italic leading-relaxed">At UCR, we are grounded in vision, trust, and a commitment to excellence. We believe success is measured not just by financial gains but by the positive impact we have on our communities and future generations.We have broadened our investments across various sectors with a clear strategy. As global markets change, we remain focused on responsible growth, continuous innovation, and delivering lasting value.</p>
+                    </TextReveal>
                     <Image src="/quote.png" alt="Icon" width={40} height={0} className="self-end w-8 lg:w-[60px]" />
 
                 </div>
@@ -100,7 +103,6 @@ export default function Team() {
 
 
             </div>
-            </ParallaxSection>
 
             <ParallaxSection index={1}>
             <TeamMemoriesSection />

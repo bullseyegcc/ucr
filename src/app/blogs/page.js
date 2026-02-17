@@ -80,7 +80,7 @@ export default function BlogsPage() {
                     {/* Smaller cards row (desktop 3 columns) */}
                     <div className="grid gap-6 lg:grid-cols-3 mt-8">
                         {others.map((post) => (
-                            <Link href={`/blogs/${post.slug}`} key={post.id} className="block bg-white rounded-xl overflow-hidden shadow">
+                            <Link href={`/blogs/${post.slug}`} key={post.id} className="block bg-white rounded-xl overflow-hidden shadow group cursor-pointer transition-all duration-400 ease-out hover:scale-105 hover:shadow-2xl">
                                 <article>
                                     <Image src={post.image} alt={post.title} width={800} height={500} className="w-full h-44 lg:h-[280px] object-cover" />
                                     <div className="p-3">

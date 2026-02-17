@@ -33,7 +33,7 @@ export default function Logistics() {
 
                 <div className=" px-6 lg:px-10 py-8 lg:py-10 flex flex-col lg:flex-row justify-center gap-6 items-end">
 
-                    <div className="min-h-[55vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8">
+                    <div className="min-h-[55vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 animate-reveal group hover:scale-105 transition-all duration-400">
                         <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">200k+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
@@ -48,7 +48,7 @@ export default function Logistics() {
 
                     </div>
 
-                    <div className="min-h-[55vh] lg:h-[50vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8">
+                    <div className="min-h-[55vh] lg:min-h-[50vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 animate-reveal group hover:scale-105 transition-all duration-400">
                         <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">150+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
@@ -62,7 +62,7 @@ export default function Logistics() {
 
                     </div>
 
-                    <div className="min-h-[55vh] lg:h-[45vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8">
+                    <div className="min-h-[55vh] lg:min-h-[45vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 animate-reveal group hover:scale-105 transition-all duration-400">
                         <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">30+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
@@ -85,7 +85,7 @@ export default function Logistics() {
 
                 <div className=" px-6 lg:px-10 py-8 lg:py-10 flex flex-col lg:flex-row justify-center gap-6 items-end">
 
-                    <div className="min-h-[55vh] lg:h-[45vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8">
+                    <div className="min-h-[55vh] lg:min-h-[45vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 animate-reveal group hover:scale-105 transition-all duration-400">
                         <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">200k+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
@@ -100,7 +100,7 @@ export default function Logistics() {
 
                     </div>
 
-                    <div className="min-h-[55vh] lg:h-[50vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8">
+                    <div className="min-h-[55vh] lg:min-h-[50vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 animate-reveal group hover:scale-105 transition-all duration-400">
                         <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">150+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
@@ -114,7 +114,7 @@ export default function Logistics() {
 
                     </div>
 
-                    <div className="min-h-[55vh] lg:h-[55vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8">
+                    <div className="min-h-[55vh] lg:min-h-[55vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 animate-reveal group hover:scale-105 transition-all duration-400">
                         <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">30+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
@@ -135,7 +135,7 @@ export default function Logistics() {
 
 
 
-            <div className=" min-h-[80vh] lg:min-h-screen bg-white  pt-20 flex flex-col items-center justify-center ">
+            <div className=" overflow-x-hidden min-h-[80vh] lg:min-h-screen bg-white  pt-20 flex flex-col items-center justify-center ">
 
                 {/* Header */}
                 <div className="flex px-10 flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-8 lg:gap-12 mb-12 lg:mb-16 lg:mb-20">
@@ -157,20 +157,24 @@ export default function Logistics() {
                 </div>
             </div>
 
-            <div className="relative flex flex-col justify-center pt-20   items-center min-h-screen ">
-
-                <Image src="/gradientcircle.png" alt="Logistics End Image" width={900} height={200} className="absolute -top-200 -right-100 w-[90vw] z-0 " />
-
-                <Image src="/vector.png" alt="Logistics End Image" width={300} height={0} className="absolute -top-20 -right-10 z-0 " />
-
-                <div className="w-full text-left px-6 lg:px-10">
-                    <h1 className='text-sm lg:text-xl lg:text-2xl text-primary uppercase'>Global Presence</h1>
-                    <h1 className="text-2xl lg:text-4xl lg:text-5xl font-semibold text-black mt-2 lg:mt-5 lg:mt-2 leading-tight lg:leading-snug">Global Reach</h1>
+            <div className="relative w-full bg-white overflow-hidden">
+                
+                {/* Background decorative elements */}
+                <div className="absolute inset-0 pointer-events-none">
+                    <Image src="/gradientcircle.png" alt="Logistics End Image" width={900} height={200} className="absolute -top-80 -right-20 w-[50vw] z-0" />
+                    <Image src="/vector.png" alt="Logistics End Image" width={300} height={0} className="absolute -top-10 -right-5 z-0" />
                 </div>
 
+                {/* Content */}
+                <div className="relative z-10 flex flex-col items-start gap-12 px-6 lg:px-10 pt-20 pb-20">
+                    
+                    <div className="w-full text-left">
+                        <h1 className='text-sm lg:text-xl lg:text-2xl text-primary uppercase'>Global Presence</h1>
+                        <h1 className="text-2xl lg:text-4xl lg:text-5xl font-semibold text-black mt-2 lg:mt-4 leading-tight lg:leading-snug">Global Reach</h1>
+                    </div>
 
-                {/* wrapper */}
-                <div className="flex pb-12 lg:pb-0 flex-col lg:flex-row gap-6 lg:gap-8 w-full mt-12 lg:mt-20 px-6 lg:px-10 z-900 ">
+                    {/* wrapper */}
+                    <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 w-full">
 
                     {/* column 1 */}
                     <div className="w-full lg:w-1/3 flex flex-col gap-8 lg:gap-10 ">
@@ -257,13 +261,13 @@ export default function Logistics() {
 
                     </div>
 
-                    <div className="hidden lg:block w-full lg:w-1/3 h-[40vh] lg:h-[80vh] bg-[url('/advantagecol3.png')] bg-cover  bg-bottom bg-no-repeat">
+                    <div className="hidden lg:block w-full lg:w-1/3 h-[40vh] md:h-auto lg:h-[80vh] bg-[url('/advantagecol3.png')] bg-cover  bg-bottom bg-no-repeat">
 
                     </div>
 
                 </div>
 
-
+                </div>
 
             </div>
 

@@ -15,7 +15,7 @@ export default function sustainability() {
             {/* Our Mission */}
 
             <ParallaxSection index={0}>
-            <div className=" overflow-x-hidden relative min-h-auto lg:min-h-screen flex flex-col lg:flex-row px-6 lg:px-10 py-12 lg:py-20 font-medium bg-gray-200 shadow-lg backdrop-blur-sm gap-8 lg:gap-0">
+            <div className=" overflow-x-hidden relative min-h-auto lg:min-h-screen flex flex-col lg:flex-row px-6 lg:px-10 py-12 lg:py-20 font-medium bg-gray-200 shadow-lg gap-8 lg:gap-0">
                                      
                 <div className="hidden lg:flex flex-col gap-28 w-90">
                     <Image src="/mission1.png" alt="Icon" width={300} height={0} className="ml-9" />
@@ -50,29 +50,30 @@ export default function sustainability() {
 
             </div>
 
+            </ParallaxSection>
 
-            <div className="min-h-auto lg:min-h-[85vh] flex flex-col items-center px-2 lg:px-10 py-12 lg:py-20">
+            <div className="min-h-auto lg:min-h-[85vh] flex flex-col items-center px-2 lg:px-10 py-12 lg:py-20 relative z-10">
 
                 <h1 className="text-primary text-base lg:text-xl font-medium uppercase text-center" >Build on integrity, powered by innovation</h1>
                 <h1 className="w-full lg:w-[60%] text-center text-3xl px-10 lg:text-5xl mt-4 font-semibold">Eco-friendly designs & recycling innovations.</h1>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-2 my-12 lg:my-16 w-full">
 
-                    <div className="flex flex-col px-6 lg:px-10 gap-3">
+                    <div className="flex flex-col px-6 lg:px-10 gap-3 animate-reveal group hover:scale-105 transition-all duration-400">
                         <Image src="/eco1.png" alt="Icon" width={300} height={0} className="w-full" />
                         <h1 className="text-xl lg:text-2xl font-medium text-primary text-left">Lower Electricity Consumption</h1>
                         <p className="text-sm">Helio leverages modern data centers with a Power Usage Effectiveness (PUE) as low as 1.02 — far better than the 2.6 average of local render farms. Less waste, smarter cooling, dramatically lower energy demand.</p>
 
                     </div>
 
-                    <div className="flex flex-col px-6 lg:px-10 gap-3">
+                    <div className="flex flex-col px-6 lg:px-10 gap-3 animate-reveal group hover:scale-105 transition-all duration-400">
                         <Image src="/eco2.png" alt="Icon" width={300} height={0} className="w-full" />
                         <h1 className="text-xl lg:text-2xl font-medium text-primary">CO₂ reports & carbon capture</h1>
                         <p className="text-sm">Helio utilizes cutting-edge rendering algorithms that significantly reduce processing time while maintaining high-quality outputs. This technology optimizes resource usage, allowing for more projects to be completed in less time.</p>
 
                     </div>
 
-                    <div className="flex flex-col px-6 lg:px-10 gap-3">
+                    <div className="flex flex-col px-6 lg:px-10 gap-3 animate-reveal group hover:scale-105 transition-all duration-400">
                         <Image src="/eco3.png" alt="Icon" width={300} height={0} className="w-full" />
                         <h1 className="text-xl lg:text-2xl font-medium text-primary">Energy conservation</h1>
                         <p className="text-sm">With Helio, users can easily scale their rendering capabilities up or down based on project requirements. This flexibility ensures that clients only pay for the resources they need, enhancing cost efficiency.</p>
@@ -82,8 +83,7 @@ export default function sustainability() {
                 </div>
             </div>
 
-
-            <div className="min-h-auto lg:min-h-screen px-6 lg:px-10 py-12 lg:py-20">
+            <div className="min-h-auto lg:min-h-screen px-6 lg:px-10 py-12 lg:py-20 relative z-10">
             
                     <div className="text-center mb-12 lg:mb-16 flex flex-col items-center">
                       <Badge title="Core Strength" />
@@ -91,42 +91,41 @@ export default function sustainability() {
                     </div>
             
                     <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 gap-4 lg:gap-6">
-                      <div className="min-h-[60vh] lg:full lg:row-span-2 lg:ml-10 rounded-xl overflow-hidden relative h-48 lg:h-auto">
+                      <div className="min-h-[60vh] lg:full lg:row-span-2 lg:ml-10 rounded-xl overflow-hidden relative h-48 lg:h-auto animate-reveal group hover:scale-105 transition-all duration-400">
                       <VideoPlayer src="/wecarethenature.mp4" width={600} height={800} className='w-full h-full' />
                     
                           <h1 className="text-xl lg:text-3xl text-white absolute bottom-4 lg:bottom-9 left-4 lg:left-6">We care the Nature</h1>
                    
                      
                       </div>
-                      <div className="bg-white rounded-xl p-6 py-12      lg:p-8 flex flex-col gap-4 shadow-lg">
+                      <div className="bg-white rounded-xl p-6 py-12 lg:p-8 flex flex-col gap-4 shadow-lg animate-reveal group hover:scale-105 transition-all duration-400">
                         <Image src="/ecofeature1.png" alt="Icon" width={80} height={0} className="mb-4 lg:mb-6" />
                         <h1 className="text-lg lg:text-2xl font-semibold text-black">Sustainable Materials</h1>
                         <p className="text-sm">We prioritize recyclable, low-impact materials</p>
                       </div>
             
-                      <div className="bg-white rounded-xl p-6 py-12 lg:p-8 flex flex-col gap-4 shadow-lg">
+                      <div className="bg-white rounded-xl p-6 py-12 lg:p-8 flex flex-col gap-4 shadow-lg animate-reveal group hover:scale-105 transition-all duration-400">
                         <Image src="/ecofeature2.png" alt="Icon" width={80} height={40} className="mb-4 lg:mb-6" />
                         <h1 className="text-lg lg:text-2xl font-semibold text-black">Energy-Efficient Processes</h1>
                         <p className="text-sm">manufacturing powered by energy-saving technologies</p>
                       </div>
             
-                      <div className="bg-white rounded-xl p-6 py-12 lg:p-8 flex flex-col gap-4 shadow-lg">
+                      <div className="bg-white rounded-xl p-6 py-12 lg:p-8 flex flex-col gap-4 shadow-lg animate-reveal group hover:scale-105 transition-all duration-400">
                         <Image src="/ecofeature3.png" alt="Icon" width={80} height={40} className="mb-4 lg:mb-6" />
                         <h1 className="text-lg lg:text-2xl font-semibold text-black">Reduced Carbon Emissions</h1>
                         <p className="text-sm">Commitment to lowering CO₂ emissions</p>
                       </div>
             
-                      <div className="bg-white rounded-xl p-6 py-12 lg:p-8 flex flex-col gap-4 shadow-lg">
+                      <div className="bg-white rounded-xl p-6 py-12 lg:p-8 flex flex-col gap-4 shadow-lg animate-reveal group hover:scale-105 transition-all duration-400">
                         <Image src="/ecofeature4.png" alt="Icon" width={80} height={40} className="mb-4 lg:mb-6" />
                         <h1 className="text-lg lg:text-2xl font-semibold text-black">Future-Focused Innovation</h1>
                         <p className="text-sm">Continuous investment in green technologies</p>
                       </div>
                     </div>
-            
-            
-                  </div>
-            
-            </ParallaxSection>
-        </div >
+
+            </div>
+
+        </div>
+
     )
 }

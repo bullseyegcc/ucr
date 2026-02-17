@@ -33,101 +33,105 @@ export default function Technology() {
 
             {/* cards */}
 
-            </div>
             </ParallaxSection>
 
             {/* card one  */}
             <ParallaxSection index={1}>
-            <div className="bg-white px-6 sm:px-8 lg:px-10 rounded-xl min-h-screen lg:min-h-[80vh] mx-6 sm:mx-8 lg:mx-10">
+                <div className="bg-white px-6 sm:px-8 lg:px-10 rounded-xl min-h-screen lg:min-h-[80vh] mx-6 sm:mx-8 lg:mx-10">
 
-                {/* card header */}
+                    {/* card header */}
 
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
-                    <h1 className="text-primary text-2xl sm:text-3xl lg:text-4xl font-medium uppercase">South Wire Technology</h1>
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
+                        <h1 className="text-primary text-2xl sm:text-3xl lg:text-4xl font-medium uppercase animate-reveal">South Wire Technology</h1>
 
-                    <h1 className="text-secondary text-xl sm:text-2xl lg:text-4xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap">01/<span className="text-secondary">02</span></h1>
-                </div>
+                        <h1 className="text-secondary text-xl sm:text-2xl lg:text-4xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal">01/<span className="text-secondary">02</span></h1>
+                    </div>
 
                 {/* content */}
 
                 <div className="w-full flex flex-col lg:flex-row border-t border-secondary/40">
                     {/* left side */}
                     <div className="w-full lg:w-1/2 flex flex-col gap-6 lg:gap-20 py-6 lg:py-9">
-                        <p className="text-base lg:text-xl lg:text-2xl">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.
+                            <p className="text-base lg:text-xl lg:text-2xl animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.
 
-                        </p>
+                            </p>
 
-                        <p className="text-base lg:text-xl lg:text-2xl">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
-                    </div>
+                            <p className="text-base lg:text-xl lg:text-2xl animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
+                        </div>
 
-                    {/* right side */}
-                    <div className="w-full lg:w-1/2">
-                        <Image src="/southwire.png" alt="Icon" width={500} height={0} className="w-full h-full object-cover rounded-none lg:rounded-r-xl p-4 lg:p-6 lg:p-8" />
+                        {/* right side */}
+                        <div className="w-full lg:w-1/2">
+                            <Image src="/southwire.png" alt="Icon" width={500} height={0} className="w-full h-full object-cover rounded-none lg:rounded-r-xl p-4 lg:p-6 lg:p-8" />
+                        </div>
                     </div>
                 </div>
-            </div>
+            </ParallaxSection>
 
             {/* card two */}
-            <div className="text-white my-2 bg-[#272A2A] px-6 sm:px-8 lg:px-10 rounded-xl min-h-screen lg:min-h-[80vh] mx-6 sm:mx-8 lg:mx-10">
+            <ParallaxSection index={2}>
+                <div className="text-white my-2 bg-[#272A2A] px-6 sm:px-8 lg:px-10 rounded-xl min-h-screen lg:min-h-[80vh] mx-6 sm:mx-8 lg:mx-10">
 
-                {/* card header */}
+                    {/* card header */}
 
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
-                    <h1 className="text-white text-2xl sm:text-3xl lg:text-4xl font-medium uppercase">Copper treatments </h1>
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
+                        <h1 className="text-white text-2xl sm:text-3xl lg:text-4xl font-medium uppercase animate-reveal">Copper treatments </h1>
 
-                    <h1 className="text-secondary text-xl sm:text-2xl lg:text-4xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap">02/<span className="text-secondary">03</span></h1>
-                </div>
-
-                {/* content */}
-
-                <div className="w-full flex flex-col lg:flex-row border-t border-secondary/40">
-                    {/* left side */}
-                    <div className="w-full lg:w-[60%] flex flex-col gap-6 lg:gap-20 py-6 lg:py-9">
-                        <p className="text-base lg:text-xl lg:text-2xl">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.
-
-                        </p>
-
-                        <p className="text-base lg:text-xl lg:text-2xl">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
-
-
-                        <h1 className="py-4 text-base lg:text-lg text-primary font-medium underline">Read More</h1>
+                        <h1 className="text-secondary text-xl sm:text-2xl lg:text-4xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal">02/<span className="text-secondary">03</span></h1>
                     </div>
 
-                    {/* right side */}
-                    <div className="w-full lg:w-[40%]">
-                        <Image src="/coppertreatment.png" alt="Icon" width={500} height={0} className="w-full h-full object-cover rounded-none lg:rounded-r-xl p-4 lg:p-6 lg:p-8" />
+                    {/* content */}
+
+                    <div className="w-full flex flex-col lg:flex-row border-t border-secondary/40">
+                        {/* left side */}
+                        <div className="w-full lg:w-[60%] flex flex-col gap-6 lg:gap-20 py-6 lg:py-9">
+                            <p className="text-base lg:text-xl lg:text-2xl animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.
+
+                            </p>
+
+                            <p className="text-base lg:text-xl lg:text-2xl animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
+
+
+                            <h1 className="py-4 text-base lg:text-lg text-primary font-medium underline hover:text-orange-600 transition-colors duration-300">Read More</h1>
+                        </div>
+
+                        {/* right side */}
+                        <div className="w-full lg:w-[40%]">
+                            <Image src="/coppertreatment.png" alt="Icon" width={500} height={0} className="w-full h-full object-cover rounded-none lg:rounded-r-xl p-4 lg:p-6 lg:p-8" />
+                        </div>
                     </div>
                 </div>
-            </div>
+            </ParallaxSection>
 
             {/* card three  */}
-            <div className="bg-white px-6 sm:px-8 lg:px-10 rounded-xl min-h-screen lg:min-h-[80vh] mx-6 sm:mx-8 lg:mx-10">
+            <ParallaxSection index={3}>
+                <div className="bg-white px-6 sm:px-8 lg:px-10 rounded-xl min-h-screen lg:min-h-[80vh] mx-6 sm:mx-8 lg:mx-10">
 
-                {/* card header */}
+                    {/* card header */}
 
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
-                    <h1 className="text-primary text-2xl sm:text-3xl lg:text-4xl font-medium ">NexGen Sol</h1>
-                    <h1 className="text-secondary text-xl sm:text-2xl lg:text-4xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap">03/<span className="text-secondary">03</span></h1>
-                </div>
-
-                {/* content */}
-
-                <div className="w-full flex flex-col lg:flex-row border-t border-secondary/40">
-                    {/* left side */}
-                    <div className="w-full lg:w-1/2 flex flex-col gap-6 lg:gap-20 py-6 lg:py-9">
-                        <p className="text-base lg:text-xl lg:text-2xl">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.
-
-                        </p>
-
-                        <p className="text-base lg:text-xl lg:text-2xl">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
+                        <h1 className="text-primary text-2xl sm:text-3xl lg:text-4xl font-medium animate-reveal">NexGen Sol</h1>
+                        <h1 className="text-secondary text-xl sm:text-2xl lg:text-4xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal">03/<span className="text-secondary">03</span></h1>
                     </div>
 
-                    {/* right side */}
-                    <div className="w-full lg:w-1/2">
-                        <Image src="/nextgensol.png" alt="Icon" width={500} height={0} className="w-full h-full object-cover rounded-none lg:rounded-r-xl p-4 lg:p-6 lg:p-8" />
+                    {/* content */}
+
+                    <div className="w-full flex flex-col lg:flex-row border-t border-secondary/40">
+                        {/* left side */}
+                        <div className="w-full lg:w-1/2 flex flex-col gap-6 lg:gap-20 py-6 lg:py-9">
+                            <p className="text-base lg:text-xl lg:text-2xl animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.
+
+                            </p>
+
+                            <p className="text-base lg:text-xl lg:text-2xl animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
+                        </div>
+
+                        {/* right side */}
+                        <div className="w-full lg:w-1/2">
+                            <Image src="/nextgensol.png" alt="Icon" width={500} height={0} className="w-full h-full object-cover rounded-none lg:rounded-r-xl p-4 lg:p-6 lg:p-8" />
+                        </div>
                     </div>
                 </div>
-            </div>
+            </ParallaxSection>
 
             {/* cards end */}
 
@@ -135,53 +139,56 @@ export default function Technology() {
 
             {/* laboratory */}
 
-            <div className="flex min-h-[80vh] flex-col px-10 items-center justify-center py-20">
+            <ParallaxSection index={4}>
+                <div className="flex min-h-[80vh] flex-col px-10 items-center justify-center py-20">
 
-                <Badgetextblack title="UCR Laboratory" />
-                <h1 className="text-3xl text-center lg:text-4xl lg:text-5xl font-semibold text-black mt-4 lg:mt-5 lg:mt-6 leading-tight lg:leading-snug">Equipment used in the testing process</h1>
+                    <div className="animate-reveal">
+                        <Badgetextblack title="UCR Laboratory" />
+                    </div>
+                    <h1 className="text-3xl text-center lg:text-4xl lg:text-5xl font-semibold text-black mt-4 lg:mt-5 lg:mt-6 leading-tight lg:leading-snug animate-reveal">Equipment used in the testing process</h1>
 
 
-                {/* cards */}
-                <div className="flex flex-wrap gap-6 py-8 justify-center">
+                    {/* cards */}
+                    <div className="flex flex-wrap gap-6 py-8 justify-center">
 
-                    {/* card 1 */}
-                    <div className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%]">
+                        {/* card 1 */}
+                        <div className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%] animate-reveal">
 
-                        <Image src="/lab1.png" alt="Icon" width={480} height={0} className="object-contain rounded-xl " />
-                        <div className="relative">
-                            <span aria-hidden="true" className="absolute -left-0 -top-0 w-3 h-3 bg-[#FF6A00] rounded-full shadow-sm" />
-                            <h1 className="text-xl font-medium text-gray-500 pl-4 ml-2">LECO Oxygen Analyzer</h1>
+                            <Image src="/lab1.png" alt="Icon" width={480} height={0} className="object-contain rounded-xl " />
+                            <div className="relative">
+                                <span aria-hidden="true" className="absolute -left-0 -top-0 w-3 h-3 bg-[#FF6A00] rounded-full shadow-sm" />
+                                <h1 className="text-xl font-medium text-gray-500 pl-4 ml-2">LECO Oxygen Analyzer</h1>
+                            </div>
+
+                        </div>
+
+                        {/* card 2 */}
+                        <div className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%] mt-6 sm:mt-8 animate-reveal">
+
+                            <Image src="/lab2.png" alt="Icon" width={480} height={0} className="object-contain rounded-xl " />
+                            <div className="relative">
+                                <span aria-hidden="true" className="absolute -left-0 -top-0 w-3 h-3 bg-[#FF6A00] rounded-full shadow-sm" />
+                                <h1 className="text-xl font-medium text-gray-500 pl-4 ml-2">Twist/Torsion Tester,</h1>
+                            </div>
+
+                        </div>
+
+                        {/* card 3   */}
+                        <div className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%]  mt-8 sm:mt-16 animate-reveal">
+
+                            <Image src="/lab3.png" alt="Icon" width={480} height={300} className="h-[75%] lg:w-[90%]  object-fit rounded-xl " />
+                            <div className="relative">
+                                <span aria-hidden="true" className="absolute -left-0 -top-0 w-3 h-3 bg-[#FF6A00] rounded-full shadow-sm" />
+                                <h1 className="text-xl font-medium text-gray-500 pl-4 ml-2">UTS (Ultimate Tensile Strength)</h1>
+                            </div>
+
                         </div>
 
                     </div>
 
-                    {/* card 2 */}
-                    <div className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%] mt-6 sm:mt-8">
 
-                        <Image src="/lab2.png" alt="Icon" width={480} height={0} className="object-contain rounded-xl " />
-                        <div className="relative">
-                            <span aria-hidden="true" className="absolute -left-0 -top-0 w-3 h-3 bg-[#FF6A00] rounded-full shadow-sm" />
-                            <h1 className="text-xl font-medium text-gray-500 pl-4 ml-2">Twist/Torsion Tester,</h1>
-                        </div>
-
-                    </div>
-
-                    {/* card 3   */}
-                    <div className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%]  mt-8 sm:mt-16">
-
-                        <Image src="/lab3.png" alt="Icon" width={480} height={300} className="h-[75%] lg:w-[90%]  object-fit rounded-xl " />
-                        <div className="relative">
-                            <span aria-hidden="true" className="absolute -left-0 -top-0 w-3 h-3 bg-[#FF6A00] rounded-full shadow-sm" />
-                            <h1 className="text-xl font-medium text-gray-500 pl-4 ml-2">UTS (Ultimate Tensile Strength)</h1>
-                        </div>
-
-                    </div>
 
                 </div>
-
-
-
-            </div>
             </ParallaxSection>
         </div>
     )
