@@ -54,10 +54,10 @@ export default function AboutUs() {
 
             <ParallaxSection index={1}>
                 <div className="min-h-screen relative mb-8 lg:mb-0">
-                    <div className="min-h-[40vh] sm:min-h-[50vh] w-full bg-[url('/parentcompanybg.png')] bg-cover bg-center lg:bg-top bg-no-repeat rounded-xl sm:rounded-2xl flex flex-col justify-center items-center px-4 sm:px-5 lg:px-16 py-8 sm:py-12">
-                        <div className="flex flex-col sm:flex-row  items-center gap-2 sm:gap-3 text-white z-10">
+                    <div className="min-h-[40vh] sm:min-h-[50vh] w-full bg-[url('/parentcompanybg.png')] bg-cover bg-center lg:bg-top bg-no-repeat rounded-xl sm:rounded-2xl flex flex-col justify-center  px-4 sm:px-5 lg:px-16 py-8 sm:py-12">
+                        <div className="flex flex-col sm:flex-row  justify-start items-center gap-2 sm:gap-3 text-white z-10">
                             <Image src='/badge-w.png' alt="Badge Icon" width={34} height={34} className='object-contain w-6 h-6 sm:w-8 sm:h-8 lg:w-[34px] lg:h-[34px]' />
-                            <span className='text-2xl sm:text-3xl lg:text-4xl uppercase font-medium text-center'>Parent Company</span>
+                            <span className='text-2xl sm:text-3xl lg:text-4xl uppercase font-medium'>Parent Company</span>
                         </div>
                     </div>
                     
