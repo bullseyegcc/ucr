@@ -34,10 +34,10 @@ export default function ParallaxSection({ children, index = 0, parallaxAmount = 
         entranceTl.fromTo(
           content,
           {
-            opacity: 0.4,
+            opacity: 1,
           },
           {
-            opacity: 0.85,
+            opacity: 1,
             duration: 0.5,
             ease: 'power1.inOut',
           },
@@ -136,16 +136,15 @@ export default function ParallaxSection({ children, index = 0, parallaxAmount = 
       ref={sectionRef}
       style={{ 
         zIndex: 10 + index,
+        backgroundColor: 'white',
       }}
-      className="relative w-full overflow-hidden -mb-1"
+      className="relative w-full overflow-hidden"
     >
       <div 
         ref={contentRef}
-        className="will-change-transform origin-center backface-hidden"
+        className="will-change-transform origin-center"
         style={{
-          perspective: '1500px',
-          transformStyle: 'preserve-3d',
-          transform: 'var(--parallax-scale, 1)',
+          transform: 'scale(var(--parallax-scale, 1))',
         }}
       >
         {children}

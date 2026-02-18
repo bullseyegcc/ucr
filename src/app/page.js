@@ -9,31 +9,22 @@ import { VideoCard } from "../common/VideoCard.js";
 import StatsCard from "../components/StatsCard.js";
 import FeaturedProducts from "../components/home/FeaturedProducts.js";
 import WeCareSection from "../components/home/WeCareSection.js";
-import About from "../components/home/About.js";
 import OurTechnology from "../components/home/OurTechnology.js";
 import CTA from "../components/home/CTA.js";
 import Articles from "../components/home/Articles.js";
-import { VideoPlayer } from "../common/video";
 import ParallaxSection from "../components/ParallaxSection.js";
 import SplashOverlay from "../components/SplashOverlay.js";
 import HorizontalScrollGallery from "../components/HorizontalScrollGallery.js";
 import WhyChooseUs from "../components/home/WhyChooseUs.js";
+import HomeHeroAbout from "../components/home/HomeHeroAbout.js";
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-white">
       <SplashOverlay />
 
-      {/* header */}
-      <div className="relative flex min-h-[80vh] sm:min-h-[90vh] font-medium justify-center bg-black font-sans dark:bg-black overflow-hidden">
-        <VideoPlayer src="/hero.mp4" className="absolute inset-0 w-full h-full object-cover" />
-        <h1 className="absolute bottom-[50%] lg:top-[40%] text-3xl lg:text-4xl lg:text-6xl text-white px-4 lg:px-0 text-center z-10">UCR shapping the future</h1>
-      </div>
-
-
-      <ParallaxSection index={-1}>
-        <About />
-      </ParallaxSection>
+      {/* Hero → About with scroll-locked heading colour animation */}
+      <HomeHeroAbout />
 
       {/* video Cards */}
       <ParallaxSection index={0}>
@@ -53,7 +44,6 @@ export default function Home() {
         />
         </div>
       </ParallaxSection>
-
 
       <ParallaxSection index={1}>
         <FeaturedProducts />

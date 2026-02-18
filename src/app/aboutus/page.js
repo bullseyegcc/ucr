@@ -9,8 +9,10 @@ import Image from "next/image"
 import { VideoPlayer } from "../../common/video";
 import JourneySection from "../../components/JourneySection"
 import ParallaxSection from "../../components/ParallaxSection"
-import TextReveal from "../../components/TextReveal"
 import MissionValuesSection from "../../components/MissionValuesSection"
+import ColorChangeWithScroll from "../../components/ColorChangeWithScroll"
+import ExpertiseCards from "../../components/ExpertiseCards"
+import HeroHeading from "@/components/home/HeroHeading";
 
 export default function AboutUs() {
 
@@ -23,7 +25,11 @@ export default function AboutUs() {
                     <span className='text-white uppercase font-medium text-center text-sm lg:text-base'>Crafting Sustainable Progress, One Copper Solution at a Time </span>
                 </div>
 
-                <h1 className=" lg:w-[70%] leading-relaxed  text-center text-3xl lg:text-5xl  font-medium px-3 md:font-bold text-white">Leading the region's copper transformation with cutting edge technology </h1>
+                <HeroHeading >
+                        <h1 className="w-[80%]   text-3xl md:text-5xl lg:text-6xl text-white font-semibold text-center leading-tight">
+                    Leading the region&apos;s copper transformation with cutting edge technology
+                </h1>
+                </HeroHeading>
                 <div className="absolute -bottom-[40%] lg:-bottom-[55%] w-[90%] md:w-[80%] h-[50vh] lg:h-[70vh] ">
                     <VideoPlayer src="/aboutvideo.mp4" className="w-full h-full object-cover rounded-xl " />
 
@@ -33,13 +39,11 @@ export default function AboutUs() {
             <div className="px-3 lg:px-10 py-20 flex flex-col lg:items-center justify-center">
                 <Badge title="Who we are" />
 
-                <TextReveal>
-                    <h1 className="text-center text-xl pr-2 lg:text-4xl leading-relaxed  mt-8">
-                        <span className="text-[#FF7A5C]">Since 2008, we've delivered reliable, high performance copper solutions to </span>
-                        <span className="bg-gradient-to-r from-[#FF7A5C] to-[#8A8A8A] bg-clip-text text-transparent">industries across more than 30 countries, supported by advanced </span>
-                        <span className="text-[#8A8A8A]">technology and a strong focus on environmental responsibility. Guided by our core values, we work to elevate industry standards and help shape a greener, more efficient future.</span>
+                <ColorChangeWithScroll initialColor="#8A8A8A" afterColor="#FF7A5C" >
+                    <h1 className="text-center text-xl pr-2 lg:text-4xl leading-relaxed mt-8">
+                        Since 2008, we&apos;ve delivered reliable, high performance copper solutions to industries across more than 30 countries, supported by advanced technology and a strong focus on environmental responsibility. Guided by our core values, we work to elevate industry standards and help shape a greener, more efficient future.
                     </h1>
-                </TextReveal>
+                </ColorChangeWithScroll>
              
 
             </div>
@@ -101,51 +105,7 @@ export default function AboutUs() {
                         <h1 className="text-xl sm:text-2xl lg:text-4xl mt-3 sm:mt-4 font-semibold">Our Expertise & Experience</h1>
                     </div>
                     
-                    <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 items-stretch lg:items-end">
-
-                        <div className="rounded-xl w-full lg:w-1/3 bg-white px-4 sm:px-5 pt-8 sm:pt-10 lg:pt-16 relative flex flex-col gap-4 sm:gap-6 lg:gap-8 min-h-[45vh] sm:min-h-[50vh] lg:h-[55vh] group cursor-pointer transition-all duration-400 ease-out hover:scale-105 hover:shadow-2xl overflow-hidden">
-                            <h1 className="pt-3 sm:pt-5 text-4xl sm:text-5xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-3 sm:gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-                                20+ 
-                                <hr className="text-primary/30 w-[90%] shadow" />
-                            </h1>
-
-                            <div className="relative z-10 pb-4 sm:pb-6">
-                                <h1 className="text-2xl sm:text-2xl lg:text-3xl font-bold mb-2">Years Experience</h1>
-                                <p className="text-sm sm:text-base w-[85%] lg:w-[90%] pr-2 text-gray-600">200,000 metric tons copper production line that is the largest of its kind in the Middle East.</p>
-                            </div>
-
-                            <Image src="/exp1.png" alt="Expertise Icon" width={290} height={80} className='w-full absolute -bottom-0 right-0 z-0 opacity-90' />
-                        </div>
-
-                        <div className="rounded-xl w-full lg:w-1/3 bg-white px-4 sm:px-5 pt-8 sm:pt-10 lg:pt-16 relative flex flex-col gap-4 sm:gap-6 lg:gap-8 min-h-[45vh] sm:min-h-[50vh] lg:h-[50vh] group cursor-pointer transition-all duration-400 ease-out hover:scale-105 hover:shadow-2xl overflow-hidden">
-                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-3 sm:gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-                                1500+ 
-                                <hr className="text-primary/30 w-[90%] shadow" />
-                            </h1>
-
-                            <div className="relative z-10 pb-4 sm:pb-6">
-                                <h1 className="text-2xl sm:text-2xl lg:text-3xl font-bold mb-2">Employees</h1>
-                                <p className="text-sm sm:text-base w-[85%] lg:w-[80%] text-gray-600">With over 150 experienced employees, we deliver quality and reliability every day.</p>
-                            </div>
-
-                            <Image src="/employees.png" alt="Expertise Icon" width={300} height={80} className='absolute -bottom-0 right-0 z-0 opacity-90' />
-                        </div>
-                        
-                        <div className="rounded-xl w-full lg:w-1/3 bg-white px-4 sm:px-5 pt-8 sm:pt-10 lg:pt-16 relative flex flex-col gap-4 sm:gap-6 lg:gap-8 min-h-[45vh] sm:min-h-[50vh] lg:h-[45vh] group cursor-pointer transition-all duration-400 ease-out hover:scale-105 hover:shadow-2xl overflow-hidden">
-                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-3 sm:gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-                                30+ 
-                                <hr className="text-primary/30 w-[90%] shadow" />
-                            </h1>
-
-                            <div className="relative z-10 pb-4 sm:pb-6">
-                                <h1 className="text-2xl sm:text-2xl lg:text-3xl font-bold mb-2">Global Sales</h1>
-                                <p className="text-sm sm:text-base w-[85%] lg:w-[85%] pr-2 text-gray-600">We supply products, services and solutions across over 30 countries in Australia, Asia, Africa, and the Middle East.</p>
-                            </div>
-
-                            <Image src="/exp3.png" alt="Expertise Icon" width={300} height={80} className='absolute -bottom-0 right-0 z-0 opacity-90' />
-                        </div>
-
-                    </div>
+                    <ExpertiseCards />
 
                 </div>
             </ParallaxSection>

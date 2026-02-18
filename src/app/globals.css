@@ -7,9 +7,14 @@
   font-style: normal;
 }
 
+html {
+  color-scheme: light !important;
+  background-color: #ffffff !important;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ffffff !important;
+  --foreground: #171717 !important;
   --font-primary: 'Helvetica Now Display', sans-serif;
 }
 
@@ -21,17 +26,19 @@
   --font-primary: var(--font-primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Prevent GSAP pin-spacer from showing dark background or border seams */
+.pin-spacer {
+  background-color: white !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--background) !important;
+  color: var(--foreground) !important;
   font-family: var(--font-primary), sans-serif;
+  color-scheme: light !important;
 }
 
 @layer utilities {
@@ -84,4 +91,56 @@ body {
     animation-timeline: view();
     animation-range: entry 0% cover 40%;
   }
+}
+
+/* ─── SnippScrol System ──────────────────────────────────────────────────────
+ *
+ * data-snip-bg   → background parallax layer (slowest, zooms in)
+ * data-snip-text → staggered fade + rise + blur reveal
+ * data-snip-fg   → foreground parallax layer (fastest, pops forward)
+ * data-float     → idle floating micro-animation loop
+ *
+ * The SnippScrol wrapper adds these via GSAP; the classes below ensure
+ * correct base state so there's no flash of unstyled content.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+/* Prevent layout thrash — only composite properties are animated */
+[data-snip-bg],
+[data-snip-fg],
+[data-snip-text],
+[data-float] {
+  will-change: transform, opacity;
+}
+
+/* bg layer fills its container and is never clipped unexpectedly */
+[data-snip-bg] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Text elements start invisible so GSAP's fromTo has a clean baseline */
+[data-snip-text] {
+  opacity: 0;
+}
+
+/* Mask-based text reveal helper */
+.snip-mask {
+  overflow: hidden;
+  display: block;
+}
+
+/* Grain shimmer — optional CSS-only pulsing grain (subtle extra layering) */
+@keyframes grain-drift {
+  0%   { background-position: 0   0; }
+  25%  { background-position: 50px 25px; }
+  50%  { background-position: 25px 50px; }
+  75%  { background-position: -25px 25px; }
+  100% { background-position: 0   0; }
+}
+
+.snip-grain-drift {
+  animation: grain-drift 8s steps(1) infinite;
 }
