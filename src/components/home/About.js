@@ -55,7 +55,7 @@ export default function About({ lockProgressRef = null }) {
 
   return (
     <div className="bg-white h-screen flex flex-col overflow-hidden">
-      <div className="flex-1  relative flex flex-col md:flex-row px-6 md:px-10 pt-10 md:pt-14 gap-6 md:gap-6">
+      <div className="flex-1 overflow-hidden relative flex flex-col md:flex-row px-6 md:px-10 pt-10 md:pt-14 gap-6 md:gap-6">
         <div className="w-full md:w-[60%] flex flex-col gap-5 md:gap-8 z-10">
           <Badge title="About Us" />
           <TextReveal>
