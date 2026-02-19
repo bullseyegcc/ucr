@@ -21,8 +21,7 @@ import HomeHeroAbout from "../components/home/HomeHeroAbout.js";
 export default function Home() {
   return (
     <div className="bg-white">
-      <SplashOverlay />
-
+ 
       {/* Hero → About with scroll-locked heading colour animation */}
       <HomeHeroAbout />
 

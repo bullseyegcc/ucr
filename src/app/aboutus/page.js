@@ -25,11 +25,10 @@ export default function AboutUs() {
                     <span className='text-white uppercase font-medium text-center text-sm lg:text-base'>Crafting Sustainable Progress, One Copper Solution at a Time </span>
                 </div>
 
-                <HeroHeading >
                         <h1 className="w-[80%]   text-3xl md:text-5xl lg:text-6xl text-white font-semibold text-center leading-tight">
                     Leading the region&apos;s copper transformation with cutting edge technology
                 </h1>
-                </HeroHeading>
+             
                 <div className="absolute -bottom-[40%] lg:-bottom-[55%] w-[90%] md:w-[80%] h-[50vh] lg:h-[70vh] ">
                     <VideoPlayer src="/aboutvideo.mp4" className="w-full h-full object-cover rounded-xl " />
 
