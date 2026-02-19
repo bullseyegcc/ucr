@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Badge } from "../common/badge"
+import { Badge } from "../../common/badge"
 
 export default function UcrLaboratoryToolsSection() {
   const cards = [
@@ -22,7 +22,7 @@ export default function UcrLaboratoryToolsSection() {
 
       <div className="mt-16 grid gap-4 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map((card) => (
-          <article key={card.title} className="text-center h-[35vh] sm:h-[60vh] md:h-[70vh] group relative overflow-hidden rounded-xl bg-white shadow-sm transition duration-300 hover:shadow-lg">
+          <article key={card.title} className="text-center h-[35vh] sm:h-[60vh] md:h-[70vh] group relative overflow-hidden rounded-xl bg-white shadow-sm transition duration-300">
             <Image
               src={card.src}
               alt={card.alt}

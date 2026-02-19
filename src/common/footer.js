@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import { WhiteBadge } from "./badge";
 import { VideoPlayer } from "./video";
-import Shuffle from "../components/Shuffle";
+import Shuffle from "../animations/Shuffle";
 
 export default function Footer() {
     return (

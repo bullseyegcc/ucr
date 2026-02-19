@@ -6,14 +6,14 @@ import badge_icon from '../../public/badge.png';
 import { Badge } from "../common/badge.js";
 import { WhiteBadge } from "../common/badge.js";
 import { VideoCard } from "../common/VideoCard.js";
-import StatsCard from "../components/StatsCard.js";
+import StatsCard from "../common/StatsCard.js";
 import FeaturedProducts from "../components/home/FeaturedProducts.js";
 import WeCareSection from "../components/home/WeCareSection.js";
 import OurTechnology from "../components/home/OurTechnology.js";
 import CTA from "../components/home/CTA.js";
 import Articles from "../components/home/Articles.js";
-import ParallaxSection from "../components/ParallaxSection.js";
-import HorizontalScrollGallery from "../components/HorizontalScrollGallery.js";
+import ParallaxSection from "../animations/ParallaxSection.js";
+import HorizontalScrollGallery from "../common/HorizontalScrollGallery.js";
 import WhyChooseUs from "../components/home/WhyChooseUs.js";
 import HomeHeroAbout from "../components/home/HomeHeroAbout.js";
 

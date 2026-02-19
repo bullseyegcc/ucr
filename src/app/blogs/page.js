@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Badgetextwhite } from "../../common/badge";
 import { blogs } from "../../assets/blogs";
-import ParallaxSection from "../../components/ParallaxSection";
-import CardAnimation from "../../components/CardAnimation";
+import ParallaxSection from "../../animations/ParallaxSection";
+import CardAnimation from "../../animations/CardAnimation";
 
 export default function BlogsPage() {
     const featured = blogs.slice(0, 3);

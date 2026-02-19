@@ -9,11 +9,11 @@ import { ArrowRight } from 'lucide-react';
 
 import Image from "next/image"
 import { VideoPlayer } from "../../common/video";
-import JourneySection from "../../components/JourneySection"
-import ParallaxSection from "../../components/ParallaxSection"
-import MissionValuesSection from "../../components/MissionValuesSection"
-import ColorChangeWithScroll from "../../components/ColorChangeWithScroll"
-import CardAnimation from "../../components/CardAnimation"
+import JourneySection from "../../components/about/JourneySection"
+import ParallaxSection from "../../animations/ParallaxSection"
+import MissionValuesSection from "../../components/about/MissionValuesSection"
+import ColorChangeWithScroll from "../../animations/ColorChangeWithScroll"
+import CardAnimation from "../../animations/CardAnimation"
 import CountUp from "../../animations/countup"
 import HeroHeading from "@/components/home/HeroHeading";
 

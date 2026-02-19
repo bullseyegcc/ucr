@@ -3,7 +3,7 @@
 import { VideoPlayer } from "../../common/video";
 import { Badge, Badgetextwhite } from "../../common/badge";
 import Image from "next/image";
-import CardAnimation from "../../components/CardAnimation";
+import CardAnimation from "../../animations/CardAnimation";
 import CountUp from "../../animations/countup";
 
 export default function Logistics() {

@@ -1,7 +1,7 @@
 'use client'
 
 import { Badgetextwhite } from "../../common/badge"
-import CardAnimation from "../../components/CardAnimation"
+import CardAnimation from "../../animations/CardAnimation"
 
 export default function contactus() {
     return (

@@ -16,6 +16,9 @@ export default function SmoothScroll() {
       touchMultiplier: 2,
     });
 
+    // Expose Lenis on window so other components can access it
+    window.lenisInstance = lenis;
+
     // Connect Lenis scroll events to GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
 
@@ -27,6 +30,7 @@ export default function SmoothScroll() {
 
     return () => {
       lenis.destroy();
+      delete window.lenisInstance;
       gsap.ticker.remove((time) => lenis.raf(time * 1000));
     };
   }, []);

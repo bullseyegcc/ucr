@@ -7,9 +7,9 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { products } from "../../assets/products"
 import { Menu, ArrowRight, ArrowDown } from 'lucide-react';
-import UcrLaboratoryToolsSection from "../../components/UcrLaboratoryToolsSection"
-import ParallaxSection from "../../components/ParallaxSection"
-import ColorChangeWithScroll from "../../components/ColorChangeWithScroll"
+import UcrLaboratoryToolsSection from "../../components/technology/UcrLaboratoryToolsSection"
+import ParallaxSection from "../../animations/ParallaxSection"
+import ColorChangeWithScroll from "../../animations/ColorChangeWithScroll"
 
 export default function blogs() {
     const router = useRouter();

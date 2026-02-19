@@ -2,8 +2,8 @@
 
 import { Badge, Badgetextwhite } from "../../common/badge"
 import Image from "next/image"
-import ColorChangeWithScroll from "../../components/ColorChangeWithScroll"
-import CardAnimation from "../../components/CardAnimation"
+import ColorChangeWithScroll from "../../animations/ColorChangeWithScroll"
+import CardAnimation from "../../animations/CardAnimation"
 import CountUp from "../../animations/countup"
 
 
@@ -24,7 +24,7 @@ export default function parentCompany() {
 
             <div className="px-2 md:px-10 py-20 flex flex-col items-center justify-center">
 
-                <ColorChangeWithScroll initialColor="#8A8A8A" afterColor="#FF7A5C">
+                <ColorChangeWithScroll initialColor="#8A8A8A" afterColor="#FF7A5C" >
                     <p className="text-center text-lg  md:text-4xl leading-relaxed px-10 mt-8">
                         Ittihad International Investment LLC is a private holding and multi-disciplinary conglomerate, engaged in a wide spectrum of economic activities across the MENA region. We lead, manage, and empower a diverse portfolio of companies to bring long-term value, operational excellence, and sustainable growth.
                     </p>

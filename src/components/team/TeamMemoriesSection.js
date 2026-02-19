@@ -1,8 +1,8 @@
 'use client'
 
 import Image from "next/image"
-import { Badge } from "../common/badge"
-import CircularGallery from "./CircularGallery"
+import { Badge } from "../../common/badge";
+import CircularGallery from "../../common/CircularGallery";
 
 export default function TeamMemoriesSection() {
   const galleryItems = [

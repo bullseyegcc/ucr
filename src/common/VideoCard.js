@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { VideoPlayer } from "./video";
 import { WhiteBadge } from "./badge.js";
-import TextReveal from "../components/TextReveal";
+import TextReveal from "../animations/TextReveal";
 
 export const VideoCard = ({ 
   videoSrc, 

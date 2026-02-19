@@ -3,9 +3,9 @@
 import Image from "next/image"
 import { VideoPlayer } from "../../common/video"
 import { Badgetextblack, Badgetextwhite } from "../../common/badge"
-import ParallaxSection from "../../components/ParallaxSection"
-import CardAnimation from "../../components/CardAnimation"
-import SnipScroll from "../../components/SnipScroll"
+import ParallaxSection from "../../animations/ParallaxSection"
+import CardAnimation from "../../animations/CardAnimation"
+import SnipScroll from "../../animations/SnippScrol"
 
 export default function Technology() {
     return (
@@ -22,6 +22,7 @@ export default function Technology() {
 
             {/* Header */}
             <ParallaxSection index={0}>
+            <CardAnimation index={0}>
             <div className=" overflow-x-hidden relative flex flex-col px-6 sm:px-10 py-12 lg:py-20 lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-8 lg:gap-12 mb-12 lg:mb-16 lg:mb-20">
                 <div className="flex-1 sm:mb-30">
                     <Badgetextblack title="Top notch Technology" />
@@ -34,6 +35,7 @@ export default function Technology() {
                 <Image src="/technologyheaderbottom.png" alt="Icon" width={900} height={0} className="w-full  absolute bottom-0  " />
 
             </div>
+            </CardAnimation>
 
             {/* cards */}
 

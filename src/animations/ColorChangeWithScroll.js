@@ -20,13 +20,13 @@ export default function ColorChangeWithScroll({ children, initialColor = '#8a8a8
 
     if (words.length === 0) return;
 
-    // Create timeline for word-by-word color animation
+    // Create scroll-linked timeline (not time-based)
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
         start: 'top 75%',
         end: 'bottom 25%',
-        scrub: 1,
+        scrub: 0.5, // Faster scrub (lower = faster response to scroll)
         markers: false,
       },
     });
@@ -37,14 +37,14 @@ export default function ColorChangeWithScroll({ children, initialColor = '#8a8a8
         tl.fromTo(
           word,
           { filter: 'blur(6px)', color: word.style.color },
-          { filter: 'blur(0px)', color: afterColorRef.current, duration: 1, ease: 'none' },
-          index
+          { filter: 'blur(0px)', color: afterColorRef.current, duration: 0.5, ease: 'none' }, // Reduced from 1 to 0.5
+          index * 0.3 // Less stagger for faster animation
         );
       } else {
         tl.to(
           word,
-          { color: afterColorRef.current, duration: 1, ease: 'none' },
-          index
+          { color: afterColorRef.current, duration: 0.5, ease: 'none' },
+          index * 0.3
         );
       }
     });

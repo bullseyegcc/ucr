@@ -1,8 +1,8 @@
 import "./globals.css";
-import { Navbar } from "../components/Navbar";
+import { Navbar } from "../common/Navbar";
 import Footer from "../common/footer";
-import SmoothScroll from "../components/SmoothScroll";
-import SplashOverlay from "../components/SplashOverlay";
+import SmoothScroll from "../common/SmoothScroll";
+import SplashOverlay from "../common/SplashOverlay";
 
 export const metadata = {
   title: "Create Next App",

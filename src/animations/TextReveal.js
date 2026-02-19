@@ -78,7 +78,11 @@ export default function TextReveal({ children, className = '' }) {
       processElement(container);
 
       if (wordSpans.length > 0) {
-        // Animate all words in sequence
+        // Calculate total animation duration
+        const staggerDuration = (wordSpans.length - 1) * 0.04;
+        const totalDuration = staggerDuration + 0.8;
+
+        // Scroll-linked animation with scrub
         gsap.to(wordSpans, {
           opacity: 1,
           filter: 'blur(0px)',
@@ -89,10 +93,24 @@ export default function TextReveal({ children, className = '' }) {
           ease: 'power2.out',
           scrollTrigger: {
             trigger: container,
-            start: 'top 85%',
-            end: 'top 25%',
+            start: 'top 100%',
+            end: 'top 10%',
             scrub: 1.2,
             markers: false,
+            onEnter: () => {
+              // Stop Lenis when animation starts
+              const lenis = window.lenisInstance;
+              if (lenis) {
+                lenis.stop();
+              }
+            },
+            onLeave: () => {
+              // Resume Lenis when leaving
+              const lenis = window.lenisInstance;
+              if (lenis) {
+                lenis.start();
+              }
+            },
           },
         });
 

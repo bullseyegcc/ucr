@@ -4,9 +4,10 @@ import { useEffect, useRef } from 'react';
 import Image from "next/image";
 import { ArrowRight } from 'lucide-react';
 import { Badge } from "../../common/badge.js";
-import StatsCard from "../StatsCard.js";
-import TextReveal from "../TextReveal.js";
+import StatsCard from "../../common/StatsCard.js";
+import TextReveal from "../../animations/TextReveal.js";
 import gsap from 'gsap';
+import CardAnimation from '../../animations/CardAnimation.js';
 
 export default function About({ lockProgressRef = null }) {
   const statsRef   = useRef(null);
@@ -61,14 +62,16 @@ export default function About({ lockProgressRef = null }) {
           <TextReveal>
             <h1 ref={headingRef} className="text-primary text-2xl md:text-4xl lg:text-5xl leading-snug md:leading-tight">
               Our UAE factory combines Advanced technology with global{' '}
-              <span className="text-secondary">
+              <span className="text-gray-100">
                 expertise to produce high-quality copper products that meet international standards
               </span>
             </h1>
           </TextReveal>
-          <button className="bg-primary w-44 md:w-56 px-5 md:px-8 py-3 text-white md:text-lg flex justify-between items-center gap-3 rounded-full">
+
+          <CardAnimation> <button className="bg-primary w-44 md:w-56 px-5 md:px-8 py-3 text-white md:text-lg flex justify-between items-center gap-3 rounded-full">
             Know more <ArrowRight size={22} color="white" />
-          </button>
+          </button></CardAnimation>
+         
         </div>
         <div className="absolute bottom-0 right-0 md:relative md:w-[45%] flex items-end justify-end pointer-events-none">
           <Image

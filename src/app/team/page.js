@@ -1,10 +1,10 @@
 import { Badgetextwhite, Badge } from "../../common/badge"
 import Image from "next/image"
-import SuccessStrengthSection from "../../components/SuccessStrengthSection"
-import TeamMemoriesSection from "../../components/TeamMemoriesSection"
-import ParallaxSection from "../../components/ParallaxSection"
-import TextReveal from "../../components/TextReveal"
-import CardAnimation from "../../components/CardAnimation"
+import SuccessStrengthSection from "../../components/team/SuccessStrengthSection"
+import TeamMemoriesSection from "../../components/team/TeamMemoriesSection"
+import ParallaxSection from "../../animations/ParallaxSection"
+import TextReveal from "../../animations/TextReveal"
+import CardAnimation from "../../animations/CardAnimation"
 
 export default function Team() {
 

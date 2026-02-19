@@ -1,8 +1,8 @@
 import Image from "next/image"
 import { Badgetextblack, Badgetextwhite, Badge } from "../../common/badge"
-import ParallaxSection from "../../components/ParallaxSection"
-import TextReveal from "../../components/TextReveal"
-import CardAnimation from "../../components/CardAnimation"
+import ParallaxSection from "../../animations/ParallaxSection"
+import TextReveal from "../../animations/TextReveal"
+import CardAnimation from "../../animations/CardAnimation"
 
 export default function Quality() {
     return (

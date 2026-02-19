@@ -8,6 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function SplashOverlay() {
+  const containerRef = useRef(null);
   const overlayRef = useRef(null);
   const maskGroupRef = useRef(null);
   const outlineRef = useRef(null);
@@ -49,6 +50,7 @@ export default function SplashOverlay() {
       const splashTl = gsap.timeline({
         onComplete: () => {
           gsap.set(overlay, { display: 'none', pointerEvents: 'none' });
+          gsap.set(containerRef.current, { display: 'none', pointerEvents: 'none' });
           window.removeEventListener('wheel', preventScroll);
           window.removeEventListener('touchmove', preventScroll);
           window.removeEventListener('scroll', preventScroll);
@@ -67,19 +69,29 @@ export default function SplashOverlay() {
         },
         {
           attr: { transform: 'translate(960, 540) scale(29.7) translate(-37, -18.57)' },
-          duration: 2.1,
-          ease: 'power4.out',
+          duration: 2.0,
+          ease: 'expo.out',
         }
+      );
+
+      splashTl.to(
+        overlay,
+        {
+          scale: 1.008,
+          duration: 2.0,
+          ease: 'sine.inOut',
+        },
+        0
       );
 
       splashTl.to(
         outlineRef.current,
         {
           opacity: 0,
-          duration: 0.8,
-          ease: 'power3.out',
+          duration: 0.9,
+          ease: 'sine.out',
         },
-        1.1
+        0.95
       );
 
       // Step 2: split to reveal heading and hold briefly
@@ -87,21 +99,22 @@ export default function SplashOverlay() {
         [topRectRef.current, bottomRectRef.current],
         {
           attr: (index) => ({ y: index === 0 ? -54 : 594 }),
-          duration: 1.1,
-          ease: 'power4.inOut',
-        }
+          duration: 1.0,
+          ease: 'expo.inOut',
+        },
+        '-=0.25'
       );
 
-      splashTl.to({}, { duration: 1.6 });
+      splashTl.to({}, { duration: 1.2 });
 
       // Step 3: skew and slide the split panels away, then fade
       splashTl.to(
         [topRectRef.current, bottomRectRef.current],
         {
-          attr: (index) => ({ y: index === 0 ? -720 : 1260, x: index === 0 ? -140 : 140 }),
-          skewX: (index) => (index === 0 ? -8 : 8),
-          duration: 0.8,
-          ease: 'power3.inOut',
+          attr: (index) => ({ y: index === 0 ? -740 : 1280, x: index === 0 ? -150 : 150 }),
+          skewX: (index) => (index === 0 ? -4 : 4),
+          duration: 0.85,
+          ease: 'expo.inOut',
         }
       );
 
@@ -109,10 +122,10 @@ export default function SplashOverlay() {
         overlay,
         {
           opacity: 0,
-          duration: 0.8,
-          ease: 'power3.inOut',
+          duration: 0.85,
+          ease: 'sine.inOut',
         },
-        '<'
+        '-=0.55'
       );
     }, 100);
 
@@ -129,8 +142,12 @@ export default function SplashOverlay() {
     };
   }, [isHomepage]);
 
+  if (!isHomepage) {
+    return null;
+  }
+
   return (
-    <div className="fixed inset-0 overflow-hidden z-[9999]" style={{ width: '100vw', height: '100vh' }}>
+    <div ref={containerRef} className="fixed inset-0 overflow-hidden z-[9999]" style={{ width: '100vw', height: '100vh' }}>
       {/* Orange Overlay Container */}
       <div ref={overlayRef} className="absolute inset-0 z-[9999]" style={{ width: '100vw', height: '100vh', pointerEvents: 'auto' }}>
         {/* SVG overlay with logo-shaped hole */}

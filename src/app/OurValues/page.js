@@ -1,6 +1,7 @@
+'use client'
 import { Badge } from "../../common/badge"
 import Image from "next/image"
-import CardAnimation from "../../components/CardAnimation"
+import CardAnimation from "../../animations/CardAnimation"
 
 export default function OurValues() {
     return (

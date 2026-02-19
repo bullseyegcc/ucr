@@ -76,7 +76,7 @@ export const Navbar = () => {
             <div className="absolute top-0 left-0 w-full h-16 sm:h-20 bg-secondary/20 flex flex-row-reverse md:flex-row items-center justify-between px-4 sm:px-6 md:px-10 lg:px-12 z-50">
                 {/* Menu Button - Always visible */}
                 <div 
-                    className='inline-block bg-secondary/20 p-2 rounded-lg cursor-pointer hover:bg-secondary/30 transition-all' 
+                    className='inline-block bg-secondary/20 p-2 cursor-pointer hover:bg-secondary/30 transition-all' 
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
                     <Menu size={24} className="sm:w-7 sm:h-7" color="white" />
@@ -136,7 +136,7 @@ export const Navbar = () => {
                                         <Link href={item.href} onClick={() => setIsMenuOpen(false)}>
                                             <div className={`text-base sm:text-lg md:text-xl font-normal py-2 px-3 rounded-full cursor-pointer transition-colors ${
                                                 isActivePage(item.href)
-                                                    ? 'bg-primary text-white'
+                                                    ? 'text-primary'
                                                     : 'text-gray-800 hover:text-primary'
                                             }`}>
                                                 {item.label}
@@ -148,7 +148,7 @@ export const Navbar = () => {
                                                 onClick={() => toggleSection(item.label)}
                                                 className={`w-full flex items-center justify-between text-base sm:text-lg md:text-xl font-normal py-2 px-3 rounded-full transition-colors ${
                                                     expandedSection === item.label || menuStructure.find(m => m.label === item.label)?.items?.some(sub => isActivePage(sub.href))
-                                                        ? 'bg-primary text-white'
+                                                        ? 'text-primary'
                                                         : 'text-gray-800 hover:text-primary'
                                                 }`}
                                             >
@@ -171,13 +171,17 @@ export const Navbar = () => {
                                                             >
                                                                 <div className={`text-sm sm:text-base font-normal flex items-center gap-2 cursor-pointer py-1 px-3 rounded-full transition-colors ${
                                                                     isActive
-                                                                        ? 'bg-primary text-white'
-                                                                        : 'text-gray-700 hover:text-primary'
+                                                                        ? 'text-primary'
+                                                                        : 'text-gray-700 hover:text-white hover:bg-primary'
                                                                 }`}>
-                                                                    <ChevronRight 
-                                                                        size={16} 
-                                                                        className={`flex-shrink-0 transition-colors ${isActive ? 'text-white' : 'text-gray-400'}`} 
-                                                                    />
+                                                                    <span
+                                                                        className={`flex-shrink-0 inline-flex items-center justify-center w-7 h-7 transition-colors ${isActive ? 'bg-primary' : 'bg-gray-200'}`}
+                                                                    >
+                                                                        <ChevronRight 
+                                                                            size={16} 
+                                                                            className={`${isActive ? 'text-white' : 'text-gray-600'}`} 
+                                                                        />
+                                                                    </span>
                                                                     {subItem.label}
                                                                 </div>
                                                             </Link>

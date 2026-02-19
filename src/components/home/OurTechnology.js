@@ -8,7 +8,7 @@ import { Badge } from "../../common/badge.js";
 import { WhiteBadge } from "../../common/badge.js";
 import { VideoPlayer } from "../../common/video";
 import { technologyParallaxSlide } from '../../animations/technologyParallax';
-import ParallaxSection from '../ParallaxSection';
+import ParallaxSection from '../../animations/ParallaxSection';
 
 // Technology data structure
 const TECHNOLOGIES = [

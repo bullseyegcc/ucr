@@ -74,7 +74,7 @@ export default function WhyChooseUs() {
         {/* ── Featured left card ─────────────────────────────────────── */}
         <div
           ref={featuredRef}
-          className="relative min-h-[50vh] flex flex-col justify-between items-start row-span-2 bg-[url('/excellence.png')] bg-cover bg-center md:ml-10 rounded-xl group cursor-pointer transition-all duration-400 ease-out hover:scale-105"
+          className="relative min-h-[50vh] flex flex-col justify-between items-start row-span-2 bg-[url('/excellence.png')] bg-cover bg-center md:ml-10 rounded-xl group cursor-pointer transition-all duration-400 ease-out"
           style={{ willChange: 'transform, opacity' }}
         >
           <VideoPlayer src="/excellence.mp4" className="object-contain rounded-2xl" />
@@ -95,7 +95,7 @@ export default function WhyChooseUs() {
           <div
             key={card.title}
             ref={(el) => { if (el) cardsRef.current[i] = el; }}
-            className="bg-white rounded-xl p-8 flex flex-col gap-4 shadow-lg group cursor-pointer transition-all duration-400 ease-out hover:scale-105 hover:shadow-2xl"
+            className="bg-white rounded-xl p-8 flex flex-col gap-4 shadow-lg group cursor-pointer transition-all duration-400 ease-out"
             style={{ willChange: 'transform, opacity' }}
           >
             <Image
@@ -104,7 +104,7 @@ export default function WhyChooseUs() {
               alt={card.title}
               width={card.w}
               height={card.h}
-              className="mb-6 transition-transform duration-400 group-hover:scale-110"
+              className="mb-6 transition-transform duration-400"
               style={{ willChange: 'transform, opacity' }}
             />
             <h1 data-ct className="text-2xl font-semibold text-black" style={{ willChange: 'transform, opacity' }}>{card.title}</h1>
