@@ -5,13 +5,15 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { VideoPlayer } from '../common/video';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function SplashOverlay() {
-  // Splash screen temporarily disabled
-  return null;
+  const overlayRef = useRef(null);
+  const maskGroupRef = useRef(null);
+  const outlineRef = useRef(null);
+  const pathname = usePathname();
+  const isHomepage = pathname === '/';
 
   useEffect(() => {
     const overlay = overlayRef.current;
@@ -20,39 +22,59 @@ export default function SplashOverlay() {
     // Only show splash on homepage
     if (!isHomepage) {
       gsap.set(overlay, { display: 'none', pointerEvents: 'none' });
+      document.body.style.overflow = 'auto';
       return;
     }
+
+    // Prevent scroll while splash is visible
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.height = '100vh';
+    document.documentElement.style.height = '100vh';
+    
+    const preventScroll = (e) => {
+      e.preventDefault();
+      return false;
+    };
+
+    window.addEventListener('wheel', preventScroll, { passive: false });
+    window.addEventListener('touchmove', preventScroll, { passive: false });
+    window.addEventListener('scroll', preventScroll, { passive: false });
+    document.addEventListener('scroll', preventScroll, { passive: false });
 
     const timer = setTimeout(() => {
       // Create timeline for initial splash animation
       const splashTl = gsap.timeline();
 
-      // Logo expand animation from 30vh to 110vh then fade out
+      // Logo expand animation upward only (Y direction), centered scaling
       if (maskGroupRef.current && outlineRef.current) {
-        // Expand from 30vh (scale ~8.1) to 110vh (scale ~29.7)
-        splashTl.to(
-          [maskGroupRef.current, outlineRef.current],
-          {
-            attr: { transform: 'translate(960, 540) scale(29.7)' },
-            duration: 2,
-            ease: 'power2.out',
-          },
-          0
-        );
+        // Animate scaleY from 8.1 to 29.7 while keeping X scale constant
+        // splashTl.fromTo(
+        //   [maskGroupRef.current, outlineRef.current],
+        //   {
+        //     attr: { transform: 'translate(960, 540) scale(8.1, 8.1) translate(-21.82, -18.57)' },
+        //   },
+        //   {
+        //     attr: { transform: 'translate(960, 540) scale(8.1, 29.7) translate(-21.82, -18.57)' },
+        //     duration: 2,
+        //     ease: 'power2.out',
+        //   },
+        //   0
+        // );
 
         // Fade out logo and orange overlay together
-        splashTl.to(
-          overlay,
-          {
-            opacity: 0,
-            duration: 1,
-            ease: 'power2.inOut',
-            onComplete: () => {
-              gsap.set(overlay, { display: 'none', pointerEvents: 'none' });
-            },
-          },
-          1.5
-        );
+        // splashTl.to(
+        //   overlay,
+        //   {
+        //     opacity: 0,
+        //     duration: 1,
+        //     ease: 'power2.inOut',
+        //     onComplete: () => {
+        //       gsap.set(overlay, { display: 'none', pointerEvents: 'none' });
+        //     },
+        //   },
+        //   1.5
+        // );
       }
 
       // Overlay fade out animation
@@ -69,54 +91,40 @@ export default function SplashOverlay() {
       //   0.5
       // );
 
-      // Prevent scroll during the entire animation
-      document.body.style.overflow = 'hidden';
-      
-      const preventScroll = (e) => {
-        if (splashTl.progress() < 1) {
-          e.preventDefault();
-        } else {
-          document.body.style.overflow = 'auto';
-          removeScrollListeners();
-        }
-      };
-
-      const removeScrollListeners = () => {
-        window.removeEventListener('wheel', preventScroll);
-        window.removeEventListener('touchmove', preventScroll);
-      };
-
-      window.addEventListener('wheel', preventScroll, { passive: false });
-      window.addEventListener('touchmove', preventScroll, { passive: false });
     }, 100);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('wheel', preventScroll);
+      window.removeEventListener('touchmove', preventScroll);
+      window.removeEventListener('scroll', preventScroll);
+      document.removeEventListener('scroll', preventScroll);
+      document.body.style.overflow = 'auto';
+      document.documentElement.style.overflow = 'auto';
+      document.body.style.height = 'auto';
+      document.documentElement.style.height = 'auto';
+    };
   }, [isHomepage]);
 
   return (
-    <div className="fixed inset-0 w-full h-full overflow-hidden z-[9999]">
-      {/* Background Video */}
-      <VideoPlayer
-        src="/hero.mp4"
-        className="absolute inset-0 z-10"
-      />
-
+    <div className="fixed inset-0 overflow-hidden z-[9999]" style={{ width: '100vw', height: '100vh' }}>
       {/* Orange Overlay Container */}
-      <div ref={overlayRef} className="absolute inset-0 z-[9999]">
+      <div ref={overlayRef} className="absolute inset-0 z-[9999]" style={{ width: '100vw', height: '100vh', pointerEvents: 'auto' }}>
         {/* SVG overlay with logo-shaped hole */}
         <svg
-          width="100%"
-          height="100%"
+          width="100vw"
+          height="100vh"
           viewBox="0 0 1920 1080"
           preserveAspectRatio="xMidYMid slice"
-          className="absolute inset-0"
-          style={{ pointerEvents: 'none' }}
+          style={{ 
+            pointerEvents: 'none'
+          }}
         >
           <defs>
-            {/* Mask: white = shows orange, black = transparent (shows video) */}
+            {/* Mask: white = shows orange, black = transparent */}
             <mask id="logoHoleMask">
-              <rect width="1920" height="1080" fill="white" />
-              <g ref={maskGroupRef} transform="translate(960, 540) scale(8.1)" style={{ transformOrigin: '0 0' }}>
+              <rect x="0" y="0" width="1920" height="1080" fill="white" />
+              <g ref={maskGroupRef} transform="translate(960, 540) scale(8.1) translate(-21.82, -18.57)">
                 <path d="M37.2256 2.54971C38.0078 2.54997 38.6689 3.20385 38.6689 3.95694C38.6689 4.14032 38.6667 4.23403 38.6357 4.3251L38.6299 4.34171L38.627 4.35928C38.5916 4.56658 38.4869 4.78571 38.208 5.01944L38.2021 5.02432C28.7217 13.5479 19.2685 22.1316 9.74414 30.6982L9.74316 30.6991C7.8036 32.4603 5.87981 34.2033 3.96387 35.9413C5.04654 34.8348 6.13067 33.7267 7.21582 32.62C9.04746 30.752 10.8785 28.8829 12.6992 27.0146L12.7002 27.0155C18.5001 21.1242 24.2552 15.2326 30.0098 9.34171L30.0088 9.34073C32.0295 7.27697 34.1018 5.20798 36.082 3.09561L36.0811 3.09464C36.1311 3.04458 36.1784 2.98758 36.1992 2.96378C36.2273 2.93182 36.2381 2.92522 36.2432 2.92276L36.2744 2.90714L36.2998 2.88272L36.3447 2.83878C36.3441 2.83937 36.3478 2.83624 36.3594 2.82803C36.3705 2.82009 36.3837 2.81121 36.4014 2.79971C36.4192 2.78806 36.4459 2.76582 36.4756 2.74307C36.7239 2.62254 36.9582 2.54971 37.2256 2.54971Z" fill="black"/>
                 <path d="M29.4926 0.351624C30.4098 0.351701 31.1605 1.0935 31.1605 1.97858C31.1605 2.20855 31.1236 2.35625 31.0424 2.55475L31.0375 2.56647C31.0016 2.67179 30.9244 2.82255 30.806 2.97858L30.7777 3.00787L30.7328 3.05182H30.7318L30.723 3.06158C29.4647 4.4459 28.1949 5.83009 26.9252 7.20905L23.1263 11.3253C20.5414 14.1387 17.9566 16.9416 15.3715 19.7442C12.7864 22.5467 10.2008 25.3494 7.6156 28.1631C6.42423 29.46 5.24393 30.7465 4.06384 32.0323C3.57215 32.568 3.07978 33.1032 2.58728 33.6397C5.25894 30.208 7.9519 26.7914 10.6478 23.3467C15.5479 17.1045 20.4943 10.8181 25.3949 4.53131L25.3978 4.5274C26.2497 3.38751 27.1438 2.2947 28.0463 1.14752L28.0511 1.14069L28.056 1.13483C28.3792 0.660982 28.8986 0.351624 29.4926 0.351624Z" fill="black"/>
                 <path d="M39.3832 8.96823C40.3004 8.9683 41.0511 9.7101 41.0511 10.5952C41.0511 11.1735 40.7353 11.6765 40.3011 11.9467L40.2806 11.9594L40.2631 11.976C40.2313 12.0071 40.2274 12.0114 40.1957 12.0424C40.1835 12.0544 40.1535 12.0831 40.1361 12.1001C38.6347 13.2177 37.1444 14.3358 35.6429 15.4643L31.0687 18.9038C28.0116 21.2118 24.954 23.5206 21.8969 25.8286L12.725 32.7524C11.3318 33.8071 9.9277 34.8624 8.52283 35.9174C8.08361 36.2473 7.64439 36.5778 7.20544 36.9077C8.29179 35.943 9.37679 34.9783 10.4633 34.0151C12.5088 32.2017 14.5551 30.3886 16.601 28.5639C19.5904 25.9044 22.5913 23.2451 25.5922 20.5854C28.5929 17.9258 31.5936 15.2657 34.5834 12.6059L34.5844 12.6049C35.1454 12.1002 35.718 11.595 36.2914 11.0893C36.8589 10.5888 37.427 10.0869 37.9847 9.58542C38.0773 9.53518 38.1339 9.48492 38.1771 9.44284C38.507 9.16064 38.9079 8.96823 39.3832 8.96823Z" fill="black"/>
@@ -128,10 +136,10 @@ export default function SplashOverlay() {
           </defs>
           
           {/* Orange rectangle with mask applied */}
-          <rect width="1920" height="1080" fill="#FE5D0A" mask="url(#logoHoleMask)" />
+          <rect x="0" y="0" width="1920" height="1080" fill="#FE5D0A" mask="url(#logoHoleMask)" />
           
           {/* Logo outline stroke for reference */}
-          <g ref={outlineRef} transform="translate(960, 540) scale(8.1)">
+          <g ref={outlineRef} transform="translate(960, 540) scale(8.1) translate(-21.82, -18.57)">
             <path d="M37.2256 2.54971C38.0078 2.54997 38.6689 3.20385 38.6689 3.95694C38.6689 4.14032 38.6667 4.23403 38.6357 4.3251L38.6299 4.34171L38.627 4.35928C38.5916 4.56658 38.4869 4.78571 38.208 5.01944L38.2021 5.02432C28.7217 13.5479 19.2685 22.1316 9.74414 30.6982L9.74316 30.6991C7.8036 32.4603 5.87981 34.2033 3.96387 35.9413C5.04654 34.8348 6.13067 33.7267 7.21582 32.62C9.04746 30.752 10.8785 28.8829 12.6992 27.0146L12.7002 27.0155C18.5001 21.1242 24.2552 15.2326 30.0098 9.34171L30.0088 9.34073C32.0295 7.27697 34.1018 5.20798 36.082 3.09561L36.0811 3.09464C36.1311 3.04458 36.1784 2.98758 36.1992 2.96378C36.2273 2.93182 36.2381 2.92522 36.2432 2.92276L36.2744 2.90714L36.2998 2.88272L36.3447 2.83878C36.3441 2.83937 36.3478 2.83624 36.3594 2.82803C36.3705 2.82009 36.3837 2.81121 36.4014 2.79971C36.4192 2.78806 36.4459 2.76582 36.4756 2.74307C36.7239 2.62254 36.9582 2.54971 37.2256 2.54971Z" stroke="white" strokeWidth="0.8" fill="none" opacity="0.9"/>
             <path d="M29.4926 0.351624C30.4098 0.351701 31.1605 1.0935 31.1605 1.97858C31.1605 2.20855 31.1236 2.35625 31.0424 2.55475L31.0375 2.56647C31.0016 2.67179 30.9244 2.82255 30.806 2.97858L30.7777 3.00787L30.7328 3.05182H30.7318L30.723 3.06158C29.4647 4.4459 28.1949 5.83009 26.9252 7.20905L23.1263 11.3253C20.5414 14.1387 17.9566 16.9416 15.3715 19.7442C12.7864 22.5467 10.2008 25.3494 7.6156 28.1631C6.42423 29.46 5.24393 30.7465 4.06384 32.0323C3.57215 32.568 3.07978 33.1032 2.58728 33.6397C5.25894 30.208 7.9519 26.7914 10.6478 23.3467C15.5479 17.1045 20.4943 10.8181 25.3949 4.53131L25.3978 4.5274C26.2497 3.38751 27.1438 2.2947 28.0463 1.14752L28.0511 1.14069L28.056 1.13483C28.3792 0.660982 28.8986 0.351624 29.4926 0.351624Z" stroke="white" strokeWidth="0.8" fill="none" opacity="0.9"/>
             <path d="M39.3832 8.96823C40.3004 8.9683 41.0511 9.7101 41.0511 10.5952C41.0511 11.1735 40.7353 11.6765 40.3011 11.9467L40.2806 11.9594L40.2631 11.976C40.2313 12.0071 40.2274 12.0114 40.1957 12.0424C40.1835 12.0544 40.1535 12.0831 40.1361 12.1001C38.6347 13.2177 37.1444 14.3358 35.6429 15.4643L31.0687 18.9038C28.0116 21.2118 24.954 23.5206 21.8969 25.8286L12.725 32.7524C11.3318 33.8071 9.9277 34.8624 8.52283 35.9174C8.08361 36.2473 7.64439 36.5778 7.20544 36.9077C8.29179 35.943 9.37679 34.9783 10.4633 34.0151C12.5088 32.2017 14.5551 30.3886 16.601 28.5639C19.5904 25.9044 22.5913 23.2451 25.5922 20.5854C28.5929 17.9258 31.5936 15.2657 34.5834 12.6059L34.5844 12.6049C35.1454 12.1002 35.718 11.595 36.2914 11.0893C36.8589 10.5888 37.427 10.0869 37.9847 9.58542C38.0773 9.53518 38.1339 9.48492 38.1771 9.44284C38.507 9.16064 38.9079 8.96823 39.3832 8.96823Z" stroke="white" strokeWidth="0.8" fill="none" opacity="0.9"/>

@@ -2,6 +2,7 @@ import "./globals.css";
 import { Navbar } from "../components/Navbar";
 import Footer from "../common/footer";
 import SmoothScroll from "../components/SmoothScroll";
+import SplashOverlay from "../components/SplashOverlay";
 
 export const metadata = {
   title: "Create Next App",
@@ -12,6 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="antialiased m-0 bg-white " >
+        <SplashOverlay />
         <SmoothScroll />
         <Navbar/>
         {children}
