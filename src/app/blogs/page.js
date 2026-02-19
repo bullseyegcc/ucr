@@ -1,8 +1,11 @@
+'use client'
+
 import Image from "next/image";
 import Link from "next/link";
 import { Badgetextwhite } from "../../common/badge";
 import { blogs } from "../../assets/blogs";
 import ParallaxSection from "../../components/ParallaxSection";
+import CardAnimation from "../../components/CardAnimation";
 
 export default function BlogsPage() {
     const featured = blogs.slice(0, 3);
@@ -35,30 +38,34 @@ export default function BlogsPage() {
                     {/* Desktop-only 4-column grid: left large spans 2 cols x 2 rows; two top-right cards in cols 3-4 */}
                     <div className="grid gap-6 lg:grid-cols-4 lg:auto-rows-min">
                         {featured[0] && (
-                            <Link href={`/blogs/${featured[0].slug}`} className="hidden lg:block lg:col-span-2 lg:row-span-2 bg-white rounded-xl overflow-hidden shadow">
-                                <article>
-                                    <Image src={featured[0].image} alt={featured[0].title} width={1600} height={1000} className="w-full h-[360px] object-cover" />
-                                    <div className="p-6">
-                                        <p className="text-sm text-gray-500">{featured[0].date}</p>
-                                        <h3 className="text-2xl font-semibold mt-3">{featured[0].title}</h3>
-                                        <p className="text-base text-gray-600 mt-3">{featured[0].excerpt}</p>
-                                    </div>
-                                </article>
-                            </Link>
+                            <CardAnimation index={0} className="hidden lg:block lg:col-span-2 lg:row-span-2">
+                                <Link href={`/blogs/${featured[0].slug}`} className="block bg-white rounded-xl overflow-hidden shadow">
+                                    <article>
+                                        <Image src={featured[0].image} alt={featured[0].title} width={1600} height={1000} className="w-full h-[360px] object-cover" />
+                                        <div className="p-6">
+                                            <p className="text-sm text-gray-500">{featured[0].date}</p>
+                                            <h3 className="text-2xl font-semibold mt-3">{featured[0].title}</h3>
+                                            <p className="text-base text-gray-600 mt-3">{featured[0].excerpt}</p>
+                                        </div>
+                                    </article>
+                                </Link>
+                            </CardAnimation>
                         )}
 
                         {/** two top-right featured cards (desktop) */}
-                        {featured.slice(1, 3).map((post) => (
-                            <Link href={`/blogs/${post.slug}`} key={post.id} className="hidden lg:block bg-white rounded-xl overflow-hidden shadow">
-                                <article>
-                                    <Image src={post.image} alt={post.title} width={1200} height={800} className="w-full h-[320px] object-cover" />
-                                    <div className="p-4">
-                                        <p className="text-sm text-gray-500">{post.date}</p>
-                                        <h3 className="text-lg font-semibold mt-2">{post.title}</h3>
-                                        <p className="text-sm text-gray-600 mt-2">{post.excerpt}</p>
-                                    </div>
-                                </article>
-                            </Link>
+                        {featured.slice(1, 3).map((post, index) => (
+                            <CardAnimation index={index + 1} key={post.id} className="hidden lg:block">
+                                <Link href={`/blogs/${post.slug}`} className="block bg-white rounded-xl overflow-hidden shadow">
+                                    <article>
+                                        <Image src={post.image} alt={post.title} width={1200} height={800} className="w-full h-[320px] object-cover" />
+                                        <div className="p-4">
+                                            <p className="text-sm text-gray-500">{post.date}</p>
+                                            <h3 className="text-lg font-semibold mt-2">{post.title}</h3>
+                                            <p className="text-sm text-gray-600 mt-2">{post.excerpt}</p>
+                                        </div>
+                                    </article>
+                                </Link>
+                            </CardAnimation>
                         ))}
 
                         {/* Fallback for smaller screens: stacked featured cards */}
@@ -79,16 +86,18 @@ export default function BlogsPage() {
 
                     {/* Smaller cards row (desktop 3 columns) */}
                     <div className="grid gap-6 lg:grid-cols-3 mt-8">
-                        {others.map((post) => (
-                            <Link href={`/blogs/${post.slug}`} key={post.id} className="block bg-white rounded-xl overflow-hidden shadow group cursor-pointer transition-all duration-400 ease-out hover:scale-105 hover:shadow-2xl">
-                                <article>
-                                    <Image src={post.image} alt={post.title} width={800} height={500} className="w-full h-44 lg:h-[280px] object-cover" />
-                                    <div className="p-3">
-                                        <p className="text-xs text-gray-500">{post.date}</p>
-                                        <h4 className="text-sm lg:text-base font-semibold mt-1">{post.title}</h4>
-                                    </div>
-                                </article>
-                            </Link>
+                        {others.map((post, index) => (
+                            <CardAnimation index={index + 3} key={post.id}>
+                                <Link href={`/blogs/${post.slug}`} className="block bg-white rounded-xl overflow-hidden shadow group cursor-pointer transition-all duration-400 ease-out hover:scale-105 hover:shadow-2xl">
+                                    <article>
+                                        <Image src={post.image} alt={post.title} width={800} height={500} className="w-full h-44 lg:h-[280px] object-cover" />
+                                        <div className="p-3">
+                                            <p className="text-xs text-gray-500">{post.date}</p>
+                                            <h4 className="text-sm lg:text-base font-semibold mt-1">{post.title}</h4>
+                                        </div>
+                                    </article>
+                                </Link>
+                            </CardAnimation>
                         ))}
                     </div>
                 </div>

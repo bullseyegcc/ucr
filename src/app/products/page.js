@@ -9,7 +9,7 @@ import { products } from "../../assets/products"
 import { Menu, ArrowRight, ArrowDown } from 'lucide-react';
 import UcrLaboratoryToolsSection from "../../components/UcrLaboratoryToolsSection"
 import ParallaxSection from "../../components/ParallaxSection"
-import TextReveal from "../../components/TextReveal"
+import ColorChangeWithScroll from "../../components/ColorChangeWithScroll"
 
 export default function blogs() {
     const router = useRouter();
@@ -34,13 +34,9 @@ export default function blogs() {
                 <div className="absolute top-16  flex flex-col items-center gap-4">
 
                     <Badgetextblack title="What we produce" className="" />
-                    <TextReveal>
-                        <h1 className="w-full px-40 flex flex-col justify-center items-center w-[85%] text-2xl lg:text-4xl mt-9  text-center leading-tight">
-                            <span className="bg-gradient-to-r from-[#FF7A5C] to-[#8A8A8A] bg-clip-text text-transparent"> Union Copper Rod's primary products are the 8mm, 12.5mm, copper rods </span>
-                            <span className="text-[#8A8A8A]">that have at least 99.95% copper content and comply with international standards including BS: EN 1977 and ASTM-B49.</span>
-
-                        </h1>
-                    </TextReveal>
+                    <ColorChangeWithScroll initialColor="#8A8A8A" afterColor="#FF7A5C">
+                        <h1 className="w-full px-40 w-[85%] text-2xl lg:text-4xl mt-9  text-center leading-tight">Union Copper Rod's primary products are the 8mm, 12.5mm, copper rods that have at least 99.95% copper content and comply with international standards including BS: EN 1977 and ASTM-B49.</h1>
+                    </ColorChangeWithScroll>
 
                 </div>
 

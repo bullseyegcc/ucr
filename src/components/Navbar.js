@@ -134,9 +134,9 @@ export const Navbar = () => {
                                 <div key={item.label}>
                                     {item.type === 'simple' ? (
                                         <Link href={item.href} onClick={() => setIsMenuOpen(false)}>
-                                            <div className={`text-base sm:text-lg md:text-xl font-normal py-2 cursor-pointer transition-colors ${
+                                            <div className={`text-base sm:text-lg md:text-xl font-normal py-2 px-3 rounded-full cursor-pointer transition-colors ${
                                                 isActivePage(item.href)
-                                                    ? 'text-primary'
+                                                    ? 'bg-primary text-white'
                                                     : 'text-gray-800 hover:text-primary'
                                             }`}>
                                                 {item.label}
@@ -146,9 +146,9 @@ export const Navbar = () => {
                                         <div>
                                             <button
                                                 onClick={() => toggleSection(item.label)}
-                                                className={`w-full flex items-center justify-between text-base sm:text-lg md:text-xl font-normal py-2 transition-colors ${
+                                                className={`w-full flex items-center justify-between text-base sm:text-lg md:text-xl font-normal py-2 px-3 rounded-full transition-colors ${
                                                     expandedSection === item.label || menuStructure.find(m => m.label === item.label)?.items?.some(sub => isActivePage(sub.href))
-                                                        ? 'text-primary'
+                                                        ? 'bg-primary text-white'
                                                         : 'text-gray-800 hover:text-primary'
                                                 }`}
                                             >
@@ -169,14 +169,14 @@ export const Navbar = () => {
                                                                 href={subItem.href} 
                                                                 onClick={() => setIsMenuOpen(false)}
                                                             >
-                                                                <div className={`text-sm sm:text-base font-normal flex items-center gap-2 cursor-pointer py-1 transition-colors ${
+                                                                <div className={`text-sm sm:text-base font-normal flex items-center gap-2 cursor-pointer py-1 px-3 rounded-full transition-colors ${
                                                                     isActive
-                                                                        ? 'text-primary'
+                                                                        ? 'bg-primary text-white'
                                                                         : 'text-gray-700 hover:text-primary'
                                                                 }`}>
                                                                     <ChevronRight 
                                                                         size={16} 
-                                                                        className={`flex-shrink-0 transition-colors ${isActive ? 'text-primary' : 'text-gray-400'}`} 
+                                                                        className={`flex-shrink-0 transition-colors ${isActive ? 'text-white' : 'text-gray-400'}`} 
                                                                     />
                                                                     {subItem.label}
                                                                 </div>

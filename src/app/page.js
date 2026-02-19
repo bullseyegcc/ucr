@@ -13,7 +13,6 @@ import OurTechnology from "../components/home/OurTechnology.js";
 import CTA from "../components/home/CTA.js";
 import Articles from "../components/home/Articles.js";
 import ParallaxSection from "../components/ParallaxSection.js";
-import SplashOverlay from "../components/SplashOverlay.js";
 import HorizontalScrollGallery from "../components/HorizontalScrollGallery.js";
 import WhyChooseUs from "../components/home/WhyChooseUs.js";
 import HomeHeroAbout from "../components/home/HomeHeroAbout.js";

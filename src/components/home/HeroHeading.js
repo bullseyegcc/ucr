@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
-export default function HeroHeading({ children, className = '' }) {
+export default function HeroHeading({ children, className = '', delay = 0 }) {
   const wrapperRef = useRef(null);
 
   useEffect(() => {
@@ -22,6 +22,7 @@ export default function HeroHeading({ children, className = '' }) {
           letterSpacing: '0.01em',
           duration: 1.2,
           ease: 'expo.out',
+          delay,
         }
       );
 

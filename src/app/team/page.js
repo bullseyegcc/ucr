@@ -4,6 +4,7 @@ import SuccessStrengthSection from "../../components/SuccessStrengthSection"
 import TeamMemoriesSection from "../../components/TeamMemoriesSection"
 import ParallaxSection from "../../components/ParallaxSection"
 import TextReveal from "../../components/TextReveal"
+import CardAnimation from "../../components/CardAnimation"
 
 export default function Team() {
 
@@ -47,28 +48,25 @@ export default function Team() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6  py-8 justify-center">
 
                         {/* card 1 */}
-                        <div className="h-full animate-reveal group hover:scale-105 transition-all duration-400">
+                        <CardAnimation index={0} className="h-full group hover:scale-[1.03] transition-transform duration-500 ease-out">
                             <Image src="/chairman.png" alt="Team member" width={1000} height={1000} className="w-full rounded-lg object-contain" />
-
                             <h1 className="text-2xl lg:text-3xl mt-2 font-medium">Diam O'Sullivan</h1>
                             <p className="text-primary lg:text-2xl font-light">Honorable Chairman</p>
-                        </div>
+                        </CardAnimation>
 
                         {/* card 2 */}
-                        <div className="h-full items-center animate-reveal group hover:scale-105 transition-all duration-400">
-                            <Image src="/cofounder.png" alt="Team member" width={1000} height={1000} className=" w-full rounded-lg object-contain" />
-
+                        <CardAnimation index={1} className="h-full group hover:scale-[1.03] transition-transform duration-500 ease-out">
+                            <Image src="/cofounder.png" alt="Team member" width={1000} height={1000} className="w-full rounded-lg object-contain" />
                             <h1 className="text-2xl lg:text-3xl mt-2 font-medium">Diam O'Sullivan</h1>
                             <p className="text-primary lg:text-2xl font-light">Honorable Chairman</p>
-                        </div>
+                        </CardAnimation>
 
-                        {/* card 2 */}
-                        <div className="h-full animate-reveal group hover:scale-105 transition-all duration-400">
-                            <Image src="/cheftechnology.png" alt="Team member" width={1000} height={1000} className=" w-full rounded-lg object-contain" />
-
+                        {/* card 3 */}
+                        <CardAnimation index={2} className="h-full group hover:scale-[1.03] transition-transform duration-500 ease-out">
+                            <Image src="/cheftechnology.png" alt="Team member" width={1000} height={1000} className="w-full rounded-lg object-contain" />
                             <h1 className="text-2xl lg:text-3xl mt-2 font-medium">Diam O'Sullivan</h1>
                             <p className="text-primary lg:text-2xl font-light">Honorable Chairman</p>
-                        </div>
+                        </CardAnimation>
                     </div>
 
 

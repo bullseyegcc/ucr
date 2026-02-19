@@ -1,6 +1,10 @@
+'use client'
+
 import { VideoPlayer } from "../../common/video";
 import { Badge, Badgetextwhite } from "../../common/badge";
 import Image from "next/image";
+import CardAnimation from "../../components/CardAnimation";
+import CountUp from "../../animations/countup";
 
 export default function Logistics() {
     return (
@@ -33,8 +37,8 @@ export default function Logistics() {
 
                 <div className=" px-6 lg:px-10 py-8 lg:py-10 flex flex-col lg:flex-row justify-center gap-6 items-end">
 
-                    <div className="min-h-[55vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 animate-reveal group hover:scale-105 transition-all duration-400">
-                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">200k+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <CardAnimation index={0} className="min-h-[55vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 group transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
+                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent"><span><CountUp to={200} duration={2} />k+</span> <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
                         <div className="relative z-10">
@@ -46,10 +50,10 @@ export default function Logistics() {
 
                         <Image src="/anum.png" alt="Expertise Icon" width={290} height={80} className='w-full absolute -bottom-0 right-0 z-0' />
 
-                    </div>
+                    </CardAnimation>
 
-                    <div className="min-h-[55vh] lg:min-h-[50vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 animate-reveal group hover:scale-105 transition-all duration-400">
-                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">150+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <CardAnimation index={1} className="min-h-[55vh] lg:min-h-[50vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 group transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
+                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent"><span><CountUp to={150} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
                         <div className="relative z-10">
@@ -60,10 +64,10 @@ export default function Logistics() {
 
                         <Image src="/employees.png" alt="Expertise Icon" width={330} height={80} className=' absolute -bottom-0 right-0 z-0' />
 
-                    </div>
+                    </CardAnimation>
 
-                    <div className="min-h-[55vh] lg:min-h-[45vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 animate-reveal group hover:scale-105 transition-all duration-400">
-                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">30+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <CardAnimation index={2} className="min-h-[55vh] lg:min-h-[45vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 group transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
+                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent"><span><CountUp to={30} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
                         <div className="relative z-10">
@@ -74,7 +78,7 @@ export default function Logistics() {
 
                         <Image src="/globalsales.png" alt="Expertise Icon" width={240} height={80} className=' absolute -bottom-0 right-0 z-0' />
 
-                    </div>
+                    </CardAnimation>
 
 
 
@@ -85,8 +89,8 @@ export default function Logistics() {
 
                 <div className=" px-6 lg:px-10 py-8 lg:py-10 flex flex-col lg:flex-row justify-center gap-6 items-end">
 
-                    <div className="min-h-[55vh] lg:min-h-[45vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 animate-reveal group hover:scale-105 transition-all duration-400">
-                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">200k+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <CardAnimation index={3} className="min-h-[55vh] lg:min-h-[45vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 group transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
+                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent"><span><CountUp to={200} duration={2} />k+</span> <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
                         <div className="relative z-10">
@@ -98,10 +102,10 @@ export default function Logistics() {
 
                         <Image src="/anum.png" alt="Expertise Icon" width={290} height={80} className='w-full absolute -bottom-0 right-0 z-0' />
 
-                    </div>
+                    </CardAnimation>
 
-                    <div className="min-h-[55vh] lg:min-h-[50vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 animate-reveal group hover:scale-105 transition-all duration-400">
-                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">150+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <CardAnimation index={4} className="min-h-[55vh] lg:min-h-[50vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 group transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
+                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent"><span><CountUp to={150} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
                         <div className="relative z-10">
@@ -112,10 +116,10 @@ export default function Logistics() {
 
                         <Image src="/employees.png" alt="Expertise Icon" width={330} height={80} className=' absolute -bottom-0 right-0 z-0' />
 
-                    </div>
+                    </CardAnimation>
 
-                    <div className="min-h-[55vh] lg:min-h-[55vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 animate-reveal group hover:scale-105 transition-all duration-400">
-                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">30+ <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <CardAnimation index={5} className="min-h-[55vh] lg:min-h-[55vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 group transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
+                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent"><span><CountUp to={30} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
                         <div className="relative z-10">
@@ -126,7 +130,7 @@ export default function Logistics() {
 
                         <Image src="/globalsales.png" alt="Expertise Icon" width={240} height={80} className=' absolute -bottom-0 right-0 z-0' />
 
-                    </div>
+                    </CardAnimation>
 
 
 
@@ -180,7 +184,7 @@ export default function Logistics() {
                     <div className="w-full lg:w-1/3 flex flex-col gap-8 lg:gap-10 ">
 
                         {/* card 1 */}
-                        <div className="border-t-2 border-primary flex gap-6 lg:gap-9 pt-6 lg:pt-9 ">
+                        <CardAnimation index={6} className="border-t-2 border-primary flex gap-6 lg:gap-9 pt-6 lg:pt-9 ">
 
                             <h1 className="text-primary text-4xl lg:text-6xl min-w-fit">01</h1>
 
@@ -191,7 +195,7 @@ export default function Logistics() {
                             </div>
 
 
-                        </div>
+                        </CardAnimation>
 
                         <div className="block lg:hidden w-full  h-[40vh] lg:h-[80vh] bg-[url('/advantagecol3.png')] bg-cover  bg-bottom bg-no-repeat">
 
@@ -199,7 +203,7 @@ export default function Logistics() {
 
                         {/* card 3 */}
 
-                        <div className="hidden border-t-2 border-secondary hover:border-primary lg:flex gap-6 lg:gap-5 pt-6 lg:pt-9 ">
+                        <CardAnimation index={7} className="hidden border-t-2 border-secondary hover:border-primary lg:flex gap-6 lg:gap-5 pt-6 lg:pt-9 ">
 
                             <h1 className="text-secondary hover:text-primary text-4xl lg:text-6xl min-w-fit">03</h1>
 
@@ -210,7 +214,7 @@ export default function Logistics() {
                             </div>
 
 
-                        </div>
+                        </CardAnimation>
 
                     </div>
 
@@ -218,9 +222,9 @@ export default function Logistics() {
                     <div className="w-full lg:w-1/3 flex flex-col gap-8 lg:gap-10 ">
 
                         {/* card 2 */}
-                        <div className="border-t-2 border-primary flex gap-6 lg:gap-5 pt-6 lg:pt-9 ">
+                        <CardAnimation index={8} className="border-t-2 border-primary flex gap-6 lg:gap-5 pt-6 lg:pt-9 ">
 
-                            <h1 className="text-primary text-4xl lg:text-6xl min-w-fit">02</h1>
+                            <h1 className=" text-4xl lg:text-6xl min-w-fit">02</h1>
 
                             <div className="flex flex-col gap-4">
                                 <h1 className="text-lg lg:text-2xl font-semibold ">Higher Delivery Capacity</h1>
@@ -229,9 +233,9 @@ export default function Logistics() {
                             </div>
 
 
-                        </div>
+                        </CardAnimation>
                                         
-                        <div className="lg:hidden border-t-2 border-secondary hover:border-primary flex gap-6 lg:gap-5 pt-6 lg:pt-9 ">
+                        <CardAnimation index={9} className="lg:hidden border-t-2 border-secondary hover:border-primary flex gap-6 lg:gap-5 pt-6 lg:pt-9 ">
 
                             <h1 className="text-secondary hover:text-primary text-4xl lg:text-6xl min-w-fit">03</h1>
 
@@ -242,11 +246,11 @@ export default function Logistics() {
                             </div>
 
 
-                        </div>
+                        </CardAnimation>
 
 
                         {/* card 4 */}
-                        <div className="border-t-2 border-secondary hover:border-primary flex gap-6 lg:gap-5 pt-6 lg:pt-9 ">
+                        <CardAnimation index={10} className="border-t-2 border-secondary hover:border-primary flex gap-6 lg:gap-5 pt-6 lg:pt-9 ">
 
                             <h1 className="text-secondary hover:text-primary text-4xl lg:text-6xl min-w-fit">04</h1>
 
@@ -257,7 +261,7 @@ export default function Logistics() {
                             </div>
 
 
-                        </div>
+                        </CardAnimation>
 
                     </div>
 

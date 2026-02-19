@@ -2,6 +2,7 @@ import Image from "next/image"
 import { Badgetextblack, Badgetextwhite, Badge } from "../../common/badge"
 import ParallaxSection from "../../components/ParallaxSection"
 import TextReveal from "../../components/TextReveal"
+import CardAnimation from "../../components/CardAnimation"
 
 export default function Quality() {
     return (
@@ -33,7 +34,9 @@ export default function Quality() {
 
                     <Image src='/gradientcircle.png' alt="Icon" width={400} height={0} className="w-full object-cover hidden lg:block postion absolute overflow-hidden left-0 top-0" />
 
-                    <Image src="/certificate.png" alt="Icon" width={900} height={0} className="w-full object-cover  " />
+                    <CardAnimation index={0} className="w-full">
+                        <Image src="/certificate.png" alt="Icon" width={900} height={0} className="w-full object-cover" />
+                    </CardAnimation>
                 </div>
 
             </div>
@@ -53,28 +56,25 @@ export default function Quality() {
                 <div className="relative lg:px-6 sm:px-8 lg:px-10 pb-12 sm:pb-16 lg:pb-20 flex flex-wrap lg:gap-4 sm:gap-6 py-6 sm:py-8 lg:justify-center pt-6 sm:pt-9">
 
                     {/* card 1 */}
-                    <div className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%]">
+                    <CardAnimation index={0} className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%]">
 
                         <Image src="/q1.png" alt="Icon" width={480} height={0} className="object-cover rounded-xl" />
 
-
-                    </div>
+                    </CardAnimation>
 
                     {/* card 2 */}
-                    <div className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%] mt-4 sm:mt-0">
+                    <CardAnimation index={1} className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%] mt-4 sm:mt-0">
 
                         <Image src="/q2.png" alt="Icon" width={480} height={0} className="object-cover rounded-xl" />
 
-
-                    </div>
+                    </CardAnimation>
 
                     {/* card 3   */}
-                    <div className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%] mt-4 sm:mt-0">
+                    <CardAnimation index={2} className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%] mt-4 sm:mt-0">
 
                         <Image src="/q3.png" alt="Icon" width={400} height={0} className="object-cover rounded-xl" />
 
-
-                    </div>
+                    </CardAnimation>
 
                     <Image src="/orangebottom.png" alt="Icon" width={900} height={0} className="w-full absolute bottom-0" />
 

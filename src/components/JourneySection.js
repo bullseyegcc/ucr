@@ -102,7 +102,7 @@ export default function JourneySection() {
                 {String(index + 1).padStart(2, "0")} / {String(journeyData.length).padStart(2, "0")}
               </span>
 
-              <h1 className="text-[70px] sm:text-[100px] lg:text-[130px] font-light leading-none text-black/10 select-none -mb-4">
+              <h1 className="text-[70px] sm:text-[100px] lg:text-[130px] font-light leading-none text-white select-none -mb-4">
                 {item.year}
               </h1>
 

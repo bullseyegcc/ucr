@@ -1,3 +1,5 @@
+'use client';
+
 import { useInView, useMotionValue, useSpring } from 'motion/react';
 import { useCallback, useEffect, useRef } from 'react';
 
@@ -24,7 +26,7 @@ export default function CountUp({
     stiffness
   });
 
-  const isInView = useInView(ref, { once: true, margin: '0px' });
+  const isInView = useInView(ref, { once: false, margin: '0px' });
 
   const getDecimalPlaces = num => {
     const str = num.toString();
@@ -85,7 +87,15 @@ export default function CountUp({
         clearTimeout(durationTimeoutId);
       };
     }
-  }, [isInView, startWhen, motionValue, direction, from, to, delay, onStart, onEnd, duration]);
+
+    if (!isInView) {
+      const resetValue = direction === 'down' ? to : from;
+      motionValue.set(resetValue);
+      if (ref.current) {
+        ref.current.textContent = formatValue(resetValue);
+      }
+    }
+  }, [isInView, startWhen, motionValue, direction, from, to, delay, onStart, onEnd, duration, formatValue]);
 
   useEffect(() => {
     const unsubscribe = springValue.on('change', latest => {

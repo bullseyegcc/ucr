@@ -1,7 +1,11 @@
+'use client'
+
 import Image from "next/image"
 import { VideoPlayer } from "../../common/video"
 import { Badgetextblack, Badgetextwhite } from "../../common/badge"
 import ParallaxSection from "../../components/ParallaxSection"
+import CardAnimation from "../../components/CardAnimation"
+import SnipScroll from "../../components/SnipScroll"
 
 export default function Technology() {
     return (
@@ -36,15 +40,15 @@ export default function Technology() {
             </ParallaxSection>
 
             {/* card one  */}
-            <ParallaxSection index={1}>
-                <div className="bg-white px-6 sm:px-8 lg:px-10 rounded-xl min-h-screen lg:min-h-[80vh] mx-6 sm:mx-8 lg:mx-10">
+            <SnipScroll>
+                <div className="bg-white px-6 sm:px-8 lg:px-10 rounded-xl min-h-screen lg:min-h-[80vh] mx-6 sm:mx-8 lg:mx-10 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl">
 
                     {/* card header */}
 
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
                         <h1 className="text-primary text-2xl sm:text-3xl lg:text-4xl font-medium uppercase animate-reveal">South Wire Technology</h1>
 
-                        <h1 className="text-secondary text-xl sm:text-2xl lg:text-4xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal">01/<span className="text-secondary">02</span></h1>
+                        <h1 className="text-secondary text-xl sm:text-2xl lg:text-4xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal text-primary">01/<span className="text-secondary">02</span></h1>
                     </div>
 
                 {/* content */}
@@ -65,18 +69,16 @@ export default function Technology() {
                         </div>
                     </div>
                 </div>
-            </ParallaxSection>
 
-            {/* card two */}
-            <ParallaxSection index={2}>
-                <div className="text-white my-2 bg-[#272A2A] px-6 sm:px-8 lg:px-10 rounded-xl min-h-screen lg:min-h-[80vh] mx-6 sm:mx-8 lg:mx-10">
+                {/* card two */}
+                <div className="text-white my-2 bg-[#272A2A] px-6 sm:px-8 lg:px-10 rounded-xl min-h-screen lg:min-h-[80vh] mx-6 sm:mx-8 lg:mx-10 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl">
 
                     {/* card header */}
 
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
                         <h1 className="text-white text-2xl sm:text-3xl lg:text-4xl font-medium uppercase animate-reveal">Copper treatments </h1>
 
-                        <h1 className="text-secondary text-xl sm:text-2xl lg:text-4xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal">02/<span className="text-secondary">03</span></h1>
+                        <h1 className="text-secondary text-xl sm:text-2xl lg:text-4xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal text-primary">02/<span className="text-secondary">03</span></h1>
                     </div>
 
                     {/* content */}
@@ -100,17 +102,15 @@ export default function Technology() {
                         </div>
                     </div>
                 </div>
-            </ParallaxSection>
 
-            {/* card three  */}
-            <ParallaxSection index={3}>
-                <div className="bg-white px-6 sm:px-8 lg:px-10 rounded-xl min-h-screen lg:min-h-[80vh] mx-6 sm:mx-8 lg:mx-10">
+                {/* card three  */}
+                <div className="bg-white px-6 sm:px-8 lg:px-10 rounded-xl min-h-screen lg:min-h-[80vh] mx-6 sm:mx-8 lg:mx-10 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl">
 
                     {/* card header */}
 
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
                         <h1 className="text-primary text-2xl sm:text-3xl lg:text-4xl font-medium animate-reveal">NexGen Sol</h1>
-                        <h1 className="text-secondary text-xl sm:text-2xl lg:text-4xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal">03/<span className="text-secondary">03</span></h1>
+                        <h1 className="text-secondary text-xl sm:text-2xl lg:text-4xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal text-primary">03/<span className="text-secondary">03</span></h1>
                     </div>
 
                     {/* content */}
@@ -131,7 +131,7 @@ export default function Technology() {
                         </div>
                     </div>
                 </div>
-            </ParallaxSection>
+            </SnipScroll>
 
             {/* cards end */}
 
@@ -140,7 +140,7 @@ export default function Technology() {
             {/* laboratory */}
 
             <ParallaxSection index={4}>
-                <div className="flex min-h-[80vh] flex-col px-10 items-center justify-center py-20">
+                <div className="mt-4    flex min-h-[80vh] flex-col px-10 items-center justify-start pt-8 pb-20">
 
                     <div className="animate-reveal">
                         <Badgetextblack title="UCR Laboratory" />
@@ -152,7 +152,7 @@ export default function Technology() {
                     <div className="flex flex-wrap gap-6 py-8 justify-center">
 
                         {/* card 1 */}
-                        <div className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%] animate-reveal">
+                        <CardAnimation index={3} className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%] transition-all duration-500 ease-out hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl">
 
                             <Image src="/lab1.png" alt="Icon" width={480} height={0} className="object-contain rounded-xl " />
                             <div className="relative">
@@ -160,10 +160,10 @@ export default function Technology() {
                                 <h1 className="text-xl font-medium text-gray-500 pl-4 ml-2">LECO Oxygen Analyzer</h1>
                             </div>
 
-                        </div>
+                        </CardAnimation>
 
                         {/* card 2 */}
-                        <div className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%] mt-6 sm:mt-8 animate-reveal">
+                        <CardAnimation index={4} className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%] mt-6 sm:mt-8 transition-all duration-500 ease-out hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl">
 
                             <Image src="/lab2.png" alt="Icon" width={480} height={0} className="object-contain rounded-xl " />
                             <div className="relative">
@@ -171,10 +171,10 @@ export default function Technology() {
                                 <h1 className="text-xl font-medium text-gray-500 pl-4 ml-2">Twist/Torsion Tester,</h1>
                             </div>
 
-                        </div>
+                        </CardAnimation>
 
                         {/* card 3   */}
-                        <div className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%]  mt-8 sm:mt-16 animate-reveal">
+                        <CardAnimation index={5} className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%]  mt-8 sm:mt-16 transition-all duration-500 ease-out hover:scale-[1.02] hover:-translate-y-1 hover:shadow-xl">
 
                             <Image src="/lab3.png" alt="Icon" width={480} height={300} className="h-[75%] lg:w-[90%]  object-fit rounded-xl " />
                             <div className="relative">
@@ -182,7 +182,7 @@ export default function Technology() {
                                 <h1 className="text-xl font-medium text-gray-500 pl-4 ml-2">UTS (Ultimate Tensile Strength)</h1>
                             </div>
 
-                        </div>
+                        </CardAnimation>
 
                     </div>
 

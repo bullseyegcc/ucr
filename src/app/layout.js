@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="antialiased m-0 bg-white " >
-      
+        <SplashOverlay />
         <SmoothScroll />
         <Navbar/>
         {children}

@@ -1,4 +1,7 @@
+'use client'
+
 import { Badgetextwhite } from "../../common/badge"
+import CardAnimation from "../../components/CardAnimation"
 
 export default function contactus() {
     return (
@@ -26,7 +29,7 @@ export default function contactus() {
                     {/* Left Column */}
                     <div>
                         {/* Person Card */}
-                        <div className="bg-white rounded-lg p-4 lg:p-8 mb-8 lg:mb-12 group hover:shadow-xl hover:scale-105 transition-all duration-400">
+                        <CardAnimation index={0} className="bg-white rounded-lg p-4 lg:p-8 mb-8 lg:mb-12 group hover:shadow-xl hover:scale-105 transition-all duration-400">
                             <div className="flex items-start gap-3 lg:gap-6">
                                 <img src="/person.png" alt="Team member" className="w-16 lg:w-40 h-16 lg:h-40 rounded-lg object-cover flex-shrink-0" />
                                 <div className="flex-1">
@@ -38,37 +41,37 @@ export default function contactus() {
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </CardAnimation>
 
                         {/* Contact Details - 2x2 Grid */}
                         <div className="grid grid-cols-2 gap-3 lg:gap-6">
                             {/* Box 1: Connect */}
-                            <div className="bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                            <CardAnimation index={1} className="bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
                                 <h4 className="text-gray-900 font-semibold text-xs lg:text-base mb-2 lg:mb-4">Connect</h4>
                                 <div className="space-y-1">
                                     <a href="#" className="text-gray-700 text-xs lg:text-sm hover:text-[#FA6E43] transition-colors duration-300 block underline">Instagram</a>
                                     <a href="#" className="text-gray-700 text-xs lg:text-sm hover:text-[#FA6E43] transition-colors duration-300 block underline">LinkedIn</a>
                                     <a href="#" className="text-gray-700 text-xs lg:text-sm hover:text-[#FA6E43] transition-colors duration-300 block underline">Twitter</a>
                                 </div>
-                            </div>
+                            </CardAnimation>
 
                             {/* Box 2: Fax */}
-                            <div className="flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                            <CardAnimation index={2} className="flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
                                 <h4 className="text-gray-900 font-semibold text-xs lg:text-base mb-2 lg:mb-3">Fax</h4>
                                 <p className="text-[#FA6E43] text-xs lg:text-sm font-semibold">+971 2 550 3240</p>
-                            </div>
+                            </CardAnimation>
 
                             {/* Box 3: Reach Out */}
-                            <div className="bg-white rounded-lg p-3 lg:p-6 flex flex-col justify-between group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                            <CardAnimation index={3} className="bg-white rounded-lg p-3 lg:p-6 flex flex-col justify-between group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
                                 <h4 className="text-gray-900 font-semibold text-xs lg:text-base mb-2 lg:mb-4">Reach Out</h4>
                                 <div className="space-y-2 lg:space-y-4">
                                     <a href="mailto:info@ucrccopper.ae" className="text-[#FA6E43] text-xs lg:text-sm font-semibold hover:text-orange-600 transition-colors duration-300 block">info@ucrccopper.ae</a>
                                     <a href="tel:+971255033240" className="text-[#FA6E43] text-xs lg:text-sm font-semibold hover:text-orange-600 transition-colors duration-300 block">+971 2 550 3240</a>
                                 </div>
-                            </div>
+                            </CardAnimation>
 
                             {/* Box 4: Office */}
-                            <div className="flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                            <CardAnimation index={4} className="flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
                                 <h5 className="text-gray-900 font-semibold text-xs lg:text-base mb-2 lg:mb-3">Office</h5>
                                 <div className="space-y-1 text-gray-600 text-xs lg:text-sm leading-tight lg:leading-relaxed">
                                     <p>Mussafah,</p>
@@ -76,12 +79,12 @@ export default function contactus() {
                                     <p>P.O.Box 112231,</p>
                                     <p>Abu Dhabi, UAE</p>
                                 </div>
-                            </div>
+                            </CardAnimation>
                         </div>
                     </div>
 
                     {/* Right Column - Contact Form */}
-                    <div className="bg-white rounded-lg p-4 lg:p-12 group hover:shadow-xl transition-all duration-300">
+                    <CardAnimation index={5} className="bg-white rounded-lg p-4 lg:p-12 group hover:shadow-xl transition-all duration-300">
                         <h3 className="text-xl lg:text-4xl font-bold text-gray-900 mb-5 lg:mb-8">Contact us</h3>
                         
                         <form className="space-y-3 lg:space-y-5">
@@ -136,7 +139,7 @@ export default function contactus() {
                         <p className="text-gray-600 text-xs lg:text-sm text-center mt-3 lg:mt-6 leading-tight lg:leading-relaxed">
                             By submitting, you agree to our <a href="#" className="underline hover:text-[#FA6E43] transition-colors duration-300">Terms & Privacy Policy</a>
                         </p>
-                    </div>
+                    </CardAnimation>
                 </div>
             </div>
         </div>
