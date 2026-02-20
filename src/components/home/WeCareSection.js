@@ -72,7 +72,7 @@ export default function WeCareSection() {
   return (
     <div
       ref={sectionRef}
-      className="relative min-h-[80vh] px-5 sm:px-0 sm:h-[90vh] flex flex-col justify-between bg-[url('/care.jpg')] bg-cover bg-center mx-4 md:mx-10 my-5 rounded-xl overflow-hidden"
+      className="relative min-h-[80vh] pt-8 px-5 sm:px-0 sm:h-[90vh] flex flex-col justify-between bg-[url('/care.jpg')] bg-cover bg-center mx-4 md:mx-10 my-5 rounded-xl overflow-hidden"
     >
       <VideoPlayer src="/sustain.mp4" className="absolute inset-0 w-full h-full object-cover" />
 
@@ -82,7 +82,7 @@ export default function WeCareSection() {
       </div>
 
       <div className="absolute bottom-4 w-full z-20">
-        <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-6 px-4 md:px-10 w-full overflow-x-auto md:overflow-visible snap-x md:snap-none">
+        <div className="hidden md:grid md:grid-cols-3 gap-4 md:gap-6 px-4 md:px-10 w-full overflow-x-auto md:overflow-visible snap-x md:snap-none">
           {CARDS.map((card, i) => (
             <div
               key={card.title}

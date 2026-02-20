@@ -22,6 +22,9 @@ export default function HorizontalScrollGallery({ images = [] }) {
 
     gsap.set(wrapper, { x: 0 });
 
+    // Pause auto-scroll on mobile for touch control, enable on desktop
+    const isMobile = window.innerWidth < 768;
+
     tweenRef.current = gsap.fromTo(
       wrapper,
       { x: 0 },
@@ -30,6 +33,7 @@ export default function HorizontalScrollGallery({ images = [] }) {
         duration: imgs.length * 4,
         ease: 'none',
         repeat: -1,
+        paused: isMobile, // paused on mobile, playing on desktop
       }
     );
 

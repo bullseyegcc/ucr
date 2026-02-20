@@ -47,8 +47,8 @@ export default function OurTechnology() {
   const currentTech = TECHNOLOGIES[activeTab];
   return (
     <ParallaxSection index={0}>
-      <div className="min-h-[70vh] sm:min-h-screen flex flex-col  sm:flex-row gap-1 sm:mx-10 overflow-hidden">
-        <div className="min-h-[60vh] md:min-h-screen sm:w-1/2 bg-[#FA6E43] rounded-xl px-3 md:px-8 py-8 flex flex-col gap-12 ">
+      <div className="min-h-[70vh]  sm:min-h-screen flex flex-col  sm:flex-row gap-1 sm:mx-10 overflow-hidden">
+        <div className="min-h-[60vh] pt-10 md:min-h-screen sm:w-1/2 bg-[#FA6E43] rounded-xl px-3 md:px-8 py-8 flex flex-col gap-12 ">
           <div className="mt-8">
             <div className="animate-reveal">
               <WhiteBadge title="Core Strength" className='z-190' />

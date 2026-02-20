@@ -9,30 +9,52 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroll() {
   useEffect(() => {
-    const lenis = new Lenis({
-      lerp: 0.08,           // smoothness factor (lower = smoother/slower)
-      smoothWheel: true,    // smooth mouse wheel
-      syncTouch: false,     // native feel on touch devices
-      touchMultiplier: 2,
-    });
+    if (typeof window === 'undefined') return;
 
-    // Expose Lenis on window so other components can access it
-    window.lenisInstance = lenis;
+    try {
+      const lenis = new Lenis({
+        lerp: 0.08,
+        smoothWheel: true,
+        syncTouch: true,
+        touchMultiplier: 1,
+        prevent: (node) => {
+          // Prevent smooth scroll inside certain elements if needed
+          return node.classList && node.classList.contains('no-lenis');
+        },
+      });
 
-    // Connect Lenis scroll events to GSAP ScrollTrigger
-    lenis.on('scroll', ScrollTrigger.update);
+      window.lenisInstance = lenis;
 
-    // Use GSAP ticker to drive Lenis instead of rAF loop
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0);
+      // Connect Lenis to ScrollTrigger
+      lenis.on('scroll', ScrollTrigger.update);
 
-    return () => {
-      lenis.destroy();
-      delete window.lenisInstance;
-      gsap.ticker.remove((time) => lenis.raf(time * 1000));
-    };
+      // Support ScrollTrigger's refresh
+      ScrollTrigger.addEventListener('refresh', () => lenis.scrollTo(0, { immediate: true }));
+
+      // Use GSAP ticker to drive Lenis
+      let tic;
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+
+      return () => {
+        try {
+          lenis.destroy();
+          delete window.lenisInstance;
+          ScrollTrigger.removeEventListener('refresh', () => {});
+        } catch (e) {
+          console.error('Error cleaning up Lenis:', e);
+        }
+      };
+    } catch (error) {
+      console.error('Error initializing Lenis:', error);
+      // Fallback: allow native scroll if Lenis fails
+      document.documentElement.style.scrollBehavior = 'smooth';
+      return () => {
+        document.documentElement.style.scrollBehavior = 'auto';
+      };
+    }
   }, []);
 
   return null;

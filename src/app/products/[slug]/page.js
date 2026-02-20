@@ -9,6 +9,7 @@ import { useState } from "react";
 import { use } from "react";
 import { ChevronDown, Package, Wrench, Layers } from "lucide-react";
 import FadeIn from "../../../animations/FadeIn";
+import SlideIn from "../../../animations/SlideIn";
 
 export default function ProductDetail({ params }) {
     const { slug } = use(params);
@@ -185,9 +186,15 @@ export default function ProductDetail({ params }) {
             <div className="relative md:min-h-screen mt-8">
 
                 {/* header */}
-                <div className="flex flex-col gap-3 sm:gap-4 md:gap-5 items-center justify-center text-center py-8 sm:py-12 md:py-16 lg:py-20 px-6">
-                     <Badge title="Core Strength" />
-                    <h1 className="font-medium text-2xl sm:text-3xl md:text-4xl lg:text-6xl mt-2 sm:mt-3 md:mt-4 leading-tight w-full sm:w-[85%] md:w-[75%] lg:w-[60%]">Our products meet global quality and safety standards.</h1>
+                <div className="w-screen flex flex-col gap-3 sm:gap-4 md:gap-5 items-center justify-center text-center py-8 sm:py-12 md:py-16 lg:py-20 px-6">
+                    <SlideIn direction="bottom" scrollTrigger={true} duration={0.8} delay={0}>
+                        <Badge title="Core Strength" />
+                    </SlideIn>
+
+
+                    <FadeIn duration={0.4} delay={0} scrollTrigger={true} className="flex justify-center">
+                        <h1 className="font-medium text-2xl text-center sm:text-3xl md:text-4xl lg:text-6xl mt-2 sm:mt-3 md:mt-4 leading-tight w-full sm:w-[85%] md:w-[75%] lg:w-[60%]">Our products meet global quality and safety standards.</h1>
+                    </FadeIn>
                 </div>
 
 

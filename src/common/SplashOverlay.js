@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -16,6 +16,23 @@ export default function SplashOverlay() {
   const bottomRectRef = useRef(null);
   const pathname = usePathname();
   const isHomepage = pathname === '/';
+  const [viewportSize, setViewportSize] = useState({ width: 1920, height: 1080 });
+
+
+
+  useEffect(() => {
+    // Set initial viewport size
+    const updateViewport = () => {
+      setViewportSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    updateViewport();
+    window.addEventListener('resize', updateViewport);
+    return () => window.removeEventListener('resize', updateViewport);
+  }, []);
 
   useEffect(() => {
     const overlay = overlayRef.current;
@@ -28,48 +45,56 @@ export default function SplashOverlay() {
       return;
     }
 
-    // Prevent scroll while splash is visible
-    document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.height = '100vh';
-    document.documentElement.style.height = '100vh';
+    // Calculate responsive scale values
+    const isMobile = viewportSize.width < 768;
+    const centerX = viewportSize.width / 2;
+    const centerY = viewportSize.height / 2;
     
-    const preventScroll = (e) => {
-      e.preventDefault();
-      return false;
-    };
+    // Adjusted: More dramatic scaling for mobile
+    const startScale = isMobile ? 2.5 : 7.5;
+    const endScale = isMobile ? 6 : 18.5;
 
-    window.addEventListener('wheel', preventScroll, { passive: false });
-    window.addEventListener('touchmove', preventScroll, { passive: false });
-    window.addEventListener('scroll', preventScroll, { passive: false });
-    document.addEventListener('scroll', preventScroll, { passive: false });
+    // Prevent scroll while splash is visible - just use CSS, no event listeners
+    const originalOverflow = document.body.style.overflow;
+    const originalHeight = document.body.style.height;
+    document.body.style.overflow = 'hidden';
+    document.body.style.height = '100vh';
+    document.documentElement.style.overflow = 'hidden';
+    document.documentElement.style.height = '100vh';
 
     const timer = setTimeout(() => {
       if (!maskGroupRef.current || !outlineRef.current || !topRectRef.current || !bottomRectRef.current) return;
 
       const splashTl = gsap.timeline({
         onComplete: () => {
-          gsap.set(overlay, { display: 'none', pointerEvents: 'none' });
-          gsap.set(containerRef.current, { display: 'none', pointerEvents: 'none' });
-          window.removeEventListener('wheel', preventScroll);
-          window.removeEventListener('touchmove', preventScroll);
-          window.removeEventListener('scroll', preventScroll);
-          document.removeEventListener('scroll', preventScroll);
-          document.body.style.overflow = 'auto';
-          document.documentElement.style.overflow = 'auto';
-          document.body.style.height = 'auto';
-          document.documentElement.style.height = 'auto';
+          // Restore scroll styles immediately
+          document.body.style.overflow = '';
+          document.documentElement.style.overflow = '';
+          document.body.style.height = '';
+          document.documentElement.style.height = '';
+          
+          // Hide overlay and container
+          gsap.set([overlay, containerRef.current], { display: 'none', pointerEvents: 'none' });
         },
       });
 
-      splashTl.fromTo(
+      // Responsive duration
+      const duration = isMobile ? 1.5 : 2.0;
+
+      // Initial state: masks hidden at responsive starting scale
+      // centerX/centerY are viewport center; logo offset centers the logo at that point
+      gsap.set([maskGroupRef.current, outlineRef.current], { 
+        opacity: 0,
+        attr: { transform: `translate(${centerX}, ${centerY}) scale(${startScale}) translate(-37.5, -19)` }
+      });
+
+      // Scale animation: masks appear and scale from viewport center
+      splashTl.to(
         [maskGroupRef.current, outlineRef.current],
         {
-          attr: { transform: 'translate(960, 540) scale(8.1) translate(-37, -18.57)' },
-        },
-        {
-          attr: { transform: 'translate(960, 540) scale(29.7) translate(-37, -18.57)' },
-          duration: 2.0,
+          attr: { transform: `translate(${centerX}, ${centerY}) scale(${endScale}) translate(-37.5, -19)` },
+          opacity: 1,
+          duration: duration,
           ease: 'expo.out',
         }
       );
@@ -78,93 +103,114 @@ export default function SplashOverlay() {
         overlay,
         {
           scale: 1.008,
-          duration: 2.0,
+          duration: duration,
           ease: 'sine.inOut',
         },
         0
       );
 
+      // Masks fade and scale - outline disappears during scale
       splashTl.to(
         outlineRef.current,
         {
           opacity: 0,
-          duration: 0.9,
+          duration: isMobile ? 0.4 : 0.5,
           ease: 'sine.out',
         },
-        0.95
+        duration - (isMobile ? 0.4 : 0.5)
       );
 
-      // Step 2: split to reveal heading and hold briefly
-      splashTl.to(
-        [topRectRef.current, bottomRectRef.current],
-        {
-          attr: (index) => ({ y: index === 0 ? -54 : 594 }),
-          duration: 1.0,
-          ease: 'expo.inOut',
-        },
-        '-=0.25'
-      );
+      // ╔════════════════════════════════════════════════════════════════════╗
+      // ║ COMMENTED OUT: Step 2 & 3 - Mask split and slide away            ║
+      // ║ For now: Just scale responsive and fade, keeping masks centered   ║
+      // ╚════════════════════════════════════════════════════════════════════╝
 
-      splashTl.to({}, { duration: 1.2 });
+      // // Step 2: split to reveal heading and hold briefly
+      // splashTl.to(
+      //   [topRectRef.current, bottomRectRef.current],
+      //   {
+      //     attr: (index) => ({ y: index === 0 ? -centerY : centerY + centerY }),
+      //     duration: isMobile ? 0.8 : 1.0,
+      //     ease: 'expo.inOut',
+      //   },
+      //   '-=0.25'
+      // );
 
-      // Step 3: skew and slide the split panels away, then fade
-      splashTl.to(
-        [topRectRef.current, bottomRectRef.current],
-        {
-          attr: (index) => ({ y: index === 0 ? -740 : 1280, x: index === 0 ? -150 : 150 }),
-          skewX: (index) => (index === 0 ? -4 : 4),
-          duration: 0.85,
-          ease: 'expo.inOut',
-        }
-      );
+      // splashTl.to({}, { duration: isMobile ? 0.8 : 1.2 });
 
+      // // Step 3: skew and slide the split panels away, then fade
+      // splashTl.to(
+      //   [topRectRef.current, bottomRectRef.current],
+      //   {
+      //     attr: (index) => ({ 
+      //       y: index === 0 ? -centerY * 2 : centerY * 2.5, 
+      //       x: index === 0 ? -150 : 150 
+      //     }),
+      //     skewX: (index) => (index === 0 ? -4 : 4),
+      //     duration: isMobile ? 0.65 : 0.85,
+      //     ease: 'expo.inOut',
+      //   }
+      // );
+
+      // splashTl.to(
+      //   overlay,
+      //   {
+      //     opacity: 0,
+      //     duration: isMobile ? 0.65 : 0.85,
+      //     ease: 'sine.inOut',
+      //   },
+      //   '-=0.55'
+      // );
+
+      // Final fade out - masks stay centered and disappear
       splashTl.to(
         overlay,
         {
           opacity: 0,
-          duration: 0.85,
+          duration: isMobile ? 1.2 : 1.5,
           ease: 'sine.inOut',
         },
-        '-=0.55'
+        '-=0.1'
       );
     }, 100);
 
     return () => {
       clearTimeout(timer);
-      window.removeEventListener('wheel', preventScroll);
-      window.removeEventListener('touchmove', preventScroll);
-      window.removeEventListener('scroll', preventScroll);
-      document.removeEventListener('scroll', preventScroll);
-      document.body.style.overflow = 'auto';
-      document.documentElement.style.overflow = 'auto';
-      document.body.style.height = 'auto';
-      document.documentElement.style.height = 'auto';
+      // Restore scroll on cleanup
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      document.body.style.height = '';
+      document.documentElement.style.height = '';
     };
-  }, [isHomepage]);
+  }, [isHomepage, viewportSize]);
 
   if (!isHomepage) {
     return null;
   }
 
   return (
-    <div ref={containerRef} className="fixed inset-0 overflow-hidden z-[9999]" style={{ width: '100vw', height: '100vh' }}>
+    <div ref={containerRef} className="fixed inset-0 z-[9999]" style={{ width: '100vw', height: '100vh', pointerEvents: isHomepage ? 'auto' : 'none', overflow: 'visible' }}>
       {/* Orange Overlay Container */}
-      <div ref={overlayRef} className="absolute inset-0 z-[9999]" style={{ width: '100vw', height: '100vh', pointerEvents: 'auto' }}>
+      <div ref={overlayRef} className="absolute inset-0 z-[9999]" style={{ width: '100vw', height: '100vh', pointerEvents: 'auto', transformOrigin: 'center center', overflow: 'hidden' }}>
         {/* SVG overlay with logo-shaped hole */}
         <svg
-          width="100vw"
-          height="100vh"
-          viewBox="0 0 1920 1080"
-          preserveAspectRatio="xMidYMid slice"
+          width="100%"
+          height="100%"
+          viewBox={`0 0 ${viewportSize.width} ${viewportSize.height}`}
+          preserveAspectRatio="none"
           style={{ 
-            pointerEvents: 'none'
+            pointerEvents: 'none',
+            transformOrigin: 'center center',
+            position: 'absolute',
+            top: 0,
+            left: 0,
           }}
         >
           <defs>
             {/* Mask: white = shows orange, black = transparent */}
             <mask id="logoHoleMask">
-              <rect x="0" y="0" width="1920" height="1080" fill="white" />
-              <g ref={maskGroupRef} transform="translate(960, 540) scale(8.1) translate(-37, -18.57)">
+              <rect x="0" y="0" width={viewportSize.width} height={viewportSize.height} fill="white" />
+              <g ref={maskGroupRef} opacity="0">
                 <g transform="translate(21.82, 18.57) scale(0.55) translate(-21.82, -18.57)">
                   <path d="M37.2256 2.54971C38.0078 2.54997 38.6689 3.20385 38.6689 3.95694C38.6689 4.14032 38.6667 4.23403 38.6357 4.3251L38.6299 4.34171L38.627 4.35928C38.5916 4.56658 38.4869 4.78571 38.208 5.01944L38.2021 5.02432C28.7217 13.5479 19.2685 22.1316 9.74414 30.6982L9.74316 30.6991C7.8036 32.4603 5.87981 34.2033 3.96387 35.9413C5.04654 34.8348 6.13067 33.7267 7.21582 32.62C9.04746 30.752 10.8785 28.8829 12.6992 27.0146L12.7002 27.0155C18.5001 21.1242 24.2552 15.2326 30.0098 9.34171L30.0088 9.34073C32.0295 7.27697 34.1018 5.20798 36.082 3.09561L36.0811 3.09464C36.1311 3.04458 36.1784 2.98758 36.1992 2.96378C36.2273 2.93182 36.2381 2.92522 36.2432 2.92276L36.2744 2.90714L36.2998 2.88272L36.3447 2.83878C36.3441 2.83937 36.3478 2.83624 36.3594 2.82803C36.3705 2.82009 36.3837 2.81121 36.4014 2.79971C36.4192 2.78806 36.4459 2.76582 36.4756 2.74307C36.7239 2.62254 36.9582 2.54971 37.2256 2.54971Z" fill="black"/>
                   <path d="M29.4926 0.351624C30.4098 0.351701 31.1605 1.0935 31.1605 1.97858C31.1605 2.20855 31.1236 2.35625 31.0424 2.55475L31.0375 2.56647C31.0016 2.67179 30.9244 2.82255 30.806 2.97858L30.7777 3.00787L30.7328 3.05182H30.7318L30.723 3.06158C29.4647 4.4459 28.1949 5.83009 26.9252 7.20905L23.1263 11.3253C20.5414 14.1387 17.9566 16.9416 15.3715 19.7442C12.7864 22.5467 10.2008 25.3494 7.6156 28.1631C6.42423 29.46 5.24393 30.7465 4.06384 32.0323C3.57215 32.568 3.07978 33.1032 2.58728 33.6397C5.25894 30.208 7.9519 26.7914 10.6478 23.3467C15.5479 17.1045 20.4943 10.8181 25.3949 4.53131L25.3978 4.5274C26.2497 3.38751 27.1438 2.2947 28.0463 1.14752L28.0511 1.14069L28.056 1.13483C28.3792 0.660982 28.8986 0.351624 29.4926 0.351624Z" fill="black"/>
@@ -191,11 +237,11 @@ export default function SplashOverlay() {
           </defs>
           
           {/* Orange rectangle with mask applied */}
-          <rect ref={topRectRef} x="0" y="0" width="1920" height="540" fill="#000000" mask="url(#logoHoleMask)" />
-          <rect ref={bottomRectRef} x="0" y="540" width="1920" height="540" fill="#000000" mask="url(#logoHoleMask)" />
+          <rect ref={topRectRef} x="0" y="0" width={viewportSize.width} height={viewportSize.height / 2} fill="#000000" mask="url(#logoHoleMask)" />
+          <rect ref={bottomRectRef} x="0" y={viewportSize.height / 2} width={viewportSize.width} height={viewportSize.height / 2} fill="#000000" mask="url(#logoHoleMask)" />
           
           {/* Logo outline stroke for reference */}
-          <g ref={outlineRef} transform="translate(960, 540) scale(8.1) translate(-37, -18.57)">
+          <g ref={outlineRef} opacity="0">
             <g transform="translate(21.82, 18.57) scale(0.55) translate(-21.82, -18.57)">
               <path d="M37.2256 2.54971C38.0078 2.54997 38.6689 3.20385 38.6689 3.95694C38.6689 4.14032 38.6667 4.23403 38.6357 4.3251L38.6299 4.34171L38.627 4.35928C38.5916 4.56658 38.4869 4.78571 38.208 5.01944L38.2021 5.02432C28.7217 13.5479 19.2685 22.1316 9.74414 30.6982L9.74316 30.6991C7.8036 32.4603 5.87981 34.2033 3.96387 35.9413C5.04654 34.8348 6.13067 33.7267 7.21582 32.62C9.04746 30.752 10.8785 28.8829 12.6992 27.0146L12.7002 27.0155C18.5001 21.1242 24.2552 15.2326 30.0098 9.34171L30.0088 9.34073C32.0295 7.27697 34.1018 5.20798 36.082 3.09561L36.0811 3.09464C36.1311 3.04458 36.1784 2.98758 36.1992 2.96378C36.2273 2.93182 36.2381 2.92522 36.2432 2.92276L36.2744 2.90714L36.2998 2.88272L36.3447 2.83878C36.3441 2.83937 36.3478 2.83624 36.3594 2.82803C36.3705 2.82009 36.3837 2.81121 36.4014 2.79971C36.4192 2.78806 36.4459 2.76582 36.4756 2.74307C36.7239 2.62254 36.9582 2.54971 37.2256 2.54971Z" stroke="none" strokeWidth="0.25" fill="none" opacity="0.9"/>
               <path d="M29.4926 0.351624C30.4098 0.351701 31.1605 1.0935 31.1605 1.97858C31.1605 2.20855 31.1236 2.35625 31.0424 2.55475L31.0375 2.56647C31.0016 2.67179 30.9244 2.82255 30.806 2.97858L30.7777 3.00787L30.7328 3.05182H30.7318L30.723 3.06158C29.4647 4.4459 28.1949 5.83009 26.9252 7.20905L23.1263 11.3253C20.5414 14.1387 17.9566 16.9416 15.3715 19.7442C12.7864 22.5467 10.2008 25.3494 7.6156 28.1631C6.42423 29.46 5.24393 30.7465 4.06384 32.0323C3.57215 32.568 3.07978 33.1032 2.58728 33.6397C5.25894 30.208 7.9519 26.7914 10.6478 23.3467C15.5479 17.1045 20.4943 10.8181 25.3949 4.53131L25.3978 4.5274C26.2497 3.38751 27.1438 2.2947 28.0463 1.14752L28.0511 1.14069L28.056 1.13483C28.3792 0.660982 28.8986 0.351624 29.4926 0.351624Z" stroke="none" strokeWidth="0.25" fill="none" opacity="0.9"/>

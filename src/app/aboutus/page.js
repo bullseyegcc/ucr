@@ -23,21 +23,21 @@ export default function AboutUs() {
 
     return (
         <div className="">
-            <div className=" mb-[80%] lg:mb-[30%] relative flex min-h-[80vh] items-center pt-[35%] md:pt-46 bg-black font-sans bg-primary flex flex-col gap-10">
+            <div className=" mb-[80%] lg:mb-[30%] relative flex min-h-[80vh] items-center pt-[35%] md:pt-46 gap-8 bg-black font-sans bg-primary flex flex-col gap-10">
 
-                <div className="inline-flex items-start lg:items-center lg:gap-3 text-white z-300 w-[80%] lg:w-[40%]">
-                    <SlideIn direction="bottom"  duration={0.8} delay={0}>
+                <div className="inline-flex items-start lg:items-center lg:gap-3  text-center text-white z-300 w-[60%] lg:w-[40%]">
+                    <SlideIn direction="bottom"  duration={0.4} delay={0}>
                         <Image src={badge_icon} alt="Badge Icon" width={24} height={24} className='object-contain' />
                     </SlideIn>
                     <FadeIn  duration={0.4} delay={0}>
-                        <span className='text-white uppercase font-medium text-center text-sm lg:text-base'>Crafting Sustainable Progress, One Copper Solution at a Time </span>
+                        <span className='text-white uppercase font-medium text-center text-xs lg:text-base'>Crafting Sustainable Progress, One Copper Solution at a Time </span>
                     </FadeIn>
                 </div>
 
                 <HeroHeading >
 
-                    <h1 className="w-[80%]   text-3xl md:text-5xl lg:text-6xl text-white font-semibold text-center leading-tight">
-                        <FadeIn duration={0.4} delay={0}>
+                    <h1 className="w-[80%]  mt-5  text-3xl md:text-5xl lg:text-6xl text-white font-semibold text-center leading-tight">
+                        <FadeIn>
 
                             Leading the region&apos;s copper transformation with cutting edge technology
                         </FadeIn>
