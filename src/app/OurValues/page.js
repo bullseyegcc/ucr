@@ -2,13 +2,16 @@
 import { Badge } from "../../common/badge"
 import Image from "next/image"
 import CardAnimation from "../../animations/CardAnimation"
+import FadeIn from "../../animations/FadeIn"
 
 export default function OurValues() {
     return (
         <div>
             <div className="flex flex-col text-center min-h-[80vh] items-center justify-center bg-[url('/valuebg.png')] bg-cover font-sans dark:bg-black gap-6">
                 <Badge title="values" />
-                <h1 className="text-4xl lg:text-6xl font-bold text-white">Our Values</h1>
+                <FadeIn className="text-4xl lg:text-6xl font-bold text-white">
+                    Our Values
+                </FadeIn>
             </div>
 
             {/* Trust & Reliability Section */}

@@ -6,6 +6,7 @@ import { Badgetextblack, Badgetextwhite } from "../../common/badge"
 import ParallaxSection from "../../animations/ParallaxSection"
 import CardAnimation from "../../animations/CardAnimation"
 import SnipScroll from "../../animations/SnippScrol"
+import FadeIn from "../../animations/FadeIn"
 
 export default function Technology() {
     return (
@@ -15,7 +16,9 @@ export default function Technology() {
                 <div className="absolute inset-0 z-10 bg-[linear-gradient(0deg,rgba(0,0,0,0.35)0%,rgba(0,0,0,0.35)100%)] pointer-events-none" />
                 <div className="flex flex-col items-center gap-5 absolute top-[35%] lg:top-[40%] z-20">
                     <Badgetextwhite title="Technlogy"/>
-                    <h1 className=" text-3xl lg:text-6xl text-white text-center w-full px-4">Our Advance Technology</h1>
+                    <FadeIn className=" text-3xl lg:text-6xl text-white text-center w-full px-4">
+                        Our Advance Technology
+                    </FadeIn>
 
                 </div>
             </div>

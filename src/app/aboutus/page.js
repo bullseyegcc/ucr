@@ -15,7 +15,8 @@ import MissionValuesSection from "../../components/about/MissionValuesSection"
 import ColorChangeWithScroll from "../../animations/ColorChangeWithScroll"
 import CardAnimation from "../../animations/CardAnimation"
 import CountUp from "../../animations/countup"
-import HeroHeading from "@/components/home/HeroHeading";
+import HeroHeading from "@/components/home/HeroHeading"
+import FadeIn from "../../animations/FadeIn";
 
 export default function AboutUs() {
 
@@ -29,9 +30,14 @@ export default function AboutUs() {
                 </div>
 
                 <HeroHeading >
-                        <h1 className="w-[80%]   text-3xl md:text-5xl lg:text-6xl text-white font-semibold text-center leading-tight">
-                    Leading the region&apos;s copper transformation with cutting edge technology
-                </h1>
+
+                    <h1 className="w-[80%]   text-3xl md:text-5xl lg:text-6xl text-white font-semibold text-center leading-tight">
+                        <FadeIn>
+
+                            Leading the region&apos;s copper transformation with cutting edge technology
+                        </FadeIn>
+
+                    </h1>
                 </HeroHeading>
                 <div className="absolute -bottom-[40%] lg:-bottom-[55%] w-[90%] md:w-[80%] h-[50vh] lg:h-[70vh] ">
                     <VideoPlayer src="/aboutvideo.mp4" className="w-full h-full object-cover rounded-xl " />
@@ -47,14 +53,16 @@ export default function AboutUs() {
                         Since 2008, we&apos;ve delivered reliable, high performance copper solutions to industries across more than 30 countries, supported by advanced technology and a strong focus on environmental responsibility. Guided by our core values, we work to elevate industry standards and help shape a greener, more efficient future.
                     </h1>
                 </ColorChangeWithScroll>
-             
+
 
             </div>
 
 
             {/* Our Mission & Our Values */}
 
-            <MissionValuesSection />
+            <FadeIn>
+                <MissionValuesSection />
+            </FadeIn>
 
 
             {/* parent company */}
@@ -67,8 +75,8 @@ export default function AboutUs() {
                             <span className='text-2xl sm:text-3xl lg:text-4xl uppercase font-medium'>Parent Company</span>
                         </div>
                     </div>
-                    
-                    <div className="bg-[#FEF7F4] w-full px-4 sm:px-5 lg:px-16 py-8 sm:py-10 lg:py-12">
+
+                    <div className="bg-[#FEF7F4] w-full px-4 sm:px-5 lg:px-16 py-8 sm:py-10 lg:h-[55vh]">
                         <h1 className="text-2xl sm:text-3xl lg:text-4xl text-[#212225] font-semibold mb-4 sm:mb-6">Our Core Sectors</h1>
 
                         <div className="text-primary text-lg sm:text-xl lg:text-2xl flex flex-col gap-2 sm:gap-3 mt-4 sm:mt-6">
@@ -79,17 +87,17 @@ export default function AboutUs() {
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-t-2xl lg:rounded-2xl lg:absolute lg:right-0 lg:bottom-0 lg:w-1/2 px-6 sm:px-8 lg:px-10 py-12 sm:py-16 flex flex-col items-center justify-center gap-8 sm:gap-12 lg:gap-16 lg:h-[80vh]">
+                    <div className="bg-white rounded-t-2xl lg:rounded-2xl lg:absolute lg:right-0 lg:bottom-0 lg:w-1/2 px-6 sm:px-8 lg:px-10 py-12 sm:py-16 flex flex-col items-center justify-center gap-8 sm:gap-12 lg:gap-16 lg:h-[50vh]">
                         <p className="text-base sm:text-lg lg:text-2xl text-center text-[#212225] leading-relaxed">
                             Itihad International Investment LLC is a private holding and multi-disciplinary conglomerate, engaged in a wide spectrum of economic activities in the MENA region
                         </p>
 
-                        <Image 
-                            src="/itihad.png" 
-                            alt="Itihad Logo" 
-                            width={200} 
-                            height={100} 
-                            className='w-32 sm:w-40 lg:w-[200px] h-auto object-contain' 
+                        <Image
+                            src="/itihad.png"
+                            alt="Itihad Logo"
+                            width={200}
+                            height={100}
+                            className='w-32 sm:w-40 lg:w-[200px] h-auto object-contain'
                         />
                     </div>
                 </div>
@@ -107,7 +115,7 @@ export default function AboutUs() {
                         <Badge title="our expertise" />
                         <h1 className="text-xl sm:text-2xl lg:text-4xl mt-3 sm:mt-4 font-semibold">Our Expertise & Experience</h1>
                     </div>
-                    
+
                     <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 items-stretch lg:items-end">
                         <CardAnimation index={0} className="rounded-xl w-full lg:w-1/3 bg-white px-4 sm:px-5 pt-8 sm:pt-10 lg:pt-16 relative flex flex-col gap-4 sm:gap-6 lg:gap-8 min-h-[45vh] sm:min-h-[50vh] lg:h-[55vh] group cursor-pointer transition-all duration-400 ease-out hover:scale-105 hover:shadow-2xl overflow-hidden">
                             <h1 className="pt-3 sm:pt-5 text-4xl sm:text-5xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-3 sm:gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent"><span><CountUp to={20} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow" /></h1>

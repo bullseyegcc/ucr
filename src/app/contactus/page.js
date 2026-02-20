@@ -2,13 +2,16 @@
 
 import { Badgetextwhite } from "../../common/badge"
 import CardAnimation from "../../animations/CardAnimation"
+import FadeIn from "../../animations/FadeIn"
 
 export default function contactus() {
     return (
         <div>
             <div className="relative flex min-h-[60vh] lg:min-h-[80vh] items-center justify-center bg-black font-sans bg-primary flex flex-col gap-6 lg:gap-8 lg:gap-10 px-4">
                 <Badgetextwhite title="Reach Us " />
-                <h1 className="w-full max-w-4xl text-center text-4xl lg:text-5xl lg:text-7xl font-bold text-white">Contact Details</h1>
+                <FadeIn className="w-full max-w-4xl text-center text-4xl lg:text-5xl lg:text-7xl font-bold text-white">
+                    Contact Details
+                </FadeIn>
             </div>
 
             {/* Let's Connect Section */}

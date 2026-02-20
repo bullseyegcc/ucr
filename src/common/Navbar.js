@@ -169,17 +169,17 @@ export const Navbar = () => {
                                                                 href={subItem.href} 
                                                                 onClick={() => setIsMenuOpen(false)}
                                                             >
-                                                                <div className={`text-sm sm:text-base font-normal flex items-center gap-2 cursor-pointer py-1 px-3 rounded-full transition-colors ${
+                                                                <div className={`text-sm sm:text-base font-normal flex items-center gap-2 cursor-pointer py-1 px-3 rounded-full transition-colors group ${
                                                                     isActive
                                                                         ? 'text-primary'
                                                                         : 'text-gray-700 hover:text-white hover:bg-primary'
                                                                 }`}>
                                                                     <span
-                                                                        className={`flex-shrink-0 inline-flex items-center justify-center w-7 h-7 transition-colors ${isActive ? 'bg-primary' : 'bg-gray-200'}`}
+                                                                        className={`flex-shrink-0 inline-flex items-center justify-center w-7 h-7 transition-colors ${isActive ? 'bg-primary' : 'bg-gray-200 group-hover:bg-white'}`}
                                                                     >
                                                                         <ChevronRight 
                                                                             size={16} 
-                                                                            className={`${isActive ? 'text-white' : 'text-gray-600'}`} 
+                                                                            className={`${isActive ? 'text-white' : 'text-gray-600 group-hover:text-primary'}`} 
                                                                         />
                                                                     </span>
                                                                     {subItem.label}

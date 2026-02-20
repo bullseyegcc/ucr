@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { use } from "react";
 import { ChevronDown, Package, Wrench, Layers } from "lucide-react";
+import FadeIn from "../../../animations/FadeIn";
 
 export default function ProductDetail({ params }) {
     const { slug } = use(params);
@@ -35,7 +36,9 @@ export default function ProductDetail({ params }) {
                 <div className="absolute inset-0 z-10 pointer-events-none bg-[url('/productdetailbg.png')] bg-cover bg-center" ></div>
                 <h1 className="absolute top-[40%] w-[85%] sm:w-[70%] md:w-[60%] z-20 text-3xl sm:text-4xl md:text-6xl text-white flex flex-col items-center text-center gap-2 sm:gap-3 md:gap-4 px-4 sm:px-0">
                     <Badgetextwhite title='products' />
-                    {product.name}
+                    <FadeIn>
+                        {product.name}
+                    </FadeIn>
                 </h1>
             </div>
 

@@ -3,6 +3,7 @@ import { Badgetextblack, Badgetextwhite, Badge } from "../../common/badge"
 import ParallaxSection from "../../animations/ParallaxSection"
 import TextReveal from "../../animations/TextReveal"
 import CardAnimation from "../../animations/CardAnimation"
+import FadeIn from "../../animations/FadeIn"
 
 export default function Quality() {
     return (
@@ -11,7 +12,9 @@ export default function Quality() {
             {/* header */}
             <div className="relative rounded-b-xl flex flex-col text-center min-h-[50vh] sm:min-h-[60vh] lg:min-h-[80vh] items-center justify-center font-sans dark:bg-black gap-6 px-6" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/qualitybg.png') lightgray 50% / cover no-repeat" }}>
                 <Badgetextwhite title="Premium Quality Assured" />
-                <h1 className="w-full sm:w-[90%] lg:w-[80%] text-3xl sm:text-5xl lg:text-7xl font-medium text-white leading-relaxed px-10 lg:px-0">Quality is our foundation</h1>
+                <FadeIn className="w-full sm:w-[90%] lg:w-[80%] text-3xl sm:text-5xl lg:text-7xl font-medium text-white leading-relaxed px-10 lg:px-0">
+                    Quality is our foundation
+                </FadeIn>
 
                 <Image src='/ribbin.png' alt="Icon" width={300} height={0} className="w-50 lg:w-60 absolute -right-[12%] lg:right-[6%] bottom-[12%] lg:bottom-[10%]" />
             </div>

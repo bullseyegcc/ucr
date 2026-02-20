@@ -84,7 +84,7 @@ export default function FeaturedProducts() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent rounded-xl z-5"></div>
 
       {/* Content Card */}
-      <div className="h-full relative top-8 bottom-5 bg-white p-6 md:p-8 flex flex-col gap-5 md:gap-6 md:gap-26 w-full md:w-[45%] md:min-h-[90%] mx-4 md:mx-10 rounded-xl z-10 shadow-2xl transition-all duration-700">
+      <div className="h-full pt-9 relative top-8 bottom-5 bg-white p-6 md:p-8 flex flex-col gap-5 md:gap-6 md:gap-26 w-full md:w-[45%] md:min-h-[90%] mx-4 md:mx-10 rounded-xl z-10 shadow-2xl transition-all duration-700">
         {/* Header */}
         <div className="flex flex-col gap-5">
           <div className="flex gap-3 text-white z-300">

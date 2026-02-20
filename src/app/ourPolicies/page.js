@@ -1,4 +1,5 @@
 import { Check, ArrowRight } from 'lucide-react';
+import FadeIn from "../../animations/FadeIn";
 
 export default function OurPolicies() {
     return (
@@ -6,7 +7,9 @@ export default function OurPolicies() {
             <div className="flex flex-col items-center justify-center min-h-[50vh] lg:min-h-[60vh] lg:min-h-[70vh] font-medium bg-black font-sans dark:bg-black bg-[url('/policiesbg.png')] bg-cover bg-center bg-no-repeat">
                 <div className="flex flex-col items-center gap-3 lg:gap-4 lg:gap-6 px-4">
                     <p className="text-primary text-xs lg:text-sm lg:text-base font-semibold tracking-widest uppercase">UCR  POLICIES</p>
-                    <h1 className="text-4xl lg:text-5xl lg:text-6xl text-white font-bold">Our Policies</h1>
+                    <FadeIn className="text-4xl lg:text-5xl lg:text-6xl text-white font-bold">
+                        Our Policies
+                    </FadeIn>
                 </div>
             </div>
 

@@ -6,6 +6,7 @@ import { Badgetextwhite } from "../../common/badge";
 import { blogs } from "../../assets/blogs";
 import ParallaxSection from "../../animations/ParallaxSection";
 import CardAnimation from "../../animations/CardAnimation";
+import FadeIn from "../../animations/FadeIn";
 
 export default function BlogsPage() {
     const featured = blogs.slice(0, 3);
@@ -15,7 +16,9 @@ export default function BlogsPage() {
         <div>
             <div className="rouned-b-2xl flex flex-col text-center min-h-[80vh] items-center justify-center font-sans dark:bg-black gap-6" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/blogsbg.png') lightgray 50% / cover no-repeat" }}>
                 <Badgetextwhite title="Things to Read" />
-                <h1 className="w-[80%] text-7xl font-medium text-white">News</h1>
+                <FadeIn className="w-[80%] text-7xl font-medium text-white">
+                    News
+                </FadeIn>
             </div>
 
             <ParallaxSection index={0}>

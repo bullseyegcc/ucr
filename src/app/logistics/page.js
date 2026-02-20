@@ -5,6 +5,7 @@ import { Badge, Badgetextwhite } from "../../common/badge";
 import Image from "next/image";
 import CardAnimation from "../../animations/CardAnimation";
 import CountUp from "../../animations/countup";
+import FadeIn from "../../animations/FadeIn";
 
 export default function Logistics() {
     return (
@@ -15,7 +16,9 @@ export default function Logistics() {
 
                 <Badgetextwhite title="Our Logistics" />
 
-                <h1 className=" w-[65%]  h-full text-center text-xl sm:text-5xl lg:font-bold text-white leading-tight">UCR has a higher delivery capacity in the Copper Industry</h1>
+                <FadeIn className=" w-[65%]  h-full text-center text-xl sm:text-5xl lg:font-bold text-white leading-tight">
+                    UCR has a higher delivery capacity in the Copper Industry
+                </FadeIn>
                 <div className='absolute -bottom-[50%] lg:-bottom-[65%] w-[75%] h-60 sm:h-[70vh] w-[95%] ' >
                     <VideoPlayer src="/logisticsvid.mp4" className="rounded-4xl " />
                 </div>

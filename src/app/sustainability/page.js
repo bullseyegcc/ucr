@@ -5,13 +5,20 @@ import Image from "next/image"
 import { VideoPlayer } from "../../common/video"
 import ParallaxSection from "../../animations/ParallaxSection"
 import CardAnimation from "../../animations/CardAnimation"
+import TextReveal from "../../animations/TextReveal"
+import FadeIn from "../../animations/FadeIn"
+import SlideIn from "../../animations/SlideIn"
 
 export default function sustainability() {
     return (
         <div>
             <div className="rouned-b-2xl flex flex-col text-center min-h-[60vh] lg:min-h-[80vh] items-center justify-center font-sans dark:bg-black gap-6 px-4 lg:px-0" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/sustainbg.png') lightgray 50% / cover no-repeat" }}>
                 <Badgetextwhite title="Sustainability" />
-                <h1 className="w-full lg:w-[80%] text-4xl lg:text-7xl font-medium text-white">Creating value with a differentiated approch</h1>
+                <h1 className="w-full lg:w-[80%] text-4xl lg:text-7xl font-medium text-white">
+                    <FadeIn>
+                    Creating value with a differentiated approach
+                    </FadeIn>
+                    </h1>
             </div>
 
 
@@ -20,29 +27,31 @@ export default function sustainability() {
             <ParallaxSection index={0}>
             <div className=" overflow-x-hidden relative min-h-auto lg:min-h-screen flex flex-col lg:flex-row px-6 lg:px-10 py-12 lg:py-20 font-medium bg-gray-200 shadow-lg gap-8 lg:gap-0">
                                      
-                <div className="hidden lg:flex flex-col gap-28 w-90">
+                <SlideIn direction="left" scrollTrigger={true} className="hidden lg:flex flex-col gap-28 w-90">
                     <Image src="/mission1.png" alt="Icon" width={300} height={0} className="ml-9" />
                     <Image src="/mission2.png" alt="Icon" width={400} height={0} />
-                </div>
+                </SlideIn>
 
                 <div className="flex flex-col justify-center items-center font-medium w-full">
                     <Badge title="Core Strength" />
-                    <h1 className="text-3xl lg:text-6xl mt-2 flex flex-col lg:flex-row items-center justify-center font-helvitica-now leading-tight gap-2">
-                        Our mission <Image src="/natureglobe.png" alt="Icon" width={60} height={0} className="lg:w-20" /> is to create
-                    </h1>
-                    <h1 className="text-3xl lg:text-6xl w-full lg:w-[60%] text-center leading-tight mt-4">
+                    <TextReveal className="text-3xl lg:text-6xl mt-2 flex flex-col lg:flex-row items-center justify-center font-helvitica-now leading-tight gap-2">
+                        Our mission <FadeIn><Image src="/natureglobe.png" alt="Icon" width={60} height={0} className="lg:w-20" /></FadeIn> is to create
+                    </TextReveal>
+                    <TextReveal className="text-3xl lg:text-6xl w-full lg:w-[60%] text-center leading-tight mt-4">
                         <span className="text-[#4F7363]">eco-friendly solutions </span> that promote recycling and green leaving
-                    </h1>
+                    </TextReveal>
 
+                    <FadeIn scrollTrigger={true}>
                     <p className="max-w-lg mt-6 lg:mt-8 text-base lg:text-xl text-center">
                         We believe in a future where style and sustainability coexist harmoniously.
                     </p>
+                    </FadeIn>
                 </div>
 
-                <div className="hidden lg:flex flex-col justify-between items-end w-90 gap-8">
+                <SlideIn direction="right" scrollTrigger={true} className="hidden lg:flex flex-col justify-between items-end w-90 gap-8">
                     <Image src="/mission3.png" alt="Icon" width={280} height={0} />
                     <Image src="/mission4.png" alt="Icon" width={330} height={0} className="mr-20" />
-                </div>
+                </SlideIn>
 
 
                 {/* mobile view  */}
@@ -57,8 +66,12 @@ export default function sustainability() {
 
             <div className="min-h-auto lg:min-h-[85vh] flex flex-col items-center px-2 lg:px-10 py-12 lg:py-20 relative z-10">
 
-                <h1 className="text-primary text-base lg:text-xl font-medium uppercase text-center" >Build on integrity, powered by innovation</h1>
-                <h1 className="w-full lg:w-[60%] text-center text-3xl px-10 lg:text-5xl mt-4 font-semibold">Eco-friendly designs & recycling innovations.</h1>
+                <TextReveal className="text-primary text-base lg:text-xl font-medium uppercase text-center" >
+                  Build on integrity, powered by innovation
+                </TextReveal>
+                <TextReveal className="w-full lg:w-[60%] text-center text-3xl px-10 lg:text-5xl mt-4 font-semibold">
+                  Eco-friendly designs & recycling innovations.
+                </TextReveal>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-2 my-12 lg:my-16 w-full">
 
@@ -90,7 +103,9 @@ export default function sustainability() {
             
                     <div className="text-center mb-12 lg:mb-16 flex flex-col items-center">
                       <Badge title="Core Strength" />
-                      <h1 className="text-2xl lg:text-4xl font-semibold text-black mt-4">Why choose us</h1>
+                      <TextReveal className="text-2xl lg:text-4xl font-semibold text-black mt-4">
+                        Why choose us
+                      </TextReveal>
                     </div>
             
                     <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 gap-4 lg:gap-6">

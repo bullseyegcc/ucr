@@ -5,6 +5,7 @@ import TeamMemoriesSection from "../../components/team/TeamMemoriesSection"
 import ParallaxSection from "../../animations/ParallaxSection"
 import TextReveal from "../../animations/TextReveal"
 import CardAnimation from "../../animations/CardAnimation"
+import FadeIn from "../../animations/FadeIn"
 
 export default function Team() {
 
@@ -12,7 +13,9 @@ export default function Team() {
         <div >
             <div className="relative flex min-h-[55vh] lg:min-h-[120vh] items-center pt-40 bg-black font-sans bg-primary flex flex-col gap-6 lg:gap-8 lg:gap-10 ">
                 <Badgetextwhite title="Our Team " />
-                <h1 className=" max-w-[80%] text-center text-3xl lg:text-5xl lg:text-7xl font-medium text-white">Meet the People Behind the Power of Copper</h1>
+                <FadeIn className=" max-w-[80%] text-center text-3xl lg:text-5xl lg:text-7xl font-medium text-white">
+                    Meet the People Behind the Power of Copper
+                </FadeIn>
                 <Image src='/whitegradient.png' alt='Vector Image' width={1200} height={900} className=" hidden md:block rotate-180  absolute -bottom-25 left-1/2 transform -translate-x-1/2  object-cover w-full" />
 
                 <Image src='/vector.png' alt='Vector Image' width={1200} height={900} className="rotate-180 opacity-70 absolute bottom-10 left-1/2 transform -translate-x-1/2  object-contain w-1/3" />

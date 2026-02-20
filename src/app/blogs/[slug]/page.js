@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { blogs } from "../../../assets/blogs";
 import { Badgetextwhite } from "../../../common/badge";
 import Link from "next/link";
+import FadeIn from "../../../animations/FadeIn";
 
 export default async function BlogDetail({ params }) {
     const { slug } = await params;
@@ -14,7 +15,9 @@ export default async function BlogDetail({ params }) {
         <div>
             <div className="rouned-b-2xl flex flex-col text-center min-h-[80vh] items-center justify-center font-sans dark:bg-black gap-6" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/blogsbg.png') lightgray 50% / cover no-repeat" }}>
                 <Badgetextwhite title="Things to Read" />
-                <h1 className="w-[80%] text-7xl font-medium text-white">News</h1>
+                <FadeIn className="w-[80%] text-7xl font-medium text-white">
+                    News
+                </FadeIn>
             </div>
             <div className="min-h-screen px-8 md:px-20 py-16">
 

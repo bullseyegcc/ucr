@@ -5,6 +5,7 @@ import Image from "next/image"
 import ColorChangeWithScroll from "../../animations/ColorChangeWithScroll"
 import CardAnimation from "../../animations/CardAnimation"
 import CountUp from "../../animations/countup"
+import FadeIn from "../../animations/FadeIn"
 
 
 export default function parentCompany() {
@@ -15,7 +16,9 @@ export default function parentCompany() {
 
                 <Badgetextwhite title="Our Logistics" />
 
-                <h1 className="w-full md:w-3/4 lg:w-2/3 text-center text-3xl md:text-5xl font-bold text-white leading-tight px-6">UCR has a higher delivery capacity in the Copper Industry</h1>
+                <FadeIn className="w-full md:w-3/4 lg:w-2/3 text-center text-3xl md:text-5xl font-bold text-white leading-tight px-6">
+                    UCR has a higher delivery capacity in the Copper Industry
+                </FadeIn>
 
 
 

@@ -10,6 +10,7 @@ import { Menu, ArrowRight, ArrowDown } from 'lucide-react';
 import UcrLaboratoryToolsSection from "../../components/technology/UcrLaboratoryToolsSection"
 import ParallaxSection from "../../animations/ParallaxSection"
 import ColorChangeWithScroll from "../../animations/ColorChangeWithScroll"
+import FadeIn from "../../animations/FadeIn"
 
 export default function blogs() {
     const router = useRouter();
@@ -23,7 +24,9 @@ export default function blogs() {
                 <h1 className="absolute top-[40%]  lg:w-[60%] w-[95%]  z-20 text-3xl lg:text-6xl text-white flex flex-col items-center text-center gap-4">
 
                     <Badgetextwhite title="Our Products" />
-                    Premium Copper Products With Precision Engineering
+                    <FadeIn>
+                        Premium Copper Products With Precision Engineering
+                    </FadeIn>
 
                 </h1>
             </div>
