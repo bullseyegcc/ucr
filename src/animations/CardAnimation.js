@@ -14,7 +14,7 @@ export default function CardAnimation({ children, index = 0, className = '' }) {
     card.style.transform = 'translateY(80px)';
     card.style.filter = 'blur(6px)';
     card.style.transition =
-      'opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), filter 1.8s cubic-bezier(0.16, 1, 0.3, 1)';
+      'opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), filter 1.8s cubic-bezier(0.16, 1, 0.3, 1)';
 
     const observer = new IntersectionObserver(
       ([entry]) => {

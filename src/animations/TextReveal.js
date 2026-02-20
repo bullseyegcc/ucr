@@ -93,9 +93,9 @@ export default function TextReveal({ children, className = '' }) {
           ease: 'power2.out',
           scrollTrigger: {
             trigger: container,
-            start: 'top 120%',
-            end: 'top 20%',
-            scrub: 0.2,
+            start: 'top 110%',
+            end: 'top 40%',
+            scrub: 0.009,
             markers: false,
             onEnter: () => {
               // Stop Lenis when animation starts

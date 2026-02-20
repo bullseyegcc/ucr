@@ -3,13 +3,16 @@
 import { Badgetextwhite } from "../../common/badge"
 import CardAnimation from "../../animations/CardAnimation"
 import FadeIn from "../../animations/FadeIn"
+import SlideIn from "../../animations/SlideIn"
 
 export default function contactus() {
     return (
         <div>
             <div className="relative flex min-h-[60vh] lg:min-h-[80vh] items-center justify-center bg-black font-sans bg-primary flex flex-col gap-6 lg:gap-8 lg:gap-10 px-4">
-                <Badgetextwhite title="Reach Us " />
-                <FadeIn className="w-full max-w-4xl text-center text-4xl lg:text-5xl lg:text-7xl font-bold text-white">
+                <SlideIn direction="bottom" duration={0.8} delay={0}>
+                    <Badgetextwhite title="Reach Us " />
+                </SlideIn>
+                <FadeIn className="w-full max-w-4xl text-center text-4xl lg:text-5xl lg:text-7xl font-bold text-white" duration={0.4} delay={0}>
                     Contact Details
                 </FadeIn>
             </div>
@@ -19,12 +22,18 @@ export default function contactus() {
                 {/* Header Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 mb-12 lg:mb-16 leading-tight">
                     <div>
-                        <p className="uppercase text-[#FA6E43] text-xs lg:text-lg font-semibold uppercase tracking-widest mb-3 lg:mb-4">Contact us</p>
-                        <h2 className="text-3xl lg:text-4xl font-bold lg:text-6xl font-bold text-black leading-tight">Let's connect</h2>
+                        <SlideIn direction="left" duration={0.9} >
+                            <p className="uppercase text-[#FA6E43] text-xs lg:text-lg font-semibold uppercase tracking-widest mb-3 lg:mb-4">Contact us</p>
+
+                            <h2 className="text-3xl lg:text-4xl font-bold lg:text-6xl font-bold text-black leading-tight">Let's connect</h2>
+                        </SlideIn>
                     </div>
+                    <SlideIn direction="right" duration={0.9} delay={0.2} >
                     <div className="flex items-start self-center">
+
                         <p className="text-gray-700 text-sm lg:text-2xl leading-relaxed  lg:text-left max-w-lg leading-tight ml-auto">Whether you're ready to start or just curious, we'd love to hear from you.</p>
                     </div>
+                    </SlideIn>
                 </div>
 
                 {/* Main Content Grid */}
@@ -89,12 +98,12 @@ export default function contactus() {
                     {/* Right Column - Contact Form */}
                     <CardAnimation index={5} className="bg-white rounded-lg p-4 lg:p-12 group hover:shadow-xl transition-all duration-300">
                         <h3 className="text-xl lg:text-4xl font-bold text-gray-900 mb-5 lg:mb-8">Contact us</h3>
-                        
+
                         <form className="space-y-3 lg:space-y-5">
                             {/* First Name */}
                             <div>
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     placeholder="First Name"
                                     className="w-full px-0 py-2 lg:py-3 border-b border-gray-300 text-xs lg:text-sm focus:outline-none focus:border-[#FA6E43] focus:shadow-sm bg-white placeholder-gray-400 transition-all duration-300"
                                 />
@@ -102,8 +111,8 @@ export default function contactus() {
 
                             {/* Email */}
                             <div>
-                                <input 
-                                    type="email" 
+                                <input
+                                    type="email"
                                     placeholder="Email"
                                     className="w-full px-0 py-2 lg:py-3 border-b border-gray-300 text-xs lg:text-sm focus:outline-none focus:border-[#FA6E43] focus:shadow-sm bg-white placeholder-gray-400 transition-all duration-300"
                                 />
@@ -111,8 +120,8 @@ export default function contactus() {
 
                             {/* Phone */}
                             <div>
-                                <input 
-                                    type="tel" 
+                                <input
+                                    type="tel"
                                     placeholder="Phone"
                                     className="w-full px-0 py-2 lg:py-3 border-b border-gray-300 text-xs lg:text-sm focus:outline-none focus:border-[#FA6E43] focus:shadow-sm bg-white placeholder-gray-400 transition-all duration-300"
                                 />
@@ -120,7 +129,7 @@ export default function contactus() {
 
                             {/* Message */}
                             <div>
-                                <textarea 
+                                <textarea
                                     placeholder="Message"
                                     rows="4"
                                     className="w-full px-0 py-2 lg:py-3 border-b border-gray-300 text-xs lg:text-sm focus:outline-none focus:border-[#FA6E43] focus:shadow-sm bg-white placeholder-gray-400 resize-none transition-all duration-300"
@@ -129,7 +138,7 @@ export default function contactus() {
 
                             {/* Submit Button */}
                             <div className="pt-4 lg:pt-8">
-                                <button 
+                                <button
                                     type="submit"
                                     className="w-full bg-black hover:bg-[#FA6E43] text-white py-3 lg:py-4 rounded-full font-semibold text-xs lg:text-sm transition-all duration-300 hover:shadow-lg hover:scale-105"
                                 >

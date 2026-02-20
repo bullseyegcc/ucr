@@ -175,11 +175,11 @@ export const Navbar = () => {
                                                                         : 'text-gray-700 hover:text-white hover:bg-primary'
                                                                 }`}>
                                                                     <span
-                                                                        className={`flex-shrink-0 inline-flex items-center justify-center w-7 h-7 transition-colors ${isActive ? 'bg-primary' : 'bg-gray-200 group-hover:bg-white'}`}
+                                                                        className={`flex-shrink-0 inline-flex items-center justify-center w-7 h-7 transition-colors ${isActive ? 'bg-primary' : 'bg-gray-200 group-hover:bg-primary'}`}
                                                                     >
                                                                         <ChevronRight 
                                                                             size={16} 
-                                                                            className={`${isActive ? 'text-white' : 'text-gray-600 group-hover:text-primary'}`} 
+                                                                            className={`${isActive ? 'text-white' : 'text-gray-600 group-hover:text-white'}`} 
                                                                         />
                                                                     </span>
                                                                     {subItem.label}

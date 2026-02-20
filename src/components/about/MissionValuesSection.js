@@ -5,6 +5,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Badge } from '../../common/badge';
 import { WhiteBadge } from '../../common/badge';
+import FadeIn from '../../animations/FadeIn';
+import SlideIn from '../../animations/SlideIn';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -93,30 +95,38 @@ export default function MissionValuesSection() {
     >
       <div className=" w-full flex flex-col lg:flex-row gap-6 items-stretch">
         {/* Mission Card */}
-        <div
-          ref={missionRef}
-          className="w-full lg:w-1/2 min-h-96 rounded-3xl text-white px-10 py-8 flex flex-col justify-between"
-          style={{
-            backgroundImage: "url('/missionbg.png')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'top',
-          }}
-        >
-          <WhiteBadge title="our mission" className="mb-6" />
-          <h1 className="text-2xl lg:text-4xl font-medium  leading-tight">
-            To deliver premium copper product and services that power progress and add value to a sustainable future
-          </h1>
-        </div>
+        <SlideIn direction="left" scrollTrigger={true} duration={0.8} className="w-full lg:w-1/2">
+          <div
+            ref={missionRef}
+            className="min-h-96 rounded-3xl text-white px-10 py-8 flex flex-col justify-between"
+            style={{
+              backgroundImage: "url('/missionbg.png')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'top',
+            }}
+          >
+            <WhiteBadge title="our mission" className="mb-6" />
+            <FadeIn duration={0.8} scrollTrigger={true}>
+              <h1 className="text-2xl lg:text-4xl font-medium  leading-tight">
+                To deliver premium copper product and services that power progress and add value to a sustainable future
+              </h1>
+            </FadeIn>
+          </div>
+        </SlideIn>
 
         {/* Values Card */}
         <div
           ref={valuesRef}
           className="w-full lg:w-1/2 min-h-96 rounded-3xl bg-[#F5F5F5] px-10 py-8 flex flex-col justify-between"
         >
-          <Badge title="our values" className="mb-6" />
-          <h1 className="text-2xl lg:text-4xl font-medium text-black leading-tight">
-            To deliver premium copper product and services that power progress and add value to a sustainable future
-          </h1>
+          <SlideIn direction="left" scrollTrigger={true} duration={0.8}>
+            <Badge title="our values" className="mb-6" />
+          </SlideIn>
+          <FadeIn duration={0.8} scrollTrigger={true}>
+            <h1 className="text-2xl lg:text-4xl font-medium text-black leading-tight">
+              To deliver premium copper product and services that power progress and add value to a sustainable future
+            </h1>
+          </FadeIn>
         </div>
       </div>
     </div>

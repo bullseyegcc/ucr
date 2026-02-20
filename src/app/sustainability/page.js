@@ -13,12 +13,14 @@ export default function sustainability() {
     return (
         <div>
             <div className="rouned-b-2xl flex flex-col text-center min-h-[60vh] lg:min-h-[80vh] items-center justify-center font-sans dark:bg-black gap-6 px-4 lg:px-0" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/sustainbg.png') lightgray 50% / cover no-repeat" }}>
-                <Badgetextwhite title="Sustainability" />
+                <SlideIn direction="bottom" duration={0.8} delay={0}>
+                    <Badgetextwhite title="Sustainability" />
+                </SlideIn>
                 <h1 className="w-full lg:w-[80%] text-4xl lg:text-7xl font-medium text-white">
-                    <FadeIn>
-                    Creating value with a differentiated approach
+                    <FadeIn duration={0.4} delay={0}>
+                        Creating value with a differentiated approach
                     </FadeIn>
-                    </h1>
+                </h1>
             </div>
 
 
@@ -102,10 +104,13 @@ export default function sustainability() {
             <div className="min-h-auto lg:min-h-screen px-6 lg:px-10 py-12 lg:py-20 relative z-10">
             
                     <div className="text-center mb-12 lg:mb-16 flex flex-col items-center">
-                      <Badge title="Core Strength" />
-                      <TextReveal className="text-2xl lg:text-4xl font-semibold text-black mt-4">
-                        Why choose us
-                      </TextReveal>
+                        
+                                            <SlideIn direction="bottom" scrollTrigger={true} className="mb-4 lg:mb-6">
+                                                <Badge title="Core Strength" />
+                                            </SlideIn>
+                        <FadeIn className="text-2xl lg:text-4xl font-semibold text-black mt-4" scrollTrigger={true}>
+                            <h1>Why choose us</h1>
+                        </FadeIn>
                     </div>
             
                     <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 gap-4 lg:gap-6">

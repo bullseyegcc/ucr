@@ -1,8 +1,8 @@
 "use client"
 
-import Image from "next/image"
-import { Badge } from "../../common/badge";
 import { useEffect, useRef } from "react"
+import Image from "next/image"
+import { Badge } from "../../common/badge"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
@@ -45,145 +45,161 @@ export default function JourneySection() {
     const section = sectionRef.current
     const pin = pinRef.current
     const track = trackRef.current
+
     if (!section || !pin || !track) return
 
-    const ctx = gsap.context(() => {
-      const getSlideDistance = () => track.scrollWidth - pin.offsetWidth
-
+    const timer = setTimeout(() => {
       gsap.fromTo(
         pin,
-        { opacity: 0 },
         {
+          clipPath: "inset(6% 3% round 12px)",
+          opacity: 0.2,
+          scale: 0.93,
+        },
+        {
+          clipPath: "inset(0% 0% round 0px)",
           opacity: 1,
+          scale: 1,
           ease: "sine.out",
+          force3D: true,
           scrollTrigger: {
             trigger: section,
-            start: "top 90%",
-            end: "top 65%",
-            scrub: 1.2,
+            start: "top 85%",
+            end: "top 10%",
+            scrub: 0.8,
           },
         }
       )
 
-      gsap.to(pin, {
-        opacity: 0,
-        ease: "sine.in",
-        scrollTrigger: {
-          trigger: section,
-          start: "bottom 40%",
-          end: "bottom 10%",
-          scrub: 1.2,
-        },
-      })
+      gsap.fromTo(
+        track,
+        { x: 0 },
+        {
+          x: () => -(track.scrollWidth - window.innerWidth),
+          ease: "none",
+          force3D: true,
+          scrollTrigger: {
+            trigger: pin,
+            start: "top top",
+            end: () => "+=" + (track.scrollWidth - window.innerWidth),
+            pin: true,
+            pinSpacing: true,
+            anticipatePin: 1,
+            scrub: 1.2,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              const activeIndex = Math.round(
+                self.progress * (journeyData.length - 1)
+              )
 
-      gsap.to(track, {
-        x: () => -getSlideDistance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: pin,
-          start: "top 10%",
-          end: () => `+=${getSlideDistance()}`,
-          pin: true,
-          pinSpacing: true,
-          anticipatePin: 1.5,
-          scrub: 2.4,
-          fastScrollEnd: true,
-          refreshPriority: 1,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            const activeIndex = Math.round(self.progress * (journeyData.length - 1))
-            dotsRef.current.forEach((dot, i) => {
-              if (!dot) return
-              dot.style.backgroundColor = i === activeIndex ? "#F26522" : "rgba(0,0,0,0.2)"
-              dot.style.transform = i === activeIndex ? "scale(1.3)" : "scale(1)"
-            })
+              dotsRef.current.forEach((dot, index) => {
+                if (!dot) return
+                const isActive = index === activeIndex
+                dot.style.backgroundColor = isActive
+                  ? "#F26522"
+                  : "rgba(0,0,0,0.2)"
+                dot.style.transform = isActive ? "scale(1.3)" : "scale(1)"
+              })
+            },
           },
-        },
-      })
-    }, section)
+        }
+      )
 
-    return () => ctx.revert()
+      ScrollTrigger.refresh()
+    }, 150)
+
+    return () => {
+      clearTimeout(timer)
+      ScrollTrigger.getAll().forEach((st) => {
+        if (st.trigger === section || st.trigger === pin) st.kill()
+      })
+    }
   }, [])
 
   return (
-    <section
-      ref={sectionRef}
-      className="w-full relative"
-    >
+    <section ref={sectionRef} className="relative w-full">
       <div
         ref={pinRef}
-        className="w-full h-screen overflow-hidden bg-[linear-gradient(164deg,#FFF_8.84%,#FA6E43_118.41%)] relative"
+        className="w-screen min-h-screen overflow-hidden bg-[linear-gradient(164deg,#FFF_8.84%,#FA6E43_118.41%)] relative"
+        style={{ willChange: "transform, opacity", backfaceVisibility: "hidden" }}
       >
         {/* Horizontal track */}
         <div
           ref={trackRef}
           className="flex h-full"
-          style={{ width: `${journeyData.length * 100}vw` }}
+          style={{ width: `${journeyData.length * 100}vw`, willChange: "transform" }}
         >
           {journeyData.map((item, index) => (
             <div
               key={index}
-              className="w-screen h-full flex flex-col md:flex-row items-center justify-center px-6 sm:px-12 lg:px-24 gap-8 lg:gap-20 flex-shrink-0"
+              className="w-screen min-h-screen flex flex-col md:flex-row items-center justify-center flex-shrink-0"
             >
               {/* Left: text */}
-              <div className="flex flex-col justify-center w-full md:w-1/2 gap-3 sm:gap-5 pt-10 md:pt-0">
-                {index === 0 && (
-                  <div className="mb-1">
-                    <Badge title="Our Story" />
-                  </div>
-                )}
+              <div className="flex flex-col justify-center w-full md:w-1/2 h-full">
+                <div className="flex flex-col gap-3 sm:gap-5 pt-10 md:pt-0 px-8 md:px-12 lg:px-16">
+                  {index === 0 && (
+                    <div className="mb-1">
+                      <Badge title="Our Story" />
+                    </div>
+                  )}
 
-                <span className="text-[#F26522] text-xs font-semibold uppercase tracking-widest">
-                  {String(index + 1).padStart(2, "0")} / {String(journeyData.length).padStart(2, "0")}
-                </span>
+                  <span className="text-[#F26522] text-xs font-semibold uppercase tracking-widest">
+                    {String(index + 1).padStart(2, "0")} / {String(journeyData.length).padStart(2, "0")}
+                  </span>
 
-                <h1 className="text-[70px] sm:text-[100px] lg:text-[130px] font-light leading-none text-white select-none -mb-4">
-                  {item.year}
-                </h1>
+                  <h1 className="text-[70px] sm:text-[100px] lg:text-[130px] font-light leading-none text-white select-none -mb-4">
+                    {item.year}
+                  </h1>
 
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#1a1a1a]">
-                  {item.title}
-                </h2>
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#1a1a1a]">
+                    {item.title}
+                  </h2>
 
-                <p className="text-sm sm:text-base text-[#555] leading-relaxed max-w-md">
-                  {item.description}
-                </p>
-
-                {/* Dot progress */}
-                <div className="flex items-center gap-3 mt-2">
-                  {journeyData.map((_, i) => (
-                    <div
-                      key={i}
-                      ref={(el) => (dotsRef.current[i] = el)}
-                      data-active={i === index ? "true" : "false"}
-                      className="w-2.5 h-2.5 rounded-full transition-all duration-300"
-                      style={{
-                        backgroundColor: i === index ? "#F26522" : "rgba(0,0,0,0.2)",
-                        transform: i === index ? "scale(1.3)" : "scale(1)",
-                      }}
-                    />
-                  ))}
+                  <p className="text-sm sm:text-base text-[#555] leading-relaxed max-w-md">
+                    {item.description}
+                  </p>
                 </div>
               </div>
 
               {/* Right: image */}
-              <div className="w-full md:w-1/2 h-[38vh] md:h-[62vh] relative rounded-2xl overflow-hidden shadow-2xl flex-shrink-0">
-                <Image
-                  src={item.image}
-                  alt={item.year}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute bottom-0 left-0 right-0 px-6 py-5 bg-gradient-to-t from-black/60 to-transparent">
-                  <span className="text-white text-5xl font-light">{item.year}</span>
+              <div className="w-full md:w-1/2 flex-shrink-0 h-[38vh] md:h-[62vh] px-8 md:px-12 lg:px-16 py-4 md:py-0">
+                <div className="h-full">
+                  <div className="relative rounded-2xl overflow-hidden shadow-2xl h-full w-full">
+                    <Image
+                      src={item.image}
+                      alt={item.year}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 px-6 py-5 bg-gradient-to-t from-black/60 to-transparent">
+                      <span className="text-white text-5xl font-light">{item.year}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
+        {/* Shared dots indicator */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 z-10">
+          {journeyData.map((_, i) => (
+            <div
+              key={i}
+              ref={(el) => {
+                dotsRef.current[i] = el
+              }}
+              className="w-2.5 h-2.5 rounded-full transition-all duration-300"
+              style={{
+                backgroundColor: i === 0 ? "#F26522" : "rgba(0,0,0,0.2)",
+                transform: i === 0 ? "scale(1.3)" : "scale(1)",
+              }}
+            />
+          ))}
+        </div>
+
         {/* Scroll hint */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 text-black/30 text-xs pointer-events-none select-none">
+        <div className="absolute bottom-6 right-8 flex items-center gap-2 text-black/30 text-xs pointer-events-none select-none">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>

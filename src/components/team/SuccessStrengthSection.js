@@ -1,3 +1,6 @@
+import FadeIn from "@/animations/FadeIn";
+import SlideIn from "../../animations/SlideIn";
+
 export default function SuccessStrengthSection() {
   const stats = [
     {
@@ -64,10 +67,12 @@ export default function SuccessStrengthSection() {
       <div className="mt-16 pt-10">
         <div className="flex flex-col md:flex-row justify-between items-start gap-10 md:gap-4">
           {stats.map((stat, index) => (
-            <div key={index} className="flex-1 flex gap-4 border-t border-gray-200 pt-10">
-              <p className="text-4xl  text-gray-400 font-medium mb-3">{stat.number}</p>
-              <p className="text-xl md:text-2xl font-bold leading-tight px-5">{stat.label}</p>
-            </div>
+            <FadeIn key={index} direction="left" duration={0.8} scrollTrigger={true} className="flex-1">
+              <div className="flex gap-4 border-t border-gray-200 pt-10">
+                <p className="text-4xl  text-gray-400 font-medium mb-3">{stat.number}</p>
+                <p className="text-xl md:text-2xl font-bold leading-tight px-5">{stat.label}</p>
+              </div>
+            </FadeIn>
           ))}
         </div>
       </div>

@@ -6,14 +6,17 @@ import ParallaxSection from "../../animations/ParallaxSection"
 import TextReveal from "../../animations/TextReveal"
 import CardAnimation from "../../animations/CardAnimation"
 import FadeIn from "../../animations/FadeIn"
+import SlideIn from "../../animations/SlideIn"
 
 export default function Team() {
 
     return (
         <div >
             <div className="relative flex min-h-[55vh] lg:min-h-[120vh] items-center pt-40 bg-black font-sans bg-primary flex flex-col gap-6 lg:gap-8 lg:gap-10 ">
-                <Badgetextwhite title="Our Team " />
-                <FadeIn className=" max-w-[80%] text-center text-3xl lg:text-5xl lg:text-7xl font-medium text-white">
+                <SlideIn direction="bottom" duration={0.8} delay={0}>
+                    <Badgetextwhite title="Our Team " />
+                </SlideIn>
+                <FadeIn className=" max-w-[80%] text-center text-3xl lg:text-5xl lg:text-7xl font-medium text-white" duration={0.4} delay={0}>
                     Meet the People Behind the Power of Copper
                 </FadeIn>
                 <Image src='/whitegradient.png' alt='Vector Image' width={1200} height={900} className=" hidden md:block rotate-180  absolute -bottom-25 left-1/2 transform -translate-x-1/2  object-cover w-full" />
@@ -36,13 +39,13 @@ export default function Team() {
                 <div className="px-5 lg:px-10 relative z-10">
                     {/* Header */}
                     <div className="flex py-12 flex-col  lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-28 mb-12 lg:mb-16">
-                        <div className="flex-1">
+                        <SlideIn direction="left" duration={0.8} scrollTrigger={true} className="flex-1">
                             <Badge title="Core Strength" />
                             <h1 className="text-4xl lg:text-5xl font-semibold text-black mt-4 lg:mt-6 leading-tight lg:leading-snug">Our people</h1>
-                        </div>
-                        <div className="flex-1 lg:w-1/2 text-xs lg:text-sm text-gray-600 lg:pt-12">
+                        </SlideIn>
+                        <SlideIn direction="right" duration={0.8} scrollTrigger={true} className="flex-1 lg:w-1/2 text-xs lg:text-sm text-gray-600 lg:pt-12">
                             <p className="w-full text-xl">Our team represents decades of industrial mastery and modern innovation. Each member contributes deep technical knowledge, precision, and a shared commitment to sustainable growth. </p>
-                        </div>
+                        </SlideIn>
                     </div>
 
 

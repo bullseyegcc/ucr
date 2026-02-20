@@ -13,6 +13,9 @@ export default function SlideIn({
   duration = 2.2,
   delay = 0.1,
   scrollTrigger = false,
+  triggerOnScroll = false,
+  exist = false,
+  exit = false,
 }) {
   const elementRef = useRef(null);
 
@@ -47,6 +50,9 @@ export default function SlideIn({
       willChange: 'transform, opacity',
     });
 
+    const useScrollTrigger = triggerOnScroll || scrollTrigger;
+    const exitOnScroll = exist || exit;
+
     // Create animation configuration
     const animationConfig = {
       x: 0,
@@ -59,23 +65,49 @@ export default function SlideIn({
       clearProps: 'will-change',
     };
 
-    if (scrollTrigger) {
-      // Scroll-triggered animation
-      animationConfig.scrollTrigger = {
-        trigger: element,
-        start: 'top 85%',
-        end: 'top 50%',
-        scrub: 0.5,
-        markers: false,
-      };
-    }
+    const scrollConfig = {
+      trigger: element,
+      start: 'top 85%',
+      end: exitOnScroll ? 'bottom 15%' : 'top 50%',
+      scrub: 0.5,
+      markers: false,
+    };
 
-    // Animate
-    gsap.to(element, animationConfig);
+    let tween;
+    let timeline;
+
+    if (useScrollTrigger) {
+      if (exitOnScroll) {
+        timeline = gsap.timeline({ scrollTrigger: scrollConfig });
+        timeline.to(element, {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: duration,
+          ease: 'power1.inOut',
+        });
+        timeline.to(element, {
+          x: initialTransform.x,
+          y: initialTransform.y,
+          opacity: 0,
+          scale: 0.95,
+          duration: duration,
+          ease: 'power1.inOut',
+          clearProps: 'will-change',
+        });
+      } else {
+        tween = gsap.to(element, { ...animationConfig, scrollTrigger: scrollConfig });
+      }
+    } else {
+      tween = gsap.to(element, animationConfig);
+    }
 
     // Cleanup
     return () => {
-      if (scrollTrigger) {
+      if (tween) tween.kill();
+      if (timeline) timeline.kill();
+      if (useScrollTrigger) {
         ScrollTrigger.getAll().forEach(trigger => {
           if (trigger.trigger === element) {
             trigger.kill();
@@ -83,12 +115,13 @@ export default function SlideIn({
         });
       }
     };
-  }, [direction, duration, delay, scrollTrigger]);
+  }, [direction, duration, delay, scrollTrigger, triggerOnScroll, exist, exit]);
 
   return (
     <div 
       ref={elementRef} 
       className={className}
+      style={{ opacity: 0 }}
     >
       {children}
     </div>

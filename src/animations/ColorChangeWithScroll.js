@@ -6,10 +6,31 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ColorChangeWithScroll({ children, initialColor = '#8a8a8a', afterColor = '#FA6E43', blur = false }) {
+// Helper function to convert hex to rgba
+const hexToRgba = (hex, opacity = 1) => {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+};
+
+export default function ColorChangeWithScroll({ 
+  children, 
+  initialColor = 'rgba(150, 150, 150, 0.25)', 
+  afterColor = '#FA6E43', 
+  blur = false,
+  initialOpacity = 0.25,
+  lockScroll = true, // New prop to enable/disable scroll locking
+  backgroundColor = 'transparent'
+}) {
   const containerRef = useRef(null);
   const afterColorRef = useRef(afterColor);
   const blurRef = useRef(blur);
+  
+  // Normalize initial color to rgba if it's hex
+  const normalizedInitialColor = initialColor.startsWith('#') 
+    ? hexToRgba(initialColor, initialOpacity)
+    : initialColor;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -20,31 +41,57 @@ export default function ColorChangeWithScroll({ children, initialColor = '#8a8a8
 
     if (words.length === 0) return;
 
-    // Create scroll-linked timeline (not time-based)
+    // Create scroll-linked timeline with native pinning and smooth easing
     const tl = gsap.timeline({
+      defaults: {
+        ease: 'sine.inOut',
+        force3D: true, // GPU acceleration for smooth performance
+      },
       scrollTrigger: {
         trigger: container,
-        start: 'top 75%',
-        end: 'bottom 25%',
-        scrub: 0.5, // Faster scrub (lower = faster response to scroll)
+        start: 'center center', // Lock when container center reaches viewport center
+        end: 'bottom center',
+        scrub: 1.2, // Smooth scrub with slight delay for fluid feel
+        pin: true, // Pin the element visually while scroll advances the timeline
+        pinSpacing: true, // Create virtual scroll space for the pin
+        anticipatePin: 1, // Smooth anticipation before pin activates
         markers: false,
       },
     });
 
-    // Animate each word strictly one at a time — no overlap
+    // Animate each word with smooth color transition
     words.forEach((word, index) => {
       if (blurRef.current) {
         tl.fromTo(
           word,
-          { filter: 'blur(6px)', color: word.style.color },
-          { filter: 'blur(0px)', color: afterColorRef.current, duration: 0.5, ease: 'none' }, // Reduced from 1 to 0.5
-          index * 0.3 // Less stagger for faster animation
+          { 
+            filter: 'blur(8px)', 
+            color: normalizedInitialColor,
+            opacity: 0.7,
+          },
+          { 
+            filter: 'blur(0px)', 
+            color: afterColorRef.current,
+            opacity: 1,
+            duration: 0.8, 
+            ease: 'sine.inOut' 
+          },
+          index * 0.1 // Smoother stagger timing
         );
       } else {
-        tl.to(
+        tl.fromTo(
           word,
-          { color: afterColorRef.current, duration: 0.5, ease: 'none' },
-          index * 0.3
+          { 
+            color: normalizedInitialColor,
+            opacity: 0.6,
+          },
+          { 
+            color: afterColorRef.current,
+            opacity: 1,
+            duration: 0.8, 
+            ease: 'sine.inOut' 
+          },
+          index * 0.1 // Smoother stagger timing
         );
       }
     });
@@ -53,7 +100,7 @@ export default function ColorChangeWithScroll({ children, initialColor = '#8a8a8
       tl.scrollTrigger?.kill();
       tl.kill();
     };
-  }, []);
+  }, [normalizedInitialColor, lockScroll]);
 
   // Helper function to split text into word spans
   const renderTextWithSpans = (text) => {
@@ -63,7 +110,11 @@ export default function ColorChangeWithScroll({ children, initialColor = '#8a8a8
       <span
         key={index}
         className="scroll-word"
-        style={{ color: initialColor, ...(blur ? { filter: 'blur(6px)' } : {}) }}
+        style={{ 
+          color: normalizedInitialColor, 
+          transition: 'color 0.6s ease-in-out',
+          ...(blur ? { filter: 'blur(8px)' } : {}) 
+        }}
       >
         {word}{index < arr.length - 1 ? ' ' : ''}
       </span>
@@ -95,7 +146,15 @@ export default function ColorChangeWithScroll({ children, initialColor = '#8a8a8
   });
 
   return (
-    <div ref={containerRef}>
+    <div
+      ref={containerRef}
+      style={{
+        backgroundColor: backgroundColor,
+        willChange: 'transform',
+        backfaceVisibility: 'hidden',
+        perspective: 1000,
+      }}
+    >
       {processedChildren}
     </div>
   );

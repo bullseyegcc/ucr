@@ -3,14 +3,17 @@ import { Badge } from "../../common/badge"
 import Image from "next/image"
 import CardAnimation from "../../animations/CardAnimation"
 import FadeIn from "../../animations/FadeIn"
+import SlideIn from "../../animations/SlideIn"
 
 export default function OurValues() {
     return (
         <div>
             <div className="flex flex-col text-center min-h-[80vh] items-center justify-center bg-[url('/valuebg.png')] bg-cover font-sans dark:bg-black gap-6">
-                <Badge title="values" />
-                <FadeIn className="text-4xl lg:text-6xl font-bold text-white">
-                    Our Values
+                <SlideIn direction="bottom" duration={0.8} delay={0}>
+                    <Badge title="values" />
+                </SlideIn>
+                <FadeIn className="text-4xl lg:text-6xl font-bold text-white" duration={0.4} delay={0}>
+                    <h1>Our Values</h1>
                 </FadeIn>
             </div>
 
@@ -19,13 +22,13 @@ export default function OurValues() {
                 <div className="w-full mx-auto">
                     {/* Header */}
                     <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-9 lg:gap-12 mb-12 lg:mb-16">
-                        <div className="flex-1">
+                        <SlideIn direction="left" duration={0.8} className="flex-1">
                             <Badge title="Build on integrity, powered by innovation" />
                             <h1 className="text-4xl lg:w-[80%] lg:text-5xl font-semibold text-black mt-4 lg:mt-6 leading-tight lg:leading-snug">Beyond copper, we build trust & reliability</h1>
-                        </div>
-                        <div className="flex-1 lg:pt-12">
+                        </SlideIn>
+                        <SlideIn direction="right" duration={0.8} className="flex-1 lg:pt-12">
                             <p className="overflow-hidden text-ellipsis text-[#212225] text-lg font-normal leading-[30px] tracking-[-0.45px]">We don't just produce copper — we shape reliability, innovation, and sustainability into every product we deliver.</p>
-                        </div>
+                        </SlideIn>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
@@ -87,8 +90,12 @@ export default function OurValues() {
             <div className="min-h-screen  bg-[url('/people.png')] bg-cover  bg-bottom bg-no-repeat">
 
                 <div className="flex flex-col items-center gap-4 lg:gap-5 px-6 lg:px-10 pt-12 lg:pt-0">
-                    <Badge title="people" />
-                    <h1 className='text-2xl lg:text-5xl text-center lg:mb-8 text-[#5F5F66] leading-tight lg:leading-snug'>Treating all employees with respect and dignity</h1>
+                    <SlideIn direction="bottom" duration={0.8} scrollTrigger={true}>
+                        <Badge title="people" />
+                    </SlideIn>
+                    <FadeIn className="text-2xl lg:text-5xl text-center lg:mb-8 text-[#5F5F66] leading-tight lg:leading-snug" duration={0.8} scrollTrigger={true}>
+                        <h1>Treating all employees with respect and dignity</h1>
+                    </FadeIn>
                 </div>
 
             </div>

@@ -4,6 +4,7 @@ import ParallaxSection from "../../animations/ParallaxSection"
 import TextReveal from "../../animations/TextReveal"
 import CardAnimation from "../../animations/CardAnimation"
 import FadeIn from "../../animations/FadeIn"
+import SlideIn from "../../animations/SlideIn"
 
 export default function Quality() {
     return (
@@ -11,8 +12,10 @@ export default function Quality() {
 
             {/* header */}
             <div className="relative rounded-b-xl flex flex-col text-center min-h-[50vh] sm:min-h-[60vh] lg:min-h-[80vh] items-center justify-center font-sans dark:bg-black gap-6 px-6" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/qualitybg.png') lightgray 50% / cover no-repeat" }}>
-                <Badgetextwhite title="Premium Quality Assured" />
-                <FadeIn className="w-full sm:w-[90%] lg:w-[80%] text-3xl sm:text-5xl lg:text-7xl font-medium text-white leading-relaxed px-10 lg:px-0">
+                <SlideIn direction="bottom" duration={0.8} delay={0}>
+                    <Badgetextwhite title="Premium Quality Assured" />
+                </SlideIn>
+                <FadeIn className="w-full sm:w-[90%] lg:w-[80%] text-3xl sm:text-5xl lg:text-7xl font-medium text-white leading-relaxed px-10 lg:px-0" duration={0.4} delay={0}>
                     Quality is our foundation
                 </FadeIn>
 
@@ -26,11 +29,11 @@ export default function Quality() {
             <div className="relative lg:min-h-screen bg-[rgba(255,255,255,0.77)]">
 
                 {/* header */}
-                <div className="flex flex-col gap-4 sm:gap-5 items-center justify-center text-center py-12 sm:py-16 lg:py-20 px-6">
+                <SlideIn direction="top" scrollTrigger={true} duration={0.6} className="flex flex-col gap-4 sm:gap-5 items-center justify-center text-center py-12 sm:py-16 lg:py-20 px-6">
                     <p className="text-base sm:text-lg lg:text-xl text-primary font-medium">Certified Excellence. Trusted Worldwide.</p>
                     <h1 className="font-medium text-3xl sm:text-4xl lg:text-6xl mt-3 sm:mt-4 leading-tight">Our Key Certifications</h1>
                     <p className="w-full sm:w-[70%] lg:w-[60%] text-base sm:text-lg lg:text-xl"> Our certifications stand as proof of our unwavering dedication to quality, safety, and sustainability. Each ISO achievement reflects the precision and responsibility that define every stage of our copper production.</p>
-                </div>
+                </SlideIn>
 
 
                 <div className="w-full sm:w-[80%] lg:w-[65%] flex items-center justify-center mx-auto px-6 sm:px-0">
@@ -50,8 +53,12 @@ export default function Quality() {
             <div className="relative z-20 flex min-h-screen lg:min-h-[80vh] flex-col gap-10 sm:gap-12 lg:gap-16 items-center justify-center py-12 sm:py-16 lg:py-20   bg-[#FFF8F4] sm:px-6">
 
                 <div className="flex flex-col items-center text-center">
-                    <Badgetextblack title="More certifications" />
-                    <h1 className="px-9 text-2xl sm:text-3xl lg:text-4xl lg:text-5xl font-semibold text-black mt-3 sm:mt-4 lg:mt-5 lg:mt-6 leading-tight lg:leading-snug">We've also achieved so far</h1>
+                    <SlideIn direction="bottom" scrollTrigger={true} className="mb-3 lg:mb-5" duration={0.8}>
+                        <Badgetextblack title="More certifications" />
+                    </SlideIn>
+                    <FadeIn scrollTrigger={true}  duration={0.8} className="px-9 text-2xl sm:text-3xl lg:text-4xl lg:text-5xl font-semibold text-black mt-3 sm:mt-4 lg:mt-5 lg:mt-6 leading-tight lg:leading-snug">
+                        <h1>We've also achieved so far</h1>
+                    </FadeIn>
 
                 </div>
 

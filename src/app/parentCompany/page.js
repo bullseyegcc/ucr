@@ -6,6 +6,7 @@ import ColorChangeWithScroll from "../../animations/ColorChangeWithScroll"
 import CardAnimation from "../../animations/CardAnimation"
 import CountUp from "../../animations/countup"
 import FadeIn from "../../animations/FadeIn"
+import SlideIn from "../../animations/SlideIn"
 
 
 export default function parentCompany() {
@@ -14,9 +15,11 @@ export default function parentCompany() {
             {/* header */}
             <div className="bg-[url('/pcbg.png')] bg-cover bg-bottom bg-no-repeat relative  min-h-[60vh] md:min-h-[80vh]    font-sans flex flex-col items-center  justify-center gap-6">
 
-                <Badgetextwhite title="Our Logistics" />
+                <SlideIn direction="bottom" duration={0.8} delay={0}>
+                    <Badgetextwhite title="Our Logistics" />
+                </SlideIn>
 
-                <FadeIn className="w-full md:w-3/4 lg:w-2/3 text-center text-3xl md:text-5xl font-bold text-white leading-tight px-6">
+                <FadeIn className="w-full md:w-3/4 lg:w-2/3 text-center text-3xl md:text-5xl font-bold text-white leading-tight px-6" duration={0.4} delay={0}>
                     UCR has a higher delivery capacity in the Copper Industry
                 </FadeIn>
 
@@ -25,10 +28,10 @@ export default function parentCompany() {
 
             </div>
 
-            <div className="px-2 md:px-10 py-20 flex flex-col items-center justify-center">
+            <div className="px-2 md:px-10 py-20 flex flex-col items-center justify-center bg-[#F5F5F5]">
 
-                <ColorChangeWithScroll initialColor="#8A8A8A" afterColor="#FF7A5C" >
-                    <p className="text-center text-lg  md:text-4xl leading-relaxed px-10 mt-8">
+                <ColorChangeWithScroll initialColor="#8A8A8A" afterColor="#FF7A5C" backgroundColor="#F5F5F5">
+                    <p className="text-center text-lg  md:text-4xl leading-relaxed px-10 mt-8 bg-[#F5F5F5]">
                         Ittihad International Investment LLC is a private holding and multi-disciplinary conglomerate, engaged in a wide spectrum of economic activities across the MENA region. We lead, manage, and empower a diverse portfolio of companies to bring long-term value, operational excellence, and sustainable growth.
                     </p>
                 </ColorChangeWithScroll>
@@ -73,8 +76,12 @@ export default function parentCompany() {
             <div className="w-full h-auto md:h-[80vh] pt-12 md:pt-16 px-4 md:px-10 mb-8 bg-[url('/expertisebg.png')] bg-contain bg-top bg-no-repeat bg-cover flex flex-col justify-between">
 
                 <div>
-                    <Badge title="our expertise" />
-                    <h1 className="text-2xl md:text-4xl mt-4 font-semibold ">Our Expertise & Experiance</h1>
+                    <SlideIn direction="bottom" scrollTrigger={true} duration={0.8}>
+                        <Badge title="our expertise" />
+                    </SlideIn>
+                    <FadeIn className="text-2xl md:text-4xl mt-4 font-semibold " scrollTrigger={true} duration={0.8}>
+                        <h1>Our Expertise & Experiance</h1>
+                    </FadeIn>
 
                 </div>
                 <div className="mt-6 flex flex-col md:flex-row gap-6 items-end">

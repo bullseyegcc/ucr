@@ -83,6 +83,9 @@ export default function FadeIn({
       // Start processing
       processElement(element);
 
+      // Reveal container once spans are prepared
+      element.style.opacity = '1';
+
       if (wordSpans.length > 0) {
         // Cinematic fade-in with staggered delay
         const animationConfig = {
@@ -130,6 +133,7 @@ export default function FadeIn({
     <div 
       ref={elementRef} 
       className={className}
+      style={{ opacity: 0 }}
     >
       {children}
     </div>
