@@ -55,8 +55,8 @@ export default function About({ lockProgressRef = null }) {
   }, [lockProgressRef]);
 
   return (
-    <div className="w-full bg-white flex flex-col">
-      <div className="relative flex flex-col lg:flex-row px-6 lg:px-10 pt-10 lg:pt-14 gap-6 lg:gap-6 min-h-fit">
+    <div className="w-full bg-white flex flex-col min-h-screen max-h-auto">
+      <div className="relative flex flex-col lg:flex-row px-6 lg:px-10 pt-10 lg:pt-14 gap-6 lg:gap-6 h-1/2 ">
         <div className="w-full lg:w-[60%] flex flex-col gap-5 lg:gap-8 z-10">
           <Badge title="About Us" />
           <TextReveal>
@@ -73,7 +73,7 @@ export default function About({ lockProgressRef = null }) {
           </button></CardAnimation>
          
         </div>
-        <div className="lg:w-[45%] flex items-end justify-end pointer-events-none">
+        <div className="lg:w-[45%] flex items-end justify-end pointer-events-none h-1/2">
           <Image
             src="/aboutside.png"
             alt="Factory Image"
