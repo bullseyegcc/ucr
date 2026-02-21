@@ -11,51 +11,67 @@ export default function SmoothScroll() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    try {
-      const lenis = new Lenis({
-        lerp: 0.08,
+    // Mobile: native smooth scroll
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+      document.documentElement.style.scrollBehavior = 'smooth';
+      return;
+    }
+
+    // Ensure document can scroll
+    document.documentElement.style.overflow = 'auto';
+    document.body.style.overflow = 'auto';
+
+    let unsubscribe;
+    let lenis;
+
+    const setupLenis = () => {
+      lenis = new Lenis({
         smoothWheel: true,
         syncTouch: true,
-        touchMultiplier: 1,
-        prevent: (node) => {
-          // Prevent smooth scroll inside certain elements if needed
-          return node.classList && node.classList.contains('no-lenis');
-        },
+        lerp: 0.1,
+        autoRaf: false,
       });
 
       window.lenisInstance = lenis;
 
-      // Connect Lenis to ScrollTrigger
-      lenis.on('scroll', ScrollTrigger.update);
-
-      // Support ScrollTrigger's refresh
-      ScrollTrigger.addEventListener('refresh', () => lenis.scrollTo(0, { immediate: true }));
-
-      // Use GSAP ticker to drive Lenis
-      let tic;
-      gsap.ticker.add((time) => {
+      // Connect with GSAP ticker
+      unsubscribe = gsap.ticker.add((time) => {
         lenis.raf(time * 1000);
       });
+
+      // Disable GSAP lag smoothing
       gsap.ticker.lagSmoothing(0);
 
-      return () => {
-        try {
-          lenis.destroy();
-          delete window.lenisInstance;
-          ScrollTrigger.removeEventListener('refresh', () => {});
-        } catch (e) {
-          console.error('Error cleaning up Lenis:', e);
-        }
-      };
-    } catch (error) {
-      console.error('Error initializing Lenis:', error);
-      // Fallback: allow native scroll if Lenis fails
-      document.documentElement.style.scrollBehavior = 'smooth';
-      return () => {
-        document.documentElement.style.scrollBehavior = 'auto';
-      };
-    }
+      // Monitor scroll
+      lenis.on('scroll', () => {
+        ScrollTrigger.update();
+      });
+
+      // Refresh ScrollTrigger
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 50);
+    };
+
+    // Start after page layout
+    const timer = setTimeout(setupLenis, 150);
+
+    return () => {
+      clearTimeout(timer);
+      if (unsubscribe) unsubscribe();
+      if (lenis) {
+        lenis.destroy();
+        delete window.lenisInstance;
+      }
+    };
   }, []);
 
   return null;
 }
+
+
+
+
+
+

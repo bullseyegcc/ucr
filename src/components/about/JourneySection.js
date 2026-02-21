@@ -132,11 +132,11 @@ export default function JourneySection() {
           {journeyData.map((item, index) => (
             <div
               key={index}
-              className="w-screen min-h-screen flex flex-col md:flex-row items-center justify-center flex-shrink-0"
+              className="w-screen min-h-screen flex flex-col lg:flex-row items-center justify-center flex-shrink-0"
             >
               {/* Left: text */}
-              <div className="flex flex-col justify-center w-full md:w-1/2 h-full">
-                <div className="flex flex-col gap-3 sm:gap-5 pt-10 md:pt-0 px-8 md:px-12 lg:px-16">
+              <div className="flex flex-col justify-center w-full lg:w-1/2 h-full">
+                <div className="flex flex-col gap-3 sm:gap-5 pt-10 lg:pt-0 px-8 lg:px-12 lg:px-16">
                   {index === 0 && (
                     <div className="mb-1">
                       <Badge title="Our Story" />
@@ -162,7 +162,7 @@ export default function JourneySection() {
               </div>
 
               {/* Right: image */}
-              <div className="w-full md:w-1/2 flex-shrink-0 h-[38vh] md:h-[62vh] px-8 md:px-12 lg:px-16 py-4 md:py-0">
+              <div className="w-full lg:w-1/2 flex-shrink-0 h-[38vh] lg:h-[62vh] px-8 lg:px-12 lg:px-16 py-4 lg:py-0">
                 <div className="h-full">
                   <div className="relative rounded-2xl overflow-hidden shadow-2xl h-full w-full">
                     <Image

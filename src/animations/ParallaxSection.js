@@ -15,6 +15,9 @@ export default function ParallaxSection({ children, index = 0, parallaxAmount = 
     const content = contentRef.current;
     if (!section || !content) return;
 
+    // ✅ MOBILE DETECTION - Skip scroll animations on mobile for better performance
+    const isMobile = window.innerWidth < 768;
+
     // Give DOM time to settle before creating ScrollTrigger
     const timer = setTimeout(() => {
       if (section && section.parentElement) {
@@ -25,7 +28,7 @@ export default function ParallaxSection({ children, index = 0, parallaxAmount = 
             trigger: section,
             start: 'top 120%',
             end: 'top 0%',
-            scrub: 1.8,
+            scrub: isMobile ? 0.5 : 1.8, // Faster on mobile for responsiveness
             markers: false,
           },
         });
@@ -48,7 +51,7 @@ export default function ParallaxSection({ children, index = 0, parallaxAmount = 
         entranceTl.fromTo(
           content,
           {
-            y: 80,
+            y: isMobile ? 40 : 80, // Reduced movement on mobile
             scale: 0.95,
           },
           {
@@ -75,47 +78,53 @@ export default function ParallaxSection({ children, index = 0, parallaxAmount = 
         );
 
         // ============ SOPHISTICATED PARALLAX MOVEMENT ============
-        const movement = parallaxAmount !== null ? parallaxAmount : -16 * (index + 1);
+        // ✅ DISABLED ON MOBILE - Reduces scroll jank
+        if (!isMobile) {
+          const movement = parallaxAmount !== null ? parallaxAmount : -16 * (index + 1);
 
-        const parallaxTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 45%',
-            end: 'bottom -25%',
-            scrub: 2.2,
-            markers: false,
-          },
-        });
+          const parallaxTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 45%',
+              end: 'bottom -25%',
+              scrub: 2.2,
+              markers: false,
+            },
+          });
 
-        // Smooth, refined parallax drift
-        parallaxTl.to(
-          content,
-          {
-            y: movement,
-            ease: 'none',
-          },
-          0
-        );
+          // Smooth, refined parallax drift
+          parallaxTl.to(
+            content,
+            {
+              y: movement,
+              ease: 'none',
+            },
+            0
+          );
+        }
 
         // ============ REFINED SCALE PULSE (OPTIONAL MICRO-INTERACTION) ============
-        // Ultra-subtle scale shift as section moves through viewport
-        gsap.to(content, {
-          scrollTrigger: {
-            trigger: section,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 2,
-            onUpdate: (self) => {
-              const progress = self.progress;
-              // Barely perceptible: 1 at center, 0.98 at edges
-              const scaleValue = 0.99 + Math.sin((progress - 0.5) * Math.PI) * 0.01;
-              gsap.set(content, {
-                '--parallax-scale': scaleValue,
-              });
+        // ✅ SIMPLIFIED ON MOBILE - Only use on desktop for better performance
+        if (!isMobile) {
+          // Ultra-subtle scale shift as section moves through viewport
+          gsap.to(content, {
+            scrollTrigger: {
+              trigger: section,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 2,
+              onUpdate: (self) => {
+                const progress = self.progress;
+                // Barely perceptible: 1 at center, 0.98 at edges
+                const scaleValue = 0.99 + Math.sin((progress - 0.5) * Math.PI) * 0.01;
+                gsap.set(content, {
+                  '--parallax-scale': scaleValue,
+                });
+              },
+              markers: false,
             },
-            markers: false,
-          },
-        });
+          });
+        }
 
         ScrollTrigger.refresh();
       }

@@ -55,7 +55,7 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <div className="md:min-h-screen md:h-[90vh] rounded-xl mx-4 md:mx-10 flex items-end pb-20 relative">
+    <div className="lg:min-h-screen lg:h-[90vh] rounded-xl mx-4 lg:mx-10 flex items-end py-10 relative">
       {/* Background Slider Container */}
       <div className="absolute inset-0 overflow-hidden rounded-xl">
         <div
@@ -84,7 +84,7 @@ export default function FeaturedProducts() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent rounded-xl z-5"></div>
 
       {/* Content Card */}
-      <div className="h-full pt-9 relative top-8 bottom-5 bg-white p-6 md:p-8 flex flex-col gap-5 md:gap-6 md:gap-26 w-full md:w-[45%] md:min-h-[90%] mx-4 md:mx-10 rounded-xl z-10 shadow-2xl transition-all duration-700">
+      <div className="h-full pt-9 relative top-8 bottom-5 bg-white p-6 lg:p-8 flex flex-col gap-5 lg:gap-6 lg:gap-26 w-full lg:w-[45%] lg:min-h-[90%] mx-4 lg:mx-10 rounded-xl z-10 shadow-2xl transition-all duration-700">
         {/* Header */}
         <div className="flex flex-col gap-5">
           <div className="flex gap-3 text-white z-300">
@@ -103,7 +103,7 @@ export default function FeaturedProducts() {
                 }`}
               >
                 {activeTab === index ? (
-                  <h1 className="flex items-center text-xl md:text-5xl text-primary mt-5 font-bold">
+                  <h1 className="flex items-center text-xl lg:text-5xl text-primary mt-5 font-bold">
                     {product.title}
                     {product.icon && (
                       <Image
@@ -111,12 +111,12 @@ export default function FeaturedProducts() {
                         alt={product.title}
                         width={50}
                         height={50}
-                        className='object-contain inline-block md:ml-3'
+                        className='object-contain inline-block lg:ml-3'
                       />
                     )}
                   </h1>
                 ) : (
-                  <h1 className="text-lg md:text-4xl text-secondary my-2 font-semibold">
+                  <h1 className="text-lg lg:text-4xl text-secondary my-2 font-semibold">
                     {product.title}
                   </h1>
                 )}
@@ -128,7 +128,7 @@ export default function FeaturedProducts() {
         {/* CTA Button */}
         <button 
           onClick={handleKnowMore}
-          className="w-fit flex gap-2 my-6 md:my-0 items-center text-primary text-sm md:text-base border-2 border-primary rounded-full px-6 py-3 hover:bg-primary hover:text-white transition-all duration-300 font-semibold"
+          className="w-fit flex gap-2 my-6 lg:my-0 items-center text-primary text-sm lg:text-base border-2 border-primary rounded-full px-6 py-3 hover:bg-primary hover:text-white transition-all duration-300 font-semibold"
         >
           Know More <ArrowRight size={18} />
         </button>

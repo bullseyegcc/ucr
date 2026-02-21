@@ -97,20 +97,6 @@ export default function TextReveal({ children, className = '' }) {
             end: 'top 40%',
             scrub: 0.009,
             markers: false,
-            onEnter: () => {
-              // Stop Lenis when animation starts
-              const lenis = window.lenisInstance;
-              if (lenis) {
-                lenis.stop();
-              }
-            },
-            onLeave: () => {
-              // Resume Lenis when leaving
-              const lenis = window.lenisInstance;
-              if (lenis) {
-                lenis.start();
-              }
-            },
           },
         });
 

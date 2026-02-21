@@ -13,13 +13,13 @@ export default function parentCompany() {
     return (
         <div className="bg-[#F5F5F5]">
             {/* header */}
-            <div className="bg-[url('/pcbg.png')] bg-cover bg-bottom bg-no-repeat relative  min-h-[60vh] md:min-h-[80vh]    font-sans flex flex-col items-center  justify-center gap-6">
+            <div className="bg-[url('/pcbg.png')] bg-cover bg-bottom bg-no-repeat relative  min-h-[60vh] lg:min-h-[80vh]    font-sans flex flex-col items-center  justify-center gap-6">
 
                 <SlideIn direction="bottom" duration={0.8} delay={0}>
                     <Badgetextwhite title="Our Logistics" />
                 </SlideIn>
 
-                <FadeIn className="w-full md:w-3/4 lg:w-2/3 text-center text-3xl md:text-5xl font-bold text-white leading-tight px-6" duration={0.4} delay={0}>
+                <FadeIn className="w-full lg:w-3/4 lg:w-2/3 text-center text-3xl lg:text-5xl font-bold text-white leading-tight px-6" duration={0.4} delay={0}>
                     UCR has a higher delivery capacity in the Copper Industry
                 </FadeIn>
 
@@ -28,71 +28,71 @@ export default function parentCompany() {
 
             </div>
 
-            <div className="px-2 md:px-10 py-20 flex flex-col items-center justify-center bg-[#F5F5F5]">
+            <div className="px-2 lg:px-10 py-20 flex flex-col items-center justify-center bg-[#F5F5F5]">
 
                 <ColorChangeWithScroll initialColor="#8A8A8A" afterColor="#FF7A5C" backgroundColor="#F5F5F5">
-                    <p className="text-center text-lg  md:text-4xl leading-relaxed px-10 mt-8 bg-[#F5F5F5]">
+                    <p className="text-center text-lg  lg:text-4xl leading-relaxed px-10 mt-8 bg-[#F5F5F5]">
                         Ittihad International Investment LLC is a private holding and multi-disciplinary conglomerate, engaged in a wide spectrum of economic activities across the MENA region. We lead, manage, and empower a diverse portfolio of companies to bring long-term value, operational excellence, and sustainable growth.
                     </p>
                 </ColorChangeWithScroll>
             </div>
 
 
-            <div className="grid grid-cols-1 py-8 sm:grid-cols-2 lg:grid-cols-2 gap-6 px-4 md:px-10">
-                <CardAnimation index={0} className="min-h-[40vh] py-10 md:h-full relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
-                    <Image src="/pc1.png" alt="Icon" className='absolute bottom-0 right-0 max-w-[45%] md:max-w-[60%]' width={300} height={0} />
+            <div className="grid grid-cols-1 py-8 sm:grid-cols-2 lg:grid-cols-2 gap-6 px-4 lg:px-10">
+                <CardAnimation index={0} className="min-h-[40vh] py-10 lg:h-full relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
+                    <Image src="/pc1.png" alt="Icon" className='absolute bottom-0 right-0 max-w-[45%] lg:max-w-[60%]' width={300} height={0} />
                     <div className="pb-6">
-                        <h1 className="text-2xl md:text-4xl py-4 md:py-6 font-semibold text-primary">Manufacturing</h1>
-                        <p className="text-[#5F5F66] text-base md:text-lg mt-3 w-full md:w-4/5">Our manufacturing segment is powered by advanced production capabilities, high-grade facilities, and an uncompromising commitment to quality. We support industries with reliable, large-scale output across metals, materials, consumer goods, and industrial components.</p>
+                        <h1 className="text-2xl lg:text-4xl py-4 lg:py-6 font-semibold text-primary">Manufacturing</h1>
+                        <p className="text-[#5F5F66] text-base lg:text-lg mt-3 w-full lg:w-4/5">Our manufacturing segment is powered by advanced production capabilities, high-grade facilities, and an uncompromising commitment to quality. We support industries with reliable, large-scale output across metals, materials, consumer goods, and industrial components.</p>
                     </div>
                 </CardAnimation>
 
                 <CardAnimation index={1} className="relative py-5 rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
-                    <Image src="/pc2.png" alt="Icon" className='absolute bottom-0 right-0 max-w-[35%] md:max-w-[55%]' width={250} height={0} />
+                    <Image src="/pc2.png" alt="Icon" className='absolute bottom-0 right-0 max-w-[35%] lg:max-w-[55%]' width={250} height={0} />
                     <div className="pb-6">
-                        <h1 className="text-2xl md:text-4xl py-4 md:py-6 font-semibold text-primary">Trading</h1>
-                        <p className="text-[#5F5F66] text-base md:text-lg mt-3 w-full md:w-4/5">With a strong regional footprint, our trading operations connect global suppliers with local markets. We streamline supply-chain processes, enhance product availability, and ensure that businesses can access the materials and products they need, quickly and efficiently.</p>
+                        <h1 className="text-2xl lg:text-4xl py-4 lg:py-6 font-semibold text-primary">Trading</h1>
+                        <p className="text-[#5F5F66] text-base lg:text-lg mt-3 w-full lg:w-4/5">With a strong regional footprint, our trading operations connect global suppliers with local markets. We streamline supply-chain processes, enhance product availability, and ensure that businesses can access the materials and products they need, quickly and efficiently.</p>
                     </div>
                 </CardAnimation>
 
                 <CardAnimation index={2} className="min-h-[40vh] py-10 relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
-                    <Image src="/pc3.png" alt="Icon" className='absolute bottom-0 right-0 max-w-[35%] md:max-w-[55%]' width={250} height={0} />
+                    <Image src="/pc3.png" alt="Icon" className='absolute bottom-0 right-0 max-w-[35%] lg:max-w-[55%]' width={250} height={0} />
                     <div className="pb-6">
-                        <h1 className="text-2xl md:text-4xl py-4 md:py-6 font-semibold text-primary">Construction</h1>
-                        <p className="text-[#5F5F66] text-base md:text-lg mt-3 w-full md:w-4/5">Our manufacturing segment is powered by advanced production capabilities, high-grade facilities, and an uncompromising commitment to quality. We support industries with reliable, large-scale output across metals, materials, consumer goods, and industrial components.</p>
+                        <h1 className="text-2xl lg:text-4xl py-4 lg:py-6 font-semibold text-primary">Construction</h1>
+                        <p className="text-[#5F5F66] text-base lg:text-lg mt-3 w-full lg:w-4/5">Our manufacturing segment is powered by advanced production capabilities, high-grade facilities, and an uncompromising commitment to quality. We support industries with reliable, large-scale output across metals, materials, consumer goods, and industrial components.</p>
                     </div>
                 </CardAnimation>
 
                 <CardAnimation index={3} className="min-h-[40vh] py-10 relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
-                    <Image src="/pc4.png" alt="Icon" className='absolute bottom-3 right-3 max-w-[35%] md:max-w-[55%] z-0' width={250} height={0} />
+                    <Image src="/pc4.png" alt="Icon" className='absolute bottom-3 right-3 max-w-[35%] lg:max-w-[55%] z-0' width={250} height={0} />
                     <div className="pb-6">
-                        <h1 className="text-2xl md:text-4xl py-4 md:py-6 font-semibold text-primary">Services</h1>
-                        <p className="text-[#5F5F66] text-base md:text-lg mt-3 w-full md:w-4/5">From logistics and facility management to specialized industrial services, we deliver essential support functions that strengthen our group’s operational backbone. Our service companies allow other subsidiaries to focus on their core business while benefiting from dependable, optimized support systems.</p>
+                        <h1 className="text-2xl lg:text-4xl py-4 lg:py-6 font-semibold text-primary">Services</h1>
+                        <p className="text-[#5F5F66] text-base lg:text-lg mt-3 w-full lg:w-4/5">From logistics and facility management to specialized industrial services, we deliver essential support functions that strengthen our group’s operational backbone. Our service companies allow other subsidiaries to focus on their core business while benefiting from dependable, optimized support systems.</p>
                     </div>
                 </CardAnimation>
             </div>
 
 
-            <div className="w-full h-auto md:h-[80vh] pt-12 md:pt-16 px-4 md:px-10 mb-8 bg-[url('/expertisebg.png')] bg-contain bg-top bg-no-repeat bg-cover flex flex-col justify-between">
+            <div className="w-full h-auto lg:h-[80vh] pt-12 lg:pt-16 px-4 lg:px-10 mb-8 bg-[url('/expertisebg.png')] bg-contain bg-top bg-no-repeat bg-cover flex flex-col justify-between">
 
                 <div>
                     <SlideIn direction="bottom" scrollTrigger={true} duration={0.8}>
                         <Badge title="our expertise" />
                     </SlideIn>
-                    <FadeIn className="text-2xl md:text-4xl mt-4 font-semibold " scrollTrigger={true} duration={0.8}>
+                    <FadeIn className="text-2xl lg:text-4xl mt-4 font-semibold " scrollTrigger={true} duration={0.8}>
                         <h1>Our Expertise & Experiance</h1>
                     </FadeIn>
 
                 </div>
-                <div className="mt-6 flex flex-col md:flex-row gap-6 items-end">
+                <div className="mt-6 flex flex-col lg:flex-row gap-6 items-end">
 
-                    <CardAnimation index={0} className="min-h-[50vh] md:min-h-[55vh] rounded-xl w-full md:w-1/3 bg-white px-5 pt-2 md:pt-16 relative flex flex-col gap-8 h-[50vh] md:h-[55vh] group hover:scale-105 transition-all duration-400">
+                    <CardAnimation index={0} className="min-h-[50vh] lg:min-h-[55vh] rounded-xl w-full lg:w-1/3 bg-white px-5 pt-2 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group hover:scale-105 transition-all duration-400">
                         <h1 className="pt-5 text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent"><span><CountUp to={20} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
                         <div className="relative z-10 pb-6 ">
                             <h1 className="text-3xl font-bold mb-2">Years Experience</h1>
-                            <p className="w-[70%] md:w-90 pr-0 md:pr-4">200,000 metric tons copper production line that is the largest of its kind in the Middle East.</p>
+                            <p className="w-[70%] lg:w-90 pr-0 lg:pr-4">200,000 metric tons copper production line that is the largest of its kind in the Middle East.</p>
 
                         </div>
 
@@ -100,7 +100,7 @@ export default function parentCompany() {
 
                     </CardAnimation>
 
-                    <CardAnimation index={1} className="overflow-x-hidden min-h-[55vh] md:min-h-[50vh] rounded-xl w-full lg:w-1/3 bg-white px-5 pt-10 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[50vh] group hover:scale-105 transition-all duration-400">
+                    <CardAnimation index={1} className="overflow-x-hidden min-h-[55vh] lg:min-h-[50vh] rounded-xl w-full lg:w-1/3 bg-white px-5 pt-10 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[50vh] group hover:scale-105 transition-all duration-400">
                         <h1 className="text-6xl font-semibold text-primary relative  z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent"><span><CountUp to={1500} duration={2.5} />+</span> <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 
@@ -110,11 +110,11 @@ export default function parentCompany() {
 
                         </div>
 
-                        <Image src="/exp2.png" alt="Expertise Icon" width={180} height={80} className='w-60 absolute -bottom-0 -right-5 md:right-0 z-0' />
+                        <Image src="/exp2.png" alt="Expertise Icon" width={180} height={80} className='w-60 absolute -bottom-0 -right-5 lg:right-0 z-0' />
 
                     </CardAnimation>
 
-                    <CardAnimation index={2} className="min-h-[55vh] md:min-h-[45vh] rounded-xl w-full lg:w-1/3 bg-white px-5 pt-10 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[45vh] group hover:scale-105 transition-all duration-400">
+                    <CardAnimation index={2} className="min-h-[55vh] lg:min-h-[45vh] rounded-xl w-full lg:w-1/3 bg-white px-5 pt-10 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[45vh] group hover:scale-105 transition-all duration-400">
                         <h1 className="text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent"><span><CountUp to={30} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " /></h1>
 
 

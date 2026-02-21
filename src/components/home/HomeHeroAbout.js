@@ -30,8 +30,8 @@ export default function HomeHeroAbout() {
 
   return (
     <SnippScrol
-      scrub={1.5}
-      mobileScrub={1}
+      scrub={0.5}          // ✅ Optimized for trackpad + Lenis interaction
+      mobileScrub={0.3}    // ✅ Optimized for mobile trackpad
       enableSnap={true}
       snapDuration={0.5}
       enableExit={false}
