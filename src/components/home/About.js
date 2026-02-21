@@ -55,8 +55,8 @@ export default function About({ lockProgressRef = null }) {
   }, [lockProgressRef]);
 
   return (
-    <div className="min-h-auto bg-white  lg:min-h-screen  flex flex-col ">
-      <div className="flex-1 overflow-hidden relative flex flex-col lg:flex-row px-6 lg:px-10 pt-10 lg:pt-14 gap-6 lg:gap-6">
+    <div className="w-full bg-white flex flex-col">
+      <div className="relative flex flex-col lg:flex-row px-6 lg:px-10 pt-10 lg:pt-14 gap-6 lg:gap-6 min-h-fit">
         <div className="w-full lg:w-[60%] flex flex-col gap-5 lg:gap-8 z-10">
           <Badge title="About Us" />
           <TextReveal>
@@ -73,7 +73,7 @@ export default function About({ lockProgressRef = null }) {
           </button></CardAnimation>
          
         </div>
-        <div className="absolute bottom-0 right-0 lg:relative lg:w-[45%] flex items-end justify-end pointer-events-none">
+        <div className="lg:w-[45%] flex items-end justify-end pointer-events-none">
           <Image
             src="/aboutside.png"
             alt="Factory Image"
@@ -83,7 +83,7 @@ export default function About({ lockProgressRef = null }) {
           />
         </div>
       </div>
-      <div ref={statsRef} className="min-h-auto shrink-0 bg-white grid grid-cols-2 lg:grid-cols-4 px-2 lg:px-10 py-4 lg:py-6 gap-4 lg:gap-6">
+      <div ref={statsRef} className="h-auto bg-white grid grid-cols-2 lg:grid-cols-4 px-2 lg:px-10 py-4 lg:py-6 gap-4 lg:gap-6">
         <div className="stat-card-item"><StatsCard mainHeading="2009" subHeading="Established In" description="Since then, our excellence has made us a trusted name in copper manufacturing." /></div>
         <div className="stat-card-item"><StatsCard mainHeading="20K+" subHeading="MT/Annum" description="Produces 20,000 metric tons of copper per year." /></div>
         <div className="stat-card-item"><StatsCard mainHeading="150+" subHeading="Employees" description="With over 150 experienced employees, we deliver quality and reliability every day." /></div>
