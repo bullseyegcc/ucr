@@ -6,31 +6,21 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Helper function to convert hex to rgba
-const hexToRgba = (hex, opacity = 1) => {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
-};
-
 export default function ColorChangeWithScroll({ 
   children, 
-  initialColor = 'rgba(150, 150, 150, 0.25)', 
+  initialColor = '#8A8A8A', 
   afterColor = '#FA6E43', 
   blur = false,
-  initialOpacity = 0.25,
-  lockScroll = true, // New prop to enable/disable scroll locking
+  initialOpacity = 1,
+  lockScroll = true,
   backgroundColor = 'transparent'
 }) {
   const containerRef = useRef(null);
   const afterColorRef = useRef(afterColor);
   const blurRef = useRef(blur);
   
-  // Normalize initial color to rgba if it's hex
-  const normalizedInitialColor = initialColor.startsWith('#') 
-    ? hexToRgba(initialColor, initialOpacity)
-    : initialColor;
+  // Use initialColor as-is, with no alpha injection
+  const normalizedInitialColor = initialColor;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -67,7 +57,7 @@ export default function ColorChangeWithScroll({
           { 
             filter: 'blur(8px)', 
             color: normalizedInitialColor,
-            opacity: 0.7,
+            opacity: initialOpacity,
           },
           { 
             filter: 'blur(0px)', 
@@ -83,7 +73,7 @@ export default function ColorChangeWithScroll({
           word,
           { 
             color: normalizedInitialColor,
-            opacity: 0.6,
+            opacity: initialOpacity,
           },
           { 
             color: afterColorRef.current,
@@ -100,7 +90,7 @@ export default function ColorChangeWithScroll({
       tl.scrollTrigger?.kill();
       tl.kill();
     };
-  }, [normalizedInitialColor, lockScroll]);
+  }, [normalizedInitialColor, initialOpacity, lockScroll]);
 
   // Helper function to split text into word spans
   const renderTextWithSpans = (text) => {
@@ -111,8 +101,9 @@ export default function ColorChangeWithScroll({
         key={index}
         className="scroll-word"
         style={{ 
-          color: normalizedInitialColor, 
-          transition: 'color 0.6s ease-in-out',
+          color: normalizedInitialColor,
+          opacity: initialOpacity,
+          transition: 'color 0.6s ease-in-out, opacity 0.6s ease-in-out',
           ...(blur ? { filter: 'blur(8px)' } : {}) 
         }}
       >
@@ -149,7 +140,7 @@ export default function ColorChangeWithScroll({
     <div
       ref={containerRef}
       style={{
-        backgroundColor: backgroundColor,
+        backgroundColor: 'transparent',
         willChange: 'transform',
         backfaceVisibility: 'hidden',
         perspective: 1000,

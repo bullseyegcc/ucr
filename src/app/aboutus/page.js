@@ -30,7 +30,7 @@ export default function AboutUs() {
                         <Image src={badge_icon} alt="Badge Icon" width={24} height={24} className='object-contain' />
                     </SlideIn>
                     <FadeIn  duration={0.4} delay={0}>
-                        <span className='text-white uppercase font-medium text-center text-xs lg:text-base'>Crafting Sustainable Progress, One Copper Solution at a Time </span>
+                        <span className='text-white uppercase font-medium text-center text-xs md:text-lg lg:text-base'>Crafting Sustainable Progress, One Copper Solution at a Time </span>
                     </FadeIn>
                 </div>
 

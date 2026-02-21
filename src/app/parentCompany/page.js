@@ -30,8 +30,8 @@ export default function parentCompany() {
 
             <div className="px-2 lg:px-10 py-20 flex flex-col items-center justify-center bg-[#F5F5F5]">
 
-                <ColorChangeWithScroll initialColor="#8A8A8A" afterColor="#FF7A5C" backgroundColor="#F5F5F5">
-                    <p className="text-center text-lg  lg:text-4xl leading-relaxed px-10 mt-8 bg-[#F5F5F5]">
+                <ColorChangeWithScroll initialColor="#8A8A8A" afterColor="#FF7A5C">
+                    <p className="text-center text-lg  lg:text-4xl leading-relaxed px-10 mt-8">
                         Ittihad International Investment LLC is a private holding and multi-disciplinary conglomerate, engaged in a wide spectrum of economic activities across the MENA region. We lead, manage, and empower a diverse portfolio of companies to bring long-term value, operational excellence, and sustainable growth.
                     </p>
                 </ColorChangeWithScroll>
