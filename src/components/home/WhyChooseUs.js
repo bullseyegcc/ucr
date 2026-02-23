@@ -59,7 +59,7 @@ export default function WhyChooseUs() {
                 className="mb-6 transition-transform duration-400"
                 style={{ willChange: 'transform, opacity' }}
               />
-              <h1 data-ct className="text-2xl font-semibold text-black" style={{ willChange: 'transform, opacity' }}>{card.title}</h1>
+              <h1 data-ct className="text-2xl font-medium text-black" style={{ willChange: 'transform, opacity' }}>{card.title}</h1>
               <p data-cd className="text-sm" style={{ willChange: 'transform, opacity' }}>Factory in a world-class industrial hub</p>
             </div>
           </CardAnimation>

@@ -67,12 +67,16 @@ export default function SplashOverlay() {
 
       const splashTl = gsap.timeline({
         onComplete: () => {
-          // Restore scroll styles immediately
-          document.body.style.overflow = '';
-          document.documentElement.style.overflow = '';
-          document.body.style.height = '';
-          document.documentElement.style.height = '';
-          
+          // Bulletproof scroll restoration
+          setTimeout(() => {
+            document.body.style.overflow = 'auto';
+            document.documentElement.style.overflow = 'auto';
+            document.body.style.height = 'auto';
+            document.documentElement.style.height = 'auto';
+            if (window.gsap && window.gsap.ScrollTrigger) {
+              window.gsap.ScrollTrigger.refresh(true);
+            }
+          }, 0);
           // Hide overlay and container
           gsap.set([overlay, containerRef.current], { display: 'none', pointerEvents: 'none' });
         },
@@ -176,11 +180,16 @@ export default function SplashOverlay() {
 
     return () => {
       clearTimeout(timer);
-      // Restore scroll on cleanup
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-      document.body.style.height = '';
-      document.documentElement.style.height = '';
+      // Bulletproof scroll restoration on cleanup
+      setTimeout(() => {
+        document.body.style.overflow = 'auto';
+        document.documentElement.style.overflow = 'auto';
+        document.body.style.height = 'auto';
+        document.documentElement.style.height = 'auto';
+        if (window.gsap && window.gsap.ScrollTrigger) {
+          window.gsap.ScrollTrigger.refresh(true);
+        }
+      }, 0);
     };
   }, [isHomepage, viewportSize]);
 

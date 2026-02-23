@@ -15,7 +15,7 @@ export default function Footer() {
             </div>
 
 
-            <div className='relative md:absolute md:-bottom-[0%] w-full md:w-[80%] bg-white rounded-t-xl p-6 sm:p-10 md:p-16 flex flex-col gap-8 sm:gap-12'>
+            <div className='relative md:absolute md:-bottom-[0%] w-full md:w-[80%] bg-[url(/footerbg.png)] bg-cover bg-bottom rounded-t-xl p-6 sm:p-10 md:p-16 flex flex-col gap-8 sm:gap-12'>
                 {/* Header Section */}
                 <div className='flex flex-col sm:flex-row sm:justify-between items-center gap-6 sm:gap-0'>
                     <div className='flex items-center'>

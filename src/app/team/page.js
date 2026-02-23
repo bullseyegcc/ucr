@@ -2,6 +2,7 @@ import { Badgetextwhite, Badge } from "../../common/badge"
 import Image from "next/image"
 import SuccessStrengthSection from "../../components/team/SuccessStrengthSection"
 import TeamMemoriesSection from "../../components/team/TeamMemoriesSection"
+import TeamCards from "../../components/team/TeamCards"
 import ParallaxSection from "../../animations/ParallaxSection"
 import TextReveal from "../../animations/TextReveal"
 import CardAnimation from "../../animations/CardAnimation"
@@ -51,29 +52,7 @@ export default function Team() {
 
                     {/* Team Members Grid */}
                     {/* cards */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6  py-8 justify-center">
-
-                        {/* card 1 */}
-                        <CardAnimation index={0} className="h-full group hover:scale-[1.03] transition-transform duration-500 ease-out">
-                            <Image src="/chairman.png" alt="Team member" width={1000} height={1000} className="w-full rounded-lg object-contain" />
-                            <h1 className="text-2xl lg:text-3xl mt-2 font-medium">Diam O'Sullivan</h1>
-                            <p className="text-primary lg:text-2xl font-light">Honorable Chairman</p>
-                        </CardAnimation>
-
-                        {/* card 2 */}
-                        <CardAnimation index={1} className="h-full group hover:scale-[1.03] transition-transform duration-500 ease-out">
-                            <Image src="/cofounder.png" alt="Team member" width={1000} height={1000} className="w-full rounded-lg object-contain" />
-                            <h1 className="text-2xl lg:text-3xl mt-2 font-medium">Diam O'Sullivan</h1>
-                            <p className="text-primary lg:text-2xl font-light">Honorable Chairman</p>
-                        </CardAnimation>
-
-                        {/* card 3 */}
-                        <CardAnimation index={2} className="h-full group hover:scale-[1.03] transition-transform duration-500 ease-out">
-                            <Image src="/cheftechnology.png" alt="Team member" width={1000} height={1000} className="w-full rounded-lg object-contain" />
-                            <h1 className="text-2xl lg:text-3xl mt-2 font-medium">Diam O'Sullivan</h1>
-                            <p className="text-primary lg:text-2xl font-light">Honorable Chairman</p>
-                        </CardAnimation>
-                    </div>
+                    <TeamCards />
 
 
 
@@ -88,13 +67,13 @@ export default function Team() {
 
             <div className="min-h-[60vh] lg:min-h-[80vh] rounded-t-lg bg-[linear-gradient(174deg,#FA6E43_-22.99%,#FFF_94.94%)] flex flex-col items-center justify-center gap-4 lg:gap-6 px-6 text-center py-12 lg:py-20">
 
-                <div className="flex flex-col w-full lg:w-[80%]">
+                <div className="flex flex-col w-full lg:w-[80%] relative">
 
                     <Image src="/quote.png" alt="Icon" width={40} height={0} className="w-8 lg:w-[60px]" />
                     <TextReveal>
-                        <p className="pl-3 lg:pl-5 text-lg lg:text-3xl italic leading-relaxed">At UCR, we are grounded in vision, trust, and a commitment to excellence. We believe success is measured not just by financial gains but by the positive impact we have on our communities and future generations.We have broadened our investments across various sectors with a clear strategy. As global markets change, we remain focused on responsible growth, continuous innovation, and delivering lasting value.</p>
+                        <p className="pl-3 lg:pl-5 text-sm lg:text-4xl p-0 italic leading-relaxed font-light">At UCR, we are grounded in vision, trust, and a commitment to excellence. We believe success is measured not just by financial gains but by the positive impact we have on our communities and future generations.We have broadened our investments across various sectors with a clear strategy. As global markets change, we remain focused on responsible growth, continuous innovation, and delivering lasting value.</p>
                     </TextReveal>
-                    <Image src="/quote.png" alt="Icon" width={40} height={0} className="self-end w-8 lg:w-[60px]" />
+                    <Image src="/quote.png" alt="Icon" width={40} height={0} className="self-end w-8 lg:w-[60px] absolute right-35 bottom-0" />
 
                 </div>
 

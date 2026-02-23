@@ -54,8 +54,8 @@ export default function StatsCard({ mainHeading, subHeading, description }) {
       </h1>
       <hr className="border-t border-secondary transition-all duration-400 ease-out group-hover:border-primary" />
       <div className="transition-transform duration-400 ease-out group-hover:translate-x-1">
-        <h1 className="font-semibold text-lg sm:text-2xl">{subHeading}</h1>
-        <p className="text-xs md:text-sm font-light mt-2">{description}</p>
+        <h1 className="font-medium text-lg sm:text-2xl">{subHeading}</h1>
+        <p className="text-xs md:text-sm font-light text-[#2122258C]/80 mt-2">{description}</p>
       </div>
     </div>
   );

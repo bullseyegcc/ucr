@@ -85,103 +85,85 @@ export default function SnippScrol({
     const total       = sections.length;
     const id          = instanceId.current;
 
+
     ctxRef.current = gsap.context(() => {
 
       // ── Position all panels absolutely inside the 100vh container ────────
+      const isMobile = window.innerWidth < 768;
       sections.forEach((section, i) => {
         gsap.set(section, {
-          position: 'absolute',
+          position: isMobile ? 'relative' : 'absolute',
           top:      0,
           left:     0,
           width:    '100%',
-          height:   '100%',
+          height:   isMobile ? 'auto' : '100%',
           zIndex:   10 + i,
-          // First panel is already on screen; rest start below
-          y: i === 0 ? '0%' : '100%',
-          overflow: 'hidden',
+          y: !isMobile ? (i === 0 ? '0%' : '100%') : '0%',
+          overflow: isMobile ? 'visible' : 'hidden',
         });
       });
 
       // ── Build the master timeline that drives all panel transitions ───────
-      // Duration is arbitrary (1 unit per transition); the ST scrub maps it
-      // to real scroll pixels.
       const tl = gsap.timeline({ paused: true });
 
       sections.forEach((section, i) => {
-        if (i === 0) return; // first panel is the base; only incoming panels are animated
-
+        if (i === 0) return;
         const prev = sections[i - 1];
-
-        // Incoming panel slides up from below
         tl.fromTo(
           section,
           { y: '100%' },
           { y: '0%', ease: 'none', duration: 1 },
-          (i - 1)   // absolute position in the timeline
+          (i - 1)
         );
-
-        // Optional: outgoing panel scales down and fades slightly
         if (enableExit && prev) {
           tl.fromTo(
             prev,
             { scale: 1, opacity: 1 },
             { scale: 0.93, opacity: 0.6, ease: 'none', duration: 0.6 },
-            (i - 1)       // runs in parallel with the slide-in
+            (i - 1)
           );
         }
       });
 
       // ── Extend tl duration for the lock-at-end phase ─────────────────────
-      // CRITICAL: ScrollTrigger drives tl.progress() proportional to self.progress.
-      // If tl ends at time=(total-1) but the pin covers (total-1+lockAtEnd)*vh,
-      // GSAP stretches panel animations across the full range — the lock zone is
-      // never reached. Adding a dummy tween makes tl.duration = total-1+lockAtEnd
-      // so panels complete at self.progress = (total-1)/(total-1+lockAtEnd) ✓
-      const panelDuration = total - 1; // timeline time units used by panels
+      const panelDuration = total - 1;
       if (lockAtEnd > 0) {
-        const _dummy = {}; // GSAP needs a target; empty obj is harmless
+        const _dummy = {};
         tl.to(_dummy, { duration: lockAtEnd }, panelDuration);
       }
 
       // ── Pin container and scrub the timeline ──────────────────────────────
-      // pinSpacing:true inserts a spacer after the container so everything
-      // below (WhyChooseUs, CTA, Articles …) scrolls into view naturally
-      // only after all panels have been seen.
-      // Total scroll budget: panel transitions + optional lock-at-end phase
       const panelScrollPx = (total - 1) * window.innerHeight;
       const lockScrollPx  = lockAtEnd * window.innerHeight;
       const totalScrollPx = panelScrollPx + lockScrollPx;
-      // panelFraction: ST.progress at which all panels are fully transitioned
       const panelFraction = totalScrollPx > 0 ? panelScrollPx / totalScrollPx : 1;
 
+      // Disable pinning on mobile to restore scroll
       ScrollTrigger.create({
         id:         `snip-${id}-master`,
         trigger:    container,
         start:      'top top',
         end:        () => `+=${totalScrollPx}`,
-        pin:        true,
-        pinSpacing: true,
+        pin:        !isMobile,
+        pinSpacing: !isMobile,
         scrub:      activeScrub,
         animation:  tl,
-        snap: enableSnap && total > 1
+        snap: enableSnap && total > 1 && !isMobile
           ? {
-              // Snap to panel boundaries only; lock zone has no snap
               snapTo: (value) => {
                 if (value <= panelFraction) {
-                  // step = fraction of total range each panel occupies
                   const step = panelFraction / (total - 1);
                   return Math.round(value / step) * step;
                 }
-                return value; // lock zone — no snapping
+                return value;
               },
               duration: { min: 0.2, max: snapDuration },
               ease:     'power2.inOut',
               delay:    0.05,
             }
           : undefined,
-        onUpdate: lockScrollPx > 0 && onLockProgress
+        onUpdate: lockScrollPx > 0 && onLockProgress && !isMobile
           ? (self) => {
-              // self.progress: raw 0→1 across the full pin range (panels + lock)
               if (self.progress > panelFraction) {
                 const lockRaw = (self.progress - panelFraction) / (1 - panelFraction);
                 onLockProgress(Math.min(1, Math.max(0, lockRaw)));
@@ -191,8 +173,6 @@ export default function SnippScrol({
             }
           : undefined,
         onRefresh: () => {
-          // GSAP dynamically injects a .pin-spacer div — make it white
-          // so no dark background bleeds through the gap
           const spacer = container.closest('.pin-spacer') || container.parentElement;
           if (spacer && spacer.classList.contains('pin-spacer')) {
             spacer.style.backgroundColor = 'white';
@@ -200,7 +180,6 @@ export default function SnippScrol({
         },
       });
 
-      // Style the pin-spacer immediately after creation too
       requestAnimationFrame(() => {
         const spacer = container.closest('.pin-spacer') || container.parentElement;
         if (spacer && spacer.classList.contains('pin-spacer')) {
@@ -208,7 +187,7 @@ export default function SnippScrol({
         }
       });
 
-    }, container); // scope: entire context is tied to the container element
+    }, container);
 
   }, [scrub, mobileScrub, snapDuration, enableSnap, enableExit, lockAtEnd, onLockProgress]);
 
@@ -247,13 +226,13 @@ export default function SnippScrol({
       <div
         ref={containerRef}
         style={{
-          position:             'relative',
-          width:                '100%',
-          height:               '100vh',
-          overflow:             'hidden',
-          backgroundColor:      'white',
-          transform:            'translateZ(0)',
-          backfaceVisibility:   'hidden',
+          position: 'relative',
+          width: '100%',
+          height: typeof window !== 'undefined' && window.innerWidth < 768 ? 'auto' : '100vh',
+          overflow: typeof window !== 'undefined' && window.innerWidth < 768 ? 'visible' : 'hidden',
+          backgroundColor: 'white',
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden',
           WebkitBackfaceVisibility: 'hidden',
         }}
       >
@@ -263,10 +242,9 @@ export default function SnippScrol({
             ref={(el) => { if (el) sectionsRef.current[index] = el; }}
             style={{
               willChange: 'transform, opacity',
-              // Pre-size so there's no flash before GSAP sets position:absolute
-              width:    '100%',
-              height:   '100%',
-              overflow: 'hidden',
+              width: '100%',
+              height: typeof window !== 'undefined' && window.innerWidth < 768 ? 'auto' : '100%',
+              overflow: typeof window !== 'undefined' && window.innerWidth < 768 ? 'visible' : 'hidden',
             }}
           >
             {child}

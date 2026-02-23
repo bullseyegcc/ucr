@@ -6,10 +6,10 @@ import { WhiteBadge } from "../../common/badge.js";
 import Link from "next/link";
 
 export default function Articles() {
-  const sectionRef  = useRef(null);
-  const badgeRef    = useRef(null);
-  const headingRef  = useRef(null);
-  const leftRef     = useRef(null);
+  const sectionRef = useRef(null);
+  const badgeRef = useRef(null);
+  const headingRef = useRef(null);
+  const leftRef = useRef(null);
   const rightTopRef = useRef(null);
   const rightBotRef = useRef(null);
 
@@ -18,13 +18,13 @@ export default function Articles() {
 
     // Uniform animation profile — all elements animate together, same timing
     const DURATION = 1.6;
-    const FROM     = 'translateY(50px) scale(0.97)';
-    const TO       = 'translateY(0px) scale(1)';
+    const FROM = 'translateY(50px) scale(0.97)';
+    const TO = 'translateY(0px) scale(1)';
 
     const elements = [
-      { el: badgeRef.current    },
-      { el: headingRef.current  },
-      { el: leftRef.current     },
+      { el: badgeRef.current },
+      { el: headingRef.current },
+      { el: leftRef.current },
       { el: rightTopRef.current },
       { el: rightBotRef.current },
     ]
@@ -33,8 +33,8 @@ export default function Articles() {
 
     // Apply initial hidden state immediately
     elements.forEach(({ el, fromTransform, duration }) => {
-      el.style.opacity   = '0';
-      el.style.filter    = 'blur(10px)';
+      el.style.opacity = '0';
+      el.style.filter = 'blur(10px)';
       el.style.transform = fromTransform;
       el.style.willChange = 'transform, opacity, filter';
       el.style.transition = `opacity ${duration}s cubic-bezier(0.22, 1, 0.36, 1), transform ${duration}s cubic-bezier(0.22, 1, 0.36, 1), filter ${duration}s cubic-bezier(0.22, 1, 0.36, 1)`;
@@ -48,14 +48,14 @@ export default function Articles() {
 
           if (entry.isIntersecting) {
             setTimeout(() => {
-              match.el.style.opacity   = '1';
-              match.el.style.filter    = 'blur(0px)';
+              match.el.style.opacity = '1';
+              match.el.style.filter = 'blur(0px)';
               match.el.style.transform = match.toTransform;
             }, match.delay);
           } else {
             // Smooth exit — reverse back to from state
-            match.el.style.opacity   = '0';
-            match.el.style.filter    = 'blur(10px)';
+            match.el.style.opacity = '0';
+            match.el.style.filter = 'blur(10px)';
             match.el.style.transform = match.fromTransform;
           }
         });
@@ -71,7 +71,7 @@ export default function Articles() {
   return (
     <div
       ref={sectionRef}
-      className="min-h-[60vh]    py-4  md:py-8 sm:min-h-screen flex flex-col items-center sm:flex-row gap-1 sm:mx-10 items-start mb-4"
+      className="min-h-[60vh]    py-4  md:py-8 sm:min-h-screen flex flex-col items-center sm:flex-row gap-5 sm:mx-10 items-start mb-4"
     >
       {/* ── Left feature card ──── */}
       <Link
@@ -125,9 +125,11 @@ export default function Articles() {
           <div className="rounded-xl h-90 md:h-26 pl-0 absolute top-0 w-full z-0 bg-gradient-to-b from-[#FA6E43] to-transparent" />
         </Link>
 
-        <div
+        <Link
           ref={rightBotRef}
           className="w-full h-[45vh] md:h-1/2 relative bg-[#6A3120] hidden md:flex flex-col justify-start gap-16 md:gap-6 rounded-xl bg-[url('/blog2.png')] bg-cover bg-center bg-no-repeat"
+          href="/blogs/high-conductivity-copper-rods-energy-sector"
+
           style={{ willChange: 'transform, opacity' }}
         >
           <div className="z-500 px-4 text-white flex justify-between text-sm font-light pt-9">
@@ -138,7 +140,7 @@ export default function Articles() {
             Company Launches New High-Conductivity Copper Rods for Energy Sector
           </h1>
           <div className="rounded-xl h-90 md:h-26 pl-0 absolute top-0 w-full z-0 bg-gradient-to-b from-[#FA6E43] to-transparent" />
-        </div>
+        </Link>
 
         <Link
           href="/blogs"

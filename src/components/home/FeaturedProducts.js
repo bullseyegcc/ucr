@@ -103,7 +103,7 @@ export default function FeaturedProducts() {
                 }`}
               >
                 {activeTab === index ? (
-                  <h1 className="flex items-center text-xl md:text-5xl text-primary mt-5 font-bold">
+                  <h1 className="flex items-center text-xl md:text-5xl text-primary mt-5 font-medium">
                     {product.title}
                     {product.icon && (
                       <Image
@@ -116,7 +116,7 @@ export default function FeaturedProducts() {
                     )}
                   </h1>
                 ) : (
-                  <h1 className="text-lg md:text-4xl text-secondary my-2 font-semibold">
+                  <h1 className="text-lg md:text-4xl text-secondary my-2 font-medium">
                     {product.title}
                   </h1>
                 )}

@@ -5,8 +5,8 @@ import Image from 'next/image';
 
 const members = [
   { src: '/chairman.png',      name: "Diam O'Sullivan", role: 'Honorable Chairman' },
-  { src: '/cofounder.png',     name: "Diam O'Sullivan", role: 'Honorable Chairman' },
-  { src: '/cheftechnology.png',name: "Diam O'Sullivan", role: 'Honorable Chairman' },
+  { src: '/cofounder.png',     name: "Liam O'Sullivan", role: 'Honorable Co-Founder' },
+  { src: '/cheftechnology.png',name: "Samantha Chen", role: 'Honorable Chief Technology Officer' },
 ];
 
 export default function TeamCards() {
@@ -57,8 +57,13 @@ export default function TeamCards() {
         <div
           key={i}
           ref={(el) => { if (el) cardsRef.current[i] = el; }}
-          className="h-full group hover:scale-[1.03] transition-transform duration-500 ease-out"
-          style={{ willChange: 'transform, opacity' }}
+          className="h-full group"
+          style={{
+            willChange: 'transform, opacity',
+            transition: 'transform 1.2s cubic-bezier(0.22, 1, 0.36, 1)',
+          }}
+          onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.06)'}
+          onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
         >
           <Image
             src={member.src}

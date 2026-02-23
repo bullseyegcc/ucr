@@ -41,7 +41,29 @@ export default function HorizontalScrollGallery({ images = [] }) {
   }, [imgs.length]);
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-white overflow-hidden">
+    <div className="w-full relative flex items-center justify-center bg-white overflow-hidden">
+      {/* Left blur overlay - premium smooth blur */}
+      <div
+        className="pointer-events-none absolute left-0 top-0 h-full w-32 md:w-14 z-20"
+        style={{
+          background: 'linear-gradient(to right, rgba(255,255,255,1) 40%, rgba(255,255,255,0.7) 70%, rgba(255,255,255,0.1) 100%)',
+          WebkitBackdropFilter: 'blur(18px)',
+          backdropFilter: 'blur(18px)',
+          boxShadow: '8px 0 32px 0 rgba(180,180,180,0.10)',
+          transition: 'backdrop-filter 0.3s',
+        }}
+      />
+      {/* Right blur overlay - premium smooth blur */}
+      <div
+        className="pointer-events-none absolute right-0 top-0 h-full w-32 md:w-14 z-20"
+        style={{
+          background: 'linear-gradient(to left, rgba(255,255,255,1) 40%, rgba(255,255,255,0.7) 70%, rgba(255,255,255,0.1) 100%)',
+          WebkitBackdropFilter: 'blur(18px)',
+          backdropFilter: 'blur(18px)',
+          boxShadow: '-8px 0 32px 0 rgba(180,180,180,0.10)',
+          transition: 'backdrop-filter 0.3s',
+        }}
+      />
       <div
         ref={wrapperRef}
         className="flex gap-8 will-change-transform"
