@@ -29,6 +29,14 @@ export default function LogisticsAdvantageSection() {
     return bgImages.default;
   };
 
+  // Helper to determine active state: clicked overrides hover
+  const isActive = (index) => (clickedCard ? clickedCard === index : hoveredCard === index);
+
+  // Toggle clicked state on card click
+  const toggleClicked = (index) => {
+    setClickedCard((prev) => (prev === index ? null : index));
+  };
+
   return (
     <div className="relative w-full bg-white overflow-hidden">
       {/* Background decorative elements */}
@@ -51,9 +59,12 @@ export default function LogisticsAdvantageSection() {
               count={"01"}
               title="Higher Delivery Capacity"
               description="UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum."
-              borderColor="border-primary"
+              borderColor={isActive(6) ? "border-primary" : "border-primary"}
               hoverBorderColor="hover:border-primary"
-              numberColor="text-primary"
+              numberColor={isActive(6) ? "text-primary" : ""}
+              onMouseEnter={() => setHoveredCard(6)}
+              onMouseLeave={() => setHoveredCard(null)}
+              onClick={() => toggleClicked(6)}
             />
             <div className="block lg:hidden w-full  h-[40vh] lg:h-[80vh] bg-[url('/advantagecol3.png')] bg-cover  bg-bottom bg-no-repeat"></div>
             <LogisticsAdvantageCard
@@ -61,10 +72,13 @@ export default function LogisticsAdvantageSection() {
               count={"03"}
               title="Higher Delivery Capacity"
               description="UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum."
-              borderColor="border-secondary"
+              borderColor={isActive(7) ? "border-primary" : "border-secondary"}
               hoverBorderColor="hover:border-primary"
-              numberColor="text-secondary hover:text-primary"
+              numberColor={isActive(7) ? "text-primary" : "text-secondary hover:text-primary"}
               className="hidden lg:flex"
+              onMouseEnter={() => setHoveredCard(7)}
+              onMouseLeave={() => setHoveredCard(null)}
+              onClick={() => toggleClicked(7)}
             />
           </div>
           {/* column 2 */}
@@ -74,36 +88,37 @@ export default function LogisticsAdvantageSection() {
               count={"02"}
               title="Higher Delivery Capacity"
               description="UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum."
-              borderColor="border-primary"
+              borderColor={isActive(8) ? "border-primary" : "border-primary"}
               hoverBorderColor="hover:border-primary"
+              numberColor={isActive(8) ? "text-primary" : ""}
               onMouseEnter={() => setHoveredCard(8)}
               onMouseLeave={() => setHoveredCard(null)}
-              onClick={() => setClickedCard(8)}
+              onClick={() => toggleClicked(8)}
             />
             <LogisticsAdvantageCard
               index={9}
               count={"03"}
               title="Higher Delivery Capacity"
               description="UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum."
-              borderColor="border-secondary"
+              borderColor={isActive(9) ? "border-primary" : "border-secondary"}
               hoverBorderColor="hover:border-primary"
-              numberColor="text-secondary hover:text-primary"
+              numberColor={isActive(9) ? "text-primary" : "text-secondary hover:text-primary"}
               className="lg:hidden"
               onMouseEnter={() => setHoveredCard(9)}
               onMouseLeave={() => setHoveredCard(null)}
-              onClick={() => setClickedCard(9)}
+              onClick={() => toggleClicked(9)}
             />
             <LogisticsAdvantageCard
               index={10}
               count={"04"}
               title="Higher Delivery Capacity"
               description="UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum."
-              borderColor="border-secondary"
+              borderColor={isActive(10) ? "border-primary" : "border-secondary"}
               hoverBorderColor="hover:border-primary"
-              numberColor="text-secondary hover:text-primary"
+              numberColor={isActive(10) ? "text-primary" : "text-secondary hover:text-primary"}
               onMouseEnter={() => setHoveredCard(10)}
               onMouseLeave={() => setHoveredCard(null)}
-              onClick={() => setClickedCard(10)}
+              onClick={() => toggleClicked(10)}
             />
           </div>
           {/* Third column background container */}

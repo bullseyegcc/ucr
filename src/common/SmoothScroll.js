@@ -18,12 +18,10 @@ export default function SmoothScroll() {
       return;
     }
 
-    // Ensure document can scroll
-    document.documentElement.style.overflow = 'auto';
-    document.body.style.overflow = 'auto';
-
     let unsubscribe;
     let lenis;
+    let splashListener;
+    let timer;
 
     const setupLenis = () => {
       lenis = new Lenis({
@@ -36,7 +34,10 @@ export default function SmoothScroll() {
       window.lenisInstance = lenis;
 
       // Connect with GSAP ticker
-      unsubscribe = gsap.ticker.add((time) => {
+      unsubscribe = () => gsap.ticker.remove((time) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.add((time) => {
         lenis.raf(time * 1000);
       });
 
@@ -54,15 +55,28 @@ export default function SmoothScroll() {
       }, 50);
     };
 
-    // Start after page layout
-    const timer = setTimeout(setupLenis, 150);
+    // Step 4: Coordinate Lenis initialization
+    if (window.__splashActive) {
+      // Splash is running, wait for splashComplete event
+      splashListener = () => {
+        setupLenis();
+        window.removeEventListener('splashComplete', splashListener);
+      };
+      window.addEventListener('splashComplete', splashListener);
+    } else {
+      // No splash, start as usual
+      timer = setTimeout(setupLenis, 150);
+    }
 
     return () => {
-      clearTimeout(timer);
+      if (timer) clearTimeout(timer);
       if (unsubscribe) unsubscribe();
       if (lenis) {
         lenis.destroy();
         delete window.lenisInstance;
+      }
+      if (splashListener) {
+        window.removeEventListener('splashComplete', splashListener);
       }
     };
   }, []);

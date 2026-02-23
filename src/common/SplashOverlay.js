@@ -8,6 +8,20 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function SplashOverlay() {
+  // --- Scroll-blocking handlers (must be in component scope for consistent reference) ---
+  function preventScroll(e) {
+    e.preventDefault();
+  }
+  function preventKeyScroll(e) {
+    // Scroll keys: space(32), page up(33), page down(34), end(35), home(36), left(37), up(38), right(39), down(40)
+    const keys = [32, 33, 34, 35, 36, 37, 38, 39, 40];
+    if (keys.includes(e.keyCode)) {
+      e.preventDefault();
+    }
+  }
+  function lockScrollPosition() {
+    window.scrollTo(0, 0);
+  }
   const containerRef = useRef(null);
   const overlayRef = useRef(null);
   const maskGroupRef = useRef(null);
@@ -35,6 +49,7 @@ export default function SplashOverlay() {
   }, []);
 
   useEffect(() => {
+
     const overlay = overlayRef.current;
     if (!overlay) return;
 
@@ -44,6 +59,9 @@ export default function SplashOverlay() {
       document.body.style.overflow = 'auto';
       return;
     }
+
+    // Step 1: Set splash flag
+    window.__splashActive = true;
 
     // Calculate responsive scale values
     const isMobile = viewportSize.width < 768;
@@ -62,6 +80,12 @@ export default function SplashOverlay() {
     document.documentElement.style.overflow = 'hidden';
     document.documentElement.style.height = '100vh';
 
+    // Register scroll-blocking listeners
+    window.addEventListener('wheel', preventScroll, { passive: false });
+    window.addEventListener('touchmove', preventScroll, { passive: false });
+    window.addEventListener('keydown', preventKeyScroll, { passive: false });
+    window.addEventListener('scroll', lockScrollPosition);
+
     const timer = setTimeout(() => {
       if (!maskGroupRef.current || !outlineRef.current || !topRectRef.current || !bottomRectRef.current) return;
 
@@ -72,12 +96,22 @@ export default function SplashOverlay() {
           document.documentElement.style.overflow = 'auto';
           document.body.style.height = 'auto';
           document.documentElement.style.height = 'auto';
-          
+
           // Ensure scroll is enabled on mobile
           document.body.style.WebkitOverflowScrolling = 'touch';
-          
+
           // Hide overlay and container
           gsap.set([overlay, containerRef.current], { display: 'none', pointerEvents: 'none' });
+
+          // Remove scroll-blocking listeners
+          window.removeEventListener('wheel', preventScroll, { passive: false });
+          window.removeEventListener('touchmove', preventScroll, { passive: false });
+          window.removeEventListener('keydown', preventKeyScroll, { passive: false });
+          window.removeEventListener('scroll', lockScrollPosition);
+
+          // Step 2: Dispatch splashComplete event and clear flag
+          window.__splashActive = false;
+          window.dispatchEvent(new CustomEvent('splashComplete'));
         },
       });
 
@@ -198,6 +232,15 @@ export default function SplashOverlay() {
         if (window.gsap && window.gsap.ScrollTrigger) {
           window.gsap.ScrollTrigger.refresh(true);
         }
+        // Step 3: Also clear splash flag and dispatch event on cleanup
+        window.__splashActive = false;
+        window.dispatchEvent(new CustomEvent('splashComplete'));
+
+        // Remove scroll-blocking listeners (cleanup)
+        window.removeEventListener('wheel', preventScroll, { passive: false });
+        window.removeEventListener('touchmove', preventScroll, { passive: false });
+        window.removeEventListener('keydown', preventKeyScroll, { passive: false });
+        window.removeEventListener('scroll', lockScrollPosition);
       }, 0);
     };
   }, [isHomepage, viewportSize]);
