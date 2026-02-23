@@ -41,7 +41,7 @@ export default function HomeHeroAbout() {
       {/* Panel 1: Hero */}
       <div className="relative flex min-h-[80vh] md:min-h-screen font-medium justify-center bg-black font-sans dark:bg-black overflow-hidden">
         <VideoPlayer src="/hero.mp4" className="absolute inset-0 w-full h-full object-cover" />
-        <HeroHeading delay={3}>UCR shaping the future</HeroHeading>
+        <HeroHeading delay={4}>UCR shaping the future</HeroHeading>
       </div>
 
       {/* Panel 2: About — receives the progress ref so it can register its colour driver */}

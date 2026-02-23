@@ -4,6 +4,7 @@ import { VideoPlayer } from "../../common/video";
 import { Badge, Badgetextwhite } from "../../common/badge";
 import Image from "next/image";
 import CardAnimation from "../../animations/CardAnimation";
+import LogisticsAdvantageSection from "../../components/logistics/LogisticsAdvantageSection";
 import CountUp from "../../animations/countup";
 import FadeIn from "../../animations/FadeIn";
 import SlideIn from "../../animations/SlideIn";
@@ -149,19 +150,21 @@ export default function Logistics() {
 
 
 
-            <div className=" overflow-x-hidden min-h-[80vh] lg:min-h-screen bg-white  pt-20 flex flex-col items-center justify-center ">
+            <div className=" overflow-x-hidden min-h-[80vh] lg:min-h-screen bg-white  pt-20 flex flex-col  justify-end ">
 
                 {/* Header */}
-                <div className="flex px-10 flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-8 lg:gap-12 mb-12 lg:mb-16 lg:mb-20">
+                <div className="flex px-10 flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-18 lg:gap-12 mb-12 lg:mb-16 lg:mb-20">
 
                     <SlideIn direction="left" scrollTrigger={true} duration={0.8} className="flex-1">
                         <h1 className='text-lg lg:text-xl lg:text-2xl text-primary'>Global Presence</h1>
                         <h1 className="text-3xl lg:text-4xl lg:text-5xl font-semibold text-black mt-4 lg:mt-5 lg:mt-6 leading-tight lg:leading-snug">Global Reach</h1>
                     </SlideIn>
+                    <div className="w-[30%]">
 
-                    <SlideIn direction="right" scrollTrigger={true} duration={0.8} className="self-end flex-1 text-xs lg:text-sm text-gray-600 lg:pt-8 lg:pt-12">
-                        <p className=' text-xl'>We don't just produce copper — we shape reliability, innovation, and sustainability into every product we deliver.</p>
-                    </SlideIn>
+                        <SlideIn direction="right" scrollTrigger={true} duration={0.8} className=" flex-1  text-xs lg:text-2xl text-gray-600 lg:pt-8 lg:pt-12">
+                            <p className='  text-2xl self-start'>We don't just produce copper — we shape reliability, innovation, and sustainability into every product we deliver.</p>
+                        </SlideIn>
+                    </div>
                 </div>
 
                 <div className="w-full h-[60vh] lg:h-screen relative z-50">
@@ -171,119 +174,8 @@ export default function Logistics() {
                 </div>
             </div>
 
-            <div className="relative w-full bg-white overflow-hidden">
-
-                {/* Background decorative elements */}
-                <div className="absolute inset-0 pointer-events-none">
-                    <Image src="/gradientcircle.png" alt="Logistics End Image" width={900} height={200} className="absolute -top-80 -right-20 w-[50vw] z-0" />
-                    <Image src="/vector.png" alt="Logistics End Image" width={300} height={0} className="absolute -top-10 -right-5 z-0" />
-                </div>
-
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-start gap-12 px-6 lg:px-10 pt-20 pb-20">
-
-                    <SlideIn direction="left" duration={0.8} scrollTrigger={true} className="w-full text-left">
-                        <h1 className='text-sm lg:text-xl lg:text-2xl text-primary uppercase'>Global Presence</h1>
-                        <h1 className="text-2xl lg:text-4xl lg:text-5xl font-semibold text-black mt-2 lg:mt-4 leading-tight lg:leading-snug">Global Reach</h1>
-                    </SlideIn>
-
-                    {/* wrapper */}
-                    <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 w-full">
-
-                        {/* column 1 */}
-                        <div className="w-full lg:w-1/3 flex flex-col gap-8 lg:gap-10 ">
-
-                            {/* card 1 */}
-                            <CardAnimation index={6} className="border-t-2 border-primary flex gap-6 lg:gap-9 pt-6 lg:pt-9 ">
-
-                                <h1 className="text-primary text-4xl lg:text-6xl min-w-fit">01</h1>
-
-                                <div className="flex flex-col gap-4">
-                                    <h1 className="text-lg lg:text-2xl font-semibold ">Higher Delivery Capacity</h1>
-                                    <p className="text-sm lg:text-lg">UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum.
-                                    </p>
-                                </div>
-
-
-                            </CardAnimation>
-
-                            <div className="block lg:hidden w-full  h-[40vh] lg:h-[80vh] bg-[url('/advantagecol3.png')] bg-cover  bg-bottom bg-no-repeat">
-
-                            </div>
-
-                            {/* card 3 */}
-
-                            <CardAnimation index={7} className="hidden border-t-2 border-secondary hover:border-primary lg:flex gap-6 lg:gap-5 pt-6 lg:pt-9 ">
-
-                                <h1 className="text-secondary hover:text-primary text-4xl lg:text-6xl min-w-fit">03</h1>
-
-                                <div className="flex flex-col gap-4">
-                                    <h1 className="text-lg lg:text-2xl font-semibold ">Higher Delivery Capacity</h1>
-                                    <p className="text-sm lg:text-lg">UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum.
-                                    </p>
-                                </div>
-
-
-                            </CardAnimation>
-
-                        </div>
-
-                        {/* column 2 */}
-                        <div className="w-full lg:w-1/3 flex flex-col gap-8 lg:gap-10 ">
-
-                            {/* card 2 */}
-                            <CardAnimation index={8} className="border-t-2 border-primary flex gap-6 lg:gap-5 pt-6 lg:pt-9 ">
-
-                                <h1 className=" text-4xl lg:text-6xl min-w-fit">02</h1>
-
-                                <div className="flex flex-col gap-4">
-                                    <h1 className="text-lg lg:text-2xl font-semibold ">Higher Delivery Capacity</h1>
-                                    <p className="text-sm lg:text-lg">UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum.
-                                    </p>
-                                </div>
-
-
-                            </CardAnimation>
-
-                            <CardAnimation index={9} className="lg:hidden border-t-2 border-secondary hover:border-primary flex gap-6 lg:gap-5 pt-6 lg:pt-9 ">
-
-                                <h1 className="text-secondary hover:text-primary text-4xl lg:text-6xl min-w-fit">03</h1>
-
-                                <div className="flex flex-col gap-4">
-                                    <h1 className="text-lg lg:text-2xl font-semibold ">Higher Delivery Capacity</h1>
-                                    <p className="text-sm lg:text-lg">UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum.
-                                    </p>
-                                </div>
-
-
-                            </CardAnimation>
-
-
-                            {/* card 4 */}
-                            <CardAnimation index={10} className="border-t-2 border-secondary hover:border-primary flex gap-6 lg:gap-5 pt-6 lg:pt-9 ">
-
-                                <h1 className="text-secondary hover:text-primary text-4xl lg:text-6xl min-w-fit">04</h1>
-
-                                <div className="flex flex-col gap-4">
-                                    <h1 className="text-lg lg:text-2xl font-semibold ">Higher Delivery Capacity</h1>
-                                    <p className="text-sm lg:text-lg">UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum.
-                                    </p>
-                                </div>
-
-
-                            </CardAnimation>
-
-                        </div>
-
-                        <div className="hidden lg:block w-full lg:w-1/3 h-[40vh] lg:h-auto lg:h-[80vh] bg-[url('/advantagecol3.png')] bg-cover  bg-bottom bg-no-repeat">
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
+            {/* logistics advantage */}
+            <LogisticsAdvantageSection />
 
         </div>
 

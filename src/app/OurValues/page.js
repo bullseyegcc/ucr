@@ -18,7 +18,17 @@ export default function OurValues() {
             </div>
 
             {/* Trust & Reliability Section */}
-            <div className="min-h-screen bg-[linear-gradient(180deg,#FFF_0%,rgba(255,255,255,0.44)_100%)] px-6 lg:px-10 py-12 lg:py-20">
+            <div className="min-h-screen bg-[linear-gradient(180deg,#FFF_0%,rgba(255,255,255,0.44)_100%)] px-6 lg:px-10 py-12 lg:py-20 relative overflow-hidden">
+                {/* Gradient Image Centered, Low Z-Index */}
+                <Image 
+                    src="/valuegrad.png" 
+                    alt="Gradient Circle" 
+                    width={900} 
+                    height={900} 
+                    className=" rotate-270 w-[80%]  absolute left-1/2 top-[60%] -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none select-none"
+                />
+               
+                   
                 <div className="w-full mx-auto">
                     {/* Header */}
                     <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-9 lg:gap-12 mb-12 lg:mb-16">
@@ -87,7 +97,7 @@ export default function OurValues() {
 
 
             {/* people */}
-            <div className="min-h-screen  bg-[url('/people.png')] bg-cover  bg-bottom bg-no-repeat">
+            <div className="min-h-screen  bg-[url('/people.png')] bg-cover pt-6 lg:pt-20  bg-bottom bg-no-repeat">
 
                 <div className="flex flex-col items-center gap-4 lg:gap-5 px-6 lg:px-10 pt-12 lg:pt-0">
                     <SlideIn direction="bottom" duration={0.8} scrollTrigger={true}>

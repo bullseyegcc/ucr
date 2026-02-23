@@ -169,9 +169,9 @@ export default function Technology() {
                         <CardAnimation index={3} className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%] transition-all duration-500 ease-out">
                             <SlideIn direction="top" scrollTrigger={true} duration={0.9}>
                                 <Image src="/lab1.png" alt="Icon" width={480} height={0} className="object-contain rounded-xl " />
-                                <div className="relative">
-                                    <span aria-hidden="true" className="absolute -left-0 -top-0 w-3 h-3 bg-[#FF6A00] rounded-full shadow-sm" />
-                                    <h1 className="text-xl font-medium text-gray-500 pl-4 ml-2">LECO Oxygen Analyzer</h1>
+                                <div className="relative mt-5 flex flex-col ">
+                                    <span aria-hidden="true" className="  w-3 h-3 bg-[#FF6A00] rounded-full shadow-sm" />
+                                    <h1 className="text-xl font-medium text-gray-500 pl-4 ml-2 ">LECO Oxygen Analyzer</h1>
                                 </div>
                             </SlideIn>
                         </CardAnimation>
@@ -180,8 +180,8 @@ export default function Technology() {
                         <CardAnimation index={4} className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%] mt-6 sm:mt-8 transition-all duration-500 ease-out">
                             <SlideIn direction="top" scrollTrigger={true} duration={0.9}>
                                 <Image src="/lab2.png" alt="Icon" width={480} height={0} className="object-contain rounded-xl " />
-                                <div className="relative">
-                                    <span aria-hidden="true" className="absolute -left-0 -top-0 w-3 h-3 bg-[#FF6A00] rounded-full shadow-sm" />
+                                <div className="relative mt-5 flex flex-col ">
+                                    <span aria-hidden="true" className=" w-3 h-3 bg-[#FF6A00] rounded-full shadow-sm" />
                                     <h1 className="text-xl font-medium text-gray-500 pl-4 ml-2">Twist/Torsion Tester,</h1>
                                 </div>
                             </SlideIn>
@@ -191,8 +191,8 @@ export default function Technology() {
                         <CardAnimation index={5} className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%]  mt-8 sm:mt-16 transition-all duration-500 ease-out">
                             <SlideIn direction="top" scrollTrigger={true} duration={0.9}>
                                 <Image src="/lab3.png" alt="Icon" width={480} height={300} className="h-[75%] lg:w-[90%]  object-fit rounded-xl " />
-                                <div className="relative">
-                                    <span aria-hidden="true" className="absolute -left-0 -top-0 w-3 h-3 bg-[#FF6A00] rounded-full shadow-sm" />
+                                <div className="relative mt-5 flex flex-col ">
+                                    <span aria-hidden="true" className="w-3 h-3 bg-[#FF6A00] rounded-full shadow-sm" />
                                     <h1 className="text-xl font-medium text-gray-500 pl-4 ml-2">UTS (Ultimate Tensile Strength)</h1>
                                 </div>
                             </SlideIn>

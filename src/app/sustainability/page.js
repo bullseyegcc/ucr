@@ -36,10 +36,10 @@ export default function sustainability() {
 
                 <div className="flex flex-col justify-center items-center font-medium w-full">
                     <Badge title="Core Strength" />
-                    <TextReveal className="text-xl lg:text-6xl mt-2 flex flex-col lg:flex-row items-center justify-center font-helvitica-now leading-tight gap-2">
-                        Our mission <FadeIn><Image src="/natureglobe.png" alt="Icon" width={60} height={0} className="lg:w-20" /></FadeIn> is to create
+                    <TextReveal className="leading-none     text-xl lg:text-6xl lg:mt-10 flex flex-col lg:flex-row items-center justify-center font-helvitica-now leading-tight gap-2">
+                        Our mission <FadeIn><Image src="/natureglobe.png" alt="Icon" width={60} height={0} className="relative lg:bottom-8 lg:w-20" /></FadeIn> is to create
                     </TextReveal>
-                    <TextReveal className="text-xl lg:text-6xl w-full lg:w-[60%] text-center leading-tight mt-4">
+                    <TextReveal className="relative lg:bottom-10  text-xl lg:text-6xl w-full lg:w-[60%] text-center leading-tight mt-4">
                         <span className="text-[#4F7363]">eco-friendly solutions </span> that promote recycling and green leaving
                     </TextReveal>
 

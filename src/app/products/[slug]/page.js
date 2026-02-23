@@ -44,7 +44,7 @@ export default function ProductDetail({ params }) {
             </div>
 
             {/* Content */}
-            <div className="min-h-screen   bg-[#F5F5F5]">
+            <div className="min-h-screen   bg-[#F5F5F5] -mb-10">
                 <div className="w-full  ">
                     <div className="flex flex-col lg:flex-row py-8 sm:py-10 px-6 sm:px-10 bg-white  ">
 
@@ -56,11 +56,19 @@ export default function ProductDetail({ params }) {
 
                             <div className="mt-6 sm:mt-8">
                                 <span className="text-lg sm:text-xl font-semibold text-[#FF6A00]">Sizes available:</span>
-                                <div className="flex flex-wrap gap-2 sm:gap-3 mt-3 sm:mt-4">
+                                <div className="flex gap-6 mt-3 sm:mt-4">
                                     {product.sizes?.map((size, i) => (
-                                        <span key={i} className="px-3 sm:px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-xs sm:text-sm font-medium">
-                                            {size}
-                                        </span>
+                                        <label key={i} className="flex items-center cursor-pointer gap-2">
+                                            <input
+                                                type="radio"
+                                                name="product-size"
+                                                value={size}
+                                                className="hidden peer"
+                                                defaultChecked={i === 0}
+                                            />
+                                            <span className="w-5 h-5 rounded-full bg-gray-200 peer-checked:bg-orange-400 transition-colors"></span>
+                                            <span className="text-gray-900 text-base sm:text-lg font-medium">{size}</span>
+                                        </label>
                                     ))}
                                 </div>
                             </div>
@@ -71,7 +79,7 @@ export default function ProductDetail({ params }) {
                             </div>
 
 
-                            <button className="w-full sm:w-90 bg-[#FE5D0A] text-white rounded-full py-3 mt-4 sm:mt-6 text-sm sm:text-base font-medium hover:bg-[#E04D00] transition-colors">Download Brochure</button>
+                            <button className="w-full sm:w-90 bg-[#FE5D0A] text-white rounded-full py-3 mt-4 sm:mt-20 text-sm sm:text-base font-medium hover:bg-[#E04D00] transition-colors">Download Brochure</button>
 
                         </div>
                         <div className="w-full lg:w-1/2 mt-6 lg:mt-0">
@@ -82,8 +90,8 @@ export default function ProductDetail({ params }) {
                     {/* Applications Section */}
                     <div className="mb-4 mt-12 sm:mt-20 px-6 sm:px-10">
                         <button onClick={() => toggleSection('applications')} className="w-full bg-white border border-gray-200 rounded-lg flex items-stretch hover:shadow-md transition-shadow">
-                            <div className="w-12 sm:w-16 h-auto flex items-center justify-center bg-orange-100 rounded-l-lg">
-                                <Layers size={20} className="sm:size-6 text-orange-500" />
+                            <div className={`w-12 sm:w-16 h-auto flex items-center justify-center rounded-l-lg transition-colors duration-300 ${expandedSections.applications ? 'bg-orange-100' : 'bg-gray-100'}`}> 
+                                <Image src="/applications.png" alt="Applications" width={32} height={32} className="sm:w-6 sm:h-6 w-5 h-5 object-contain" />
                             </div>
                             <div className="flex-1 flex items-center justify-between px-4 sm:px-6 py-4 sm:py-6">
                                 <h3 className="text-lg sm:text-xl font-semibold text-gray-900">Applications</h3>
@@ -117,8 +125,8 @@ export default function ProductDetail({ params }) {
                     {/* Technical Parameters Section */}
                     <div className="mb-4 px-6 sm:px-10">
                         <button onClick={() => toggleSection('technical')} className="w-full bg-white border border-gray-200 rounded-lg flex items-stretch hover:shadow-md transition-shadow">
-                            <div className="w-12 sm:w-16 h-auto flex items-center justify-center bg-orange-100 rounded-l-lg">
-                                <Wrench size={20} className="sm:size-6 text-orange-500" />
+                            <div className={`w-12 sm:w-16 h-auto flex items-center justify-center rounded-l-lg transition-colors duration-300 ${expandedSections.technical ? 'bg-orange-100' : 'bg-gray-100'}`}> 
+                                <Image src="/technical.png" alt="Technical Parameters" width={32} height={32} className="sm:w-6 sm:h-6 w-5 h-5 object-contain" />
                             </div>
                             <div className="flex-1 flex items-center justify-between px-4 sm:px-6 py-4 sm:py-6">
                                 <h3 className="text-lg sm:text-xl font-semibold text-gray-900">Technical Parameters</h3>
@@ -154,8 +162,8 @@ export default function ProductDetail({ params }) {
                     {/* Packaging Dimensions Section */}
                     <div className="mb-8 sm:mb-12 px-6 sm:px-10">
                         <button onClick={() => toggleSection('packaging')} className="w-full bg-white border border-gray-200 rounded-lg flex items-stretch hover:shadow-md transition-shadow">
-                            <div className="w-12 sm:w-16 h-auto flex items-center justify-center bg-orange-100 rounded-l-lg">
-                                <Package size={20} className="sm:size-6 text-orange-500" />
+                            <div className={`w-12 sm:w-16 h-auto flex items-center justify-center rounded-l-lg transition-colors duration-300 ${expandedSections.packaging ? 'bg-orange-100' : 'bg-gray-100'}`}>
+                                <Package size={20} className="sm:size-6 " />
                             </div>
                             <div className="flex-1 flex items-center justify-between px-4 sm:px-6 py-4 sm:py-6">
                                 <h3 className="text-lg sm:text-xl font-semibold text-gray-900">Packaging Dimensions</h3>
