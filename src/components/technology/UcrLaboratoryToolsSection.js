@@ -12,13 +12,13 @@ export default function UcrLaboratoryToolsSection() {
   ]
 
   return (
-    <section className="w-full   px-5 md:px-10 py-20">
+    <section className="w-full   px-5 lg:px-10 py-20">
       <div className="flex flex-col gap-5 items-center text-center mb-14">
         <SlideIn direction="bottom" scrollTrigger={true} duration={0.8}>
           <Badge title="UCR Laboratory" />
         </SlideIn>
 
-        <FadeIn className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight md:max-w-[80%]" scrollTrigger={true} duration={0.8}>
+        <FadeIn className="text-3xl lg:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight lg:max-w-[80%]" scrollTrigger={true} duration={0.8}>
           <h2>Tools that have assisted UCR in upholding its exceptional international standards.</h2>
         </FadeIn>
 
@@ -28,7 +28,7 @@ export default function UcrLaboratoryToolsSection() {
       <div className="mt-16 grid gap-4 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map((card, index) => (
           <CardAnimation key={card.title} index={index}>
-            <article className="text-center h-[35vh] sm:h-[60vh] md:h-[70vh] group relative overflow-hidden rounded-xl bg-white shadow-sm transition duration-300">
+            <article className="text-center h-[35vh] sm:h-[60vh] lg:h-[70vh] group relative overflow-hidden rounded-xl bg-white shadow-sm transition duration-300">
               <Image
                 src={card.src}
                 alt={card.alt}
@@ -40,7 +40,7 @@ export default function UcrLaboratoryToolsSection() {
               <Image src='/cardgradient.png' alt='Gradient Overlay' width={1200} height={800} className="absolute right-0 inset-0 h-full opacity-70" />
 
               <div className="absolute bottom-0 left-0 right-0 p-6 ">
-                <h3 className=" text-white text-lg md:text-2xl font-medium leading-snug text-left">{card.title}</h3>
+                <h3 className=" text-white text-lg lg:text-2xl font-medium leading-snug text-left">{card.title}</h3>
               </div>
             </article>
           </CardAnimation>

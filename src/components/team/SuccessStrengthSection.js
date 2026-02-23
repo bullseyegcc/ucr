@@ -20,7 +20,7 @@ export default function SuccessStrengthSection() {
   return (
     <section className="w-full  px-5 sm:px-10 py-30">
       {/* Top Row */}
-      <div className="flex flex-col lg:flex-row items-center lg:items-center justify-between gap-16 md:gap-10">
+      <div className="flex flex-col lg:flex-row items-center lg:items-center justify-between gap-16 lg:gap-10">
         
         {/* Left Side - Orange Circle Stat */}
         <div className="flex flex-col items-center lg:items-start gap-6 flex-1">
@@ -54,10 +54,10 @@ export default function SuccessStrengthSection() {
 
         {/* Right Side - Heading Block */}
         <div className="flex flex-col items-center lg:items-start justify-center flex-1">
-          <span className=" text-sm md:text-xl uppercase tracking-[2px] font-medium text-[#F26101] mb-4">
+          <span className=" text-sm lg:text-xl uppercase tracking-[2px] font-medium text-[#F26101] mb-4">
             THE STRENGTH BEHIND OUR SUCCESS
           </span>
-          <h2 className="text-4xl md:text-[40px] font-bold leading-[1.2] text-gray-900 max-w-[520px] md:text-center lg:text-left">
+          <h2 className="text-4xl lg:text-[40px] font-bold leading-[1.2] text-gray-900 max-w-[520px] lg:text-center lg:text-left">
             Built by people who build with pride
           </h2>
         </div>
@@ -65,12 +65,12 @@ export default function SuccessStrengthSection() {
 
       {/* Bottom Row */}
       <div className="mt-16 pt-10">
-        <div className="flex flex-col md:flex-row justify-between items-start gap-10 md:gap-4">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-10 lg:gap-4">
           {stats.map((stat, index) => (
             <FadeIn key={index} direction="left" duration={0.8} scrollTrigger={true} className="flex-1">
               <div className="flex gap-4 border-t border-gray-200 pt-10">
                 <p className="text-4xl  text-gray-400 font-medium mb-3">{stat.number}</p>
-                <p className="text-xl md:text-2xl font-bold leading-tight px-5">{stat.label}</p>
+                <p className="text-xl lg:text-2xl font-bold leading-tight px-5">{stat.label}</p>
               </div>
             </FadeIn>
           ))}

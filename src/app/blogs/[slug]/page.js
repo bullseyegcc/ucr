@@ -19,16 +19,16 @@ export default async function BlogDetail({ params }) {
                     News
                 </FadeIn>
             </div>
-            <div className="min-h-screen px-8 md:px-20 py-16">
+            <div className="min-h-screen px-8 lg:px-20 py-16">
 
 
                 <div className="max-w-4xl mx-auto">
                     <p className="text-sm text-gray-500">{post.date} • {post.category}</p>
-                    <h1 className="text-4xl md:text-5xl font-bold mt-4">{post.title}</h1>
+                    <h1 className="text-4xl lg:text-5xl font-bold mt-4">{post.title}</h1>
 
                     {post.image && (
                         <div className="mt-6 rounded-lg overflow-hidden shadow">
-                            <Image src={post.image} alt={post.title} width={1200} height={600} className="w-full h-72 md:h-[420px] object-cover" />
+                            <Image src={post.image} alt={post.title} width={1200} height={600} className="w-full h-72 lg:h-[420px] object-cover" />
                         </div>
                     )}
 
@@ -36,7 +36,7 @@ export default async function BlogDetail({ params }) {
                         {post.content.map((block, i) => {
                             if (block.type === "paragraph") {
                                 return (
-                                    <p key={i} className="text-base md:text-lg leading-relaxed">
+                                    <p key={i} className="text-base lg:text-lg leading-relaxed">
                                         {block.text}
                                     </p>
                                 );
@@ -63,11 +63,11 @@ export default async function BlogDetail({ params }) {
 
             <section className="my-20">
                 <div className="w-full px-10 mx-auto px-8">
-                    <div className="flex  flex-col md:flex-row gap-2 items-start justify-between mb-8">
+                    <div className="flex  flex-col lg:flex-row gap-2 items-start justify-between mb-8">
                         <div>
-                            <p className="uppercase text-[#FA6E43] text-xs md:text-lg font-semibold uppercase tracking-widest mb-3 md:mb-4">Our Blogs</p>
+                            <p className="uppercase text-[#FA6E43] text-xs lg:text-lg font-semibold uppercase tracking-widest mb-3 lg:mb-4">Our Blogs</p>
 
-                            <h2 className="text-4xl md:text-5xl font-bold">Latest news & insights</h2>
+                            <h2 className="text-4xl lg:text-5xl font-bold">Latest news & insights</h2>
                         </div>
                         <p className="text-gray-500 max-w-sm">Dive deep into fresh ideas, expert advice, and behind-the-scenes thinking.</p>
                     </div>
@@ -78,13 +78,13 @@ export default async function BlogDetail({ params }) {
                             return (
                                 <Link key={item.slug} href={`/blogs/${item.slug}`} className={`${isHero ? 'lg:col-span-2 lg:row-span-2' : 'col-span-1'} group block`}>
                                     <div className={`rounded overflow-hidden shadow-sm bg-white ${isHero ? '' : ''}`}>
-                                        <div className={`${isHero ? 'h-72 md:h-[360px]' : 'h-44 md:h-48'} w-full overflow-hidden`}>
+                                        <div className={`${isHero ? 'h-72 lg:h-[360px]' : 'h-44 lg:h-48'} w-full overflow-hidden`}>
                                             <Image src={item.image} alt={item.title} width={1200} height={700} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
                                         </div>
                                         <div className="p-4">
                                             <p className="text-xs text-gray-400 mb-2">{item.date}</p>
-                                            <h3 className={`font-semibold ${isHero ? 'text-lg md:text-xl' : 'text-sm md:text-base'}`}>{item.title}</h3>
-                                            <p className="text-sm text-gray-500 mt-2 hidden md:block">{item.excerpt}</p>
+                                            <h3 className={`font-semibold ${isHero ? 'text-lg lg:text-xl' : 'text-sm lg:text-base'}`}>{item.title}</h3>
+                                            <p className="text-sm text-gray-500 mt-2 hidden lg:block">{item.excerpt}</p>
                                         </div>
                                     </div>
                                 </Link>

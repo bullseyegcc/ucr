@@ -74,7 +74,7 @@ export default function HorizontalScrollGallery({ images = [] }) {
           return (
             <div
               key={index}
-              className={`flex-shrink-0 ${isWide ? 'w-[900px]' : 'w-[500px] md:w-[600px]'} h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg`}
+              className={`flex-shrink-0 ${isWide ? 'w-[900px]' : 'w-[500px] lg:w-[600px]'} h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-lg`}
             >
               <Image
                 src={image}

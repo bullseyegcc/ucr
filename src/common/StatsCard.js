@@ -39,7 +39,7 @@ export default function StatsCard({ mainHeading, subHeading, description }) {
   }, []);
 
   return (
-    <div ref={cardRef} className="flex flex-col gap-8 px-2 md:px-8 relative mt-10 group cursor-pointer transition-transform duration-500 ease-out hover:scale-[1.03]">
+    <div ref={cardRef} className="flex flex-col gap-8 px-2 lg:px-8 relative mt-10 group cursor-pointer transition-transform duration-500 ease-out hover:scale-[1.03]">
       <h1 className="text-primary text-6xl font-semibold z-99 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent transition-transform duration-500 ease-out">
         <CountUp
           from={0}
@@ -54,8 +54,8 @@ export default function StatsCard({ mainHeading, subHeading, description }) {
       </h1>
       <hr className="border-t border-secondary transition-all duration-400 ease-out group-hover:border-primary" />
       <div className="transition-transform duration-400 ease-out group-hover:translate-x-1">
-        <h1 className="font-medium text-lg sm:text-2xl">{subHeading}</h1>
-        <p className="text-xs md:text-sm font-light text-[#2122258C]/80 mt-2">{description}</p>
+          <h1 className="font-semibold text-lg sm:text-2xl">{subHeading}</h1>
+          <p className="text-xs lg:text-sm font-light mt-2">{description}</p>
       </div>
     </div>
   );

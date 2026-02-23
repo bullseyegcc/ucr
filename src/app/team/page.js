@@ -20,7 +20,7 @@ export default function Team() {
                 <FadeIn className=" max-w-[80%] text-center text-3xl lg:text-5xl lg:text-7xl font-medium text-white" duration={0.4} delay={0}>
                     Meet the People Behind the Power of Copper
                 </FadeIn>
-                <Image src='/whitegradient.png' alt='Vector Image' width={1200} height={900} className=" hidden md:block rotate-180  absolute -bottom-25 left-1/2 transform -translate-x-1/2  object-cover w-full" />
+                <Image src='/whitegradient.png' alt='Vector Image' width={1200} height={900} className=" hidden lg:block rotate-180  absolute -bottom-25 left-1/2 transform -translate-x-1/2  object-cover w-full" />
 
                 <Image src='/vector.png' alt='Vector Image' width={1200} height={900} className="rotate-180 opacity-70 absolute bottom-10 left-1/2 transform -translate-x-1/2  object-contain w-1/3" />
                 <Image src="/teamhero.png" alt="Team Image" width={1920} height={1080} className="w-full absolute bottom-0 object-center lg:object-cover rounded-lg " />

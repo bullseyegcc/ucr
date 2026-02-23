@@ -25,7 +25,7 @@ export function Badgetextwhite({ title }) {
     return (
         <div className="inline-flex items-center gap-3 text-white z-300">   
             <Image src={badge_icon} alt="Badge Icon" width={24} height={24} className='object-contain' />
-            <span className='text-white uppercase font-medium text-sm md:text-base'>{title}</span>
+            <span className='text-white uppercase font-medium text-sm lg:text-base'>{title}</span>
         </div>
     )
 }

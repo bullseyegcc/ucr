@@ -73,7 +73,7 @@ export const Navbar = () => {
     return(
         <>
             {/* Top Navigation Bar - Original Dark Theme */}
-            <div className="absolute top-0 left-0 w-full h-16 sm:h-20 bg-secondary/20 flex flex-row-reverse md:flex-row items-center justify-between px-4 sm:px-6 md:px-10 lg:px-12 z-50">
+            <div className="absolute top-0 left-0 w-full h-16 sm:h-20 bg-secondary/20 flex flex-row-reverse lg:flex-row items-center justify-between px-4 sm:px-6 lg:px-10 lg:px-12 z-50">
                 {/* Menu Button - Always visible */}
                 <div 
                     className='inline-block bg-secondary/20 p-2 cursor-pointer hover:bg-secondary/30 transition-all' 
@@ -88,11 +88,11 @@ export const Navbar = () => {
                     alt="Logo" 
                     width={140} 
                     height={140} 
-                    className='object-contain w-20 h-20 sm:w-24 sm:w-36 md:absolute md:left-1/2 md:-translate-x-1/2' 
+                    className='object-contain w-20 h-20 sm:w-24 sm:w-36 lg:absolute lg:left-1/2 lg:-translate-x-1/2' 
                 />
 
                 {/* Contact Button - Hidden on mobile */}
-                <Link href="/contactus" className='hidden md:block'>
+                <Link href="/contactus" className='hidden lg:block'>
                     <button className='flex items-center gap-2 w-36 lg:w-40 text-white border border-secondary rounded-2xl px-3 py-2 justify-between hover:bg-secondary/10 transition-all text-sm lg:text-base'>
                         Contact Us 
                         <ArrowRight size={18} color='white' />
@@ -105,14 +105,14 @@ export const Navbar = () => {
                 <>
                     {/* Overlay for larger screens */}
                     <div 
-                        className="fixed inset-0 bg-black/50 z-[9998] md:block"
+                        className="fixed inset-0 bg-black/50 z-[9998] lg:block"
                         onClick={() => setIsMenuOpen(false)}
                     />
                     
                     {/* Menu Panel - Light Theme */}
-                    <div className="fixed bg-white top-0 left-0 w-full sm:w-[400px] md:w-[420px] lg:w-[450px] h-full z-[9999] bg-white flex flex-col pt-4 sm:pt-6 px-6 sm:px-8 md:px-10 overflow-y-auto shadow-2xl animate-slide-in">
+                    <div className="fixed bg-white top-0 left-0 w-full sm:w-[400px] lg:w-[420px] lg:w-[450px] h-full z-[9999] bg-white flex flex-col pt-4 sm:pt-6 px-6 sm:px-8 lg:px-10 overflow-y-auto shadow-2xl animate-slide-in">
                         {/* Header with Logo and Close Button */}
-                        <div className="flex items-center justify-between mb-6 sm:mb-8 md:mb-10">
+                        <div className="flex items-center justify-between mb-6 sm:mb-8 lg:mb-10">
                             <Image 
                                 src="/clogo.png" 
                                 alt="Logo" 
@@ -134,7 +134,7 @@ export const Navbar = () => {
                                 <div key={item.label}>
                                     {item.type === 'simple' ? (
                                         <Link href={item.href} onClick={() => setIsMenuOpen(false)}>
-                                            <div className={`text-base sm:text-lg md:text-xl font-normal py-2 px-3 rounded-full cursor-pointer transition-colors ${
+                                            <div className={`text-base sm:text-lg lg:text-xl font-normal py-2 px-3 rounded-full cursor-pointer transition-colors ${
                                                 isActivePage(item.href)
                                                     ? 'text-primary'
                                                     : 'text-gray-800 hover:text-primary'
@@ -146,7 +146,7 @@ export const Navbar = () => {
                                         <div>
                                             <button
                                                 onClick={() => toggleSection(item.label)}
-                                                className={`w-full flex items-center justify-between text-base sm:text-lg md:text-xl font-normal py-2 px-3 rounded-full transition-colors ${
+                                                className={`w-full flex items-center justify-between text-base sm:text-lg lg:text-xl font-normal py-2 px-3 rounded-full transition-colors ${
                                                     expandedSection === item.label || menuStructure.find(m => m.label === item.label)?.items?.some(sub => isActivePage(sub.href))
                                                         ? 'text-primary'
                                                         : 'text-gray-800 hover:text-primary'
@@ -160,7 +160,7 @@ export const Navbar = () => {
                                             </button>
                                             {/* Expandable Submenu with smooth animation */}
                                             <div className={`overflow-hidden transition-all duration-300 ${expandedSection === item.label ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                                                <div className="flex flex-col gap-2 sm:gap-3 mt-2 ml-3 sm:ml-4 md:ml-6">
+                                                <div className="flex flex-col gap-2 sm:gap-3 mt-2 ml-3 sm:ml-4 lg:ml-6">
                                                     {item.items.map((subItem) => {
                                                         const isActive = isActivePage(subItem.href);
                                                         return (

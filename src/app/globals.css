@@ -9,11 +9,13 @@
 
 html {
   color-scheme: light !important;
-  background-color: #ffffff !important;
+  /* ✅ Ensure scroll is enabled on all devices */
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 :root {
-  --background: #ffffff !important;
+  --background: transparent !important;
   --foreground: #171717 !important;
   --font-primary: 'Helvetica Now Display', sans-serif;
 }
@@ -26,19 +28,22 @@ html {
   --font-primary: var(--font-primary);
 }
 
-/* Prevent GSAP pin-spacer from showing dark background or border seams */
+/* ✅ Prevent GSAP pin-spacer from showing dark background or border seams */
 .pin-spacer {
-  background-color: white !important;
+  background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
   outline: none !important;
 }
 
 body {
-  background: var(--background) !important;
+  background: transparent;
   color: var(--foreground) !important;
   font-family: var(--font-primary), sans-serif;
   color-scheme: light !important;
+  /* ✅ Ensure body is scrollable too */
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 @layer utilities {

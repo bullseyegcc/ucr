@@ -3,7 +3,7 @@ import { VideoPlayer } from "../../common/video.js";
 
 export default function CTA() {
   return (
-    <div className='relative min-h-[60vh] md:h-screen rounded-xl my-20 flex flex-col items-center gap-5 overflow-hidden'>
+    <div className='relative min-h-[60vh] lg:h-screen rounded-xl my-20 flex flex-col items-center gap-5 overflow-hidden'>
       
       <VideoPlayer src="/cta.mp4" className="absolute inset-0 w-full h-full object-cover" />
       

@@ -48,7 +48,7 @@ export default function OurTechnology() {
   return (
     <ParallaxSection index={0}>
       <div className="min-h-[70vh]  sm:min-h-screen flex flex-col  sm:flex-row gap-1 sm:mx-10 overflow-hidden">
-        <div className="min-h-[60vh] pt-10 md:min-h-screen sm:w-1/2 bg-[#FA6E43] rounded-xl px-3 md:px-8 py-8 flex flex-col gap-12 ">
+        <div className="min-h-[60vh] pt-20  lg:min-h-screen sm:w-1/2 bg-[#FA6E43] rounded-xl px-3 lg:px-8 py-10 flex flex-col gap-12 ">
           <div className="mt-8">
             <div className="animate-reveal">
               <WhiteBadge title="Core Strength" className='z-190' />
@@ -58,7 +58,7 @@ export default function OurTechnology() {
 
           <div>
             {/* All Tabs - Active gets white bg with description */}
-            <div className="flex flex-col gap-6 mt-20">
+            <div className="flex flex-col gap-6 mt-10">
               {TECHNOLOGIES.map((tech, index) => (
                 <div
                   key={tech.id}

@@ -13,7 +13,7 @@ export default function Logistics() {
         <div className="bg-[#F5F5F5]">
 
             {/* header */}
-            <div className=" mb-[40%] md:mb-[30%] bg-[url('/logisticsbg.png')]  bg-cover  bg-bottom bg-no-repeat relative flex  min-h-[55vh] sm:min-h-[80vh] items-center pt-[30%] md:pt-[15%] bg-black font-sans bg-primary flex flex-col items-center gap-10">
+            <div className=" mb-[40%] lg:mb-[30%] bg-[url('/logisticsbg.png')]  bg-cover  bg-bottom bg-no-repeat relative flex  min-h-[55vh] sm:min-h-[80vh] items-center pt-[30%] lg:pt-[15%] bg-black font-sans bg-primary flex flex-col items-center gap-10">
 
                 <SlideIn direction="bottom" duration={0.8} delay={0}>
                     <Badgetextwhite title="Our Logistics" />
@@ -275,7 +275,7 @@ export default function Logistics() {
 
                         </div>
 
-                        <div className="hidden lg:block w-full lg:w-1/3 h-[40vh] md:h-auto lg:h-[80vh] bg-[url('/advantagecol3.png')] bg-cover  bg-bottom bg-no-repeat">
+                        <div className="hidden lg:block w-full lg:w-1/3 h-[40vh] lg:h-auto lg:h-[80vh] bg-[url('/advantagecol3.png')] bg-cover  bg-bottom bg-no-repeat">
 
                         </div>
 

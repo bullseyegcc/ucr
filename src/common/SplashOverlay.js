@@ -67,16 +67,15 @@ export default function SplashOverlay() {
 
       const splashTl = gsap.timeline({
         onComplete: () => {
-          // Bulletproof scroll restoration
-          setTimeout(() => {
-            document.body.style.overflow = 'auto';
-            document.documentElement.style.overflow = 'auto';
-            document.body.style.height = 'auto';
-            document.documentElement.style.height = 'auto';
-            if (window.gsap && window.gsap.ScrollTrigger) {
-              window.gsap.ScrollTrigger.refresh(true);
-            }
-          }, 0);
+          // Restore scroll styles immediately
+          document.body.style.overflow = 'auto';
+          document.documentElement.style.overflow = 'auto';
+          document.body.style.height = 'auto';
+          document.documentElement.style.height = 'auto';
+          
+          // Ensure scroll is enabled on mobile
+          document.body.style.WebkitOverflowScrolling = 'touch';
+          
           // Hide overlay and container
           gsap.set([overlay, containerRef.current], { display: 'none', pointerEvents: 'none' });
         },

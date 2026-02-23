@@ -32,10 +32,10 @@ export default function ProductDetail({ params }) {
     return (
         <div className="flex flex-col gap-7">
             {/* Header */}
-            <div className="relative h-[40vh] sm:h-[50vh] md:h-[55vh] max-h-[80vh] font-medium flex items-center justify-center font-sans dark:bg-black overflow-hidden">
+            <div className="relative h-[40vh] sm:h-[50vh] lg:h-[55vh] max-h-[80vh] font-medium flex items-center justify-center font-sans dark:bg-black overflow-hidden">
                 <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#FF6A00] to-[#FF8C42]"></div>
                 <div className="absolute inset-0 z-10 pointer-events-none bg-[url('/productdetailbg.png')] bg-cover bg-center" ></div>
-                <h1 className="absolute top-[40%] w-[85%] sm:w-[70%] md:w-[60%] z-20 text-3xl sm:text-4xl md:text-6xl text-white flex flex-col items-center text-center gap-2 sm:gap-3 md:gap-4 px-4 sm:px-0">
+                <h1 className="absolute top-[40%] w-[85%] sm:w-[70%] lg:w-[60%] z-20 text-3xl sm:text-4xl lg:text-6xl text-white flex flex-col items-center text-center gap-2 sm:gap-3 lg:gap-4 px-4 sm:px-0">
                     <Badgetextwhite title='products' />
                     <FadeIn>
                         {product.name}
@@ -46,13 +46,13 @@ export default function ProductDetail({ params }) {
             {/* Content */}
             <div className="min-h-screen   bg-[#F5F5F5]">
                 <div className="w-full  ">
-                    <div className="flex flex-col md:flex-row py-8 sm:py-10 px-6 sm:px-10 bg-white  ">
+                    <div className="flex flex-col lg:flex-row py-8 sm:py-10 px-6 sm:px-10 bg-white  ">
 
-                        <div className="w-full md:w-1/2 p-4 sm:p-8 sm:px-16">
+                        <div className="w-full lg:w-1/2 p-4 sm:p-8 sm:px-16">
 
                             <span className="text-lg sm:text-xl text-[#5F5F66]">Description</span>
 
-                            <p className="w-full md:w-[80%] pt-4 text-base sm:text-xl leading-tight">{product.description}</p>
+                            <p className="w-full lg:w-[80%] pt-4 text-base sm:text-xl leading-tight">{product.description}</p>
 
                             <div className="mt-6 sm:mt-8">
                                 <span className="text-lg sm:text-xl font-semibold text-[#FF6A00]">Sizes available:</span>
@@ -74,8 +74,8 @@ export default function ProductDetail({ params }) {
                             <button className="w-full sm:w-90 bg-[#FE5D0A] text-white rounded-full py-3 mt-4 sm:mt-6 text-sm sm:text-base font-medium hover:bg-[#E04D00] transition-colors">Download Brochure</button>
 
                         </div>
-                        <div className="w-full md:w-1/2 mt-6 md:mt-0">
-                            <Image src='/pdetail.png' alt={product.name} width={1200} height={600} className="w-full h-48 sm:h-72 md:h-[420px] object-cover rounded-lg shadow" />
+                        <div className="w-full lg:w-1/2 mt-6 lg:mt-0">
+                            <Image src='/pdetail.png' alt={product.name} width={1200} height={600} className="w-full h-48 sm:h-72 lg:h-[420px] object-cover rounded-lg shadow" />
                         </div>
                     </div>
 
@@ -183,22 +183,22 @@ export default function ProductDetail({ params }) {
 
             {/* certifications */}
 
-            <div className="relative md:min-h-screen mt-8">
+            <div className="relative lg:min-h-screen mt-8">
 
                 {/* header */}
-                <div className="w-screen flex flex-col gap-3 sm:gap-4 md:gap-5 items-center justify-center text-center py-8 sm:py-12 md:py-16 lg:py-20 px-6">
+                <div className="w-screen flex flex-col gap-3 sm:gap-4 lg:gap-5 items-center justify-center text-center py-8 sm:py-12 lg:py-16 lg:py-20 px-6">
                     <SlideIn direction="bottom" scrollTrigger={true} duration={0.8} delay={0}>
                         <Badge title="Core Strength" />
                     </SlideIn>
 
 
                     <FadeIn duration={0.4} delay={0} scrollTrigger={true} className="flex justify-center">
-                        <h1 className="font-medium text-2xl text-center sm:text-3xl md:text-4xl lg:text-6xl mt-2 sm:mt-3 md:mt-4 leading-tight w-full sm:w-[85%] md:w-[75%] lg:w-[60%]">Our products meet global quality and safety standards.</h1>
+                        <h1 className="font-medium text-2xl text-center sm:text-3xl lg:text-4xl lg:text-6xl mt-2 sm:mt-3 lg:mt-4 leading-tight w-full sm:w-[85%] lg:w-[75%] lg:w-[60%]">Our products meet global quality and safety standards.</h1>
                     </FadeIn>
                 </div>
 
 
-                <div className="w-full sm:w-[90%] md:w-[85%] lg:w-[65%] flex items-center justify-center mx-auto px-6 sm:px-0">
+                <div className="w-full sm:w-[90%] lg:w-[85%] lg:w-[65%] flex items-center justify-center mx-auto px-6 sm:px-0">
 
 
                     <Image src="/certificate.png" alt="Icon" width={900} height={0} className="w-full object-cover  " />

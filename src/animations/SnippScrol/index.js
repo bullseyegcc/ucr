@@ -51,15 +51,15 @@ function newId() { return ++_instanceCount; }
 
 export default function SnippScrol({
   children,
-  scrub          = 1.5,
-  mobileScrub    = 1,
+  scrub          = 0.5,      // ✅ REDUCED further (from 0.8) - less lag with Lenis + trackpad
+  mobileScrub    = 0.3,      // ✅ REDUCED further (from 0.5) - mobile trackpad performance
   snapDuration   = 0.5,
   enableSnap     = true,
   enableExit     = true,
   grain          = false,
   grainOpacity   = 0.038,
-  lockAtEnd      = 0,      // extra scroll vh after last panel (drives onLockProgress)
-  onLockProgress = null,   // (progress: 0→1) => void — called during lock phase
+  lockAtEnd      = 0,
+  onLockProgress = null,
 }) {
   const containerRef = useRef(null);
   const sectionsRef  = useRef([]);
@@ -109,18 +109,24 @@ export default function SnippScrol({
       sections.forEach((section, i) => {
         if (i === 0) return;
         const prev = sections[i - 1];
+
+        // Incoming panel slides up from below
+        // ✅ Use force3D for GPU acceleration on transforms
         tl.fromTo(
           section,
-          { y: '100%' },
-          { y: '0%', ease: 'none', duration: 1 },
-          (i - 1)
+          { y: '100%', force3D: true },
+          { y: '0%', ease: 'none', duration: 1, force3D: true },
+          (i - 1)   // absolute position in the timeline
         );
+
+        // Optional: outgoing panel scales down and fades slightly
+        // ✅ Composite properties only (transform + opacity) for GPU
         if (enableExit && prev) {
           tl.fromTo(
             prev,
-            { scale: 1, opacity: 1 },
-            { scale: 0.93, opacity: 0.6, ease: 'none', duration: 0.6 },
-            (i - 1)
+            { scale: 1, opacity: 1, force3D: true },
+            { scale: 0.93, opacity: 0.6, ease: 'none', duration: 0.6, force3D: true },
+            (i - 1)       // runs in parallel with the slide-in
           );
         }
       });
@@ -180,12 +186,11 @@ export default function SnippScrol({
         },
       });
 
-      requestAnimationFrame(() => {
-        const spacer = container.closest('.pin-spacer') || container.parentElement;
-        if (spacer && spacer.classList.contains('pin-spacer')) {
-          spacer.style.backgroundColor = 'white';
-        }
-      });
+      // ✅ Style the pin-spacer immediately (remove rAF to prevent extra repaints)
+      const spacer = container.closest('.pin-spacer') || container.parentElement;
+      if (spacer && spacer.classList.contains('pin-spacer')) {
+        spacer.style.backgroundColor = 'white';
+      }
 
     }, container);
 
@@ -234,6 +239,8 @@ export default function SnippScrol({
           transform: 'translateZ(0)',
           backfaceVisibility: 'hidden',
           WebkitBackfaceVisibility: 'hidden',
+          willChange:           'transform, opacity',   // ✅ GPU acceleration for pinned container
+          contain:              'layout style paint',    // ✅ Isolate paint boundaries
         }}
       >
         {childArray.map((child, index) => (

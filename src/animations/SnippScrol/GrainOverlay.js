@@ -33,6 +33,9 @@ export default function GrainOverlay({
         backgroundRepeat: 'repeat',
         backgroundSize: `${size}px ${size}px`,
         willChange: 'auto',    // no animation, no will-change needed
+        contain: 'strict',     // ✅ Optimize: prevent layout recalculation
+        transform: 'translateZ(0)', // ✅ GPU acceleration hint
+        backfaceVisibility: 'hidden',
       }}
     />
   );

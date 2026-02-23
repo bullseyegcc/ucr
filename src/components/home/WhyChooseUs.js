@@ -28,7 +28,7 @@ export default function WhyChooseUs() {
 
         {/* ── Featured left card ─────────────────────────────────────── */}
         <div
-          className="relative min-h-[50vh] flex flex-col justify-between items-start row-span-2 bg-[url('/excellence.png')] bg-cover bg-center md:ml-10 rounded-xl group cursor-pointer transition-all duration-400 ease-out"
+          className="relative min-h-[50vh] flex flex-col justify-between items-start row-span-2 bg-[url('/excellence.png')] bg-cover bg-center lg:ml-10 rounded-xl group cursor-pointer transition-all duration-400 ease-out"
           style={{ willChange: 'transform, opacity' }}
         >
           <VideoPlayer src="/excellence.mp4" className="object-contain rounded-2xl" />

@@ -72,22 +72,22 @@ export default function WeCareSection() {
   return (
     <div
       ref={sectionRef}
-      className="relative min-h-[80vh] pt-8 px-5 sm:px-0 sm:h-[90vh] flex flex-col justify-between bg-[url('/care.jpg')] bg-cover bg-center mx-4 md:mx-10 my-5 rounded-xl overflow-hidden"
+      className="relative min-h-[80vh] pt-8 px-5 sm:px-0 sm:h-[90vh] flex flex-col justify-between bg-[url('/care.jpg')] bg-cover bg-center mx-4 lg:mx-10 my-5 rounded-xl overflow-hidden"
     >
       <VideoPlayer src="/sustain.mp4" className="absolute inset-0 w-full h-full object-cover" />
 
-      <div ref={headingRef} className="absolute top-6 md:top-15 px-4 md:px-10 z-10">
+      <div ref={headingRef} className="absolute top-6 lg:top-15 px-4 lg:px-10 z-10">
         <WhiteBadge title="What we Care" />
-        <h1 className="text-2xl md:text-4xl text-white font-medium mt-3 md:mt-5">Sustainability</h1>
+        <h1 className="text-2xl lg:text-4xl text-white font-semibold mt-3 lg:mt-5">Sustainability</h1>
       </div>
 
       <div className="absolute bottom-4 w-full z-20">
-        <div className="hidden md:grid md:grid-cols-3 gap-4 md:gap-6 px-4 md:px-10 w-full overflow-x-auto md:overflow-visible snap-x md:snap-none">
+        <div className="hidden lg:grid lg:grid-cols-3 gap-4 lg:gap-6 px-4 lg:px-10 w-full overflow-x-auto lg:overflow-visible snap-x lg:snap-none">
           {CARDS.map((card, i) => (
             <div
               key={card.title}
               ref={(el) => { if (el) cardsRef.current[i] = el; }}
-              className="flex-none w-90 sm:w-full md:min-w-0 bg-white/20 backdrop-blur-sm text-center flex flex-col items-center py-12 px-10 mx-2 rounded-xl gap-3 shadow-lg snap-start"
+              className="flex-none w-90 sm:w-full lg:min-w-0 bg-white/20 backdrop-blur-sm text-center flex flex-col items-center py-12 px-10 mx-2 rounded-xl gap-3 shadow-lg snap-start"
               style={{ willChange: 'transform, opacity' }}
             >
               <Image
@@ -95,10 +95,10 @@ export default function WeCareSection() {
                 alt={card.title}
                 width={140}
                 height={130}
-                className="w-40 h-25 md:w-46 md:h-[130px]"
+                className="w-40 h-25 lg:w-46 lg:h-[130px]"
               />
-              <h1 className="text-lg md:text-2xl text-white font-medium">{card.title}</h1>
-              <p className="text-secondary text-sm md:text-sm">{card.desc}</p>
+              <h1 className="text-lg lg:text-2xl text-white font-medium">{card.title}</h1>
+              <p className="text-secondary text-sm lg:text-sm">{card.desc}</p>
             </div>
           ))}
         </div>
