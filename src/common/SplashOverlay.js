@@ -165,15 +165,25 @@ export default function SplashOverlay() {
       //   '-=0.55'
       // );
 
-      // Final fade out - masks stay centered and disappear
+      // Final: scale mask up dramatically to "enter" the logo, then hide overlay
+      splashTl.to(
+        [maskGroupRef.current, outlineRef.current],
+        {
+          attr: { transform: `translate(${centerX}, ${centerY}) scale(${endScale * 8}) translate(-37.5, -19)` },
+          opacity: 1,
+          duration: isMobile ? 1.2 : 1.5,
+          ease: 'expo.in',
+        },
+        '-=0.1'
+      );
       splashTl.to(
         overlay,
         {
           opacity: 0,
-          duration: isMobile ? 1.2 : 1.5,
+          duration: 0.2,
           ease: 'sine.inOut',
         },
-        '-=0.1'
+        '>-0.1'
       );
     }, 100);
 
