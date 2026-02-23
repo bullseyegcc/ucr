@@ -40,6 +40,8 @@ export default function JourneySection() {
   const pinRef = useRef(null)
   const trackRef = useRef(null)
   const dotsRef = useRef([])
+  const yearsRef = useRef([])
+  const progressBarRef = useRef(null)
 
   useEffect(() => {
     const section = sectionRef.current
@@ -92,13 +94,30 @@ export default function JourneySection() {
                 self.progress * (journeyData.length - 1)
               )
 
+              // update progress bar width
+              if (progressBarRef.current) {
+                progressBarRef.current.style.width = `${Math.max(3, self.progress * 100)}%`
+              }
+
               dotsRef.current.forEach((dot, index) => {
                 if (!dot) return
                 const isActive = index === activeIndex
-                dot.style.backgroundColor = isActive
-                  ? "#F26522"
-                  : "rgba(0,0,0,0.2)"
-                dot.style.transform = isActive ? "scale(1.3)" : "scale(1)"
+                dot.style.borderColor = isActive ? '#F26522' : 'rgba(255,255,255,0.28)'
+                dot.style.background = isActive ? '#F26522' : 'transparent'
+                dot.style.boxShadow = isActive ? '0 0 0 6px rgba(242,101,34,0.18)' : 'none'
+                dot.style.transform = isActive ? 'scale(1.25)' : 'scale(1)'
+                const inner = dot.querySelector && dot.querySelector('.w-2')
+                if (inner) inner.style.opacity = isActive ? '1' : '0.9'
+              })
+
+              // animate year labels opacity/weight
+              yearsRef.current.forEach((yr, idx) => {
+                if (!yr) return
+                const active = idx === activeIndex
+                yr.style.opacity = active ? '1' : '0.55'
+                yr.style.transform = active ? 'translateY(-4px) scale(1.02)' : 'translateY(0px) scale(1)'
+                yr.style.transition = 'all 0.28s ease'
+                yr.style.fontWeight = active ? '600' : '500'
               })
             },
           },
@@ -181,21 +200,47 @@ export default function JourneySection() {
           ))}
         </div>
 
-        {/* Shared dots indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 z-10">
-          {journeyData.map((_, i) => (
-            <div
-              key={i}
-              ref={(el) => {
-                dotsRef.current[i] = el
-              }}
-              className="w-2.5 h-2.5 rounded-full transition-all duration-300"
-              style={{
-                backgroundColor: i === 0 ? "#F26522" : "rgba(0,0,0,0.2)",
-                transform: i === 0 ? "scale(1.3)" : "scale(1)",
-              }}
-            />
-          ))}
+        {/* Timeline indicator */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[90vw] max-w-[700px] flex flex-col items-center z-10">
+          {/* Years row */}
+          <div className="flex w-full justify-between mb-2">
+            {journeyData.map((item, i) => (
+              <span
+                key={i}
+                ref={el => (yearsRef.current[i] = el)}
+                className="text-white text-[13px] font-medium transition-all tracking-widest"
+                style={{ opacity: i === 0 ? 1 : 0.6, letterSpacing: '0.14em' }}
+              >
+                {item.year}
+              </span>
+            ))}
+          </div>
+          {/* Timeline line and circles */}
+          <div className="relative w-full h-8 flex items-center">
+            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-gradient-to-r from-[#F26522]/60 to-[#FA6E43]/40" />
+            <div ref={progressBarRef} className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-[#F26522] rounded-full" style={{ width: '0%', transition: 'width 0.28s linear' }} />
+            {journeyData.map((item, i) => (
+              <div
+                key={i}
+                className="absolute z-10 flex flex-col items-center top-1/2 -translate-y-1/2"
+                style={{ left: `calc(${(i / (journeyData.length - 1)) * 100}% - 16px)` }}
+              >
+                <div
+                  ref={el => (dotsRef.current[i] = el)}
+                  className="w-8 h-8 flex items-center justify-center rounded-full border-4"
+                  style={{
+                    borderColor: i === 0 ? '#F26522' : 'rgba(255,255,255,0.18)',
+                    background: i === 0 ? '#F26522' : 'transparent',
+                    boxShadow: i === 0 ? '0 0 0 8px rgba(242,101,34,0.18)' : 'none',
+                    transition: 'all 0.28s ease',
+                    backdropFilter: 'saturate(120%) blur(2px)'
+                  }}
+                >
+                  <div className="w-3 h-3 rounded-full bg-white" />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Scroll hint */}

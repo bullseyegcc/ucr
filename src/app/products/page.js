@@ -68,44 +68,45 @@ export default function blogs() {
                     <div className="w-full px-2 lg:px-10 ">
                         {/* Featured Product */}
                         <Link href={`/products/${products[0].slug}`}>
-                            <div className="bg-[#FF6A00] rounded-lg p-8 mb-12 flex flex-col lg:flex-row items-center justify-between hover:shadow-lg gap-9 lg:gap-6 transition-shadow cursor-pointer">
-                                <div className="flex-1 flex flex-col gap-5">
+                            <div className=" bg-[#FF6A00] rounded-lg p-8 mb-12 flex flex-col lg:flex-row items-center justify-between hover:shadow-lg gap-9 lg:gap-6 transition-shadow cursor-pointer">
+                                <div className="flex-1 flex flex-col gap-5 lg:w-[50%]">
                                     <p className="text-3xl font-medium text-white    mb-2">{products[0].sku}</p>
                                     <h3 className="text-5xl font-semibold text-white mb-3">{products[0].name}</h3>
                                     <p className="text-white/90 text-xl leading-relaxed ">{products[0].description}</p>
-                                </div>
-                                <div className="w-full lg:w-[22%] lg:ml-8 bg-white rounded-lg ">
-                                    <Image src="/drawnwire.png" alt="Icon" width={300} height={300} className="w-full h-full object-cover" />
-                                </div>
-                                <button
-                                    onClick={() => router.push(`/products/${product.slug}`)}
-                                    className="w-60 hidden group-hover:flex gap-2 items-center duration-300 bg-white hover:bg-gray-100 text-primary px-6 py-4 rounded-full font-semibold transition-all duration-300 ease-in-out mt-6"
+                                       <button
+                                    onClick={() => router.push(`/products/${products[0].slug}`)}
+                                    className="w-60 flex gap-2 items-center duration-300 bg-white hover:bg-gray-100 text-primary px-6 py-4 rounded-full font-semibold transition-all duration-300 ease-in-out mt-6"
                                 >
                                     Details About Product
                                     <ArrowRight size={18} color='#FF6A00' />
                                 </button>
+                               </div>
+                                <div className="w-full lg:w-[22%] lg:ml-8 bg-white rounded-lg ">
+                                    <Image src="/drawnwire.png" alt="Icon" width={300} height={300} className="w-full h-full object-cover" />
+                                </div>
+                              
                             </div>
                         </Link>
 
                         {/* Products Grid */}
                         <div className="w-full">
                             {products.slice(1).map((product, idx) => (
-                                <div key={product.id} className="relative group text-[#5F5F66] bg-white rounded-lg p-8 mb-12 flex flex-col lg:flex-row items-center justify-between gap-9 lg:gap-6 transition-all cursor-pointer overflow-hidden hover:bg-[#FF6A00] hover:shadow-lg">
+                                <div key={product.id} className="relative group text-[#5F5F66] bg-white rounded-lg p-8 mb-12 flex flex-col lg:flex-row items-center justify-between gap-9 lg:gap-6 transition-all duration-700 ease-in-out cursor-pointer overflow-hidden hover:bg-[#FF6A00] hover:shadow-lg">
                                     <div className="flex-1 flex flex-col gap-5 w-full lg:w-auto">
-                                        <p className="text-3xl font-medium mb-2 transition-all duration-300 ease-in-out group-hover:text-white">{product.sku}</p>
-                                        <h3 className="text-5xl font-semibold mb-3 transition-all duration-300 ease-in-out group-hover:text-white">{product.name}</h3>
-                                        <p className="text-lg leading-relaxed transition-all duration-300 ease-in-out group-hover:text-white/90">{product.description}</p>
+                                        <p className="text-3xl font-medium mb-2 transition-all duration-700 ease-in-out group-hover:text-white">{product.sku}</p>
+                                        <h3 className="text-5xl font-semibold mb-3 transition-all duration-700 ease-in-out group-hover:text-white">{product.name}</h3>
+                                        <p className="text-lg leading-relaxed transition-all duration-700 ease-in-out group-hover:text-white/90">{product.description}</p>
 
                                         <button
                                             onClick={() => router.push(`/products/${product.slug}`)}
-                                            className="w-60 flex gap-2 items-center duration-300 bg-white hover:bg-gray-100 text-primary px-6 py-4 rounded-full font-semibold transition-all duration-300 ease-in-out mt-6"
+                                            className="w-60 hidden group-hover:flex gap-2 items-center bg-white hover:bg-gray-100 text-primary px-6 py-4 rounded-full font-semibold transition-all duration-700 ease-in-out mt-6"
                                         >
                                             Details About Product
                                             <ArrowRight size={18} color='#FF6A00' />
                                         </button>
                                     </div>
-                                    <div className="w-full lg:w-[22%] lg:ml-8 bg-white rounded-lg transition-all duration-300 ease-in-out hidden group-hover:block">
-                                        <Image src="/drawnwire.png" alt="Icon" width={300} height={300} className="w-full h-full object-cover" />
+                                    <div className="w-full lg:w-[22%] lg:ml-8 bg-white rounded-lg transition-all duration-700 ease-in-out hidden group-hover:block">
+                                        <Image src="/drawnwire.png" alt="Icon" width={300} height={300} className="w-full h-full object-cover transition-all duration-700 ease-in-out" />
                                     </div>
                                 </div>
                             ))}

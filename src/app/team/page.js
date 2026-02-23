@@ -73,7 +73,7 @@ export default function Team() {
                     <TextReveal>
                         <p className="pl-3 lg:pl-5 text-sm lg:text-4xl p-0 italic leading-relaxed font-light">At UCR, we are grounded in vision, trust, and a commitment to excellence. We believe success is measured not just by financial gains but by the positive impact we have on our communities and future generations.We have broadened our investments across various sectors with a clear strategy. As global markets change, we remain focused on responsible growth, continuous innovation, and delivering lasting value.</p>
                     </TextReveal>
-                    <Image src="/quote.png" alt="Icon" width={40} height={0} className="self-end w-8 lg:w-[60px] absolute right-35 bottom-0" />
+                    <Image src="/quote.png" alt="Icon" width={40} height={0} className="self-end w-8 lg:w-[60px] absolute right-0 bottom-0" />
 
                 </div>
 
