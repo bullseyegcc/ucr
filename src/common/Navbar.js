@@ -3,13 +3,40 @@
 import { Menu, ArrowRight, X, ChevronDown, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 export const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [expandedSection, setExpandedSection] = useState(null);
+    const [isScrolled, setIsScrolled] = useState(false);
     const pathname = usePathname();
+
+    // Scroll detection for navbar opacity and sticky behavior
+    useEffect(() => {
+        let ticking = false;
+
+        const handleScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    // Hero section threshold - adjust as needed (80vh or 600px)
+                    const heroThreshold = Math.min(window.innerHeight * 0.8, 600);
+                    setIsScrolled(window.scrollY > heroThreshold);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        
+        // Check initial scroll position
+        handleScroll();
+
+        // Cleanup
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const isActivePage = (href) => {
         return pathname === href || pathname.startsWith(href + '/');
@@ -72,30 +99,49 @@ export const Navbar = () => {
 
     return(
         <>
-            {/* Top Navigation Bar - Original Dark Theme */}
-            <div className="absolute top-0 left-0 w-full h-16 sm:h-20 bg-secondary/20 flex flex-row-reverse lg:flex-row items-center justify-between px-4 sm:px-6 lg:px-10 lg:px-12 z-50">
-                {/* Menu Button - Always visible */}
+            {/* Top Navigation Bar - Dynamic opacity and sticky behavior */}
+            <div className={`top-0 left-0 w-full h-16 sm:h-20 flex flex-row-reverse lg:flex-row items-center justify-between px-4 sm:px-6 lg:px-10 lg:px-12 z-50 transition-all duration-500 ease-in-out ${
+                isScrolled 
+                    ? 'fixed bg-white shadow-lg backdrop-blur-sm transform translate-y-0 opacity-100' 
+                    : 'absolute bg-secondary/20 transform translate-y-0 opacity-100'
+            }`}>
+                {/* Menu Button - Dynamic color based on scroll state */}
                 <div 
-                    className='inline-block bg-secondary/20 p-2 cursor-pointer hover:bg-secondary/30 transition-all' 
+                    className={`inline-block p-2 cursor-pointer transition-all duration-300 ${
+                        isScrolled 
+                            ? 'bg-gray-100 hover:bg-gray-200' 
+                            : 'bg-secondary/20 hover:bg-secondary/30'
+                    }`}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
-                    <Menu size={24} className="sm:w-7 sm:h-7" color="white" />
+                    <Menu 
+                        size={24} 
+                        className="sm:w-7 sm:h-7" 
+                        color={isScrolled ? '#1a1a1a' : 'white'} 
+                    />
                 </div>
 
                 {/* Logo - Centered on mobile, left on desktop */}
                 <Image 
-                    src="/logo.png" 
+                    src={isScrolled ? "/clogo.png" : "/logo.png"}
                     alt="Logo" 
                     width={140} 
                     height={140} 
-                    className='object-contain w-20 h-20 sm:w-24 sm:w-36 lg:absolute lg:left-1/2 lg:-translate-x-1/2' 
+                    className='object-contain w-20 h-20 sm:w-24 sm:w-36 lg:absolute lg:left-1/2 lg:-translate-x-1/2 transition-all duration-300' 
                 />
 
-                {/* Contact Button - Hidden on mobile */}
+                {/* Contact Button - Hidden on mobile, dynamic color */}
                 <Link href="/contactus" className='hidden lg:block'>
-                    <button className='flex items-center gap-2 w-36 lg:w-40 text-white border border-secondary rounded-2xl px-3 py-2 justify-between hover:bg-secondary/10 transition-all text-sm lg:text-base'>
+                    <button className={`flex items-center gap-2 w-36 lg:w-40 border rounded-2xl px-3 py-2 justify-between transition-all duration-300 text-sm lg:text-base ${
+                        isScrolled
+                            ? 'text-gray-900 border-gray-900 hover:bg-gray-100'
+                            : 'text-white border-secondary hover:bg-secondary/10'
+                    }`}>
                         Contact Us 
-                        <ArrowRight size={18} color='white' />
+                        <ArrowRight 
+                            size={18} 
+                            color={isScrolled ? '#1a1a1a' : 'white'} 
+                        />
                     </button>
                 </Link>
             </div>

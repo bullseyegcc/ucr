@@ -35,7 +35,7 @@ export default function BlogsPage() {
                             <h2 className="text-3xl lg:text-4xl font-bold lg:text-6xl font-bold text-black leading-tight">Latest News & Insights</h2>
                         </div>
                         <div className="flex items-start self-center">
-                            <p className="text-gray-700 text-sm lg:text-2xl leading-relaxed  lg:text-left max-w-lg leading-tight ml-auto">Dive deep into fresh ideas, expert advice,
+                            <p className="w-[50%] text-gray-700 text-sm lg:text-xl font-light leading-relaxed  lg:text-left max-w-lg leading-tight ml-auto">Dive deep into fresh ideas, expert advice,
                                 and behind-the-scenes thinking.</p>
                         </div>
                     </div>
