@@ -19,7 +19,7 @@ export default function parentCompany() {
                     <Badgetextwhite title="Our Logistics" />
                 </SlideIn>
 
-                <FadeIn className="w-full lg:w-3/4 lg:w-2/3 text-center text-3xl lg:text-5xl font-bold text-white leading-tight px-6" duration={0.4} delay={0}>
+                <FadeIn className="w-full lg:w-3/4 lg:w-2/3 text-center text-xl lg:text-5xl font-medium text-white leading-tight px-6" duration={0.4} delay={0}>
                     UCR has a higher delivery capacity in the Copper Industry
                 </FadeIn>
 

@@ -40,7 +40,7 @@ export default function blogs() {
                     <div className="absolute top-16  flex flex-col items-center gap-4">
 
                         <Badgetextblack title="What we produce" className="" />
-                        <TextReveal className="w-full px-40 w-[85%] text-2xl lg:text-4xl mt-9 text-center leading-tight text-primary">
+                        <TextReveal className="w-full px-5 lg:px-40 lg:w-[85%] text-2xl lg:text-4xl mt-9 text-center leading-tight text-primary">
                             Union Copper Rod's primary products are the 8mm, 12.5mm, copper rods that have at least 99.95% copper content and comply with international standards including BS: EN 1977 and ASTM-B49.
                         </TextReveal>
 
@@ -91,21 +91,31 @@ export default function blogs() {
                         {/* Products Grid */}
                         <div className="w-full">
                             {products.slice(1).map((product, idx) => (
-                                <div key={product.id} className="relative group text-[#5F5F66] bg-white rounded-lg p-8 mb-12 flex flex-col lg:flex-row items-center justify-between gap-9 lg:gap-6 transition-all duration-700 ease-in-out cursor-pointer overflow-hidden hover:bg-[#FF6A00] hover:shadow-lg">
+                                <div
+                                    key={product.id}
+                                    className={
+                                        `relative group text-[#5F5F66] bg-white rounded-lg p-8 mb-12 flex flex-col lg:flex-row items-center justify-between gap-9 lg:gap-6 transition-all duration-700 ease-in-out cursor-pointer overflow-hidden ` +
+                                        `hover:bg-[#FF6A00] hover:shadow-lg ` +
+                                        `lg:bg-white ` +
+                                        `lg:text-[#5F5F66] ` +
+                                        `lg:hover:bg-[#FF6A00] lg:hover:shadow-lg ` +
+                                        `mobile:bg-[#FF6A00] mobile:shadow-lg mobile:text-white`
+                                    }
+                                >
                                     <div className="flex-1 flex flex-col gap-5 w-full lg:w-auto">
-                                        <p className="text-3xl font-medium mb-2 transition-all duration-700 ease-in-out group-hover:text-white">{product.sku}</p>
-                                        <h3 className="text-5xl font-semibold mb-3 transition-all duration-700 ease-in-out group-hover:text-white">{product.name}</h3>
-                                        <p className="text-lg leading-relaxed transition-all duration-700 ease-in-out group-hover:text-white/90">{product.description}</p>
+                                        <p className="text-3xl font-medium mb-2 transition-all duration-700 ease-in-out group-hover:text-white lg:group-hover:text-white mobile:text-white">{product.sku}</p>
+                                        <h3 className="text-5xl font-semibold mb-3 transition-all duration-700 ease-in-out group-hover:text-white lg:group-hover:text-white mobile:text-white">{product.name}</h3>
+                                        <p className="text-lg leading-relaxed transition-all duration-700 ease-in-out group-hover:text-white/90 lg:group-hover:text-white/90 mobile:text-white/90">{product.description}</p>
 
                                         <button
                                             onClick={() => router.push(`/products/${product.slug}`)}
-                                            className="w-60 hidden group-hover:flex gap-2 items-center bg-white hover:bg-gray-100 text-primary px-6 py-4 rounded-full font-semibold transition-all duration-700 ease-in-out mt-6"
+                                            className="w-60 flex gap-2 items-center border border-primary lg:border-0 bg-white hover:bg-gray-100 text-primary px-6 py-4 rounded-full font-semibold transition-all duration-700 ease-in-out mt-6 lg:hidden group-hover:flex mobile:flex"
                                         >
                                             Details About Product
                                             <ArrowRight size={18} color='#FF6A00' />
                                         </button>
                                     </div>
-                                    <div className="w-full lg:w-[22%] lg:ml-8 bg-white rounded-lg transition-all duration-700 ease-in-out hidden group-hover:block">
+                                    <div className="w-full lg:w-[22%] lg:ml-8 bg-white rounded-lg transition-all duration-700 ease-in-out block group-hover:block mobile:block lg:hidden">
                                         <Image src="/drawnwire.png" alt="Icon" width={300} height={300} className="w-full h-full object-cover transition-all duration-700 ease-in-out" />
                                     </div>
                                 </div>

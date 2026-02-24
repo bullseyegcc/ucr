@@ -13,7 +13,7 @@ export default function Team() {
 
     return (
         <div >
-            <div className="relative flex min-h-[55vh] lg:min-h-[120vh] items-center pt-40 bg-black font-sans bg-primary flex flex-col gap-6 lg:gap-8 lg:gap-10 ">
+            <div className="relative flex min-h-[55vh] lg:min-h-[120vh] items-center pt-20 lg:pt-40 bg-black font-sans bg-primary flex flex-col gap-6 lg:gap-8 lg:gap-10 ">
                 <SlideIn direction="bottom" duration={0.8} delay={0}>
                     <Badgetextwhite title="Our Team " />
                 </SlideIn>
@@ -22,7 +22,7 @@ export default function Team() {
                 </FadeIn>
                 <Image src='/whitegradient.png' alt='Vector Image' width={1200} height={900} className=" hidden lg:block rotate-180  absolute -bottom-25 left-1/2 transform -translate-x-1/2  object-cover w-full" />
 
-                <Image src='/vector.png' alt='Vector Image' width={1200} height={900} className="rotate-180 opacity-70 absolute bottom-10 left-1/2 transform -translate-x-1/2  object-contain w-1/3" />
+                <Image src='/vector.png' alt='Vector Image' width={1200} height={900} className="rotate-180 opacity-70 absolute bottom-0 left-1/2 transform -translate-x-1/2  object-contain w-1/3" />
                 <Image src="/teamhero.png" alt="Team Image" width={1920} height={1080} className="w-full absolute bottom-0 object-center lg:object-cover rounded-lg " />
             </div>
 
@@ -71,7 +71,7 @@ export default function Team() {
 
                     <Image src="/quote.png" alt="Icon" width={40} height={0} className="w-8 lg:w-[60px]" />
                     <TextReveal>
-                        <p className="pl-3 lg:pl-5 text-sm lg:text-4xl p-0 italic leading-relaxed font-light">At UCR, we are grounded in vision, trust, and a commitment to excellence. We believe success is measured not just by financial gains but by the positive impact we have on our communities and future generations.We have broadened our investments across various sectors with a clear strategy. As global markets change, we remain focused on responsible growth, continuous innovation, and delivering lasting value.</p>
+                        <p className="pl-3 lg:pl-5 text-xl lg:text-4xl p-0 italic leading-relaxed font-light">At UCR, we are grounded in vision, trust, and a commitment to excellence. We believe success is measured not just by financial gains but by the positive impact we have on our communities and future generations.We have broadened our investments across various sectors with a clear strategy. As global markets change, we remain focused on responsible growth, continuous innovation, and delivering lasting value.</p>
                     </TextReveal>
                     <Image src="/quote.png" alt="Icon" width={40} height={0} className="self-end w-8 lg:w-[60px] absolute right-0 bottom-0" />
 
