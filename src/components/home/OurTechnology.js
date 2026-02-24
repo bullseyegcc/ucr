@@ -72,7 +72,6 @@ export default function OurTechnology() {
                   {activeTab === index ? (
                     <div className="flex flex-col gap-4 pl-2">
                       <h1 className="flex gap-4 items-center text-2xl sm:text-4xl text-primary font-medium">
-                  
                         {tech.title}
                       </h1>
                       <p className="text-lg font-light text-gray-700 ">{tech.description}</p>

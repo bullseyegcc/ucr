@@ -31,8 +31,8 @@ export default function BlogsPage() {
                     {/* Header Section */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 mb-12 lg:mb-16 leading-tight">
                         <div>
-                            <p className="uppercase text-[#FA6E43] text-xs lg:text-lg font-semibold uppercase tracking-widest mb-3 lg:mb-4">Our Blogs</p>
-                            <h2 className="text-3xl lg:text-4xl font-bold lg:text-6xl font-bold text-black leading-tight">Latest News & Insights</h2>
+                            <p className="uppercase text-[#FA6E43] text-xs lg:text-lg font-medium uppercase tracking-widest mb-3 lg:mb-4">Our Blogs</p>
+                            <h2 className="text-3xl lg:text-4xl lg:text-6xl font-medium text-black leading-tight">Latest News & Insights</h2>
                         </div>
                         <div className="flex items-start self-center">
                             <p className="w-[50%] text-gray-700 text-sm lg:text-xl font-light leading-relaxed  lg:text-left max-w-lg leading-tight ml-auto">Dive deep into fresh ideas, expert advice,

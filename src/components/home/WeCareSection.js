@@ -78,7 +78,7 @@ export default function WeCareSection() {
 
       <div ref={headingRef} className="absolute top-6 lg:top-15 px-4 lg:px-10 z-10">
         <WhiteBadge title="What we Care" />
-        <h1 className="text-2xl lg:text-4xl text-white font-semibold mt-3 lg:mt-5">Sustainability</h1>
+        <h1 className="text-2xl lg:text-4xl text-white font-medium mt-3 lg:mt-5">Sustainability</h1>
       </div>
 
       <div className="absolute bottom-4 w-full z-20">

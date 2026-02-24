@@ -18,7 +18,7 @@ export default function UcrLaboratoryToolsSection() {
           <Badge title="UCR Laboratory" />
         </SlideIn>
 
-        <FadeIn className="text-3xl lg:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight lg:max-w-[80%]" scrollTrigger={true} duration={0.8}>
+        <FadeIn className="text-3xl lg:text-4xl lg:text-5xl font-medium text-gray-900 leading-tight lg:max-w-[80%]" scrollTrigger={true} duration={0.8}>
           <h2>Tools that have assisted UCR in upholding its exceptional international standards.</h2>
         </FadeIn>
 

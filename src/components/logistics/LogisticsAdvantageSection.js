@@ -48,7 +48,7 @@ export default function LogisticsAdvantageSection() {
       <div className="relative z-10 flex flex-col items-start gap-12 px-6 lg:px-10 pt-20 pb-20">
         <SlideIn direction="left" duration={0.8} scrollTrigger={true} className="w-full text-left">
           <h1 className='text-sm lg:text-xl lg:text-2xl text-primary uppercase'>Global Presence</h1>
-          <h1 className="text-2xl lg:text-4xl lg:text-5xl font-semibold text-black mt-2 lg:mt-4 leading-tight lg:leading-snug">Global Reach</h1>
+          <h1 className="text-2xl lg:text-4xl lg:text-5xl font-medium text-black mt-2 lg:mt-4 leading-tight lg:leading-snug">Global Reach</h1>
         </SlideIn>
         {/* wrapper */}
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 w-full">

@@ -57,7 +57,7 @@ export default function SuccessStrengthSection() {
           <span className=" text-sm lg:text-xl uppercase tracking-[2px] font-medium text-[#F26101] mb-4">
             THE STRENGTH BEHIND OUR SUCCESS
           </span>
-          <h2 className="text-4xl lg:text-[40px] font-bold leading-[1.2] text-gray-900 max-w-[520px] lg:text-center lg:text-left">
+          <h2 className="text-4xl lg:text-[40px] font-medium leading-[1.2] text-gray-900 max-w-[520px] lg:text-center lg:text-left">
             Built by people who build with pride
           </h2>
         </div>

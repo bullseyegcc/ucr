@@ -12,7 +12,7 @@ export default function OurValues() {
                 <SlideIn direction="bottom" duration={0.8} delay={0}>
                     <Badge title="values" />
                 </SlideIn>
-                <FadeIn className="text-4xl lg:text-6xl font-bold text-white" duration={0.4} delay={0}>
+                <FadeIn className="text-4xl lg:text-6xl font-medium text-white" duration={0.4} delay={0}>
                     <h1>Our Values</h1>
                 </FadeIn>
             </div>
@@ -34,7 +34,7 @@ export default function OurValues() {
                     <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-9 lg:gap-12 mb-12 lg:mb-16">
                         <SlideIn direction="left" duration={0.8} className="flex-1">
                             <Badge title="Build on integrity, powered by innovation" />
-                            <h1 className="text-4xl lg:w-[80%] lg:text-5xl font-semibold text-black mt-4 lg:mt-6 leading-tight lg:leading-snug">Beyond copper, we build trust & reliability</h1>
+                            <h1 className="text-4xl lg:w-[80%] lg:text-5xl font-medium text-black mt-4 lg:mt-6 leading-tight lg:leading-snug">Beyond copper, we build trust & reliability</h1>
                         </SlideIn>
                         <SlideIn direction="right" duration={0.8} className="flex-1 lg:pt-12">
                             <p className="overflow-hidden text-ellipsis text-[#212225] text-lg font-normal leading-[30px] tracking-[-0.45px]">We don't just produce copper — we shape reliability, innovation, and sustainability into every product we deliver.</p>
