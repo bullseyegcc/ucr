@@ -10,7 +10,7 @@ import CardAnimation from "../../animations/CardAnimation";
 export default function WhyChooseUs() {
   return (
     <div
-      className="min-h-screen bg-gradient-to-b from-white via-[#FDD4BB] to-white px-10 py-20"
+      className="min-h-screen bg-gradient-to-b from-white via-[#FDD4BB] to-white px-5 lg:px-10 py-20"
     >
       <div
         className="text-center mb-16 flex flex-col items-center"

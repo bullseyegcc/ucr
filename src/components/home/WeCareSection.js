@@ -24,16 +24,30 @@ const CARDS = [
 ];
 
 export default function WeCareSection() {
-  const sectionRef = useRef(null);
-  const cardsRef   = useRef([]);
-  const headingRef = useRef(null);
+  const sectionRef      = useRef(null);
+  const mobileCardsRef   = useRef([]);
+  const desktopCardsRef = useRef([]);
+  const headingRef      = useRef(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const cards = cardsRef.current.filter(Boolean);
+    const mobile = window.innerWidth < 1024;
+    const cards  = mobile
+      ? mobileCardsRef.current.filter(Boolean)
+      : desktopCardsRef.current.filter(Boolean);
 
-    // ── Same animation style as WhyChooseUs ───────────────────────────────
+    // On mobile: cards visible immediately so user can swipe to see all
+    if (mobile && cards.length) {
+      cards.forEach((card) => {
+        card.style.opacity   = '1';
+        card.style.transform = 'translateY(0)';
+        card.style.filter    = 'blur(0)';
+      });
+      return;
+    }
+
+    // Desktop: same animation style as WhyChooseUs
     cards.forEach((card) => {
       card.style.opacity   = '0';
       card.style.transform = 'translateY(80px)';
@@ -81,13 +95,22 @@ export default function WeCareSection() {
         <h1 className="text-2xl lg:text-4xl text-white font-medium mt-3 lg:mt-5">Sustainability</h1>
       </div>
 
-      <div className="absolute bottom-4 w-full z-20">
-        <div className="hidden lg:grid lg:grid-cols-3 gap-4 lg:gap-6 px-4 lg:px-10 w-full overflow-x-auto lg:overflow-visible snap-x lg:snap-none">
+      <div className="absolute bottom-4 left-0 right-0 w-full z-20 pointer-events-none">
+        {/* Mobile: horizontal scrollable cards — swipe to see all (pointer-events-auto so touches hit this) */}
+        <div
+          data-lenis-prevent
+          className="flex lg:hidden gap-4 pl-4 pr-4 pb-2 w-full min-h-[260px] overflow-x-scroll overflow-y-hidden scrollbar-hide snap-x snap-mandatory pointer-events-auto touch-pan-x"
+          style={{
+            WebkitOverflowScrolling: 'touch',
+            touchAction: 'pan-x',
+            overscrollBehaviorX: 'contain',
+          }}
+        >
           {CARDS.map((card, i) => (
             <div
               key={card.title}
-              ref={(el) => { if (el) cardsRef.current[i] = el; }}
-              className="flex-none w-90 sm:w-full lg:min-w-0 bg-white/20 backdrop-blur-sm text-center flex flex-col items-center py-12 px-10 mx-2 rounded-xl gap-3 shadow-lg snap-start"
+              ref={(el) => { if (el) mobileCardsRef.current[i] = el; }}
+              className="flex-none w-[280px] min-w-[280px] sm:w-80 sm:min-w-80 bg-white/20 backdrop-blur-sm text-center flex flex-col items-center py-10 px-5 rounded-xl gap-3 shadow-lg snap-start shrink-0"
               style={{ willChange: 'transform, opacity' }}
             >
               <Image
@@ -95,10 +118,31 @@ export default function WeCareSection() {
                 alt={card.title}
                 width={140}
                 height={130}
-                className="w-40 h-25 lg:w-46 lg:h-[130px]"
+                className="w-40 h-25"
               />
-              <h1 className="text-lg lg:text-2xl text-white font-medium">{card.title}</h1>
-              <p className="text-secondary text-sm lg:text-sm">{card.desc}</p>
+              <h1 className="text-lg text-white font-medium">{card.title}</h1>
+              <p className="text-secondary text-sm">{card.desc}</p>
+            </div>
+          ))}
+        </div>
+        {/* Desktop: grid cards */}
+        <div className="hidden lg:grid lg:grid-cols-3 gap-6 px-10 w-full pointer-events-auto">
+          {CARDS.map((card, i) => (
+            <div
+              key={card.title}
+              ref={(el) => { if (el) desktopCardsRef.current[i] = el; }}
+              className="flex-none lg:min-w-0 bg-white/20 backdrop-blur-sm text-center flex flex-col items-center py-12 px-10 mx-2 rounded-xl gap-3 shadow-lg"
+              style={{ willChange: 'transform, opacity' }}
+            >
+              <Image
+                src={card.img}
+                alt={card.title}
+                width={140}
+                height={130}
+                className="lg:w-46 lg:h-[130px]"
+              />
+              <h1 className="lg:text-2xl text-white font-medium">{card.title}</h1>
+              <p className="text-secondary lg:text-sm">{card.desc}</p>
             </div>
           ))}
         </div>

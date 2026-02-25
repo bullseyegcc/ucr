@@ -24,9 +24,8 @@ export default function FadeIn({
     const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
     const prefersReduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    let wordSpans = [];
     const timer = setTimeout(() => {
-      const wordSpans = [];
-
       // Function to get all computed styles from an element
       const getComputedStyles = (element) => {
         const computed = window.getComputedStyle(element);
@@ -136,28 +135,26 @@ export default function FadeIn({
 
         gsap.to(wordSpans, animationConfig);
       }
-
-      return () => {
-        gsap.set(wordSpans, { willChange: 'auto' });
-        if (scrollTrigger) {
-          ScrollTrigger.getAll().forEach(trigger => {
-            if (trigger.trigger === element) {
-              trigger.kill();
-            }
-          });
-        }
-      };
     }, 50);
 
-    return () => clearTimeout(timer);
+    // Cleanup on unmount: kill ScrollTrigger and reset styles
+    return () => {
+      clearTimeout(timer);
+      if (wordSpans && wordSpans.length > 0) {
+        gsap.set(wordSpans, { willChange: 'auto', opacity: 1, filter: 'none' });
+      }
+      if (elementRef.current && scrollTrigger) {
+        ScrollTrigger.getAll().forEach(trigger => {
+          if (trigger.trigger === elementRef.current) {
+            trigger.kill();
+          }
+        });
+      }
+    };
   }, [duration, stagger, delay, scrollTrigger]);
 
   return (
-    <div 
-      ref={elementRef} 
-      className={className}
-      style={{ opacity: 0 }}
-    >
+    <div ref={elementRef} className={className}>
       {children}
     </div>
   );

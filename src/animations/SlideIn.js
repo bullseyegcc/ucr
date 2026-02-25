@@ -71,7 +71,12 @@ export default function SlideIn({
     // Create animation configuration
     const animDuration = isMobile ? Math.min(duration * 0.4, 0.9) : duration;
     const animScale = isMobile ? 0.97 : 0.95;
-    const animScrub = isMobile ? false : 0.5;
+    let animScrub;
+    if (exitOnScroll) {
+      animScrub = isMobile ? 0.2 : 0.5;
+    } else {
+      animScrub = isMobile ? false : 0.5;
+    }
     const animStart = isMobile ? 'top 95%' : 'top 85%';
     const animEnd = isMobile ? (exitOnScroll ? 'bottom 25%' : 'top 65%') : (exitOnScroll ? 'bottom 15%' : 'top 50%');
 

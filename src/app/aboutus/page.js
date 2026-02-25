@@ -125,7 +125,7 @@ export default function AboutUs() {
 
                     <div className="mb-2 sm:mb-4">
                         <Badge title="our expertise" />
-                        <h1 className="text-xl sm:text-2xl lg:text-5xl mt-3 sm:mt-4 font-semibold">Our Expertise & Experience</h1>
+                        <h1 className="text-4xl lg:text-6xl mt-3 sm:mt-4 font-semibold">Our Expertise & Experience</h1>
                     </div>
 
                     <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 items-stretch lg:items-end">

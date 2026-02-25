@@ -89,17 +89,20 @@ export default function SnippScrol({
     ctxRef.current = gsap.context(() => {
 
       // ── Position all panels absolutely inside the 100vh container ────────
+      // overflow-y: auto so tall content can be scrolled within the panel (no clip)
       const isMobile = window.innerWidth < 768;
       sections.forEach((section, i) => {
         gsap.set(section, {
-          position: isMobile ? 'relative' : 'absolute',
+          position: 'absolute',
           top:      0,
           left:     0,
           width:    '100%',
-          height:   isMobile ? 'auto' : '100%',
+          height:   '100%',
           zIndex:   10 + i,
-          y: !isMobile ? (i === 0 ? '0%' : '100%') : '0%',
-          overflow: isMobile ? 'visible' : 'hidden',
+          y: (i === 0 ? '0%' : '100%'),
+          overflowX: 'hidden',
+          overflowY: 'auto',
+          WebkitOverflowScrolling: 'touch',
         });
       });
 
@@ -150,11 +153,11 @@ export default function SnippScrol({
         trigger:    container,
         start:      'top top',
         end:        () => `+=${totalScrollPx}`,
-        pin:        !isMobile,
-        pinSpacing: !isMobile,
+        pin:        true,
+        pinSpacing: true,
         scrub:      activeScrub,
         animation:  tl,
-        snap: enableSnap && total > 1 && !isMobile
+        snap: enableSnap && total > 1
           ? {
               snapTo: (value) => {
                 if (value <= panelFraction) {
@@ -168,7 +171,7 @@ export default function SnippScrol({
               delay:    0.05,
             }
           : undefined,
-        onUpdate: lockScrollPx > 0 && onLockProgress && !isMobile
+        onUpdate: lockScrollPx > 0 && onLockProgress
           ? (self) => {
               if (self.progress > panelFraction) {
                 const lockRaw = (self.progress - panelFraction) / (1 - panelFraction);
@@ -233,8 +236,8 @@ export default function SnippScrol({
         style={{
           position: 'relative',
           width: '100%',
-          height: typeof window !== 'undefined' && window.innerWidth < 768 ? 'auto' : '100vh',
-          overflow: typeof window !== 'undefined' && window.innerWidth < 768 ? 'visible' : 'hidden',
+          height: '100vh',
+          overflow: 'hidden',
           backgroundColor: 'white',
           transform: 'translateZ(0)',
           backfaceVisibility: 'hidden',
@@ -247,11 +250,14 @@ export default function SnippScrol({
           <div
             key={index}
             ref={(el) => { if (el) sectionsRef.current[index] = el; }}
+            className="scrollbar-hide"
             style={{
               willChange: 'transform, opacity',
               width: '100%',
-              height: typeof window !== 'undefined' && window.innerWidth < 768 ? 'auto' : '100%',
-              overflow: typeof window !== 'undefined' && window.innerWidth < 768 ? 'visible' : 'hidden',
+              height: '100%',
+              overflowX: 'hidden',
+              overflowY: 'auto',
+              WebkitOverflowScrolling: 'touch',
             }}
           >
             {child}

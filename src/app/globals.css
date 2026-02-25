@@ -12,6 +12,12 @@ html {
   /* ✅ Ensure scroll is enabled on all devices */
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+  /* Hide main window scrollbar while keeping scroll behavior */
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+html::-webkit-scrollbar {
+  display: none !important;
 }
 
 :root {
@@ -34,6 +40,11 @@ html {
   border: none !important;
   box-shadow: none !important;
   outline: none !important;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+.pin-spacer::-webkit-scrollbar {
+  display: none !important;
 }
 
 body {
@@ -44,11 +55,25 @@ body {
   /* ✅ Ensure body is scrollable too */
   min-height: 100vh;
   overflow-x: hidden;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+body::-webkit-scrollbar {
+  display: none !important;
 }
 
 @layer utilities {
   .font-primary {
     font-family: var(--font-primary), sans-serif;
+  }
+
+  /* Hide scrollbar but keep scroll behavior (strong so it wins everywhere) */
+  .scrollbar-hide {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none !important;
   }
 }
 

@@ -67,7 +67,7 @@ export default function OurValues() {
                         </CardAnimation>
 
                         <CardAnimation index={3} className="bg-[#FDF5F3] text-center rounded-xl p-6 lg:p-8 flex flex-col items-center gap-6 group transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
-                            <Image src="/morethancopper.png" alt="Icon" width={300} height={90} className="group-hover:scale-110 group-hover:rotate-10 transition-transform duration-400" />
+                            <Image src="/moreThanCopper.png" alt="Icon" width={300} height={90} className="group-hover:scale-110 group-hover:rotate-10 transition-transform duration-400" />
                             <h1 className="overflow-hidden text-[#FA6E43] font-medium text-[32px] leading-[64px] tracking-[-1.4px] capitalize">More Than Cooper</h1>
 
                         </CardAnimation>

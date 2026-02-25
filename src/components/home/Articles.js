@@ -93,7 +93,7 @@ export default function Articles() {
           </h1>
         </div>
 
-        <div className="w-full h-[500px] sm:h-[900px] relative p-3 flex flex-col justify-start mx-2 gap-5 rounded-xl bg-[url('/hblog1.png')] bg-cover bg-top bg-no-repeat">
+        <div className="w-[95%] lg:w-full h-[500px] sm:h-[900px] relative p-3 flex flex-col justify-start mx-2 gap-5 rounded-xl bg-[url('/hblog1.png')] bg-cover bg-top bg-no-repeat">
           <div className="z-500 px-4 text-white flex justify-between text-sm font-light pt-9">
             <span>Writen by Bruce Sommers's</span>
             <span>Monday,April 28,2026</span>
@@ -108,7 +108,7 @@ export default function Articles() {
       </Link>
 
       {/* ── Right column ───────────────────────────────────────────────── */}
-      <div className="min-h-[60vh] sm:h-screen sm:w-1/2 rounded-xl flex flex-col items-center lg:justify-between">
+      <div className="px-1 lg:px-0 min-h-[60vh] sm:h-screen sm:w-1/2 rounded-xl flex flex-col items-center lg:justify-between">
         <Link
           ref={rightTopRef}
           href="/blogs/high-conductivity-copper-rods-energy-sector"
