@@ -23,30 +23,45 @@ export default function SlideIn({
     const element = elementRef.current;
     if (!element) return;
 
-    // Determine initial transform based on direction
+    // Step 1 & 3: Detect mobile and reduced motion
+    const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
+    const prefersReduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Determine initial transform based on direction and mobile
     const getInitialTransform = () => {
-      switch(direction) {
-        case 'left':
-          return { x: -100, y: 0 };
-        case 'right':
-          return { x: 100, y: 0 };
-        case 'top':
-          return { x: 0, y: -100 };
-        case 'bottom':
-          return { x: 0, y: 100 };
-        default:
-          return { x: -100, y: 0 };
+      if (isMobile) {
+        switch(direction) {
+          case 'left': return { x: -30, y: 0 };
+          case 'right': return { x: 30, y: 0 };
+          case 'top': return { x: 0, y: -30 };
+          case 'bottom': return { x: 0, y: 30 };
+          default: return { x: -30, y: 0 };
+        }
+      } else {
+        switch(direction) {
+          case 'left': return { x: -100, y: 0 };
+          case 'right': return { x: 100, y: 0 };
+          case 'top': return { x: 0, y: -100 };
+          case 'bottom': return { x: 0, y: 100 };
+          default: return { x: -100, y: 0 };
+        }
       }
     };
 
     const initialTransform = getInitialTransform();
+
+    // Step 2: Respect reduced motion
+    if (prefersReduced) {
+      gsap.set(element, { x: 0, y: 0, opacity: 1, scale: 1, willChange: 'auto' });
+      return;
+    }
 
     // Set initial state
     gsap.set(element, {
       x: initialTransform.x,
       y: initialTransform.y,
       opacity: 0,
-      scale: 0.95,
+      scale: isMobile ? 0.97 : 0.95,
       willChange: 'transform, opacity',
     });
 
@@ -54,12 +69,18 @@ export default function SlideIn({
     const exitOnScroll = exist || exit;
 
     // Create animation configuration
+    const animDuration = isMobile ? Math.min(duration * 0.4, 0.9) : duration;
+    const animScale = isMobile ? 0.97 : 0.95;
+    const animScrub = isMobile ? false : 0.5;
+    const animStart = isMobile ? 'top 95%' : 'top 85%';
+    const animEnd = isMobile ? (exitOnScroll ? 'bottom 25%' : 'top 65%') : (exitOnScroll ? 'bottom 15%' : 'top 50%');
+
     const animationConfig = {
       x: 0,
       y: 0,
       opacity: 1,
       scale: 1,
-      duration: duration,
+      duration: animDuration,
       delay: delay,
       ease: 'power1.inOut',
       clearProps: 'will-change',
@@ -67,9 +88,9 @@ export default function SlideIn({
 
     const scrollConfig = {
       trigger: element,
-      start: 'top 85%',
-      end: exitOnScroll ? 'bottom 15%' : 'top 50%',
-      scrub: 0.5,
+      start: animStart,
+      end: animEnd,
+      scrub: animScrub,
       markers: false,
     };
 
@@ -84,15 +105,17 @@ export default function SlideIn({
           y: 0,
           opacity: 1,
           scale: 1,
-          duration: duration,
+          duration: animDuration,
           ease: 'power1.inOut',
         });
+        // Exit slide uses same mobile offset logic
+        const exitTransform = getInitialTransform();
         timeline.to(element, {
-          x: initialTransform.x,
-          y: initialTransform.y,
+          x: exitTransform.x,
+          y: exitTransform.y,
           opacity: 0,
-          scale: 0.95,
-          duration: duration,
+          scale: animScale,
+          duration: animDuration,
           ease: 'power1.inOut',
           clearProps: 'will-change',
         });

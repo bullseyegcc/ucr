@@ -62,7 +62,7 @@ export default function blogs() {
                     {/* Header */}
                     <div className="flex flex-col gap-1 items-center justify-center">
                         <Badge title="Collections" />
-                        <h1 className="text-5xl mt-4 font-bold text-center">Our Core Products</h1>
+                        <h1 className=" text-3xl lg:text-5xl mt-4 font-medium text-center">Our Core Products</h1>
                     </div>
 
                     <div className="w-full px-2 lg:px-10 ">
@@ -153,18 +153,18 @@ export default function blogs() {
             {/* cta */}
 
             <ParallaxSection index={3}>
-                <div className="min-h-[85vh] px-4 lg:min-h-[60vh] lg:min-h-[70vh] relative bg-[#272A2A] flex lg:flex-row flex-col-reverse  justify-center lg:justify-start   items-center  lg:px-10 lg:py-20 mt-8 rounded-lg overflow-hidden">
+                <div className="min-h-[85vh] px-4 pl-4 lg:pl-0 lg:min-h-[60vh] lg:min-h-[70vh] relative bg-[#272A2A] flex lg:flex-row flex-col-reverse  justify-center lg:justify-start   items-center   lg:px-10 lg:py-20 mt-8 rounded-lg overflow-hidden">
 
                     <Image src='/gradientcircle.png' alt="Icon" width={1200} height={0} className="  h-[90vh]  top-[0%]  absolute top-[26%]   bottom-0 right-20  top-6 left-0 lg:right-0 lg:rotate-180" />
 
                     <Image src='/ctar.png' alt="Icon" width={900} height={0} className=" absolute bottom-0 h-[55%] lg:top-0 -right-30 lg:w-[40%] lg:h-full object-cover" />
 
 
-                    <SlideIn direction="left" scrollTrigger={true} duration={0.8} className="lg:w-[60%]  p-5 lg:p-9 text-white flex flex-col items-start justify-between lg:justify-center gap-6 relative z-10">
+                    <SlideIn direction="left" scrollTrigger={true} duration={0.8} className="lg:w-[60%]   p-5 lg:p-9 text-white flex flex-col items-start justify-between lg:justify-center gap-6 relative z-10">
                         <Badge title="Brocher" />
-                        <h1 className="text-3xl lg:text-5xl">Download our brochure to discover our full capabilities, precision technologies, and quality-driven manufacturing approach.</h1>
+                        <h1 className="text-3xl lg:text-5xl pr-2">Download our brochure to discover our full capabilities, precision technologies, and quality-driven manufacturing approach.</h1>
 
-                        <button className="self-center lg:self-start text-xl text-center w-90  mt-[34vh] lg:mt-6 bg-white hover:bg-gray-100 text-black px-6 py-6 lg:py-4 rounded-full transition-all duration-300 ease-in-out flex items-center justify-center  gap-2">Download Our Brocher<ArrowDown size={24} color='black' /></button>
+                        <button className="self-center lg:self-start text-xl text-center w-80  mt-[34vh] lg:mt-6 bg-white hover:bg-gray-100 text-black px-6 py-6 lg:py-4 rounded-full transition-all duration-300 ease-in-out flex items-center justify-center  gap-2">Download Our Brocher<ArrowDown size={24} color='black' /></button>
                     </SlideIn>
                 </div>
             </ParallaxSection>

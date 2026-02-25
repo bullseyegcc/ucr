@@ -27,7 +27,7 @@ export default function sustainability() {
             {/* Our Mission */}
 
             <ParallaxSection index={0}>
-            <div className=" overflow-x-hidden relative min-h-auto lg:min-h-screen flex flex-col lg:flex-row px-6 lg:px-10 py-12 lg:py-20 font-medium bg-gray-200 shadow-lg gap-8 lg:gap-0">
+            <div className=" overflow-x-hidden relative min-h-auto lg:min-h-screen flex flex-col gap-8 lg:flex-row px-6 lg:px-10 py-12 lg:py-20 font-medium  shadow-lg gap-8 lg:gap-0">
                                      
                 <SlideIn direction="left" scrollTrigger={true} className="hidden lg:flex flex-col gap-28 w-90">
                     <Image src="/mission1.png" alt="Icon" width={300} height={0} className="ml-9" />
@@ -35,16 +35,16 @@ export default function sustainability() {
                 </SlideIn>
 
                 <div className="flex flex-col justify-center items-center font-medium w-full">
-                    <Badge title="Core Strength" />
-                    <TextReveal className="leading-none     text-xl lg:text-6xl lg:mt-10 flex flex-col lg:flex-row items-center justify-center font-helvitica-now leading-tight gap-2">
-                        Our mission <FadeIn><Image src="/natureglobe.png" alt="Icon" width={60} height={0} className="relative lg:bottom-8 lg:w-20" /></FadeIn> is to create
+                    <Badge title="Core Strength"  />
+                    <TextReveal className="leading-tight mt-6    text-2xl lg:text-6xl lg:mt-10 flex flex-row items-center justify-center font-mediumleading-tight gap-2">
+                        Our mission <FadeIn><Image src="/natureglobe.png" alt="Icon" width={60} height={0} className="relative bottom-1 lg:bottom-8 w-6 lg:w-20" /></FadeIn> is to create
                     </TextReveal>
-                    <TextReveal className="relative lg:bottom-10  text-xl lg:text-6xl w-full lg:w-[60%] text-center leading-tight mt-4">
+                    <TextReveal className="relative  bottom-0 lg:bottom-10  text-2xl lg:text-6xl w-full lg:w-[60%] text-center leading-tight font-medium ">
                         <span className="text-[#4F7363]">eco-friendly solutions </span> that promote recycling and green leaving
                     </TextReveal>
 
                     <FadeIn scrollTrigger={true}>
-                    <p className="max-w-lg mt-6 lg:mt-8 text-base lg:text-xl text-center">
+                    <p className="font-normal max-w-lg mt-6 lg:mt-8 text-sm lg:text-xl text-center">
                         We believe in a future where style and sustainability coexist harmoniously.
                     </p>
                     </FadeIn>
@@ -58,8 +58,8 @@ export default function sustainability() {
 
                 {/* mobile view  */}
 
-                 <Image src="/mission3.png" alt="Icon" width={80} height={0} className="lg:hidden absolute -right-[8%] top-[12%]"/>
-                    <Image src="/mission1.png" alt="Icon" width={100} height={0} className="lg:hidden absolute -left-[15%] bottom-[5%]" />
+                 <Image src="/mission3.png" alt="Icon" width={35} height={0} className="rounded-lg lg:hidden absolute -right-[0%] top-[12%]"/>
+                    <Image src="/mission1.png" alt="Icon" width={40} height={0} className="rounded-lg lg:hidden absolute -left-[4%] bottom-[5%]" />
 
 
             </div>

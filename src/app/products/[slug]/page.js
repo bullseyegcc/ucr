@@ -137,17 +137,17 @@ export default function ProductDetail({ params }) {
                         {expandedSections.technical && (
                             <div className="bg-white border border-t-0 border-gray-200 rounded-b-lg overflow-x-auto">
                                 {/* Table Header */}
-                                <div className="bg-[#FF6A00] grid grid-cols-4 gap-2 sm:gap-4 p-4 sm:p-6 text-white font-semibold text-xs sm:text-sm min-w-max sm:min-w-full">
-                                    <div>Parameters</div>
-                                    <div>Unit</div>
-                                    <div className="whitespace-nowrap">ASTM B49/BS-EN 1977</div>
-                                    <div>UCR Typical</div>
+                                <div className="bg-[#FF6A00] grid grid-cols-4 gap-2 sm:gap-4 p-4 sm:p-6 text-white font-semibold text-xs sm:text-sm min-w-[500px] w-full">
+                                    <div className="overflow-x-auto overflow-ellipsis whitespace-nowrap">Parameters</div>
+                                    <div className="overflow-x-auto overflow-ellipsis whitespace-nowrap">Unit</div>
+                                    <div className="overflow-x-auto overflow-ellipsis whitespace-nowrap">ASTM B49/BS-EN 1977</div>
+                                    <div className="overflow-x-auto overflow-ellipsis whitespace-nowrap">UCR Typical</div>
                                 </div>
 
                                 {/* Table Body */}
                                 <div>
                                     {product.technicalParameters?.map((param, i) => (
-                                        <div key={i} className={`grid grid-cols-4 gap-2 sm:gap-4 p-4 sm:p-6 text-gray-700 text-xs sm:text-sm min-w-max sm:min-w-full ${i !== product.technicalParameters.length - 1 ? 'border-b border-gray-200' : ''}`}>
+                                        <div key={i} className={`grid grid-cols-4 gap-2 sm:gap-4 p-4 sm:p-6 text-gray-700 text-xs sm:text-sm min-w-[500px] w-full ${i !== product.technicalParameters.length - 1 ? 'border-b border-gray-200' : ''}`}>
                                             <div>{param.parameter}</div>
                                             <div>{param.unit}</div>
                                             <div className="whitespace-nowrap">{param.astm}</div>

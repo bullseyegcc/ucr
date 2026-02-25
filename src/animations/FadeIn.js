@@ -20,6 +20,10 @@ export default function FadeIn({
     const element = elementRef.current;
     if (!element) return;
 
+    // Step 1 & 3: Detect mobile and reduced motion
+    const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
+    const prefersReduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const timer = setTimeout(() => {
       const wordSpans = [];
 
@@ -39,12 +43,15 @@ export default function FadeIn({
         };
       };
 
+      // Step 1: Blur amount
+      const blurAmount = isMobile ? '4px' : '12px';
+
       // Function to apply styles to word span
       const applyStyles = (wordSpan, parentStyles) => {
         Object.assign(wordSpan.style, parentStyles);
         wordSpan.style.display = 'inline';
         wordSpan.style.opacity = '0';
-        wordSpan.style.filter = 'blur(12px)';
+        wordSpan.style.filter = `blur(${blurAmount})`;
         wordSpan.style.willChange = 'opacity, filter';
       };
 
@@ -87,15 +94,31 @@ export default function FadeIn({
       element.style.opacity = '1';
 
       if (wordSpans.length > 0) {
-        // Cinematic fade-in with staggered delay
+        // Step 3: prefers-reduced-motion disables animation
+        if (prefersReduced) {
+          wordSpans.forEach(span => {
+            span.style.opacity = '1';
+            span.style.filter = 'none';
+            span.style.willChange = 'auto';
+          });
+          return;
+        }
+
+        // Step 1: Mobile/desktop animation config
+        const animDuration = isMobile ? Math.min(duration * 0.4, 0.7) : duration * 0.8;
+        const animStagger = isMobile ? 0.01 : stagger;
+        const animScrub = isMobile ? false : 0.5;
+        const animStart = isMobile ? 'top 95%' : 'top 85%';
+        const animEnd = isMobile ? 'top 70%' : 'top 50%';
+
         const animationConfig = {
           opacity: 1,
           filter: 'blur(0px)',
           stagger: {
-            each: stagger,
+            each: animStagger,
             from: 'start',
           },
-          duration: duration * 0.8,
+          duration: animDuration,
           delay: scrollTrigger ? 0 : delay,
           ease: 'power1.inOut',
         };
@@ -104,9 +127,9 @@ export default function FadeIn({
           // Scroll-triggered animation
           animationConfig.scrollTrigger = {
             trigger: element,
-            start: 'top 85%',
-            end: 'top 50%',
-            scrub: 0.5,
+            start: animStart,
+            end: animEnd,
+            scrub: animScrub,
             markers: false,
           };
         }

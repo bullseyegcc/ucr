@@ -23,65 +23,80 @@ export default function ColorChangeWithScroll({
   const normalizedInitialColor = initialColor;
 
   useEffect(() => {
+
     const container = containerRef.current;
     if (!container) return;
 
+    // Step 1: Detect mobile
+    const isMobile = window.innerWidth <= 768;
+
     // Get all word spans
     const words = container.querySelectorAll('.scroll-word');
-
     if (words.length === 0) return;
 
-    // Create scroll-linked timeline with native pinning and smooth easing
+    // Step 2: Branch ScrollTrigger config
+    const scrollTriggerConfig = isMobile
+      ? {
+          trigger: container,
+          start: 'top 85%',
+          end: 'bottom 20%',
+          scrub: 0.6,
+          pin: false,
+          pinSpacing: false,
+          markers: false,
+        }
+      : {
+          trigger: container,
+          start: 'center center',
+          end: 'bottom center',
+          scrub: 1.2,
+          pin: true,
+          pinSpacing: true,
+          anticipatePin: 1,
+          markers: false,
+        };
+
     const tl = gsap.timeline({
       defaults: {
         ease: 'sine.inOut',
-        force3D: true, // GPU acceleration for smooth performance
+        force3D: true,
       },
-      scrollTrigger: {
-        trigger: container,
-        start: 'center center', // Lock when container center reaches viewport center
-        end: 'bottom center',
-        scrub: 1.2, // Smooth scrub with slight delay for fluid feel
-        pin: true, // Pin the element visually while scroll advances the timeline
-        pinSpacing: true, // Create virtual scroll space for the pin
-        anticipatePin: 1, // Smooth anticipation before pin activates
-        markers: false,
-      },
+      scrollTrigger: scrollTriggerConfig,
     });
 
-    // Animate each word with smooth color transition
+    // Step 3: Branch per-word animation params
     words.forEach((word, index) => {
       if (blurRef.current) {
         tl.fromTo(
           word,
-          { 
-            filter: 'blur(8px)', 
+          {
+            filter: 'blur(8px)',
             color: normalizedInitialColor,
             opacity: initialOpacity,
           },
-          { 
-            filter: 'blur(0px)', 
+          {
+            filter: 'blur(0px)',
             color: afterColorRef.current,
             opacity: 1,
-            duration: 0.8, 
-            ease: 'sine.inOut' 
+            duration: isMobile ? 0.4 : 0.8,
+            ease: 'sine.inOut',
           },
-          index * 0.1 // Smoother stagger timing
+          index * (isMobile ? 0.06 : 0.1)
         );
       } else {
         tl.fromTo(
           word,
-          { 
+          {
             color: normalizedInitialColor,
             opacity: initialOpacity,
           },
-          { 
+          {
             color: afterColorRef.current,
             opacity: 1,
-            duration: 0.8, 
-            ease: 'sine.inOut' 
+            duration: isMobile ? 0.4 : 0.8,
+            ease: 'sine.inOut',
           },
-          index * 0.1 // Smoother stagger timing
+          index * (isMobile ? 0.06 : 0.1)
         );
       }
     });

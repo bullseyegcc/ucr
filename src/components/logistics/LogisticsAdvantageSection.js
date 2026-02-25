@@ -10,27 +10,30 @@ export default function LogisticsAdvantageSection() {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [clickedCard, setClickedCard] = useState(null);
 
-  // Map card index to background image
+
+  // Map card index to background image (include all indices used)
   const bgImages = {
+    6: "/pdetail.png",
+    7: "/blog8.png",
     8: "/pdetail.png",
     9: "/blog8.png",
     10: "/blog9.png",
     default: "/fp3.png",
   };
 
-  // Get background image URL based on clicked or hovered card
+  // Get background image URL based on clicked or hovered card (mobile and desktop)
   const getBgImageUrl = () => {
-    if (clickedCard && bgImages[clickedCard]) {
+    if (clickedCard !== null && bgImages[clickedCard]) {
       return bgImages[clickedCard];
     }
-    if (hoveredCard && bgImages[hoveredCard]) {
+    if (hoveredCard !== null && bgImages[hoveredCard]) {
       return bgImages[hoveredCard];
     }
     return bgImages.default;
   };
 
   // Helper to determine active state: clicked overrides hover
-  const isActive = (index) => (clickedCard ? clickedCard === index : hoveredCard === index);
+  const isActive = (index) => (clickedCard !== null ? clickedCard === index : hoveredCard === index);
 
   // Toggle clicked state on card click
   const toggleClicked = (index) => {
@@ -66,7 +69,8 @@ export default function LogisticsAdvantageSection() {
               onMouseLeave={() => setHoveredCard(null)}
               onClick={() => toggleClicked(6)}
             />
-            <div className="block lg:hidden w-full  h-[40vh] lg:h-[80vh] bg-[url('/advantagecol3.png')] bg-cover  bg-bottom bg-no-repeat"></div>
+            {/* Mobile: show dynamic background image below first card */}
+            <div className="block lg:hidden w-full h-[40vh] bg-cover bg-bottom bg-no-repeat transition-all duration-500" style={{ backgroundImage: `url('${getBgImageUrl()}')` }}></div>
             <LogisticsAdvantageCard
               index={7}
               count={"03"}

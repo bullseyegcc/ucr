@@ -153,16 +153,16 @@ export default function Logistics() {
             <div className=" overflow-x-hidden min-h-[80vh] lg:min-h-screen bg-white  pt-20 flex flex-col  justify-end ">
 
                 {/* Header */}
-                <div className="flex px-10 flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-18 lg:gap-12 mb-12 lg:mb-16 lg:mb-20">
+                <div className="flex px-5 lg:px-10 flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-18 lg:gap-12 mb-12 lg:mb-16 lg:mb-20">
 
                     <SlideIn direction="left" scrollTrigger={true} duration={0.8} className="flex-1">
-                        <h1 className='text-lg lg:text-xl lg:text-2xl text-primary'>Global Presence</h1>
+                        <h1 className='text-lg  lg:text-2xl text-primary'>Global Presence</h1>
                         <h1 className="text-3xl lg:text-4xl lg:text-5xl font-semibold text-black mt-4 lg:mt-5 lg:mt-6 leading-tight lg:leading-snug">Global Reach</h1>
                     </SlideIn>
-                    <div className="w-[30%]">
+                    <div className="lg:w-[30%]">
 
                         <SlideIn direction="right" scrollTrigger={true} duration={0.8} className=" flex-1  text-xs lg:text-2xl text-gray-600 lg:pt-8 lg:pt-12">
-                            <p className='  text-2xl self-start'>We don't just produce copper — we shape reliability, innovation, and sustainability into every product we deliver.</p>
+                            <p className='  text-lg lg:text-2xl self-start'>Union Copper Rod products are famous all over the region and they are in high demand amongst many organizations that procure copper related products.</p>
                         </SlideIn>
                     </div>
                 </div>
