@@ -35,7 +35,7 @@ export default function ProductDetail({ params }) {
             <div className="relative h-[40vh] sm:h-[50vh] lg:h-[55vh] max-h-[80vh] font-medium flex items-center justify-center font-sans dark:bg-black overflow-hidden">
                 <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#FF6A00] to-[#FF8C42]"></div>
                 <div className="absolute inset-0 z-10 pointer-events-none bg-[url('/productdetailbg.png')] bg-cover bg-center" ></div>
-                <h1 className="absolute top-[40%] w-[85%] sm:w-[70%] lg:w-[60%] z-20 text-3xl sm:text-4xl lg:text-6xl text-white flex flex-col items-center text-center gap-2 sm:gap-3 lg:gap-4 px-4 sm:px-0">
+                <h1 className="absolute top-[40%] w-[85%] sm:w-[70%] lg:w-[60%] z-20 font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-white flex flex-col items-center text-center align-middle capitalize gap-2 sm:gap-3 lg:gap-4 px-4 sm:px-0">
                     <Badgetextwhite title='products' />
                     <FadeIn>
                         {product.name}
@@ -201,7 +201,7 @@ export default function ProductDetail({ params }) {
 
 
                     <FadeIn duration={0.4} delay={0} scrollTrigger={true} className="flex justify-center">
-                        <h1 className="font-medium text-2xl text-center sm:text-3xl lg:text-4xl lg:text-6xl mt-2 sm:mt-3 lg:mt-4 leading-tight w-full sm:w-[85%] lg:w-[75%] lg:w-[60%]">Our products meet global quality and safety standards.</h1>
+                        <h1 className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize mt-2 sm:mt-3 lg:mt-4 w-full sm:w-[85%] lg:w-[75%] lg:w-[60%]">Our products meet global quality and safety standards.</h1>
                     </FadeIn>
                 </div>
 

@@ -22,7 +22,7 @@ export default function blogs() {
                     <VideoPlayer src="/moreabout.mp4" className="w-full h-full object-cover" />
                 </div>
                 <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)" }}></div>
-                <h1 className="absolute top-[40%]  lg:w-[60%] w-[95%]  z-20 text-3xl lg:text-6xl text-white flex flex-col items-center text-center gap-4">
+                <h1 className="absolute top-[40%] lg:w-[60%] w-[95%] z-20 flex flex-col items-center gap-4 font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white">
 
                     <SlideIn direction="bottom" duration={0.8} delay={0}>
                         <Badgetextwhite title="Our Products" />

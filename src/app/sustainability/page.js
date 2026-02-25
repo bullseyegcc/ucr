@@ -16,7 +16,7 @@ export default function sustainability() {
                 <SlideIn direction="bottom" duration={0.8} delay={0}>
                     <Badgetextwhite title="Sustainability" />
                 </SlideIn>
-                <h1 className="w-full lg:w-[80%] text-4xl lg:text-7xl font-medium text-white">
+                <h1 className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white w-full lg:w-[80%]">
                     <FadeIn duration={0.4} delay={0}>
                         Creating value with a differentiated approach
                     </FadeIn>

@@ -20,7 +20,7 @@ export default function Logistics() {
                     <Badgetextwhite title="Our Logistics" />
                 </SlideIn>
 
-                <FadeIn className=" w-[65%]  h-full text-center text-xl sm:text-5xl lg:font-bold text-white leading-tight" duration={0.4} delay={0}>
+                <FadeIn className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white w-[65%]" duration={0.4} delay={0}>
                     UCR has a higher delivery capacity in the Copper Industry
                 </FadeIn>
                 <div className='absolute -bottom-[50%] lg:-bottom-[65%] w-[75%] h-60 sm:h-[70vh] w-[95%] ' >

@@ -15,7 +15,7 @@ export default function Quality() {
                 <SlideIn direction="bottom" duration={0.8} delay={0}>
                     <Badgetextwhite title="Premium Quality Assured" />
                 </SlideIn>
-                <FadeIn className="w-full sm:w-[90%] lg:w-[80%] text-3xl sm:text-5xl lg:text-7xl font-medium text-white leading-relaxed px-10 lg:px-0" duration={0.4} delay={0}>
+                <FadeIn className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white w-full sm:w-[90%] lg:w-[80%] px-10 lg:px-0" duration={0.4} delay={0}>
                     Quality is our foundation
                 </FadeIn>
 

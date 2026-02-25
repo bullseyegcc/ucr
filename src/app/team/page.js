@@ -17,7 +17,7 @@ export default function Team() {
                 <SlideIn direction="bottom" duration={0.8} delay={0}>
                     <Badgetextwhite title="Our Team " />
                 </SlideIn>
-                <FadeIn className=" max-w-[80%] text-center text-3xl lg:text-5xl lg:text-7xl font-medium text-white" duration={0.4} delay={0}>
+                <FadeIn className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white max-w-[80%]" duration={0.4} delay={0}>
                     Meet the People Behind the Power of Copper
                 </FadeIn>
                 <Image src='/whitegradient.png' alt='Vector Image' width={1200} height={900} className=" hidden lg:block rotate-180  absolute -bottom-25 left-1/2 transform -translate-x-1/2  object-cover w-full" />

@@ -12,7 +12,7 @@ export default function contactus() {
                 <SlideIn direction="bottom" duration={0.8} delay={0}>
                     <Badgetextwhite title="Reach Us " />
                 </SlideIn>
-                <FadeIn className="w-full max-w-4xl text-center text-4xl lg:text-5xl lg:text-7xl font-bold text-white" duration={0.4} delay={0}>
+                <FadeIn className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white w-full max-w-4xl" duration={0.4} delay={0}>
                     Contact Details
                 </FadeIn>
             </div>

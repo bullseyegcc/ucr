@@ -12,8 +12,8 @@ export default function OurValues() {
                 <SlideIn direction="bottom" duration={0.8} delay={0}>
                     <Badge title="values" />
                 </SlideIn>
-                <FadeIn className="text-4xl lg:text-6xl font-medium text-white" duration={0.4} delay={0}>
-                    <h1>Our Values</h1>
+                <FadeIn className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white" duration={0.4} delay={0}>
+                    Our Values
                 </FadeIn>
             </div>
 

@@ -19,7 +19,8 @@ export default function Technology() {
                     <SlideIn direction="bottom" duration={0.8} delay={0}>
                         <Badgetextwhite title="Technlogy"/>
                     </SlideIn>
-                    <FadeIn className=" text-3xl lg:text-6xl text-white text-center w-full px-4" duration={0.4} delay={0}>
+                    <FadeIn className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white w-full px-4" duration={0.4} delay={0}>
+
                         Our Advance Technology
                     </FadeIn>
 

@@ -19,7 +19,7 @@ export default function BlogsPage() {
                 <SlideIn direction="bottom" duration={0.8} delay={0} className="text-[#FA6E43] text-sm font-semibold uppercase tracking-widest">
                     <Badgetextwhite title="Things to Read" />                
                 </SlideIn>
-                <FadeIn className="w-[80%] text-7xl font-medium text-white" duration={0.4} delay={0}>
+                <FadeIn className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white w-[80%]" duration={0.4} delay={0}>
 
                     News
                 </FadeIn>

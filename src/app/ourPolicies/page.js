@@ -10,7 +10,7 @@ export default function OurPolicies() {
                     <SlideIn direction="bottom" duration={0.8} delay={0}>
                         <p className="text-primary text-xs lg:text-sm lg:text-base font-semibold tracking-widest uppercase">UCR  POLICIES</p>
                     </SlideIn>
-                    <FadeIn className="text-4xl lg:text-5xl lg:text-6xl text-white font-bold" duration={0.4} delay={0}>
+                    <FadeIn className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white" duration={0.4} delay={0}>
                         Our Policies
                     </FadeIn>
                 </div>
