@@ -22,6 +22,9 @@ export default function HorizontalScrollGallery({ images = [] }) {
 
     gsap.set(wrapper, { x: 0 });
 
+    // Pause auto-scroll on mobile for touch control, enable on desktop
+    const isMobile = window.innerWidth < 768;
+
     tweenRef.current = gsap.fromTo(
       wrapper,
       { x: 0 },
@@ -30,7 +33,7 @@ export default function HorizontalScrollGallery({ images = [] }) {
         duration: imgs.length * 4,
         ease: 'none',
         repeat: -1,
-        paused: false, // always auto-scroll
+        paused: isMobile, // paused on mobile, playing on desktop
       }
     );
 
@@ -63,7 +66,7 @@ export default function HorizontalScrollGallery({ images = [] }) {
       />
       <div
         ref={wrapperRef}
-        className="flex gap-8 will-change-transform overflow-x-auto touch-pan-x"
+        className="flex gap-8 will-change-transform"
         style={{ width: 'max-content' }}
       >
         {loopImgs.map((image, index) => {
@@ -71,13 +74,13 @@ export default function HorizontalScrollGallery({ images = [] }) {
           return (
             <div
               key={index}
-              className={`flex-shrink-0 ${isWide ? 'w-[900px] lg:w-[900px] md:w-[600px] sm:w-[260px]' : 'w-[500px] lg:w-[600px] md:w-[400px] sm:w-[260px]'} h-[180px] md:h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-lg`}
+              className={`flex-shrink-0 ${isWide ? 'w-[900px]' : 'w-[500px] lg:w-[600px]'} h-[400px] lg:h-[500px] rounded-2xl overflow-hidden shadow-lg`}
             >
               <Image
                 src={image}
                 alt={`Slide ${(index % imgs.length) + 1}`}
-                width={isWide ? 900 : 500}
-                height={180}
+                width={900}
+                height={500}
                 className="w-full h-full object-cover"
                 quality={95}
               />

@@ -47,9 +47,10 @@ export default function Home() {
         <FeaturedProducts />
       </ParallaxSection>
 
-      <ParallaxSection index={2}>
+      {/* WeCareSection: mounted outside ParallaxSection so mobile horizontal scroll works (no overflow-hidden + transform ancestor) */}
+      <div className="relative w-full" style={{ zIndex: 12 }}>
         <WeCareSection />
-      </ParallaxSection>
+      </div>
 
       <ParallaxSection index={3}>
         <OurTechnology />

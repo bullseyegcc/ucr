@@ -156,6 +156,36 @@ export default function Footer() {
                         />
                     </Link>
                 </div>
+
+                 {/* Info Sections */}
+                <div className='flex flex-col gap-3 my-4 lg:hidden '>
+                    {/* Address */}
+                    <div className='flex flex-col gap-4'>
+                        <h3 className='text-primary font-bold text-sm uppercase'>Address</h3>
+                        <div className='text-gray-700 text-sm space-y-1'>
+                            <p>Mussafah,</p>
+                            <p>Industrial Area of Abu Dhabi (ICAD1),</p>
+                            <p>P.O.Box 112231,</p>
+                            <p>Abu Dhabi, UAE</p>
+                        </div>
+                    </div>
+
+                    {/* Phone */}
+                    <div className='flex flex-col gap-4'>
+                        <h3 className='text-primary font-bold text-sm uppercase'>Phone</h3>
+                        <div className='text-gray-700 text-sm'>
+                            <p>+971 2 550 3240</p>
+                        </div>
+                    </div>
+
+                    {/* Email */}
+                    <div className='flex flex-col gap-4'>
+                        <h3 className='text-primary font-bold text-sm uppercase'>Email</h3>
+                        <div className='text-gray-700 text-sm'>
+                            <p>info@unioncopper.ae</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -23,11 +23,17 @@ const CARDS = [
   },
 ];
 
+const CARD_WIDTH = 280;
+const CARD_GAP = 16;
+const MOBILE_PADDING = 32;
+const TOTAL_CARDS_WIDTH = CARDS.length * CARD_WIDTH + (CARDS.length - 1) * CARD_GAP + MOBILE_PADDING * 2;
+
 export default function WeCareSection() {
-  const sectionRef      = useRef(null);
+  const sectionRef       = useRef(null);
   const mobileCardsRef   = useRef([]);
-  const desktopCardsRef = useRef([]);
-  const headingRef      = useRef(null);
+  const desktopCardsRef  = useRef([]);
+  const headingRef       = useRef(null);
+  const scrollViewportRef = useRef(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -86,47 +92,63 @@ export default function WeCareSection() {
   return (
     <div
       ref={sectionRef}
-      className="relative min-h-[80vh] pt-8 px-5 sm:px-0 sm:h-[90vh] flex flex-col justify-between bg-[url('/care.jpg')] bg-cover bg-center mx-4 lg:mx-10 my-5 rounded-xl overflow-hidden"
+      className="relative min-h-[80vh] pt-8 px-5 sm:px-0 sm:h-[90vh] flex flex-col justify-between bg-[url('/care.jpg')] bg-cover bg-center mx-4 lg:mx-10 my-5 rounded-xl lg:overflow-hidden"
     >
-      <VideoPlayer src="/sustain.mp4" className="absolute inset-0 w-full h-full object-cover" />
+      <VideoPlayer src="/sustain.mp4" className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
 
-      <div ref={headingRef} className="absolute top-6 lg:top-15 px-4 lg:px-10 z-10">
+      <div ref={headingRef} className="absolute top-6 lg:top-15 px-4 lg:px-10 z-10 pointer-events-none">
         <WhiteBadge title="What we Care" />
         <h1 className="text-2xl lg:text-4xl text-white font-medium mt-3 lg:mt-5">Sustainability</h1>
       </div>
 
-      <div className="absolute bottom-4 left-0 right-0 w-full z-20 pointer-events-none">
-        {/* Mobile: horizontal scrollable cards — swipe to see all (pointer-events-auto so touches hit this) */}
+      <div className="absolute bottom-4 left-0 right-0 w-full z-20 ml-5">
+        {/* Mobile: horizontal scroll — viewport + inner track so overflow is guaranteed and touch scroll works */}
         <div
-          data-lenis-prevent
-          className="flex lg:hidden gap-4 pl-4 pr-4 pb-2 w-full min-h-[260px] overflow-x-scroll overflow-y-hidden scrollbar-hide snap-x snap-mandatory pointer-events-auto touch-pan-x"
+          ref={scrollViewportRef}
+          role="region"
+          aria-label="Sustainability cards - swipe to view all"
+          className="flex lg:hidden scrollbar-hide snap-x snap-proximity w-full"
           style={{
+            overflowX: 'scroll',
+            overflowY: 'hidden',
             WebkitOverflowScrolling: 'touch',
             touchAction: 'pan-x',
-            overscrollBehaviorX: 'contain',
+            overscrollBehaviorX: 'auto',
+            minHeight: 260,
+            maxWidth: '100%',
+            position: 'relative',
           }}
         >
-          {CARDS.map((card, i) => (
-            <div
-              key={card.title}
-              ref={(el) => { if (el) mobileCardsRef.current[i] = el; }}
-              className="flex-none w-[280px] min-w-[280px] sm:w-80 sm:min-w-80 bg-white/20 backdrop-blur-sm text-center flex flex-col items-center py-10 px-5 rounded-xl gap-3 shadow-lg snap-start shrink-0"
-              style={{ willChange: 'transform, opacity' }}
-            >
-              <Image
-                src={card.img}
-                alt={card.title}
-                width={140}
-                height={130}
-                className="w-40 h-25"
-              />
-              <h1 className="text-lg text-white font-medium">{card.title}</h1>
-              <p className="text-secondary text-sm">{card.desc}</p>
-            </div>
-          ))}
+          <div
+            className="flex gap-4 pl-8 pr-8 pb-2"
+            style={{ width: TOTAL_CARDS_WIDTH, minWidth: 'max-content' }}
+          >
+            {CARDS.map((card, i) => (
+              <div
+                key={card.title}
+                ref={(el) => { if (el) mobileCardsRef.current[i] = el; }}
+                className="flex-none bg-white/20 backdrop-blur-sm text-center flex flex-col items-center py-10 px-5 rounded-xl gap-3 shadow-lg snap-start"
+                style={{
+                   width: CARD_WIDTH,
+                  minWidth: CARD_WIDTH,
+                  ...(i === 0 && { paddingLeft: '24px' }),
+                }}
+              >
+                <Image
+                  src={card.img}
+                  alt={card.title}
+                  width={140}
+                  height={130}
+                  className="w-40 h-25"
+                />
+                <h1 className="text-lg text-white font-medium">{card.title}</h1>
+                <p className="text-secondary text-sm">{card.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
         {/* Desktop: grid cards */}
-        <div className="hidden lg:grid lg:grid-cols-3 gap-6 px-10 w-full pointer-events-auto">
+        <div className="hidden lg:grid lg:grid-cols-3 gap-6 px-10 w-full">
           {CARDS.map((card, i) => (
             <div
               key={card.title}

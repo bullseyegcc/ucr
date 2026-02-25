@@ -8,20 +8,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function SplashOverlay() {
-  // --- Scroll-blocking handlers (must be in component scope for consistent reference) ---
-  function preventScroll(e) {
-    e.preventDefault();
-  }
-  function preventKeyScroll(e) {
-    // Scroll keys: space(32), page up(33), page down(34), end(35), home(36), left(37), up(38), right(39), down(40)
-    const keys = [32, 33, 34, 35, 36, 37, 38, 39, 40];
-    if (keys.includes(e.keyCode)) {
-      e.preventDefault();
-    }
-  }
-  function lockScrollPosition() {
-    window.scrollTo(0, 0);
-  }
   const containerRef = useRef(null);
   const overlayRef = useRef(null);
   const maskGroupRef = useRef(null);
@@ -32,10 +18,8 @@ export default function SplashOverlay() {
   const isHomepage = pathname === '/';
   const [viewportSize, setViewportSize] = useState({ width: 1920, height: 1080 });
 
-
-
   useEffect(() => {
-    // Set initial viewport size
+    // Set viewport size after hydration to prevent mismatch
     const updateViewport = () => {
       setViewportSize({
         width: window.innerWidth,
@@ -56,29 +40,46 @@ export default function SplashOverlay() {
     // Only show splash on homepage
     if (!isHomepage) {
       gsap.set(overlay, { display: 'none', pointerEvents: 'none' });
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = '';
       return;
+    }
+
+    // --- Define scroll-blocking handlers inside useEffect for stable references ---
+    function preventScroll(e) {
+      e.preventDefault();
+    }
+    function preventKeyScroll(e) {
+      // Scroll keys: space(32), page up(33), page down(34), end(35), home(36), left(37), up(38), right(39), down(40)
+      const keys = [32, 33, 34, 35, 36, 37, 38, 39, 40];
+      if (keys.includes(e.keyCode)) {
+        e.preventDefault();
+      }
+    }
+    function lockScrollPosition() {
+      window.scrollTo(0, 0);
     }
 
     // Step 1: Set splash flag
     window.__splashActive = true;
 
-    // Calculate responsive scale values
-    const isMobile = viewportSize.width < 768;
-    const centerX = viewportSize.width / 2;
-    const centerY = viewportSize.height / 2;
+    // Calculate responsive scale values - read from window, not state
+    const isMobile = window.innerWidth < 768;
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
     
     // Adjusted: More dramatic scaling for mobile
     const startScale = isMobile ? 2.5 : 7.5;
     const endScale = isMobile ? 6 : 18.5;
 
-    // Prevent scroll while splash is visible - just use CSS, no event listeners
-    const originalOverflow = document.body.style.overflow;
-    const originalHeight = document.body.style.height;
+    // Prevent scroll while splash is visible
     document.body.style.overflow = 'hidden';
     document.body.style.height = '100vh';
     document.documentElement.style.overflow = 'hidden';
     document.documentElement.style.height = '100vh';
+    
+    // Add touch-action: none to block touch scrolling
+    document.body.style.touchAction = 'none';
+    document.documentElement.style.touchAction = 'none';
 
     // Register scroll-blocking listeners
     window.addEventListener('wheel', preventScroll, { passive: false });
@@ -91,17 +92,25 @@ export default function SplashOverlay() {
 
       const splashTl = gsap.timeline({
         onComplete: () => {
-          // Restore scroll styles immediately
-          document.body.style.overflow = 'auto';
-          document.documentElement.style.overflow = 'auto';
-          document.body.style.height = 'auto';
-          document.documentElement.style.height = 'auto';
+          // Restore scroll styles: clear inline to let CSS rules win
+          document.body.style.overflow = '';
+          document.documentElement.style.overflow = '';
+          document.body.style.height = '';
+          document.documentElement.style.height = '';
+          
+          // Restore touch-action
+          document.body.style.touchAction = '';
+          document.documentElement.style.touchAction = '';
 
           // Ensure scroll is enabled on mobile
           document.body.style.WebkitOverflowScrolling = 'touch';
 
           // Hide overlay and container
           gsap.set([overlay, containerRef.current], { display: 'none', pointerEvents: 'none' });
+          
+          // Clear will-change
+          gsap.set([maskGroupRef.current, outlineRef.current], { willChange: 'auto' });
+          gsap.set(overlay, { willChange: 'auto' });
 
           // Remove scroll-blocking listeners
           window.removeEventListener('wheel', preventScroll, { passive: false });
@@ -115,14 +124,19 @@ export default function SplashOverlay() {
         },
       });
 
-      // Responsive duration
-      const duration = isMobile ? 1.5 : 2.0;
+      // Responsive duration - shortened for mobile
+      const duration = isMobile ? 0.8 : 2.0;
 
-      // Initial state: masks hidden at responsive starting scale
-      // centerX/centerY are viewport center; logo offset centers the logo at that point
+      // Initial state with will-change for hardware acceleration
       gsap.set([maskGroupRef.current, outlineRef.current], { 
         opacity: 0,
-        attr: { transform: `translate(${centerX}, ${centerY}) scale(${startScale}) translate(-37.5, -19)` }
+        attr: { transform: `translate(${centerX}, ${centerY}) scale(${startScale}) translate(-37.5, -19)` },
+        willChange: 'transform, opacity',
+      });
+      
+      // Add will-change to overlay
+      gsap.set(overlay, {
+        willChange: 'transform, opacity',
       });
 
       // Scale animation: masks appear and scale from viewport center
@@ -151,61 +165,23 @@ export default function SplashOverlay() {
         outlineRef.current,
         {
           opacity: 0,
-          duration: isMobile ? 0.4 : 0.5,
+          duration: isMobile ? 0.3 : 0.5,
           ease: 'sine.out',
         },
-        duration - (isMobile ? 0.4 : 0.5)
+        duration - (isMobile ? 0.3 : 0.5)
       );
 
-      // ╔════════════════════════════════════════════════════════════════════╗
-      // ║ COMMENTED OUT: Step 2 & 3 - Mask split and slide away            ║
-      // ║ For now: Just scale responsive and fade, keeping masks centered   ║
-      // ╚════════════════════════════════════════════════════════════════════╝
-
-      // // Step 2: split to reveal heading and hold briefly
-      // splashTl.to(
-      //   [topRectRef.current, bottomRectRef.current],
-      //   {
-      //     attr: (index) => ({ y: index === 0 ? -centerY : centerY + centerY }),
-      //     duration: isMobile ? 0.8 : 1.0,
-      //     ease: 'expo.inOut',
-      //   },
-      //   '-=0.25'
-      // );
-
-      // splashTl.to({}, { duration: isMobile ? 0.8 : 1.2 });
-
-      // // Step 3: skew and slide the split panels away, then fade
-      // splashTl.to(
-      //   [topRectRef.current, bottomRectRef.current],
-      //   {
-      //     attr: (index) => ({ 
-      //       y: index === 0 ? -centerY * 2 : centerY * 2.5, 
-      //       x: index === 0 ? -150 : 150 
-      //     }),
-      //     skewX: (index) => (index === 0 ? -4 : 4),
-      //     duration: isMobile ? 0.65 : 0.85,
-      //     ease: 'expo.inOut',
-      //   }
-      // );
-
-      // splashTl.to(
-      //   overlay,
-      //   {
-      //     opacity: 0,
-      //     duration: isMobile ? 0.65 : 0.85,
-      //     ease: 'sine.inOut',
-      //   },
-      //   '-=0.55'
-      // );
-
       // Final: scale mask up dramatically to "enter" the logo, then hide overlay
+      // Reduced multiplier for mobile (4x instead of 8x) to avoid GPU thrash
+      const finalScale = isMobile ? endScale * 4 : endScale * 8;
+      const finalDuration = isMobile ? 0.6 : 1.5;
+      
       splashTl.to(
         [maskGroupRef.current, outlineRef.current],
         {
-          attr: { transform: `translate(${centerX}, ${centerY}) scale(${endScale * 8}) translate(-37.5, -19)` },
+          attr: { transform: `translate(${centerX}, ${centerY}) scale(${finalScale}) translate(-37.5, -19)` },
           opacity: 1,
-          duration: isMobile ? 1.2 : 1.5,
+          duration: finalDuration,
           ease: 'expo.in',
         },
         '-=0.1'
@@ -225,13 +201,21 @@ export default function SplashOverlay() {
       clearTimeout(timer);
       // Bulletproof scroll restoration on cleanup
       setTimeout(() => {
-        document.body.style.overflow = 'auto';
-        document.documentElement.style.overflow = 'auto';
-        document.body.style.height = 'auto';
-        document.documentElement.style.height = 'auto';
-        if (window.gsap && window.gsap.ScrollTrigger) {
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        document.body.style.height = '';
+        document.documentElement.style.height = '';
+        
+        // Restore touch-action
+        document.body.style.touchAction = '';
+        document.documentElement.style.touchAction = '';
+        
+        // Only refresh ScrollTrigger on desktop
+        const isMobileCleanup = window.innerWidth < 768;
+        if (!isMobileCleanup && window.gsap && window.gsap.ScrollTrigger) {
           window.gsap.ScrollTrigger.refresh(true);
         }
+        
         // Step 3: Also clear splash flag and dispatch event on cleanup
         window.__splashActive = false;
         window.dispatchEvent(new CustomEvent('splashComplete'));
@@ -243,7 +227,7 @@ export default function SplashOverlay() {
         window.removeEventListener('scroll', lockScrollPosition);
       }, 0);
     };
-  }, [isHomepage, viewportSize]);
+  }, [isHomepage]);
 
   if (!isHomepage) {
     return null;

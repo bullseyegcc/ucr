@@ -7,7 +7,7 @@ import { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 
 export default function TeamMemoriesSection() {
-  const galleryItems = [
+  const galleryItems = [  
     { image: "/t1.png", year: "2023", caption: "Team collaboration" },
     { image: "/t2.png", year: "2024", caption: "New year celebration" },
     { image: "/t3.png", year: "2022", caption: "Annual Picnic" },
@@ -16,6 +16,7 @@ export default function TeamMemoriesSection() {
   ];
 
   const [activeIdx, setActiveIdx] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
   const headerRef = useRef(null);
   const memoriesRef = useRef(null);
   const centerTextRef = useRef(null);
@@ -36,6 +37,20 @@ export default function TeamMemoriesSection() {
         { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 0.12 }
       );
     }
+  }, []);
+
+  // Track mobile vs desktop to tweak card layout responsively
+  useEffect(() => {
+    const handleResize = () => {
+      if (typeof window !== "undefined") {
+        setIsMobile(window.innerWidth < 768);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Smooth transition for center card text when active image changes
@@ -61,14 +76,17 @@ export default function TeamMemoriesSection() {
   };
 
   return (
-    <section className="w-full bg-[#f5f5f3] py-[8vw]">
+    <section className="w-full bg-white py-[8vw]">
       <div className="flex flex-col text-center items-center justify-center gap-6 mb-[4vw]">
         {/* Header */}
-        <div className="flex flex-col items-center mb-[6vw]">
-          <div ref={headerRef} className="mb-4">
-            <span className="uppercase text-[1vw] tracking-[0.22em] text-[#ff6a00] font-semibold">gallery</span>
+        <div className="flex flex-col items-center mb-10">
+          <div ref={headerRef} className="mb-3">
+            <Badge title="Gallery" />
           </div>
-          <h2 ref={memoriesRef} className="text-[4vw] md:text-[5vw] font-medium text-gray-900 leading-tight flex gap-2">
+          <h2
+            ref={memoriesRef}
+            className="text-3xl sm:text-4xl lg:text-5xl font-medium text-gray-900 leading-tight flex gap-2"
+          >
             <span className="font-sans font-medium text-gray-900">Team</span>
             <span className="font-serif italic text-[#222] font-normal tracking-tight">Memories</span>
           </h2>
@@ -83,12 +101,12 @@ export default function TeamMemoriesSection() {
                 <div
                   className="flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden border border-orange-200 transition-all duration-500"
                   style={{
-                    width: '18vw',
-                    aspectRatio: '1/1.2',
-                    height: 'auto',
-                    filter: 'blur(6px)',
+                    width: isMobile ? "40vw" : "18vw",
+                    aspectRatio: isMobile ? "3/4" : "1/1.2",
+                    height: "auto",
+                    filter: "blur(6px)",
                     opacity: 0.7,
-                    marginLeft: '-14.4vw',
+                    marginLeft: isMobile ? "-32vw" : "-14.4vw",
                   }}
                 >
                   <div className="w-full h-full relative">
@@ -107,11 +125,11 @@ export default function TeamMemoriesSection() {
                     key={`${idx}-${i}`}
                     className={`flex flex-col items-center bg-white rounded-lg shadow-lg border ${i === 1 ? 'border-orange-400' : 'border-orange-200'} transition-all duration-500 ease-out`}
                     style={{
-                      flex: '1 1 0',
-                      maxWidth: '28vw',
-                      minWidth: '18vw',
-                      height: 'auto',
-                      overflow: 'visible',
+                      flex: isMobile ? "0 0 auto" : "1 1 0",
+                      maxWidth: isMobile ? (i === 1 ? "72vw" : "60vw") : "28vw",
+                      minWidth: isMobile ? (i === 1 ? "72vw" : "60vw") : "18vw",
+                      height: "auto",
+                      overflow: "visible",
                     }}
                     onMouseEnter={e => gsap.to(e.currentTarget, { scale: 1.04, duration: 0.7, ease: "power2.out" })}
                     onMouseLeave={e => gsap.to(e.currentTarget, { scale: 1, duration: 0.7, ease: "power2.out" })}
@@ -132,7 +150,7 @@ export default function TeamMemoriesSection() {
                         ref={centerTextRef}
                         className="w-full flex flex-col items-center justify-center text-center bg-white"
                         style={{
-                          padding: '1.5vw 1vw 2vw 1vw',
+                          padding: isMobile ? "5vw 4vw 6vw 4vw" : "1.5vw 1vw 2vw 1vw",
                           borderRadius: '0 0 1vw 1vw',
                           border: '1px solid #ff6a00',
                           borderTop: 'none',
@@ -144,7 +162,7 @@ export default function TeamMemoriesSection() {
                         <div
                           style={{
                             color: '#ff6a00',
-                            fontSize: '0.9vw',
+                            fontSize: isMobile ? "3vw" : "0.9vw",
                             fontWeight: 600,
                             letterSpacing: '0.1em',
                             marginBottom: '0.5vw',
@@ -155,7 +173,7 @@ export default function TeamMemoriesSection() {
                         <div
                           style={{
                             color: '#222',
-                            fontSize: '1.8vw',
+                            fontSize: isMobile ? "5vw" : "1.8vw",
                             fontWeight: 500,
                             fontFamily: 'sans-serif',
                             letterSpacing: '-0.01em',
@@ -173,12 +191,12 @@ export default function TeamMemoriesSection() {
                 <div
                   className="flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden border border-orange-200 transition-all duration-500"
                   style={{
-                    width: '18vw',
-                    aspectRatio: '1/1.2',
-                    height: 'auto',
-                    filter: 'blur(6px)',
+                    width: isMobile ? "40vw" : "18vw",
+                    aspectRatio: isMobile ? "3/4" : "1/1.2",
+                    height: "auto",
+                    filter: "blur(6px)",
                     opacity: 0.7,
-                    marginRight: '-14.4vw',
+                    marginRight: isMobile ? "-32vw" : "-14.4vw",
                   }}
                 >
                   <div className="w-full h-full relative">
