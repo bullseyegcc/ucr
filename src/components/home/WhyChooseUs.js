@@ -48,7 +48,7 @@ export default function WhyChooseUs() {
         ].map((card, i) => (
           <CardAnimation key={card.title} index={i}>
             <div
-              className="bg-white rounded-xl p-8 flex flex-col gap-4 shadow-lg group cursor-pointer transition-all duration-400 ease-out"
+              className="bg-white rounded-xl p-8 flex flex-col gap-4 group cursor-pointer transition-all duration-400 ease-out"
             >
               <Image
                 data-ci

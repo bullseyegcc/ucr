@@ -132,7 +132,7 @@ export const Navbar = () => {
 
                 {/* Contact Button - Hidden on mobile, dynamic color */}
                 <Link href="/contactus" className='hidden lg:block'>
-                    <button className={`flex items-center gap-2 w-36 lg:w-40 border rounded-2xl px-3 py-2 justify-between transition-all duration-300 text-sm lg:text-base ${
+                    <button className={`flex items-center gap-2 w-36 lg:w-40 border rounded-full px-3 py-2 justify-between transition-all duration-300 text-sm lg:text-base ${
                         isScrolled
                             ? 'text-gray-900 border-gray-900 hover:bg-gray-100'
                             : 'text-white border-secondary hover:bg-secondary/10'

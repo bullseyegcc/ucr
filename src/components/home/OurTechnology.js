@@ -70,11 +70,11 @@ export default function OurTechnology() {
                   }`}
                 >
                   {activeTab === index ? (
-                    <div className="flex flex-col gap-4 pl-2">
-                      <h1 className="flex gap-4 items-center text-2xl sm:text-4xl text-primary font-medium">
+                    <div className="flex flex-col gap-4 ">
+                      <h1 className="flex gap-4 items-center text-2xl sm:text-4xl text-primary ">
                         {tech.title}
                       </h1>
-                      <p className="text-lg font-light text-gray-700 ">{tech.description}</p>
+                      <p className="text-lg text-black">{tech.description}</p>
                       <button 
                         onClick={() => router.push('/technology')}
                         className=" flex gap-2 justify-between text-primary text-lg items-center border border-primary rounded-full px-5 py-2 hover:bg-primary hover:text-white hover:scale-105 transition-all duration-300 w-fit"

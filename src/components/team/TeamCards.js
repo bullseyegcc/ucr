@@ -5,8 +5,8 @@ import Image from 'next/image';
 
 const members = [
   { src: '/chairman.png',      name: "Diam O'Sullivan", role: 'Honorable Chairman' },
-  { src: '/cofounder.png',     name: "Liam O'Sullivan", role: 'Honorable Co-Founder' },
-  { src: '/cheftechnology.png',name: "Samantha Chen", role: 'Honorable Chief Technology Officer' },
+  { src: '/cofounder.png',     name: "Liam O'Sullivan", role: 'Co-Founder & COO' },
+  { src: '/cheftechnology.png',name: "Samantha Chen", role: 'Chief Technology Officer' },
 ];
 
 export default function TeamCards() {
@@ -72,8 +72,8 @@ export default function TeamCards() {
             height={1000}
             className="w-full rounded-lg object-contain"
           />
-          <h1 className="text-2xl lg:text-3xl mt-2 font-medium">{member.name}</h1>
-          <p className="text-primary lg:text-2xl font-light">{member.role}</p>
+          <h1 className="text-2xl lg:text-3xl mt-6 mb-3 font-semibold">{member.name}</h1>
+          <p className="text-primary lg:text-xl font-light">{member.role}</p>
         </div>
       ))}
     </div>

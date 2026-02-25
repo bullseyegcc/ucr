@@ -36,7 +36,7 @@ export default function AboutUs() {
 
                 <HeroHeading >
 
-                    <h1 className="w-[80%] mt-5 text-3xl lg:text-5xl lg:text-6xl text-white font-medium text-center leading-tight">
+                    <h1 className="w-[80%] mt-5 text-3xl lg:text-5xl lg:text-6xl text-white font-medium text-center leading-tight lg:mb-8">
                         <FadeIn>
 
                             Leading the region&apos;s copper transformation with cutting edge technology

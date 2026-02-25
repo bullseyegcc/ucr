@@ -44,12 +44,12 @@ export default function HeroHeading({ children, className = '', delay = 0 }) {
 
   return (
     <div
-      className={`absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none px-4 ${className}`}
+      className={`absolute inset-0 flex flex-col items-center justify-center md:justify-start z-10 pointer-events-none px-4 ${className}`}
     >
       <div
         ref={wrapperRef}
-        className="flex flex-wrap justify-center gap-x-[0.35em] gap-y-2
-                   text-3xl lg:text-5xl lg:text-7xl text-white font-medium text-center
+        className="flex flex-wrap justify-center lg:pt-60 gap-x-[0.35em] gap-y-2
+                   text-3xl  lg:text-[80px] text-white font-medium text-center
                    select-none"
         style={{ willChange: 'transform, opacity, filter, letter-spacing', opacity: 0 }}
       >
