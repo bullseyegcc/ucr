@@ -92,7 +92,7 @@ export default function WeCareSection() {
   return (
     <div
       ref={sectionRef}
-      className="relative min-h-[80vh] pt-8 px-5 sm:px-0 sm:h-[90vh] flex flex-col justify-between bg-[url('/care.jpg')] bg-cover bg-center mx-4 lg:mx-10 my-5 rounded-xl lg:overflow-hidden"
+      className="relative min-h-[80vh] pt-8 px-5 sm:px-0 sm:h-[90vh] flex flex-col justify-between bg-[url('/care.jpg')] bg-cover bg-center  lg:mx-10 my-5 rounded-xl lg:overflow-hidden"
     >
       <VideoPlayer src="/sustain.mp4" className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
 
@@ -137,12 +137,12 @@ export default function WeCareSection() {
                 <Image
                   src={card.img}
                   alt={card.title}
-                  width={140}
-                  height={130}
-                  className="w-40 h-25"
+                  width={154}
+                  height={84}
+                  className="w-[154px] h-[84px] lg:w-[226px] lg:h-[124px]"
                 />
-                <h1 className="text-lg text-white font-medium">{card.title}</h1>
-                <p className="text-secondary text-sm">{card.desc}</p>
+                <h1 className="font-primary font-normal text-[24.42px] leading-[27.13px] tracking-[-1.02px] text-white capitalize">{card.title}</h1>
+                <p className="font-primary font-normal text-[10.85px] leading-[18.99px] tracking-[-0.46px] text-secondary">{card.desc}</p>
               </div>
             ))}
           </div>
@@ -159,12 +159,12 @@ export default function WeCareSection() {
               <Image
                 src={card.img}
                 alt={card.title}
-                width={140}
-                height={130}
-                className="lg:w-46 lg:h-[130px]"
+                width={226}
+                height={124}
+                className="w-[154px] h-[84px] lg:w-[226px] lg:h-[124px]"
               />
-              <h1 className="lg:text-2xl text-white font-medium">{card.title}</h1>
-              <p className="text-secondary lg:text-sm">{card.desc}</p>
+              <h1 className="font-primary font-normal text-[24.42px] leading-[27.13px] tracking-[-1.02px] text-white capitalize lg:text-[36px] lg:leading-[40px] lg:tracking-[-1.5px]">{card.title}</h1>
+              <p className="font-primary font-normal text-[10.85px] leading-[18.99px] tracking-[-0.46px] text-secondary lg:text-[16px] lg:leading-[28px] lg:tracking-[-0.68px]">{card.desc}</p>
             </div>
           ))}
         </div>

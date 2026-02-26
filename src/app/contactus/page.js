@@ -23,9 +23,11 @@ export default function contactus() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 mb-12 lg:mb-16 leading-tight">
                     <div>
                         <SlideIn direction="left" duration={0.9} >
-                            <p className="uppercase text-[#FA6E43] text-xs lg:text-lg font-semibold uppercase tracking-widest mb-3 lg:mb-4">Contact us</p>
+                            <p className="uppercase text-[#FA6E43] text-xs lg:text-lg font-medium uppercase tracking-widest mb-3 lg:mb-4">Contact us</p>
 
-                            <h2 className="text-3xl lg:text-4xl font-bold lg:text-6xl font-bold text-black leading-tight">Let's connect</h2>
+                            <h2 className="font-primary font-medium text-[62px] leading-[70px] tracking-[-1.86px] align-middle text-black">
+                                Let's connect
+                            </h2>
                         </SlideIn>
                     </div>
                     <SlideIn direction="right" duration={0.9} delay={0.2} >
@@ -56,7 +58,7 @@ export default function contactus() {
                         </CardAnimation>
 
                         {/* Contact Details - 2x2 Grid */}
-                        <div className="grid grid-cols-2 gap-3 lg:gap-6">
+                        <div className="grid grid-cols-2 gap-3 lg:gap-2">
                             {/* Box 1: Connect */}
                             <CardAnimation index={1} className="bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
                                 <h4 className="text-gray-900 font-semibold text-xs lg:text-base mb-2 lg:mb-4">Connect</h4>

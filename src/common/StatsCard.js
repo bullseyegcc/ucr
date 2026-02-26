@@ -39,8 +39,8 @@ export default function StatsCard({ mainHeading, subHeading, description }) {
   }, []);
 
   return (
-    <div ref={cardRef} className="flex flex-col gap-8 px-2 lg:px-8 relative mt-10 group cursor-pointer transition-transform duration-500 ease-out hover:scale-[1.03]">
-      <h1 className="text-primary text-6xl lg:text-[80px] font-semibold z-99 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent transition-transform duration-500 ease-out">
+    <div ref={cardRef} className="flex flex-col gap-4 lg:gap-8 px-2 lg:px-8 relative mt-4 lg:mt-10 group cursor-pointer transition-transform duration-500 ease-out hover:scale-[1.03] min-w-0">
+      <h1 className="text-primary font-primary font-medium text-[40px] leading-[44px] lg:text-[clamp(48px,5.5vw,84px)] lg:leading-[1.1] tracking-[-1.38px] z-99 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent transition-transform duration-500 ease-out">
         <CountUp
           from={0}
           to={mainHeading}
@@ -54,8 +54,8 @@ export default function StatsCard({ mainHeading, subHeading, description }) {
       </h1>
       <hr className="border-t border-secondary transition-all duration-400 ease-out group-hover:border-primary" />
       <div className="transition-transform duration-400 ease-out group-hover:translate-x-1">
-          <h1 className="font-medium text-lg sm:text-2xl">{subHeading}</h1>
-          <p className="text-xs lg:text-sm font-light mt-4 text-[#212225]/55">{description}</p>
+          <h1 className="font-primary font-medium text-[18px] lg:text-[26px] leading-[28px] tracking-[-1.5px] align-middle">{subHeading}</h1>
+          <p className="font-primary font-medium text-sm lg:text-lg leading-[28px] tracking-[-0.68px] align-middle mt-4 text-[#212225]/55">{description}</p>
       </div>
     </div>
   );

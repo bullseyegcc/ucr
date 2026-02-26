@@ -17,6 +17,7 @@
 import { useRef, useCallback } from 'react';
 import SnippScrol from '../../animations/SnippScrol/index.js';
 import About from './About.js';
+import AboutStats from './AboutStats.js';
 import HeroHeading from './HeroHeading.js';
 import { VideoPlayer } from '../../common/video';
 
@@ -39,15 +40,17 @@ export default function HomeHeroAbout() {
       onLockProgress={handleLockProgress}
     >
       {/* Panel 1: Hero */}
-      <div className="relative flex min-h-[80vh] md:min-h-screen justify-center bg-black font-sans dark:bg-black overflow-hidden">
+      <div className="relative flex min-h-[80vh] md:min-h-screen justify-center bg-black dark:bg-black overflow-hidden">
         <VideoPlayer src="/hero.mp4" className="absolute inset-0 w-full h-full object-cover" />
         <HeroHeading delay={4}>UCR shaping the future</HeroHeading>
       </div>
 
       {/* Panel 2: About — receives the progress ref so it can register its colour driver */}
-      <div className="w-full h-full">
+      <div className="w-full h-auto">
         <About lockProgressRef={lockProgressRef} />
+         <AboutStats />
       </div>
+     
     </SnippScrol>
   );
 }

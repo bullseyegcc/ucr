@@ -13,25 +13,29 @@ const journeyData = [
       year: "2009",
       title: "Founded With Vision",
       description: "Founded with a steadfast dedication to accuracy, quality, and innovation, our journey in copper production began with a clear purpose — to set new benchmarks in the industry. Every process, from sourcing to refinement, reflects our pursuit of perfection and reliability.",
-      image: "/2009img.png"
+      image: "/2009img.png",
+      milestone: "Copper Excellence Begins"
     },
     {
       year: "2013",
       title: "Expansion & Growth",
       description: "Four years into our journey, we expanded our production capacity and established ourselves as a trusted name in the regional copper industry. Our commitment to excellence and customer satisfaction drove unprecedented growth and market recognition.",
-      image: "/2009img.png"
+      image: "/2009img.png",
+      milestone: "Regional Recognition"
     },
     {
       year: "2018",
       title: "Innovation & Technology",
       description: "A decade of dedication led us to integrate cutting-edge technology into our manufacturing processes. We invested heavily in automation and quality control, setting new industry standards for precision and efficiency.",
-      image: "/2009img.png"
+      image: "/2009img.png",
+      milestone: "Tech Innovation"
     },
     {
       year: "2024",
       title: "Global Excellence",
       description: "Today, we stand as a beacon of quality and innovation in the global copper market. Our world-class facilities and commitment to sustainability position us as the partner of choice for enterprises worldwide.",
-      image: "/2009img.png"
+      image: "/2009img.png",
+      milestone: "Global Leader"
     }
 ]
 
@@ -94,30 +98,32 @@ export default function JourneySection() {
                 self.progress * (journeyData.length - 1)
               )
 
-              // update progress bar width
+              // update progress bar background position
               if (progressBarRef.current) {
-                progressBarRef.current.style.width = `${Math.max(3, self.progress * 100)}%`
+                const progress = self.progress * 100
+                progressBarRef.current.style.width = `${progress}%`
               }
 
               dotsRef.current.forEach((dot, index) => {
                 if (!dot) return
-                const isActive = index === activeIndex
-                dot.style.borderColor = isActive ? '#F26522' : 'rgba(255,255,255,0.28)'
-                dot.style.background = isActive ? '#F26522' : 'transparent'
-                dot.style.boxShadow = isActive ? '0 0 0 6px rgba(242,101,34,0.18)' : 'none'
-                dot.style.transform = isActive ? 'scale(1.25)' : 'scale(1)'
-                const inner = dot.querySelector && dot.querySelector('.w-2')
-                if (inner) inner.style.opacity = isActive ? '1' : '0.9'
+                const isActive = index <= activeIndex
+                
+                // Clean minimal dot styling
+                dot.style.borderColor = isActive ? '#FA6E43' : 'rgba(255,255,255,0.4)'
+                dot.style.background = isActive ? '#FA6E43' : 'rgba(255,255,255,0.15)'
+                dot.style.transform = isActive ? 'scale(1.1)' : 'scale(1)'
               })
 
-              // animate year labels opacity/weight
+              // animate year labels opacity
               yearsRef.current.forEach((yr, idx) => {
                 if (!yr) return
-                const active = idx === activeIndex
-                yr.style.opacity = active ? '1' : '0.55'
-                yr.style.transform = active ? 'translateY(-4px) scale(1.02)' : 'translateY(0px) scale(1)'
-                yr.style.transition = 'all 0.28s ease'
-                yr.style.fontWeight = active ? '600' : '500'
+                const active = idx <= activeIndex
+                
+                yr.style.opacity = active ? '1' : '0.5'
+                yr.style.fontSize = active ? '18px' : '14px'
+                yr.style.fontWeight = active ? '700' : '600'
+                yr.style.transform = active ? 'scale(1.05)' : 'scale(1)'
+                yr.style.transition = 'all 0.3s ease-out'
               })
             },
           },
@@ -200,57 +206,84 @@ export default function JourneySection() {
           ))}
         </div>
 
-        {/* Timeline indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[90vw] max-w-[700px] flex flex-col items-center z-10">
-          {/* Years row */}
-          <div className="flex w-full justify-between mb-2">
-            {journeyData.map((item, i) => (
-              <span
-                key={i}
-                ref={el => (yearsRef.current[i] = el)}
-                className="text-white text-[13px] font-medium transition-all tracking-widest"
-                style={{ opacity: i === 0 ? 1 : 0.6, letterSpacing: '0.14em' }}
-              >
-                {item.year}
-              </span>
-            ))}
-          </div>
-          {/* Timeline line and circles */}
-          <div className="relative w-full h-8 flex items-center">
-            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-gradient-to-r from-[#F26522]/60 to-[#FA6E43]/40" />
-            <div ref={progressBarRef} className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-[#F26522] rounded-full" style={{ width: '0%', transition: 'width 0.28s linear' }} />
+        {/* REDESIGNED Timeline indicator */}
+        <div className="absolute bottom-8 left-0 right-0 flex flex-col items-center z-10 px-4 w-full">
+
+          {/* Years row - above timeline */}
+          <div className="relative w-[90%] mb-8 h-7">
             {journeyData.map((item, i) => (
               <div
                 key={i}
-                className="absolute z-10 flex flex-col items-center top-1/2 -translate-y-1/2"
-                style={{ left: `calc(${(i / (journeyData.length - 1)) * 100}% - 16px)` }}
+                className="absolute top-0 flex justify-center w-12"
+                style={{
+                  left: `calc(${(i / (journeyData.length - 1)) * 100}% - 24px)`,
+                }}
               >
-                <div
-                  ref={el => (dotsRef.current[i] = el)}
-                  className="w-8 h-8 flex items-center justify-center rounded-full border-4"
+                <span
+                  ref={el => (yearsRef.current[i] = el)}
+                  className="text-white font-bold tracking-wider transition-all whitespace-nowrap"
                   style={{
-                    borderColor: i === 0 ? '#F26522' : 'rgba(255,255,255,0.18)',
-                    background: i === 0 ? '#F26522' : 'transparent',
-                    boxShadow: i === 0 ? '0 0 0 8px rgba(242,101,34,0.18)' : 'none',
-                    transition: 'all 0.28s ease',
-                    backdropFilter: 'saturate(120%) blur(2px)'
+                    opacity: i === 0 ? 1 : 0.5,
+                    fontSize: i === 0 ? '18px' : '14px',
+                    fontWeight: i === 0 ? '700' : '600',
+                    letterSpacing: '0.03em',
                   }}
                 >
-                  <div className="w-3 h-3 rounded-full bg-white" />
+                  {item.year}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Timeline line and circles */}
+          <div className="relative w-[90%] my-5 flex items-center">
+            {/* Background timeline track - Gray base line */}
+            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px bg-white rounded-full" style={{ opacity: 0.3 }} />
+            
+            {/* Progress bar - Pure white, clean */}
+            <div
+              ref={progressBarRef}
+              className="absolute left-0 top-1/2 -translate-y-1/2 h-px rounded-full"
+              style={{
+                width: '0%',
+                background: 'white',
+                transition: 'width 0.3s ease-out',
+              }}
+            />
+
+            {/* Milestone dots */}
+            {journeyData.map((item, i) => (
+              <div
+                key={i}
+                className="absolute z-20 flex justify-center top-1/2 -translate-y-1/2"
+                style={{ left: `calc(${(i / (journeyData.length - 1)) * 100}% - 28px)` }}
+              >
+                {/* Main dot container - Minimal clean design */}
+                <div
+                  ref={el => (dotsRef.current[i] = el)}
+                  className="w-14 h-14 flex items-center justify-center rounded-full border-2 relative z-10"
+                  style={{
+                    borderColor: i === 0 ? '#FA6E43' : 'rgba(255,255,255,0.4)',
+                    background: i === 0 ? '#FA6E43' : 'rgba(255,255,255,0.15)',
+                    transition: 'all 0.3s ease-out',
+                    transform: i === 0 ? 'scale(1.1)' : 'scale(1)',
+                  }}
+                >
+                  {/* Inner white dot */}
+                  <div
+                    className="w-4 h-4 rounded-full bg-white"
+                    style={{
+                      transition: 'opacity 0.3s ease',
+                    }}
+                  />
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Scroll hint */}
-        <div className="absolute bottom-6 right-8 flex items-center gap-2 text-black/30 text-xs pointer-events-none select-none">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-          <span>Scroll to explore</span>
-        </div>
       </div>
     </section>
   )
 }
+  

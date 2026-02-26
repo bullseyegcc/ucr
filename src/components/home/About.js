@@ -4,32 +4,13 @@ import { useEffect, useRef } from 'react';
 import Image from "next/image";
 import { ArrowRight } from 'lucide-react';
 import { Badge } from "../../common/badge.js";
-import StatsCard from "../../common/StatsCard.js";
+import AboutStats from './AboutStats.js';
 import TextReveal from "../../animations/TextReveal.js";
 import gsap from 'gsap';
 import CardAnimation from '../../animations/CardAnimation.js';
 
 export default function About({ lockProgressRef = null }) {
-  const statsRef   = useRef(null);
   const headingRef = useRef(null);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const cards = statsRef.current?.querySelectorAll('.stat-card-item');
-    if (!cards?.length) return;
-    gsap.set(cards, { y: 50, opacity: 0, scale: 0.92 });
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          gsap.to(cards, { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: 'expo.out', stagger: 0.1 });
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.4 }
-    );
-    observer.observe(statsRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     if (typeof window === 'undefined' || !lockProgressRef) return;
@@ -55,12 +36,12 @@ export default function About({ lockProgressRef = null }) {
   }, [lockProgressRef]);
 
   return (
-    <div className="w-full bg-white flex flex-col min-h-screen max-h-auto">
-      <div className="relative flex flex-col lg:flex-row px-6 lg:px-10 pt-10 lg:pt-14 gap-6 lg:gap-6 h-1/2 ">
+    <div className="w-full bg-white flex flex-col">
+      <div className="relative flex flex-col lg:flex-row px-6 lg:px-10 pt-10 lg:pt-14 gap-6 lg:gap-6">
         <div className="w-full lg:w-[60%] flex flex-col gap-5 lg:gap-8 z-10">
           <Badge title="About Us" />
           <TextReveal>
-            <h1 ref={headingRef} className="text-primary text-2xl lg:text-4xl lg:text-5xl leading-snug lg:leading-tight">
+            <h1 ref={headingRef} className="text-primary font-primary font-medium text-[20px] leading-[32px] tracking-[-0.53px] lg:text-[48px] lg:leading-[69.32px] lg:tracking-[-1.39px]">
               Our UAE factory combines Advanced technology with global{' '}
               <span className="text-gray-100">
                 expertise to produce high-quality copper products that meet international standards
@@ -68,12 +49,12 @@ export default function About({ lockProgressRef = null }) {
             </h1>
           </TextReveal>
 
-          <CardAnimation> <button className="bg-primary w-44 lg:w-56 px-5 lg:px-8 py-3 text-white lg:text-lg flex justify-between items-center gap-3 rounded-full">
-            Know more <ArrowRight size={22} color="white" />
+          <CardAnimation> <button className="bg-primary text-[14px] lg:text-xl w-[143px] lg:w-[199px] h-[41.4px] lg:h-[62px] px-[18px] lg:px-[26px] py-2 lg:py-3 text-white flex justify-between items-center gap-3 rounded-[33.42px] lg:rounded-[50px] [border:0.67px_solid_white] lg:[border:1px_solid_white]">
+            <span className="font-primary font-normal  leading-[19.65px] tracking-[-0.59px] text-center align-middle">Know more</span> <ArrowRight size={22} color="white" />
           </button></CardAnimation>
          
         </div>
-        <div className="lg:w-[45%] flex items-end justify-end pointer-events-none h-1/2">
+        <div className="w-80 lg:w-[45%] lg:static  absolute top-[70%] left-[20%] flex items-end justify-end pointer-events-none z-0">
           <Image
             src="/aboutside.png"
             alt="Factory Image"
@@ -82,12 +63,6 @@ export default function About({ lockProgressRef = null }) {
             className="w-[75%] lg:w-full object-contain"
           />
         </div>
-      </div>
-      <div ref={statsRef} className="h-auto bg-white grid grid-cols-2 lg:grid-cols-4 px-2 lg:px-10 py-4 lg:py-6 gap-4 lg:gap-6">
-        <div className="stat-card-item"><StatsCard mainHeading="2009" subHeading="Established In" description="Since then, our excellence has made us a trusted name in copper manufacturing." /></div>
-        <div className="stat-card-item"><StatsCard mainHeading="20K+" subHeading="MT/Annum" description="Produces 20,000 metric tons of copper per year." /></div>
-        <div className="stat-card-item"><StatsCard mainHeading="150+" subHeading="Employees" description="With over 150 experienced employees, we deliver quality and reliability every day." /></div>
-        <div className="stat-card-item"><StatsCard mainHeading="50+" subHeading="Global sales" description="With a presence in 50+ countries, we serve clients on every continent." /></div>
       </div>
     </div>
   );

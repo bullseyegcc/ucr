@@ -55,9 +55,9 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <div className="lg:min-h-screen lg:h-[90vh] rounded-xl mx-4 lg:mx-10 flex items-end py-10 relative">
+    <div className="min-h-screen lg:h-[90vh] rounded-xl  lg:mx-10 flex items-end py-10 relative">
       {/* Background Slider Container */}
-      <div className="absolute inset-0 overflow-hidden rounded-xl">
+      <div className="absolute inset-0  overflow-hidden rounded-xl">
         <div
           ref={backgroundSliderRef}
           className="flex h-full will-change-transform"
@@ -84,7 +84,7 @@ export default function FeaturedProducts() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent rounded-xl z-5"></div>
 
       {/* Content Card */}
-      <div className="h-full pt-9 relative top-8 bottom-5 bg-white p-6 lg:p-8 flex flex-col gap-5 lg:gap-6 lg:gap-26 w-full lg:w-[45%] lg:min-h-[90%] mx-4 lg:mx-10 rounded-xl z-10 shadow-2xl transition-all duration-700">
+      <div className="h-full  relative bg-white p-6 lg:p-8 flex flex-col gap-5 lg:gap-6 lg:gap-26 w-full lg:w-[45%] lg:min-h-[90%] mx-2 lg:mx-10 rounded-xl z-10 shadow-2xl transition-all duration-700">
         {/* Header */}
         <div className="flex flex-col gap-5">
           <div className="flex gap-3 text-white z-300">
@@ -93,17 +93,17 @@ export default function FeaturedProducts() {
           </div>
 
           {/* Product Tabs */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col lg:gap-12">
             {PRODUCTS.map((product, index) => (
               <div
                 key={product.id}
                 onClick={() => handleTabChange(index)}
                 className={`cursor-pointer transition-all duration-300 ${
                   activeTab === index ? 'opacity-100' : 'opacity-60 hover:opacity-80'
-                }`}
+                } flex flex-col gap-9`}
               >
                 {activeTab === index ? (
-                  <h1 className="flex items-center text-xl lg:text-5xl text-primary mt-5 font-medium">
+                  <h1 className="flex items-center text-[28px] leading-[29.71px] tracking-[-1.55px] text-primary mt-5 font-normal capitalize align-middle lg:text-5xl lg:font-medium">
                     {product.title}
                     {product.icon && (
                       <Image
@@ -111,12 +111,12 @@ export default function FeaturedProducts() {
                         alt={product.title}
                         width={50}
                         height={50}
-                        className='object-contain inline-block lg:ml-3'
+                        className='hidden object-contain lg:inline-block lg:ml-3'
                       />
                     )}
                   </h1>
                 ) : (
-                  <h1 className="text-lg lg:text-4xl text-secondary my-2 font-medium">
+                  <h1 className="text-[28px] leading-[61.27px] tracking-[-1.55px] text-secondary my-2 font-normal capitalize align-middle lg:text-5xl lg:font-medium">
                     {product.title}
                   </h1>
                 )}
@@ -128,9 +128,10 @@ export default function FeaturedProducts() {
         {/* CTA Button */}
         <button 
           onClick={handleKnowMore}
-          className="w-fit flex gap-2 my-6 lg:my-0 items-center text-primary text-sm lg:text-base border-2 border-primary rounded-full px-6 py-3 hover:bg-primary hover:text-white transition-all duration-300 font-semibold"
+          className="w-full lg:w-[193px] h-[39.5189px] lg:h-[62px] flex gap-2 my-6 lg:my-0 items-center justify-center text-primary text-sm lg:text-base border-[0.62px] border-primary rounded-[30.95px] lg:rounded-[50px] py-[8px] lg:py-3 pl-[20px] lg:pl-[28px] pr-[20px] lg:pr-[18px] hover:bg-primary hover:text-white transition-all duration-300 font-semibold"
         >
-          Know More <ArrowRight size={18} />
+          <span className="font-primary font-normal text-[14px] leading-[18.2px] tracking-[-0.54px] text-center align-middle lg:text-[20px] lg:leading-[29.4px] lg:tracking-[-0.88px]">Know More</span>
+          <ArrowRight size={18} />
         </button>
 
         {/* Indicator Dots */}

@@ -53,7 +53,7 @@ export default function OurTechnology() {
             <div className="animate-reveal">
               <WhiteBadge title="Core Strength" className='z-190' />
             </div>
-            <h1 className="text-4xl text-white font-semibold mt-4 animate-reveal">Our technology</h1>
+            <h1 className="font-primary font-medium text-[32px] leading-[36.09px] tracking-[-0.79px] lg:text-[64px] lg:leading-[64px] lg:tracking-[-1.4px] text-white mt-4 animate-reveal">Our technology</h1>
           </div>
 
           <div>
@@ -71,19 +71,20 @@ export default function OurTechnology() {
                 >
                   {activeTab === index ? (
                     <div className="flex flex-col gap-4 ">
-                      <h1 className="flex gap-4 items-center text-2xl sm:text-4xl text-primary ">
+                      <h1 className="font-primary font-normal text-[28px] leading-[36.09px] tracking-[-1.41px] text-primary lg:text-[48px] lg:leading-[64px] lg:tracking-[-2.5px]">
                         {tech.title}
                       </h1>
-                      <p className="text-lg text-black">{tech.description}</p>
+                      <p className="font-primary font-normal text-[12px] leading-[20px] tracking-[-0.41px] text-black lg:text-[20px] lg:leading-[32px] lg:tracking-[-0.72px]">{tech.description}</p>
                       <button 
                         onClick={() => router.push('/technology')}
-                        className=" flex gap-2 justify-between text-primary text-lg items-center border border-primary rounded-full px-5 py-2 hover:bg-primary hover:text-white hover:scale-105 transition-all duration-300 w-fit"
+                        className="w-full h-[40px] lg:w-[193px] lg:h-[62px] flex items-center justify-center gap-2 text-primary border-[0.62px] lg:border border-primary rounded-[30.95px] lg:rounded-[50px] py-[8px] lg:py-[12px] px-[20px] lg:pl-[28px] lg:pr-[18px] hover:bg-primary hover:text-white transition-all duration-300"
                       >
-                        Know More <ArrowRight size={18} className="text-primary group-hover:text-white" />
+                        <span className="font-primary font-normal text-[14px] leading-[18.2px] tracking-[-0.54px] lg:text-[20px] lg:leading-[29.4px] lg:tracking-[-0.88px]">Know More</span>
+                        <ArrowRight size={18} className="text-primary" />
                       </button>
                     </div>
                   ) : (
-                    <h1 className="text-white font-normal hover:text-white/80 text-2xl sm:text-4xl">
+                    <h1 className="font-primary font-normal text-[24px] leading-[55.82px] tracking-[-1.41px] lg:text-[40px] lg:leading-[99px] lg:tracking-[-2.5px] text-white hover:text-white/80">
                       {tech.title}
                     </h1>
                   )}
