@@ -20,12 +20,12 @@ export default function contactus() {
             {/* Let's Connect Section */}
             <div className="w-full px-4 lg:px-10 lg:px-20 py-12 lg:py-16 lg:py-20 bg-[#F5F5F5] leading-tight">
                 {/* Header Section */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 mb-12 lg:mb-16 leading-tight">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-6 mb-12 lg:mb-16 leading-tight">
                     <div>
                         <SlideIn direction="left" duration={0.9} >
                             <p className="uppercase text-[#FA6E43] text-xs lg:text-lg font-medium uppercase tracking-widest mb-3 lg:mb-4">Contact us</p>
 
-                            <h2 className="font-primary font-medium text-[62px] leading-[70px] tracking-[-1.86px] align-middle text-black">
+                            <h2 className="font-primary font-medium text-[32px] lg:text-[62px] leading-[48px] lg:leading-[70px] tracking-[-1.86px] align-middle text-black">
                                 Let's connect
                             </h2>
                         </SlideIn>
@@ -33,7 +33,7 @@ export default function contactus() {
                     <SlideIn direction="right" duration={0.9} delay={0.2} >
                     <div className="flex items-start self-center">
 
-                        <p className="text-gray-700 text-sm lg:text-2xl leading-relaxed  lg:text-left max-w-lg leading-tight ml-auto">Whether you're ready to start or just curious, we'd love to hear from you.</p>
+                        <p className="text-gray-700 text-base leading-[28px] tracking-[-0.2px] lg:text-2xl lg:leading-relaxed max-w-[361px] lg:max-w-lg ml-auto">Whether you're ready to start or just curious, we'd love to hear from you.</p>
                     </div>
                     </SlideIn>
                 </div>
@@ -41,7 +41,7 @@ export default function contactus() {
                 {/* Main Content Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8">
                     {/* Left Column */}
-                    <div>
+                    <div className="hidden lg:block">
                         {/* Person Card */}
                         <CardAnimation index={0} className="bg-white rounded-lg p-4 lg:p-8 mb-8 lg:mb-12 group hover:shadow-xl hover:scale-105 transition-all duration-400">
                             <div className="flex items-start gap-3 lg:gap-6">
@@ -155,6 +155,62 @@ export default function contactus() {
                         </p>
                     </CardAnimation>
                 </div>
+
+                 <div className="mt-8 lg:hidden">
+                        {/* Person Card */}
+                        <CardAnimation index={0} className="bg-white rounded-lg p-4 lg:p-8 mb-8 lg:mb-12 group hover:shadow-xl hover:scale-105 transition-all duration-400">
+                            <div className="flex justify-between items-start gap-3 lg:gap-6">
+                                <img src="/person.png" alt="Team member" className="w-16 lg:w-40 h-16 lg:h-40 rounded-lg object-cover flex-shrink-0" />
+                                <div className=" w-[50%]">
+                                    <h3 className="font-semibold text-gray-900 text-sm lg:text-2xl mb-1 lg:mb-3">Hey there!</h3>
+                                    <p className="text-gray-600 text-xs lg:text-base leading-tight lg:leading-relaxed mb-3 lg:mb-5">Whether you need quick answers or deep strategy talks, I'm here to make your journey smooth.</p>
+                                    <a href="#" className="text-[#FA6E43] text-xs lg:text-sm font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all">
+                                        Book a call directly with HR
+                                        <span>→</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </CardAnimation>
+
+                        {/* Contact Details - 2x2 Grid */}
+                        <div className="grid grid-cols-2 gap-3 lg:gap-2">
+                            {/* Box 1: Connect */}
+                            <CardAnimation index={1} className="bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                                <h4 className="text-gray-900 font-semibold text-xs lg:text-base mb-2 lg:mb-4">Connect</h4>
+                                <div className="space-y-1">
+                                    <a href="#" className="text-gray-700 text-xs lg:text-sm hover:text-[#FA6E43] transition-colors duration-300 block underline">Instagram</a>
+                                    <a href="#" className="text-gray-700 text-xs lg:text-sm hover:text-[#FA6E43] transition-colors duration-300 block underline">LinkedIn</a>
+                                    <a href="#" className="text-gray-700 text-xs lg:text-sm hover:text-[#FA6E43] transition-colors duration-300 block underline">Twitter</a>
+                                </div>
+                            </CardAnimation>
+
+                            {/* Box 2: Fax */}
+                            <CardAnimation index={2} className="flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                                <h4 className="text-gray-900 font-semibold text-xs lg:text-base mb-2 lg:mb-3">Fax</h4>
+                                <p className="text-[#FA6E43] text-xs lg:text-sm font-semibold">+971 2 550 3240</p>
+                            </CardAnimation>
+
+                            {/* Box 3: Reach Out */}
+                            <CardAnimation index={3} className="bg-white rounded-lg p-3 lg:p-6 flex flex-col justify-between group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                                <h4 className="text-gray-900 font-semibold text-xs lg:text-base mb-2 lg:mb-4">Reach Out</h4>
+                                <div className="space-y-2 lg:space-y-4">
+                                    <a href="mailto:info@ucrccopper.ae" className="text-[#FA6E43] text-xs lg:text-sm font-semibold hover:text-orange-600 transition-colors duration-300 block">info@ucrccopper.ae</a>
+                                    <a href="tel:+971255033240" className="text-[#FA6E43] text-xs lg:text-sm font-semibold hover:text-orange-600 transition-colors duration-300 block">+971 2 550 3240</a>
+                                </div>
+                            </CardAnimation>
+
+                            {/* Box 4: Office */}
+                            <CardAnimation index={4} className="flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                                <h5 className="text-gray-900 font-semibold text-xs lg:text-base mb-2 lg:mb-3">Office</h5>
+                                <div className="space-y-1 text-gray-600 text-xs lg:text-sm leading-tight lg:leading-relaxed">
+                                    <p>Mussafah,</p>
+                                    <p>Industrial Area of AbuDhabi(ICAD1)</p>
+                                    <p>P.O.Box 112231,</p>
+                                    <p>Abu Dhabi, UAE</p>
+                                </div>
+                            </CardAnimation>
+                        </div>
+                    </div>
             </div>
         </div>
     )

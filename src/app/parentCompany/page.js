@@ -4,6 +4,7 @@ import { Badge, Badgetextwhite } from "../../common/badge"
 import Image from "next/image"
 import ColorChangeWithScroll from "../../animations/ColorChangeWithScroll"
 import CardAnimation from "../../animations/CardAnimation"
+import ScrollRevealCardsContainer from "../../animations/ScrollRevealCardsContainer"
 import CountUp from "../../animations/countup"
 import FadeIn from "../../animations/FadeIn"
 import SlideIn from "../../animations/SlideIn"
@@ -19,7 +20,7 @@ export default function parentCompany() {
                     <Badgetextwhite title="Our Logistics" />
                 </SlideIn>
 
-                <FadeIn className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white w-full px-6" duration={0.4} delay={0}>
+                <FadeIn className="lg:w-[70%] font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white w-full px-6" duration={0.4} delay={0}>
                    Driving growth through strategy, leadership, and innovation.
                 </FadeIn>
 
@@ -38,39 +39,43 @@ export default function parentCompany() {
             </div>
 
 
-            <div className="grid grid-cols-1 py-8 sm:grid-cols-2 lg:grid-cols-2 gap-6 px-4 lg:px-10">
-                <CardAnimation index={0} className="min-h-[40vh] py-10 lg:h-full relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
+            <ScrollRevealCardsContainer
+                className="min-h-[80vh] w-full flex items-center justify-center my-8 px-2 lg:px-10"
+                containerClassName="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6"
+                staggerDelay={0.5}
+            >
+                <div className="min-h-[40vh] py-10 lg:h-full relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
                     <Image src="/pc1.png" alt="Icon" className='absolute bottom-0 right-0 max-w-[45%] lg:max-w-[60%]' width={300} height={0} />
                     <div className="pb-6">
                         <h1 className="text-2xl lg:text-4xl py-4 lg:py-6 font-semibold text-primary">Manufacturing</h1>
                         <p className="text-[#5F5F66] text-base lg:text-lg mt-3 w-full lg:w-4/5">Our manufacturing segment is powered by advanced production capabilities, high-grade facilities, and an uncompromising commitment to quality. We support industries with reliable, large-scale output across metals, materials, consumer goods, and industrial components.</p>
                     </div>
-                </CardAnimation>
+                </div>
 
-                <CardAnimation index={1} className="relative py-5 rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
+                <div className="relative py-5 rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
                     <Image src="/pc2.png" alt="Icon" className='absolute bottom-0 right-0 max-w-[35%] lg:max-w-[55%]' width={250} height={0} />
                     <div className="pb-6">
                         <h1 className="text-2xl lg:text-4xl py-4 lg:py-6 font-semibold text-primary">Trading</h1>
                         <p className="text-[#5F5F66] text-base lg:text-lg mt-3 w-full lg:w-4/5">With a strong regional footprint, our trading operations connect global suppliers with local markets. We streamline supply-chain processes, enhance product availability, and ensure that businesses can access the materials and products they need, quickly and efficiently.</p>
                     </div>
-                </CardAnimation>
+                </div>
 
-                <CardAnimation index={2} className="min-h-[40vh] py-10 relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
+                <div className="min-h-[40vh] py-10 relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
                     <Image src="/pc3.png" alt="Icon" className='absolute bottom-0 right-0 max-w-[35%] lg:max-w-[55%]' width={250} height={0} />
                     <div className="pb-6">
                         <h1 className="text-2xl lg:text-4xl py-4 lg:py-6 font-semibold text-primary">Construction</h1>
                         <p className="text-[#5F5F66] text-base lg:text-lg mt-3 w-full lg:w-4/5">Our manufacturing segment is powered by advanced production capabilities, high-grade facilities, and an uncompromising commitment to quality. We support industries with reliable, large-scale output across metals, materials, consumer goods, and industrial components.</p>
                     </div>
-                </CardAnimation>
+                </div>
 
-                <CardAnimation index={3} className="min-h-[40vh] py-10 relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
+                <div className="min-h-[40vh] py-10 relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
                     <Image src="/pc4.png" alt="Icon" className='absolute bottom-3 right-3 max-w-[35%] lg:max-w-[55%] z-0' width={250} height={0} />
                     <div className="pb-6">
                         <h1 className="text-2xl lg:text-4xl py-4 lg:py-6 font-semibold text-primary">Services</h1>
-                        <p className="text-[#5F5F66] text-base lg:text-lg mt-3 w-full lg:w-4/5">From logistics and facility management to specialized industrial services, we deliver essential support functions that strengthen our group’s operational backbone. Our service companies allow other subsidiaries to focus on their core business while benefiting from dependable, optimized support systems.</p>
+                        <p className="text-[#5F5F66] text-base lg:text-lg mt-3 w-full lg:w-4/5">From logistics and facility management to specialized industrial services, we deliver essential support functions that strengthen our group's operational backbone. Our service companies allow other subsidiaries to focus on their core business while benefiting from dependable, optimized support systems.</p>
                     </div>
-                </CardAnimation>
-            </div>
+                </div>
+            </ScrollRevealCardsContainer>
 
 
             <div className="w-full h-auto lg:h-[80vh] pt-12 lg:pt-16 px-4 lg:px-10 mb-8 bg-[url('/expertisebg.png')] bg-contain bg-top bg-no-repeat bg-cover flex flex-col justify-between">

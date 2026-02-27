@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import SlideIn from "../../animations/SlideIn";
 import LogisticsAdvantageCard from "./LogisticsAdvantageCard";
@@ -6,22 +5,21 @@ import { useState } from "react";
 
 export default function LogisticsAdvantageSection() {
 
-  // Track which card is hovered or clicked (null, 8, 9, or 10)
+  // Track which card is hovered or clicked
   const [hoveredCard, setHoveredCard] = useState(null);
   const [clickedCard, setClickedCard] = useState(null);
 
-
-  // Map card index to background image (include all indices used)
+  // Map card index to background image
   const bgImages = {
     6: "/pdetail.png",
     7: "/blog8.png",
-    8: "/pdetail.png",
+    8: "/blog6.png",
     9: "/blog8.png",
     10: "/blog9.png",
     default: "/fp3.png",
   };
 
-  // Get background image URL based on clicked or hovered card (mobile and desktop)
+  // Get background image URL based on clicked or hovered card
   const getBgImageUrl = () => {
     if (clickedCard !== null && bgImages[clickedCard]) {
       return bgImages[clickedCard];
@@ -32,8 +30,8 @@ export default function LogisticsAdvantageSection() {
     return bgImages.default;
   };
 
-  // Helper to determine active state: clicked overrides hover
-  const isActive = (index) => (clickedCard !== null ? clickedCard === index : hoveredCard === index);
+  // Helper to determine active state (for clicked cards only)
+  const isActive = (index) => clickedCard === index;
 
   // Toggle clicked state on card click
   const toggleClicked = (index) => {
@@ -62,9 +60,9 @@ export default function LogisticsAdvantageSection() {
               count={"01"}
               title="Higher Delivery Capacity"
               description="UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum."
-              borderColor={isActive(6) ? "border-primary" : "border-primary"}
-              hoverBorderColor="hover:border-primary"
-              numberColor={isActive(6) ? "text-primary" : ""}
+              borderColor={isActive(6) ? "border-primary" : "border-secondary hover:border-primary"}
+              numberColor={isActive(6) ? "text-primary" : "text-secondary group-hover:text-primary"}
+              titleColor={isActive(6) ? "text-primary" : "text-secondary group-hover:text-primary"}
               onMouseEnter={() => setHoveredCard(6)}
               onMouseLeave={() => setHoveredCard(null)}
               onClick={() => toggleClicked(6)}
@@ -76,9 +74,9 @@ export default function LogisticsAdvantageSection() {
               count={"03"}
               title="Higher Delivery Capacity"
               description="UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum."
-              borderColor={isActive(7) ? "border-primary" : "border-secondary"}
-              hoverBorderColor="hover:border-primary"
-              numberColor={isActive(7) ? "text-primary" : "text-secondary hover:text-primary"}
+              borderColor={isActive(7) ? "border-primary" : "border-secondary hover:border-primary"}
+              numberColor={isActive(7) ? "text-primary" : "text-secondary group-hover:text-primary"}
+              titleColor={isActive(7) ? "text-primary" : "text-secondary group-hover:text-primary"}
               className="hidden lg:flex"
               onMouseEnter={() => setHoveredCard(7)}
               onMouseLeave={() => setHoveredCard(null)}
@@ -92,9 +90,9 @@ export default function LogisticsAdvantageSection() {
               count={"02"}
               title="Higher Delivery Capacity"
               description="UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum."
-              borderColor={isActive(8) ? "border-primary" : "border-primary"}
-              hoverBorderColor="hover:border-primary"
-              numberColor={isActive(8) ? "text-primary" : ""}
+              borderColor={isActive(8) ? "border-primary" : "border-secondary hover:border-primary"}
+              numberColor={isActive(8) ? "text-primary" : "text-secondary group-hover:text-primary"}
+              titleColor={isActive(8) ? "text-primary" : "text-secondary group-hover:text-primary"}
               onMouseEnter={() => setHoveredCard(8)}
               onMouseLeave={() => setHoveredCard(null)}
               onClick={() => toggleClicked(8)}
@@ -104,9 +102,9 @@ export default function LogisticsAdvantageSection() {
               count={"03"}
               title="Higher Delivery Capacity"
               description="UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum."
-              borderColor={isActive(9) ? "border-primary" : "border-secondary"}
-              hoverBorderColor="hover:border-primary"
-              numberColor={isActive(9) ? "text-primary" : "text-secondary hover:text-primary"}
+              borderColor={isActive(9) ? "border-primary" : "border-secondary hover:border-primary"}
+              numberColor={isActive(9) ? "text-primary" : "text-secondary group-hover:text-primary"}
+              titleColor={isActive(9) ? "text-primary" : "text-secondary group-hover:text-primary"}
               className="lg:hidden"
               onMouseEnter={() => setHoveredCard(9)}
               onMouseLeave={() => setHoveredCard(null)}
@@ -117,9 +115,9 @@ export default function LogisticsAdvantageSection() {
               count={"04"}
               title="Higher Delivery Capacity"
               description="UCR's state-of-the-art facility is Middle East's largest independent copper rod-producing mill with a capacity exceeding 200,000 metric tons per annum."
-              borderColor={isActive(10) ? "border-primary" : "border-secondary"}
-              hoverBorderColor="hover:border-primary"
-              numberColor={isActive(10) ? "text-primary" : "text-secondary hover:text-primary"}
+              borderColor={isActive(10) ? "border-primary" : "border-secondary hover:border-primary"}
+              numberColor={isActive(10) ? "text-primary" : "text-secondary group-hover:text-primary"}
+              titleColor={isActive(10) ? "text-primary" : "text-secondary group-hover:text-primary"}
               onMouseEnter={() => setHoveredCard(10)}
               onMouseLeave={() => setHoveredCard(null)}
               onClick={() => toggleClicked(10)}

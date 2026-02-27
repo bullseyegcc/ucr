@@ -180,11 +180,7 @@ export const Navbar = () => {
                                 <div key={item.label}>
                                     {item.type === 'simple' ? (
                                         <Link href={item.href} onClick={() => setIsMenuOpen(false)}>
-                                            <div className={`text-base sm:text-lg lg:text-xl font-normal py-2 px-3 rounded-full cursor-pointer transition-colors ${
-                                                isActivePage(item.href)
-                                                    ? 'text-primary'
-                                                    : 'text-gray-800 hover:text-primary'
-                                            }`}>
+                                            <div className="text-base sm:text-lg lg:text-xl font-normal py-2 px-3 rounded-full cursor-pointer transition-colors text-gray-800 hover:text-primary">
                                                 {item.label}
                                             </div>
                                         </Link>
@@ -192,11 +188,7 @@ export const Navbar = () => {
                                         <div>
                                             <button
                                                 onClick={() => toggleSection(item.label)}
-                                                className={`w-full flex items-center justify-between text-base sm:text-lg lg:text-xl font-normal py-2 px-3 rounded-full transition-colors ${
-                                                    expandedSection === item.label || menuStructure.find(m => m.label === item.label)?.items?.some(sub => isActivePage(sub.href))
-                                                        ? 'text-primary'
-                                                        : 'text-gray-800 hover:text-primary'
-                                                }`}
+                                                className="w-full flex items-center justify-between text-base sm:text-lg lg:text-xl font-normal py-2 px-3 rounded-full transition-colors text-gray-800 hover:text-primary"
                                             >
                                                 <span>{item.label}</span>
                                                 <ChevronDown 
@@ -215,11 +207,7 @@ export const Navbar = () => {
                                                                 href={subItem.href} 
                                                                 onClick={() => setIsMenuOpen(false)}
                                                             >
-                                                                <div className={`text-sm sm:text-base font-normal flex items-center gap-2 cursor-pointer py-1 px-3 rounded-full transition-colors group ${
-                                                                    isActive
-                                                                        ? 'text-primary'
-                                                                        : 'text-gray-700 hover:text-white hover:bg-primary'
-                                                                }`}>
+                                                                <div className="text-sm sm:text-base font-normal flex items-center gap-2 cursor-pointer py-1 px-3 rounded-full transition-colors group text-gray-700 hover:text-white hover:bg-primary">
                                                                     <span
                                                                         className={`flex-shrink-0 inline-flex items-center justify-center w-7 h-7 transition-colors ${isActive ? 'bg-primary' : 'bg-gray-200 group-hover:bg-primary'}`}
                                                                     >

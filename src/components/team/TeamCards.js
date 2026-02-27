@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import ScrollRevealCardsContainer from '../../animations/ScrollRevealCardsContainer';
 
 const members = [
   { src: '/chairman.png',      name: "Diam O'Sullivan", role: 'Honorable Chairman' },
@@ -10,53 +10,17 @@ const members = [
 ];
 
 export default function TeamCards() {
-  const cardsRef = useRef([]);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const cards = cardsRef.current.filter(Boolean);
-
-    cards.forEach((card) => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(80px)';
-      card.style.filter = 'blur(6px)';
-      card.style.transition =
-        'opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), filter 1.8s cubic-bezier(0.16, 1, 0.3, 1)';
-    });
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const card = entry.target;
-          const i = cards.indexOf(card);
-
-          if (entry.isIntersecting) {
-            setTimeout(() => {
-              card.style.opacity = '1';
-              card.style.transform = 'translateY(0px)';
-              card.style.filter = 'blur(0px)';
-            }, i * 150);
-          } else {
-            const exitingAbove = entry.boundingClientRect.top > 0;
-            card.style.opacity = '0';
-            card.style.filter = 'blur(6px)';
-            card.style.transform = exitingAbove ? 'translateY(80px)' : 'translateY(-50px)';
-          }
-        });
-      },
-      { threshold: 0.18 }
-    );
-
-    cards.forEach((card) => observer.observe(card));
-    return () => observer.disconnect();
-  }, []);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-8 justify-center">
-      {members.map((member, i) => (
+    <ScrollRevealCardsContainer
+      className="min-h-screen w-full flex items-center justify-center py-8 px-2 lg:px-10"
+      containerClassName="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      staggerDelay={0.2}
+      pinOnMobile={false}
+    >
+      {members.map((member) => (
         <div
-          key={i}
-          ref={(el) => { if (el) cardsRef.current[i] = el; }}
+          key={member.name}
           className="h-full group"
           style={{
             willChange: 'transform, opacity',
@@ -76,6 +40,6 @@ export default function TeamCards() {
           <p className="text-primary lg:text-xl font-light">{member.role}</p>
         </div>
       ))}
-    </div>
+    </ScrollRevealCardsContainer>
   );
 }

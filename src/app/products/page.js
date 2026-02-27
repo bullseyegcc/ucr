@@ -22,7 +22,7 @@ export default function blogs() {
                     <VideoPlayer src="/moreabout.mp4" className="w-full h-full object-cover" />
                 </div>
                 <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)" }}></div>
-                <h1 className="absolute top-[40%] lg:w-[60%] w-[95%] z-20 flex flex-col items-center gap-4 font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white">
+                <h1 className="absolute top-[40%] lg:top-[25%] lg:w-[60%] w-[95%] z-20 flex flex-col items-center gap-4 font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white">
 
                     <SlideIn direction="bottom" duration={0.8} delay={0}>
                         <Badgetextwhite title="Our Products" />
@@ -109,14 +109,16 @@ export default function blogs() {
 
                                         <button
                                             onClick={() => router.push(`/products/${product.slug}`)}
-                                            className="w-60 flex gap-2 items-center border border-primary lg:border-0 bg-white hover:bg-gray-100 text-primary px-6 py-4 rounded-full font-semibold transition-all duration-700 ease-in-out mt-6 lg:hidden group-hover:flex mobile:flex"
+                                            className="w-60 flex gap-2 items-center border border-primary  bg-white hover:bg-gray-100 text-primary px-6 py-4 rounded-full font-semibold transition-all duration-700 ease-in-out mt-6"
                                         >
                                             Details About Product
                                             <ArrowRight size={18} color='#FF6A00' />
                                         </button>
                                     </div>
-                                    <div className="w-full lg:w-[22%] lg:ml-8 bg-white rounded-lg transition-all duration-700 ease-in-out block group-hover:block mobile:block lg:hidden">
-                                        <Image src="/drawnwire.png" alt="Icon" width={300} height={300} className="w-full h-full object-cover transition-all duration-700 ease-in-out" />
+                                    <div className="w-full lg:w-[22%] lg:ml-8 bg-white rounded-lg transition-all duration-700 ease-in-out block">
+                                        <FadeIn scrollTrigger={true} duration={2} >
+                                        <Image src={product.icon || "/drawnwire.png"} alt={product.name} width={300} height={300} className="w-full h-full object-cover transition-all duration-700 ease-in-out" />
+                                    </FadeIn>
                                     </div>
                                 </div>
                             ))}

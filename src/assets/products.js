@@ -3,12 +3,79 @@ export const products = [
     id: 1,
     slug: "drawn-wire",
     name: "Drawn Wire",
-    description: "Wireroad is where ideas take shape and connections come alive.A place built for creators, thinkers, and forward-doers.Here, every path leads to something meaningful.",
+    description: "High-quality ETP Electrolytic. Tough Pitch copper rods",
     sku: "01/09",
     icon: "/wire-icon.svg",
     featured: true,
-    longDescription: "Wireroad is where ideas take shape and connections come alive.A place built for creators, thinkers, and forward-doers.Here, every path leads to something meaningful.",
-    specifications: ["99.95% Pure Copper", "Precision tolerances ±0.01mm", "High electrical conductivity", "Flexible and durable", "Available in multiple gauges"],
+    longDescription: "High-quality ETP Electrolytic Tough Pitch copper rods designed for superior wire drawing and conductor manufacturing. Engineered for exceptional purity and electrical conductivity.",
+    specifications: ["ETP Electrolytic copper", "Tough Pitch grade", "99.95% Pure Copper", "High electrical conductivity", "Clean & Scratch-free surface"],
+    applications: [
+      "Power cables manufacturers",
+      "Communication cables",
+      "Super fine wire applications",
+      "Round and sector conductors",
+      "Telephone and network cables",
+      "Automotive wire harnesses",
+      "Enameled copper wire production",
+      "Transformer and motor windings",
+      "Electrical and mechanical applications requiring high conductivity"
+    ],
+    technicalParameters: [
+      { parameter: "Copper, min", unit: "% min", astm: "99.90", ucr: ">99.95" },
+      { parameter: "Oxygen", unit: "ppm", astm: "100-650", ucr: "100-650" },
+      { parameter: "Temper", unit: "-", astm: "Hard/Soft", ucr: "Hard/Soft (Annealed)" },
+      { parameter: "Elongation", unit: "% min", astm: "25% (0.5-2.55mm), 30% (2.5mm+)", ucr: "Min 25% for .5mm-2.55, Min 30% for 2.5mm & above" },
+      { parameter: "Diameter", unit: "Tolerance in %", astm: "Min 210", ucr: "Min 210" },
+      { parameter: "Rod Conductivity", unit: "% IACS", astm: "Min 100%", ucr: "Min 100%" },
+      { parameter: "Surface Condition", unit: "-", astm: "Clean & Scratch-free", ucr: "Clean & Scratch-free" }
+    ],
+    packagingDimensions: {
+      weightRanges: "300 - 1200 Kgs",
+      packaging: "Hexagon Box / Steel Baskets"
+    },
+    sizes: ["0.2 MM", "1 MM", "2 MM", "3 MM", "4 MM"],
+    productSpecification: "BSEN/IEC 60228, ASTM B33"
+  },
+  {
+    id: 2,
+    slug: "tin-coated-copper-wire",
+    name: "Tin Coated Copper Wire",
+    description: "High-quality ETP Electrolytic. Tough Pitch copper rods with tin coating",
+    sku: "02/9",
+    featured: false,
+    longDescription: "Tin Coated Copper Wire combines high-quality ETP Electrolytic Tough Pitch copper with protective tin coating (1-20 microns), providing superior corrosion resistance and enhanced performance for demanding applications.",
+    specifications: ["ETP Electrolytic copper", "Tin coating 1-20 microns", "99.95% Pure Copper", "High electrical conductivity", "Anti-corrosion protection"],
+    applications: [
+      "Solar cables manufacturers",
+      "Earthing applications",
+      "Electrical & mechanical applications requiring high conductive and anti-corrosion copper"
+    ],
+    technicalParameters: [
+      { parameter: "Copper, min", unit: "% min", astm: "99.90", ucr: ">99.95" },
+      { parameter: "Tin Thickness", unit: "Micron", astm: "1-20", ucr: "1 to 20" },
+      { parameter: "Temper", unit: "-", astm: "Hard/Soft", ucr: "Hard/Soft (Annealed)" },
+      { parameter: "Elongation", unit: "% min", astm: "27%", ucr: "Min EAB 27%" },
+      { parameter: "Tensile Strength", unit: "Mpa", astm: "Min 210", ucr: "Min 210" },
+      { parameter: "Diameter", unit: "Tolerance in %", astm: "+1%", ucr: "+1%" },
+      { parameter: "Rod Conductivity", unit: "% IACS", astm: "Min 100%", ucr: "Min 100%" },
+      { parameter: "Surface Condition", unit: "-", astm: "Clean & Scratch-free", ucr: "Clean & Scratch-free" }
+    ],
+    packagingDimensions: {
+      weightRanges: "300 - 1200 Kgs",
+      packaging: "Hexagon box / Steel Baskets"
+    },
+    sizes: ["1.25 MM", "1.5 MM", "2 MM", "2.5 MM", "3 MM"],
+    productSpecification: "BSEN/IEC 60228, ASTM B33"
+  },
+  {
+    id: 3,
+    slug: "copper-rod",
+    name: "Copper Rod",
+    description: "High-quality ETP Electrolytic. Tough Pitch copper rods",
+    sku: "03/9",
+    featured: false,
+    longDescription: "High-quality ETP Electrolytic Tough Pitch copper rods designed for wire drawing, cable manufacturing, and various industrial applications. Engineered for exceptional purity and electrical conductivity with consistent quality.",
+    specifications: ["ETP Electrolytic copper", "Tough Pitch grade", "99.95% Pure Copper", "High electrical conductivity", "Multiple size options"],
     applications: [
       "Cable manufacturing (power, communication)",
       "Super fine wire applications",
@@ -21,11 +88,22 @@ export const products = [
     ],
     technicalParameters: [
       { parameter: "Copper, min", unit: "% min", astm: "99.90", ucr: ">99.95" },
-      { parameter: "Zinc, min", unit: "% min", astm: "98.00", ucr: ">98.50" },
-      { parameter: "Copper, max", unit: "% max", astm: "0.05", ucr: "<0.02" },
-      { parameter: "Lead, min", unit: "% min", astm: "0.10", ucr: ">0.15" },
-      { parameter: "Nickel, min", unit: "% min", astm: "0.50", ucr: ">0.70" },
-      { parameter: "Iron, min", unit: "% min", astm: "0.20", ucr: ">0.30" }
+      { parameter: "Tellurium, min", unit: "ppm", astm: "25.0", ucr: "+2.0" },
+      { parameter: "Tensile Strength", unit: "Mpa", astm: "200-250", ucr: "+5.0" },
+      { parameter: "Shear strength", unit: "ppm", astm: "150", ucr: "+15.0" },
+      { parameter: "Elongation", unit: "ppm", astm: "30", ucr: "+3.0" },
+      { parameter: "Tin, min", unit: "ppm", astm: "40", ucr: "+4.0" },
+      { parameter: "Lead, min", unit: "ppm", astm: "50", ucr: "+5.0" },
+      { parameter: "Boron, min", unit: "ppm", astm: "60", ucr: "+6.0" },
+      { parameter: "Nickel, min", unit: "ppm", astm: "50", ucr: "+5.0" },
+      { parameter: "Cobalt, min", unit: "ppm", astm: "30", ucr: "+3.0" },
+      { parameter: "Silver, min", unit: "ppm", astm: "150", ucr: "+15.0" },
+      { parameter: "Strontium, min", unit: "ppm", astm: "150", ucr: "+25.0" },
+      { parameter: "Oxygen", unit: "ppm", astm: "250-350", ucr: "250-350" },
+      { parameter: "Surface oxide", unit: "ppm", astm: "100-800", ucr: ">500" },
+      { parameter: "Elongation", unit: "%", astm: "Max 350", ucr: "+40%" },
+      { parameter: "Diameter", unit: "Tolerance in %", astm: "+0.35", ucr: "+0.35" },
+      { parameter: "Rod conductivity", unit: "% IACS", astm: "Min 100%", ucr: ">100%" }
     ],
     packagingDimensions: {
       outerDiameter: "1750 mm",
@@ -36,74 +114,6 @@ export const products = [
       coilPackaging: "Compacted, Strapped & Wrapped with polyethylene wraps and complete protection of copper with tube cover seaworthy packaging"
     },
     sizes: ["8 MM", "12.5 MM", "16 MM"],
-    productSpecification: "Meets ASTM B49 & BS EN 1977 standards"
-  },
-  {
-    id: 2,
-    slug: "wire-rod",
-    name: "Wire Rod",
-    description: "High-purity copper rod ideal for wire drawing, electrical conductors, and industrial components.",
-    sku: "02/9",
-    featured: false,
-    longDescription: "Wire Rod products provide the foundation for premium wire drawing operations. Our high-purity copper rods ensure consistent quality and performance throughout the drawing process, making them ideal for creating precision electrical conductors and industrial components.",
-    specifications: ["99.95% Copper content", "Consistent composition", "Suitable for drawing", "Industrial grade quality", "Meets ASTM-B49 standards"],
-    applications: [
-      "Wire drawing operations",
-      "Electrical conductors",
-      "Industrial component manufacturing",
-      "Power transmission applications",
-      "Telecommunications cables",
-      "Bus bar production",
-      "Electrical equipment manufacturing"
-    ],
-    technicalParameters: [
-      { parameter: "Copper, min", unit: "% min", astm: "99.90", ucr: ">99.95" },
-      { parameter: "Zinc, min", unit: "% min", astm: "98.00", ucr: ">98.50" },
-      { parameter: "Impurities, max", unit: "% max", astm: "0.05", ucr: "<0.02" },
-      { parameter: "Electrical conductivity", unit: "% IACS", astm: "≥100", ucr: ">101" }
-    ],
-    packagingDimensions: {
-      outerDiameter: "1600 mm",
-      innerDiameter: "850 mm",
-      heightOfCoils: "550 mm",
-      weightRanges: "2800 - 4500 Kgs",
-      coilLaidType: "Laid Type",
-      coilPackaging: "Compacted, Strapped & Wrapped with protection wraps"
-    },
-    sizes: ["10 MM", "14 MM", "18 MM"],
-    productSpecification: "Meets ASTM B49 & BS EN 1977 standards"
-  },
-  {
-    id: 3,
-    slug: "multi-wires",
-    name: "Multi Wires",
-    description: "Stranded copper wire bundles for flexible applications in power transmission and control systems.",
-    sku: "03/9",
-    featured: false,
-    longDescription: "Multi Wires combine multiple strands of copper wire for enhanced flexibility and reliability. Perfect for applications requiring flexibility without compromising conductivity, these products are ideal for power transmission, control systems, and industrial machinery.",
-    specifications: ["Multiple strand configuration", "High flexibility", "Excellent conductivity", "Corrosion resistant", "Suitable for harsh environments"],
-    applications: [
-      "Power transmission applications",
-      "Control systems",
-      "Cable assemblies",
-      "Flexible conductor solutions",
-      "Industrial machinery connections",
-      "Equipment wiring",
-      "Multi-strand conductor requirements"
-    ],
-    technicalParameters: [
-      { parameter: "Copper, min", unit: "% min", astm: "99.90", ucr: ">99.95" },
-      { parameter: "Strand configuration", unit: "count", astm: "Various", ucr: "Customizable" },
-      { parameter: "Flexibility rating", unit: "count", astm: "Standard", ucr: "High" }
-    ],
-    packagingDimensions: {
-      outerDiameter: "1700 mm",
-      innerDiameter: "900 mm",
-      heightOfCoils: "575 mm",
-      weightRanges: "3000 - 4600 Kgs",
-      coilLaidType: "Laid Type"
-    },
-    sizes: ["6 MM", "10 MM", "14 MM"],
     productSpecification: "Meets ASTM B49 & BS EN 1977 standards"
   },
   {
