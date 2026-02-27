@@ -282,8 +282,8 @@ export default function SplashOverlay() {
           </defs>
           
           {/* Orange rectangle with mask applied */}
-          <rect ref={topRectRef} x="0" y="0" width={viewportSize.width} height={viewportSize.height / 2} fill="#000000" mask="url(#logoHoleMask)" />
-          <rect ref={bottomRectRef} x="0" y={viewportSize.height / 2} width={viewportSize.width} height={viewportSize.height / 2} fill="#000000" mask="url(#logoHoleMask)" />
+          <rect ref={topRectRef} x="0" y="0" width={viewportSize.width} height={viewportSize.height / 2} fill="#EF4A2A" mask="url(#logoHoleMask)" />
+          <rect ref={bottomRectRef} x="0" y={viewportSize.height / 2} width={viewportSize.width} height={viewportSize.height / 2} fill="#EF4A2A" mask="url(#logoHoleMask)" />
           
           {/* Logo outline stroke for reference */}
           <g ref={outlineRef} opacity="0">
