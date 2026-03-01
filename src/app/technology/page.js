@@ -12,7 +12,7 @@ import FadeIn from "../../animations/FadeIn"
 export default function Technology() {
     return (
         <div className="bg-[#F2F2F2]">
-            <div className="relative flex h-[50vh] sm:h-[60vh] lg:h-[80vh] max-h-[80vh] font-medium justify-center bg-black dark:bg-black">
+            <div className="relative flex min-h-[60vh] lg:min-h-[80vh] font-medium justify-center bg-black dark:bg-black">
                 <VideoPlayer src="/technologybg.mp4" className="absolute inset-0 object-cover w-full h-full z-0" />
                 <div className="absolute inset-0 z-10 bg-[linear-gradient(0deg,rgba(0,0,0,0.35)0%,rgba(0,0,0,0.35)100%)] pointer-events-none" />
                 <div className="flex flex-col items-center gap-5 absolute top-[35%] lg:top-[40%] z-20">
@@ -30,14 +30,14 @@ export default function Technology() {
             {/* Header */}
             <ParallaxSection index={0}>
             <CardAnimation index={0}>
-            <div className=" overflow-x-hidden relative flex flex-col px-6 sm:px-10 py-12 lg:py-20 lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-8 lg:gap-12 mb-12 lg:mb-16 lg:mb-20">
-                <div className="flex-1 sm:mb-30">
+            <div className=" overflow-x-hidden relative flex flex-col px-6 sm:px-8 py-12 lg:py-20 lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-8 lg:gap-12 mb-12 lg:mb-16 lg:mb-20">
+                <div className="lg:w-[40%]  sm:mb-30">
                     <Badgetextblack title="Top notch Technology" />
-                    <h1 className="text-3xl lg:text-4xl lg:text-5xl font-semibold text-black mt-4 lg:mt-5 lg:mt-6 leading-tight lg:leading-snug">Precision Crafted
+                    <h1 className="font-medium text-[32px] leading-[48px] tracking-[-0.7px] align-bottom capitalize mt-4 lg:mt-5 lg:mt-6 lg:text-[52px] lg:leading-[72px] lg:tracking-[-1.4px]">Precision Crafted
                         Copper Excellence</h1>
                 </div>
-                <div className="flex-1  flex lg:justify-end text-xs lg:text-sm text-gray-600 lg:pt-8 lg:pt-12">
-                    <p className='lg:w-4/5 text-xl'>Cutting-edge technology meets traditional craftsmanship. Discover how we're reshaping the future of copper manufacturing.</p>
+                <div className=" lg:w-[35%]   flex lg:justify-end text-xs  text-gray-600 lg:pt-8 lg:pt-12">
+                    <p className='font-normal text-[16px] leading-[30px] tracking-[-0.45px] lg:text-[22px] lg:leading-[40px]'>Cutting-edge technology meets traditional craftsmanship. Discover how we're reshaping the future of copper manufacturing.</p>
                 </div>
                 <Image src="/technologyheaderbottom.png" alt="Icon" width={900} height={0} className="w-full  absolute bottom-0  " />
 
@@ -52,14 +52,14 @@ export default function Technology() {
             <div className="block md:hidden flex flex-col gap-6 px-6 pb-8">
                 <div className="bg-white px-6 sm:px-8 rounded-xl overflow-y-auto scrollbar-hide transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
-                        <h1 className="text-primary text-2xl sm:text-3xl font-medium uppercase animate-reveal">South Wire Technology</h1>
+                        <h1 className="text-primary font-medium uppercase animate-reveal text-[28px] leading-[48px] tracking-[-1.4px] align-middle sm:text-[28px] lg:text-[48px] lg:leading-[64px]">South Wire Technology</h1>
                         <h1 className="text-secondary text-xl sm:text-2xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal text-primary">01/<span className="text-secondary">02</span></h1>
                     </div>
                     <FadeIn direction="bottom" scrollTrigger={true} duration={0.9}>
                         <div className="w-full flex flex-col border-t border-secondary/40">
                             <div className="w-full flex flex-col gap-6 py-6 lg:py-9">
-                                <p className="text-base lg:text-xl animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.</p>
-                                <p className="text-base lg:text-xl animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
+                                    <p className="font-normal text-[18px] leading-[36px] tracking-[-0.45px] lg:text-[24px] lg:leading-[43px] animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.</p>
+                                    <p className="font-normal text-[18px] leading-[36px] tracking-[-0.45px] lg:text-[24px] lg:leading-[43px] animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
                             </div>
                             <div className="w-full">
                                 <Image src="/southwire.png" alt="Icon" width={500} height={0} className="w-full h-full object-cover rounded-none p-4 lg:p-6" />
@@ -70,14 +70,14 @@ export default function Technology() {
 
                 <div className="text-white bg-[#272A2A] px-6 sm:px-8 rounded-xl overflow-y-auto scrollbar-hide transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
-                        <h1 className="text-white text-2xl sm:text-3xl font-medium uppercase animate-reveal">Copper treatments </h1>
+                        <h1 className="text-white font-medium uppercase animate-reveal text-[28px] leading-[48px] tracking-[-1.4px] align-middle sm:text-[28px] lg:text-[48px] lg:leading-[64px]">Copper treatments </h1>
                         <h1 className="text-secondary text-xl sm:text-2xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal text-primary">02/<span className="text-secondary">03</span></h1>
                     </div>
                     <FadeIn direction="bottom" scrollTrigger={true} duration={1.5}>
                         <div className="w-full flex flex-col border-t border-secondary/40">
                             <div className="w-full flex flex-col gap-6 py-6 lg:py-9">
-                                <p className="text-base lg:text-xl animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.</p>
-                                <p className="text-base lg:text-xl animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
+                                <p className="font-normal text-[18px] leading-[36px] tracking-[-0.45px] lg:text-[24px] lg:leading-[43px] animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.</p>
+                                <p className="font-normal text-[18px] leading-[36px] tracking-[-0.45px] lg:text-[24px] lg:leading-[43px] animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
                                 <h1 className="py-4 text-base lg:text-lg text-primary font-medium underline hover:text-orange-600 transition-colors duration-300">Read More</h1>
                             </div>
                             <div className="w-full">
@@ -89,14 +89,14 @@ export default function Technology() {
 
                 <div className="bg-white px-6 sm:px-8 rounded-xl overflow-y-auto scrollbar-hide transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
-                        <h1 className="text-primary text-2xl sm:text-3xl font-medium animate-reveal">NexGen Sol</h1>
+                        <h1 className="text-primary font-medium animate-reveal text-[28px] leading-[48px] tracking-[-1.4px] align-middle sm:text-[28px] lg:text-[48px] lg:leading-[64px]">NexGen Sol</h1>
                         <h1 className="text-secondary text-xl sm:text-2xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal text-primary">03/<span className="text-secondary">03</span></h1>
                     </div>
                     <FadeIn direction="bottom" scrollTrigger={true} duration={1.5}>
                         <div className="w-full flex flex-col border-t border-secondary/40">
                             <div className="w-full flex flex-col gap-6 py-6 lg:py-9">
-                                <p className="text-base lg:text-xl animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.</p>
-                                <p className="text-base lg:text-xl animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
+                                <p className="font-normal text-[18px] leading-[36px] tracking-[-0.45px] lg:text-[24px] lg:leading-[43px] animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.</p>
+                                <p className="font-normal text-[18px] leading-[36px] tracking-[-0.45px] lg:text-[24px] lg:leading-[43px] animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
                             </div>
                             <div className="w-full">
                                 <Image src="/nextgensol.png" alt="Icon" width={500} height={0} className="w-full h-full object-cover rounded-none p-4 lg:p-6" />
@@ -114,7 +114,7 @@ export default function Technology() {
                         {/* card header */}
 
                         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
-                            <h1 className="text-primary text-2xl sm:text-3xl lg:text-4xl font-medium uppercase animate-reveal">South Wire Technology</h1>
+                            <h1 className="text-primary font-medium uppercase animate-reveal text-[28px] leading-[48px] tracking-[-1.4px] align-middle sm:text-[28px] lg:text-[48px] lg:leading-[64px]">South Wire Technology</h1>
 
                             <h1 className="text-secondary text-xl sm:text-2xl lg:text-4xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal text-primary">01/<span className="text-secondary">02</span></h1>
                         </div>
@@ -125,11 +125,11 @@ export default function Technology() {
                         <div className="w-full flex flex-col lg:flex-row border-t border-secondary/40">
                             {/* left side */}
                             <div className="w-full lg:w-1/2 flex flex-col gap-6 lg:gap-20 py-6 lg:py-9">
-                                    <p className="text-base lg:text-xl lg:text-2xl animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.
+                                    <p className="font-normal text-[18px] leading-[36px] tracking-[-0.45px] lg:text-[24px] lg:leading-[43px] animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.
 
                                     </p>
 
-                                    <p className="text-base lg:text-xl lg:text-2xl animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
+                                    <p className="font-normal text-[18px] leading-[36px] tracking-[-0.45px] lg:text-[24px] lg:leading-[43px] animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
                                 </div>
 
                                 {/* right side */}
@@ -146,7 +146,7 @@ export default function Technology() {
                         {/* card header */}
 
                         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
-                            <h1 className="text-white text-2xl sm:text-3xl lg:text-4xl font-medium uppercase animate-reveal">Copper treatments </h1>
+                            <h1 className="text-white font-medium uppercase animate-reveal text-[28px] leading-[48px] tracking-[-1.4px] align-middle sm:text-[28px] lg:text-[48px] lg:leading-[64px]">Copper treatments </h1>
 
                             <h1 className="text-secondary text-xl sm:text-2xl lg:text-4xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal text-primary">02/<span className="text-secondary">03</span></h1>
                         </div>
@@ -181,7 +181,7 @@ export default function Technology() {
                         {/* card header */}
 
                         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
-                            <h1 className="text-primary text-2xl sm:text-3xl lg:text-4xl font-medium animate-reveal">NexGen Sol</h1>
+                            <h1 className="text-primary font-medium animate-reveal text-[28px] leading-[48px] tracking-[-1.4px] align-middle sm:text-[28px] lg:text-[48px] lg:leading-[64px]">NexGen Sol</h1>
                             <h1 className="text-secondary text-xl sm:text-2xl lg:text-4xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal text-primary">03/<span className="text-secondary">03</span></h1>
                         </div>
 
@@ -191,11 +191,11 @@ export default function Technology() {
                             <div className="w-full flex flex-col lg:flex-row border-t border-secondary/40">
                                 {/* left side */}
                                 <div className="w-full lg:w-1/2 flex flex-col gap-6 lg:gap-20 py-6 lg:py-9">
-                                    <p className="text-base lg:text-xl lg:text-2xl animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.
+                                    <p className="font-normal text-[18px] leading-[36px] tracking-[-0.45px] lg:text-[24px] lg:leading-[43px] animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.
 
                                     </p>
 
-                                    <p className="text-base lg:text-xl lg:text-2xl animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
+                                    <p className="font-normal text-[18px] leading-[36px] tracking-[-0.45px] lg:text-[24px] lg:leading-[43px] animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
                                 </div>
 
                                 {/* right side */}
@@ -214,7 +214,6 @@ export default function Technology() {
 
             {/* laboratory */}
 
-            <ParallaxSection index={4}>
                 <div className="mt-4    flex min-h-[80vh] flex-col px-10 items-center justify-start pt-8 pb-20">
 
                     <div className="animate-reveal">
@@ -264,7 +263,7 @@ export default function Technology() {
 
 
                 </div>
-            </ParallaxSection>
+ 
         </div>
     )
 }

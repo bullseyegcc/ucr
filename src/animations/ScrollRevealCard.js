@@ -18,11 +18,11 @@ export default function ScrollRevealCard({
     const element = elementRef.current;
     if (!element) return;
 
-    // Step 1 & 3: Detect mobile and reduced motion
+    // Detect mobile and reduced motion
     const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
     const prefersReduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Step 2: Respect reduced motion
+    // Respect reduced motion
     if (prefersReduced) {
       gsap.set(element, { y: 0, opacity: 1, scale: 1, willChange: 'auto' });
       return;
@@ -30,36 +30,34 @@ export default function ScrollRevealCard({
 
     // Set initial state
     gsap.set(element, {
-      y: isMobile ? 60 : 120,
+      y: isMobile ? 30 : 60,
       opacity: 0,
       scale: 0.95,
       willChange: 'transform, opacity',
     });
 
-    // Create animation configuration for mobile vs desktop
-    const animDuration = isMobile ? Math.min(duration * 0.6, 0.7) : duration;
+    // Create timeline with scroll trigger (similar to MissionValuesSection)
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: element,
+        start: 'top center',
+        end: 'bottom center',
+        scrub: 0.8,
+        pin: true,
+        pinSpacing: true,
+        markers: false,
+      },
+    });
 
-    const animationConfig = {
+    // Animate from initial state to final state
+    tl.to(element, {
       y: 0,
       opacity: 1,
       scale: 1,
-      duration: animDuration,
-      delay: index * 0.2,
+      duration: 1,
       ease: 'power2.inOut',
+      delay: index * 0.15,
       clearProps: 'will-change',
-    };
-
-    const scrollConfig = {
-      trigger: element,
-      start: 'top 85%',
-      end: 'top 85%',
-      markers: false,
-    };
-
-    // Create animation with ScrollTrigger (one-shot trigger, no scroll-linking)
-    gsap.to(element, {
-      ...animationConfig,
-      scrollTrigger: scrollConfig,
     });
 
     // Cleanup function

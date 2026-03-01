@@ -17,15 +17,15 @@ export default function blogs() {
     const router = useRouter();
     return (
         <div>
-            <div className="relative max-h-[60vh] min-h-[80vh] font-medium flex items-center justify-center font-sans dark:bg-black overflow-hidden">
+            <div className="relative min-h-[80vh] lg:min-h-[80vh] font-medium flex items-center justify-center font-sans dark:bg-black overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <VideoPlayer src="/moreabout.mp4" className="w-full h-full object-cover" />
                 </div>
                 <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)" }}></div>
-                <h1 className="absolute top-[40%] lg:top-[25%] lg:w-[60%] w-[95%] z-20 flex flex-col items-center gap-4 font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white">
+                <h1 className="w-[95%] lg:w-[60%] z-20 flex flex-col items-center gap-4 font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle text-white">
 
                     <SlideIn direction="bottom" duration={0.8} delay={0}>
-                        <Badgetextwhite title="Our Products" />
+                        <Badgetextwhite title="Products" />
                     </SlideIn>
                     <FadeIn duration={0.4} delay={0}>
                         Premium Copper Products With Precision Engineering
@@ -41,7 +41,9 @@ export default function blogs() {
 
                         <Badgetextblack title="What we produce" className="" />
                         <TextReveal className="w-full px-5 lg:px-40 lg:w-[85%] text-2xl lg:text-4xl mt-9 text-center leading-tight text-primary">
-                            Union Copper Rod's primary products are the 8mm, 12.5mm, copper rods that have at least 99.95% copper content and comply with international standards including BS: EN 1977 and ASTM-B49.
+                            <h1 className="text-[24px] leading-[40px] tracking-[-1.4px] text-center font-normal lg:text-[42px] lg:leading-[64px] lg:tracking-[-1.4px]" style={{ fontFamily: 'Helvetica Now Display, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial' }}>
+                                Union Copper Rod's primary products are the 8mm, 12.5mm, copper rods that have at least 99.95% copper content and comply with international standards including BS: EN 1977 and ASTM-B49.
+                            </h1>
                         </TextReveal>
 
                     </div>
@@ -68,7 +70,7 @@ export default function blogs() {
                     <div className="w-full px-2 lg:px-10 ">
                         {/* Featured Product */}
                         <Link href={`/products/${products[0].slug}`}>
-                            <div className=" bg-[#FF6A00] rounded-lg p-8 mb-12 flex flex-col lg:flex-row items-center justify-between hover:shadow-lg gap-9 lg:gap-6 transition-shadow cursor-pointer">
+                            <div className=" bg-[#FF6A00] rounded-lg p-8 mb-12 flex flex-col lg:flex-row items-center justify-between gap-9 lg:gap-6 transition-shadow cursor-pointer hover:scale-100 hover:transform-none">
                                 <div className="flex-1 flex flex-col gap-5 lg:w-[50%]">
                                     <p className="text-3xl font-medium text-white    mb-2">{products[0].sku}</p>
                                     <h3 className="text-5xl font-semibold text-white mb-3">{products[0].name}</h3>
@@ -89,38 +91,28 @@ export default function blogs() {
                         </Link>
 
                         {/* Products Grid */}
-                        <div className="w-full">
+                            <div className="w-full">
                             {products.slice(1).map((product, idx) => (
-                                <div
-                                    key={product.id}
-                                    className={
-                                        `relative group text-[#5F5F66] bg-white rounded-lg p-8 mb-12 flex flex-col lg:flex-row items-center justify-between gap-9 lg:gap-6 transition-all duration-700 ease-in-out cursor-pointer overflow-hidden ` +
-                                        `hover:bg-[#FF6A00] hover:shadow-lg ` +
-                                        `lg:bg-white ` +
-                                        `lg:text-[#5F5F66] ` +
-                                        `lg:hover:bg-[#FF6A00] lg:hover:shadow-lg ` +
-                                        `mobile:bg-[#FF6A00] mobile:shadow-lg mobile:text-white`
-                                    }
-                                >
-                                    <div className="flex-1 flex flex-col gap-5 w-full lg:w-auto">
-                                        <p className="text-3xl font-medium mb-2 transition-all duration-700 ease-in-out group-hover:text-white lg:group-hover:text-white mobile:text-white">{product.sku}</p>
-                                        <h3 className="text-5xl font-semibold mb-3 transition-all duration-700 ease-in-out group-hover:text-white lg:group-hover:text-white mobile:text-white">{product.name}</h3>
-                                        <p className="text-lg leading-relaxed transition-all duration-700 ease-in-out group-hover:text-white/90 lg:group-hover:text-white/90 mobile:text-white/90">{product.description}</p>
-
-                                        <button
-                                            onClick={() => router.push(`/products/${product.slug}`)}
-                                            className="w-60 flex gap-2 items-center border border-primary  bg-white hover:bg-gray-100 text-primary px-6 py-4 rounded-full font-semibold transition-all duration-700 ease-in-out mt-6"
-                                        >
-                                            Details About Product
-                                            <ArrowRight size={18} color='#FF6A00' />
-                                        </button>
+                                <Link key={product.id} href={`/products/${product.slug}`}>
+                                    <div className="bg-[#FF6A00] rounded-lg p-8 mb-12 flex flex-col lg:flex-row items-center justify-between gap-9 lg:gap-6 transition-shadow cursor-pointer hover:scale-100 hover:transform-none">
+                                        <div className="flex-1 flex flex-col gap-5 lg:w-[50%]">
+                                            <p className="text-3xl font-medium text-white mb-2">{product.sku}</p>
+                                            <h3 className="text-5xl font-semibold text-white mb-3">{product.name}</h3>
+                                            <p className="text-white/90 text-xl leading-relaxed">{product.description}</p>
+                                            <button
+                                                className="w-60 flex gap-2 items-center duration-300 bg-white hover:bg-gray-100 text-primary px-6 py-4 rounded-full font-semibold transition-all duration-300 ease-in-out mt-6"
+                                            >
+                                                Details About Product
+                                                <ArrowRight size={18} color='#FF6A00' />
+                                            </button>
+                                        </div>
+                                        <div className="w-full lg:w-[22%] lg:ml-8 bg-white rounded-lg">
+                                            <FadeIn scrollTrigger={true} duration={2}>
+                                                <Image src={product.icon || "/drawnwire.png"} alt={product.name} width={300} height={300} className="w-full h-full object-cover" />
+                                            </FadeIn>
+                                        </div>
                                     </div>
-                                    <div className="w-full lg:w-[22%] lg:ml-8 bg-white rounded-lg transition-all duration-700 ease-in-out block">
-                                        <FadeIn scrollTrigger={true} duration={2} >
-                                        <Image src={product.icon || "/drawnwire.png"} alt={product.name} width={300} height={300} className="w-full h-full object-cover transition-all duration-700 ease-in-out" />
-                                    </FadeIn>
-                                    </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     </div>

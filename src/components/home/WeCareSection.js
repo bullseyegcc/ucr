@@ -109,7 +109,7 @@ export default function WeCareSection() {
           aria-label="Sustainability cards - swipe to view all"
           className="flex lg:hidden scrollbar-hide snap-x snap-proximity w-full"
           style={{
-            overflowX: 'scroll',
+            overflowX: 'auto',
             overflowY: 'hidden',
             WebkitOverflowScrolling: 'touch',
             touchAction: 'pan-x',
@@ -121,7 +121,7 @@ export default function WeCareSection() {
         >
           <div
             className="flex gap-4 pl-8 pr-8 pb-2"
-            style={{ width: TOTAL_CARDS_WIDTH, minWidth: 'max-content' }}
+            style={{ display: 'inline-flex', minWidth: `${TOTAL_CARDS_WIDTH}px`, width: 'max-content' }}
           >
             {CARDS.map((card, i) => (
               <div

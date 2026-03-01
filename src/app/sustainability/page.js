@@ -12,11 +12,11 @@ import SlideIn from "../../animations/SlideIn"
 export default function sustainability() {
     return (
         <div>
-            <div className="rouned-b-2xl flex flex-col text-center min-h-[60vh] lg:min-h-[80vh] items-center justify-center font-sans dark:bg-black gap-6 px-4 lg:px-0" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/sustainbg.png') lightgray 50% / cover no-repeat" }}>
+            <div className="rouned-b-2xl flex flex-col text-center min-h-[60vh] lg:min-h-[80vh] items-center justify-center  dark:bg-black gap-6 px-4 lg:px-0" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/sustainbg.png') lightgray 50% / cover no-repeat" }}>
                 <SlideIn direction="bottom" duration={0.8} delay={0}>
                     <Badgetextwhite title="Sustainability" />
                 </SlideIn>
-                <h1 className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white w-full lg:w-[80%]">
+                <h1 className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white w-full lg:w-[70%]">
                     <FadeIn duration={0.4} delay={0}>
                         Creating value with a differentiated approach
                     </FadeIn>

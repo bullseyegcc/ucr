@@ -22,69 +22,57 @@ export default function MissionValuesSection() {
 
     if (!container || !mission || !values) return;
 
-    const timer = setTimeout(() => {
-      // Create timeline with scroll lock
+    // smoother pinning & responsive adjustments using matchMedia
+    const tlRef = { current: null };
+    const mm = gsap.matchMedia();
+
+    // give the elements a hint to use transforms for smoother rendering
+    gsap.set([mission, values], { willChange: 'transform, opacity' });
+
+    mm.add({ isDesktop: '(min-width: 1024px)' }, (context) => {
+      const { isDesktop } = context.conditions;
+
+      // timeline with a controlled end distance to make pin feel smooth
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
           start: 'center center',
-          end: 'bottom center',
-          scrub: 1.5,
+          end: () => `+=${Math.max(window.innerHeight * 0.6, 400)}`,
+          scrub: 0.8,
           pin: true,
           pinSpacing: true,
+          anticipatePin: 0.5,
+          invalidateOnRefresh: true,
           markers: false,
         },
       });
 
-      // Animate Values card to move up and fade in, becoming adjacent to Mission
+      // Values: lift and fade in
       tl.fromTo(
         values,
-        {
-          y: 200,
-          opacity: 1,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          ease: 'power2.inOut',
-        },
+        { y: 200, opacity: 0 },
+        { y: 0, opacity: 1, ease: 'power3.out' },
         0
       );
 
-      // On desktop, also animate to move horizontally and become adjacent
-      tl.fromTo(
-        values,
-        {
-          x: 0,
-        },
-        {
-          x: 0,
-          ease: 'power2.inOut',
-        },
-        0
-      );
+      // on desktop give a subtle horizontal entrance
+      if (isDesktop) {
+        tl.fromTo(values, { x: 80 }, { x: 0, ease: 'power3.out' }, 0);
+      }
 
-      // Add scale animation for polish
-      tl.fromTo(
-        values,
-        {
-          scale: 0.95,
-        },
-        {
-          scale: 1,
-          ease: 'back.out',
-        },
-        0
-      );
+      // polish scale
+      tl.fromTo(values, { scale: 0.97 }, { scale: 1, ease: 'back.out(1.2)' }, 0);
 
-      ScrollTrigger.refresh();
-    }, 150);
+      tlRef.current = tl;
+      return () => {
+        if (tlRef.current) tlRef.current.kill();
+      };
+    });
 
+    // cleanup
     return () => {
-      clearTimeout(timer);
-      ScrollTrigger.getAll().forEach((trigger) => {
-        trigger.kill();
-      });
+      mm.revert();
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 

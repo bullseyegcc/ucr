@@ -56,7 +56,7 @@ export default function ProductDetail({ params }) {
 
                             <div className="mt-6 sm:mt-8">
                                 <span className="text-lg sm:text-xl font-semibold text-[#FF6A00]">Sizes available:</span>
-                                <div className="flex gap-6 mt-3 sm:mt-4">
+                                <div className="flex flex-wrap gap-6 mt-3 sm:mt-4">
                                     {product.sizes?.map((size, i) => (
                                         <label key={i} className="flex items-center cursor-pointer gap-2">
                                             <input

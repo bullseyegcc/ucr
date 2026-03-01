@@ -6,6 +6,7 @@ import { VideoPlayer } from "../../common/video";
 import SlideIn from "../../animations/SlideIn";
 import FadeIn from "../../animations/FadeIn";
 import ScrollRevealCardsContainer from "../../animations/ScrollRevealCardsContainer";
+import CardAnimation from "@/animations/CardAnimation.js";
 
 export default function WhyChooseUs() {
   return (
@@ -28,7 +29,7 @@ export default function WhyChooseUs() {
 
         {/* ── Featured left card ─────────────────────────────────────── */}
         <div
-          className="relative min-h-[50vh] flex flex-col justify-between items-start row-span-2 bg-[url('/excellence.png')] bg-cover bg-center lg:ml-10 rounded-xl group cursor-pointer transition-all duration-400 ease-out"
+          className="relative  flex flex-col justify-between items-start row-span-2 bg-[url('/excellence.png')] bg-cover bg-center lg:ml-10 rounded-xl group cursor-pointer transition-all duration-400 ease-out"
           style={{ willChange: 'transform, opacity' }}
         >
           <VideoPlayer src="/excellence.mp4" className="object-contain rounded-2xl" />
@@ -40,18 +41,14 @@ export default function WhyChooseUs() {
         </div>
 
         {/* ── Small cards with scroll reveal container ────────────────────────────────────────────── */}
-        <ScrollRevealCardsContainer
-          className="sm:col-span-2 flex items-center"
-          containerClassName="w-full grid grid-cols-1 sm:grid-cols-2 gap-6"
-          staggerDelay={0.5}
-          pinOnMobile={false}
-        >
+      
           {[
             { src: '/gn.png',  h: 0,  title: 'Global network',       w: 80 },
             { src: '/tn.png',  h: 40, title: 'Top-notch certified',  w: 80 },
             { src: '/sf.png',  h: 40, title: 'Sustainable future',   w: 80 },
             { src: '/p.png',   h: 40, title: 'Partnership approach', w: 80 },
           ].map((card) => (
+            <CardAnimation>
             <div
               key={card.title}
               className="bg-white rounded-xl p-8 flex flex-col gap-4 group cursor-pointer transition-all duration-400 ease-out"
@@ -68,8 +65,9 @@ export default function WhyChooseUs() {
               <h1 data-ct className="text-2xl font-medium text-black" style={{ willChange: 'transform, opacity' }}>{card.title}</h1>
               <p data-cd className="text-sm" style={{ willChange: 'transform, opacity' }}>Factory in a world-class industrial hub</p>
             </div>
+            </CardAnimation>
           ))}
-        </ScrollRevealCardsContainer>
+  
 
       </div>
     </div>

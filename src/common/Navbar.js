@@ -146,6 +146,9 @@ export const Navbar = () => {
                 </Link>
             </div>
 
+            {/* Spacer to prevent content from hiding behind fixed navbar */}
+            <div className={`${isScrolled ? 'h-16 sm:h-20 lg:h-40' : 'h-0'}`} />
+
             {/* Slide-in Menu - Fully Responsive */}
             {isMenuOpen && (
                 <>

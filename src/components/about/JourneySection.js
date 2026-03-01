@@ -118,9 +118,10 @@ export default function JourneySection() {
               yearsRef.current.forEach((yr, idx) => {
                 if (!yr) return
                 const active = idx <= activeIndex
-                
+                const isMobile = window.innerWidth < 640
+
                 yr.style.opacity = active ? '1' : '0.5'
-                yr.style.fontSize = active ? '18px' : '14px'
+                yr.style.fontSize = active ? (isMobile ? '16px' : '18px') : (isMobile ? '12px' : '14px')
                 yr.style.fontWeight = active ? '700' : '600'
                 yr.style.transform = active ? 'scale(1.05)' : 'scale(1)'
                 yr.style.transition = 'all 0.3s ease-out'
@@ -157,7 +158,7 @@ export default function JourneySection() {
           {journeyData.map((item, index) => (
             <div
               key={index}
-              className="w-screen min-h-screen flex flex-col lg:flex-row items-center justify-center flex-shrink-0"
+              className="w-screen min-h-screen flex flex-col lg:flex-row items-center justify-center flex-shrink-0 pb-28 lg:pb-0"
             >
               {/* Left: text */}
               <div className="flex flex-col justify-center w-full lg:w-1/2 h-full">
@@ -187,7 +188,7 @@ export default function JourneySection() {
               </div>
 
               {/* Right: image */}
-              <div className="w-full lg:w-1/2 flex-shrink-0 h-[38vh] lg:h-[62vh] px-8 lg:px-12 lg:px-16 py-4 lg:py-0">
+              <div className="w-full lg:w-1/2 flex-shrink-0 h-[30vh] sm:h-[38vh] lg:h-[62vh] px-8 lg:px-12 lg:px-16 py-4 lg:py-0">
                 <div className="h-full">
                   <div className="relative rounded-2xl overflow-hidden shadow-2xl h-full w-full">
                     <Image
@@ -207,10 +208,10 @@ export default function JourneySection() {
         </div>
 
         {/* REDESIGNED Timeline indicator */}
-        <div className="absolute bottom-8 left-0 right-0 flex flex-col items-center z-10 px-4 w-full">
+        <div className="absolute bottom-4 sm:bottom-8 left-0 right-0 flex flex-col items-center z-10 px-4 w-full">
 
           {/* Years row - above timeline */}
-          <div className="relative w-[90%] mb-8 h-7">
+          <div className="relative w-[90%] mb-6 sm:mb-8 h-7">
             {journeyData.map((item, i) => (
               <div
                 key={i}
@@ -221,10 +222,9 @@ export default function JourneySection() {
               >
                 <span
                   ref={el => (yearsRef.current[i] = el)}
-                  className="text-white font-bold tracking-wider transition-all whitespace-nowrap"
+                  className="text-white text-[12px] sm:text-[14px] font-bold tracking-wider transition-all whitespace-nowrap"
                   style={{
                     opacity: i === 0 ? 1 : 0.5,
-                    fontSize: i === 0 ? '18px' : '14px',
                     fontWeight: i === 0 ? '700' : '600',
                     letterSpacing: '0.03em',
                   }}
@@ -238,12 +238,12 @@ export default function JourneySection() {
           {/* Timeline line and circles */}
           <div className="relative w-[90%] my-5 flex items-center">
             {/* Background timeline track - Gray base line */}
-            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px bg-white rounded-full" style={{ opacity: 0.3 }} />
+            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-0.5 sm:h-px bg-white rounded-full" style={{ opacity: 0.3 }} />
             
             {/* Progress bar - Pure white, clean */}
             <div
               ref={progressBarRef}
-              className="absolute left-0 top-1/2 -translate-y-1/2 h-px rounded-full"
+              className="absolute left-0 top-1/2 -translate-y-1/2 h-0.5 sm:h-px rounded-full"
               style={{
                 width: '0%',
                 background: 'white',
@@ -261,7 +261,7 @@ export default function JourneySection() {
                 {/* Main dot container - Minimal clean design */}
                 <div
                   ref={el => (dotsRef.current[i] = el)}
-                  className="w-14 h-14 flex items-center justify-center rounded-full border-2 relative z-10"
+                  className="w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center rounded-full border-2 relative z-10"
                   style={{
                     borderColor: i === 0 ? '#FA6E43' : 'rgba(255,255,255,0.4)',
                     background: i === 0 ? '#FA6E43' : 'rgba(255,255,255,0.15)',
@@ -271,7 +271,7 @@ export default function JourneySection() {
                 >
                   {/* Inner white dot */}
                   <div
-                    className="w-4 h-4 rounded-full bg-white"
+                    className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-white"
                     style={{
                       transition: 'opacity 0.3s ease',
                     }}

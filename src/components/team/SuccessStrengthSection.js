@@ -53,7 +53,7 @@ export default function SuccessStrengthSection() {
         <div className="hidden lg:block w-px h-[120px] bg-gray-200"></div>
 
         {/* Right Side - Heading Block */}
-        <div className="flex flex-col items-center lg:items-start justify-center flex-1">
+        <div className="flex flex-col items-start lg:items-start justify-center flex-1">
           <span className=" text-sm lg:text-xl uppercase tracking-[2px] font-medium text-[#F26101] mb-4">
             THE STRENGTH BEHIND OUR SUCCESS
           </span>
@@ -70,7 +70,7 @@ export default function SuccessStrengthSection() {
             <FadeIn key={index} direction="left" duration={0.8} scrollTrigger={true} className="flex-1">
               <div className="flex gap-4 border-t border-gray-200 pt-10">
                 <p className="text-4xl  text-gray-400 font-medium mb-3">{stat.number}</p>
-                <p className="text-xl lg:text-2xl font-bold leading-tight px-5">{stat.label}</p>
+                <p className="text-xl lg:text-2xl font-medium leading-tight px-5">{stat.label}</p>
               </div>
             </FadeIn>
           ))}

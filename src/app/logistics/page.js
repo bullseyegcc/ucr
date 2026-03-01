@@ -14,17 +14,17 @@ export default function Logistics() {
         <div className="bg-[#F5F5F5]">
 
             {/* header */}
-            <div className=" mb-[40%] lg:mb-[30%] bg-[url('/logisticsbg.png')]  bg-cover  bg-bottom bg-no-repeat relative flex  min-h-[55vh] sm:min-h-[80vh] items-center pt-[30%] lg:pt-[15%] bg-black font-sans bg-primary flex flex-col items-center gap-10">
+            <div className=" mb-[50%] lg:mb-[30%] bg-[url('/logisticsbg.png')]  bg-cover  bg-bottom bg-no-repeat relative   min-h-[55vh] sm:min-h-[80vh]     flex flex-col items-center justify-center gap-2">
 
                 <SlideIn direction="bottom" duration={0.8} delay={0}>
                     <Badgetextwhite title="Our Logistics" />
                 </SlideIn>
 
-                <FadeIn className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white w-[65%]" duration={0.4} delay={0}>
+                <FadeIn className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white lg:w-[65%] px-5" duration={0.4} delay={0}>
                     UCR has a higher delivery capacity in the Copper Industry
                 </FadeIn>
-                <div className='absolute -bottom-[50%] lg:-bottom-[65%] w-[75%] h-60 sm:h-[70vh] w-[95%] ' >
-                    <VideoPlayer src="/logisticsvid.mp4" className="rounded-4xl " />
+                <div className='absolute -bottom-[40%] lg:-bottom-[70%] h-60 sm:h-[70vh] w-[95%] ' >
+                    <VideoPlayer src="/logisticsvid.mp4" className="rounded-3xl " />
                 </div>
 
 
@@ -48,46 +48,57 @@ export default function Logistics() {
 
                 <div className=" px-6 lg:px-10 py-8 lg:py-10 flex flex-col lg:flex-row justify-center gap-6 items-end">
 
-                    <CardAnimation index={0} className="min-h-[55vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 group transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
-                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent"><span><CountUp to={200} duration={2} />k+</span> <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <CardAnimation index={0} className="overflow-y-hidden min-h-[55vh] lg:min-h-[65vh]  lg:rounded-t-2xl rounded-2xl w-full lg:w-1/3 bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
+                        <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
+                            <span><CountUp to={20} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " />
+                        </h1>
 
 
-                        <div className="relative z-10">
-                            <h1 className="text-3xl lg:text-xl lg:text-3xl font-bold mb-2 ">MT/Anum</h1>
-                            <p className="w-4/5 pr-4 text-sm lg:text-base">200,000 metric tons
-                                copper production line that is the largest of its kind in the Middle East. </p>
+                        <div className="relative z-10 pb-6 ">
+                            <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
+                                Years Experience
+                            </h1>
+                            <p className=" lg:w-60 pr-0 lg:pr-4">Produces 20,000 metric tons of copper per year.</p>
 
                         </div>
 
-                        <Image src="/anum.png" alt="Expertise Icon" width={290} height={80} className='w-full absolute -bottom-0 right-0 z-0' />
+                        <Image src="/logistics1.png" alt="Expertise Icon" width={290} height={80} className='w-full  absolute -bottom-8 right-0 z-0 rounded-b-2xl lg:rounded-none' />
 
                     </CardAnimation>
 
-                    <CardAnimation index={1} className="min-h-[55vh] lg:min-h-[50vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 group transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
-                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent"><span><CountUp to={150} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <CardAnimation index={1} className="min-h-[55vh] lg:min-h-[60vh] lg:rounded-t-2xl rounded-2xl w-full lg:w-1/3 bg-white px-6 lg:px-8 pt-8 overflow-x-hidden lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
+                        <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
+                            <span><CountUp to={99} duration={2.5} />%</span> <hr className="text-primary/30 w-[90%] shadow  " />
+                        </h1>
 
 
                         <div className="relative z-10">
-                            <h1 className="text-3xl lg:text-3xl font-bold mb-2">Employees</h1>
-                            <p className="w-[60%] lg:w-70 text-sm lg:text-base">With over 150 experienced employees, we deliver quality and reliability every day.</p>
+                            <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
+                                Delivery Speed
+                            </h1>
+                            <p className="w-45 lg:w-55">Timely delivery is crucial for customer satisfaction. We strive to ensure that all orders arrive right on schedule.</p>
 
                         </div>
 
-                        <Image src="/employees.png" alt="Expertise Icon" width={330} height={80} className=' absolute -bottom-0 right-0 z-0' />
+                        <Image src="/logistics2.png" alt="Expertise Icon" width={180} height={80} className='w-60 lg:w-90 absolute -bottom-0 -right-5 lg:right-0 z-0 rounded-b-2xl lg:rounded-none' />
 
                     </CardAnimation>
 
-                    <CardAnimation index={2} className="min-h-[55vh] lg:min-h-[45vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 group transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
-                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent"><span><CountUp to={30} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <CardAnimation index={2} className="min-h-[55vh] lg:min-h-[55vh] lg:rounded-t-2xl rounded-2xl w-full lg:w-1/3 bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
+                        <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
+                            <span><CountUp to={30} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " />
+                        </h1>
 
 
                         <div className="relative z-10">
-                            <h1 className="text-3xl lg:text-3xl font-bold mb-2">Global Sales</h1>
-                            <p className=" w-4/5 lg:w-80 pr-4 text-sm lg:text-base">We supplies products, services and solutions across over 30 countries in Australia, Asia, Africa, and the Middle East  </p>
+                            <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
+                                Global Sales
+                            </h1>
+                            <p className=" w-[70%] lg:w-80 pr-0 lg:pr-4">We supplies products, services and solutions across over 50 countries in Australia, Asia, Africa, and the Middle East.</p>
 
                         </div>
 
-                        <Image src="/globalsales.png" alt="Expertise Icon" width={240} height={80} className=' absolute -bottom-0 right-0 z-0' />
+                        <Image src="/exp3.png" alt="Expertise Icon" width={300} height={80} className='w-90 absolute -bottom-0 right-0 z-0 rounded-b-2xl lg:rounded-none' />
 
                     </CardAnimation>
 
@@ -98,50 +109,63 @@ export default function Logistics() {
 
 
 
-                <div className=" px-6 lg:px-10 py-8 lg:py-10 flex flex-col lg:flex-row justify-center gap-6 items-end">
+                <div className=" px-6 lg:px-10 py-8 lg:py-10 flex flex-col-reverse lg:flex-row-reverse justify-center gap-6 items-end">
 
-                    <CardAnimation index={3} className="min-h-[55vh] lg:min-h-[45vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 group transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
-                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent"><span><CountUp to={200} duration={2} />k+</span> <hr className="text-primary/30 w-[90%] shadow  " /></h1>
-
-
-                        <div className="relative z-10">
-                            <h1 className="text-3xl lg:text-3xl font-bold mb-2 ">MT/Anum</h1>
-                            <p className=" w-4/5 pr-4 text-sm lg:text-base">200,000 metric tons
-                                copper production line that is the largest of its kind in the Middle East. </p>
-
-                        </div>
-
-                        <Image src="/anum.png" alt="Expertise Icon" width={290} height={80} className='w-full absolute -bottom-0 right-0 z-0' />
-
-                    </CardAnimation>
-
-                    <CardAnimation index={4} className="min-h-[55vh] lg:min-h-[50vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 group transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
-                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent"><span><CountUp to={150} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <CardAnimation index={0} className="overflow-y-hidden min-h-[55vh] lg:min-h-[65vh]  lg:rounded-t-2xl rounded-2xl w-full lg:w-1/3 bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
+                        <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
+                            <span><CountUp to={20} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " />
+                        </h1>
 
 
-                        <div className="relative z-10">
-                            <h1 className="text-3xl lg:text-3xl font-bold mb-2">Employees</h1>
-                            <p className="w-1/2 lg:w-70 text-sm lg:text-base">With over 150 experienced employees, we deliver quality and reliability every day.</p>
+                        <div className="relative z-10 pb-6 ">
+                            <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
+                                Years Experience
+                            </h1>
+                            <p className=" lg:w-60 pr-0 lg:pr-4">Produces 20,000 metric tons of copper per year.</p>
 
                         </div>
 
-                        <Image src="/employees.png" alt="Expertise Icon" width={330} height={80} className=' absolute -bottom-0 right-0 z-0' />
+                        <Image src="/logistics1.png" alt="Expertise Icon" width={290} height={80} className='w-full  absolute -bottom-8 right-0 z-0 rounded-b-2xl lg:rounded-none' />
 
                     </CardAnimation>
 
-                    <CardAnimation index={5} className="min-h-[55vh] lg:min-h-[55vh] rounded-xl w-full lg:w-[30%] bg-white px-5 pt-8 lg:pt-16 relative flex flex-col gap-8 group transition-all duration-500 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
-                        <h1 className="text-6xl lg:text-6xl font-semibold text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent"><span><CountUp to={30} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " /></h1>
+                    <CardAnimation index={1} className="min-h-[55vh] lg:min-h-[60vh] lg:rounded-t-2xl rounded-2xl w-full lg:w-1/3 bg-white px-6 lg:px-8 pt-8 overflow-x-hidden lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
+                        <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
+                            <span><CountUp to={99} duration={2.5} />%</span> <hr className="text-primary/30 w-[90%] shadow  " />
+                        </h1>
 
 
                         <div className="relative z-10">
-                            <h1 className="text-3xl lg:text-3xl font-bold mb-2">Global Sales</h1>
-                            <p className=" w-4/5 lg:w-80 pr-4 text-sm lg:text-base">We supplies products, services and solutions across over 30 countries in Australia, Asia, Africa, and the Middle East  </p>
+                            <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
+                                Delivery Speed
+                            </h1>
+                            <p className="w-45 lg:w-55">Timely delivery is crucial for customer satisfaction. We strive to ensure that all orders arrive right on schedule.</p>
 
                         </div>
 
-                        <Image src="/globalsales.png" alt="Expertise Icon" width={240} height={80} className=' absolute -bottom-0 right-0 z-0' />
+                        <Image src="/logistics2.png" alt="Expertise Icon" width={180} height={80} className='w-60 lg:w-90 absolute -bottom-0 -right-5 lg:right-0 z-0 rounded-b-2xl lg:rounded-none' />
 
                     </CardAnimation>
+
+                    <CardAnimation index={2} className="min-h-[55vh] lg:min-h-[55vh] lg:rounded-t-2xl rounded-2xl w-full lg:w-1/3 bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
+                        <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
+                            <span><CountUp to={50} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " />
+                        </h1>
+
+
+                        <div className="relative z-10">
+                            <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
+                                Global Sales
+                            </h1>
+                            <p className=" w-[70%] lg:w-80 pr-0 lg:pr-4">We supplies products, services and solutions across over 50 countries in Australia, Asia, Africa, and the Middle East.</p>
+
+                        </div>
+
+                        <Image src="/exp3.png" alt="Expertise Icon" width={300} height={80} className='w-90 absolute -bottom-0 right-0 z-0 rounded-b-2xl lg:rounded-none' />
+
+                    </CardAnimation>
+
+
 
 
 

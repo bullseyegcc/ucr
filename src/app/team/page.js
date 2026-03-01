@@ -13,11 +13,11 @@ export default function Team() {
 
     return (
         <div >
-            <div className="relative flex min-h-[55vh] lg:min-h-[120vh] items-center pt-20 lg:pt-40 bg-black font-sans bg-primary flex flex-col gap-6 lg:gap-8 lg:gap-10 ">
+            <div className="relative flex min-h-[70vh] lg:min-h-[120vh] items-center pt-20 lg:pt-40 bg-black font-sans bg-primary flex flex-col gap-6 lg:gap-8 lg:gap-10 ">
                 <SlideIn direction="bottom" duration={0.8} delay={0}>
                     <Badgetextwhite title="Our Team " />
                 </SlideIn>
-                <FadeIn className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white max-w-[80%]" duration={0.4} delay={0}>
+                <FadeIn className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle  text-white max-w-[50%]" duration={0.4} delay={0}>
                     Meet the People Behind the Power of Copper
                 </FadeIn>
                 <Image src='/whitegradient.png' alt='Vector Image' width={1200} height={900} className=" hidden lg:block rotate-180  absolute -bottom-25 left-1/2 transform -translate-x-1/2  object-cover w-full" />
@@ -37,7 +37,7 @@ export default function Team() {
                 </div>
 
                 {/* our people */}
-                <div className="px-5 lg:px-10 relative z-10">
+                <div className="px-5 lg:px-10 relative z-10 ">
                     {/* Header */}
                     <div className="flex py-12 flex-col  lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-28 mb-12 lg:mb-16">
                         <SlideIn direction="left" duration={0.8} scrollTrigger={true} className="flex-1">
@@ -73,7 +73,7 @@ export default function Team() {
                     <TextReveal>
                         <p className="pl-3 lg:pl-5 text-xl lg:text-4xl p-0 italic leading-relaxed font-light">At UCR, we are grounded in vision, trust, and a commitment to excellence. We believe success is measured not just by financial gains but by the positive impact we have on our communities and future generations.We have broadened our investments across various sectors with a clear strategy. As global markets change, we remain focused on responsible growth, continuous innovation, and delivering lasting value.</p>
                     </TextReveal>
-                    <Image src="/quote.png" alt="Icon" width={40} height={0} className="self-end w-8 lg:w-[60px] absolute right-0 bottom-0" />
+                    <Image src="/quote.png" alt="Icon" width={40} height={0} className="self-end w-8 lg:w-[60px] absolute -right-5 lg:right-0 bottom-0" />
 
                 </div>
 
