@@ -55,7 +55,7 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <div className="min-h-screen lg:h-[90vh] rounded-xl  lg:mx-10 flex items-end py-10 relative">
+    <div className="min-h-screen lg:h-[90vh] rounded-xl  lg:mx-10 flex items-end lg:items-center py-10 pt-16 relative">
       {/* Background Slider Container */}
       <div className="absolute inset-0  overflow-hidden rounded-xl">
         <div
@@ -84,7 +84,7 @@ export default function FeaturedProducts() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent rounded-xl z-5"></div>
 
       {/* Content Card */}
-      <div className="h-full  relative bg-white p-6 lg:p-8 flex flex-col gap-5 lg:gap-6 lg:gap-26 w-full lg:w-[45%] lg:min-h-[90%] mx-2 lg:mx-10 rounded-xl z-10 shadow-2xl transition-all duration-700">
+      <div className="h-full  relative bg-white p-6 lg:p-8 flex flex-col gap-5 lg:gap-6 lg:gap-26 w-full lg:w-[48%] lg:min-h-[90%] mx-2 lg:mx-10 rounded-xl z-10 shadow-2xl transition-all duration-700">
         {/* Header */}
         <div className="flex flex-col gap-5">
           <div className="flex gap-3 text-white z-300">
@@ -103,14 +103,14 @@ export default function FeaturedProducts() {
                 } flex flex-col gap-9`}
               >
                 {activeTab === index ? (
-                  <h1 className="flex items-center text-[28px] leading-[29.71px] tracking-[-1.55px] text-primary mt-5 font-normal capitalize align-middle lg:text-5xl lg:font-medium">
+                  <h1 className="flex items-center gap-5 text-[28px] leading-[29.71px] tracking-[-1.55px] text-primary mt-5 font-normal capitalize align-middle lg:text-5xl lg:font-medium">
                     {product.title}
                     {product.icon && (
                       <Image
                         src={product.icon}
                         alt={product.title}
-                        width={50}
-                        height={50}
+                        width={80}
+                        height={80}
                         className='hidden object-contain lg:inline-block lg:ml-3'
                       />
                     )}

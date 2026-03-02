@@ -45,7 +45,7 @@ export default function HomeHeroAbout() {
         <HeroHeading delay={4}>UCR shaping the future</HeroHeading>
       </div>
 
-      <div className="w-full h-auto">
+      <div className="w-full h-auto ">
         <About lockProgressRef={lockProgressRef} />
         
          <AboutStats />

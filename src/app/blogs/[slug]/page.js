@@ -4,6 +4,8 @@ import { blogs } from "../../../assets/blogs";
 import { Badgetextwhite } from "../../../common/badge";
 import Link from "next/link";
 import FadeIn from "../../../animations/FadeIn";
+import { ArrowRight } from 'lucide-react';
+
 
 export default async function BlogDetail({ params }) {
     const { slug } = await params;
@@ -128,9 +130,9 @@ export default async function BlogDetail({ params }) {
                     </div>
 
                     <div className="flex justify-center mt-10">
-                        <Link href="/blogs" className="inline-flex items-center bg-[#FF6A00] hover:bg-[#ff7b2a] text-white px-6 py-3 rounded-full text-sm">
+                        <Link href="/blogs" className="inline-flex items-center justify-center gap-2 bg-[#FA6E43] hover:bg-[#ff8a5c] text-white w-[207px] h-[70px] px-6 py-3 rounded-full  font-normal text-[20px] leading-[29.4px] tracking-[-0.88px] text-center align-middle">
                             View all news
-                            <span className="ml-2">→</span>
+                            <ArrowRight size={18} />
                         </Link>
                     </div>
                 </div>

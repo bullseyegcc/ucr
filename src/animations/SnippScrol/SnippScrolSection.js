@@ -230,7 +230,7 @@ export default function SnippScrolSection({
       {mid && (
         <div
           ref={midRef}
-          className="absolute inset-0 w-full h-full flex items-center justify-center"
+          className="absolute inset-0  w-full h-full flex items-center justify-center"
           style={{ willChange: 'transform', zIndex: 2 }}
         >
           {mid}
@@ -241,7 +241,7 @@ export default function SnippScrolSection({
       {fg && (
         <div
           ref={fgRef}
-          className="absolute inset-0 w-full h-full pointer-events-none"
+          className="absolute inset-0 w-full h-full pointer-events-none "
           style={{ willChange: 'transform', zIndex: 3 }}
         >
           {fg}

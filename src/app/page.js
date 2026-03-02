@@ -26,7 +26,7 @@ export default function Home() {
 
       {/* video Cards */}
       <ParallaxSection index={0}>
-        <div className="flex flex-col lg:flex-row justify-center min-h-screen  lg:px-10 gap-1 lg:gap-2 lg:py-8 bg-white">
+        <div className="mt-8 flex flex-col lg:flex-row justify-center min-h-screen  lg:px-10 gap-1 lg:gap-2 lg:py-8 bg-white">
         <VideoCard
           videoSrc="/moreabout.mp4"
           badgeTitle="more about"
