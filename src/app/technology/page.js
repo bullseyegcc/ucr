@@ -156,19 +156,19 @@ export default function Technology() {
                         <SlideIn direction="bottom" scrollTrigger={true} duration={1.5}>
                             <div className="w-full flex flex-col lg:flex-row border-t border-secondary/40">
                                 {/* left side */}
-                                <div className="w-full lg:w-1/2 flex flex-col gap-6 lg:gap-20 py-6 lg:py-9">
-                                    <p className="font-normal text-[18px] leading-[36px] tracking-[-0.45px] lg:text-[24px] lg:leading-[43px] animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.
+                                <div className="w-full lg:w-[60%] flex flex-col gap-6 lg:gap-20 py-6 lg:py-9">
+                                    <p className="text-base lg:text-xl lg:text-2xl animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.
 
                                     </p>
 
-                                    <p className="font-normal text-[18px] leading-[36px] tracking-[-0.45px] lg:text-[24px] lg:leading-[43px] animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
+                                    <p className="text-base lg:text-xl lg:text-2xl animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
 
 
                                     <h1 className="py-4 text-base lg:text-lg text-primary font-medium underline hover:text-orange-600 transition-colors duration-300">Read More</h1>
                                 </div>
 
                                 {/* right side */}
-                                <div className="w-full lg:w-1/2">
+                                <div className="w-full lg:w-[40%]">
                                     <Image src="/coppertreatment.png" alt="Icon" width={500} height={0} className="w-full h-full object-cover rounded-none lg:rounded-r-xl p-4 lg:p-6 lg:p-8" />
                                 </div>
                             </div>
@@ -219,7 +219,8 @@ export default function Technology() {
                     <div className="animate-reveal">
                         <Badgetextblack title="UCR Laboratory" />
                     </div>
-fea
+                    <h1 className="font-medium text-[32px] leading-[48px] tracking-[-1.4px] text-center lg:text-[52px] lg:leading-[72px] text-black mt-4 lg:mt-5 lg:mt-6 animate-reveal">Equipment used in the testing process</h1>
+
 
                     {/* cards */}
                     <div className="flex flex-wrap gap-6 py-8 justify-center">

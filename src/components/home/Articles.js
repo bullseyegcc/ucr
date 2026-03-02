@@ -143,7 +143,7 @@ export default function Articles() {
 
         <Link
           href="/blogs"
-          className="border my-8 border-primary w-80 px-5 py-3 text-primary lg:hidden flex justify-center items-center gap-3 rounded-full text-xl"
+          className="border my-8 border-primary w-[80%] px-5 py-3 text-primary lg:hidden flex justify-center items-center gap-3 rounded-full text-lg"
         >
           Read more <ArrowRight size={22} className="text-primary" />
         </Link>

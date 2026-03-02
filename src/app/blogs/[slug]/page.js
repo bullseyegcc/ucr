@@ -50,13 +50,13 @@ export default async function BlogDetail({ params }) {
 
                     {/* Hero Image - Full Width Compact */}
                     {post.image && (
-                        <div className="h-[90vh] mb-8 w-full">
+                        <div className="h-auto lg:h-[90vh] mb-8 w-full">
                             <Image
                                 src={post.image}
                                 alt={post.title}
                                 width={1400}
                                 height={600}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-contain lg:object-cover"
                             />
                         </div>
                     )}
