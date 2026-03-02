@@ -39,7 +39,7 @@ export default function StatsCard({ mainHeading, subHeading, description }) {
   }, []);
 
   return (
-    <div ref={cardRef} className="h-auto flex flex-col gap-3 lg:gap-8 px-2 lg:px-8 relative mt-3 lg:mt-10 group cursor-pointer transition-transform duration-500 ease-out min-w-0 z-99">
+    <div ref={cardRef} className="h-auto flex flex-col gap-3 lg:gap-8 px-2 lg:px-8 relative mt-3 lg:mt-10 group cursor-pointer transition-transform duration-500 ease-out min-w-0 ">
       <h1 className="text-primary font-primary font-medium text-[34px] leading-[38px] lg:text-[clamp(48px,5.5vw,84px)] lg:leading-[1.1] tracking-[-1.38px] z-99 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent transition-transform duration-500 ease-out">
         <CountUp
           from={0}

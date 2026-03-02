@@ -31,8 +31,8 @@ export default function HomeHeroAbout() {
 
   return (
     <SnippScrol
-      scrub={0.5}          // ✅ Optimized for trackpad + Lenis interaction
-      mobileScrub={0.3}    // ✅ Optimized for mobile trackpad
+      scrub={0.5}          
+      mobileScrub={0.3}    
       enableSnap={true}
       snapDuration={0.5}
       enableExit={false}
@@ -45,7 +45,6 @@ export default function HomeHeroAbout() {
         <HeroHeading delay={4}>UCR shaping the future</HeroHeading>
       </div>
 
-      {/* Panel 2: About — receives the progress ref so it can register its colour driver */}
       <div className="w-full h-auto">
         <About lockProgressRef={lockProgressRef} />
         

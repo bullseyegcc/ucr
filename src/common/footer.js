@@ -47,7 +47,7 @@ export default function Footer() {
                     <div className='flex flex-col gap-4'>
                         <h3 className='text-primary font-bold text-sm uppercase'>Phone</h3>
                         <div className=' text-gray-700 text-sm'>
-                            <p className="font-medium text-base">+971 2 550 3240</p>
+                            <p className="font-medium text-[18px]">+971 2 550 3240</p>
                         </div>
                     </div>
 
@@ -55,7 +55,7 @@ export default function Footer() {
                     <div className='flex flex-col gap-4'>
                         <h3 className='text-primary font-bold text-sm uppercase'>Email</h3>
                         <div className='font-medium text-gray-700 text-sm'>
-                            <p className="text-base">info@unioncopper.ae</p>
+                            <p className="text-[18px]">info@unioncopper.ae</p>
                         </div>
                     </div>
                 </div>
