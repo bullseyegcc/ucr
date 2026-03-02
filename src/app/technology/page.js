@@ -157,11 +157,11 @@ export default function Technology() {
                             <div className="w-full flex flex-col lg:flex-row border-t border-secondary/40">
                                 {/* left side */}
                                 <div className="w-full lg:w-[60%] flex flex-col gap-6 lg:gap-20 py-6 lg:py-9">
-                                    <p className="text-base lg:text-xl lg:text-2xl animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.
+                                    <p className="font-normal text-[18px] leading-[36px] tracking-[-0.45px] lg:text-[24px] lg:leading-[43px] animate-reveal">UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.
 
                                     </p>
 
-                                    <p className="text-base lg:text-xl lg:text-2xl animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
+                                    <p className="font-normal text-[18px] leading-[36px] tracking-[-0.45px] lg:text-[24px] lg:leading-[43px] animate-reveal">As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.</p>
 
 
                                     <h1 className="py-4 text-base lg:text-lg text-primary font-medium underline hover:text-orange-600 transition-colors duration-300">Read More</h1>

@@ -63,14 +63,15 @@ export default function OurTechnology() {
                 <div
                   key={tech.id}
                   onClick={() => handleTabChange(index)}
-                  className={`cursor-pointer transition-all duration-300 animate-reveal ${
+                  className={`cursor-pointer transition-all duration-300 ${activeTab === index ? '' : 'animate-reveal'} ${
                     activeTab === index
-                      ? 'rounded-xl !bg-white opacity-100 px-5 py-9 border-l-4 border-primary shadow-lg'
+                      ? 'rounded-xl !bg-white opacity-100 px-5 py-9 border-l-4 border-primary shadow-lg z-20'
                       : ''
                   }`}
+                  style={activeTab === index ? { backgroundColor: 'white !important' } : {}}
                 >
                   {activeTab === index ? (
-                    <div className="flex flex-col gap-4 w-full !bg-white">
+                    <div className="flex flex-col gap-4 w-full !bg-white" style={{ backgroundColor: 'white' }}>
                       <h1 className="font-primary font-normal text-[28px] leading-[36.09px] tracking-[-1.41px] text-primary lg:text-[48px] lg:leading-[64px] lg:tracking-[-2.5px]">
                         {tech.title}
                       </h1>
