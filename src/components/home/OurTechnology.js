@@ -63,11 +63,10 @@ export default function OurTechnology() {
                 <div
                   key={tech.id}
                   onClick={() => handleTabChange(index)}
-                  className={`cursor-pointer transition-all duration-300 animate-reveal ${
-                    activeTab === index 
-                      ? 'rounded-xl bg-white px-5 py-9 border-l-4 border-primary shadow-lg hover:shadow-xl' 
-                      : 'hover:bg-white/10'
-                  }`}
+                  className={`cursor-pointer transition-all duration-300 animate-reveal ${activeTab === index
+                      ? 'rounded-xl bg-white px-5 py-9 border-l-4 border-primary shadow-lg'
+                      : ''
+                    }`}
                 >
                   {activeTab === index ? (
                     <div className="flex flex-col gap-4 ">
@@ -75,7 +74,7 @@ export default function OurTechnology() {
                         {tech.title}
                       </h1>
                       <p className="font-primary font-normal text-[12px] leading-[20px] tracking-[-0.41px] text-black lg:text-[20px] lg:leading-[32px] lg:tracking-[-0.72px]">{tech.description}</p>
-                      <button 
+                      <button
                         onClick={() => router.push('/technology')}
                         className="w-full h-[40px] lg:w-[193px] lg:h-[62px] flex items-center justify-center gap-2 text-primary border-[0.62px] lg:border border-primary rounded-[30.95px] lg:rounded-[50px] py-[8px] lg:py-[12px] px-[20px] lg:pl-[28px] lg:pr-[18px] hover:bg-primary hover:text-white transition-all duration-300"
                       >
@@ -84,7 +83,8 @@ export default function OurTechnology() {
                       </button>
                     </div>
                   ) : (
-                    <h1 className="font-primary font-normal text-[24px] leading-[55.82px] tracking-[-1.41px] lg:text-[40px] lg:leading-[99px] lg:tracking-[-2.5px] text-white hover:text-white/80">
+                    <h1 className="font-primary font-normal text-[24px] leading-[55.82px] tracking-[-1.41px] lg:text-[40px] lg:leading-[99px] lg:tracking-[-2.5px] text-white hover:text-white/80 flex items-center gap-4">
+                      <ArrowRight size={30} className="text-white" />
                       {tech.title}
                     </h1>
                   )}

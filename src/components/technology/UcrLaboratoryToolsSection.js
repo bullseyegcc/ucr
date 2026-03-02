@@ -121,7 +121,7 @@ export default function UcrLaboratoryToolsSection() {
                 alt={card.alt}
                 width={1200}
                 height={800}
-                className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full object-cover transition-transform duration-500"
               />
               <Image src='/labgrad.png' alt='Gradient Overlay' width={1200} height={800} className="absolute right-0 inset-0 h-full opacity-90 pointer-events-none" />
               <div className="w-full absolute bottom-0 left-0 right-0 p-6">

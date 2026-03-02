@@ -11,7 +11,7 @@ export default function Quality() {
         <div>
 
             {/* header */}
-            <div className="relative rounded-b-xl flex flex-col text-center min-h-[60vh] sm:min-h-[60vh] lg:min-h-[80vh] items-center justify-center font-sans dark:bg-black gap-6 px-6" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/qualitybg.png') lightgray 50% / cover no-repeat" }}>
+            <div className="relative rounded-b-xl flex flex-col text-center min-h-[60vh] sm:min-h-[60vh] lg:min-h-[80vh] items-center justify-center   dark:bg-black gap-6 px-6" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/qualitybg.png') lightgray 50% / cover no-repeat" }}>
                 <SlideIn direction="bottom" duration={0.8} delay={0}>
                     <Badgetextwhite title="Premium Quality Assured" />
                 </SlideIn>
@@ -103,12 +103,11 @@ export default function Quality() {
 
                         <Image src="/quote.png" alt="Icon" width={40} height={0} className="w-8 lg:w-[70px]" />
                         <TextReveal className="relative">
-                            <p className="pl-3 lg:pl-5 text-[24px] leading-[48px] italic tracking-[0px] text-center align-middle lg:text-[32px] lg:leading-[48px]">At UCR, we are grounded in vision, trust, and a commitment to excellence. We believe success is measured not just by financial gains but by the positive impact we have on our communities and future generations.We have broadened our investments across various sectors with a clear strategy. As global markets change, we remain focused on responsible growth, continuous innovation, and delivering lasting value.</p>
-                            <Image src="/quote.png" alt="Icon" width={40} height={0} className="hidden lg:block absolute right-80  lg:w-[70px]" />
+                            <p className="pl-3 lg:pl-5 text-[24px] leading-[48px] italic tracking-[0px] text-center align-middle lg:text-[32px] lg:leading-[48px]">At UCR, we are grounded in vision, trust, and a commitment to excellence. We believe success is measured not just by financial gains but by the positive impact we have on our communities and future generations.We have broadened our investments across various sectors with a clear strategy. As global markets change, we remain focused on responsible growth, continuous innovation, and delivering lasting <span className="relative">value.   <Image src="/quote.png" alt="Icon" width={40} height={0} className="self-end w-8 lg:w-[60px] absolute -right-8 lg:-right-20 lg:-right-6 -bottom-0" /></span></p>
+                         
 
                         </TextReveal>
-                        <Image src="/quote.png" alt="Icon" width={40} height={0} className="lg:hidden self-end w-8" />
-
+                 
                     </div>
 
                     <div className="flex flex-col justify-center items-center gap-2 lg:gap-4">

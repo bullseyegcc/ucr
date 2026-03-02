@@ -36,7 +36,7 @@ export default function About({ lockProgressRef = null }) {
   }, [lockProgressRef]);
 
   return (
-    <div className="w-full bg-white flex flex-col">
+    <div className="w-full h-auto bg-white flex flex-col">
       <div className="relative flex flex-col lg:flex-row px-6 lg:px-10 pt-10 lg:pt-14 gap-6 lg:gap-6">
         <div className="w-full lg:w-[60%] flex flex-col gap-5 lg:gap-8 z-10">
           <Badge title="About Us" />

@@ -199,7 +199,7 @@ export default function AboutUs() {
 
 
             <ParallaxSection index={1}>
-                <div className="flex flex-col lg:flex-row justify-center items-stretch min-h-auto lg:min-h-screen px-4 sm:px-6 lg:px-10 gap-4 sm:gap-6 lg:gap-8 py-6 sm:py-8 lg:py-12">
+                <div className="flex flex-col lg:flex-row justify-center items-stretch min-h-auto lg:min-h-screen mx-1 sm:px-6 lg:px-10 gap-4 sm:gap-6 lg:gap-8 py-6 sm:py-8 lg:py-12">
                     <VideoCard
                         videoSrc="/moreabout.mp4"
                         badgeTitle="more about"

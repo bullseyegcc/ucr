@@ -17,7 +17,7 @@ export default function blogs() {
     const router = useRouter();
     return (
         <div>
-            <div className="relative min-h-[80vh] lg:min-h-[80vh] font-medium flex items-center justify-center font-sans dark:bg-black overflow-hidden">
+            <div className="relative min-h-[80vh] lg:min-h-[80vh] font-medium flex items-center justify-center   dark:bg-black overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <VideoPlayer src="/moreabout.mp4" className="w-full h-full object-cover" />
                 </div>
@@ -36,11 +36,11 @@ export default function blogs() {
 
 
             <ParallaxSection index={0}>
-                <div className=" relative overflow-hidden min-h-[80vh] flex flex-col justify-center items-center px-5 lg:px-10 pt-20">
-                    <div className="absolute top-16  flex flex-col items-center gap-4">
+                <div className=" relative overflow-hidden min-h-screen lg:min-h-[90vh] lg:max-h-[90vh] flex flex-col justify-center lg:justify-start lg:pt-20 items-center px-2 lg:px-0 ">
+                    <div className=" flex flex-col items-center gap-4">
 
                         <Badgetextblack title="What we produce" className="" />
-                        <TextReveal className="w-full px-5 lg:px-40 lg:w-[85%] text-2xl lg:text-4xl mt-9 text-center leading-tight text-primary">
+                        <TextReveal className="w-full px-5 lg:px-10 lg:w-[85%] text-2xl lg:text-4xl mt-9 text-center leading-tight text-primary">
                             <h1 className="text-[24px] leading-[40px] tracking-[-1.4px] text-center font-normal lg:text-[42px] lg:leading-[64px] lg:tracking-[-1.4px]" style={{ fontFamily: 'Helvetica Now Display, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial' }}>
                                 Union Copper Rod's primary products are the 8mm, 12.5mm, copper rods that have at least 99.95% copper content and comply with international standards including BS: EN 1977 and ASTM-B49.
                             </h1>
@@ -50,7 +50,7 @@ export default function blogs() {
 
                     <Image src='/gradientcircle.png' alt="Icon" width={300} height={0} className="rotate-180 hidden lg:block absolute overflow-hidden left-0 bottom-0" />
 
-                    <div className="absolute  -left-60 bottom-0 lg:relative lg:left-0 bg-[url('/wireshadow.png')] bg-cover bg-center w-[150%] lg:w-[60%]" >
+                    <div className="absolute  -left-60 lg:left-[15%] bottom-0  bg-[url('/wireshadow.png')] bg-cover bg-center w-[150%] lg:w-[60%]" >
 
                         <Image src="/weproduce.png" alt="Icon" width={900} height={0} className="object-cover w-full h-full" />
                     </div>
@@ -70,7 +70,7 @@ export default function blogs() {
                     <div className="w-full px-2 lg:px-10 ">
                         {/* Featured Product */}
                         <Link href={`/products/${products[0].slug}`}>
-                            <div className=" bg-[#FF6A00] rounded-lg p-8 mb-12 flex flex-col lg:flex-row items-center justify-between gap-9 lg:gap-6 transition-shadow cursor-pointer hover:scale-100 hover:transform-none">
+                            <div className=" bg-[#FF6A00] rounded-lg p-8 mb-12 flex flex-col lg:flex-row items-center justify-between gap-9 lg:gap-6 transition-shadow cursor-pointer">
                                 <div className="flex-1 flex flex-col gap-5 lg:w-[50%]">
                                     <p className="text-3xl font-medium text-white    mb-2">{products[0].sku}</p>
                                     <h3 className="text-5xl font-semibold text-white mb-3">{products[0].name}</h3>
@@ -94,7 +94,7 @@ export default function blogs() {
                             <div className="w-full">
                             {products.slice(1).map((product, idx) => (
                                 <Link key={product.id} href={`/products/${product.slug}`}>
-                                    <div className="bg-[#FF6A00] rounded-lg p-8 mb-12 flex flex-col lg:flex-row items-center justify-between gap-9 lg:gap-6 transition-shadow cursor-pointer hover:scale-100 hover:transform-none">
+                                    <div className="bg-[#FF6A00] rounded-lg p-8 mb-12 flex flex-col lg:flex-row items-center justify-between gap-9 lg:gap-6 transition-shadow cursor-pointer">
                                         <div className="flex-1 flex flex-col gap-5 lg:w-[50%]">
                                             <p className="text-3xl font-medium text-white mb-2">{product.sku}</p>
                                             <h3 className="text-5xl font-semibold text-white mb-3">{product.name}</h3>

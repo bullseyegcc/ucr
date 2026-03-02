@@ -49,8 +49,8 @@ export default function Technology() {
             </ParallaxSection>
 
             {/* Mobile: stacked cards, no SnipScroll */}
-            <div className="block md:hidden flex flex-col gap-6 px-6 pb-8">
-                <div className="bg-white px-6 sm:px-8 rounded-xl overflow-y-auto scrollbar-hide transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl">
+            <div className="block md:hidden flex flex-col gap-6 px-4 pb-8">
+                <div className="bg-white px-4 sm:px-8 rounded-xl overflow-y-auto scrollbar-hide transition-all duration-500 ease-out">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
                         <h1 className="text-primary font-medium uppercase animate-reveal text-[28px] leading-[48px] tracking-[-1.4px] align-middle sm:text-[28px] lg:text-[48px] lg:leading-[64px]">South Wire Technology</h1>
                         <h1 className="text-secondary text-xl sm:text-2xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal text-primary">01/<span className="text-secondary">02</span></h1>
@@ -68,7 +68,7 @@ export default function Technology() {
                     </FadeIn>
                 </div>
 
-                <div className="text-white bg-[#272A2A] px-6 sm:px-8 rounded-xl overflow-y-auto scrollbar-hide transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl">
+                <div className="text-white bg-[#272A2A] px-4 sm:px-8 rounded-xl overflow-y-auto scrollbar-hide transition-all duration-500 ease-out">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
                         <h1 className="text-white font-medium uppercase animate-reveal text-[28px] leading-[48px] tracking-[-1.4px] align-middle sm:text-[28px] lg:text-[48px] lg:leading-[64px]">Copper treatments </h1>
                         <h1 className="text-secondary text-xl sm:text-2xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal text-primary">02/<span className="text-secondary">03</span></h1>
@@ -87,7 +87,7 @@ export default function Technology() {
                     </FadeIn>
                 </div>
 
-                <div className="bg-white px-6 sm:px-8 rounded-xl overflow-y-auto scrollbar-hide transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl">
+                <div className="bg-white px-4 sm:px-8 rounded-xl overflow-y-auto scrollbar-hide transition-all duration-500 ease-out">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-8 lg:py-12">
                         <h1 className="text-primary font-medium animate-reveal text-[28px] leading-[48px] tracking-[-1.4px] align-middle sm:text-[28px] lg:text-[48px] lg:leading-[64px]">NexGen Sol</h1>
                         <h1 className="text-secondary text-xl sm:text-2xl font-semibold text-black leading-tight lg:leading-snug whitespace-nowrap animate-reveal text-primary">03/<span className="text-secondary">03</span></h1>
@@ -109,7 +109,7 @@ export default function Technology() {
             {/* Desktop: SnipScroll slider */}
             <div className="hidden md:block">
                 <SnipScroll>
-                    <div className="bg-white px-6 sm:px-8 lg:px-10 rounded-xl h-full overflow-y-auto scrollbar-hide mx-6 sm:mx-8 lg:mx-10 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl">
+                    <div className="bg-white px-6 sm:px-8 lg:px-10 rounded-xl h-full overflow-y-auto scrollbar-hide mx-6 sm:mx-8 lg:mx-10 transition-all duration-500 ease-out">
 
                         {/* card header */}
 
@@ -141,7 +141,7 @@ export default function Technology() {
                     </div>
 
                     {/* card two */}
-                    <div className="text-white my-2 bg-[#272A2A] px-6 sm:px-8 lg:px-10 rounded-xl h-full overflow-y-auto scrollbar-hide mx-6 sm:mx-8 lg:mx-10 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl">
+                    <div className="text-white my-2 bg-[#272A2A] px-6 sm:px-8 lg:px-10 rounded-xl h-full overflow-y-auto scrollbar-hide mx-6 sm:mx-8 lg:mx-10 transition-all duration-500 ease-out">
 
                         {/* card header */}
 
@@ -176,7 +176,7 @@ export default function Technology() {
                     </div>
 
                     {/* card three  */}
-                    <div className="bg-white px-6 sm:px-8 lg:px-10 rounded-xl h-full overflow-y-auto scrollbar-hide mx-6 sm:mx-8 lg:mx-10 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl">
+                    <div className="bg-white px-6 sm:px-8 lg:px-10 rounded-xl h-full overflow-y-auto scrollbar-hide mx-6 sm:mx-8 lg:mx-10 transition-all duration-500 ease-out">
 
                         {/* card header */}
 

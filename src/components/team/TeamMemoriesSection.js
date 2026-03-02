@@ -87,7 +87,7 @@ export default function TeamMemoriesSection() {
             ref={memoriesRef}
             className="text-3xl sm:text-4xl lg:text-5xl font-medium text-gray-900 leading-tight flex gap-2"
           >
-            <span className="font-sans font-medium text-gray-900">Team</span>
+            <span className="  font-medium text-gray-900">Team</span>
             <span className="font-serif italic text-[#222] font-normal tracking-tight">Memories</span>
           </h2>
         </div>

@@ -5,7 +5,7 @@ import SlideIn from "../../animations/SlideIn";
 export default function OurPolicies() {
     return (
         <div>
-            <div className="flex flex-col items-center justify-center min-h-[50vh] lg:min-h-[60vh] lg:min-h-[70vh] font-medium bg-black font-sans dark:bg-black bg-[url('/policiesbg.png')] bg-cover bg-center bg-no-repeat">
+            <div className="flex flex-col items-center justify-center min-h-[50vh] lg:min-h-[60vh] lg:min-h-[70vh] font-medium bg-black   dark:bg-black bg-[url('/policiesbg.png')] bg-cover bg-center bg-no-repeat">
                 <div className="flex flex-col items-center gap-3 lg:gap-4 lg:gap-6 px-4">
                     <SlideIn direction="bottom" duration={0.8} delay={0}>
                         <p className="text-primary text-xs lg:text-sm lg:text-base font-semibold tracking-widest uppercase">UCR  POLICIES</p>

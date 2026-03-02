@@ -8,7 +8,7 @@ import SlideIn from "../../animations/SlideIn"
 export default function contactus() {
     return (
         <div>
-            <div className="relative flex min-h-[60vh] lg:min-h-[80vh] items-center justify-center bg-black font-sans bg-primary flex flex-col gap-6 lg:gap-8 lg:gap-10 px-4">
+            <div className="relative flex min-h-[60vh] lg:min-h-[80vh] items-center justify-center bg-black   bg-primary flex flex-col gap-6 lg:gap-8 lg:gap-10 px-4">
                 <SlideIn direction="bottom" duration={0.8} delay={0}>
                     <Badgetextwhite title="Reach Us " />
                 </SlideIn>
@@ -43,7 +43,7 @@ export default function contactus() {
                     {/* Left Column */}
                     <div className="hidden lg:block">
                         {/* Person Card */}
-                        <CardAnimation index={0} className="bg-white rounded-lg p-4 lg:p-8 mb-8 lg:mb-12 group hover:shadow-xl hover:scale-105 transition-all duration-400">
+                        <CardAnimation index={0} className="bg-white rounded-lg p-4 lg:p-8 mb-8 lg:mb-12 group transition-all duration-400">
                             <div className="flex items-start gap-3 lg:gap-6">
                                 <img src="/person.png" alt="Team member" className="w-16 lg:w-40 h-16 lg:h-40 rounded-lg object-cover flex-shrink-0" />
                                 <div className="flex-1">
@@ -60,7 +60,7 @@ export default function contactus() {
                         {/* Contact Details - 2x2 Grid */}
                         <div className="grid grid-cols-2 gap-3 lg:gap-2">
                             {/* Box 1: Connect */}
-                            <CardAnimation index={1} className="bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                            <CardAnimation index={1} className="bg-white rounded-lg p-3 lg:p-6 group transition-all duration-300 cursor-pointer">
                                 <h4 className="text-[#505050] text-xs lg:text-base mb-2 lg:mb-4">Connect</h4>
                                 <div className="space-y-1 text-[#0F0F0F]">
                                     <a href="#" className=" text-base lg:text-base font-medium leading-6 hover:text-[#FA6E43] transition-colors duration-300 block underline">Instagram</a>
@@ -70,13 +70,13 @@ export default function contactus() {
                             </CardAnimation>
 
                             {/* Box 2: Fax */}
-                            <CardAnimation index={2} className="flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                            <CardAnimation index={2} className="flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group transition-all duration-300 cursor-pointer">
                                 <h4 className="text-[#505050] text-xs lg:text-base mb-2 lg:mb-3">Fax</h4>
                                 <p className="text-[#FA6E43] text-xs lg:text-sm font-semibold">+971 2 550 3240</p>
                             </CardAnimation>
 
                             {/* Box 3: Reach Out */}
-                            <CardAnimation index={3} className="bg-white rounded-lg p-3 lg:p-6 flex flex-col justify-between group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                            <CardAnimation index={3} className="bg-white rounded-lg p-3 lg:p-6 flex flex-col justify-between group transition-all duration-300 cursor-pointer">
                                 <h4 className="text-[#505050]  text-xs lg:text-base mb-2 lg:mb-4">Reach Out</h4>
                                 <div className="space-y-2 lg:space-y-4">
                                     <a href="mailto:info@ucrccopper.ae" className="text-[#FA6E43] text-xs lg:text-sm font-semibold hover:text-orange-600 transition-colors duration-300 block">info@ucrccopper.ae</a>
@@ -85,7 +85,7 @@ export default function contactus() {
                             </CardAnimation>
 
                             {/* Box 4: Office */}
-                            <CardAnimation index={4} className="flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                            <CardAnimation index={4} className="flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group transition-all duration-300 cursor-pointer">
                                 <h5 className="text-[#505050]  text-xs lg:text-base mb-2 lg:mb-3">Office</h5>
                                 <div className="space-y-1 text-[#0F0F0F] text-base lg:text-base font-medium leading-6 lg:leading-6">
                                     <p>Mussafah,</p>
@@ -98,7 +98,7 @@ export default function contactus() {
                     </div>
 
                     {/* Right Column - Contact Form */}
-                    <CardAnimation index={5} className="bg-white rounded-lg p-4 lg:p-12 group hover:shadow-xl transition-all duration-300">
+                    <CardAnimation index={5} className="bg-white rounded-lg p-4 lg:p-12 group transition-all duration-300">
                         <h3 className="text-xl lg:text-4xl font-bold text-gray-900 mb-5 lg:mb-8">Contact us</h3>
 
                         <form className="space-y-3 lg:space-y-5">
@@ -142,7 +142,7 @@ export default function contactus() {
                             <div className="pt-4 lg:pt-8">
                                 <button
                                     type="submit"
-                                    className="w-full bg-black hover:bg-[#FA6E43] text-white py-3 lg:py-4 rounded-full font-semibold text-xs lg:text-sm transition-all duration-300 hover:shadow-lg hover:scale-105"
+                                    className="w-full bg-black hover:bg-[#FA6E43] text-white py-3 lg:py-4 rounded-full font-semibold text-xs lg:text-sm transition-all duration-300"
                                 >
                                     Submit
                                 </button>
@@ -158,7 +158,7 @@ export default function contactus() {
 
                 <div className="mt-8 lg:hidden">
                     {/* Person Card */}
-                    <CardAnimation index={0} className="flex flex-col items-center bg-white rounded-lg p-4 lg:p-8 mb-8 lg:mb-12 group hover:shadow-xl hover:scale-105 transition-all duration-400">
+                    <CardAnimation index={0} className="flex flex-col items-center bg-white rounded-lg p-4 lg:p-8 mb-8 lg:mb-12 group transition-all duration-400">
                         <div className="flex items-start justify-between gap-3 lg:gap-6">
 
                             <div className="w-1/2 flex items-center">
@@ -185,7 +185,7 @@ export default function contactus() {
                     {/* Contact Details - 2x2 Grid */}
                     <div className="grid grid-cols-1 gap-3 lg:gap-2">
                         {/* Box 1: Connect */}
-                        <CardAnimation index={1} className="h-50 flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <CardAnimation index={1} className="h-50 flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group transition-all duration-300 cursor-pointer">
                             <h4 className="text-[#505050] text-base mb-2 lg:mb-4">Connect</h4>
                             <div className="space-y-1 text-[#0F0F0F]">
                                 <a href="#" className=" text-base lg:text-base font-medium leading-6 hover:text-[#FA6E43] transition-colors duration-300 block underline">Instagram</a>
@@ -195,13 +195,13 @@ export default function contactus() {
                         </CardAnimation>
 
                         {/* Box 2: Fax */}
-                        <CardAnimation index={2} className="h-50 flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <CardAnimation index={2} className="h-50 flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group transition-all duration-300 cursor-pointer">
                             <h4 className="text-[#505050] text-base mb-2 lg:mb-3">Fax</h4>
                             <p className="text-[#FA6E43] text-sm lg:text-base font-semibold">+971 2 550 3240</p>
                         </CardAnimation>
 
                         {/* Box 3: Reach Out */}
-                        <CardAnimation index={3} className="h-50 bg-white rounded-lg p-3 lg:p-6 flex flex-col justify-between group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <CardAnimation index={3} className="h-50 bg-white rounded-lg p-3 lg:p-6 flex flex-col justify-between group transition-all duration-300 cursor-pointer">
                             <h4 className="text-[#505050]  text-base mb-2 lg:mb-4">Reach Out</h4>
                             <div className="space-y-2 lg:space-y-4">
                                 <a href="mailto:info@ucrccopper.ae" className="text-[#FA6E43] text-xs lg:text-sm font-semibold hover:text-orange-600 transition-colors duration-300 block">info@ucrccopper.ae</a>
@@ -210,7 +210,7 @@ export default function contactus() {
                         </CardAnimation>
 
                         {/* Box 4: Office */}
-                        <CardAnimation index={4} className="h-50 flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+                        <CardAnimation index={4} className="h-50 flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group transition-all duration-300 cursor-pointer">
                             <h5 className="text-[#505050]  text-base mb-2 lg:mb-3">Office</h5>
                             <div className="space-y-1 text-[#0F0F0F] text-base lg:text-base font-medium leading-6 lg:leading-6">
                                 <p>Mussafah,</p>

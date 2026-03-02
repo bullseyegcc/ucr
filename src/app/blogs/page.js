@@ -15,7 +15,7 @@ export default function BlogsPage() {
 
     return (
         <div>
-            <div className="rounded-b-2xl flex flex-col text-center min-h-[60vh] lg:min-h-[80vh] items-center justify-center font-sans dark:bg-black gap-6" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/blogsbg.png') lightgray 50% / cover no-repeat" }}>
+            <div className="rounded-b-2xl flex flex-col text-center min-h-[60vh] lg:min-h-[80vh] items-center justify-center   dark:bg-black gap-6" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/blogsbg.png') lightgray 50% / cover no-repeat" }}>
                 <SlideIn direction="bottom" duration={0.8} delay={0} className="text-[#FA6E43] text-sm font-semibold uppercase tracking-widest">
                     <Badgetextwhite title="Things to Read" />
                 </SlideIn>
@@ -97,7 +97,7 @@ export default function BlogsPage() {
                         <div className="grid gap-6 lg:grid-cols-3 mt-8">
                             {others.map((post, index) => (
                                 <CardAnimation index={index + 3} key={post.id}>
-                                    <Link href={`/blogs/${post.slug}`} className="block bg-white rounded-xl overflow-hidden shadow group cursor-pointer transition-all duration-400 ease-out hover:scale-105 hover:shadow-2xl">
+                                    <Link href={`/blogs/${post.slug}`} className="block bg-white rounded-xl overflow-hidden shadow group cursor-pointer transition-all duration-400 ease-out">
                                         <article>
                                             <Image src={post.image} alt={post.title} width={800} height={500} className="w-full h-64 lg:h-[280px] object-cover" />
                                             <div className="p-4">

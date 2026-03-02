@@ -8,7 +8,7 @@ import SlideIn from "../../animations/SlideIn"
 export default function OurValues() {
     return (
         <div className="">
-            <div className="flex flex-col text-center min-h-[60vh] lg:min-h-[80vh] items-center justify-center bg-[url('/valuebg.png')] bg-cover font-sans dark:bg-black gap-6">
+            <div className="flex flex-col text-center min-h-[60vh] lg:min-h-[80vh] items-center justify-center bg-[url('/valuebg.png')] bg-cover   dark:bg-black gap-6">
                 <SlideIn direction="bottom" duration={0.8} delay={0}>
                     <Badge title="values" />
                 </SlideIn>

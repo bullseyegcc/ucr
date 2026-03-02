@@ -89,6 +89,50 @@ export default function WeCareSection() {
     return () => observer.disconnect();
   }, []);
 
+  // touch-drag fallback for mobile where native horizontal swipe may be blocked
+  useEffect(() => {
+    const el = scrollViewportRef.current;
+    if (!el) return;
+    let startX = 0;
+    let startScroll = 0;
+    let isDragging = false;
+
+    function onTouchStart(e) {
+      if (window.innerWidth >= 1024) return;
+      const t = e.touches[0];
+      startX = t.clientX;
+      startScroll = el.scrollLeft;
+      isDragging = true;
+    }
+
+    function onTouchMove(e) {
+      if (!isDragging) return;
+      const t = e.touches[0];
+      const dx = t.clientX - startX;
+      const dy = t.clientY - (e.touches[0].clientY || 0);
+
+      // if mostly horizontal movement, prevent vertical page scroll
+      if (Math.abs(dx) > Math.abs(dy)) e.preventDefault();
+
+      el.scrollLeft = startScroll - dx;
+    }
+
+    function onTouchEnd() {
+      isDragging = false;
+    }
+
+    // use non-passive listeners so we can call preventDefault when needed
+    el.addEventListener('touchstart', onTouchStart, { passive: true });
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    el.addEventListener('touchend', onTouchEnd, { passive: true });
+
+    return () => {
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('touchmove', onTouchMove);
+      el.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [scrollViewportRef.current]);
+
   return (
     <div
       ref={sectionRef}

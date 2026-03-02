@@ -20,16 +20,16 @@ export default function WhyChooseUs() {
         <SlideIn direction="bottom" scrollTrigger={true} duration={0.8}>
           <Badge title="Core Strength" />
         </SlideIn>
-        <FadeIn className="text-4xl font-semibold text-black mt-6" scrollTrigger={true} duration={0.8}>
-          <h1>Why choose us</h1>
+        <FadeIn className=" mt-6" scrollTrigger={true} duration={0.8}>
+          <h1 className="font-sans font-medium text-[#272A2A] text-[32px] leading-[36px] tracking-[-1.4px] align-middle lg:text-[64px] lg:leading-[72px] lg:tracking-[-1.4px]">Why choose us</h1>
         </FadeIn>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 grid-rows-2 gap-6">
+      <div className="lg:h-[90vh] grid grid-cols-1 grid-rows-auto sm:grid-cols-3 grid-rows-2 gap-6">
 
         {/* ── Featured left card ─────────────────────────────────────── */}
         <div
-          className="relative  flex flex-col justify-between items-start row-span-2 bg-[url('/excellence.png')] bg-cover bg-center lg:ml-10 rounded-xl group cursor-pointer transition-all duration-400 ease-out"
+          className=" h-[60vh] lg:h-full relative  flex flex-col justify-between items-start row-span-2 bg-[url('/excellence.png')] bg-cover bg-center lg:ml-10 rounded-xl group cursor-pointer transition-all duration-400 ease-out"
           style={{ willChange: 'transform, opacity' }}
         >
           <VideoPlayer src="/excellence.mp4" className="object-contain rounded-2xl" />
@@ -41,17 +41,17 @@ export default function WhyChooseUs() {
         </div>
 
         {/* ── Small cards with scroll reveal container ────────────────────────────────────────────── */}
-      
-          {[
-            { src: '/gn.png',  h: 0,  title: 'Global network',       w: 80 },
-            { src: '/tn.png',  h: 40, title: 'Top-notch certified',  w: 80 },
-            { src: '/sf.png',  h: 40, title: 'Sustainable future',   w: 80 },
-            { src: '/p.png',   h: 40, title: 'Partnership approach', w: 80 },
-          ].map((card) => (
-            <CardAnimation>
+
+        {[
+          { src: '/gn.png', h: 0, title: 'Global network', w: 140 },
+          { src: '/tn.png', h: 40, title: 'Top-notch certified', w: 140 },
+          { src: '/sf.png', h: 40, title: 'Sustainable future', w: 140 },
+          { src: '/p.png', h: 40, title: 'Partnership approach', w: 140 },
+        ].map((card) => (
+          <CardAnimation>
             <div
               key={card.title}
-              className="bg-white rounded-xl p-8 flex flex-col gap-4 group cursor-pointer transition-all duration-400 ease-out"
+              className="w-full h-full bg-white rounded-xl p-8 flex flex-col justify-between  group cursor-pointer transition-all duration-400 ease-out"
             >
               <Image
                 data-ci
@@ -62,12 +62,26 @@ export default function WhyChooseUs() {
                 className="mb-6 transition-transform duration-400"
                 style={{ willChange: 'transform, opacity' }}
               />
-              <h1 data-ct className="text-2xl font-medium text-black" style={{ willChange: 'transform, opacity' }}>{card.title}</h1>
-              <p data-cd className="text-sm" style={{ willChange: 'transform, opacity' }}>Factory in a world-class industrial hub</p>
+              <div>
+                <h1
+                  data-ct
+                  className="font-sans font-medium text-black text-[24px] leading-[42.63px] tracking-[-1.94px] align-middle lg:text-[32px] lg:leading-[52.8px] lg:tracking-[-1.4px]"
+                  style={{ willChange: 'transform, opacity' }}
+                >
+                  {card.title}
+                </h1>
+                <p
+                  data-cd
+                  className="font-sans font-normal text-[15.5px] leading-[23.74px] tracking-[-0.85px] align-middle lg:text-[19.2px] lg:leading-[29.4px] lg:tracking-[-1.05px]"
+                  style={{ willChange: 'transform, opacity' }}
+                >
+                  Factory in a world-class industrial hub
+                </p>
+              </div>
             </div>
-            </CardAnimation>
-          ))}
-  
+          </CardAnimation>
+        ))}
+
 
       </div>
     </div>

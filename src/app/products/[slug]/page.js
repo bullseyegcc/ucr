@@ -32,7 +32,7 @@ export default function ProductDetail({ params }) {
     return (
         <div className="flex flex-col gap-7">
             {/* Header */}
-            <div className="relative h-[40vh] sm:h-[50vh] lg:h-[55vh] max-h-[80vh] font-medium flex items-center justify-center font-sans dark:bg-black overflow-hidden">
+            <div className="relative h-[40vh] sm:h-[50vh] lg:h-[55vh] max-h-[80vh] font-medium flex items-center justify-center   dark:bg-black overflow-hidden">
                 <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#FF6A00] to-[#FF8C42]"></div>
                 <div className="absolute inset-0 z-10 pointer-events-none bg-[url('/productdetailbg.png')] bg-cover bg-center" ></div>
                 <h1 className="absolute top-[40%] w-[85%] sm:w-[70%] lg:w-[60%] z-20 font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-white flex flex-col items-center text-center align-middle capitalize gap-2 sm:gap-3 lg:gap-4 px-4 sm:px-0">
@@ -89,7 +89,7 @@ export default function ProductDetail({ params }) {
 
                     {/* Applications Section */}
                     <div className="mb-4 mt-12 sm:mt-20 px-6 sm:px-10">
-                        <button onClick={() => toggleSection('applications')} className="w-full bg-white border border-gray-200 rounded-lg flex items-stretch hover:shadow-md transition-shadow">
+                        <button onClick={() => toggleSection('applications')} className="w-full bg-white border border-gray-200 rounded-lg flex items-stretch transition-shadow">
                             <div className={`w-12 sm:w-16 h-auto flex items-center justify-center rounded-l-lg transition-colors duration-300 ${expandedSections.applications ? 'bg-orange-100' : 'bg-gray-100'}`}> 
                                 <Image src="/applications.png" alt="Applications" width={32} height={32} className="sm:w-6 sm:h-6 w-5 h-5 object-contain" />
                             </div>
@@ -124,7 +124,7 @@ export default function ProductDetail({ params }) {
 
                     {/* Technical Parameters Section */}
                     <div className="mb-4 px-6 sm:px-10">
-                        <button onClick={() => toggleSection('technical')} className="w-full bg-white border border-gray-200 rounded-lg flex items-stretch hover:shadow-md transition-shadow">
+                        <button onClick={() => toggleSection('technical')} className="w-full bg-white border border-gray-200 rounded-lg flex items-stretch transition-shadow">
                             <div className={`w-12 sm:w-16 h-auto flex items-center justify-center rounded-l-lg transition-colors duration-300 ${expandedSections.technical ? 'bg-orange-100' : 'bg-gray-100'}`}> 
                                 <Image src="/technical.png" alt="Technical Parameters" width={32} height={32} className="sm:w-6 sm:h-6 w-5 h-5 object-contain" />
                             </div>
@@ -161,7 +161,7 @@ export default function ProductDetail({ params }) {
 
                     {/* Packaging Dimensions Section */}
                     <div className="mb-8 sm:mb-12 px-6 sm:px-10">
-                        <button onClick={() => toggleSection('packaging')} className="w-full bg-white border border-gray-200 rounded-lg flex items-stretch hover:shadow-md transition-shadow">
+                        <button onClick={() => toggleSection('packaging')} className="w-full bg-white border border-gray-200 rounded-lg flex items-stretch transition-shadow">
                             <div className={`w-12 sm:w-16 h-auto flex items-center justify-center rounded-l-lg transition-colors duration-300 ${expandedSections.packaging ? 'bg-orange-100' : 'bg-gray-100'}`}>
                                 <Package size={20} className="sm:size-6 " />
                             </div>

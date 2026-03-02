@@ -14,7 +14,7 @@ export default function parentCompany() {
     return (
         <div className="bg-[#F5F5F5]">
             {/* header */}
-            <div className="bg-[url('/pcbg.png')] bg-cover bg-bottom bg-no-repeat relative  min-h-[60vh] lg:min-h-[80vh]    font-sans flex flex-col items-center  justify-center gap-6">
+            <div className="bg-[url('/pcbg.png')] bg-cover bg-bottom bg-no-repeat relative  min-h-[60vh] lg:min-h-[80vh]      flex flex-col items-center  justify-center gap-6">
 
                 <SlideIn direction="bottom" duration={0.8} delay={0}>
                     <Badgetextwhite title="Parent Company" />
@@ -46,7 +46,7 @@ export default function parentCompany() {
                 containerClassName="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6"
                 staggerDelay={0.5}
             >
-                <div className="min-h-[40vh] py-10 lg:h-full relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
+                <div className="min-h-[40vh] py-10 lg:h-full relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group transition-transform duration-500 ease-out">
                     <div className="pb-6">
                         <h1 className="font-[Helvetica_Now_Display] font-medium text-[28px] leading-[37px] tracking-[-0.74px] lg:text-[52px] lg:leading-[69.07px] lg:tracking-[-1.38px] text-primary py-4 lg:py-6">Manufacturing</h1>
                         <p className="text-[#5F5F66] font-[Helvetica_Now_Display] font-normal text-sm leading-[24px] tracking-[-0.43px] mt-3 w-full lg:w-4/5 lg:text-[20px] lg:leading-[36px] lg:tracking-[-0.8px]">Our manufacturing segment is powered by advanced production capabilities, high-grade facilities, and an uncompromising commitment to quality. We support industries with reliable, large-scale output across metals, materials, consumer goods, and industrial components.</p>
@@ -54,7 +54,7 @@ export default function parentCompany() {
                     <Image src="/pc1.png" alt="Icon" className='absolute bottom-0 right-0 max-w-[45%] lg:max-w-[60%]' width={300} height={0} />
                 </div>
 
-                <div className="relative py-5 rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
+                <div className="relative py-5 rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group transition-transform duration-500 ease-out">
                     <div className="pb-6">
                         <h1 className="font-[Helvetica_Now_Display] font-medium text-[28px] leading-[37px] tracking-[-0.74px] lg:text-[52px] lg:leading-[69.07px] lg:tracking-[-1.38px] text-primary py-4 lg:py-6">Trading</h1>
                         <p className="relative z-10 text-[#5F5F66] font-[Helvetica_Now_Display] font-normal text-sm leading-[24px] tracking-[-0.43px] mt-3 w-full lg:w-4/5 lg:text-[20px] lg:leading-[36px] lg:tracking-[-0.8px]">With a strong regional footprint, our trading operations connect global suppliers with local markets. We streamline supply-chain processes, enhance product availability, and ensure that businesses can access the materials and products they need, quickly and efficiently.</p>
@@ -62,7 +62,7 @@ export default function parentCompany() {
                     <Image src="/pc2.png" alt="Icon" className='z-0 absolute bottom-0 right-0 max-w-[35%] lg:max-w-[55%]' width={250} height={0} />
                 </div>
 
-                <div className="min-h-[40vh] py-10 relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
+                <div className="min-h-[40vh] py-10 relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group transition-transform duration-500 ease-out">
                     <div className="pb-6">
                         <h1 className="font-[Helvetica_Now_Display] font-medium text-[28px] leading-[37px] tracking-[-0.74px] lg:text-[52px] lg:leading-[69.07px] lg:tracking-[-1.38px] text-primary py-4 lg:py-6">Construction</h1>
                         <p className="text-[#5F5F66] font-[Helvetica_Now_Display] font-normal text-sm leading-[24px] tracking-[-0.43px] mt-3 w-full lg:w-4/5 lg:text-[20px] lg:leading-[36px] lg:tracking-[-0.8px]">Our manufacturing segment is powered by advanced production capabilities, high-grade facilities, and an uncompromising commitment to quality. We support industries with reliable, large-scale output across metals, materials, consumer goods, and industrial components.</p>
@@ -70,7 +70,7 @@ export default function parentCompany() {
                     <Image src="/pc3.png" alt="Icon" className='z-0 absolute bottom-0 right-0 max-w-[35%] lg:max-w-[55%]' width={250} height={0} />
                 </div>
 
-                <div className="min-h-[40vh] py-10 relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group hover:scale-[1.03] transition-transform duration-500 ease-out">
+                <div className="min-h-[40vh] py-10 relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group transition-transform duration-500 ease-out">
                     <div className="pb-6">
                         <h1 className="font-[Helvetica_Now_Display] font-medium text-[28px] leading-[37px] tracking-[-0.74px] lg:text-[52px] lg:leading-[69.07px] lg:tracking-[-1.38px] text-primary py-4 lg:py-6">Services</h1>
                         <p className="relative z-10 text-[#5F5F66] font-[Helvetica_Now_Display] font-normal text-sm leading-[24px] tracking-[-0.43px] mt-3 w-full lg:w-4/5 lg:text-[20px] lg:leading-[36px] lg:tracking-[-0.8px]">From logistics and facility management to specialized industrial services, we deliver essential support functions that strengthen our group's operational backbone. Our service companies allow other subsidiaries to focus on their core business while benefiting from dependable, optimized support systems.</p>
