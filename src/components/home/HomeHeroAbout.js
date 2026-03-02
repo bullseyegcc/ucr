@@ -48,6 +48,7 @@ export default function HomeHeroAbout() {
       {/* Panel 2: About — receives the progress ref so it can register its colour driver */}
       <div className="w-full h-auto">
         <About lockProgressRef={lockProgressRef} />
+        
          <AboutStats />
       </div>
      

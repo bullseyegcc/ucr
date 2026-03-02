@@ -109,7 +109,7 @@ export default function sustainability() {
                         <Badge title="Core Strength" />
                     </SlideIn>
                     <FadeIn className="text-2xl lg:text-4xl font-semibold text-black mt-4" scrollTrigger={true}>
-                        <h1 className="font-sans font-medium text-[#272A2A] text-[32px] leading-[36px] tracking-[-1.4px] align-middle lg:text-[64px] lg:leading-[72px] lg:tracking-[-1.4px]">Why choose us</h1>
+                        <h1 className="   font-medium text-[#272A2A] text-[32px] leading-[36px] tracking-[-1.4px] align-middle lg:text-[64px] lg:leading-[72px] lg:tracking-[-1.4px]">Why choose us</h1>
                     </FadeIn>
                 </div>
 
@@ -123,26 +123,26 @@ export default function sustainability() {
                     </CardAnimation>
                     <CardAnimation index={4} className="bg-white rounded-xl p-6 py-12 lg:p-8 flex flex-col gap-4 shadow-lg group transition-all duration-400">
                         <Image src="/ecofeature1.png" alt="Icon" width={80} height={0} className="mb-4 lg:mb-6" />
-                        <h1 className="font-sans font-medium text-black text-[25.52px] leading-[42.12px] tracking-[-1.91px] align-middle lg:text-[32px] lg:leading-[52.8px] lg:tracking-[-2.4px]">Sustainable Materials</h1>
-                        <p className="font-sans font-normal text-[15.31px] leading-[23.45px] tracking-[-0.84px] align-middle lg:text-[19.2px] lg:leading-[29.4px] lg:tracking-[-1.05px]">We prioritize recyclable, low-impact materials</p>
+                        <h1 className="   font-medium text-black text-[25.52px] leading-[42.12px] tracking-[-1.91px] align-middle lg:text-[32px] lg:leading-[52.8px] lg:tracking-[-2.4px]">Sustainable Materials</h1>
+                        <p className="   font-normal text-[15.31px] leading-[23.45px] tracking-[-0.84px] align-middle lg:text-[19.2px] lg:leading-[29.4px] lg:tracking-[-1.05px]">We prioritize recyclable, low-impact materials</p>
                     </CardAnimation>
 
                     <CardAnimation index={5} className="bg-white rounded-xl p-6 py-12 lg:p-8 flex flex-col gap-4 shadow-lg group transition-all duration-400">
                         <Image src="/ecofeature2.png" alt="Icon" width={80} height={40} className="mb-4 lg:mb-6" />
-                        <h1 className="font-sans font-medium text-black text-[25.52px] leading-[42.12px] tracking-[-1.91px] align-middle lg:text-[32px] lg:leading-[52.8px] lg:tracking-[-2.4px]">Energy-Efficient Processes</h1>
-                        <p className="font-sans font-normal text-[15.31px] leading-[23.45px] tracking-[-0.84px] align-middle lg:text-[19.2px] lg:leading-[29.4px] lg:tracking-[-1.05px]">manufacturing powered by energy-saving technologies</p>
+                        <h1 className="   font-medium text-black text-[25.52px] leading-[42.12px] tracking-[-1.91px] align-middle lg:text-[32px] lg:leading-[52.8px] lg:tracking-[-2.4px]">Energy-Efficient Processes</h1>
+                        <p className="   font-normal text-[15.31px] leading-[23.45px] tracking-[-0.84px] align-middle lg:text-[19.2px] lg:leading-[29.4px] lg:tracking-[-1.05px]">manufacturing powered by energy-saving technologies</p>
                     </CardAnimation>
 
                     <CardAnimation index={6} className="bg-white rounded-xl p-6 py-12 lg:p-8 flex flex-col gap-4 shadow-lg group transition-all duration-400">
                         <Image src="/ecofeature3.png" alt="Icon" width={80} height={40} className="mb-4 lg:mb-6" />
-                        <h1 className="font-sans font-medium text-black text-[25.52px] leading-[42.12px] tracking-[-1.91px] align-middle lg:text-[32px] lg:leading-[52.8px] lg:tracking-[-2.4px]">Reduced Carbon Emissions</h1>
-                        <p className="font-sans font-normal text-[15.31px] leading-[23.45px] tracking-[-0.84px] align-middle lg:text-[19.2px] lg:leading-[29.4px] lg:tracking-[-1.05px]">Commitment to lowering CO₂ emissions</p>
+                        <h1 className="   font-medium text-black text-[25.52px] leading-[42.12px] tracking-[-1.91px] align-middle lg:text-[32px] lg:leading-[52.8px] lg:tracking-[-2.4px]">Reduced Carbon Emissions</h1>
+                        <p className="   font-normal text-[15.31px] leading-[23.45px] tracking-[-0.84px] align-middle lg:text-[19.2px] lg:leading-[29.4px] lg:tracking-[-1.05px]">Commitment to lowering CO₂ emissions</p>
                     </CardAnimation>
 
                     <CardAnimation index={7} className="bg-white rounded-xl p-6 py-12 lg:p-8 flex flex-col gap-4 shadow-lg group transition-all duration-400">
                         <Image src="/ecofeature4.png" alt="Icon" width={80} height={40} className="mb-4 lg:mb-6" />
-                        <h1 className="font-sans font-medium text-black text-[25.52px] leading-[42.12px] tracking-[-1.91px] align-middle lg:text-[32px] lg:leading-[52.8px] lg:tracking-[-2.4px]">Future-Focused Innovation</h1>
-                        <p className="font-sans font-normal text-[15.31px] leading-[23.45px] tracking-[-0.84px] align-middle lg:text-[19.2px] lg:leading-[29.4px] lg:tracking-[-1.05px]">Continuous investment in green technologies</p>
+                        <h1 className="   font-medium text-black text-[25.52px] leading-[42.12px] tracking-[-1.91px] align-middle lg:text-[32px] lg:leading-[52.8px] lg:tracking-[-2.4px]">Future-Focused Innovation</h1>
+                        <p className="   font-normal text-[15.31px] leading-[23.45px] tracking-[-0.84px] align-middle lg:text-[19.2px] lg:leading-[29.4px] lg:tracking-[-1.05px]">Continuous investment in green technologies</p>
                     </CardAnimation>
                 </div>
 

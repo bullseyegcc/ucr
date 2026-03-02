@@ -27,31 +27,34 @@ export default async function BlogDetail({ params }) {
                         <div className="w-full lg:w-[50%]">
                             <p className="text-xs font-semibold text-[#FA6E43] uppercase tracking-widest mb-3">Blog Details</p>
                             <div className=" rounded-lg  mb-4 inline-block">
-                                <h1 className="font-sans font-medium text-[42px] lg:text-[64px] leading-[48px] lg:leading-[72px] tracking-[-1.68px] lg:tracking-[-2.56px] align-middle capitalize">
+                                <h1 className="   font-medium text-[32px] lg:text-[72px] leading-[48px] lg:leading-[80px] tracking-[-1.4px] lg:tracking-[-2.88px] align-middle capitalize">
                                     {post.title}
                                 </h1>
                             </div>
-                            <p className="text-xs text-gray-500 mb-1 mt-8">Date: {post.date}</p>
-                            <p className="text-xs text-gray-500">Category: {post.category}</p>
+
                         </div>
 
                         {/* Right: Excerpt Box */}
                         <div className="lg:w-[35%] self-end rounded-3xl lg:p-6 bg-white">
-                            <p className="text-sm text-gray-700 leading-relaxed">
+                            <p className="   font-medium text-[20px] leading-[28px] tracking-[-0.2px] text-gray-700 align-middle">
                                 {post.excerpt || "Explore the latest insights and stories from our team."}
                             </p>
                         </div>
                     </div>
 
+                    <div className="self-start flex flex-col items-start gap-2 ">
+                        <p className="   font-medium text-[16px] leading-[24px] tracking-[0%] text-gray-500 mb-1 mt-8 align-middle">Date: {post.date}</p>
+                    </div>
+
                     {/* Hero Image - Full Width Compact */}
                     {post.image && (
-                        <div className="h-[80vh] mb-8 w-full">
-                            <Image 
-                                src={post.image} 
-                                alt={post.title} 
-                                width={1400} 
-                                height={600} 
-                                className="w-full h-full object-cover" 
+                        <div className="h-[90vh] mb-8 w-full">
+                            <Image
+                                src={post.image}
+                                alt={post.title}
+                                width={1400}
+                                height={600}
+                                className="w-full h-full object-cover"
                             />
                         </div>
                     )}
@@ -59,9 +62,16 @@ export default async function BlogDetail({ params }) {
                     {/* Article Content */}
                     <article className="space-y-6 text-gray-700 max-w-3xl">
                         {post.content.map((block, i) => {
+                            if (block.type === "heading") {
+                                return (
+                                    <h2 key={i} className="   font-medium text-[20px] lg:text-[32px] leading-[32px] lg:leading-[40px] tracking-[-0.64px] text-gray-900 align-middle">
+                                        {block.text}
+                                    </h2>
+                                );
+                            }
                             if (block.type === "paragraph") {
                                 return (
-                                    <p key={i} className="text-sm lg:text-base leading-relaxed">
+                                    <p key={i} className="   font-normal text-[16px] lg:text-[16px] leading-[24px] lg:leading-[24px] tracking-[-0.16px] text-gray-700 align-middle">
                                         {block.text}
                                     </p>
                                 );
@@ -69,12 +79,12 @@ export default async function BlogDetail({ params }) {
                             if (block.type === "image") {
                                 return (
                                     <div key={i} className="rounded-lg overflow-hidden shadow-md my-6">
-                                        <Image 
-                                            src={block.src} 
-                                            alt={block.alt || post.title} 
-                                            width={1200} 
-                                            height={600} 
-                                            className="w-full h-auto object-cover" 
+                                        <Image
+                                            src={block.src}
+                                            alt={block.alt || post.title}
+                                            width={1200}
+                                            height={600}
+                                            className="w-full h-auto object-cover"
                                         />
                                     </div>
                                 );

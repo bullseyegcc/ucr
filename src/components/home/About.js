@@ -54,7 +54,7 @@ export default function About({ lockProgressRef = null }) {
           </button></CardAnimation>
          
         </div>
-        <div className="w-80 lg:w-[45%] lg:static  absolute top-[70%] left-[20%] flex items-end justify-end pointer-events-none z-0">
+        <div className="w-80 lg:w-[45%] lg:static  absolute top-[70%] left-[20%] flex items-end justify-end pointer-events-none z-90 lg:z-0">
           <Image
             src="/aboutside.png"
             alt="Factory Image"

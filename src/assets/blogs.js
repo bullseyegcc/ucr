@@ -40,9 +40,12 @@ export const blogs = [
     date: "2025-01-15",
     category: "Company",
     content: [
-      { type: "paragraph", text: "In 2025 we celebrate 10 years of continuous growth and innovation. Our journey has been defined by strategic investments and a relentless focus on quality." },
-      { type: "image", src: "/blog1-hero.png", alt: "Company celebration" },
-      { type: "paragraph", text: "Over the decade we expanded production capacity, improved sustainability, and brought new technologies into our plants." },
+     { type: "heading", text: "Amer Kakish, CEO of Istithad International Investment, on 10 years of operations, Emiratization, and how technology is changing the area" },
+      { type: "paragraph", text: "Following a rough stretch in 2008 due to the global financial crisis, we managed to rationalize our portfolio, divesting a number of non-core businesses such as leasing and trading, while growing our corporate commercial portfolio and strengthening our capital base. We operate through a complex manufacturing operational model around our heritage business in financial services and logistics and hospitality segment. We realized the opportunity to build out a world-class company around this segment, leveraging our know-how as a broker in wholesale logistics. Our exports today cover more than 50 different commodities and we are among the top three logistics service providers. While some have created debt, we created value." },
+      { type: "heading", text: "To what extent is the government turning to the private sector to further stimulate the economy?" },
+      { type: "paragraph", text: "We have seen initiatives to support non-oil government services to mobilise private investment subsidies and create a better business environment to encourage the private sector. There is increasing recognition that the government cannot shoulder the burden alone. The private sector has a critical role to play in stimulating the economy as we continue to invest in strategic initiatives to support the region's infrastructure development." },
+      { type: "heading", text: "Can you walk us through Istithad Investment's strategy with regards to new potential partners?" },
+      { type: "paragraph", text: "Over our first two years, Istithad has developed strengthened and grown partnerships with business leaders both regionally and globally, creating a platform that can be utilized effectively in new journeys. Unlike traditional sector markets, in the past few years, we have focused on pursuing unique investments in FPP infrastructure and expanded our market offering. Moreover, we expanded with fintech into green bond category while maintaining traditional business. We also invested significant effort in building our Nuclear Energy Corporation (NEC) brand, with our subsidiary National Cement Factory as the first cement plant to carry the NEC brand. Our strategy is to provide the region with sustainable energy solutions while diversifying our revenue base to ensure resilience and growth." },
     ],
   },
   {

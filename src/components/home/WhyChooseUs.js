@@ -21,7 +21,7 @@ export default function WhyChooseUs() {
           <Badge title="Core Strength" />
         </SlideIn>
         <FadeIn className=" mt-6" scrollTrigger={true} duration={0.8}>
-          <h1 className="font-sans font-medium text-[#272A2A] text-[32px] leading-[36px] tracking-[-1.4px] align-middle lg:text-[64px] lg:leading-[72px] lg:tracking-[-1.4px]">Why choose us</h1>
+          <h1 className="   font-medium text-[#272A2A] text-[32px] leading-[36px] tracking-[-1.4px] align-middle lg:text-[64px] lg:leading-[72px] lg:tracking-[-1.4px]">Why choose us</h1>
         </FadeIn>
       </div>
 
@@ -65,14 +65,14 @@ export default function WhyChooseUs() {
               <div>
                 <h1
                   data-ct
-                  className="font-sans font-medium text-black text-[24px] leading-[42.63px] tracking-[-1.94px] align-middle lg:text-[32px] lg:leading-[52.8px] lg:tracking-[-1.4px]"
+                  className="   font-medium text-black text-[24px] leading-[42.63px] tracking-[-1.94px] align-middle lg:text-[32px] lg:leading-[52.8px] lg:tracking-[-1.4px]"
                   style={{ willChange: 'transform, opacity' }}
                 >
                   {card.title}
                 </h1>
                 <p
                   data-cd
-                  className="font-sans font-normal text-[15.5px] leading-[23.74px] tracking-[-0.85px] align-middle lg:text-[19.2px] lg:leading-[29.4px] lg:tracking-[-1.05px]"
+                  className="   font-normal text-[15.5px] leading-[23.74px] tracking-[-0.85px] align-middle lg:text-[19.2px] lg:leading-[29.4px] lg:tracking-[-1.05px]"
                   style={{ willChange: 'transform, opacity' }}
                 >
                   Factory in a world-class industrial hub
