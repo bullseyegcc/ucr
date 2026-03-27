@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 // ...existing imports...
 import Image from "next/image";
@@ -7,10 +7,10 @@ import { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 
 export default function TeamMemoriesSection() {
-  const galleryItems = [  
-    { image: "/t1.png", year: "2023", caption: "Team collaboration" },
-    { image: "/t2.png", year: "2024", caption: "New year celebration" },
-    { image: "/t3.png", year: "2022", caption: "Annual Picnic" },
+  const galleryItems = [
+    { image: "/t2-22.png", year: "2023", caption: "Team collaboration" },
+    { image: "/t1-11.png", year: "2024", caption: "New year celebration" },
+    { image: "/t3-33.png", year: "2022", caption: "Annual Picnic" },
     { image: "/t4.jpg", year: "2021", caption: "Team moments" },
     { image: "/t5.jpg", year: "2020", caption: "Team building" },
   ];
@@ -88,13 +88,16 @@ export default function TeamMemoriesSection() {
             className="text-3xl sm:text-4xl lg:text-5xl font-medium text-gray-900 leading-tight flex gap-2"
           >
             <span className="  font-medium text-gray-900">Team</span>
-            <span className="font-serif italic text-[#222] font-normal tracking-tight">Memories</span>
+            <span className="font-serif italic text-[#222] font-normal tracking-tight">
+              Memories
+            </span>
           </h2>
         </div>
         {/* Gallery Grid */}
         <div className="w-full flex justify-center items-center select-none overflow-hidden">
           {(() => {
-            const [farLeftIdx, leftIdx, centerIdx, rightIdx, farRightIdx] = getIndices();
+            const [farLeftIdx, leftIdx, centerIdx, rightIdx, farRightIdx] =
+              getIndices();
             return (
               <div className="w-full flex justify-center items-center gap-[2vw]">
                 {/* Far left blurred card - only 20% visible */}
@@ -123,7 +126,9 @@ export default function TeamMemoriesSection() {
                 {[leftIdx, centerIdx, rightIdx].map((idx, i) => (
                   <div
                     key={`${idx}-${i}`}
-                    className={`flex flex-col items-center bg-white rounded-lg shadow-lg border ${i === 1 ? 'border-orange-400' : 'border-orange-200'} transition-all duration-500 ease-out`}
+                    className={`flex flex-col items-center bg-white rounded-lg shadow-lg border ${
+                      i === 1 ? "border-orange-400" : "border-orange-200"
+                    } transition-all duration-500 ease-out`}
                     style={{
                       flex: isMobile ? "0 0 auto" : "1 1 0",
                       maxWidth: isMobile ? (i === 1 ? "72vw" : "60vw") : "28vw",
@@ -131,11 +136,26 @@ export default function TeamMemoriesSection() {
                       height: "auto",
                       overflow: "visible",
                     }}
-                    onMouseEnter={e => gsap.to(e.currentTarget, { scale: 1.04, duration: 0.7, ease: "power2.out" })}
-                    onMouseLeave={e => gsap.to(e.currentTarget, { scale: 1, duration: 0.7, ease: "power2.out" })}
+                    onMouseEnter={(e) =>
+                      gsap.to(e.currentTarget, {
+                        scale: 1.04,
+                        duration: 0.7,
+                        ease: "power2.out",
+                      })
+                    }
+                    onMouseLeave={(e) =>
+                      gsap.to(e.currentTarget, {
+                        scale: 1,
+                        duration: 0.7,
+                        ease: "power2.out",
+                      })
+                    }
                     onClick={() => i !== 1 && setActiveIdx(idx)}
                   >
-                    <div className="w-full relative overflow-hidden rounded-t-lg transition-all duration-500" style={{ aspectRatio: '1/1.2', height: 'auto' }}>
+                    <div
+                      className="w-full relative overflow-hidden rounded-t-lg transition-all duration-500"
+                      style={{ aspectRatio: "1/1.2", height: "auto" }}
+                    >
                       <Image
                         src={galleryItems[idx].image}
                         alt={galleryItems[idx].caption}
@@ -150,35 +170,36 @@ export default function TeamMemoriesSection() {
                         ref={centerTextRef}
                         className="w-full flex flex-col items-center justify-center text-center bg-white"
                         style={{
-                          padding: isMobile ? "5vw 4vw 6vw 4vw" : "1.5vw 1vw 2vw 1vw",
-                          borderRadius: '0 0 1vw 1vw',
-                          border: '1px solid #ff6a00',
-                          borderTop: 'none',
-                          background: '#fff',
-                          position: 'relative',
+                          padding: isMobile
+                            ? "5vw 4vw 6vw 4vw"
+                            : "1.5vw 1vw 2vw 1vw",
+                          borderRadius: "0 0 1vw 1vw",
+                          borderTop: "none",
+                          background: "#fff",
+                          position: "relative",
                           zIndex: 10,
                         }}
                       >
                         <div
                           style={{
-                            color: '#ff6a00',
+                            color: "#ff6a00",
                             fontSize: isMobile ? "3vw" : "0.9vw",
                             fontWeight: 600,
-                            letterSpacing: '0.1em',
-                            marginBottom: '0.5vw',
+                            letterSpacing: "0.1em",
+                            marginBottom: "0.5vw",
                           }}
                         >
                           {galleryItems[idx].year}
                         </div>
                         <div
                           style={{
-                            color: '#222',
+                            color: "#222",
                             fontSize: isMobile ? "5vw" : "1.8vw",
                             fontWeight: 500,
-                            fontFamily: 'sans-serif',
-                            letterSpacing: '-0.01em',
-                            textAlign: 'center',
-                            lineHeight: '1.2',
+                            fontFamily: "sans-serif",
+                            letterSpacing: "-0.01em",
+                            textAlign: "center",
+                            lineHeight: "1.2",
                           }}
                         >
                           {galleryItems[idx].caption}
