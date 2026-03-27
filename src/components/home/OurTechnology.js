@@ -1,34 +1,37 @@
-'use client';
+"use client";
 
-import { useState, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight } from "lucide-react";
 import { Badge } from "../../common/badge.js";
 import { WhiteBadge } from "../../common/badge.js";
 import { VideoPlayer } from "../../common/video";
-import { technologyParallaxSlide } from '../../animations/technologyParallax';
-import ParallaxSection from '../../animations/ParallaxSection';
+import { technologyParallaxSlide } from "../../animations/technologyParallax";
+import ParallaxSection from "../../animations/ParallaxSection";
 
 // Technology data structure
 const TECHNOLOGIES = [
   {
     id: 0,
-    title: 'Southwire Technology',
-    description: 'UCR always maintains that the foremost benefit of any latest technology, if applied to an efficient operation, will automatically magnify the efficiency. This in turn will empower people and will bring out the best in quality as well as productivity.',
-    backgroundImage: "url('/technology.png')",
+    title: "Southwire Technology",
+    description:
+      "UCR always maintains that the foremost benefit of any latest technology, if applied to an efficient operation, will automatically magnify the efficiency. This in turn will empower people and will bring out the best in quality as well as productivity.",
+    backgroundImage: "url('/technology3-3.png')",
   },
   {
     id: 1,
-    title: 'Cooper treatments',
-    description: 'Advanced copper treatment processes designed to enhance durability and performance. Our innovative approach ensures superior quality in every product we manufacture.',
-    backgroundImage: "url('/technology2.png')",
+    title: "Cooper treatments",
+    description:
+      "Advanced copper treatment processes designed to enhance durability and performance. Our innovative approach ensures superior quality in every product we manufacture.",
+    backgroundImage: "url('/technology1-1.png')",
   },
   {
     id: 2,
-    title: 'NexGen Solutions',
-    description: 'Next-generation solutions for modern manufacturing challenges. We combine cutting-edge technology with proven expertise to deliver exceptional results.',
-    backgroundImage: "url('/technology3.png')",
+    title: "NexGen Solutions",
+    description:
+      "Next-generation solutions for modern manufacturing challenges. We combine cutting-edge technology with proven expertise to deliver exceptional results.",
+    backgroundImage: "url('/technology2-2.png')",
   },
 ];
 
@@ -51,9 +54,11 @@ export default function OurTechnology() {
         <div className="min-h-[60vh] pt-20  lg:min-h-screen sm:w-1/2 bg-primary rounded-xl px-3 lg:px-8 py-10 flex flex-col gap-12 ">
           <div className="mt-8">
             <div className="animate-reveal">
-              <WhiteBadge title="Core Strength" className='z-190' />
+              <WhiteBadge title="Core Strength" className="z-190" />
             </div>
-            <h1 className="font-primary font-medium text-[32px] leading-[36.09px] tracking-[-0.79px] lg:text-[64px] lg:leading-[64px] lg:tracking-[-1.4px] text-white mt-4 animate-reveal">Our technology</h1>
+            <h1 className="font-primary font-medium text-[32px] leading-[36.09px] tracking-[-0.79px] lg:text-[64px] lg:leading-[64px] lg:tracking-[-1.4px] text-white mt-4 animate-reveal">
+              Our technology
+            </h1>
           </div>
 
           <div>
@@ -65,36 +70,54 @@ export default function OurTechnology() {
                   onClick={() => handleTabChange(index)}
                   className={`cursor-pointer rounded-xl overflow-hidden transition-all duration-700 ease-linear relative ${
                     activeTab === index
-                      ? 'bg-white shadow-lg px-5 py-8'
-                      : 'px-5 py-3 hover:opacity-90'
+                      ? "bg-white shadow-lg px-5 py-8"
+                      : "px-5 py-3 hover:opacity-90"
                   }`}
                 >
                   {/* Title row — always visible */}
-                  <h1 className={`font-primary font-normal flex items-center gap-4 transition-all duration-700 ease-linear ${
-                    activeTab === index
-                      ? 'text-primary text-[28px] leading-[36.09px] tracking-[-1.41px] lg:text-[48px] lg:leading-[64px] lg:tracking-[-2.5px]'
-                      : 'text-white text-[24px] leading-[55.82px] tracking-[-1.41px] lg:text-[40px] lg:leading-[99px] lg:tracking-[-2.5px] hover:text-white/80'
-                  }`}>
-                    <span className={`transition-all duration-700 ease-linear overflow-hidden ${
-                      activeTab === index ? 'max-w-0 opacity-0' : 'max-w-[36px] opacity-100'
-                    }`}>
-                      <ArrowRight size={30} className="text-white flex-shrink-0" />
+                  <h1
+                    className={`font-primary font-normal flex items-center gap-4 transition-all duration-700 ease-linear ${
+                      activeTab === index
+                        ? "text-primary text-[28px] leading-[36.09px] tracking-[-1.41px] lg:text-[48px] lg:leading-[64px] lg:tracking-[-2.5px]"
+                        : "text-white text-[24px] leading-[55.82px] tracking-[-1.41px] lg:text-[40px] lg:leading-[99px] lg:tracking-[-2.5px] hover:text-white/80"
+                    }`}
+                  >
+                    <span
+                      className={`transition-all duration-700 ease-linear overflow-hidden ${
+                        activeTab === index
+                          ? "max-w-0 opacity-0"
+                          : "max-w-[36px] opacity-100"
+                      }`}
+                    >
+                      <ArrowRight
+                        size={30}
+                        className="text-white flex-shrink-0"
+                      />
                     </span>
                     {tech.title}
                   </h1>
 
                   {/* Expandable content */}
-                  <div className={`overflow-hidden transition-all duration-700 ease-linear ${
-                    activeTab === index ? 'max-h-[420px] opacity-100 mt-4 translate-y-0' : 'max-h-0 opacity-0 -translate-y-1'
-                  }`}>
+                  <div
+                    className={`overflow-hidden transition-all duration-700 ease-linear ${
+                      activeTab === index
+                        ? "max-h-[420px] opacity-100 mt-4 translate-y-0"
+                        : "max-h-0 opacity-0 -translate-y-1"
+                    }`}
+                  >
                     <p className="font-primary font-normal text-[12px] leading-[20px] tracking-[-0.41px] text-black lg:text-[20px] lg:leading-[32px] lg:tracking-[-0.72px]">
                       {tech.description}
                     </p>
                     <button
-                      onClick={(e) => { e.stopPropagation(); router.push('/technology'); }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        router.push("/technology");
+                      }}
                       className="mt-4 w-full h-[40px] lg:w-[193px] lg:h-[62px] flex items-center justify-center gap-2 text-primary border border-primary rounded-[30.95px] lg:rounded-[50px] py-[8px] lg:py-[12px] px-[20px] lg:pl-[28px] lg:pr-[18px] hover:bg-primary hover:text-white transition-all duration-300"
                     >
-                      <span className="font-primary font-normal text-[14px] leading-[18.2px] tracking-[-0.54px] lg:text-[20px] lg:leading-[29.4px] lg:tracking-[-0.88px]">Know More</span>
+                      <span className="font-primary font-normal text-[14px] leading-[18.2px] tracking-[-0.54px] lg:text-[20px] lg:leading-[29.4px] lg:tracking-[-0.88px]">
+                        Know More
+                      </span>
                       <ArrowRight size={18} />
                     </button>
                   </div>
@@ -116,9 +139,9 @@ export default function OurTechnology() {
                 className="w-full h-full flex-shrink-0 rounded-xl"
                 style={{
                   backgroundImage: tech.backgroundImage,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
                 }}
               />
             ))}
