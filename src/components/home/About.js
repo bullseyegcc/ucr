@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Image from "next/image";
+import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Badge } from "../../common/badge.js";
 import AboutStats from './AboutStats.js';
@@ -49,9 +50,9 @@ export default function About({ lockProgressRef = null }) {
             </h1>
           </TextReveal>
 
-          <CardAnimation> <button className="bg-primary text-[14px] lg:text-xl w-[143px] lg:w-[199px] h-[41.4px] lg:h-[62px] px-[18px] lg:px-[26px] py-2 lg:py-3 text-white flex justify-between items-center gap-3 rounded-[33.42px] lg:rounded-[50px] [border:0.67px_solid_white] lg:[border:1px_solid_white]">
+          <CardAnimation><Link href="/aboutus"><button className="bg-primary text-[14px] lg:text-xl w-[143px] lg:w-[199px] h-[41.4px] lg:h-[62px] px-[18px] lg:px-[26px] py-2 lg:py-3 text-white flex justify-between items-center gap-3 rounded-[33.42px] lg:rounded-[50px] [border:0.67px_solid_white] lg:[border:1px_solid_white]">
             <span className="font-primary font-normal  leading-[19.65px] tracking-[-0.59px] text-center align-middle">Know more</span> <ArrowRight size={22} color="white" />
-          </button></CardAnimation>
+          </button></Link></CardAnimation>
          
         </div>
         <div className="w-80 lg:w-[45%] lg:static  absolute top-[70%] left-[20%] flex items-end justify-end pointer-events-none z-90 lg:z-0">

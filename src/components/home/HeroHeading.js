@@ -49,7 +49,7 @@ export default function HeroHeading({ children, className = '', delay = 0 }) {
       <div
         ref={wrapperRef}
         className="flex flex-wrap justify-center lg:pt-60 gap-x-[0.35em] gap-y-2 font-primary
-                   font-medium text-[32px] leading-[52px] tracking-[-1.18px] lg:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white
+                   font-[550] text-[32px] leading-[52px] tracking-[-1.18px] lg:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white
                    select-none"
         style={{ willChange: 'transform, opacity, filter, letter-spacing', opacity: 0 }}
       >

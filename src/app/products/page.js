@@ -4,9 +4,8 @@ import { Badgetextblack, Badgetextwhite, Badge } from "../../common/badge"
 import { VideoPlayer } from "../../common/video"
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { products } from "../../assets/products"
-import { Menu, ArrowRight, ArrowDown } from 'lucide-react';
+import { ArrowRight, ArrowDown } from 'lucide-react';
 import UcrLaboratoryToolsSection from "../../components/technology/UcrLaboratoryToolsSection"
 import ParallaxSection from "../../animations/ParallaxSection"
 import FadeIn from "../../animations/FadeIn"
@@ -14,7 +13,6 @@ import SlideIn from "../../animations/SlideIn"
 import TextReveal from "../../animations/TextReveal"
 
 export default function blogs() {
-    const router = useRouter();
     return (
         <div>
             <div className="relative min-h-[80vh] lg:min-h-[80vh] font-medium flex items-center justify-center   dark:bg-black overflow-hidden">
@@ -67,53 +65,60 @@ export default function blogs() {
                         <h1 className=" text-3xl lg:text-5xl mt-4 font-medium text-center">Our Core Products</h1>
                     </div>
 
-                    <div className="w-full px-2 lg:px-10 ">
-                        {/* Featured Product */}
-                        <Link href={`/products/${products[0].slug}`}>
-                            <div className=" bg-[#FF6A00] rounded-lg p-8 mb-12 flex flex-col lg:flex-row items-center justify-between gap-9 lg:gap-6 transition-shadow cursor-pointer">
-                                <div className="flex-1 flex flex-col gap-5 lg:w-[50%]">
-                                    <p className="text-3xl font-medium text-white    mb-2">{products[0].sku}</p>
-                                    <h3 className="text-5xl font-semibold text-white mb-3">{products[0].name}</h3>
-                                    <p className="text-white/90 text-xl leading-relaxed ">{products[0].description}</p>
-                                       <button
-                                    onClick={() => router.push(`/products/${products[0].slug}`)}
-                                    className="w-60 flex gap-2 items-center duration-300 bg-white hover:bg-gray-100 text-primary px-6 py-4 rounded-full font-semibold transition-all duration-300 ease-in-out mt-6"
-                                >
-                                    Details About Product
-                                    <ArrowRight size={18} color='#FF6A00' />
-                                </button>
-                               </div>
-                                <div className="w-full lg:w-[22%] lg:ml-8 bg-white rounded-lg ">
-                                    <Image src="/drawnwire.png" alt="Icon" width={300} height={300} className="w-full h-full object-cover" />
-                                </div>
-                              
-                            </div>
-                        </Link>
+                    <div className="w-full  px-2 lg:px-10">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-3">
+                            {products.map((product) => {
+                                return (
+                                    <Link key={product.id} href={`/products/${product.slug}`} className="group block">
+                                        <article className="rounded-lg border border-[#EBEBEB] bg-[#FCFCFC] p-3 lg:p-[12px] min-h-[300px] transition-all duration-300 cursor-pointer hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(0,0,0,0.14)] hover:bg-[#FF6A00] hover:border-[#FF6A00]">
+                                            <div className="h-full flex flex-col lg:flex-row items-stretch gap-5 lg:gap-4">
+                                                <div className="flex-1 lg:w-[52%] px-3 pt-3 pb-4 lg:px-4 lg:pt-4 lg:pb-4 flex flex-col">
+                                                    <p
+                                                        className="font-normal text-[12px] leading-[16px] tracking-[0px] text-[#8B8B8B] transition-colors duration-300 group-hover:text-white/95"
+                                                        style={{ fontFamily: 'Helvetica Now Display, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial' }}
+                                                    >
+                                                        {product.sku}
+                                                    </p>
 
-                        {/* Products Grid */}
-                            <div className="w-full">
-                            {products.slice(1).map((product, idx) => (
-                                <Link key={product.id} href={`/products/${product.slug}`}>
-                                    <div className="bg-[#FF6A00] rounded-lg p-8 mb-12 flex flex-col lg:flex-row items-center justify-between gap-9 lg:gap-6 transition-shadow cursor-pointer">
-                                        <div className="flex-1 flex flex-col gap-5 lg:w-[50%]">
-                                            <p className="text-3xl font-medium text-white mb-2">{product.sku}</p>
-                                            <h3 className="text-5xl font-semibold text-white mb-3">{product.name}</h3>
-                                            <p className="text-white/90 text-xl leading-relaxed">{product.description}</p>
-                                            <button
-                                                className="w-60 flex gap-2 items-center duration-300 bg-white hover:bg-gray-100 text-primary px-6 py-4 rounded-full font-semibold transition-all duration-300 ease-in-out mt-6"
-                                            >
-                                                Details About Product
-                                                <ArrowRight size={18} color='#FF6A00' />
-                                            </button>
-                                        </div>
-                                        <div className="w-full lg:w-[22%] lg:ml-8 bg-white rounded-lg">
-                                            <FadeIn scrollTrigger={true} duration={2}>
-                                                <Image src={product.icon || "/drawnwire.png"} alt={product.name} width={300} height={300} className="w-full h-full object-cover" />
-                                            </FadeIn>
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
+                                                    <h3
+                                                        className="mt-4 font-medium text-[32px] leading-[40px] tracking-[-1.4px] lg:text-[38px] lg:leading-[48px] text-[#4B4B4B] transition-colors duration-300 group-hover:text-white"
+                                                        style={{ fontFamily: 'Helvetica Now Display, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial' }}
+                                                    >
+                                                        {product.name}
+                                                    </h3>
+
+                                                    <p
+                                                        className="mt-4 font-normal text-[16px] leading-[30px] tracking-[-0.25px] text-[#6F6F6F] transition-colors duration-300 group-hover:text-white/90"
+                                                        style={{ fontFamily: 'Helvetica Now Display, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial' }}
+                                                    >
+                                                        {product.description}
+                                                    </p>
+
+                                                    <span
+                                                        className="mt-6 inline-flex h-[70px] w-[278px] max-w-full items-center justify-center gap-2 rounded-[50px] border border-white bg-white text-[#2D2F33] opacity-0 translate-y-2 pointer-events-none transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-hover:bg-[#FFF6F0]"
+                                                        style={{ fontFamily: 'Helvetica Now Display, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial' }}
+                                                    >
+                                                        <span className="text-center font-normal text-[20px] leading-[29.4px] tracking-[-0.88px]">Details about product</span>
+                                                        <ArrowRight size={18} color="#FF6A00" />
+                                                    </span>
+                                                </div>
+
+                                                <div className="w-full lg:w-[48%] rounded-md overflow-hidden bg-white">
+                                                    <FadeIn scrollTrigger={true} duration={1.2}>
+                                                        <Image
+                                                            src={product.icon || "/drawnwire.png"}
+                                                            alt={product.name}
+                                                            width={560}
+                                                            height={360}
+                                                            className="w-full h-full object-cover min-h-[190px] lg:min-h-[290px]"
+                                                        />
+                                                    </FadeIn>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </Link>
+                                );
+                            })}
                         </div>
                     </div>
 

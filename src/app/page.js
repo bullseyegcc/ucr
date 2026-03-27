@@ -30,8 +30,9 @@ export default function Home() {
         <VideoCard
           videoSrc="/moreabout.mp4"
           badgeTitle="more about"
-          heading="Union Copper Rod is undeniable the most trusted copper rod manufacturer in region"
+          heading={"Union Copper Rod is undeniable\nthe most trusted copper rod\nmanufacturer in region"}
           buttonText="Company Profile"
+          href="/aboutus"
         />
 
         <VideoCard
@@ -39,6 +40,7 @@ export default function Home() {
           badgeTitle="Supplychain"
           heading="UCR leads the region in copper rod production and has its sights on vastly expanding its enterprise"
           buttonText="Know More"
+          href="/logistics"
         />
         </div>
       </ParallaxSection>

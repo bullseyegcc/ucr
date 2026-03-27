@@ -54,29 +54,44 @@ export default function JourneySection() {
 
     if (!section || !pin || !track) return
 
+    // Dynamically set the section height so it stays pinned for the full horizontal scroll
+    const updateSectionHeight = () => {
+      const scrollDistance = track.scrollWidth - window.innerWidth
+      section.style.height = scrollDistance + window.innerHeight + 'px'
+    }
+
+    window.addEventListener('resize', updateSectionHeight)
+
     const timer = setTimeout(() => {
+      updateSectionHeight()
+
+      // Entry animation — targets the sticky inner panel
       gsap.fromTo(
         pin,
         {
-          clipPath: "inset(6% 3% round 12px)",
-          opacity: 0.2,
-          scale: 0.93,
+          clipPath: "inset(4% 2% round 10px)",
+          opacity: 0.4,
+          scale: 0.97,
         },
         {
           clipPath: "inset(0% 0% round 0px)",
           opacity: 1,
           scale: 1,
-          ease: "sine.out",
+          ease: "power2.inOut",
           force3D: true,
           scrollTrigger: {
             trigger: section,
-            start: "top 85%",
-            end: "top 10%",
-            scrub: 0.8,
+            start: "top 90%",
+            end: "top 20%",
+            scrub: 1.5,
           },
         }
       )
 
+      // Horizontal track — no GSAP pin, CSS sticky handles the sticky position
+      // The outer section is tall (journeyData.length * 100vh), so the
+      // scrollTrigger runs from the moment the section hits top:top all the way
+      // to its bottom, giving us the full scroll budget for the animation.
       gsap.fromTo(
         track,
         { x: 0 },
@@ -85,20 +100,17 @@ export default function JourneySection() {
           ease: "none",
           force3D: true,
           scrollTrigger: {
-            trigger: pin,
+            trigger: section,
             start: "top top",
             end: () => "+=" + (track.scrollWidth - window.innerWidth),
-            pin: true,
-            pinSpacing: true,
-            anticipatePin: 1,
-            scrub: 1.2,
+            scrub: 1.5,
             invalidateOnRefresh: true,
+            fastScrollEnd: true,
             onUpdate: (self) => {
               const activeIndex = Math.round(
                 self.progress * (journeyData.length - 1)
               )
 
-              // update progress bar background position
               if (progressBarRef.current) {
                 const progress = self.progress * 100
                 progressBarRef.current.style.width = `${progress}%`
@@ -107,19 +119,15 @@ export default function JourneySection() {
               dotsRef.current.forEach((dot, index) => {
                 if (!dot) return
                 const isActive = index <= activeIndex
-                
-                // Clean minimal dot styling
                 dot.style.borderColor = isActive ? '#FA6E43' : 'rgba(255,255,255,0.4)'
                 dot.style.background = isActive ? '#FA6E43' : 'rgba(255,255,255,0.15)'
                 dot.style.transform = isActive ? 'scale(1.1)' : 'scale(1)'
               })
 
-              // animate year labels opacity
               yearsRef.current.forEach((yr, idx) => {
                 if (!yr) return
                 const active = idx <= activeIndex
                 const isMobile = window.innerWidth < 640
-
                 yr.style.opacity = active ? '1' : '0.5'
                 yr.style.fontSize = active ? (isMobile ? '16px' : '18px') : (isMobile ? '12px' : '14px')
                 yr.style.fontWeight = active ? '700' : '600'
@@ -136,6 +144,7 @@ export default function JourneySection() {
 
     return () => {
       clearTimeout(timer)
+      window.removeEventListener('resize', updateSectionHeight)
       ScrollTrigger.getAll().forEach((st) => {
         if (st.trigger === section || st.trigger === pin) st.kill()
       })
@@ -143,10 +152,12 @@ export default function JourneySection() {
   }, [])
 
   return (
+    // Outer section is tall — it provides the scroll budget for the horizontal animation
     <section ref={sectionRef} className="relative w-full">
+      {/* CSS sticky panel — the browser handles sticking without GSAP pin */}
       <div
         ref={pinRef}
-        className="w-screen min-h-screen overflow-hidden bg-[linear-gradient(164deg,#FFF_8.84%,#FA6E43_118.41%)] relative"
+        className="w-screen h-screen overflow-hidden bg-[linear-gradient(164deg,#FFF_8.84%,#FA6E43_118.41%)] relative sticky top-0"
         style={{ willChange: "transform, opacity", backfaceVisibility: "hidden" }}
       >
         {/* Horizontal track */}

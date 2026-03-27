@@ -1,8 +1,40 @@
-import { Check, ArrowRight } from 'lucide-react';
+'use client'
+
+import { useEffect, useState } from 'react';
+import { Check, ArrowRight, X } from 'lucide-react';
 import FadeIn from "../../animations/FadeIn";
 import SlideIn from "../../animations/SlideIn";
 
 export default function OurPolicies() {
+    const [isPolicyOpen, setIsPolicyOpen] = useState(false);
+
+    useEffect(() => {
+        const onEscape = (event) => {
+            if (event.key === 'Escape') {
+                setIsPolicyOpen(false);
+            }
+        };
+
+        if (isPolicyOpen) {
+            // Stop Lenis smooth scroll (used site-wide)
+            if (window.lenisInstance) window.lenisInstance.stop();
+            document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
+            window.addEventListener('keydown', onEscape);
+        } else {
+            if (window.lenisInstance) window.lenisInstance.start();
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+        }
+
+        return () => {
+            if (window.lenisInstance) window.lenisInstance.start();
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+            window.removeEventListener('keydown', onEscape);
+        };
+    }, [isPolicyOpen]);
+
     return (
         <div>
             <div className="flex flex-col items-center justify-center min-h-[50vh] lg:min-h-[60vh] lg:min-h-[70vh] font-medium bg-black   dark:bg-black bg-[url('/policiesbg.png')] bg-cover bg-center bg-no-repeat">
@@ -118,7 +150,10 @@ export default function OurPolicies() {
                             </div>
                         </div>
 
-                        <button className="flex items-center gap-2 bg-primary hover:bg-orange-600 text-white px-5 lg:px-8 py-2 lg:py-3 rounded-full w-fit mt-4 lg:mt-6 transition-all duration-300">
+                        <button
+                            onClick={() => setIsPolicyOpen(true)}
+                            className="flex items-center gap-2 bg-primary hover:bg-orange-600 text-white px-5 lg:px-8 py-2 lg:py-3 rounded-full w-fit mt-4 lg:mt-6 transition-all duration-300"
+                        >
                             <span className="text-xs lg:text-sm font-semibold">Read more</span>
                             <ArrowRight size={16} className="lg:w-5 lg:h-5" strokeWidth={2.5} />
                         </button>
@@ -127,6 +162,79 @@ export default function OurPolicies() {
                 </div>
             </div>
 
+            {isPolicyOpen && (
+                <div
+                    className="fixed inset-0 z-[200] flex items-start justify-center bg-black/52 backdrop-blur-[2px] px-3 py-4 lg:px-8 lg:py-6"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label="UCR responsible supply chain policy"
+                    onClick={() => setIsPolicyOpen(false)}
+                >
+                    <div
+                        className="relative w-full lg:w-[min(96vw,1460px)] h-[96vh] lg:h-[calc(100vh-48px)] rounded-2xl bg-[#F6F6F6] overflow-hidden shadow-[0_28px_95px_rgba(0,0,0,0.38)]"
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <button
+                            onClick={() => setIsPolicyOpen(false)}
+                            className="absolute right-5 top-4 lg:right-6 lg:top-5 z-20 h-12 w-12 lg:h-16 lg:w-16 rounded-full bg-black text-white flex items-center justify-center transition-transform duration-200 hover:scale-105"
+                            aria-label="Close policy"
+                        >
+                            <X size={34} strokeWidth={3.2} />
+                        </button>
+
+                        <div className="h-full flex flex-col">
+                            <div className="px-6 lg:px-12 pt-9 lg:pt-10 pb-6 border-b border-[#F2B7A2]">
+                                <h2 className="pr-16 lg:pr-24 text-[32px] lg:text-[60px] font-medium leading-[1.06] tracking-[-1.4px] text-primary" style={{ fontFamily: 'Helvetica Now Display, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial' }}>
+                                    UCR responsible supply chain policy
+                                </h2>
+                            </div>
+
+                            <div className="flex-1 overflow-y-auto px-6 lg:px-12 py-8 lg:py-10 text-[#2E3134] [scrollbar-width:thin] [scrollbar-color:#FA6E43_#E2E2E2] [&::-webkit-scrollbar]:w-[10px] [&::-webkit-scrollbar-track]:bg-[#E2E2E2] [&::-webkit-scrollbar-thumb]:bg-[#FA6E43] [&::-webkit-scrollbar-thumb]:rounded-full">
+                                <p className="text-[17px] leading-[1.55] tracking-[-0.2px]">
+                                    This Responsible Supply Chain Policy outlines our commitment to ethical, transparent, and sustainable sourcing practices across our entire supply chain. It defines the standards we expect from our suppliers, contractors, and business partners to ensure respect for human rights, environmental responsibility, and lawful business conduct.
+                                </p>
+
+                                <div className="mt-10 lg:mt-12 space-y-9 lg:space-y-10">
+                                    <section>
+                                        <h3 className="text-[24px] leading-[30px] tracking-[-0.45px] font-bold" style={{ fontFamily: 'Helvetica Now Display, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial' }}>2. Scope</h3>
+                                        <p className="mt-4 text-[17px] leading-[1.55] tracking-[-0.2px]">
+                                            This policy applies to all suppliers, manufacturers, service providers, agents, and subcontractors engaged in providing goods or services to our organization, regardless of geographic location.
+                                        </p>
+                                    </section>
+
+                                    <section>
+                                        <h3 className="text-[24px] leading-[30px] tracking-[-0.45px] font-bold" style={{ fontFamily: 'Helvetica Now Display, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial' }}>3. Ethical Business Practices</h3>
+                                        <p className="mt-4 text-[17px] leading-[1.55] tracking-[-0.2px]">
+                                            Suppliers must conduct business with integrity and comply with all applicable laws and regulations. This includes:
+                                        </p>
+                                        <ul className="mt-5 space-y-1 lg:space-y-2 text-[17px] leading-[1.55] tracking-[-0.2px] pl-6 list-disc marker:text-[#2E3134]">
+                                            <li>Prohibition of bribery, corruption, fraud, and money laundering</li>
+                                            <li>Fair competition and accurate record-keeping</li>
+                                            <li>Transparency in business operations and sourcing</li>
+                                        </ul>
+                                    </section>
+
+                                    <section>
+                                        <h3 className="text-[24px] leading-[30px] tracking-[-0.45px] font-bold" style={{ fontFamily: 'Helvetica Now Display, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial' }}>4. Human Rights &amp; Labor Standards</h3>
+                                        <p className="mt-4 text-[17px] leading-[1.55] tracking-[-0.2px]">
+                                            All partners are expected to uphold internationally recognized human rights and ensure fair labor standards, including safe working conditions, non-discrimination, lawful wages, and no forced or child labor.
+                                        </p>
+                                    </section>
+
+                                    <section>
+                                        <h3 className="text-[24px] leading-[30px] tracking-[-0.45px] font-bold" style={{ fontFamily: 'Helvetica Now Display, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial' }}>5. Environment &amp; Compliance</h3>
+                                        <p className="mt-4 text-[17px] leading-[1.55] tracking-[-0.2px]">
+                                            We require responsible environmental practices such as waste reduction, emissions control, efficient resource usage, and adherence to all environmental permits and regulations.
+                                        </p>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </div>
     )
 }
+

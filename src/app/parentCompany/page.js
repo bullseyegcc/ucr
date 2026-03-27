@@ -45,6 +45,7 @@ export default function parentCompany() {
                 className="min-h-[80vh] w-full flex items-center justify-center my-8 px-2 lg:px-10"
                 containerClassName="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6"
                 staggerDelay={0.5}
+                pin={false}
             >
                 <div className="min-h-[40vh] py-10 lg:h-full relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group transition-transform duration-500 ease-out">
                     <div className="pb-6">

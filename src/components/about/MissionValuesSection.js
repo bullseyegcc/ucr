@@ -26,23 +26,26 @@ export default function MissionValuesSection() {
     const tlRef = { current: null };
     const mm = gsap.matchMedia();
 
-    // give the elements a hint to use transforms for smoother rendering
-    gsap.set([mission, values], { willChange: 'transform, opacity' });
+    // GPU-accelerated transforms for jank-free rendering
+    gsap.set([mission, values], {
+      willChange: 'transform, opacity',
+      force3D: true,
+      backfaceVisibility: 'hidden',
+    });
 
     mm.add({ isDesktop: '(min-width: 1024px)' }, (context) => {
       const { isDesktop } = context.conditions;
 
-      // timeline with a controlled end distance to make pin feel smooth
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
           start: 'center center',
-          end: () => `+=${Math.max(window.innerHeight * 0.6, 400)}`,
-          scrub: 0.8,
+          end: () => `+=${Math.max(window.innerHeight * 0.8, 500)}`,
+          scrub: 1.8,
           pin: true,
           pinSpacing: true,
-          anticipatePin: 0.5,
           invalidateOnRefresh: true,
+          fastScrollEnd: true,
           markers: false,
         },
       });
@@ -50,18 +53,18 @@ export default function MissionValuesSection() {
       // Values: lift and fade in
       tl.fromTo(
         values,
-        { y: 200, opacity: 0 },
-        { y: 0, opacity: 1, ease: 'power3.out' },
+        { y: 100, opacity: 0 },
+        { y: 0, opacity: 1, ease: 'power2.out', force3D: true },
         0
       );
 
       // on desktop give a subtle horizontal entrance
       if (isDesktop) {
-        tl.fromTo(values, { x: 80 }, { x: 0, ease: 'power3.out' }, 0);
+        tl.fromTo(values, { x: 40 }, { x: 0, ease: 'power2.out', force3D: true }, 0);
       }
 
       // polish scale
-      tl.fromTo(values, { scale: 0.97 }, { scale: 1, ease: 'back.out(1.2)' }, 0);
+      tl.fromTo(values, { scale: 0.98 }, { scale: 1, ease: 'power2.out' }, 0);
 
       tlRef.current = tl;
       return () => {

@@ -9,16 +9,12 @@ gsap.registerPlugin(ScrollTrigger);
 export default function TextReveal({ children, className = '' }) {
   const containerRef = useRef(null);
 
-// Step 1: Module-level normalizeScrollSet guard
-let normalizeScrollSet = false;
-
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     let wordSpans = [];
     const isMobile = window.innerWidth < 768;
-    ScrollTrigger.normalizeScroll(true);
 
     // Helper: copy parent computed styles to wordSpan
     function copyParentStyles(wordSpan, parentStyles) {
@@ -100,26 +96,17 @@ let normalizeScrollSet = false;
       processElement(container);
 
       if (wordSpans.length > 0) {
-        // Step 2: Branch refresh/update logic
         const savedScrollY = window.scrollY;
+
         if (isMobile) {
-          if (!normalizeScrollSet) {
-            ScrollTrigger.normalizeScroll(true);
-            normalizeScrollSet = true;
-          }
           ScrollTrigger.update();
-          // No scroll restoration needed; update does not reset scroll
         } else {
           ScrollTrigger.refresh();
-          // Double RAF for reliable scroll restoration
           requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              window.scrollTo({ top: savedScrollY, behavior: 'instant' });
-            });
+            window.scrollTo({ top: savedScrollY, behavior: 'instant' });
           });
         }
 
-        // Step 4: GSAP animation config branching
         const gsapConfig = isMobile
           ? {
               opacity: 1,
@@ -146,6 +133,7 @@ let normalizeScrollSet = false;
               },
               onComplete: () => gsap.set(wordSpans, { willChange: 'auto' }),
             };
+
         gsap.to(wordSpans, gsapConfig);
       }
     }, 150);

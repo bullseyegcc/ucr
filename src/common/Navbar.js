@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu, ArrowRight, X, ChevronDown, ChevronRight } from 'lucide-react';
+import { Menu, ArrowRight, X, XCircle, ChevronDown, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
@@ -52,10 +52,11 @@ export const Navbar = () => {
             label: 'About Us',
             type: 'section',
             items: [
-                { label: 'About', href: '/aboutus' },
-                { label: 'Our Team', href: '/team' },
-                { label: 'Our Parent Company', href: '/parentCompany' },
-                { label: 'Our Values', href: '/OurValues' }
+                { label: 'Our Company', href: '/aboutus' },
+                { label: 'Our Values', href: '/OurValues' },
+                { label: 'Our People', href: '/team' },
+                { label: 'Our Parents Company', href: '/parentCompany' },
+                { label: 'Our Policies', href: '/ourPolicies' },
             ]
         },
         { 
@@ -82,7 +83,7 @@ export const Navbar = () => {
             ]
         },
         { 
-            label: 'News', 
+            label: 'Blogs', 
             href: '/blogs',
             type: 'simple'
         },
@@ -158,68 +159,89 @@ export const Navbar = () => {
                         onClick={() => setIsMenuOpen(false)}
                     />
                     
-                    {/* Menu Panel - Light Theme */}
-                    <div className="fixed bg-white top-0 left-0 w-full sm:w-[400px] lg:w-[420px] lg:w-[450px] h-full z-[9999] bg-white flex flex-col pt-4 sm:pt-6 px-6 sm:px-8 lg:px-10 overflow-y-auto shadow-2xl animate-slide-in">
-                        {/* Header with Logo and Close Button */}
-                        <div className="flex items-center justify-between mb-6 sm:mb-8 lg:mb-10">
-                            <Image 
-                                src="/clogo.png" 
-                                alt="Logo" 
-                                width={80} 
-                                height={80} 
-                                className='object-contain w-16 h-16 sm:w-20 sm:h-20' 
-                            />
-                            <button 
-                                onClick={() => setIsMenuOpen(false)} 
-                                className="p-2 hover:bg-gray-100 rounded-lg transition-all"
+                    {/* Menu Panel */}
+                    <div className="fixed bg-white top-0 left-0 w-full sm:w-[390px] lg:w-[430px] h-full z-[9999] flex flex-col pt-5 px-7 lg:px-9 overflow-y-auto shadow-2xl animate-slide-in">
+
+                        {/* ── Header: MEGA MENU | ⊗ CLOSE ── */}
+                        <div className="flex items-center justify-between mb-6 pb-1">
+                            <span className="text-[11px] font-semibold tracking-[0.22em] text-gray-400 uppercase">Mega Menu</span>
+                            <button
+                                onClick={() => setIsMenuOpen(false)}
+                                className="flex items-center gap-1.5 group"
                             >
-                                <X size={24} className="sm:w-6 sm:h-6" color="#1a1a1a" />
+                                <XCircle size={17} className="text-primary" />
+                                <span className="text-[11px] font-semibold text-primary uppercase tracking-[0.22em] group-hover:opacity-75 transition-opacity">Close</span>
                             </button>
                         </div>
 
-                        {/* Menu Items - Light Theme */}
-                        <div className="flex flex-col gap-3 sm:gap-4 pb-8">
-                            {menuStructure.map((item) => (
-                                <div key={item.label}>
+                        {/* ── Menu Items ── */}
+                        <nav className="flex flex-col pb-10">
+                            {menuStructure.map((item, idx) => (
+                                <div key={item.label} className={idx > 0 ? 'mt-1' : ''}>
                                     {item.type === 'simple' ? (
+                                        /* Simple link — Home, Blogs, Contact Us */
                                         <Link href={item.href} onClick={() => setIsMenuOpen(false)}>
-                                            <div className="text-base sm:text-lg lg:text-xl font-normal py-2 px-3 rounded-full cursor-pointer transition-colors text-gray-800 hover:text-primary">
+                                            <div className={`text-[22px] lg:text-[24px] font-normal py-3 cursor-pointer transition-colors leading-tight ${
+                                                isActivePage(item.href) ? 'text-primary' : 'text-[#1a1a1a] hover:text-primary'
+                                            }`}>
                                                 {item.label}
                                             </div>
                                         </Link>
                                     ) : (
+                                        /* Expandable section */
                                         <div>
+                                            {/* Section header button */}
                                             <button
                                                 onClick={() => toggleSection(item.label)}
-                                                className="w-full flex items-center justify-between text-base sm:text-lg lg:text-xl font-normal py-2 px-3 rounded-full transition-colors text-gray-800 hover:text-primary"
+                                                className={`w-full flex items-center justify-between py-3 text-[22px] lg:text-[24px] font-normal transition-colors leading-tight ${
+                                                    expandedSection === item.label
+                                                        ? 'text-primary'
+                                                        : 'text-[#1a1a1a] hover:text-primary'
+                                                }`}
                                             >
                                                 <span>{item.label}</span>
-                                                <ChevronDown 
-                                                    size={20} 
-                                                    className={`transform transition-transform duration-300 ${expandedSection === item.label ? 'rotate-180' : ''}`}
+                                                <ChevronDown
+                                                    size={20}
+                                                    className={`flex-shrink-0 transition-transform duration-300 ${
+                                                        expandedSection === item.label ? 'rotate-180' : ''
+                                                    }`}
                                                 />
                                             </button>
-                                            {/* Expandable Submenu with smooth animation */}
-                                            <div className={`overflow-hidden transition-all duration-300 ${expandedSection === item.label ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                                                <div className="flex flex-col gap-2 sm:gap-3 mt-2 ml-3 sm:ml-4 lg:ml-6">
+
+                                            {/* Divider line shown when section is open */}
+                                            {expandedSection === item.label && (
+                                                <div className="w-full h-px bg-gray-200 mb-2" />
+                                            )}
+
+                                            {/* Expandable sub-items */}
+                                            <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                                                expandedSection === item.label ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
+                                            }`}>
+                                                <div className="flex flex-col gap-1 pb-3 pl-1">
                                                     {item.items.map((subItem) => {
                                                         const isActive = isActivePage(subItem.href);
                                                         return (
-                                                            <Link 
-                                                                key={subItem.href} 
-                                                                href={subItem.href} 
+                                                            <Link
+                                                                key={subItem.href}
+                                                                href={subItem.href}
                                                                 onClick={() => setIsMenuOpen(false)}
                                                             >
-                                                                <div className="text-sm sm:text-base font-normal flex items-center gap-2 cursor-pointer py-1 px-3 rounded-full transition-colors group text-gray-700 hover:text-white hover:bg-primary">
-                                                                    <span
-                                                                        className={`flex-shrink-0 inline-flex items-center justify-center w-7 h-7 transition-colors ${isActive ? 'bg-primary' : 'bg-gray-200 group-hover:bg-primary'}`}
-                                                                    >
-                                                                        <ChevronRight 
-                                                                            size={16} 
-                                                                            className={`${isActive ? 'text-white' : 'text-gray-600 group-hover:text-white'}`} 
-                                                                        />
+                                                                <div className={`flex items-center gap-3 py-[7px] cursor-pointer transition-colors group ${
+                                                                    isActive ? 'text-primary' : 'text-[#1a1a1a] hover:text-primary'
+                                                                }`}>
+                                                                    {/* Square icon — no border-radius */}
+                                                                    <span className={`flex-shrink-0 w-7 h-7 flex items-center justify-center transition-colors duration-200 ${
+                                                                        isActive
+                                                                            ? 'bg-primary'
+                                                                            : 'bg-[#d4d4d4] group-hover:bg-primary'
+                                                                    }`}>
+                                                                        <ChevronRight size={14} className="text-white" />
                                                                     </span>
-                                                                    {subItem.label}
+                                                                    <span className={`text-[15px] lg:text-[16px] font-normal leading-snug transition-colors duration-200 ${
+                                                                        isActive ? 'text-primary font-medium' : 'text-[#2a2a2a] group-hover:text-primary'
+                                                                    }`}>
+                                                                        {subItem.label}
+                                                                    </span>
                                                                 </div>
                                                             </Link>
                                                         );
@@ -230,7 +252,7 @@ export const Navbar = () => {
                                     )}
                                 </div>
                             ))}
-                        </div>
+                        </nav>
                     </div>
                 </>
             )}

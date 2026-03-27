@@ -47,6 +47,7 @@ export default function OurValues() {
                             containerClassName="w-full grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6"
                             staggerDelay={0.4}
                             pinOnMobile={false}
+                            pin={false}
                         >
                             <div className="min-h-[50vh] max-h-auto bg-[#FDF5F3] rounded-xl p-6 lg:p-8 flex flex-col justify-between gap-6 group transition-all duration-500 ease-out">
                                 <Image src="/excel.png" alt="Icon" width={120} height={0} className="transition-transform duration-400" />

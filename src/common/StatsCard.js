@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import CountUp from '../animations/countup';
 
 
-export default function StatsCard({ mainHeading, subHeading, description }) {
+export default function StatsCard({ mainHeading, subHeading, description, showPlus = true }) {
   const cardRef = useRef(null);
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -39,8 +40,16 @@ export default function StatsCard({ mainHeading, subHeading, description }) {
   }, []);
 
   return (
-    <div ref={cardRef} className="h-auto flex flex-col gap-3 lg:gap-8 px-2 lg:px-8 relative mt-3 lg:mt-10 group cursor-pointer transition-transform duration-500 ease-out min-w-0 ">
-      <h1 className="text-primary font-primary font-medium text-[34px] leading-[38px] lg:text-[clamp(48px,5.5vw,84px)] lg:leading-[1.1] tracking-[-1.38px] z-99 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent transition-transform duration-500 ease-out">
+    <div
+      ref={cardRef}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="h-auto flex flex-col gap-3 lg:gap-8 px-2 lg:px-8 relative mt-3 lg:mt-10 group cursor-pointer transition-transform duration-500 ease-out min-w-0 "
+    >
+      <h1
+        style={hovered ? { color: '#FA6E43', WebkitTextFillColor: '#FA6E43', background: 'none' } : {}}
+        className="font-primary font-medium text-[34px] leading-[38px] lg:text-[clamp(48px,5.5vw,84px)] lg:leading-[1.1] tracking-[-1.38px] z-99 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent transition-all duration-500 ease-out"
+      >
         <CountUp
           from={0}
           to={mainHeading}
@@ -49,6 +58,7 @@ export default function StatsCard({ mainHeading, subHeading, description }) {
           duration={1}
           className="count-up-text"
         />
+        {showPlus && <span>+</span>}
 
       </h1>
       <hr className="border-t border-secondary transition-all duration-400 ease-out group-hover:border-primary" />

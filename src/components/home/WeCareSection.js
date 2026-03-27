@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import { VideoPlayer } from "../../common/video";
 import { WhiteBadge } from "../../common/badge.js";
@@ -34,6 +35,7 @@ export default function WeCareSection() {
   const desktopCardsRef  = useRef([]);
   const headingRef       = useRef(null);
   const scrollViewportRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -171,7 +173,8 @@ export default function WeCareSection() {
               <div
                 key={card.title}
                 ref={(el) => { if (el) mobileCardsRef.current[i] = el; }}
-                className="flex-none bg-white/20 backdrop-blur-sm text-center flex flex-col items-center py-10 px-5 rounded-xl gap-3 shadow-lg snap-start"
+                onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); router.push('/sustainability'); }}
+                className="flex-none bg-white/20 backdrop-blur-sm text-center flex flex-col items-center py-10 px-5 rounded-xl gap-3 shadow-lg snap-start cursor-pointer hover:bg-white/30 transition-colors duration-300"
                 style={{
                    width: CARD_WIDTH,
                   minWidth: CARD_WIDTH,
@@ -197,7 +200,8 @@ export default function WeCareSection() {
             <div
               key={card.title}
               ref={(el) => { if (el) desktopCardsRef.current[i] = el; }}
-              className="flex-none lg:min-w-0 bg-white/20 backdrop-blur-sm text-center flex flex-col items-center py-12 px-10 mx-2 rounded-xl gap-3 shadow-lg"
+              onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); router.push('/sustainability'); }}
+              className="flex-none lg:min-w-0 bg-white/20 backdrop-blur-sm text-center flex flex-col items-center py-12 px-10 mx-2 rounded-xl gap-3 shadow-lg cursor-pointer hover:bg-white/30 transition-colors duration-300"
               style={{ willChange: 'transform, opacity' }}
             >
               <Image

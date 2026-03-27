@@ -40,7 +40,7 @@ export default function HomeHeroAbout() {
       onLockProgress={handleLockProgress}
     >
       {/* Panel 1: Hero */}
-      <div className="relative flex min-h-[80vh] md:min-h-screen justify-center bg-black dark:bg-black overflow-hidden">
+    <div className="relative flex min-h-[80vh] md:min-h-screen items-center justify-center bg-black dark:bg-black overflow-hidden">
         <VideoPlayer src="/hero.mp4" className="absolute inset-0 w-full h-full object-cover" />
         <HeroHeading delay={4}>UCR shaping the future</HeroHeading>
       </div>

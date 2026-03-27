@@ -19,11 +19,13 @@ const PRODUCTS = [
   {
     id: 1,
     title: 'Cooper Sheets',
+    icon: coppericon,
     backgroundImage: "url('/fp2.png')",
   },
   {
     id: 2,
     title: 'Customized components',
+    icon: coppericon,
     backgroundImage: "url('/fp3.png')",
   },
 ];
@@ -93,34 +95,33 @@ export default function FeaturedProducts() {
           </div>
 
           {/* Product Tabs */}
-          <div className="flex flex-col lg:gap-12">
+          <div className="flex flex-col gap-4 lg:gap-6">
             {PRODUCTS.map((product, index) => (
-              <div
+              <button
                 key={product.id}
                 onClick={() => handleTabChange(index)}
                 className={`cursor-pointer transition-all duration-300 ${
                   activeTab === index ? 'opacity-100' : 'opacity-60 hover:opacity-80'
-                } flex flex-col gap-9`}
+                } w-full text-left`}
+                type="button"
               >
-                {activeTab === index ? (
-                  <h1 className="flex items-center gap-5 text-[28px] leading-[29.71px] tracking-[-1.55px] text-primary mt-5 font-normal capitalize align-middle lg:text-5xl lg:font-medium">
-                    {product.title}
-                    {product.icon && (
-                      <Image
-                        src={product.icon}
-                        alt={product.title}
-                        width={80}
-                        height={80}
-                        className='hidden object-contain lg:inline-block lg:ml-3'
-                      />
-                    )}
-                  </h1>
-                ) : (
-                  <h1 className="text-[28px] leading-[61.27px] tracking-[-1.55px] text-secondary my-2 font-normal capitalize align-middle lg:text-5xl lg:font-medium">
-                    {product.title}
-                  </h1>
-                )}
-              </div>
+                <h1
+                  className={`flex min-h-[42px] lg:min-h-[66px] items-center text-[28px] leading-[1.1] tracking-[-1.55px] font-normal capitalize align-middle lg:text-5xl lg:font-medium ${
+                    activeTab === index ? 'text-primary' : 'text-secondary'
+                  }`}
+                >
+                  <span>{product.title}</span>
+                  {activeTab === index && product.icon && (
+                    <Image
+                      src={product.icon}
+                      alt={product.title}
+                      width={80}
+                      height={80}
+                      className='hidden object-contain lg:inline-block ml-5'
+                    />
+                  )}
+                </h1>
+              </button>
             ))}
           </div>
         </div>

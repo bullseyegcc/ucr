@@ -48,7 +48,7 @@ export default function OurTechnology() {
   return (
     <ParallaxSection index={0}>
       <div className="min-h-[70vh]  sm:min-h-screen flex flex-col  sm:flex-row gap-1 sm:mx-10 overflow-hidden">
-        <div className="min-h-[60vh] pt-20  lg:min-h-screen sm:w-1/2 bg-[#FA6E43] rounded-xl px-3 lg:px-8 py-10 flex flex-col gap-12 ">
+        <div className="min-h-[60vh] pt-20  lg:min-h-screen sm:w-1/2 bg-primary rounded-xl px-3 lg:px-8 py-10 flex flex-col gap-12 ">
           <div className="mt-8">
             <div className="animate-reveal">
               <WhiteBadge title="Core Strength" className='z-190' />
@@ -58,38 +58,46 @@ export default function OurTechnology() {
 
           <div>
             {/* All Tabs - Active gets white bg with description */}
-            <div className="flex flex-col gap-6 mt-10">
+            <div className="flex flex-col gap-2 mt-10">
               {TECHNOLOGIES.map((tech, index) => (
                 <div
                   key={tech.id}
                   onClick={() => handleTabChange(index)}
-                  className={`cursor-pointer transition-all duration-300 ${activeTab === index ? '' : 'animate-reveal'} ${
+                  className={`cursor-pointer rounded-xl overflow-hidden transition-all duration-700 ease-linear relative ${
                     activeTab === index
-                      ? 'rounded-xl !bg-white opacity-100 px-5 py-9 border-l-4 border-primary shadow-lg z-20'
-                      : ''
+                      ? 'bg-white shadow-lg px-5 py-8'
+                      : 'px-5 py-3 hover:opacity-90'
                   }`}
-                  style={activeTab === index ? { backgroundColor: 'white !important' } : {}}
                 >
-                  {activeTab === index ? (
-                    <div className="flex flex-col gap-4 w-full !bg-white" style={{ backgroundColor: 'white' }}>
-                      <h1 className="font-primary font-normal text-[28px] leading-[36.09px] tracking-[-1.41px] text-primary lg:text-[48px] lg:leading-[64px] lg:tracking-[-2.5px]">
-                        {tech.title}
-                      </h1>
-                      <p className="font-primary font-normal text-[12px] leading-[20px] tracking-[-0.41px] text-black lg:text-[20px] lg:leading-[32px] lg:tracking-[-0.72px]">{tech.description}</p>
-                      <button
-                        onClick={() => router.push('/technology')}
-                        className="w-full h-[40px] lg:w-[193px] lg:h-[62px] flex items-center justify-center gap-2 text-primary border-[0.62px] lg:border border-primary rounded-[30.95px] lg:rounded-[50px] py-[8px] lg:py-[12px] px-[20px] lg:pl-[28px] lg:pr-[18px] hover:bg-primary hover:text-white transition-all duration-300"
-                      >
-                        <span className="font-primary font-normal text-[14px] leading-[18.2px] tracking-[-0.54px] lg:text-[20px] lg:leading-[29.4px] lg:tracking-[-0.88px]">Know More</span>
-                        <ArrowRight size={18} className="text-primary" />
-                      </button>
-                    </div>
-                  ) : (
-                    <h1 className="font-primary font-normal text-[24px] leading-[55.82px] tracking-[-1.41px] lg:text-[40px] lg:leading-[99px] lg:tracking-[-2.5px] text-white hover:text-white/80 flex items-center gap-4">
-                      <ArrowRight size={30} className="text-white" />
-                      {tech.title}
-                    </h1>
-                  )}
+                  {/* Title row — always visible */}
+                  <h1 className={`font-primary font-normal flex items-center gap-4 transition-all duration-700 ease-linear ${
+                    activeTab === index
+                      ? 'text-primary text-[28px] leading-[36.09px] tracking-[-1.41px] lg:text-[48px] lg:leading-[64px] lg:tracking-[-2.5px]'
+                      : 'text-white text-[24px] leading-[55.82px] tracking-[-1.41px] lg:text-[40px] lg:leading-[99px] lg:tracking-[-2.5px] hover:text-white/80'
+                  }`}>
+                    <span className={`transition-all duration-700 ease-linear overflow-hidden ${
+                      activeTab === index ? 'max-w-0 opacity-0' : 'max-w-[36px] opacity-100'
+                    }`}>
+                      <ArrowRight size={30} className="text-white flex-shrink-0" />
+                    </span>
+                    {tech.title}
+                  </h1>
+
+                  {/* Expandable content */}
+                  <div className={`overflow-hidden transition-all duration-700 ease-linear ${
+                    activeTab === index ? 'max-h-[420px] opacity-100 mt-4 translate-y-0' : 'max-h-0 opacity-0 -translate-y-1'
+                  }`}>
+                    <p className="font-primary font-normal text-[12px] leading-[20px] tracking-[-0.41px] text-black lg:text-[20px] lg:leading-[32px] lg:tracking-[-0.72px]">
+                      {tech.description}
+                    </p>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); router.push('/technology'); }}
+                      className="mt-4 w-full h-[40px] lg:w-[193px] lg:h-[62px] flex items-center justify-center gap-2 text-primary border border-primary rounded-[30.95px] lg:rounded-[50px] py-[8px] lg:py-[12px] px-[20px] lg:pl-[28px] lg:pr-[18px] hover:bg-primary hover:text-white transition-all duration-300"
+                    >
+                      <span className="font-primary font-normal text-[14px] leading-[18.2px] tracking-[-0.54px] lg:text-[20px] lg:leading-[29.4px] lg:tracking-[-0.88px]">Know More</span>
+                      <ArrowRight size={18} />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

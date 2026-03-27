@@ -3,11 +3,11 @@ export const products = [
     id: 1,
     slug: "drawn-wire",
     name: "Drawn Wire",
-    description: "High-quality ETP Electrolytic. Tough Pitch copper rods",
+    description: "Wireroad is where ideas take shape and connections come alive.A place built for creators, thinkers, and forward-doers.Here, every path leads to something meaningful.",
     sku: "01/09",
-    icon: "/wire-icon.svg",
+    icon: "/drawnwire.png",
     featured: true,
-    longDescription: "High-quality ETP Electrolytic Tough Pitch copper rods designed for superior wire drawing and conductor manufacturing. Engineered for exceptional purity and electrical conductivity.",
+    longDescription: "Wireroad is where ideas take shape and connections come alive.A place built for creators, thinkers, and forward-doers.Here, every path leads to something meaningful.",
     specifications: ["ETP Electrolytic copper", "Tough Pitch grade", "99.95% Pure Copper", "High electrical conductivity", "Clean & Scratch-free surface"],
     applications: [
       "Power cables manufacturers",
@@ -40,7 +40,7 @@ export const products = [
     id: 2,
     slug: "tin-coated-copper-wire",
     name: "Tin Coated Copper Wire",
-    description: "High-quality ETP Electrolytic. Tough Pitch copper rods with tin coating",
+    description: "Wireroad is where ideas take shape and connections come alive.A place built for creators, thinkers, and forward-doers.Here, every path leads to something meaningful.",
     sku: "02/9",
     featured: false,
     longDescription: "Tin Coated Copper Wire combines high-quality ETP Electrolytic Tough Pitch copper with protective tin coating (1-20 microns), providing superior corrosion resistance and enhanced performance for demanding applications.",
@@ -71,7 +71,7 @@ export const products = [
     id: 3,
     slug: "copper-rod",
     name: "Copper Rod",
-    description: "High-quality ETP Electrolytic. Tough Pitch copper rods",
+    description: "Wireroad is where ideas take shape and connections come alive.A place built for creators, thinkers, and forward-doers.Here, every path leads to something meaningful.",
     sku: "03/9",
     featured: false,
     longDescription: "High-quality ETP Electrolytic Tough Pitch copper rods designed for wire drawing, cable manufacturing, and various industrial applications. Engineered for exceptional purity and electrical conductivity with consistent quality.",
@@ -120,7 +120,7 @@ export const products = [
     id: 4,
     slug: "bunched-wires",
     name: "Bunched Wires",
-    description: "Carefully grouped copper wires for optimized conductivity in complex electrical assemblies.",
+    description: "Wireroad is where ideas take shape and connections come alive.A place built for creators, thinkers, and forward-doers.Here, every path leads to something meaningful.",
     sku: "04/9",
     featured: false,
     longDescription: "Bunched Wires are precisely grouped copper strands designed to maximize conductivity in complex electrical assemblies. The careful arrangement ensures optimal current distribution and minimal impedance in high-performance applications.",
@@ -147,7 +147,8 @@ export const products = [
     },
     sizes: ["8 MM", "12 MM", "16 MM"],
     productSpecification: "Meets ASTM B49 & BS EN 1977 standards"
-  },
+  }
+  /*
   {
     id: 5,
     slug: "bobbins",
@@ -308,4 +309,5 @@ export const products = [
     sizes: ["3 MM", "5 MM", "7 MM"],
     productSpecification: "Meets ASTM B49 & BS EN 1977 standards"
   }
+  */
 ];

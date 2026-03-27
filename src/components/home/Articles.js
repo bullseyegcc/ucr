@@ -122,13 +122,16 @@ export default function Articles() {
           <h1 className="z-500 text-3xl lg:text-3xl pl-4 text-white">
             Company Launches New High-Conductivity Copper Rods for Energy Sector
           </h1>
+          <button className="z-90 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
+            <ArrowRight size={18} color="black" />
+          </button>
           <div className="rounded-xl h-90 lg:h-26 pl-0 absolute top-0 w-full z-0 bg-gradient-to-b from-[#FA6E43] to-transparent" />
         </Link>
 
         <Link
           ref={rightBotRef}
           className="w-full h-[45vh] lg:h-1/2 relative bg-[#6A3120] hidden lg:flex flex-col justify-start gap-16 lg:gap-6 rounded-xl bg-[url('/blog2.png')] bg-cover bg-center bg-no-repeat"
-          href="/blogs/high-conductivity-copper-rods-energy-sector"
+          href="/blogs/expected-supply-deficit-copper-prices"
           style={{ willChange: 'transform, opacity' }}
         >
           <div className="z-500 px-4 text-white flex justify-between text-sm font-light pt-9">
@@ -136,8 +139,11 @@ export default function Articles() {
             <span>Monday,April 28,2026</span>
           </div>
           <h1 className="z-500 text-3xl pl-4 text-white">
-            Company Launches New High-Conductivity Copper Rods for Energy Sector
+            Expected Supply Deficit To Upset Copper Prices
           </h1>
+          <button className="z-90 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
+            <ArrowRight size={18} color="black" />
+          </button>
           <div className="rounded-xl h-90 lg:h-26 pl-0 absolute top-0 w-full z-0 bg-gradient-to-b from-[#FA6E43] to-transparent" />
         </Link>
 

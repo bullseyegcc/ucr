@@ -15,6 +15,7 @@ export default function ScrollRevealCardsContainer({
   staggerDelay = 0.3,
   mobileDuration = 0.8,
   mobileStaggerDelay = 0.15,
+  pin = true,
 }) {
   const containerRef = useRef(null);
 
@@ -56,13 +57,71 @@ export default function ScrollRevealCardsContainer({
       const initialDelay = isMobile ? 100 : 150;
       const timer = setTimeout(() => {
         // Mobile-optimized trigger points
+        const shouldPin = isMobile ? false : pin;
+
+        // ── No-pin path: use GSAP callbacks for enter + exit ──────────────────
+        if (!shouldPin) {
+          const effectiveStaggerDelay = isMobile ? mobileStaggerDelay : staggerDelay;
+          const effectiveDuration = isMobile ? mobileDuration : 0.8;
+
+          ScrollTrigger.create({
+            trigger: container,
+            start: 'top 85%',
+            end: 'bottom 15%',
+            onEnter: () => {
+              cards.forEach((card, i) => {
+                gsap.to(card, {
+                  y: 0, opacity: 1, scale: 1,
+                  duration: effectiveDuration,
+                  delay: i * effectiveStaggerDelay,
+                  ease: 'power2.out',
+                });
+              });
+            },
+            onLeave: () => {
+              cards.forEach((card, i) => {
+                gsap.to(card, {
+                  y: -60, opacity: 0, scale: 0.96,
+                  duration: 0.5,
+                  delay: i * 0.05,
+                  ease: 'power2.in',
+                });
+              });
+            },
+            onEnterBack: () => {
+              cards.forEach((card, i) => {
+                gsap.to(card, {
+                  y: 0, opacity: 1, scale: 1,
+                  duration: effectiveDuration,
+                  delay: i * effectiveStaggerDelay,
+                  ease: 'power2.out',
+                });
+              });
+            },
+            onLeaveBack: () => {
+              cards.forEach((card, i) => {
+                gsap.to(card, {
+                  y: 80, opacity: 0, scale: 0.96,
+                  duration: 0.5,
+                  delay: i * 0.05,
+                  ease: 'power2.in',
+                });
+              });
+            },
+          });
+
+          ScrollTrigger.refresh();
+          return;
+        }
+
+        // ── Pinned path (original scrub-driven timeline) ───────────────────────
         const triggerConfig = {
           trigger: container,
           start: isMobile ? 'top 95%' : 'center center',
           end: isMobile ? 'bottom 30%' : 'bottom center',
-          scrub: isMobile && !pinOnMobile ? false : scrub,
-          pin: isMobile ? false : true,
-          pinSpacing: true,
+          scrub: (isMobile && !pinOnMobile) ? false : scrub,
+          pin: shouldPin,
+          pinSpacing: shouldPin,
           markers: false,
         };
 
@@ -71,36 +130,19 @@ export default function ScrollRevealCardsContainer({
         const effectiveDuration = isMobile ? mobileDuration : 1.2;
 
         // Calculate total timeline duration based on cards and stagger
-        // Formula: (number of cards - 1) * stagger + duration of last card
         const totalDuration = (cards.length - 1) * effectiveStaggerDelay + effectiveDuration;
 
-        // Create timeline with scroll lock
-        const tl = gsap.timeline({
-          scrollTrigger: triggerConfig,
-        });
+        const tl = gsap.timeline({ scrollTrigger: triggerConfig });
 
-        // Add sequential card animations to timeline
-        // Each card's position in timeline is tied to scroll progress
         cards.forEach((card, index) => {
           tl.fromTo(
             card,
-            {
-              y: isMobile ? 100 : 200,
-              opacity: 0,
-              scale: 0.95,
-            },
-            {
-              y: 0,
-              opacity: 1,
-              scale: 1,
-              duration: effectiveDuration,
-              ease: 'power2.inOut',
-            },
-            index * effectiveStaggerDelay // Position in timeline, tied to scroll
+            { y: isMobile ? 100 : 200, opacity: 0, scale: 0.95 },
+            { y: 0, opacity: 1, scale: 1, duration: effectiveDuration, ease: 'power2.inOut' },
+            index * effectiveStaggerDelay
           );
         });
 
-        // Set total duration to control scroll-to-animation mapping
         tl.duration(totalDuration);
 
         ScrollTrigger.refresh();
