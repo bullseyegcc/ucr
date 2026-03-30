@@ -65,7 +65,7 @@ export default function Team() {
             </div>
             {/* quote section  */}
 
-            <div className="min-h-[60vh] lg:min-h-[80vh] rounded-t-lg bg-[linear-gradient(174deg,#FA6E43_-22.99%,#FFF_94.94%)] flex flex-col items-center justify-center gap-4 lg:gap-6 px-6 text-center py-12 lg:py-20">
+            <div className="min-h-[60vh] lg:min-h-[80vh] rounded-t-lg bg-[url('/gradient-bg.png')] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center gap-4 lg:gap-6 px-6 text-center py-12 lg:py-20">
 
                 <div className="flex flex-col w-full lg:w-[80%]">
 
