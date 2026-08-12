@@ -17,7 +17,7 @@ export default function blogs() {
         <div>
             <div className="relative min-h-[80vh] lg:min-h-[80vh] font-medium flex items-center justify-center   dark:bg-black overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <VideoPlayer src="/moreabout.mp4" className="w-full h-full object-cover" />
+                    <VideoPlayer src="/moreabout.mp4" className="absolute inset-0 w-full h-full object-cover" />
                 </div>
                 <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)" }}></div>
                 <h1 className="w-[95%] lg:w-[60%] z-20 flex flex-col items-center gap-4 font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle text-white">

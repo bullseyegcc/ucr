@@ -6,15 +6,20 @@ import { VideoPlayer } from "./video";
 
 export default function Footer() {
     return (
-        <div className='relative lg:mb-0 min-h-[50vh] lg:min-h-[90vh] flex flex-col justify-end items-center pt-20 lg:pt-0'>
+        <div className='relative lg:mb-0 min-h-[50vh] lg:min-h-[90vh] flex flex-col justify-end items-center pt-20 lg:pt-0 overflow-hidden'>
 
-            <div className='relative w-full h-[40vh] lg:h-full'>
-                <VideoPlayer src="/footer.mp4" width={600} height={800} className='w-full h-full object-cover' />
-                <div className='absolute inset-0' style={{ background: "linear-gradient(0deg, rgba(250, 110, 67, 0.15) 0%, rgba(250, 110, 67, 0.15) 100%)" }}></div>
-            </div>
+            <VideoPlayer
+                src="/footer.mp4"
+                width={600}
+                height={800}
+                className='absolute inset-0 z-0 w-full h-full object-cover'
+            />
+            <div
+                className='absolute inset-0 z-[1] pointer-events-none'
+                style={{ background: "linear-gradient(0deg, rgba(250, 110, 67, 0.15) 0%, rgba(250, 110, 67, 0.15) 100%)" }}
+            />
 
-
-            <div className='relative md:absolute md:-bottom-[0%] w-full md:w-[80%] bg-[url(/footerbg.png)] bg-cover bg-bottom rounded-t-xl p-6 sm:p-10 md:p-16 flex flex-col gap-8 sm:gap-12'>
+            <div className='relative z-10 md:absolute md:-bottom-[0%] w-full md:w-[80%] bg-[url(/footerbg.png)] bg-cover bg-bottom rounded-t-xl p-6 sm:p-10 md:p-16 flex flex-col gap-8 sm:gap-12'>
                 {/* Header Section */}
                 <div className='flex flex-col sm:flex-row sm:justify-between items-center gap-6 sm:gap-0'>
                     <div className='flex items-center'>

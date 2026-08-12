@@ -30,7 +30,7 @@ export default function Home() {
         <VideoCard
           videoSrc="/moreabout.mp4"
           badgeTitle="more about"
-          heading={"Union Copper Rod is undeniable\nthe most trusted copper rod\nmanufacturer in region"}
+          heading={"Union Copper Rod is undeniable the most trusted copper rod manufacturer in region"}
           buttonText="Company Profile"
           href="/aboutus"
         />
@@ -45,9 +45,10 @@ export default function Home() {
         </div>
       </ParallaxSection>
 
-      <ParallaxSection index={1}>
+      {/* FeaturedProducts: outside ParallaxSection so scale/overflow doesn't leave silver gaps around the image */}
+      <div className="relative w-full" style={{ zIndex: 11 }}>
         <FeaturedProducts />
-      </ParallaxSection>
+      </div>
 
       {/* WeCareSection: mounted outside ParallaxSection so mobile horizontal scroll works (no overflow-hidden + transform ancestor) */}
       <div className="relative w-full" style={{ zIndex: 12 }}>

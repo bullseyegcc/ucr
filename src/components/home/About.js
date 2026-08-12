@@ -4,65 +4,146 @@ import { useEffect, useRef } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { Badge } from "../../common/badge.js";
-import AboutStats from './AboutStats.js';
-import TextReveal from "../../animations/TextReveal.js";
+import badgeIcon from '../../../public/badge.png';
 import gsap from 'gsap';
 import CardAnimation from '../../animations/CardAnimation.js';
 
+const HEADING_TEXT =
+  'Shaping the Future With Copper From the UAE to global markets, we deliver premium copper solutions engineered for performance, reliability, and sustainable progress.';
+
+function splitIntoWordSpans(element) {
+  const wordSpans = [];
+
+  function processElement(node) {
+    Array.from(node.childNodes).forEach((child) => {
+      if (child.nodeType === Node.TEXT_NODE) {
+        const text = child.textContent;
+        if (!text.trim()) return;
+        const fragment = document.createDocumentFragment();
+        text.split(/(\s+)/).forEach((word) => {
+          if (word.trim()) {
+            const span = document.createElement('span');
+            span.textContent = word;
+            span.className = 'word-span';
+            span.style.color = '#C8C8C8';
+            fragment.appendChild(span);
+            wordSpans.push(span);
+          } else if (word) {
+            fragment.appendChild(document.createTextNode(word));
+          }
+        });
+        child.parentNode.replaceChild(fragment, child);
+      } else if (child.nodeType === Node.ELEMENT_NODE) {
+        processElement(child);
+      }
+    });
+  }
+
+  processElement(element);
+  return wordSpans;
+}
+
 export default function About({ lockProgressRef = null }) {
   const headingRef = useRef(null);
+  const smoothedProgressRef = useRef(0);
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !lockProgressRef) return;
+    if (typeof window === 'undefined' || !headingRef.current) return;
+
     let colorTl;
+    let rafId;
     const timerId = setTimeout(() => {
       const h1 = headingRef.current;
       if (!h1) return;
-      const wordSpans = Array.from(h1.querySelectorAll('.word-span'));
+
+      const wordSpans = splitIntoWordSpans(h1);
       if (!wordSpans.length) return;
-      wordSpans.forEach((span) => { span.style.webkitTextFillColor = ''; });
+
       const targetColor = '#FA6E43';
       colorTl = gsap.timeline({ paused: true });
-      wordSpans.forEach((span, i) => {
-        colorTl.to(span, { color: targetColor, duration: 1, ease: 'none' }, i);
+      colorTl.to(wordSpans, {
+        color: targetColor,
+        duration: 1,
+        ease: 'power2.inOut',
+        stagger: 0.06,
       });
-      lockProgressRef.current = (p) => colorTl.progress(p);
-    }, 300);
+
+      if (lockProgressRef) {
+        lockProgressRef.current = (p) => {
+          const target = gsap.utils.clamp(0, 1, p);
+          const tick = () => {
+            const current = smoothedProgressRef.current;
+            const next = current + (target - current) * 0.12;
+            smoothedProgressRef.current = Math.abs(target - next) < 0.001 ? target : next;
+            colorTl.progress(smoothedProgressRef.current);
+            if (smoothedProgressRef.current !== target) {
+              rafId = requestAnimationFrame(tick);
+            }
+          };
+          if (rafId) cancelAnimationFrame(rafId);
+          rafId = requestAnimationFrame(tick);
+        };
+      }
+    }, 200);
+
     return () => {
       clearTimeout(timerId);
+      if (rafId) cancelAnimationFrame(rafId);
       colorTl?.kill();
-      lockProgressRef.current = null;
+      if (lockProgressRef) lockProgressRef.current = null;
     };
   }, [lockProgressRef]);
 
   return (
-    <div className="w-full h-auto bg-white flex flex-col">
-      <div className="relative flex flex-col lg:flex-row px-6 lg:px-10 pt-10 lg:pt-14 gap-6 lg:gap-6">
-        <div className="w-full lg:w-[60%] flex flex-col gap-5 lg:gap-8 z-10">
-          <Badge title="About Us" />
-          <TextReveal>
-            <h1 ref={headingRef} className="text-primary font-primary font-medium text-[20px] leading-[32px] tracking-[-0.53px] lg:text-[48px] lg:leading-[69.32px] lg:tracking-[-1.39px]">
-              Our UAE factory combines Advanced technology with global{' '}
-              <span className="text-gray-100">
-                expertise to produce high-quality copper products that meet international standards
-              </span>
-            </h1>
-          </TextReveal>
+    <div className="w-full shrink-0 pt-[4.5rem] sm:pt-[5rem] lg:pt-[5.5rem] pb-[1.25rem] lg:pb-[1.75rem]">
+      <div className="max-w-[100rem] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
+        <div className="relative w-full">
+          <div className="hidden lg:block absolute right-0 top-[4.5rem] lg:top-[5rem] w-[38%] max-w-[42rem] pointer-events-none z-0">
+            <Image
+              src="/aboutside.png"
+              alt="Copper coil"
+              width={900}
+              height={800}
+              priority
+              className="w-full h-auto object-contain object-right max-h-[min(52vh,34rem)] xl:max-h-[min(56vh,36rem)]"
+            />
+          </div>
 
-          <CardAnimation><Link href="/aboutus"><button className="bg-primary text-[14px] lg:text-xl w-[143px] lg:w-[199px] h-[41.4px] lg:h-[62px] px-[18px] lg:px-[26px] py-2 lg:py-3 text-white flex justify-between items-center gap-3 rounded-[33.42px] lg:rounded-[50px] [border:0.67px_solid_white] lg:[border:1px_solid_white]">
-            <span className="font-primary font-normal  leading-[19.65px] tracking-[-0.59px] text-center align-middle">Know more</span> <ArrowRight size={22} color="white" />
-          </button></Link></CardAnimation>
-         
-        </div>
-        <div className="w-80 lg:w-[45%] lg:static  absolute top-[70%] left-[20%] flex items-end justify-end pointer-events-none z-90 lg:z-0">
-          <Image
-            src="/aboutside.png"
-            alt="Factory Image"
-            width={900}
-            height={800}
-            className="w-[75%] lg:w-full object-contain"
-          />
+          <div className="relative z-10 flex flex-col gap-[0.625rem] sm:gap-[0.75rem] lg:gap-[1rem] w-full lg:max-w-[58%] xl:max-w-[62%]">
+            <div className="flex items-center gap-[0.625rem]">
+              <Image src={badgeIcon} alt="" width={20} height={20} className="object-contain shrink-0" />
+              <span className="text-[#9A9A9A] uppercase text-[0.6875rem] lg:text-[0.75rem] tracking-[0.14em] font-medium">
+                About Us
+              </span>
+            </div>
+
+            <div className="lg:hidden flex justify-center">
+              <Image
+                src="/aboutside.png"
+                alt="Copper coil"
+                width={900}
+                height={800}
+                priority
+                className="w-full max-w-[18rem] sm:max-w-[20rem] h-auto object-contain max-h-[28vh]"
+              />
+            </div>
+
+            <h1
+              ref={headingRef}
+              className="font-primary font-medium w-full max-w-[40rem] sm:max-w-[42rem] lg:max-w-[46rem] xl:max-w-[50rem] 2xl:max-w-[54rem] text-[clamp(1.75rem,1.2rem+1.55vw,3.375rem)] leading-[1.28] tracking-[-0.03em]"
+            >
+              {HEADING_TEXT}
+            </h1>
+
+            <CardAnimation>
+              <Link href="/aboutus">
+                <button className="bg-primary text-[0.875rem] lg:text-[1rem] min-w-[8.75rem] lg:min-w-[11.25rem] h-[2.5rem] lg:h-[3rem] px-[1.125rem] lg:px-[1.5rem] text-white inline-flex justify-between items-center gap-[0.625rem] rounded-full border border-white/30 hover:brightness-105 transition-all duration-300">
+                  <span className="font-primary font-normal tracking-[-0.025em]">Know more</span>
+                  <ArrowRight size={18} color="white" className="shrink-0" />
+                </button>
+              </Link>
+            </CardAnimation>
+          </div>
         </div>
       </div>
     </div>

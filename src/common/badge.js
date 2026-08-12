@@ -12,11 +12,11 @@ export  function Badge({ title }) {
     )
 }
 
-export function WhiteBadge({ title }) {
+export function WhiteBadge({ title, className = '' }) {
     return (
-        <div className="flex gap-3 text-white z-300">   
-            <Image src={white_badge_icon} alt="Badge Icon" width={24} height={24} className='object-contain' />
-            <span className='text-white uppercase'>{title}</span>
+        <div className={`flex items-center gap-2.5 text-white z-10 ${className}`}>   
+            <Image src={white_badge_icon} alt="" width={20} height={20} className='object-contain shrink-0' />
+            <span className='text-white uppercase text-xs sm:text-sm tracking-[0.08em] font-normal'>{title}</span>
         </div>
     )
 }

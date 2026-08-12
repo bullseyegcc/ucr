@@ -115,7 +115,7 @@ export default function sustainability() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 gap-4 lg:gap-6">
                     <CardAnimation index={3} className="min-h-[60vh] lg:full lg:row-span-2 lg:ml-10 rounded-xl overflow-hidden relative h-48 lg:h-auto group transition-all duration-400">
-                        <VideoPlayer src="/wecarethenature.mp4" width={600} height={800} className='w-full h-full' />
+                        <VideoPlayer src="/wecarethenature.mp4" width={600} height={800} className='absolute inset-0 w-full h-full object-cover' />
 
                         <h1 className="text-xl lg:text-3xl text-white absolute bottom-4 lg:bottom-9 left-4 lg:left-6">We care the Nature</h1>
 

@@ -14,9 +14,9 @@ export default function TextReveal({ children, className = '' }) {
     if (!container) return;
 
     let wordSpans = [];
+    let tween;
     const isMobile = window.innerWidth < 768;
 
-    // Helper: copy parent computed styles to wordSpan
     function copyParentStyles(wordSpan, parentStyles) {
       if (!parentStyles) return;
       wordSpan.style.color = parentStyles.color;
@@ -30,7 +30,6 @@ export default function TextReveal({ children, className = '' }) {
       wordSpan.style.fontFamily = parentStyles.fontFamily;
     }
 
-    // Function to get all computed styles from an element
     function getComputedStyles(element) {
       const computed = window.getComputedStyle(element);
       return {
@@ -46,23 +45,14 @@ export default function TextReveal({ children, className = '' }) {
       };
     }
 
-    // Function to apply styles to word span
     function applyStyles(wordSpan, parentStyles) {
       copyParentStyles(wordSpan, parentStyles);
       wordSpan.style.opacity = '0';
-      if (isMobile) {
-        // Step 3: Reduce mobile initial translateY
-        wordSpan.style.transform = 'translateY(12px)';
-        wordSpan.style.willChange = 'opacity, transform';
-        wordSpan.style.filter = '';
-      } else {
-        wordSpan.style.filter = 'blur(10px)';
-        wordSpan.style.willChange = 'opacity, filter';
-        wordSpan.style.transform = '';
-      }
+      wordSpan.style.transform = `translateY(${isMobile ? 12 : 24}px)`;
+      wordSpan.style.willChange = 'opacity, transform';
+      wordSpan.style.filter = '';
     }
 
-    // Recursively process all text nodes and wrap words in spans
     function processElement(element) {
       const parentStyles = getComputedStyles(element);
       Array.from(element.childNodes).forEach(node => {
@@ -91,64 +81,45 @@ export default function TextReveal({ children, className = '' }) {
       });
     }
 
+    function initAnimation() {
+      if (!container || wordSpans.length === 0) return;
+
+      tween = gsap.to(wordSpans, {
+        opacity: 1,
+        y: 0,
+        ease: 'power1.out',
+        stagger: { each: isMobile ? 0.02 : 0.04 },
+        scrollTrigger: {
+          trigger: container,
+          start: isMobile ? 'top 95%' : 'top 90%',
+          end: isMobile ? 'top 70%' : 'top 50%',
+          scrub: isMobile ? 0.5 : 1,
+          once: true,
+        },
+        onComplete: () => gsap.set(wordSpans, { willChange: 'auto', clearProps: 'transform' }),
+      });
+    }
+
     const timer = setTimeout(() => {
       wordSpans = [];
       processElement(container);
-
-      if (wordSpans.length > 0) {
-        const savedScrollY = window.scrollY;
-
-        if (isMobile) {
-          ScrollTrigger.update();
-        } else {
-          ScrollTrigger.refresh();
-          requestAnimationFrame(() => {
-            window.scrollTo({ top: savedScrollY, behavior: 'instant' });
-          });
-        }
-
-        const gsapConfig = isMobile
-          ? {
-              opacity: 1,
-              y: 0,
-              stagger: { each: 0.02 },
-              duration: 0.7,
-              scrollTrigger: {
-                trigger: container,
-                start: 'top 95%',
-                end: 'top 75%',
-                scrub: 0.3,
-              },
-              onComplete: () => gsap.set(wordSpans, { willChange: 'auto' }),
-            }
-          : {
-              opacity: 1,
-              filter: 'blur(0px)',
-              stagger: { each: 0.04 },
-              scrollTrigger: {
-                trigger: container,
-                start: 'top 110%',
-                end: 'top 40%',
-                scrub: 0.009,
-              },
-              onComplete: () => gsap.set(wordSpans, { willChange: 'auto' }),
-            };
-
-        gsap.to(wordSpans, gsapConfig);
-      }
+      if (wordSpans.length > 0) initAnimation();
     }, 150);
+
+    const onReady = () => {
+      tween?.scrollTrigger?.kill();
+      tween?.kill();
+      if (wordSpans.length > 0) initAnimation();
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('scrollAnimationsReady', onReady);
 
     return () => {
       clearTimeout(timer);
-      // Comment 1: Clean up ScrollTriggers and GSAP tweens
-      if (container) {
-        ScrollTrigger.getAll().forEach(trigger => {
-          if (trigger.trigger === container) {
-            trigger.kill();
-          }
-        });
-      }
-      if (wordSpans && wordSpans.length > 0) {
+      window.removeEventListener('scrollAnimationsReady', onReady);
+      tween?.scrollTrigger?.kill();
+      tween?.kill();
+      if (wordSpans.length > 0) {
         gsap.killTweensOf(wordSpans);
       }
     };

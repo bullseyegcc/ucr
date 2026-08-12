@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { VideoPlayer } from "./video";
 import { WhiteBadge } from "./badge.js";
@@ -11,29 +11,50 @@ export const VideoCard = ({
   badgeTitle, 
   heading, 
   buttonText = "Know More",
-  bgImage = "/bg.png",
   href = null
 }) => {
   const router = useRouter();
 
   return (
-    <div className="w-full  lg:w-1/2 h-90 lg:h-auto m-0 lg:m-2 relative bg-[#6A3120] flex flex-col justify-end mb-6 lg:mb-20 gap-5 rounded-lg lg:rounded-xl">
-      <VideoPlayer src={videoSrc} className="object-contain rounded-xl" />
-      <div className="absolute bottom-0 left-0 p-2 pb-4 lg:p-8 flex flex-col justify-end gap-4 lg:gap-5 w-full z-10">
-        <WhiteBadge title={badgeTitle} className='pl-2' />
-        <TextReveal index={3} className="relative">
-          <h1 className="relative z-[300] max-w-[82%] pl-2 font-primary font-normal text-[24px] leading-[31.79px] tracking-[-0.79px] lg:text-[42px] lg:leading-[56px] lg:tracking-[-1.39px] text-white whitespace-pre-line">
-            {heading}
-          </h1>
-        </TextReveal>
-        <button
-          onClick={() => href && router.push(href)}
-          className='relative z-10 w-full h-[45.192054748535156px] rounded-full lg:w-60 lg:h-auto mt-4 text-sm lg:text-lg flex items-center justify-center lg:justify-start gap-2 text-white border-[0.57px] border-white pl-[10.22px] pr-[10.22px] py-[11.81px] lg:px-4 lg:py-3 transition-all duration-300 hover:bg-white hover:text-[#6A3120] hover:gap-5'
-        >
-          <span className="font-primary font-normal text-[16px] leading-[16.69px] tracking-[-0.5px] text-center align-middle lg:text-[20px] lg:leading-[29.4px] lg:tracking-[-0.88px]">{buttonText}</span>
-          <ArrowRight size={16} />
-        </button>
-        <div className="h-[85%] lg:h-[130%] bg-gradient-to-t rounded-xl from-[#6A3120] to-[#6a3120] mt-10 absolute bottom-0 left-0 w-full z-0 bg-[url('/bg.png')] bg-cover bg-center">
+    <div className="relative w-full lg:w-1/2 min-h-[380px] sm:min-h-[440px] lg:min-h-[520px] max-h-[520px] sm:max-h-[580px] lg:max-h-[680px] lg:aspect-[4/5] overflow-hidden rounded-lg lg:rounded-xl mb-6 lg:mb-20 m-0 lg:m-2">
+      {/* Full-bleed background video */}
+      <div className="absolute inset-0">
+        <VideoPlayer
+          src={videoSrc}
+          className="h-full w-full object-cover rounded-lg lg:rounded-xl"
+        />
+      </div>
+
+      {/* Dark gradient overlay — heaviest at bottom */}
+      <div
+        className="absolute inset-0 z-[1] rounded-lg lg:rounded-xl pointer-events-none"
+        style={{
+          background:
+            'linear-gradient(to top, #2B0F0A 0%, rgba(43, 15, 10, 0.88) 40%, rgba(43, 15, 10, 0.25) 70%, transparent 100%)',
+        }}
+      />
+
+      {/* Bottom-aligned content */}
+      <div className="absolute inset-0 z-10 flex flex-col justify-end p-6 sm:p-8 lg:p-10 lg:pb-12">
+        <div className="flex flex-col">
+          <WhiteBadge title={badgeTitle} />
+
+          <TextReveal index={3} className="relative mt-6">
+            <h2 className="relative z-[2] max-w-[88%] sm:max-w-[82%] lg:max-w-[75%] xl:max-w-[min(75%,36rem)] font-primary font-normal text-white text-[24px] leading-[1.15] tracking-[-0.79px] sm:text-[30px] sm:leading-[1.12] lg:text-[42px] lg:leading-[1.1] lg:tracking-[-1.39px] whitespace-pre-line">
+              {heading}
+            </h2>
+          </TextReveal>
+
+          <button
+            type="button"
+            onClick={() => href && router.push(href)}
+            className="relative z-[2] mt-8 w-fit rounded-full border border-white bg-transparent px-5 py-3 lg:px-6 lg:py-3.5 flex items-center gap-2.5 text-white transition-all duration-300 hover:bg-white hover:text-[#2B0F0A]"
+          >
+            <span className="font-primary font-normal text-[15px] leading-none tracking-[-0.5px] lg:text-[18px] lg:tracking-[-0.66px]">
+              {buttonText}
+            </span>
+            <ArrowDown size={16} strokeWidth={1.5} aria-hidden="true" />
+          </button>
         </div>
       </div>
     </div>

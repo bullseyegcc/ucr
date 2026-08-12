@@ -24,7 +24,7 @@ export default function Logistics() {
                     UCR has a higher delivery capacity in the Copper Industry
                 </FadeIn>
                 <div className='absolute -bottom-[40%] lg:-bottom-[70%] h-60 sm:h-[70vh] w-[95%] ' >
-                    <VideoPlayer src="/logisticsvid.mp4" className="rounded-3xl " />
+                    <VideoPlayer src="/logisticsvid.mp4" className="w-full h-full object-cover rounded-3xl" />
                 </div>
 
 
@@ -193,7 +193,7 @@ export default function Logistics() {
 
                 <div className="w-full h-[60vh] lg:h-screen relative z-50">
 
-                    <VideoPlayer src="/globalpresence.mp4" className="" />
+                    <VideoPlayer src="/globalpresence.mp4" className="w-full h-full object-cover" />
 
                 </div>
             </div>

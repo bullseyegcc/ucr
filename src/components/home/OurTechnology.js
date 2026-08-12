@@ -14,24 +14,38 @@ import ParallaxSection from "../../animations/ParallaxSection";
 const TECHNOLOGIES = [
   {
     id: 0,
-    title: "Southwire Technology",
+    title: "CCR Technology",
     description:
-      "UCR always maintains that the foremost benefit of any latest technology, if applied to an efficient operation, will automatically magnify the efficiency. This in turn will empower people and will bring out the best in quality as well as productivity.",
+      "Southwire SCR® Continuous Casting and Rolling Technology. Our Southwire SCR® continuously transforms high-purity copper cathodes into premium 8 mm, 12.5 mm, and 16 mm ETP copper rod, delivering exceptional quality, efficiency, and production reliability.",
     backgroundImage: "url('/technology3-3.png')",
   },
   {
     id: 1,
-    title: "Cooper treatments",
+    title: "Rod Breakdown Technology",
     description:
-      "Advanced copper treatment processes designed to enhance durability and performance. Our innovative approach ensures superior quality in every product we manufacture.",
+      "Advanced multi-stage rod breakdown lines convert ETP copper rod into precision drawn wire with consistent diameter, superior surface quality, and high electrical conductivity for demanding applications.",
     backgroundImage: "url('/technology1-1.png')",
   },
   {
     id: 2,
-    title: "NexGen Solutions",
+    title: "Tin Coating Technology",
     description:
-      "Next-generation solutions for modern manufacturing challenges. We combine cutting-edge technology with proven expertise to deliver exceptional results.",
+      "State-of-the-art tin coating processes apply uniform protective layers to copper wire, enhancing corrosion resistance and extending product life for electrical, solar, and industrial applications.",
     backgroundImage: "url('/technology2-2.png')",
+  },
+  {
+    id: 3,
+    title: "Upwards Vertical Continuous Casting",
+    description:
+      "Upwards vertical continuous casting technology enables the production of high-purity copper with precise metallurgical control, supporting specialty grades including oxygen-free copper.",
+    backgroundImage: "url('/technology2.png')",
+  },
+  {
+    id: 4,
+    title: "Advanced Copper Recycling",
+    description:
+      "Our advanced copper recycling capabilities recover and refine secondary copper to meet the highest environmental standards, reducing waste while maintaining premium product quality.",
+    backgroundImage: "url('/technology3.png')",
   },
 ];
 

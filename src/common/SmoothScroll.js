@@ -11,7 +11,6 @@ export default function SmoothScroll() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Mobile: native smooth scroll
     const isMobile = window.innerWidth < 768;
     if (isMobile) {
       document.documentElement.style.scrollBehavior = 'smooth';
@@ -22,54 +21,54 @@ export default function SmoothScroll() {
     let lenis;
     let splashListener;
     let timer;
+    let refreshTimer;
 
     const setupLenis = () => {
       lenis = new Lenis({
         smoothWheel: true,
         syncTouch: true,
-        lerp: 0.1,
+        lerp: 0.08,
         autoRaf: false,
       });
 
       window.lenisInstance = lenis;
+      window.dispatchEvent(new CustomEvent('lenisReady'));
+      if (window.__pageScrollLocked) {
+        lenis.stop();
+      }
 
-      // Connect with GSAP ticker
-      unsubscribe = () => gsap.ticker.remove((time) => {
+      // Lenis 1.x drives native window scroll — do not use scrollerProxy.
+      // Proxying scrollTop through lenis.scrollTo({ immediate: true }) kills
+      // wheel momentum every time ScrollTrigger pins or unpins.
+      const onTicker = (time) => {
         lenis.raf(time * 1000);
-      });
-      gsap.ticker.add((time) => {
-        lenis.raf(time * 1000);
-      });
+      };
+      gsap.ticker.add(onTicker);
+      unsubscribe = () => gsap.ticker.remove(onTicker);
 
-      // Disable GSAP lag smoothing
       gsap.ticker.lagSmoothing(0);
 
-      // Monitor scroll
-      lenis.on('scroll', () => {
-        ScrollTrigger.update();
-      });
+      lenis.on('scroll', ScrollTrigger.update);
 
-      // Refresh ScrollTrigger
-      setTimeout(() => {
+      refreshTimer = setTimeout(() => {
         ScrollTrigger.refresh();
-      }, 50);
+        window.dispatchEvent(new CustomEvent('scrollAnimationsReady'));
+      }, 100);
     };
 
-    // Step 4: Coordinate Lenis initialization
     if (window.__splashActive) {
-      // Splash is running, wait for splashComplete event
       splashListener = () => {
         setupLenis();
         window.removeEventListener('splashComplete', splashListener);
       };
       window.addEventListener('splashComplete', splashListener);
     } else {
-      // No splash, start as usual
       timer = setTimeout(setupLenis, 150);
     }
 
     return () => {
       if (timer) clearTimeout(timer);
+      if (refreshTimer) clearTimeout(refreshTimer);
       if (unsubscribe) unsubscribe();
       if (lenis) {
         lenis.destroy();
@@ -83,9 +82,3 @@ export default function SmoothScroll() {
 
   return null;
 }
-
-
-
-
-
-

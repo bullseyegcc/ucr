@@ -1,6 +1,10 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function CardAnimation({ children, index = 0, className = '' }) {
   const cardRef = useRef(null);
@@ -10,32 +14,43 @@ export default function CardAnimation({ children, index = 0, className = '' }) {
     const card = cardRef.current;
     if (!card) return;
 
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(80px)';
-    card.style.filter = 'blur(6px)';
-    card.style.transition =
-      'opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), filter 1.8s cubic-bezier(0.16, 1, 0.3, 1)';
+    let tween;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0px)';
-            card.style.filter = 'blur(0px)';
-          }, index * 75);
-        } else {
-          const exitingAbove = entry.boundingClientRect.top > 0;
-          card.style.opacity = '0';
-          card.style.filter = 'blur(6px)';
-          card.style.transform = exitingAbove ? 'translateY(80px)' : 'translateY(-50px)';
+    function initAnimation() {
+      tween?.scrollTrigger?.kill();
+      tween?.kill();
+      tween = gsap.fromTo(
+        card,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          delay: index * 0.12,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 92%',
+            toggleActions: 'play none none none',
+            once: true,
+          },
         }
-      },
-      { threshold: 0.18 }
-    );
+      );
+    }
 
-    observer.observe(card);
-    return () => observer.disconnect();
+    const timer = setTimeout(initAnimation, 200);
+    const onReady = () => {
+      initAnimation();
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('scrollAnimationsReady', onReady);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scrollAnimationsReady', onReady);
+      tween?.scrollTrigger?.kill();
+      tween?.kill();
+    };
   }, [index]);
 
   return (

@@ -2,11 +2,45 @@ import StatsCard from "../../common/StatsCard";
 
 export default function AboutStats() {
   return (
-    <div className="overflow-visible w-full h-auto bg-white grid grid-cols-2 lg:grid-cols-4 px-2 lg:px-10 py-3 lg:py-8 gap-3 lg:gap-6 relative z-10">
-      <div className="stat-card-item w-full"><StatsCard mainHeading={2009} showPlus={false} subHeading="Established In" description="Since then, our excellence has made us a trusted name in copper manufacturing." /></div>
-      <div className="stat-card-item w-full"><StatsCard mainHeading={20} showPlus={true} subHeading="MT/Annum" description="Produces 20,000 metric tons of copper per year." /></div>
-      <div className="stat-card-item w-full"><StatsCard mainHeading={150} showPlus={true} subHeading="Employees" description="With over 150 experienced employees, we deliver quality and reliability every day." /></div>
-      <div className="stat-card-item w-full"><StatsCard mainHeading={50} showPlus={true} subHeading="Global sales" description="With a presence in 50+ countries, we serve clients on every continent." /></div>
+    <div className="overflow-hidden w-full shrink-0 bg-[#F4F4F2]">
+      <div className="max-w-[100rem] mx-auto grid grid-cols-2 lg:grid-cols-4 px-[1rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] pt-[1.25rem] pb-[1rem] lg:pt-[2rem] lg:pb-[1.25rem] gap-[0.75rem] lg:gap-[1.25rem]">
+        <div className="stat-card-item w-full min-w-0">
+          <StatsCard
+            displayValue="17"
+            showPlus
+            subHeading="Years of Excellence Experience"
+            description="Delivering trusted copper solutions since 2008."
+            index={0}
+          />
+        </div>
+        <div className="stat-card-item w-full min-w-0">
+          <StatsCard
+            displayValue="200K"
+            showPlus
+            subHeading="MT/Annual Capacity"
+            description="State-of-the-art production facilities ensure consistent high-volume output."
+            index={1}
+          />
+        </div>
+        <div className="stat-card-item w-full min-w-0">
+          <StatsCard
+            displayValue="250"
+            showPlus
+            subHeading="Skilled Employees"
+            description="A dedicated team of experts committed to quality and innovation."
+            index={2}
+          />
+        </div>
+        <div className="stat-card-item w-full min-w-0">
+          <StatsCard
+            displayValue="50"
+            showPlus
+            subHeading="Global Reach"
+            description="Serving customers across more than 50 countries worldwide."
+            index={3}
+          />
+        </div>
+      </div>
     </div>
   );
 }

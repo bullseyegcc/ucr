@@ -1,10 +1,20 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CountUp from '../animations/countup';
 
+gsap.registerPlugin(ScrollTrigger);
 
-export default function StatsCard({ mainHeading, subHeading, description, showPlus = true }) {
+export default function StatsCard({
+  mainHeading,
+  displayValue,
+  subHeading,
+  description,
+  showPlus = true,
+  index = 0,
+}) {
   const cardRef = useRef(null);
   const [hovered, setHovered] = useState(false);
 
@@ -13,58 +23,111 @@ export default function StatsCard({ mainHeading, subHeading, description, showPl
     const card = cardRef.current;
     if (!card) return;
 
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(80px)';
-    card.style.filter = 'blur(6px)';
-    card.style.transition =
-      'opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), filter 1.8s cubic-bezier(0.16, 1, 0.3, 1)';
+    let tween;
+    let played = false;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0px)';
-          card.style.filter = 'blur(0px)';
-        } else {
-          const exitingAbove = entry.boundingClientRect.top > 0;
-          card.style.opacity = '0';
-          card.style.filter = 'blur(6px)';
-          card.style.transform = exitingAbove ? 'translateY(80px)' : 'translateY(-50px)';
+    function playIn() {
+      if (played || !card) return;
+      played = true;
+      tween?.scrollTrigger?.kill();
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: index * 0.1,
+        ease: 'power2.out',
+        overwrite: true,
+      });
+    }
+
+    function initAnimation() {
+      if (played) return;
+      tween?.scrollTrigger?.kill();
+      tween?.kill();
+      gsap.set(card, { opacity: 0, y: 32 });
+      tween = gsap.fromTo(
+        card,
+        { opacity: 0, y: 32 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          delay: index * 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 98%',
+            toggleActions: 'play none none none',
+            once: true,
+            onEnter: () => { played = true; },
+          },
         }
-      },
-      { threshold: 0.05 }
-    );
+      );
+    }
 
-    observer.observe(card);
-    return () => observer.disconnect();
-  }, []);
+    const timer = setTimeout(initAnimation, 300);
+    const readyTimer = window.__heroAboutPlaced ? setTimeout(playIn, 50) : null;
+    const onReady = () => {
+      initAnimation();
+      ScrollTrigger.refresh();
+    };
+    const onAboutPlaced = (e) => {
+      if (!e.detail?.placed) return;
+      ScrollTrigger.refresh();
+      playIn();
+    };
+
+    window.addEventListener('scrollAnimationsReady', onReady);
+    window.addEventListener('heroAboutPlaced', onAboutPlaced);
+
+    return () => {
+      clearTimeout(timer);
+      if (readyTimer) clearTimeout(readyTimer);
+      window.removeEventListener('scrollAnimationsReady', onReady);
+      window.removeEventListener('heroAboutPlaced', onAboutPlaced);
+      tween?.scrollTrigger?.kill();
+      tween?.kill();
+    };
+  }, [index]);
 
   return (
     <div
       ref={cardRef}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="h-auto flex flex-col gap-3 lg:gap-8 px-2 lg:px-8 relative mt-3 lg:mt-10 group cursor-pointer transition-transform duration-500 ease-out min-w-0 "
+      className="h-auto flex flex-col gap-[0.75rem] lg:gap-[1rem] px-[0.25rem] lg:px-[1rem] relative group cursor-pointer transition-transform duration-500 ease-out min-w-0"
     >
-      <h1
+      <h2
         style={hovered ? { color: '#FA6E43', WebkitTextFillColor: '#FA6E43', background: 'none' } : {}}
-        className="font-primary font-medium text-[34px] leading-[38px] lg:text-[clamp(48px,5.5vw,84px)] lg:leading-[1.1] tracking-[-1.38px] z-99 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent transition-all duration-500 ease-out"
+        className="font-primary font-medium text-[clamp(2.25rem,1.75rem+2.25vw,4.75rem)] leading-[1] tracking-[-0.04em] bg-gradient-to-b from-primary via-[#FF8A5C] to-[#FFD0BC] bg-clip-text text-transparent transition-all duration-500 ease-out"
       >
-        <CountUp
-          from={0}
-          to={mainHeading}
-          separator=","
-          direction="up"
-          duration={1}
-          className="count-up-text"
-        />
-        {showPlus && <span>+</span>}
-
-      </h1>
-      <hr className="border-t border-secondary transition-all duration-400 ease-out group-hover:border-primary" />
+        {displayValue != null ? (
+          <>
+            {displayValue}
+            {showPlus && <span>+</span>}
+          </>
+        ) : (
+          <>
+            <CountUp
+              from={0}
+              to={mainHeading}
+              separator=","
+              direction="up"
+              duration={1}
+              className="count-up-text"
+            />
+            {showPlus && <span>+</span>}
+          </>
+        )}
+      </h2>
+      <hr className="border-t border-[#D0D0CE] transition-all duration-400 ease-out group-hover:border-primary" />
       <div className="transition-transform duration-400 ease-out group-hover:translate-x-1">
-          <h1 className="font-primary font-medium text-[16px] lg:text-[26px] leading-[22px] lg:leading-[28px] tracking-[-1.5px] align-middle">{subHeading}</h1>
-          <p className="font-primary font-medium text-sm lg:text-lg leading-[20px] lg:leading-[28px] tracking-[-0.68px] align-middle mt-2 lg:mt-4 text-[#212225]/55">{description}</p>
+        <h3 className="font-primary font-medium text-[1rem] lg:text-[1.5rem] leading-tight tracking-[-0.03em] text-[#212225]">
+          {subHeading}
+        </h3>
+        <p className="font-primary font-normal text-[0.875rem] lg:text-[1.125rem] leading-[1.45] tracking-[-0.02em] mt-[0.5rem] lg:mt-[0.75rem] text-[#212225]/50">
+          {description}
+        </p>
       </div>
     </div>
   );

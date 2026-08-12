@@ -11,32 +11,45 @@ export const Navbar = () => {
     const [expandedSection, setExpandedSection] = useState(null);
     const [isScrolled, setIsScrolled] = useState(false);
     const pathname = usePathname();
+    const isHome = pathname === '/';
 
-    // Scroll detection for navbar opacity and sticky behavior
+    // Homepage: solid full-width bar when About is placed.
+    // Other pages: switch after scrolling past the hero.
     useEffect(() => {
         let ticking = false;
 
         const handleScroll = () => {
             if (!ticking) {
                 window.requestAnimationFrame(() => {
-                    // Hero section threshold - adjust as needed (80vh or 600px)
-                    const heroThreshold = Math.min(window.innerHeight * 0.8, 600);
-                    setIsScrolled(window.scrollY > heroThreshold);
+                    if (isHome) {
+                        const placed = !!window.__heroAboutPlaced;
+                        const scrolled = (window.scrollY || 0) > 8;
+                        setIsScrolled(placed || scrolled);
+                    } else {
+                        const heroThreshold = Math.min(window.innerHeight * 0.8, 600);
+                        setIsScrolled(window.scrollY > heroThreshold);
+                    }
                     ticking = false;
                 });
                 ticking = true;
             }
         };
 
-        // Add scroll event listener
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        
-        // Check initial scroll position
-        handleScroll();
+        const onAboutPlaced = (e) => {
+            if (!isHome) return;
+            setIsScrolled(!!e.detail?.placed || (window.scrollY || 0) > 8);
+        };
 
-        // Cleanup
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('heroAboutPlaced', onAboutPlaced);
+        handleScroll();
+        if (isHome && window.__heroAboutPlaced) setIsScrolled(true);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('heroAboutPlaced', onAboutPlaced);
+        };
+    }, [isHome]);
 
     const isActivePage = (href) => {
         return pathname === href || pathname.startsWith(href + '/');
@@ -147,8 +160,8 @@ export const Navbar = () => {
                 </Link>
             </div>
 
-            {/* Spacer to prevent content from hiding behind fixed navbar */}
-            <div className={`${isScrolled ? 'h-16 sm:h-20 lg:h-40' : 'h-0'}`} />
+            {/* Spacer for fixed navbar — skip on home; About already pads for the bar */}
+            <div className={`${isScrolled && !isHome ? 'h-16 sm:h-20 lg:h-40' : 'h-0'}`} />
 
             {/* Slide-in Menu - Fully Responsive */}
             {isMenuOpen && (

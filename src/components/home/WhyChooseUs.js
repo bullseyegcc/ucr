@@ -21,7 +21,7 @@ export default function WhyChooseUs() {
           <Badge title="Core Strength" />
         </SlideIn>
         <FadeIn className=" mt-6" scrollTrigger={true} duration={0.8}>
-          <h1 className="   font-medium text-[#272A2A] text-[32px] leading-[36px] tracking-[-1.4px] align-middle lg:text-[64px] lg:leading-[72px] lg:tracking-[-1.4px]">Why choose us</h1>
+          <h1 className="   font-medium text-[#272A2A] text-[32px] leading-[36px] tracking-[-1.4px] align-middle lg:text-[64px] lg:leading-[72px] lg:tracking-[-1.4px]">We are different</h1>
         </FadeIn>
       </div>
 
@@ -29,12 +29,17 @@ export default function WhyChooseUs() {
 
         {/* ── Featured left card ─────────────────────────────────────── */}
         <div
-          className=" h-[60vh] lg:h-full relative  flex flex-col justify-between items-start row-span-2 bg-[url('/excellence.png')] bg-cover bg-center lg:ml-10 rounded-xl group cursor-pointer transition-all duration-400 ease-out"
+          className="h-[60vh] lg:h-full relative row-span-2 lg:ml-10 rounded-xl overflow-hidden group cursor-pointer transition-all duration-400 ease-out"
           style={{ willChange: 'transform, opacity' }}
         >
-          <VideoPlayer src="/excellence.mp4" className="object-contain rounded-2xl" />
-          <Image data-fi src="/sign.png" alt="Icon" width={80} height={0} className="absolute top-5 px-10" style={{ willChange: 'transform, opacity' }} />
-          <div className="text-white absolute bottom-10 px-10">
+          <div className="absolute inset-0">
+            <VideoPlayer
+              src="/excellence.mp4"
+              className="h-full w-full object-cover rounded-xl"
+            />
+          </div>
+          <Image data-fi src="/sign.png" alt="Icon" width={80} height={0} className="absolute top-5 px-10 z-10" style={{ willChange: 'transform, opacity' }} />
+          <div className="text-white absolute bottom-10 px-10 z-10">
             <h1 data-ft className="text-3xl" style={{ willChange: 'transform, opacity' }}>UAE excellence</h1>
             <p data-fd className="text-sm mt-2" style={{ willChange: 'transform, opacity' }}>Factory in a world-class industrial hub</p>
           </div>
@@ -43,14 +48,41 @@ export default function WhyChooseUs() {
         {/* ── Small cards with scroll reveal container ────────────────────────────────────────────── */}
 
         {[
-          { src: '/gn.png', h: 0, title: 'Global network', w: 140 },
-          { src: '/tn.png', h: 40, title: 'Top-notch certified', w: 140 },
-          { src: '/sf.png', h: 40, title: 'Sustainable future', w: 140 },
-          { src: '/p.png', h: 40, title: 'Partnership approach', w: 140 },
+          {
+            src: '/gn.png',
+            h: 0,
+            title: 'Global network',
+            w: 140,
+            description:
+              "UCR's range of products, services, and solutions makes it a single source for various copper-related needs, with connection of international institutions",
+          },
+          {
+            src: '/p.png',
+            h: 40,
+            title: 'Partnership approach',
+            w: 140,
+            description:
+              'We strive to partner with those who share a genuine commitment to growing together. We work towards building long-term relationships',
+          },
+          {
+            src: '/sf.png',
+            h: 40,
+            title: 'Sustainable innovation',
+            w: 140,
+            description:
+              'Making sure we meet the highest environmental standards, procure the relevant certifications, and focus on secondary copper recycling',
+          },
+          {
+            src: '/ribbin.png',
+            h: 40,
+            title: 'Solution providers',
+            w: 140,
+            description:
+              'We are introducing new products, and aspire to be a one stop shop, to effectively meet and surpass client needs',
+          },
         ].map((card) => (
-          <CardAnimation>
+          <CardAnimation key={card.title}>
             <div
-              key={card.title}
               className="w-full h-full bg-white rounded-xl p-8 flex flex-col justify-between  group cursor-pointer transition-all duration-400 ease-out"
             >
               <Image
@@ -75,7 +107,7 @@ export default function WhyChooseUs() {
                   className="   font-normal text-[15.5px] leading-[23.74px] tracking-[-0.85px] align-middle lg:text-[19.2px] lg:leading-[29.4px] lg:tracking-[-1.05px]"
                   style={{ willChange: 'transform, opacity' }}
                 >
-                  Factory in a world-class industrial hub
+                  {card.description}
                 </p>
               </div>
             </div>

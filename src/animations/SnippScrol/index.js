@@ -17,8 +17,8 @@
  *  │   only appears after all panels have been seen.
  *  │
  *  ├─ [panel 0]  position:absolute, inset:0  ← visible first
- *  ├─ [panel 1]  position:absolute, inset:0, y:100%  ← slides up on scroll
- *  ├─ [panel 2]  position:absolute, inset:0, y:100%
+ *  ├─ [panel 1]  position:absolute, inset:0, yPercent:100  ← slides up on scroll
+ *  ├─ [panel 2]  position:absolute, inset:0, yPercent:100
  *  └─ …
  *
  *  Master GSAP timeline (scrubbed):
@@ -28,11 +28,15 @@
  *
  * Props
  * ─────
- *  scrub        {number}   scroll lag / inertia            (default 1.5)
- *  mobileScrub  {number}   scrub on ≤768 px                (default 1)
+ *  scrub        {number}   scroll lag / inertia            (default 0.5)
+ *  mobileScrub  {number}   scrub on ≤768 px                (default 0.3)
  *  snapDuration {number}   snap settle seconds             (default 0.5)
  *  enableSnap   {boolean}  GSAP snap to nearest panel      (default true)
  *  enableExit   {boolean}  scale+fade previous panel out   (default true)
+ *  ease         {string}   panel slide ease (use 'none' for scrub) (default 'none')
+ *  lockAtEnd    {number}   extra hold after last panel     (default 0)
+ *  lockPageUntilComplete {boolean}  freeze page scroll until the last
+ *                      panel is fully placed, then unlock  (default false)
  *  grain        {boolean}  cinematic grain overlay          (default false)
  *  grainOpacity {number}   grain strength                  (default 0.038)
  */
@@ -56,14 +60,17 @@ export default function SnippScrol({
   snapDuration   = 0.5,
   enableSnap     = true,
   enableExit     = true,
+  ease           = 'none',
   grain          = false,
   grainOpacity   = 0.038,
   lockAtEnd      = 0,
+  lockPageUntilComplete = false,
   onLockProgress = null,
 }) {
   const containerRef = useRef(null);
   const sectionsRef  = useRef([]);
   const ctxRef       = useRef(null);
+  const lockCleanupRef = useRef(null);
   const instanceId   = useRef(newId());
 
   const childArray = Array.isArray(children)
@@ -78,6 +85,8 @@ export default function SnippScrol({
     if (!container || sections.length < 1) return;
 
     // Clean up any prior run
+    lockCleanupRef.current?.();
+    lockCleanupRef.current = null;
     ctxRef.current?.revert();
 
     const isMobile    = window.innerWidth < 768;
@@ -89,9 +98,11 @@ export default function SnippScrol({
     ctxRef.current = gsap.context(() => {
 
       // ── Position all panels absolutely inside the 100vh container ────────
-      // overflow-y: auto so tall content can be scrolled within the panel (no clip)
+      // overflow hidden so panels cannot steal wheel events from Lenis during pin
       const isMobile = window.innerWidth < 768;
+      const lastPanelIndex = sections.length - 1;
       sections.forEach((section, i) => {
+        const isLastPanel = i === lastPanelIndex;
         gsap.set(section, {
           position: 'absolute',
           top:      0,
@@ -99,10 +110,13 @@ export default function SnippScrol({
           width:    '100%',
           height:   '100%',
           zIndex:   10 + i,
-          y: (i === 0 ? '0%' : '100%'),
+          yPercent: (i === 0 ? 0 : 100),
           overflowX: 'hidden',
-          overflowY: 'auto',
-          WebkitOverflowScrolling: 'touch',
+          overflowY: 'hidden',
+          overscrollBehavior: 'none',
+          scrollPaddingTop: isLastPanel
+            ? (window.innerWidth >= 1024 ? '10rem' : '7rem')
+            : undefined,
         });
       });
 
@@ -117,9 +131,9 @@ export default function SnippScrol({
         // ✅ Use force3D for GPU acceleration on transforms
         tl.fromTo(
           section,
-          { y: '100%', force3D: true },
-          { y: '0%', ease: 'none', duration: 1, force3D: true },
-          (i - 1)   // absolute position in the timeline
+          { yPercent: 100, force3D: true },
+          { yPercent: 0, ease, duration: 1, force3D: true },
+          (i - 1)
         );
 
         // Optional: outgoing panel scales down and fades slightly
@@ -136,9 +150,149 @@ export default function SnippScrol({
 
       // ── Extend tl duration for the lock-at-end phase ─────────────────────
       const panelDuration = total - 1;
-      if (lockAtEnd > 0) {
+      if (lockAtEnd > 0 && !lockPageUntilComplete) {
         const _dummy = {};
         tl.to(_dummy, { duration: lockAtEnd }, panelDuration);
+      }
+
+      // Freeze document scroll and drive the overlay from wheel/touch until
+      // the incoming panel is fully placed, then unlock page scroll.
+      if (lockPageUntilComplete) {
+        const startPlaced = (window.scrollY || 0) > 8;
+        let target = startPlaced ? 1 : 0;
+        let current = target;
+        let rafId = 0;
+        let locked = !startPlaced;
+
+        tl.progress(current);
+
+        let lastPlaced = startPlaced;
+        window.__heroAboutPlaced = startPlaced;
+        const emitPlaced = (placed) => {
+          if (placed === lastPlaced) return;
+          lastPlaced = placed;
+          window.__heroAboutPlaced = placed;
+          window.dispatchEvent(new CustomEvent('heroAboutPlaced', { detail: { placed } }));
+          if (placed) {
+            ScrollTrigger.refresh();
+            window.dispatchEvent(new CustomEvent('scrollAnimationsReady'));
+          }
+        };
+
+        const setLocked = (next) => {
+          locked = next;
+          window.__pageScrollLocked = next;
+          const lenis = window.lenisInstance;
+          if (lenis) {
+            if (next) lenis.stop();
+            else lenis.start();
+          }
+          if (window.innerWidth < 768) {
+            document.documentElement.style.overflow = next ? 'hidden' : '';
+            document.body.style.overflow = next ? 'hidden' : '';
+          }
+        };
+
+        setLocked(locked);
+
+        const reportLockProgress = (p) => {
+          if (!onLockProgress) return;
+          onLockProgress(Math.max(0, Math.min(1, (p - 0.7) / 0.3)));
+        };
+
+        const tick = () => {
+          current += (target - current) * 0.22;
+          if (Math.abs(target - current) < 0.0008) current = target;
+          tl.progress(current);
+          reportLockProgress(current);
+          if (current >= 1 && target >= 1) {
+            setLocked(false);
+            emitPlaced(true);
+          } else if (current < 1) {
+            setLocked(true);
+            emitPlaced(false);
+          }
+          rafId = current !== target ? requestAnimationFrame(tick) : 0;
+        };
+
+        const addProgress = (deltaPx) => {
+          const dist = window.innerHeight * 1.05;
+          target = Math.max(0, Math.min(1, target + deltaPx / dist));
+          if (!rafId) rafId = requestAnimationFrame(tick);
+        };
+
+        const scrollPos = () => window.lenisInstance?.scroll ?? window.scrollY ?? 0;
+
+        const onWheel = (e) => {
+          const atTop = scrollPos() <= 1;
+          if (e.deltaY > 0 && target < 1) {
+            e.preventDefault();
+            addProgress(e.deltaY);
+            return;
+          }
+          if (e.deltaY < 0 && atTop && current > 0) {
+            e.preventDefault();
+            addProgress(e.deltaY);
+          }
+        };
+
+        let touchY = 0;
+        const onTouchStart = (e) => {
+          touchY = e.touches[0].clientY;
+        };
+        const onTouchMove = (e) => {
+          const y = e.touches[0].clientY;
+          const dy = touchY - y;
+          touchY = y;
+          const atTop = scrollPos() <= 1;
+          if (dy > 0 && target < 1) {
+            e.preventDefault();
+            addProgress(dy);
+            return;
+          }
+          if (dy < 0 && atTop && current > 0) {
+            e.preventDefault();
+            addProgress(dy);
+          }
+        };
+
+        const onKey = (e) => {
+          const atTop = scrollPos() <= 1;
+          if ((e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') && target < 1) {
+            e.preventDefault();
+            addProgress(e.key === 'PageDown' ? window.innerHeight * 0.9 : 80);
+          } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && atTop && current > 0) {
+            e.preventDefault();
+            addProgress(e.key === 'PageUp' ? -window.innerHeight * 0.9 : -80);
+          }
+        };
+
+        window.addEventListener('wheel', onWheel, { passive: false, capture: true });
+        window.addEventListener('touchstart', onTouchStart, { passive: true, capture: true });
+        window.addEventListener('touchmove', onTouchMove, { passive: false, capture: true });
+        window.addEventListener('keydown', onKey, { capture: true });
+
+        const onLenisReady = () => setLocked(locked);
+        window.addEventListener('lenisReady', onLenisReady);
+        window.addEventListener('splashComplete', onLenisReady);
+
+        lockCleanupRef.current = () => {
+          if (rafId) cancelAnimationFrame(rafId);
+          window.removeEventListener('wheel', onWheel, { capture: true });
+          window.removeEventListener('touchstart', onTouchStart, { capture: true });
+          window.removeEventListener('touchmove', onTouchMove, { capture: true });
+          window.removeEventListener('keydown', onKey, { capture: true });
+          window.removeEventListener('lenisReady', onLenisReady);
+          window.removeEventListener('splashComplete', onLenisReady);
+          window.__pageScrollLocked = false;
+          window.__heroAboutPlaced = false;
+          window.lenisInstance?.start();
+          document.documentElement.style.overflow = '';
+          document.body.style.overflow = '';
+        };
+
+        if (startPlaced) reportLockProgress(1);
+        return;
       }
 
       // ── Pin container and scrub the timeline ──────────────────────────────
@@ -155,6 +309,7 @@ export default function SnippScrol({
         end:        () => `+=${totalScrollPx}`,
         pin:        true,
         pinSpacing: true,
+        anticipatePin: 0,
         scrub:      activeScrub,
         animation:  tl,
         snap: enableSnap && total > 1
@@ -195,9 +350,15 @@ export default function SnippScrol({
         spacer.style.backgroundColor = 'white';
       }
 
+      // Refresh ScrollTrigger after pin setup so child animations measure correctly
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+        window.dispatchEvent(new CustomEvent('scrollAnimationsReady'));
+      });
+
     }, container);
 
-  }, [scrub, mobileScrub, snapDuration, enableSnap, enableExit, lockAtEnd, onLockProgress]);
+  }, [scrub, mobileScrub, snapDuration, enableSnap, enableExit, ease, lockAtEnd, lockPageUntilComplete, onLockProgress]);
 
   useEffect(() => {
     // Small rAF delay lets Next.js finish painting before GSAP measures
@@ -220,6 +381,8 @@ export default function SnippScrol({
       cancelAnimationFrame(raf);
       clearTimeout(resizeTimer);
       window.removeEventListener('resize', onResize);
+      lockCleanupRef.current?.();
+      lockCleanupRef.current = null;
       ctxRef.current?.revert();
     };
   }, [build]);
@@ -239,25 +402,23 @@ export default function SnippScrol({
           height: '100vh',
           overflow: 'hidden',
           backgroundColor: 'white',
-          transform: 'translateZ(0)',
-          backfaceVisibility: 'hidden',
-          WebkitBackfaceVisibility: 'hidden',
-          willChange:           'transform, opacity',   // ✅ GPU acceleration for pinned container
-          contain:              'layout style paint',    // ✅ Isolate paint boundaries
         }}
       >
         {childArray.map((child, index) => (
           <div
             key={index}
-            ref={(el) => { if (el) sectionsRef.current[index] = el; }}
+            ref={(el) => {
+              if (el) sectionsRef.current[index] = el;
+            }}
             className="scrollbar-hide"
             style={{
-              willChange: 'transform, opacity',
+              willChange: 'transform',
               width: '100%',
               height: '100%',
               overflowX: 'hidden',
-              overflowY: 'auto',
-              WebkitOverflowScrolling: 'touch',
+              overflowY: 'hidden',
+              overscrollBehavior: 'none',
+              scrollPaddingTop: index === childArray.length - 1 ? '7rem' : undefined,
             }}
           >
             {child}

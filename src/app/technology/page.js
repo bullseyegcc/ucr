@@ -13,7 +13,7 @@ export default function Technology() {
     return (
         <div className="bg-[#F2F2F2]">
             <div className="relative flex min-h-[60vh] lg:min-h-[80vh] font-medium justify-center bg-black dark:bg-black">
-                <VideoPlayer src="/technologybg.mp4" className="absolute inset-0 object-cover w-full h-full z-0" />
+                <VideoPlayer src="/technologybg.mp4" priority className="absolute inset-0 object-cover w-full h-full z-0" />
                 <div className="absolute inset-0 z-10 bg-[linear-gradient(0deg,rgba(0,0,0,0.35)0%,rgba(0,0,0,0.35)100%)] pointer-events-none" />
                 <div className="flex flex-col items-center gap-5 absolute top-[35%] lg:top-[40%] z-20">
                     <SlideIn direction="bottom" duration={0.8} delay={0}>

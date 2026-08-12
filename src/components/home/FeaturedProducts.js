@@ -12,21 +12,33 @@ import badge_icon from "../../../public/badge.png";
 const PRODUCTS = [
   {
     id: 0,
-    title: "Copper Rods and Wires",
+    title: "ETP Copper Rod and wire",
     icon: coppericon,
-    backgroundImage: "url('/fp1-1.png')",
+    backgroundImage: "/fp1-1.png",
   },
   {
     id: 1,
-    title: "Cooper Sheets",
+    title: "Drawn Copper Wire",
     icon: coppericon,
-    backgroundImage: "url('/fp2-2.png')",
+    backgroundImage: "/fp2-2.png",
   },
   {
     id: 2,
-    title: "Customized components",
+    title: "Tin-Coated Copper Wire",
     icon: coppericon,
-    backgroundImage: "url('/fp3-3.png')",
+    backgroundImage: "/fp3-3.png",
+  },
+  {
+    id: 3,
+    title: "Copper Welding Wire for cans",
+    icon: coppericon,
+    backgroundImage: "/fp2.png",
+  },
+  {
+    id: 4,
+    title: "Oxygen free copper",
+    icon: coppericon,
+    backgroundImage: "/fp3.png",
   },
 ];
 
@@ -41,7 +53,6 @@ export default function FeaturedProducts() {
 
     setActiveTab(tabIndex);
 
-    // Animate the slider to show the correct product
     if (backgroundSliderRef.current) {
       gsap.to(backgroundSliderRef.current, {
         xPercent: -tabIndex * (100 / PRODUCTS.length),
@@ -57,108 +68,105 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <div className="min-h-screen lg:h-[90vh] rounded-xl  lg:mx-10 flex items-end lg:items-center py-10 pt-16 relative">
-      {/* Background Slider Container */}
-      <div className="absolute inset-0  overflow-hidden rounded-xl">
+    <div className="relative min-h-screen lg:min-h-[90vh] mx-4 lg:mx-10">
+      {/* Background fills the mx-10 container, clipped to rounded corners */}
+      <div className="absolute inset-0 overflow-hidden rounded-xl">
         <div
           ref={backgroundSliderRef}
           className="flex h-full will-change-transform"
-          style={{
-            width: "300%",
-          }}
+          style={{ width: `${PRODUCTS.length * 100}%` }}
         >
           {PRODUCTS.map((product) => (
             <div
               key={product.id}
+              className="h-full shrink-0 bg-cover  bg-no-repeat"
               style={{
-                backgroundImage: product.backgroundImage,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                width: "33.333%",
-                height: "100%",
+                width: `${100 / PRODUCTS.length}%`,
+                backgroundImage: `url(${product.backgroundImage})`,
               }}
             />
           ))}
         </div>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
       </div>
 
-      {/* Overlay gradient for better content readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent rounded-xl z-5"></div>
-
       {/* Content Card */}
-      <div className="h-full  relative bg-white p-6 lg:p-8 flex flex-col gap-5 lg:gap-6 lg:gap-26 w-full lg:w-[48%] lg:min-h-[90%] mx-2 lg:mx-10 rounded-xl z-10 shadow-2xl transition-all duration-700">
+      <div className="relative z-10 flex min-h-screen lg:min-h-[90vh] items-end lg:items-center py-8 lg:py-10">
+      <div className="relative bg-white p-8 lg:p-10 xl:p-12 flex flex-col gap-5 lg:gap-8 w-[calc(100%-2rem)] lg:w-[48%] h-auto mx-4 lg:ml-8 lg:mr-0 rounded-xl shadow-2xl transition-all duration-700">
         {/* Header */}
-        <div className="flex flex-col gap-5">
-          <div className="flex gap-3 text-white z-300">
-            <Image
-              src={badge_icon}
-              alt="Badge Icon"
-              width={24}
-              height={24}
-              className="object-contain"
-            />
-            <span className="text-black uppercase">Featured Products</span>
-          </div>
+        <div className="shrink-0 flex items-center gap-3">
+          <Image
+            src={badge_icon}
+            alt="Badge Icon"
+            width={24}
+            height={24}
+            className="object-contain shrink-0"
+          />
+          <span className="text-black uppercase text-[0.875rem] leading-[1.25rem] tracking-[0.0625rem]">
+            Featured Products
+          </span>
+        </div>
 
-          {/* Product Tabs */}
-          <div className="flex flex-col gap-4 lg:gap-6">
-            {PRODUCTS.map((product, index) => (
-              <button
-                key={product.id}
-                onClick={() => handleTabChange(index)}
-                className={`cursor-pointer transition-all duration-300 ${
-                  activeTab === index
-                    ? "opacity-100"
-                    : "opacity-60 hover:opacity-80"
-                } w-full text-left`}
-                type="button"
+        {/* Product Tabs — card grows to fit the full list */}
+        <div className="flex flex-col gap-3 lg:gap-5">
+          {PRODUCTS.map((product, index) => (
+            <button
+              key={product.id}
+              onClick={() => handleTabChange(index)}
+              className={`cursor-pointer transition-all duration-300 ${
+                activeTab === index
+                  ? "opacity-100"
+                  : "opacity-60 hover:opacity-80"
+              } w-full text-left`}
+              type="button"
+            >
+              <h1
+                className={`flex flex-wrap items-center gap-x-3 gap-y-1 text-[1.375rem] leading-[1.15] tracking-[-0.1rem] font-normal capitalize sm:text-[1.625rem] lg:text-[1.875rem] xl:text-[2.25rem] lg:font-medium ${
+                  activeTab === index ? "text-primary" : "text-secondary"
+                }`}
               >
-                <h1
-                  className={`flex min-h-[42px] lg:min-h-[66px] items-center text-[28px] leading-[1.1] tracking-[-1.55px] font-normal capitalize align-middle lg:text-5xl lg:font-medium ${
-                    activeTab === index ? "text-primary" : "text-secondary"
-                  }`}
-                >
-                  <span>{product.title}</span>
-                  {activeTab === index && product.icon && (
-                    <Image
-                      src={product.icon}
-                      alt={product.title}
-                      width={80}
-                      height={80}
-                      className="hidden object-contain lg:inline-block ml-5"
-                    />
-                  )}
-                </h1>
-              </button>
+                <span className="break-words">{product.title}</span>
+                {activeTab === index && product.icon && (
+                  <Image
+                    src={product.icon}
+                    alt={product.title}
+                    width={56}
+                    height={56}
+                    className="hidden shrink-0 object-contain lg:inline-block"
+                  />
+                )}
+              </h1>
+            </button>
+          ))}
+        </div>
+
+        {/* Footer: CTA + indicator dots */}
+        <div className="shrink-0 flex flex-col gap-4 pt-2">
+          <button
+            onClick={handleKnowMore}
+            className="w-full lg:w-[12.0625rem] h-[2.5rem] lg:h-[3.875rem] flex gap-2 items-center justify-center text-primary border-[0.0625rem] border-primary rounded-[1.9375rem] lg:rounded-[3.125rem] py-[0.5rem] lg:py-3 pl-[1.25rem] lg:pl-[1.75rem] pr-[1.25rem] lg:pr-[1.125rem] hover:bg-primary hover:text-white transition-all duration-300 font-semibold"
+          >
+            <span className="font-primary font-normal text-[0.875rem] leading-[1.1375rem] tracking-[-0.034rem] text-center lg:text-[1.25rem] lg:leading-[1.8375rem] lg:tracking-[-0.055rem]">
+              Know More
+            </span>
+            <ArrowRight size={18} />
+          </button>
+
+          <div className="flex gap-2">
+            {PRODUCTS.map((_, index) => (
+              <div
+                key={index}
+                onClick={() => handleTabChange(index)}
+                className={`transition-all duration-300 rounded-full cursor-pointer ${
+                  activeTab === index
+                    ? "w-6 h-3 sm:w-8 sm:h-4 bg-primary"
+                    : "w-3 h-1.5 sm:w-6 sm:h-3 bg-gray-300 hover:bg-gray-400"
+                }`}
+              />
             ))}
           </div>
         </div>
-
-        {/* CTA Button */}
-        <button
-          onClick={handleKnowMore}
-          className="w-full lg:w-[193px] h-[39.5189px] lg:h-[62px] flex gap-2 my-6 lg:my-0 items-center justify-center text-primary text-sm lg:text-base border-[0.62px] border-primary rounded-[30.95px] lg:rounded-[50px] py-[8px] lg:py-3 pl-[20px] lg:pl-[28px] pr-[20px] lg:pr-[18px] hover:bg-primary hover:text-white transition-all duration-300 font-semibold"
-        >
-          <span className="font-primary font-normal text-[14px] leading-[18.2px] tracking-[-0.54px] text-center align-middle lg:text-[20px] lg:leading-[29.4px] lg:tracking-[-0.88px]">
-            Know More
-          </span>
-          <ArrowRight size={18} />
-        </button>
-
-        {/* Indicator Dots */}
-        <div className="flex gap-2 mt-6 absolute bottom-2 sm:bottom-5 left-5">
-          {PRODUCTS.map((_, index) => (
-            <div
-              key={index}
-              onClick={() => handleTabChange(index)}
-              className={`transition-all duration-300 rounded-full cursor-pointer ${
-                activeTab === index
-                  ? "w-6 h-3 sm:w-8 sm:h-4 bg-primary"
-                  : "w-3 h-1.5 sm:w-6 sm:h-3 bg-gray-300 hover:bg-gray-400"
-              }`}
-            />
-          ))}
-        </div>
+      </div>
       </div>
     </div>
   );
