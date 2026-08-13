@@ -11,8 +11,9 @@ import CardAnimation from "@/animations/CardAnimation.js";
 export default function WhyChooseUs() {
   return (
     <div
-      className="min-h-screen bg-gradient-to-b from-white via-[#FDD4BB] to-white px-5 lg:px-10 py-20 lg:py-40 z-0"
+      className="bg-gradient-to-b from-white via-[#FDD4BB] to-white py-20 lg:py-24 z-0"
     >
+      <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
       <div
         className="text-center mb-16 flex flex-col items-center"
         style={{ willChange: 'transform, opacity' }}
@@ -25,11 +26,11 @@ export default function WhyChooseUs() {
         </FadeIn>
       </div>
 
-      <div className="lg:h-[90vh] grid grid-cols-1 grid-rows-auto sm:grid-cols-3 grid-rows-2 gap-6">
+      <div className="lg:min-h-[32rem] grid grid-cols-1 grid-rows-auto sm:grid-cols-3 grid-rows-2 gap-6">
 
         {/* ── Featured left card ─────────────────────────────────────── */}
         <div
-          className="h-[60vh] lg:h-full relative row-span-2 lg:ml-10 rounded-xl overflow-hidden group cursor-pointer transition-all duration-400 ease-out"
+          className="h-[min(60vh,520px)] lg:h-full max-h-[720px] relative row-span-2 rounded-xl overflow-hidden group cursor-pointer transition-all duration-400 ease-out"
           style={{ willChange: 'transform, opacity' }}
         >
           <div className="absolute inset-0">
@@ -115,6 +116,7 @@ export default function WhyChooseUs() {
         ))}
 
 
+      </div>
       </div>
     </div>
   );

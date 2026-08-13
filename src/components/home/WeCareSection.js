@@ -136,9 +136,10 @@ export default function WeCareSection() {
   }, [scrollViewportRef.current]);
 
   return (
+    <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] my-5">
     <div
       ref={sectionRef}
-      className="relative min-h-[80vh] pt-8 px-5 sm:px-0 sm:h-[90vh] flex flex-col justify-between bg-[url('/care.jpg')] bg-cover bg-center  lg:mx-10 my-5 rounded-xl lg:overflow-hidden"
+      className="relative min-h-[min(80vh,800px)] sm:h-[min(90vh,900px)] max-h-[1000px] pt-8 flex flex-col justify-between bg-[url('/care.jpg')] bg-cover bg-center rounded-xl lg:overflow-hidden"
     >
       <VideoPlayer src="/sustain.mp4" className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
 
@@ -217,6 +218,7 @@ export default function WeCareSection() {
           ))}
         </div>
       </div>
+    </div>
     </div>
   );
 }

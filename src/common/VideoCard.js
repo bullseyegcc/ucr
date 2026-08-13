@@ -40,7 +40,7 @@ export const VideoCard = ({
           <WhiteBadge title={badgeTitle} />
 
           <TextReveal index={3} className="relative mt-6">
-            <h2 className="relative z-[2] max-w-[88%] sm:max-w-[82%] lg:max-w-[75%] xl:max-w-[min(75%,36rem)] font-primary font-normal text-white text-[24px] leading-[1.15] tracking-[-0.79px] sm:text-[30px] sm:leading-[1.12] lg:text-[42px] lg:leading-[1.1] lg:tracking-[-1.39px] whitespace-pre-line">
+            <h2 className="relative z-[2] max-w-[92%] sm:max-w-[88%] lg:max-w-[82%] xl:max-w-[min(85%,42rem)] font-primary font-normal text-white text-[1.5rem] leading-[1.15] tracking-[-0.05rem] sm:text-[1.875rem] sm:leading-[1.12] lg:text-[2.625rem] lg:leading-[1.1] lg:tracking-[-0.087rem] whitespace-pre-line">
               {heading}
             </h2>
           </TextReveal>

@@ -4,13 +4,9 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { Badge } from "../../common/badge.js";
 import { WhiteBadge } from "../../common/badge.js";
-import { VideoPlayer } from "../../common/video";
 import { technologyParallaxSlide } from "../../animations/technologyParallax";
-import ParallaxSection from "../../animations/ParallaxSection";
 
-// Technology data structure
 const TECHNOLOGIES = [
   {
     id: 0,
@@ -56,101 +52,90 @@ export default function OurTechnology() {
 
   const handleTabChange = (tabIndex) => {
     if (tabIndex === activeTab) return;
-
     technologyParallaxSlide(backgroundSliderRef, tabIndex);
     setActiveTab(tabIndex);
   };
 
-  const currentTech = TECHNOLOGIES[activeTab];
   return (
-    <ParallaxSection index={0}>
-      <div className="min-h-[70vh]  sm:min-h-screen flex flex-col  sm:flex-row gap-1 sm:mx-10 overflow-hidden">
-        <div className="min-h-[60vh] pt-20  lg:min-h-screen sm:w-1/2 bg-primary rounded-xl px-3 lg:px-8 py-10 flex flex-col gap-12 ">
-          <div className="mt-8">
-            <div className="animate-reveal">
-              <WhiteBadge title="Core Strength" className="z-190" />
-            </div>
-            <h1 className="font-primary font-medium text-[32px] leading-[36.09px] tracking-[-0.79px] lg:text-[64px] lg:leading-[64px] lg:tracking-[-1.4px] text-white mt-4 animate-reveal">
+    <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
+      <div className="flex flex-col lg:flex-row gap-[0.25rem] items-stretch">
+        <div className="@container flex w-full lg:w-1/2 flex-col gap-[1.75rem] lg:gap-[2rem] rounded-xl bg-primary px-[1.25rem] py-[2rem] sm:px-[1.75rem] lg:px-[2.5rem] lg:py-[2.5rem]">
+          <div>
+            <WhiteBadge title="Core Strength" />
+            <h1 className="mt-[0.75rem] font-primary font-medium text-[2rem] leading-[1.1] tracking-[-0.05rem] text-white sm:text-[2.5rem] lg:text-[3.5rem] lg:tracking-[-0.09rem]">
               Our technology
             </h1>
           </div>
 
-          <div>
-            {/* All Tabs - Active gets white bg with description */}
-            <div className="flex flex-col gap-2 mt-10">
-              {TECHNOLOGIES.map((tech, index) => (
+          <div className="flex flex-col gap-[1.25rem] lg:gap-[1.75rem]">
+            {TECHNOLOGIES.map((tech, index) => {
+              const isActive = activeTab === index;
+              return (
                 <div
                   key={tech.id}
                   onClick={() => handleTabChange(index)}
-                  className={`cursor-pointer rounded-xl overflow-hidden transition-all duration-700 ease-linear relative ${
-                    activeTab === index
-                      ? "bg-white shadow-lg px-5 py-8"
-                      : "px-5 py-3 hover:opacity-90"
+                  className={`cursor-pointer rounded-xl transition-all duration-500 ease-out ${
+                    isActive
+                      ? "bg-white px-[1.25rem] py-[1.5rem] lg:px-[1.5rem] lg:py-[1.75rem] shadow-lg"
+                      : "px-[0.25rem] py-[0.15rem] hover:opacity-80"
                   }`}
                 >
-                  {/* Title row — always visible */}
-                  <h1
-                    className={`font-primary font-normal flex items-center gap-4 transition-all duration-700 ease-linear ${
-                      activeTab === index
-                        ? "text-primary text-[28px] leading-[36.09px] tracking-[-1.41px] lg:text-[48px] lg:leading-[64px] lg:tracking-[-2.5px]"
-                        : "text-white text-[24px] leading-[55.82px] tracking-[-1.41px] lg:text-[40px] lg:leading-[99px] lg:tracking-[-2.5px] hover:text-white/80"
+                  <h2
+                    className={`font-primary font-normal flex items-center gap-[0.75rem] whitespace-nowrap leading-none tracking-[-0.06rem] transition-all duration-500 ${
+                      isActive
+                        ? "text-primary text-[clamp(1.35rem,5.2cqi,2.75rem)]"
+                        : "text-white text-[clamp(1.2rem,4.6cqi,2.5rem)]"
                     }`}
                   >
                     <span
-                      className={`transition-all duration-700 ease-linear overflow-hidden ${
-                        activeTab === index
-                          ? "max-w-0 opacity-0"
-                          : "max-w-[36px] opacity-100"
+                      className={`shrink-0 overflow-hidden transition-all duration-500 ${
+                        isActive ? "w-0 opacity-0" : "w-[1.4rem] opacity-100"
                       }`}
                     >
-                      <ArrowRight
-                        size={30}
-                        className="text-white flex-shrink-0"
-                      />
+                      <ArrowRight size={22} className="text-white" />
                     </span>
-                    {tech.title}
-                  </h1>
+                    <span>{tech.title}</span>
+                  </h2>
 
-                  {/* Expandable content */}
                   <div
-                    className={`overflow-hidden transition-all duration-700 ease-linear ${
-                      activeTab === index
-                        ? "max-h-[420px] opacity-100 mt-4 translate-y-0"
-                        : "max-h-0 opacity-0 -translate-y-1"
+                    className={`overflow-hidden transition-all duration-500 ease-out ${
+                      isActive
+                        ? "mt-[0.75rem] max-h-[24rem] opacity-100"
+                        : "mt-0 max-h-0 opacity-0"
                     }`}
                   >
-                    <p className="font-primary font-normal text-[12px] leading-[20px] tracking-[-0.41px] text-black lg:text-[20px] lg:leading-[32px] lg:tracking-[-0.72px]">
+                    <p className="font-primary font-normal text-[0.75rem] leading-[1.6] tracking-[-0.02rem] text-black lg:text-[1.125rem] lg:leading-[1.7] lg:tracking-[-0.03rem]">
                       {tech.description}
                     </p>
                     <button
+                      type="button"
                       onClick={(e) => {
                         e.stopPropagation();
                         router.push("/technology");
                       }}
-                      className="mt-4 w-full h-[40px] lg:w-[193px] lg:h-[62px] flex items-center justify-center gap-2 text-primary border border-primary rounded-[30.95px] lg:rounded-[50px] py-[8px] lg:py-[12px] px-[20px] lg:pl-[28px] lg:pr-[18px] hover:bg-primary hover:text-white transition-all duration-300"
+                      className="mt-[1rem] inline-flex h-[2.5rem] items-center justify-center gap-[0.5rem] rounded-full border border-primary px-[1.25rem] text-primary transition-all duration-300 hover:bg-primary hover:text-white lg:h-[3.5rem] lg:px-[1.5rem]"
                     >
-                      <span className="font-primary font-normal text-[14px] leading-[18.2px] tracking-[-0.54px] lg:text-[20px] lg:leading-[29.4px] lg:tracking-[-0.88px]">
-                        Know More
+                      <span className="font-primary font-normal text-[0.875rem] leading-none tracking-[-0.03rem] lg:text-[1.125rem]">
+                        Know more
                       </span>
                       <ArrowRight size={18} />
                     </button>
                   </div>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Parallax Background Slider */}
-        <div className="min-h-[60vh] sm:min-h-screen sm:w-1/2 rounded-xl overflow-hidden relative">
+        <div className="relative min-h-[22rem] w-full self-stretch overflow-hidden rounded-xl lg:min-h-[40rem] lg:w-1/2">
           <div
             ref={backgroundSliderRef}
-            className="absolute inset-0 flex w-full h-full transition-all duration-700 will-change-transform"
+            className="absolute inset-0 flex h-full w-full will-change-transform"
           >
             {TECHNOLOGIES.map((tech) => (
               <div
                 key={tech.id}
-                className="w-full h-full flex-shrink-0 rounded-xl"
+                className="h-full w-full flex-shrink-0 rounded-xl"
                 style={{
                   backgroundImage: tech.backgroundImage,
                   backgroundSize: "cover",
@@ -160,8 +145,15 @@ export default function OurTechnology() {
               />
             ))}
           </div>
+          <Image
+            src="/sign.png"
+            alt=""
+            width={80}
+            height={80}
+            className="pointer-events-none absolute bottom-[1.25rem] right-[1.25rem] z-10 w-[3.5rem] lg:w-[5rem] h-auto"
+          />
         </div>
       </div>
-    </ParallaxSection>
+    </div>
   );
 }

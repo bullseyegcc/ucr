@@ -399,7 +399,8 @@ export default function SnippScrol({
         style={{
           position: 'relative',
           width: '100%',
-          height: '100vh',
+          height: 'min(100vh, 1000px)',
+          maxHeight: '1000px',
           overflow: 'hidden',
           backgroundColor: 'white',
         }}

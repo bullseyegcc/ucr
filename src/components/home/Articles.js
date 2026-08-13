@@ -71,80 +71,80 @@ export default function Articles() {
   return (
     <div
       ref={sectionRef}
-      className="min-h-[60vh] py-4 lg:py-8 sm:min-h-screen flex flex-col items-center sm:flex-row gap-5 sm:mx-10 items-start mb-4"
+      className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] py-8 lg:py-10 flex flex-col sm:flex-row gap-5 items-stretch mb-4"
     >
       {/* ── Left feature card ──── */}
       <Link
         ref={leftRef}
         href="/blogs/uae-copper-producer-expands-global-supply"
-        className="lg:min-h-[60vh] max-h-screen sm:w-1/2 bg-[#FE5D0A] rounded-xl px-2 sm:px-10 py-4 flex flex-col gap-8"
+        className="sm:w-1/2 bg-[#FE5D0A] rounded-xl px-4 sm:px-8 py-6 flex flex-col gap-6"
         style={{ willChange: 'transform, opacity' }}
       >
-        <div className="mt-6">
+        <div>
           <div ref={badgeRef} style={{ willChange: 'transform, opacity' }}>
             <WhiteBadge title="Blogs & Articles" className="z-190 mb-5" />
           </div>
           <h1
             ref={headingRef}
-            className="text-5xl my-3 text-white font-semibold mt-5"
+            className="text-[2.5rem] lg:text-[3rem] text-white font-semibold mt-3 leading-[1.15]"
             style={{ willChange: 'transform, opacity' }}
           >
             Latest News
           </h1>
         </div>
 
-        <div className="w-[95%] lg:w-full h-[500px] sm:h-[900px] relative p-3 flex flex-col justify-start mx-2 gap-5 rounded-xl bg-[url('/hblog1.png')] bg-cover bg-top bg-no-repeat">
-          <div className="z-500 px-4 text-white flex justify-between text-sm font-light pt-9">
+        <div className="relative flex-1 min-h-[18rem] lg:min-h-[22rem] p-3 flex flex-col justify-start gap-4 rounded-xl bg-[url('/hblog1.png')] bg-cover bg-top bg-no-repeat">
+          <div className="relative z-10 px-4 text-white flex justify-between text-sm font-light pt-6">
             <span>Writen by Bruce Sommers's</span>
             <span>Monday,April 28,2026</span>
           </div>
-          <h1 className="z-500 text-xl sm:text-4xl pl-4 text-white">
+          <h1 className="relative z-10 text-xl sm:text-[1.75rem] lg:text-[2rem] leading-[1.2] pl-4 pr-4 text-white">
             UAE Copper Producer Expands Global Supply Network Across Asia &amp; Europe
           </h1>
-          <button className="z-90 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
+          <button className="z-10 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
             <ArrowRight size={18} color="black" />
           </button>
         </div>
       </Link>
 
       {/* ── Right column ───────────────────────────────────────────────── */}
-      <div className="px-1 lg:px-0 min-h-[60vh] sm:h-screen sm:w-1/2 rounded-xl flex flex-col items-center lg:justify-between">
+      <div className="sm:w-1/2 rounded-xl flex flex-col gap-5">
         <Link
           ref={rightTopRef}
           href="/blogs/high-conductivity-copper-rods-energy-sector"
-          className="w-full h-[45vh] sm:h-1/2 lg:mb-5 relative bg-[#6A3120] flex flex-col gap-16 lg:gap-6 lg:justify-start gap-5 rounded-xl bg-[url('/hblog2.png')] bg-cover bg-center bg-no-repeat"
+          className="w-full flex-1 min-h-[14rem] lg:min-h-[16rem] relative bg-[#6A3120] flex flex-col justify-start gap-4 rounded-xl bg-[url('/hblog2.png')] bg-cover bg-center bg-no-repeat overflow-hidden"
           style={{ willChange: 'transform, opacity' }}
         >
-          <div className="z-500 px-4 text-white flex justify-between text-sm font-light pt-9">
+          <div className="relative z-10 px-4 text-white flex justify-between text-sm font-light pt-9">
             <span>Writen by Bruce Sommers's</span>
             <span>Monday,April 28,2026</span>
           </div>
-          <h1 className="z-500 text-3xl lg:text-3xl pl-4 text-white">
+          <h1 className="relative z-10 text-[1.5rem] lg:text-[1.75rem] leading-[1.2] pl-4 pr-8 text-white">
             Company Launches New High-Conductivity Copper Rods for Energy Sector
           </h1>
-          <button className="z-90 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
+          <button className="z-10 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
             <ArrowRight size={18} color="black" />
           </button>
-          <div className="rounded-xl h-90 lg:h-26 pl-0 absolute top-0 w-full z-0 bg-gradient-to-b from-[#FA6E43] to-transparent" />
+          <div className="rounded-xl h-24 lg:h-28 absolute top-0 w-full z-0 bg-gradient-to-b from-[#FA6E43] to-transparent" />
         </Link>
 
         <Link
           ref={rightBotRef}
-          className="w-full h-[45vh] lg:h-1/2 relative bg-[#6A3120] hidden lg:flex flex-col justify-start gap-16 lg:gap-6 rounded-xl bg-[url('/blog2.png')] bg-cover bg-center bg-no-repeat"
+          className="w-full flex-1 min-h-[14rem] lg:min-h-[16rem] relative bg-[#6A3120] hidden lg:flex flex-col justify-start gap-4 rounded-xl bg-[url('/blog2.png')] bg-cover bg-center bg-no-repeat overflow-hidden"
           href="/blogs/expected-supply-deficit-copper-prices"
           style={{ willChange: 'transform, opacity' }}
         >
-          <div className="z-500 px-4 text-white flex justify-between text-sm font-light pt-9">
+          <div className="relative z-10 px-4 text-white flex justify-between text-sm font-light pt-9">
             <span>Writen by Bruce Sommers's</span>
             <span>Monday,April 28,2026</span>
           </div>
-          <h1 className="z-500 text-3xl pl-4 text-white">
+          <h1 className="relative z-10 text-[1.5rem] lg:text-[1.75rem] leading-[1.2] pl-4 pr-8 text-white">
             Expected Supply Deficit To Upset Copper Prices
           </h1>
-          <button className="z-90 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
+          <button className="z-10 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
             <ArrowRight size={18} color="black" />
           </button>
-          <div className="rounded-xl h-90 lg:h-26 pl-0 absolute top-0 w-full z-0 bg-gradient-to-b from-[#FA6E43] to-transparent" />
+          <div className="rounded-xl h-24 lg:h-28 absolute top-0 w-full z-0 bg-gradient-to-b from-[#FA6E43] to-transparent" />
         </Link>
 
         <Link
