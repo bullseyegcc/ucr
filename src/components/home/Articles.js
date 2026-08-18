@@ -5,7 +5,49 @@ import { ArrowRight } from 'lucide-react';
 import { WhiteBadge } from "../../common/badge.js";
 import Link from "next/link";
 
-export default function Articles() {
+const FALLBACK_POSTS = [
+  {
+    slug: "uae-copper-producer-expands-global-supply",
+    title: "UAE Copper Producer Expands Global Supply Network Across Asia & Europe",
+    author: "Bruce Sommers",
+    date: "Apr 28, 2026",
+    image: "/hblog1.png",
+  },
+  {
+    slug: "high-conductivity-copper-rods-energy-sector",
+    title: "Company Launches New High-Conductivity Copper Rods for Energy Sector",
+    author: "Bruce Sommers",
+    date: "Apr 28, 2026",
+    image: "/hblog2.png",
+  },
+  {
+    slug: "expected-supply-deficit-copper-prices",
+    title: "Expected Supply Deficit To Upset Copper Prices",
+    author: "Bruce Sommers",
+    date: "Apr 28, 2026",
+    image: "/blog2.png",
+  },
+];
+
+const CARD_FALLBACKS = ["/hblog1.png", "/hblog2.png", "/blog2.png"];
+
+function mapHomePosts(posts) {
+  if (!posts?.length) return FALLBACK_POSTS;
+  return posts.slice(0, 3).map((post, index) => ({
+    slug: post.slug,
+    title: post.title,
+    author: post.author || "UCR",
+    date: post.date,
+    image: post.image || CARD_FALLBACKS[index],
+  }));
+}
+
+export default function Articles({ posts }) {
+  const items = mapHomePosts(posts);
+  const featured = items[0];
+  const second = items[1];
+  const third = items[2];
+
   const sectionRef = useRef(null);
   const badgeRef = useRef(null);
   const headingRef = useRef(null);
@@ -76,7 +118,7 @@ export default function Articles() {
       {/* ── Left feature card ──── */}
       <Link
         ref={leftRef}
-        href="/blogs/uae-copper-producer-expands-global-supply"
+        href={featured ? `/blogs/${featured.slug}` : "/blogs"}
         className="lg:min-h-[60vh] max-h-screen sm:w-1/2 bg-[#FE5D0A] rounded-xl px-2 sm:px-10 py-4 flex flex-col gap-8"
         style={{ willChange: 'transform, opacity' }}
       >
@@ -93,59 +135,68 @@ export default function Articles() {
           </h1>
         </div>
 
-        <div className="w-[95%] lg:w-full h-[500px] sm:h-[900px] relative p-3 flex flex-col justify-start mx-2 gap-5 rounded-xl bg-[url('/hblog1.png')] bg-cover bg-top bg-no-repeat">
+        {featured && (
+        <div
+          className="w-[95%] lg:w-full h-[500px] sm:h-[900px] relative p-3 flex flex-col justify-start mx-2 gap-5 rounded-xl bg-cover bg-top bg-no-repeat"
+          style={{ backgroundImage: `url(${featured.image})` }}
+        >
           <div className="z-500 px-4 text-white flex justify-between text-sm font-light pt-9">
-            <span>Writen by Bruce Sommers's</span>
-            <span>Monday,April 28,2026</span>
+            <span>Written by {featured.author}</span>
+            <span>{featured.date}</span>
           </div>
           <h1 className="z-500 text-xl sm:text-4xl pl-4 text-white">
-            UAE Copper Producer Expands Global Supply Network Across Asia &amp; Europe
+            {featured.title}
           </h1>
           <button className="z-90 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
             <ArrowRight size={18} color="black" />
           </button>
         </div>
+        )}
       </Link>
 
       {/* ── Right column ───────────────────────────────────────────────── */}
       <div className="px-1 lg:px-0 min-h-[60vh] sm:h-screen sm:w-1/2 rounded-xl flex flex-col items-center lg:justify-between">
+        {second && (
         <Link
           ref={rightTopRef}
-          href="/blogs/high-conductivity-copper-rods-energy-sector"
-          className="w-full h-[45vh] sm:h-1/2 lg:mb-5 relative bg-[#6A3120] flex flex-col gap-16 lg:gap-6 lg:justify-start gap-5 rounded-xl bg-[url('/hblog2.png')] bg-cover bg-center bg-no-repeat"
-          style={{ willChange: 'transform, opacity' }}
+          href={`/blogs/${second.slug}`}
+          className="w-full h-[45vh] sm:h-1/2 lg:mb-5 relative bg-[#6A3120] flex flex-col gap-16 lg:gap-6 lg:justify-start gap-5 rounded-xl bg-cover bg-center bg-no-repeat"
+          style={{ willChange: 'transform, opacity', backgroundImage: `url(${second.image})` }}
         >
           <div className="z-500 px-4 text-white flex justify-between text-sm font-light pt-9">
-            <span>Writen by Bruce Sommers's</span>
-            <span>Monday,April 28,2026</span>
+            <span>Written by {second.author}</span>
+            <span>{second.date}</span>
           </div>
           <h1 className="z-500 text-3xl lg:text-3xl pl-4 text-white">
-            Company Launches New High-Conductivity Copper Rods for Energy Sector
+            {second.title}
           </h1>
           <button className="z-90 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
             <ArrowRight size={18} color="black" />
           </button>
           <div className="rounded-xl h-90 lg:h-26 pl-0 absolute top-0 w-full z-0 bg-gradient-to-b from-[#FA6E43] to-transparent" />
         </Link>
+        )}
 
+        {third && (
         <Link
           ref={rightBotRef}
-          className="w-full h-[45vh] lg:h-1/2 relative bg-[#6A3120] hidden lg:flex flex-col justify-start gap-16 lg:gap-6 rounded-xl bg-[url('/blog2.png')] bg-cover bg-center bg-no-repeat"
-          href="/blogs/expected-supply-deficit-copper-prices"
-          style={{ willChange: 'transform, opacity' }}
+          className="w-full h-[45vh] lg:h-1/2 relative bg-[#6A3120] hidden lg:flex flex-col justify-start gap-16 lg:gap-6 rounded-xl bg-cover bg-center bg-no-repeat"
+          href={`/blogs/${third.slug}`}
+          style={{ willChange: 'transform, opacity', backgroundImage: `url(${third.image})` }}
         >
           <div className="z-500 px-4 text-white flex justify-between text-sm font-light pt-9">
-            <span>Writen by Bruce Sommers's</span>
-            <span>Monday,April 28,2026</span>
+            <span>Written by {third.author}</span>
+            <span>{third.date}</span>
           </div>
           <h1 className="z-500 text-3xl pl-4 text-white">
-            Expected Supply Deficit To Upset Copper Prices
+            {third.title}
           </h1>
           <button className="z-90 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
             <ArrowRight size={18} color="black" />
           </button>
           <div className="rounded-xl h-90 lg:h-26 pl-0 absolute top-0 w-full z-0 bg-gradient-to-b from-[#FA6E43] to-transparent" />
         </Link>
+        )}
 
         <Link
           href="/blogs"
@@ -157,4 +208,3 @@ export default function Articles() {
     </div>
   );
 }
-

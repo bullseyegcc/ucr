@@ -8,46 +8,70 @@ import gsap from "gsap";
 import coppericon from "../../../public/coppericon.png";
 import badge_icon from "../../../public/badge.png";
 
-// Product data structure
-const PRODUCTS = [
+const FALLBACK_BACKGROUNDS = [
+  "/fp1-1.png",
+  "/fp2-2.png",
+  "/fp3-3.png",
+  "/fp2.png",
+  "/fp3.png",
+];
+
+const FALLBACK_PRODUCTS = [
   {
     id: 0,
     title: "ETP Copper Rod and wire",
+    slug: "",
     icon: coppericon,
     backgroundImage: "/fp1-1.png",
   },
   {
     id: 1,
     title: "Drawn Copper Wire",
+    slug: "",
     icon: coppericon,
     backgroundImage: "/fp2-2.png",
   },
   {
     id: 2,
     title: "Tin-Coated Copper Wire",
+    slug: "",
     icon: coppericon,
     backgroundImage: "/fp3-3.png",
   },
   {
     id: 3,
     title: "Copper Welding Wire for cans",
+    slug: "",
     icon: coppericon,
     backgroundImage: "/fp2.png",
   },
   {
     id: 4,
     title: "Oxygen free copper",
+    slug: "",
     icon: coppericon,
     backgroundImage: "/fp3.png",
   },
 ];
 
-export default function FeaturedProducts() {
+function mapHomeProducts(products) {
+  if (!products?.length) return FALLBACK_PRODUCTS;
+  return products.map((product, index) => ({
+    id: product.id,
+    title: product.name,
+    slug: product.slug,
+    icon: product.icon || coppericon,
+    backgroundImage:
+      product.icon || FALLBACK_BACKGROUNDS[index % FALLBACK_BACKGROUNDS.length],
+  }));
+}
+
+export default function FeaturedProducts({ products }) {
+  const items = mapHomeProducts(products);
   const [activeTab, setActiveTab] = useState(0);
   const backgroundSliderRef = useRef(null);
   const router = useRouter();
 
-  // Handle tab change with direct parallax slide animation
   const handleTabChange = (tabIndex) => {
     if (tabIndex === activeTab) return;
 
@@ -55,16 +79,16 @@ export default function FeaturedProducts() {
 
     if (backgroundSliderRef.current) {
       gsap.to(backgroundSliderRef.current, {
-        xPercent: -tabIndex * (100 / PRODUCTS.length),
+        xPercent: -tabIndex * (100 / items.length),
         duration: 0.6,
         ease: "power2.inOut",
       });
     }
   };
 
-  // Navigate to products page
   const handleKnowMore = () => {
-    router.push("/products");
+    const slug = items[activeTab]?.slug;
+    router.push(slug ? `/products/${slug}` : "/products");
   };
 
   return (
@@ -74,14 +98,14 @@ export default function FeaturedProducts() {
         <div
           ref={backgroundSliderRef}
           className="flex h-full will-change-transform"
-          style={{ width: `${PRODUCTS.length * 100}%` }}
+          style={{ width: `${items.length * 100}%` }}
         >
-          {PRODUCTS.map((product) => (
+          {items.map((product) => (
             <div
               key={product.id}
               className="h-full shrink-0 bg-cover  bg-no-repeat"
               style={{
-                width: `${100 / PRODUCTS.length}%`,
+                width: `${100 / items.length}%`,
                 backgroundImage: `url(${product.backgroundImage})`,
               }}
             />
@@ -109,7 +133,7 @@ export default function FeaturedProducts() {
 
         {/* Product Tabs — card grows to fit the full list */}
         <div className="flex flex-col gap-3 lg:gap-5">
-          {PRODUCTS.map((product, index) => (
+          {items.map((product, index) => (
             <button
               key={product.id}
               onClick={() => handleTabChange(index)}
@@ -153,7 +177,7 @@ export default function FeaturedProducts() {
           </button>
 
           <div className="flex gap-2">
-            {PRODUCTS.map((_, index) => (
+            {items.map((_, index) => (
               <div
                 key={index}
                 onClick={() => handleTabChange(index)}

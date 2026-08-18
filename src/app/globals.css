@@ -181,3 +181,67 @@ body::-webkit-scrollbar {
 .snip-grain-drift {
   animation: grain-drift 8s steps(1) infinite;
 }
+
+.wp-content {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.16px;
+  color: #374151;
+}
+
+.wp-content p {
+  margin: 0 0 1.5rem;
+}
+
+.wp-content h2,
+.wp-content h3 {
+  margin: 0 0 1rem;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: -0.64px;
+  color: #111827;
+}
+
+.wp-content img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+  border-radius: 0.5rem;
+}
+
+.wp-content ul,
+.wp-content ol {
+  margin: 0 0 1.5rem;
+  padding-left: 1.25rem;
+}
+
+.wp-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1.5rem;
+  font-size: 14px;
+}
+
+.wp-content th,
+.wp-content td {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.wp-content th {
+  background: #ff6a00;
+  color: white;
+  font-weight: 600;
+}
+
+@media (min-width: 1024px) {
+  .wp-content h2,
+  .wp-content h3 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}

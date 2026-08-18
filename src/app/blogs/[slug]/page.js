@@ -1,17 +1,38 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { blogs } from "../../../assets/blogs";
+import { getPostBySlug, getPosts, getPostSlugs } from "../../../lib/wordpress/posts";
 import { Badgetextwhite } from "../../../common/badge";
 import Link from "next/link";
 import FadeIn from "../../../animations/FadeIn";
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight } from "lucide-react";
 
+const FALLBACK_IMAGE = "/blogsbg.png";
+
+export async function generateStaticParams() {
+    const slugs = await getPostSlugs();
+    return slugs.map((slug) => ({ slug }));
+}
+
+export const dynamicParams = true;
+
+export async function generateMetadata({ params }) {
+    const { slug } = await params;
+    const post = await getPostBySlug(slug);
+    if (!post) return { title: "News" };
+    return {
+        title: post.title,
+        description: post.excerpt,
+    };
+}
 
 export default async function BlogDetail({ params }) {
     const { slug } = await params;
-    const post = blogs.find((b) => b.slug === slug);
+    const post = await getPostBySlug(slug);
     if (!post) return notFound();
-    const related = blogs.filter((b) => b.slug !== post.slug).slice(0, 6);
+
+    const related = (await getPosts())
+        .filter((item) => item.slug !== post.slug)
+        .slice(0, 3);
 
     return (
         <div>
@@ -62,38 +83,10 @@ export default async function BlogDetail({ params }) {
                     )}
 
                     {/* Article Content */}
-                    <article className="space-y-6 text-gray-700 max-w-3xl">
-                        {post.content.map((block, i) => {
-                            if (block.type === "heading") {
-                                return (
-                                    <h2 key={i} className="   font-medium text-[20px] lg:text-[32px] leading-[32px] lg:leading-[40px] tracking-[-0.64px] text-gray-900 align-middle">
-                                        {block.text}
-                                    </h2>
-                                );
-                            }
-                            if (block.type === "paragraph") {
-                                return (
-                                    <p key={i} className="   font-normal text-[16px] lg:text-[16px] leading-[24px] lg:leading-[24px] tracking-[-0.16px] text-gray-700 align-middle">
-                                        {block.text}
-                                    </p>
-                                );
-                            }
-                            if (block.type === "image") {
-                                return (
-                                    <div key={i} className="rounded-lg overflow-hidden shadow-md my-6">
-                                        <Image
-                                            src={block.src}
-                                            alt={block.alt || post.title}
-                                            width={1200}
-                                            height={600}
-                                            className="w-full h-auto object-cover"
-                                        />
-                                    </div>
-                                );
-                            }
-                            return null;
-                        })}
-                    </article>
+                    <article
+                        className="wp-content max-w-3xl self-start"
+                        dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+                    />
                 </div>
             </div>
 
@@ -110,13 +103,13 @@ export default async function BlogDetail({ params }) {
                     </div>
 
                     <div className="grid lg:grid-cols-4 gap-6 items-start">
-                        {related.slice(0, 3).map((item, i) => {
+                        {related.map((item, i) => {
                             const isHero = i === 0;
                             return (
                                 <Link key={item.slug} href={`/blogs/${item.slug}`} className={`${isHero ? 'lg:col-span-2 lg:row-span-2' : 'col-span-1'} group block`}>
                                     <div className={`rounded overflow-hidden shadow-sm bg-white ${isHero ? '' : ''}`}>
                                         <div className={`${isHero ? 'h-72 lg:h-[360px]' : 'h-44 lg:h-48'} w-full overflow-hidden`}>
-                                            <Image src={item.image} alt={item.title} width={1200} height={700} className="w-full h-full object-cover transition-transform duration-300" />
+                                            <Image src={item.image || FALLBACK_IMAGE} alt={item.title} width={1200} height={700} className="w-full h-full object-cover transition-transform duration-300" />
                                         </div>
                                         <div className="p-4">
                                             <p className="text-xs text-gray-400 mb-2">{item.date}</p>
