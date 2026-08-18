@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import badgeIcon from '../../../public/badge.png';
 import gsap from 'gsap';
-import CardAnimation from '../../animations/CardAnimation.js';
 
 const HEADING_TEXT =
   'Shaping the Future With Copper From the UAE to global markets, we deliver premium copper solutions engineered for performance, reliability, and sustainable progress.';
@@ -45,52 +44,32 @@ function splitIntoWordSpans(element) {
 
 export default function About({ lockProgressRef = null }) {
   const headingRef = useRef(null);
-  const smoothedProgressRef = useRef(0);
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !headingRef.current) return;
+    if (typeof window === 'undefined' || !lockProgressRef) return;
 
     let colorTl;
-    let rafId;
     const timerId = setTimeout(() => {
-      const h1 = headingRef.current;
-      if (!h1) return;
+      const heading = headingRef.current;
+      if (!heading) return;
 
-      const wordSpans = splitIntoWordSpans(h1);
+      const wordSpans = splitIntoWordSpans(heading);
       if (!wordSpans.length) return;
 
       const targetColor = '#FA6E43';
       colorTl = gsap.timeline({ paused: true });
-      colorTl.to(wordSpans, {
-        color: targetColor,
-        duration: 1,
-        ease: 'power2.inOut',
-        stagger: 0.06,
+
+      wordSpans.forEach((span, i) => {
+        colorTl.to(span, { color: targetColor, duration: 1, ease: 'none' }, i);
       });
 
-      if (lockProgressRef) {
-        lockProgressRef.current = (p) => {
-          const target = gsap.utils.clamp(0, 1, p);
-          const tick = () => {
-            const current = smoothedProgressRef.current;
-            const next = current + (target - current) * 0.12;
-            smoothedProgressRef.current = Math.abs(target - next) < 0.001 ? target : next;
-            colorTl.progress(smoothedProgressRef.current);
-            if (smoothedProgressRef.current !== target) {
-              rafId = requestAnimationFrame(tick);
-            }
-          };
-          if (rafId) cancelAnimationFrame(rafId);
-          rafId = requestAnimationFrame(tick);
-        };
-      }
-    }, 200);
+      lockProgressRef.current = (progress) => colorTl.progress(progress);
+    }, 250);
 
     return () => {
       clearTimeout(timerId);
-      if (rafId) cancelAnimationFrame(rafId);
       colorTl?.kill();
-      if (lockProgressRef) lockProgressRef.current = null;
+      lockProgressRef.current = null;
     };
   }, [lockProgressRef]);
 
@@ -135,14 +114,12 @@ export default function About({ lockProgressRef = null }) {
               {HEADING_TEXT}
             </h1>
 
-            <CardAnimation>
-              <Link href="/aboutus">
-                <button className="bg-primary text-[0.875rem] lg:text-[1rem] min-w-[8.75rem] lg:min-w-[11.25rem] h-[2.5rem] lg:h-[3rem] px-[1.125rem] lg:px-[1.5rem] text-white inline-flex justify-between items-center gap-[0.625rem] rounded-full border border-white/30 hover:brightness-105 transition-all duration-300">
-                  <span className="font-primary font-normal tracking-[-0.025em]">Know more</span>
-                  <ArrowRight size={18} color="white" className="shrink-0" />
-                </button>
-              </Link>
-            </CardAnimation>
+            <Link href="/aboutus">
+              <button className="bg-primary text-[0.875rem] lg:text-[1rem] min-w-[8.75rem] lg:min-w-[11.25rem] h-[2.5rem] lg:h-[3rem] px-[1.125rem] lg:px-[1.5rem] text-white inline-flex justify-between items-center gap-[0.625rem] rounded-full border border-white/30">
+                <span className="font-primary font-normal tracking-[-0.025em]">Know more</span>
+                <ArrowRight size={18} color="white" className="shrink-0" />
+              </button>
+            </Link>
           </div>
         </div>
       </div>

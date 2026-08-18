@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 import SnippScrol from '../../animations/SnippScrol/index.js';
 import About from './About.js';
 import AboutStats from './AboutStats.js';
@@ -14,10 +14,23 @@ export default function HomeHeroAbout() {
     lockProgressRef.current?.(p);
   }, []);
 
+  useEffect(() => {
+    window.__pageScrollLocked = true;
+    window.lenisInstance?.stop();
+    return () => {
+      window.__pageScrollLocked = false;
+      window.lenisInstance?.start();
+    };
+  }, []);
+
   return (
     <SnippScrol
-      enableSnap={false}
+      scrub={0.5}
+      mobileScrub={0.3}
+      enableSnap={true}
+      snapDuration={0.5}
       enableExit={false}
+      lockAtEnd={1}
       lockPageUntilComplete
       onLockProgress={handleLockProgress}
     >

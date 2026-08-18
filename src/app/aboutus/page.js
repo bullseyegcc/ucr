@@ -1,9 +1,7 @@
 "use client";
 
 import { Badge, Badgetextwhite } from "../../common/badge";
-import { WhiteBadge } from "../../common/badge";
 import { VideoCard } from "../../common/VideoCard.js";
-import badge_icon from "../../../public/badge.png";
 
 import { ArrowRight } from "lucide-react";
 
@@ -23,22 +21,9 @@ export default function AboutUs() {
   return (
     <div className="">
       <div className=" mb-[80%] lg:mb-[30%] relative  min-h-[80vh]      bg-primary flex flex-col justify-center items-center ">
-        <div className="flex items-start lg:items-center justify-center lg:gap-3  text-center text-white z-300 w-[60%] ">
-          <SlideIn direction="bottom" duration={0.4} delay={0}>
-            <Image
-              src={badge_icon}
-              alt="Badge Icon"
-              width={20}
-              height={30}
-              className="object-contain"
-            />
-          </SlideIn>
-          <FadeIn duration={0.4} delay={0}>
-            <span className="text-white uppercase font-medium text-center text-xs md:text-lg lg:text-base">
-              Crafting Sustainable Progress, One Copper Solution at a Time{" "}
-            </span>
-          </FadeIn>
-        </div>
+        <SlideIn direction="bottom" duration={0.8} delay={0}>
+          <Badgetextwhite title="Crafting Sustainable Progress, One Copper Solution at a Time" />
+        </SlideIn>
 
         <h1 className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle  text-white px-5 lg:w-[80%] mt-5 lg:mb-8">
           <FadeIn>

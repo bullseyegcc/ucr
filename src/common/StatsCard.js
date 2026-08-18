@@ -14,12 +14,13 @@ export default function StatsCard({
   description,
   showPlus = true,
   index = 0,
+  skipEntrance = false,
 }) {
   const cardRef = useRef(null);
   const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || skipEntrance) return;
     const card = cardRef.current;
     if (!card) return;
 
@@ -88,7 +89,7 @@ export default function StatsCard({
       tween?.scrollTrigger?.kill();
       tween?.kill();
     };
-  }, [index]);
+  }, [index, skipEntrance]);
 
   return (
     <div

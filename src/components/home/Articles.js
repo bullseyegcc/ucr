@@ -5,6 +5,25 @@ import { ArrowRight } from 'lucide-react';
 import { WhiteBadge } from "../../common/badge.js";
 import Link from "next/link";
 
+function CardMeta({ title }) {
+  return (
+    <>
+      <div className="relative z-10 px-5 lg:px-6 text-white flex justify-between gap-4 text-xs sm:text-sm font-light pt-5 lg:pt-6">
+        <span>Written by Bruce Sommers</span>
+        <span className="shrink-0">Monday, April 28, 2026</span>
+      </div>
+      <h2 className="relative z-10 text-xl sm:text-[1.65rem] lg:text-[1.85rem] leading-[1.2] px-5 lg:px-6 pr-8 text-white font-semibold">
+        {title}
+      </h2>
+      <span className="z-10 flex justify-center items-center absolute bottom-4 left-5 lg:left-6 bg-white rounded-lg px-3 py-2">
+        <ArrowRight size={18} color="black" />
+      </span>
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-28 lg:h-32 z-0 bg-gradient-to-b from-[#FA6E43]/90 via-[#FA6E43]/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+    </>
+  );
+}
+
 export default function Articles() {
   const sectionRef = useRef(null);
   const badgeRef = useRef(null);
@@ -71,90 +90,64 @@ export default function Articles() {
   return (
     <div
       ref={sectionRef}
-      className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] py-8 lg:py-10 flex flex-col sm:flex-row gap-5 items-stretch mb-4"
+      className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] py-8 lg:py-10 mb-4"
     >
-      {/* ── Left feature card ──── */}
-      <Link
-        ref={leftRef}
-        href="/blogs/uae-copper-producer-expands-global-supply"
-        className="sm:w-1/2 bg-[#FE5D0A] rounded-xl px-4 sm:px-8 py-6 flex flex-col gap-6"
-        style={{ willChange: 'transform, opacity' }}
-      >
-        <div>
-          <div ref={badgeRef} style={{ willChange: 'transform, opacity' }}>
-            <WhiteBadge title="Blogs & Articles" className="z-190 mb-5" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-5 lg:h-[min(88vh,860px)] lg:min-h-[680px] items-stretch">
+        {/* ── Left feature column ──── */}
+        <div
+          ref={leftRef}
+          className="bg-[#FE5D0A] rounded-2xl px-4 sm:px-7 lg:px-8 py-6 lg:py-7 flex flex-col gap-5 lg:gap-6 min-h-[34rem] lg:min-h-0 lg:h-full"
+          style={{ willChange: 'transform, opacity' }}
+        >
+          <div className="shrink-0">
+            <div ref={badgeRef} style={{ willChange: 'transform, opacity' }}>
+              <WhiteBadge title="Blogs & Articles" className="z-190 mb-3 lg:mb-4" />
+            </div>
+            <h1
+              ref={headingRef}
+              className="text-[2.25rem] sm:text-[2.5rem] lg:text-[3.25rem] text-white font-semibold leading-[1.1]"
+              style={{ willChange: 'transform, opacity' }}
+            >
+              Latest news
+            </h1>
           </div>
-          <h1
-            ref={headingRef}
-            className="text-[2.5rem] lg:text-[3rem] text-white font-semibold mt-3 leading-[1.15]"
+
+          <Link
+            href="/blogs/uae-copper-producer-expands-global-supply"
+            className="relative flex-1 min-h-[22rem] lg:min-h-0 overflow-hidden rounded-2xl bg-[url('/hblog1.png')] bg-cover bg-center bg-no-repeat"
+          >
+            <CardMeta title="UAE Copper Producer Expands Global Supply Network Across Asia & Europe" />
+          </Link>
+        </div>
+
+        {/* ── Right column ───────────────────────────────────────────────── */}
+        <div className="flex flex-col gap-4 lg:gap-5 lg:h-full">
+          <Link
+            ref={rightTopRef}
+            href="/blogs/high-conductivity-copper-rods-energy-sector"
+            className="w-full flex-1 min-h-[16rem] sm:min-h-[18rem] lg:min-h-0 relative flex flex-col justify-start gap-4 rounded-2xl bg-[#6A3120] bg-[url('/hblog2.png')] bg-cover bg-center bg-no-repeat overflow-hidden"
             style={{ willChange: 'transform, opacity' }}
           >
-            Latest News
-          </h1>
+            <CardMeta title="Company Launches New High-Conductivity Copper Rods for Energy Sector" />
+          </Link>
+
+          <Link
+            ref={rightBotRef}
+            href="/blogs/expected-supply-deficit-copper-prices"
+            className="w-full flex-1 min-h-[16rem] lg:min-h-0 relative hidden lg:flex flex-col justify-start gap-4 rounded-2xl bg-[#6A3120] bg-[url('/blog2.png')] bg-cover bg-center bg-no-repeat overflow-hidden"
+            style={{ willChange: 'transform, opacity' }}
+          >
+            <CardMeta title="Expected Supply Deficit To Upset Copper Prices" />
+          </Link>
+
+          <Link
+            href="/blogs"
+            className="border my-8 border-primary w-[80%] px-5 py-3 text-primary lg:hidden flex justify-center items-center gap-3 rounded-full text-lg"
+          >
+            Read more <ArrowRight size={22} className="text-primary" />
+          </Link>
         </div>
-
-        <div className="relative flex-1 min-h-[18rem] lg:min-h-[22rem] p-3 flex flex-col justify-start gap-4 rounded-xl bg-[url('/hblog1.png')] bg-cover bg-top bg-no-repeat">
-          <div className="relative z-10 px-4 text-white flex justify-between text-sm font-light pt-6">
-            <span>Writen by Bruce Sommers's</span>
-            <span>Monday,April 28,2026</span>
-          </div>
-          <h1 className="relative z-10 text-xl sm:text-[1.75rem] lg:text-[2rem] leading-[1.2] pl-4 pr-4 text-white">
-            UAE Copper Producer Expands Global Supply Network Across Asia &amp; Europe
-          </h1>
-          <button className="z-10 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
-            <ArrowRight size={18} color="black" />
-          </button>
-        </div>
-      </Link>
-
-      {/* ── Right column ───────────────────────────────────────────────── */}
-      <div className="sm:w-1/2 rounded-xl flex flex-col gap-5">
-        <Link
-          ref={rightTopRef}
-          href="/blogs/high-conductivity-copper-rods-energy-sector"
-          className="w-full flex-1 min-h-[14rem] lg:min-h-[16rem] relative bg-[#6A3120] flex flex-col justify-start gap-4 rounded-xl bg-[url('/hblog2.png')] bg-cover bg-center bg-no-repeat overflow-hidden"
-          style={{ willChange: 'transform, opacity' }}
-        >
-          <div className="relative z-10 px-4 text-white flex justify-between text-sm font-light pt-9">
-            <span>Writen by Bruce Sommers's</span>
-            <span>Monday,April 28,2026</span>
-          </div>
-          <h1 className="relative z-10 text-[1.5rem] lg:text-[1.75rem] leading-[1.2] pl-4 pr-8 text-white">
-            Company Launches New High-Conductivity Copper Rods for Energy Sector
-          </h1>
-          <button className="z-10 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
-            <ArrowRight size={18} color="black" />
-          </button>
-          <div className="rounded-xl h-24 lg:h-28 absolute top-0 w-full z-0 bg-gradient-to-b from-[#FA6E43] to-transparent" />
-        </Link>
-
-        <Link
-          ref={rightBotRef}
-          className="w-full flex-1 min-h-[14rem] lg:min-h-[16rem] relative bg-[#6A3120] hidden lg:flex flex-col justify-start gap-4 rounded-xl bg-[url('/blog2.png')] bg-cover bg-center bg-no-repeat overflow-hidden"
-          href="/blogs/expected-supply-deficit-copper-prices"
-          style={{ willChange: 'transform, opacity' }}
-        >
-          <div className="relative z-10 px-4 text-white flex justify-between text-sm font-light pt-9">
-            <span>Writen by Bruce Sommers's</span>
-            <span>Monday,April 28,2026</span>
-          </div>
-          <h1 className="relative z-10 text-[1.5rem] lg:text-[1.75rem] leading-[1.2] pl-4 pr-8 text-white">
-            Expected Supply Deficit To Upset Copper Prices
-          </h1>
-          <button className="z-10 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
-            <ArrowRight size={18} color="black" />
-          </button>
-          <div className="rounded-xl h-24 lg:h-28 absolute top-0 w-full z-0 bg-gradient-to-b from-[#FA6E43] to-transparent" />
-        </Link>
-
-        <Link
-          href="/blogs"
-          className="border my-8 border-primary w-[80%] px-5 py-3 text-primary lg:hidden flex justify-center items-center gap-3 rounded-full text-lg"
-        >
-          Read more <ArrowRight size={22} className="text-primary" />
-        </Link>
       </div>
     </div>
   );
 }
-

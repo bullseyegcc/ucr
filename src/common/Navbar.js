@@ -3,53 +3,117 @@
 import { Menu, ArrowRight, X, XCircle, ChevronDown, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
+import {
+    motion,
+    useMotionTemplate,
+    useReducedMotion,
+    useSpring,
+    useTransform,
+} from 'motion/react';
+
+/** Distance over which the bar eases from glass to solid. */
+const FADE_DISTANCE_PX = 280;
+
+const SPRING = {
+    stiffness: 48,
+    damping: 22,
+    mass: 1.05,
+    restDelta: 0.001,
+    restSpeed: 0.001,
+};
+
+function getScrollY() {
+    return window.lenisInstance?.scroll ?? window.scrollY ?? 0;
+}
+
+function scrollToProgress(y) {
+    const t = Math.min(1, Math.max(0, y / FADE_DISTANCE_PX));
+    return t * t * (3 - 2 * t);
+}
+
+function isSolidNavbarPath(pathname) {
+    return Boolean(pathname?.startsWith('/blogs/'));
+}
 
 export const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [expandedSection, setExpandedSection] = useState(null);
-    const [isScrolled, setIsScrolled] = useState(false);
     const pathname = usePathname();
-    const isHome = pathname === '/';
+    const solidByDefault = isSolidNavbarPath(pathname);
+    const [isScrolled, setIsScrolled] = useState(solidByDefault);
+    const reducedMotion = useReducedMotion();
+    const progress = useSpring(solidByDefault ? 1 : 0, SPRING);
 
-    // Homepage: solid full-width bar when About is placed.
-    // Other pages: switch after scrolling past the hero.
+    const backgroundColor = useTransform(
+        progress,
+        [0, 1],
+        ['rgba(192,192,192,0.2)', 'rgba(255,255,255,1)']
+    );
+    const shadowOpacity = useTransform(progress, [0.35, 1], [0, 0.08]);
+    const boxShadow = useMotionTemplate`0 10px 15px -3px rgba(0,0,0,${shadowOpacity}), 0 4px 6px -4px rgba(0,0,0,${shadowOpacity})`;
+    const fgColor = useTransform(progress, [0, 1], ['#ffffff', '#1a1a1a']);
+    const borderColor = useTransform(progress, [0, 1], ['#C0C0C0', '#1a1a1a']);
+    const menuBg = useTransform(
+        progress,
+        [0, 1],
+        ['rgba(192,192,192,0.2)', 'rgb(243,244,246)']
+    );
+    const logoLightOpacity = useTransform(progress, [0, 0.8], [1, 0]);
+    const logoDarkOpacity = useTransform(progress, [0.2, 1], [0, 1]);
+
+    const applyOpaqueFlag = useCallback((value) => {
+        const opaque = solidByDefault || value > 0.45;
+        setIsScrolled((prev) => (prev === opaque ? prev : opaque));
+    }, [solidByDefault]);
+
+    const syncProgress = useCallback((instant = false) => {
+        const next = solidByDefault ? 1 : scrollToProgress(getScrollY());
+        if (instant || reducedMotion) {
+            progress.jump(next);
+        } else {
+            progress.set(next);
+        }
+    }, [progress, reducedMotion, solidByDefault]);
+
+    useEffect(() => progress.on('change', applyOpaqueFlag), [applyOpaqueFlag, progress]);
+
+    useLayoutEffect(() => {
+        syncProgress(true);
+    }, [pathname, syncProgress]);
+
     useEffect(() => {
         let ticking = false;
 
         const handleScroll = () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    if (isHome) {
-                        const placed = !!window.__heroAboutPlaced;
-                        const scrolled = (window.scrollY || 0) > 8;
-                        setIsScrolled(placed || scrolled);
-                    } else {
-                        const heroThreshold = Math.min(window.innerHeight * 0.8, 600);
-                        setIsScrolled(window.scrollY > heroThreshold);
-                    }
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        };
-
-        const onAboutPlaced = (e) => {
-            if (!isHome) return;
-            setIsScrolled(!!e.detail?.placed || (window.scrollY || 0) > 8);
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(() => {
+                syncProgress();
+                ticking = false;
+            });
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });
-        window.addEventListener('heroAboutPlaced', onAboutPlaced);
-        handleScroll();
-        if (isHome && window.__heroAboutPlaced) setIsScrolled(true);
+
+        let attachedLenis = null;
+        const attachLenis = () => {
+            const next = window.lenisInstance;
+            if (!next || attachedLenis === next) return;
+            attachedLenis?.off('scroll', handleScroll);
+            attachedLenis = next;
+            attachedLenis.on('scroll', handleScroll);
+        };
+        attachLenis();
+        window.addEventListener('lenisReady', attachLenis);
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('heroAboutPlaced', onAboutPlaced);
+            window.removeEventListener('lenisReady', attachLenis);
+            attachedLenis?.off('scroll', handleScroll);
         };
-    }, [isHome]);
+    }, [syncProgress]);
 
     const isActivePage = (href) => {
         return pathname === href || pathname.startsWith(href + '/');
@@ -113,55 +177,72 @@ export const Navbar = () => {
 
     return(
         <>
-            {/* Top Navigation Bar - Dynamic opacity and sticky behavior */}
-            <div className={`top-0 left-0 w-full h-16 sm:h-20 flex flex-row-reverse lg:flex-row items-center justify-between px-4 sm:px-6 lg:px-10 lg:px-12 z-50 transition-all duration-500 ease-in-out ${
-                isScrolled 
-                    ? 'fixed bg-white shadow-lg backdrop-blur-sm transform translate-y-0 opacity-100' 
-                    : 'absolute bg-secondary/20 transform translate-y-0 opacity-100'
-            }`}>
+            {/* Top Navigation Bar — live transparent → opaque, Bullseye-style */}
+            <motion.div
+                className="fixed top-0 left-0 z-50 flex h-16 w-full flex-row-reverse items-center justify-between px-4 backdrop-blur-sm sm:h-20 sm:px-6 lg:flex-row lg:px-12"
+                style={{
+                    backgroundColor,
+                    boxShadow,
+                }}
+            >
                 {/* Menu Button - Dynamic color based on scroll state */}
-                <div 
-                    className={`inline-block p-2 cursor-pointer transition-all duration-300 ${
-                        isScrolled 
-                            ? 'bg-gray-100 hover:bg-gray-200' 
-                            : 'bg-secondary/20 hover:bg-secondary/30'
-                    }`}
+                <motion.div
+                    className="group inline-block cursor-pointer p-2 transition-all duration-300 ease-out hover:!bg-primary"
+                    style={{ backgroundColor: menuBg }}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
-                    <Menu 
-                        size={24} 
-                        className="sm:w-7 sm:h-7" 
-                        color={isScrolled ? '#1a1a1a' : 'white'} 
-                    />
-                </div>
+                    <motion.span
+                        style={{ color: fgColor }}
+                        className="block transition-colors duration-300 ease-out group-hover:!text-white"
+                    >
+                        <Menu size={24} className="sm:h-7 sm:w-7" />
+                    </motion.span>
+                </motion.div>
 
                 {/* Logo - Centered on mobile, left on desktop */}
-                <Image 
-                    src={isScrolled ? "/clogo.png" : "/logo.png"}
-                    alt="Logo" 
-                    width={140} 
-                    height={140} 
-                    className='object-contain w-20 h-20 sm:w-24 sm:w-36 lg:absolute lg:left-1/2 lg:-translate-x-1/2 transition-all duration-300' 
-                />
+                <Link
+                    href="/"
+                    aria-label="Go to homepage"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="relative h-20 w-20 sm:h-20 sm:w-36 lg:absolute lg:left-1/2 lg:-translate-x-1/2"
+                >
+                    <motion.div className="absolute inset-0" style={{ opacity: logoLightOpacity }}>
+                        <Image
+                            src="/logo.png"
+                            alt="Logo"
+                            fill
+                            priority
+                            sizes="144px"
+                            className="object-contain"
+                        />
+                    </motion.div>
+                    <motion.div className="absolute inset-0" style={{ opacity: logoDarkOpacity }}>
+                        <Image
+                            src="/clogo.png"
+                            alt=""
+                            fill
+                            sizes="144px"
+                            className="object-contain"
+                        />
+                    </motion.div>
+                </Link>
 
                 {/* Contact Button - Hidden on mobile, dynamic color */}
-                <Link href="/contactus" className='hidden lg:block'>
-                    <button className={`flex items-center gap-2 w-36 lg:w-40 border rounded-full px-3 py-2 justify-between transition-all duration-300 text-sm lg:text-base ${
-                        isScrolled
-                            ? 'text-gray-900 border-gray-900 hover:bg-gray-100'
-                            : 'text-white border-secondary hover:bg-secondary/10'
-                    }`}>
-                        Contact Us 
-                        <ArrowRight 
-                            size={18} 
-                            color={isScrolled ? '#1a1a1a' : 'white'} 
-                        />
-                    </button>
+                <Link href="/contactus" className="group hidden lg:block">
+                    <motion.button
+                        className="flex w-36 items-center justify-between gap-2 rounded-full border px-3 py-2 text-sm transition-all duration-300 ease-out lg:w-40 lg:text-base hover:bg-primary hover:!border-primary hover:!text-white"
+                        style={{ color: fgColor, borderColor }}
+                    >
+                        Contact Us
+                        <motion.span
+                            style={{ color: fgColor }}
+                            className="block transition-transform duration-300 ease-out group-hover:translate-x-1 group-hover:!text-white"
+                        >
+                            <ArrowRight size={18} />
+                        </motion.span>
+                    </motion.button>
                 </Link>
-            </div>
-
-            {/* Spacer for fixed navbar — skip on home; About already pads for the bar */}
-            <div className={`${isScrolled && !isHome ? 'h-16 sm:h-20 lg:h-40' : 'h-0'}`} />
+            </motion.div>
 
             {/* Slide-in Menu - Fully Responsive */}
             {isMenuOpen && (
