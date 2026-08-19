@@ -1,6 +1,7 @@
 "use client";
 
-import { Badge, Badgetextwhite } from "../../common/badge";
+import { Badge } from "../../common/badge";
+import Hero from "@/components/shared/Hero";
 import Image from "next/image";
 import ColorChangeWithScroll from "../../animations/ColorChangeWithScroll";
 import CardAnimation from "../../animations/CardAnimation";
@@ -9,23 +10,25 @@ import CountUp from "../../animations/countup";
 import FadeIn from "../../animations/FadeIn";
 import SlideIn from "../../animations/SlideIn";
 
+
 export default function parentCompany() {
   return (
     <div className="bg-[#F5F5F5]">
       {/* header */}
-      <div className="bg-[url('/pcbg-1.png')] bg-cover bg-bottom bg-no-repeat relative  min-h-[60vh] lg:min-h-[80vh]      flex flex-col items-center  justify-center gap-6">
-        <SlideIn direction="bottom" duration={0.8} delay={0}>
-          <Badgetextwhite title="Parent Company" />
-        </SlideIn>
-
-        <FadeIn
-          className="lg:w-[70%] font-medium  text-[32px] leading-[48px] tracking-[-2.74px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white w-full px-6"
-          duration={0.4}
-          delay={0}
-        >
-          Driving growth through strategy, leadership, and innovation.
-        </FadeIn>
-      </div>
+      <Hero
+        badge="Parent Company"
+        title="Driving growth through strategy, leadership, and innovation."
+        titleVariant="parent-company"
+        titleClassName="lg:w-[70%] w-full px-6"
+        titleDirectFade
+        titleInH1={false}
+        gapClass="gap-6"
+        background={{
+          type: "image",
+          src: "/pcbg-1.png",
+          imageClassName: "bg-bottom bg-center",
+        }}
+      />
 
       <div className="px-2 lg:px-10 lg:py-16 flex flex-col items-center justify-center bg-[#F5F5F5]">
         <ColorChangeWithScroll initialColor="#8A8A8A" afterColor="#FF7A5C">

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 import SnippScrol from '../../animations/SnippScrol/index.js';
 import About from './About.js';
 import AboutStats from './AboutStats.js';
@@ -14,21 +14,34 @@ export default function HomeHeroAbout() {
     lockProgressRef.current?.(p);
   }, []);
 
+  useEffect(() => {
+    window.__pageScrollLocked = true;
+    window.lenisInstance?.stop();
+    return () => {
+      window.__pageScrollLocked = false;
+      window.lenisInstance?.start();
+    };
+  }, []);
+
   return (
     <SnippScrol
-      enableSnap={false}
+      scrub={0.5}
+      mobileScrub={0.3}
+      enableSnap={true}
+      snapDuration={0.5}
       enableExit={false}
+      lockAtEnd={1}
       lockPageUntilComplete
       onLockProgress={handleLockProgress}
     >
       {/* Panel 1: Hero */}
-      <div className="relative flex min-h-[80vh] md:min-h-screen items-center justify-center bg-black overflow-hidden">
+      <div className="relative flex h-full max-h-[1000px] items-center justify-center bg-black overflow-hidden">
         <VideoPlayer src="/hero.mp4" priority className="absolute inset-0 w-full h-full object-cover" />
         <HeroHeading delay={4}>UCR shaping the future</HeroHeading>
       </div>
 
       {/* Panel 2: About — matches design as one cohesive viewport block */}
-      <div className="w-full h-full min-h-0 flex flex-col justify-start gap-[0.75rem] lg:gap-[1.25rem] bg-[#F4F4F2] scroll-pt-24 lg:scroll-pt-28">
+      <div className="w-full h-full max-h-[1000px] min-h-0 flex flex-col justify-start overflow-hidden gap-[0.75rem] lg:gap-[1.25rem] bg-[#F4F4F2] scroll-pt-24 lg:scroll-pt-28">
         <About lockProgressRef={lockProgressRef} />
         <AboutStats />
       </div>

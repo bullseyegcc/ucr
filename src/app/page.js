@@ -22,7 +22,7 @@ export default async function Home() {
 
       {/* video Cards */}
       <ParallaxSection index={0}>
-        <div className="mt-8 flex flex-col lg:flex-row justify-center min-h-screen  lg:px-10 gap-1 lg:gap-2 lg:py-8 bg-white">
+        <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] mt-8 flex flex-col lg:flex-row justify-center lg:min-h-[min(100vh,1000px)] lg:max-h-[1000px] gap-1 lg:gap-2 lg:py-8 bg-white">
         <VideoCard
           videoSrc="/moreabout.mp4"
           badgeTitle="more about"
@@ -51,9 +51,9 @@ export default async function Home() {
         <WeCareSection />
       </div>
 
-      <ParallaxSection index={3}>
+      <div className="relative w-full" style={{ zIndex: 13 }}>
         <OurTechnology />
-      </ParallaxSection>
+      </div>
 
       <ParallaxSection index={4}>
         <WhyChooseUs />
@@ -69,13 +69,13 @@ export default async function Home() {
         <CTA />
       </ParallaxSection>
 
-      <ParallaxSection index={7} parallaxAmount={-30}>
+      <div className="relative w-full" style={{ zIndex: 18 }}>
         <Articles posts={posts} />
-      </ParallaxSection>
+      </div>
 
     </div>
 
 
 
   );
-}       
+}

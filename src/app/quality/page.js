@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { Badgetextblack, Badgetextwhite, Badge } from "../../common/badge";
+import { Badgetextblack, Badge } from "../../common/badge";
+import Hero from "@/components/shared/Hero";
 import ParallaxSection from "../../animations/ParallaxSection";
-import TextReveal from "../../animations/TextReveal";
 import CardAnimation from "../../animations/CardAnimation";
+import SequentialSlideIn from "../../animations/SequentialSlideIn";
 import FadeIn from "../../animations/FadeIn";
 import SlideIn from "../../animations/SlideIn";
 
@@ -10,24 +11,22 @@ export default function Quality() {
   return (
     <div>
       {/* header */}
-      <div
-        className="relative rounded-b-xl flex flex-col text-center min-h-[60vh] sm:min-h-[60vh] lg:min-h-[80vh] items-center justify-center   dark:bg-black gap-6 px-6"
-        style={{
-          background:
-            "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/qualitybg.png') lightgray 50% / cover no-repeat",
+      <Hero
+        badge="Premium Quality Assured"
+        title="Quality is our foundation"
+        titleClassName="w-full sm:w-[90%] lg:w-auto lg:whitespace-nowrap px-10 lg:px-0"
+        titleDirectFade
+        titleInH1={false}
+        className="rounded-b-xl dark:bg-black px-6"
+        minHeightClass="min-h-[60vh] sm:min-h-[60vh] lg:min-h-[80vh]"
+        background={{
+          type: "image-inline",
+          style: {
+            background:
+              "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/qualitybg.png') lightgray 50% / cover no-repeat",
+          },
         }}
       >
-        <SlideIn direction="bottom" duration={0.8} delay={0}>
-          <Badgetextwhite title="Premium Quality Assured" />
-        </SlideIn>
-        <FadeIn
-          className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white w-full sm:w-[90%] lg:w-[80%] px-10 lg:px-0"
-          duration={0.4}
-          delay={0}
-        >
-          Quality is our foundation
-        </FadeIn>
-
         <Image
           src="/ribbin.png"
           alt="Icon"
@@ -35,7 +34,7 @@ export default function Quality() {
           height={0}
           className="w-50 lg:w-60 absolute -right-[12%] lg:right-[6%] bottom-[12%] lg:bottom-[10%]"
         />
-      </div>
+      </Hero>
 
       {/* certifications */}
 
@@ -86,8 +85,7 @@ export default function Quality() {
       </ParallaxSection>
       {/* Achivements */}
 
-      <ParallaxSection index={1}>
-        <div className="relative z-20 flex min-h-screen lg:min-h-[80vh] flex-col gap-10 sm:gap-12 lg:gap-16 items-center justify-center py-12 sm:py-16 lg:py-20   bg-[#FFF8F4] sm:px-6">
+      <div className="relative z-20 flex flex-col gap-10 sm:gap-12 lg:gap-16 items-center justify-center py-12 sm:py-16 lg:py-20 bg-[#FFF8F4] sm:px-6">
           <div className="flex flex-col items-center text-center">
             <SlideIn
               direction="bottom"
@@ -107,110 +105,47 @@ export default function Quality() {
           </div>
 
           {/* cards */}
-          <div className="relative lg:px-6 sm:px-8 lg:px-10 pb-12 sm:pb-16 lg:pb-20 flex flex-wrap lg:gap-4 sm:gap-6 py-6 sm:py-8 lg:justify-center pt-6 sm:pt-9">
-            {/* card 1 */}
-            <CardAnimation
-              index={0}
-              className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%]"
+          <div className="relative lg:px-6 sm:px-8 lg:px-10 pb-12 sm:pb-16 lg:pb-20 py-6 sm:py-8 pt-6 sm:pt-9 w-full">
+            <SequentialSlideIn
+              className="flex flex-wrap lg:gap-4 sm:gap-6 lg:justify-center w-full"
+              itemClassName="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%]"
+              start="top 85%"
+              end="bottom 70%"
             >
               <Image
                 src="/q1.png"
-                alt="Icon"
+                alt="Certification"
                 width={480}
                 height={0}
                 className="object-cover rounded-xl"
               />
-            </CardAnimation>
-
-            {/* card 2 */}
-            <CardAnimation
-              index={1}
-              className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%] mt-4 sm:mt-0"
-            >
               <Image
                 src="/q2.png"
-                alt="Icon"
+                alt="Certification"
                 width={480}
                 height={0}
                 className="object-cover rounded-xl"
               />
-            </CardAnimation>
-
-            {/* card 3   */}
-            <CardAnimation
-              index={2}
-              className="flex flex-col gap-2 w-full sm:w-[48%] lg:w-[32%] mt-4 sm:mt-0"
-            >
               <Image
                 src="/q3.png"
-                alt="Icon"
+                alt="Certification"
                 width={400}
                 height={0}
                 className="object-cover rounded-xl"
               />
-            </CardAnimation>
+            </SequentialSlideIn>
 
             <Image
               src="/orangebottom.png"
-              alt="Icon"
+              alt=""
               width={900}
               height={0}
-              className="w-full absolute bottom-0"
+              className="w-full absolute bottom-0 pointer-events-none"
             />
           </div>
-        </div>
-      </ParallaxSection>
+      </div>
 
-      <ParallaxSection index={2}>
-        <div className="min-h-[60vh] lg:min-h-[80vh] rounded-t-lg bg-[url('/gradient-bg.png')] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center gap-4 lg:gap-6 px-6 text-center py-12 lg:py-20">
-          <div className="flex flex-col w-full lg:w-[80%]">
-            <Image
-              src="/quote.png"
-              alt="Icon"
-              width={40}
-              height={0}
-              className="w-8 lg:w-[70px]"
-            />
-            <TextReveal className="relative">
-              <p className="pl-3 lg:pl-5 text-[24px] leading-[48px] italic tracking-[0px] text-center align-middle lg:text-[32px] lg:leading-[48px]">
-                At UCR, we are grounded in vision, trust, and a commitment to
-                excellence. We believe success is measured not just by financial
-                gains but by the positive impact we have on our communities and
-                future generations.We have broadened our investments across
-                various sectors with a clear strategy. As global markets change,
-                we remain focused on responsible growth, continuous innovation,
-                and delivering lasting{" "}
-                <span className="relative">
-                  value.{" "}
-                  <Image
-                    src="/quote.png"
-                    alt="Icon"
-                    width={40}
-                    height={0}
-                    className="self-end w-8 lg:w-[60px] absolute -right-8 lg:-right-20 lg:-right-6 -bottom-0"
-                  />
-                </span>
-              </p>
-            </TextReveal>
-          </div>
-
-          <div className="flex flex-col justify-center items-center gap-2 lg:gap-4">
-            <Image
-              src="/diamsign.png"
-              alt="Icon"
-              width={150}
-              height={0}
-              className="w-24 lg:w-[150px]"
-            />
-            <h1 className="text-2xl lg:text-4xl font-medium">
-              Diam O'Sullivan
-            </h1>
-            <p className="text-base lg:text-2xl font-light">
-              Honorable Chairman
-            </p>
-          </div>
-        </div>
-      </ParallaxSection>
+      
     </div>
   );
 }

@@ -149,14 +149,18 @@ export default function SnippScrol({
       });
 
       // ── Extend tl duration for the lock-at-end phase ─────────────────────
-      const panelDuration = total - 1;
-      if (lockAtEnd > 0 && !lockPageUntilComplete) {
+      const panelDuration = Math.max(total - 1, 0);
+      const lockDuration  = lockAtEnd > 0 ? lockAtEnd : 0;
+      const totalDuration = panelDuration + lockDuration;
+      const panelFraction = totalDuration > 0 ? panelDuration / totalDuration : 1;
+      if (lockDuration > 0) {
         const _dummy = {};
-        tl.to(_dummy, { duration: lockAtEnd }, panelDuration);
+        tl.to(_dummy, { duration: lockDuration }, panelDuration);
       }
 
       // Freeze document scroll and drive the overlay from wheel/touch until
-      // the incoming panel is fully placed, then unlock page scroll.
+      // the incoming panel is fully placed (and lock-color hold finishes),
+      // then unlock page scroll so Lenis never jerks at the start.
       if (lockPageUntilComplete) {
         const startPlaced = (window.scrollY || 0) > 8;
         let target = startPlaced ? 1 : 0;
@@ -168,6 +172,13 @@ export default function SnippScrol({
 
         let lastPlaced = startPlaced;
         window.__heroAboutPlaced = startPlaced;
+        window.__pageScrollLocked = locked;
+        const emitCoverProgress = (p) => {
+          const next = Math.max(0, Math.min(1, p));
+          window.__heroAboutProgress = next;
+          window.__onHeroAboutProgress?.(next);
+        };
+        emitCoverProgress(current);
         const emitPlaced = (placed) => {
           if (placed === lastPlaced) return;
           lastPlaced = placed;
@@ -197,26 +208,32 @@ export default function SnippScrol({
 
         const reportLockProgress = (p) => {
           if (!onLockProgress) return;
-          onLockProgress(Math.max(0, Math.min(1, (p - 0.7) / 0.3)));
+          if (p > panelFraction && panelFraction < 1) {
+            onLockProgress(Math.min(1, Math.max(0, (p - panelFraction) / (1 - panelFraction))));
+          } else {
+            onLockProgress(0);
+          }
         };
 
         const tick = () => {
           current += (target - current) * 0.22;
           if (Math.abs(target - current) < 0.0008) current = target;
-          tl.progress(current);
+          const slideProgress = panelFraction > 0 ? Math.min(current, panelFraction) / panelFraction : current;
+          tl.progress(totalDuration > 0 ? current : slideProgress);
+          emitCoverProgress(slideProgress);
           reportLockProgress(current);
+          emitPlaced(current >= panelFraction);
           if (current >= 1 && target >= 1) {
             setLocked(false);
-            emitPlaced(true);
           } else if (current < 1) {
             setLocked(true);
-            emitPlaced(false);
           }
           rafId = current !== target ? requestAnimationFrame(tick) : 0;
         };
 
         const addProgress = (deltaPx) => {
-          const dist = window.innerHeight * 1.05;
+          const panelHeight = container.offsetHeight || window.innerHeight;
+          const dist = panelHeight * Math.max(totalDuration, 1) * 1.05;
           target = Math.max(0, Math.min(1, target + deltaPx / dist));
           if (!rafId) rafId = requestAnimationFrame(tick);
         };
@@ -286,6 +303,8 @@ export default function SnippScrol({
           window.removeEventListener('splashComplete', onLenisReady);
           window.__pageScrollLocked = false;
           window.__heroAboutPlaced = false;
+          window.__heroAboutProgress = 0;
+          window.__onHeroAboutProgress?.(0);
           window.lenisInstance?.start();
           document.documentElement.style.overflow = '';
           document.body.style.overflow = '';
@@ -296,10 +315,28 @@ export default function SnippScrol({
       }
 
       // ── Pin container and scrub the timeline ──────────────────────────────
-      const panelScrollPx = (total - 1) * window.innerHeight;
-      const lockScrollPx  = lockAtEnd * window.innerHeight;
+      const panelHeight   = container.offsetHeight || window.innerHeight;
+      const panelScrollPx = (total - 1) * panelHeight;
+      const lockScrollPx  = lockAtEnd * panelHeight;
       const totalScrollPx = panelScrollPx + lockScrollPx;
-      const panelFraction = totalScrollPx > 0 ? panelScrollPx / totalScrollPx : 1;
+
+      let lastPlaced = false;
+      window.__heroAboutPlaced = false;
+      const emitCoverProgress = (p) => {
+        const next = Math.max(0, Math.min(1, p));
+        window.__heroAboutProgress = next;
+        window.__onHeroAboutProgress?.(next);
+      };
+      emitCoverProgress(0);
+      const emitPlaced = (placed) => {
+        if (placed === lastPlaced) return;
+        lastPlaced = placed;
+        window.__heroAboutPlaced = placed;
+        window.dispatchEvent(new CustomEvent('heroAboutPlaced', { detail: { placed } }));
+        if (placed) {
+          window.dispatchEvent(new CustomEvent('scrollAnimationsReady'));
+        }
+      };
 
       // Disable pinning on mobile to restore scroll
       ScrollTrigger.create({
@@ -326,16 +363,18 @@ export default function SnippScrol({
               delay:    0.05,
             }
           : undefined,
-        onUpdate: lockScrollPx > 0 && onLockProgress
-          ? (self) => {
-              if (self.progress > panelFraction) {
-                const lockRaw = (self.progress - panelFraction) / (1 - panelFraction);
-                onLockProgress(Math.min(1, Math.max(0, lockRaw)));
-              } else {
-                onLockProgress(0);
-              }
+        onUpdate: (self) => {
+          emitCoverProgress(panelFraction > 0 ? self.progress / panelFraction : 1);
+          emitPlaced(self.progress >= panelFraction);
+          if (lockScrollPx > 0 && onLockProgress) {
+            if (self.progress > panelFraction) {
+              const lockRaw = (self.progress - panelFraction) / (1 - panelFraction);
+              onLockProgress(Math.min(1, Math.max(0, lockRaw)));
+            } else {
+              onLockProgress(0);
             }
-          : undefined,
+          }
+        },
         onRefresh: () => {
           const spacer = container.closest('.pin-spacer') || container.parentElement;
           if (spacer && spacer.classList.contains('pin-spacer')) {
@@ -384,6 +423,9 @@ export default function SnippScrol({
       lockCleanupRef.current?.();
       lockCleanupRef.current = null;
       ctxRef.current?.revert();
+      window.__heroAboutPlaced = false;
+      window.__heroAboutProgress = 0;
+      window.__onHeroAboutProgress?.(0);
     };
   }, [build]);
 
@@ -399,7 +441,8 @@ export default function SnippScrol({
         style={{
           position: 'relative',
           width: '100%',
-          height: '100vh',
+          height: 'min(100vh, 1000px)',
+          maxHeight: '1000px',
           overflow: 'hidden',
           backgroundColor: 'white',
         }}

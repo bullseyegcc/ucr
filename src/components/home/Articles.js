@@ -10,21 +10,21 @@ const FALLBACK_POSTS = [
     slug: "uae-copper-producer-expands-global-supply",
     title: "UAE Copper Producer Expands Global Supply Network Across Asia & Europe",
     author: "Bruce Sommers",
-    date: "Apr 28, 2026",
+    date: "Monday, April 28, 2026",
     image: "/hblog1.png",
   },
   {
     slug: "high-conductivity-copper-rods-energy-sector",
     title: "Company Launches New High-Conductivity Copper Rods for Energy Sector",
     author: "Bruce Sommers",
-    date: "Apr 28, 2026",
+    date: "Monday, April 28, 2026",
     image: "/hblog2.png",
   },
   {
     slug: "expected-supply-deficit-copper-prices",
     title: "Expected Supply Deficit To Upset Copper Prices",
     author: "Bruce Sommers",
-    date: "Apr 28, 2026",
+    date: "Monday, April 28, 2026",
     image: "/blog2.png",
   },
 ];
@@ -40,6 +40,25 @@ function mapHomePosts(posts) {
     date: post.date,
     image: post.image || CARD_FALLBACKS[index],
   }));
+}
+
+function CardMeta({ title, author, date }) {
+  return (
+    <>
+      <div className="relative z-10 px-5 lg:px-6 text-white flex justify-between gap-4 text-xs sm:text-sm font-light pt-5 lg:pt-6">
+        <span>Written by {author}</span>
+        <span className="shrink-0">{date}</span>
+      </div>
+      <h2 className="relative z-10 text-xl sm:text-[1.65rem] lg:text-[1.85rem] leading-[1.2] px-5 lg:px-6 pr-8 text-white font-semibold">
+        {title}
+      </h2>
+      <span className="z-10 flex justify-center items-center absolute bottom-4 left-5 lg:left-6 bg-white rounded-lg px-3 py-2">
+        <ArrowRight size={18} color="black" />
+      </span>
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-28 lg:h-32 z-0 bg-gradient-to-b from-[#FA6E43]/90 via-[#FA6E43]/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+    </>
+  );
 }
 
 export default function Articles({ posts }) {
@@ -113,97 +132,70 @@ export default function Articles({ posts }) {
   return (
     <div
       ref={sectionRef}
-      className="min-h-[60vh] py-4 lg:py-8 sm:min-h-screen flex flex-col items-center sm:flex-row gap-5 sm:mx-10 items-start mb-4"
+      className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] py-8 lg:py-10 mb-4"
     >
-      {/* ── Left feature card ──── */}
-      <Link
-        ref={leftRef}
-        href={featured ? `/blogs/${featured.slug}` : "/blogs"}
-        className="lg:min-h-[60vh] max-h-screen sm:w-1/2 bg-[#FE5D0A] rounded-xl px-2 sm:px-10 py-4 flex flex-col gap-8"
-        style={{ willChange: 'transform, opacity' }}
-      >
-        <div className="mt-6">
-          <div ref={badgeRef} style={{ willChange: 'transform, opacity' }}>
-            <WhiteBadge title="Blogs & Articles" className="z-190 mb-5" />
-          </div>
-          <h1
-            ref={headingRef}
-            className="text-5xl my-3 text-white font-semibold mt-5"
-            style={{ willChange: 'transform, opacity' }}
-          >
-            Latest News
-          </h1>
-        </div>
-
-        {featured && (
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-5 lg:h-[min(88vh,860px)] lg:min-h-[680px] items-stretch">
+        {/* ── Left feature column ──── */}
         <div
-          className="w-[95%] lg:w-full h-[500px] sm:h-[900px] relative p-3 flex flex-col justify-start mx-2 gap-5 rounded-xl bg-cover bg-top bg-no-repeat"
-          style={{ backgroundImage: `url(${featured.image})` }}
+          ref={leftRef}
+          className="bg-[#FE5D0A] rounded-2xl px-4 sm:px-7 lg:px-8 py-6 lg:py-7 flex flex-col gap-5 lg:gap-6 min-h-[34rem] lg:min-h-0 lg:h-full"
+          style={{ willChange: 'transform, opacity' }}
         >
-          <div className="z-500 px-4 text-white flex justify-between text-sm font-light pt-9">
-            <span>Written by {featured.author}</span>
-            <span>{featured.date}</span>
+          <div className="shrink-0">
+            <div ref={badgeRef} style={{ willChange: 'transform, opacity' }}>
+              <WhiteBadge title="Blogs & Articles" className="z-190 mb-3 lg:mb-4" />
+            </div>
+            <h1
+              ref={headingRef}
+              className="text-[2.25rem] sm:text-[2.5rem] lg:text-[3.25rem] text-white font-semibold leading-[1.1]"
+              style={{ willChange: 'transform, opacity' }}
+            >
+              Latest news
+            </h1>
           </div>
-          <h1 className="z-500 text-xl sm:text-4xl pl-4 text-white">
-            {featured.title}
-          </h1>
-          <button className="z-90 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
-            <ArrowRight size={18} color="black" />
-          </button>
+
+          {featured ? (
+          <Link
+            href={`/blogs/${featured.slug}`}
+            className="relative flex-1 min-h-[22rem] lg:min-h-0 overflow-hidden rounded-2xl bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url('${featured.image}')` }}
+          >
+            <CardMeta title={featured.title} author={featured.author} date={featured.date} />
+          </Link>
+          ) : null}
         </div>
-        )}
-      </Link>
 
-      {/* ── Right column ───────────────────────────────────────────────── */}
-      <div className="px-1 lg:px-0 min-h-[60vh] sm:h-screen sm:w-1/2 rounded-xl flex flex-col items-center lg:justify-between">
-        {second && (
-        <Link
-          ref={rightTopRef}
-          href={`/blogs/${second.slug}`}
-          className="w-full h-[45vh] sm:h-1/2 lg:mb-5 relative bg-[#6A3120] flex flex-col gap-16 lg:gap-6 lg:justify-start gap-5 rounded-xl bg-cover bg-center bg-no-repeat"
-          style={{ willChange: 'transform, opacity', backgroundImage: `url(${second.image})` }}
-        >
-          <div className="z-500 px-4 text-white flex justify-between text-sm font-light pt-9">
-            <span>Written by {second.author}</span>
-            <span>{second.date}</span>
-          </div>
-          <h1 className="z-500 text-3xl lg:text-3xl pl-4 text-white">
-            {second.title}
-          </h1>
-          <button className="z-90 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
-            <ArrowRight size={18} color="black" />
-          </button>
-          <div className="rounded-xl h-90 lg:h-26 pl-0 absolute top-0 w-full z-0 bg-gradient-to-b from-[#FA6E43] to-transparent" />
-        </Link>
-        )}
+        {/* ── Right column ───────────────────────────────────────────────── */}
+        <div className="flex flex-col gap-4 lg:gap-5 lg:h-full">
+          {second ? (
+          <Link
+            ref={rightTopRef}
+            href={`/blogs/${second.slug}`}
+            className="w-full flex-1 min-h-[16rem] sm:min-h-[18rem] lg:min-h-0 relative flex flex-col justify-start gap-4 rounded-2xl bg-[#6A3120] bg-cover bg-center bg-no-repeat overflow-hidden"
+            style={{ willChange: 'transform, opacity', backgroundImage: `url('${second.image}')` }}
+          >
+            <CardMeta title={second.title} author={second.author} date={second.date} />
+          </Link>
+          ) : null}
 
-        {third && (
-        <Link
-          ref={rightBotRef}
-          className="w-full h-[45vh] lg:h-1/2 relative bg-[#6A3120] hidden lg:flex flex-col justify-start gap-16 lg:gap-6 rounded-xl bg-cover bg-center bg-no-repeat"
-          href={`/blogs/${third.slug}`}
-          style={{ willChange: 'transform, opacity', backgroundImage: `url(${third.image})` }}
-        >
-          <div className="z-500 px-4 text-white flex justify-between text-sm font-light pt-9">
-            <span>Written by {third.author}</span>
-            <span>{third.date}</span>
-          </div>
-          <h1 className="z-500 text-3xl pl-4 text-white">
-            {third.title}
-          </h1>
-          <button className="z-90 flex justify-center items-center gap-2 w-18 text-white border absolute bottom-2 left-4 bg-white rounded-lg px-3 py-2">
-            <ArrowRight size={18} color="black" />
-          </button>
-          <div className="rounded-xl h-90 lg:h-26 pl-0 absolute top-0 w-full z-0 bg-gradient-to-b from-[#FA6E43] to-transparent" />
-        </Link>
-        )}
+          {third ? (
+          <Link
+            ref={rightBotRef}
+            href={`/blogs/${third.slug}`}
+            className="w-full flex-1 min-h-[16rem] lg:min-h-0 relative hidden lg:flex flex-col justify-start gap-4 rounded-2xl bg-[#6A3120] bg-cover bg-center bg-no-repeat overflow-hidden"
+            style={{ willChange: 'transform, opacity', backgroundImage: `url('${third.image}')` }}
+          >
+            <CardMeta title={third.title} author={third.author} date={third.date} />
+          </Link>
+          ) : null}
 
-        <Link
-          href="/blogs"
-          className="border my-8 border-primary w-[80%] px-5 py-3 text-primary lg:hidden flex justify-center items-center gap-3 rounded-full text-lg"
-        >
-          Read more <ArrowRight size={22} className="text-primary" />
-        </Link>
+          <Link
+            href="/blogs"
+            className="border my-8 border-primary w-[80%] px-5 py-3 text-primary lg:hidden flex justify-center items-center gap-3 rounded-full text-lg"
+          >
+            Read more <ArrowRight size={22} className="text-primary" />
+          </Link>
+        </div>
       </div>
     </div>
   );

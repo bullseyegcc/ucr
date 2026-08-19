@@ -2,24 +2,25 @@
 import { Badge } from "../../common/badge";
 import Image from "next/image";
 import ScrollRevealCardsContainer from "../../animations/ScrollRevealCardsContainer";
-import FadeIn from "../../animations/FadeIn";
 import SlideIn from "../../animations/SlideIn";
+import FadeIn from "../../animations/FadeIn";
+import Hero from "@/components/shared/Hero";
 
 export default function OurValues() {
   return (
     <div className="">
-      <div className="flex flex-col text-center min-h-[60vh] lg:min-h-[80vh] items-center justify-center bg-[url('/valuebg.png')] bg-cover   dark:bg-black gap-6">
-        <SlideIn direction="bottom" duration={0.8} delay={0}>
-          <Badge title="values" />
-        </SlideIn>
-        <FadeIn
-          className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white"
-          duration={0.4}
-          delay={0}
-        >
-          Our Values
-        </FadeIn>
-      </div>
+      <Hero
+        badge="values"
+        title="Our Values"
+        badgeVariant="primary"
+        titleDirectFade
+        titleInH1={false}
+        background={{
+          type: "image",
+          src: "/valuebg.png",
+          imageClassName: "bg-center",
+        }}
+      />
 
       {/* Trust & Reliability Section */}
       <div className="min-h-screen bg-[linear-gradient(180deg,#FFF_0%,rgba(255,255,255,0.44)_100%)] px-6 lg:px-10 py-12 lg:py-20 relative overflow-hidden">

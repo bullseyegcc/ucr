@@ -1,9 +1,10 @@
-'use client'
+﻿'use client'
 
 import { VideoPlayer } from "../../common/video";
-import { Badge, Badgetextwhite } from "../../common/badge";
+import { Badge } from "../../common/badge";
+import Hero from "@/components/shared/Hero";
 import Image from "next/image";
-import CardAnimation from "../../animations/CardAnimation";
+import SequentialSlideIn from "../../animations/SequentialSlideIn";
 import LogisticsAdvantageSection from "../../components/logistics/LogisticsAdvantageSection";
 import CountUp from "../../animations/countup";
 import FadeIn from "../../animations/FadeIn";
@@ -13,24 +14,27 @@ export default function Logistics() {
     return (
         <div className="bg-[#F5F5F5]">
 
-            {/* header */}
-            <div className=" mb-[50%] lg:mb-[30%] bg-[url('/logisticsbg.png')]  bg-cover  bg-bottom bg-no-repeat relative   min-h-[55vh] sm:min-h-[80vh]     flex flex-col items-center justify-center gap-2">
 
-                <SlideIn direction="bottom" duration={0.8} delay={0}>
-                    <Badgetextwhite title="Our Logistics" />
-                </SlideIn>
-
-                <FadeIn className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white lg:w-[65%] px-5" duration={0.4} delay={0}>
-                    UCR has a higher delivery capacity in the Copper Industry
-                </FadeIn>
-                <div className='absolute -bottom-[40%] lg:-bottom-[70%] h-60 sm:h-[70vh] w-[95%] ' >
-                    <VideoPlayer src="/logisticsvid.mp4" className="w-full h-full object-cover rounded-3xl" />
-                </div>
-
-
-
-            </div>
-
+            <Hero
+                badge="Our Logistics"
+                title="UCR has a higher delivery capacity in the Copper Industry"
+                titleClassName="lg:w-[65%] px-5"
+                titleDirectFade
+                titleInH1={false}
+                className="mb-[50%] lg:mb-[30%] flex flex-col items-center justify-center"
+                minHeightClass="min-h-[55vh] sm:min-h-[80vh]"
+                gapClass="gap-2"
+                background={{
+                    type: "image",
+                    src: "/logisticsbg.png",
+                    imageClassName: "bg-bottom bg-center",
+                }}
+                media={{
+                    type: "image",
+                    src: "/logisticspic.png",
+                    alt: "UCR logistics operations",
+                }}
+            />
 
             {/* What we're Capable of */}
 
@@ -43,111 +47,126 @@ export default function Logistics() {
                     <FadeIn className="font-medium text-3xl lg:text-6xl mt-4" duration={0.8} scrollTrigger={true}>
                         <h1>What we're capable of</h1>
                     </FadeIn>
+                    <FadeIn className="mt-4 lg:mt-6 max-w-xl px-6" duration={0.8} delay={0.15} scrollTrigger={true}>
+                        <p className="text-base lg:text-xl leading-relaxed text-[#212225]/70">
+                            A resilient responsible supply chain built to ensure continuity, reliability, and responsive delivery across global markets.
+                        </p>
+                    </FadeIn>
                 </div>
 
 
-                <div className=" px-6 lg:px-10 py-8 lg:py-10 flex flex-col lg:flex-row justify-center gap-6 items-end">
+                <SequentialSlideIn
+                    className=" px-6 lg:px-10 py-8 lg:py-10 flex flex-col lg:flex-row justify-center gap-6 items-end"
+                    itemClassName="w-full lg:w-1/3"
+                    start="top 85%"
+                    end="bottom 70%"
+                >
 
-                    <CardAnimation index={0} className="overflow-y-hidden min-h-[55vh] lg:min-h-[65vh]  lg:rounded-t-2xl rounded-2xl w-full lg:w-1/3 bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
+                    <div className="overflow-hidden min-h-[55vh] lg:min-h-[65vh] rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
                         <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-                            <span><CountUp to={20} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " />
+                            <span><CountUp to={200} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " />
                         </h1>
 
 
                         <div className="relative z-10 pb-6 ">
                             <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                                Years Experience
+                                Supply Chain partners Connected worldwide
                             </h1>
-                            <p className=" lg:w-60 pr-0 lg:pr-4">Produces 20,000 metric tons of copper per year.</p>
+                            <p className="max-w-[80%]">Bringing together suppliers, logistics providers, and stakeholders through a unified global network.</p>
 
                         </div>
 
-                        <Image src="/logistics1.png" alt="Expertise Icon" width={290} height={80} className='w-full  absolute -bottom-8 right-0 z-0 rounded-b-2xl lg:rounded-none' />
+                        <Image src="/logistics1.svg" alt="Supply chain truck" width={437} height={336} className="pointer-events-none absolute bottom-0 left-0 z-0 w-[92%] h-auto max-w-none" />
 
-                    </CardAnimation>
+                    </div>
 
-                    <CardAnimation index={1} className="min-h-[55vh] lg:min-h-[60vh] lg:rounded-t-2xl rounded-2xl w-full lg:w-1/3 bg-white px-6 lg:px-8 pt-8 overflow-x-hidden lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
-                        <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-                            <span><CountUp to={99} duration={2.5} />%</span> <hr className="text-primary/30 w-[90%] shadow  " />
+                    <div className="overflow-hidden min-h-[55vh] lg:min-h-[60vh] rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
+                        <h1 className="text-[40px] leading-[42px] tracking-[-1.2px] lg:text-[58px] lg:leading-[58px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
+                            <span><CountUp to={400} duration={2.5} />K+ <sub className="text-[0.38em] leading-none">K-MT</sub></span> <hr className="text-primary/30 w-[90%] shadow  " />
                         </h1>
 
 
                         <div className="relative z-10">
                             <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                                Delivery Speed
+                                handling yearly cargo
                             </h1>
-                            <p className="w-45 lg:w-55">Timely delivery is crucial for customer satisfaction. We strive to ensure that all orders arrive right on schedule.</p>
+                            <p className="max-w-[70%]">18K + Containers and land shipments annually managed with precision, efficiency, and operational excellence.</p>
 
                         </div>
 
-                        <Image src="/logistics2.png" alt="Expertise Icon" width={180} height={80} className='w-60 lg:w-90 absolute -bottom-0 -right-5 lg:right-0 z-0 rounded-b-2xl lg:rounded-none' />
+                        <Image src="/logistics2.svg" alt="Yearly cargo container" width={257} height={446} className="pointer-events-none absolute -bottom-16 right-0 z-0 w-[68%] lg:w-[72%] h-auto max-w-none" />
 
-                    </CardAnimation>
+                    </div>
 
-                    <CardAnimation index={2} className="min-h-[55vh] lg:min-h-[55vh] lg:rounded-t-2xl rounded-2xl w-full lg:w-1/3 bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
+                    <div className="overflow-hidden min-h-[55vh] lg:min-h-[55vh] rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
                         <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-                            <span><CountUp to={30} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " />
+                            <span><CountUp to={60} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " />
                         </h1>
 
 
                         <div className="relative z-10">
                             <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                                Global Sales
+                                Global logistic partners
                             </h1>
-                            <p className=" w-[70%] lg:w-80 pr-0 lg:pr-4">We supplies products, services and solutions across over 50 countries in Australia, Asia, Africa, and the Middle East.</p>
+                            <p className="max-w-[70%]">Trusted network of industry-leading logistics partners enables reliable, responsive, and seamless delivery across key international markets.</p>
 
                         </div>
 
-                        <Image src="/exp3.png" alt="Expertise Icon" width={300} height={80} className='w-90 absolute -bottom-0 right-0 z-0 rounded-b-2xl lg:rounded-none' />
+                        <Image src="/logistics3.svg" alt="Global logistics ship" width={249} height={172} className="pointer-events-none absolute -bottom-2 -right-9 z-0 w-[58%] lg:w-[62%] h-auto max-w-none" />
 
-                    </CardAnimation>
-
-
-
-                </div>
+                    </div>
 
 
 
+                </SequentialSlideIn>
 
-                <div className=" px-6 lg:px-10 py-8 lg:py-10 flex flex-col-reverse lg:flex-row-reverse justify-center gap-6 items-end">
 
-                    <CardAnimation index={0} className="overflow-y-hidden min-h-[55vh] lg:min-h-[65vh]  lg:rounded-t-2xl rounded-2xl w-full lg:w-1/3 bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
-                        <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-                            <span><CountUp to={20} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " />
+
+
+                <SequentialSlideIn
+                    className=" px-6 lg:px-10 py-8 lg:py-10 flex flex-col-reverse lg:flex-row-reverse justify-center gap-6 items-end"
+                    itemClassName="w-full lg:w-1/3"
+                    start="top 85%"
+                    end="bottom 70%"
+                >
+
+                    <div className="overflow-hidden min-h-[55vh] lg:min-h-[65vh] rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
+                        <h1 className="text-[40px] leading-[42px] tracking-[-1.2px] lg:text-[58px] lg:leading-[58px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
+                            <span><CountUp to={40} duration={2} /> <sub className="text-[0.38em] leading-none">K-MT</sub></span> <hr className="text-primary/30 w-[90%] shadow  " />
                         </h1>
 
 
                         <div className="relative z-10 pb-6 ">
                             <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                                Years Experience
+                                Warehousing Management Capacity
                             </h1>
-                            <p className=" lg:w-60 pr-0 lg:pr-4">Produces 20,000 metric tons of copper per year.</p>
+                            <p className="max-w-[80%]">Extensive storage infrastructure and equipment supporting operational agility and supply chain efficiency.</p>
 
                         </div>
 
-                        <Image src="/logistics1.png" alt="Expertise Icon" width={290} height={80} className='w-full  absolute -bottom-8 right-0 z-0 rounded-b-2xl lg:rounded-none' />
+                        <Image src="/logistics6.svg" alt="Warehousing facility" width={333} height={343} className="pointer-events-none absolute bottom-0 right-0 z-0 w-[72%] h-auto max-w-none" />
 
-                    </CardAnimation>
+                    </div>
 
-                    <CardAnimation index={1} className="min-h-[55vh] lg:min-h-[60vh] lg:rounded-t-2xl rounded-2xl w-full lg:w-1/3 bg-white px-6 lg:px-8 pt-8 overflow-x-hidden lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
+                    <div className="overflow-hidden min-h-[55vh] lg:min-h-[60vh] rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
                         <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-                            <span><CountUp to={99} duration={2.5} />%</span> <hr className="text-primary/30 w-[90%] shadow  " />
+                            <span><CountUp to={24} duration={2.5} /> hrs</span> <hr className="text-primary/30 w-[90%] shadow  " />
                         </h1>
 
 
                         <div className="relative z-10">
                             <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                                Delivery Speed
+                                Port & Customs Processing
                             </h1>
-                            <p className="w-45 lg:w-55">Timely delivery is crucial for customer satisfaction. We strive to ensure that all orders arrive right on schedule.</p>
+                            <p className="max-w-[65%]">Leveraging the UAE's world-class port infrastructure and efficient customs clearance to support reliable inbound and outbound cargo movement.</p>
 
                         </div>
 
-                        <Image src="/logistics2.png" alt="Expertise Icon" width={180} height={80} className='w-60 lg:w-90 absolute -bottom-0 -right-5 lg:right-0 z-0 rounded-b-2xl lg:rounded-none' />
+                        <Image src="/logistics5.svg" alt="Port and customs container" width={320} height={329} className="pointer-events-none absolute bottom-0 right-0 z-0 w-[70%] h-auto max-w-none" />
 
-                    </CardAnimation>
+                    </div>
 
-                    <CardAnimation index={2} className="min-h-[55vh] lg:min-h-[55vh] lg:rounded-t-2xl rounded-2xl w-full lg:w-1/3 bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
+                    <div className="overflow-hidden min-h-[55vh] lg:min-h-[55vh] rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
                         <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
                             <span><CountUp to={50} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " />
                         </h1>
@@ -155,21 +174,19 @@ export default function Logistics() {
 
                         <div className="relative z-10">
                             <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                                Global Sales
+                                Global Destinations
                             </h1>
-                            <p className=" w-[70%] lg:w-80 pr-0 lg:pr-4">We supplies products, services and solutions across over 50 countries in Australia, Asia, Africa, and the Middle East.</p>
+                            <p className="max-w-[80%]">Connecting partners across 50+ countries through a well-established international logistics network.</p>
 
                         </div>
 
-                        <Image src="/exp3.png" alt="Expertise Icon" width={300} height={80} className='w-90 absolute -bottom-0 right-0 z-0 rounded-b-2xl lg:rounded-none' />
+                        <Image src="/exp3.png" alt="Global destinations globe" width={300} height={80} className="pointer-events-none absolute bottom-0 right-0 z-0 w-[82%] h-auto max-w-none" />
 
-                    </CardAnimation>
-
-
+                    </div>
 
 
 
-                </div>
+                </SequentialSlideIn>
             </div>
 
 
@@ -185,7 +202,7 @@ export default function Logistics() {
                     </SlideIn>
                     <div className="lg:w-[30%]">
 
-                        <SlideIn direction="right" scrollTrigger={true} duration={0.8} className=" flex-1  text-xs lg:text-2xl text-gray-600 lg:pt-8 lg:pt-12">
+                        <SlideIn direction="right" scrollTrigger={true} duration={0.8} className=" flex-1  max-w-lg text-xs lg:text-2xl text-gray-600 lg:pt-8 lg:pt-12">
                             <p className='  text-lg lg:text-2xl self-start'>Union Copper Rod products are famous all over the region and they are in high demand amongst many organizations that procure copper related products.</p>
                         </SlideIn>
                     </div>
@@ -205,3 +222,4 @@ export default function Logistics() {
 
     )
 }
+

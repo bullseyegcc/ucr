@@ -1,21 +1,33 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: 'Helvetica Now Display';
-  src: url('/fonts/Helvetica_Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Helvetica Now Display';
-  src: url('/fonts/HelveticaNowDisplay-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-}
+/* Helvetica Now Display — full family. There is no native 600 cut, so Bold covers 600–700
+   (font-semibold and font-bold). ExtraLight is 250 so it does not collide with Thin/Light. */
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-Hairline.woff2") format("woff2"); font-weight: 100; font-style: normal; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-HairlineI.woff2") format("woff2"); font-weight: 100; font-style: italic; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-Thin.woff2") format("woff2"); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-ThinIta.woff2") format("woff2"); font-weight: 200; font-style: italic; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-ExtLt.woff2") format("woff2"); font-weight: 250; font-style: normal; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-ExtLtIta.woff2") format("woff2"); font-weight: 250; font-style: italic; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-Light.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-LightIta.woff2") format("woff2"); font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-RegIta.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-MedIta.woff2") format("woff2"); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-Bold.woff2") format("woff2"); font-weight: 600 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-BoldIta.woff2") format("woff2"); font-weight: 600 700; font-style: italic; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-ExtraBold.woff2") format("woff2"); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-ExtBdIta.woff2") format("woff2"); font-weight: 800; font-style: italic; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-Black.woff2") format("woff2"); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-BlackIta.woff2") format("woff2"); font-weight: 900; font-style: italic; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-ExtBlk.woff2") format("woff2"); font-weight: 950; font-style: normal; font-display: swap; }
+@font-face { font-family: "Helvetica Now Display"; src: url("/fonts/HelveticaNowDisplay-ExtBlkIta.woff2") format("woff2"); font-weight: 950; font-style: italic; font-display: swap; }
 
 html {
   color-scheme: light !important;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   /* ✅ Ensure scroll is enabled on all devices */
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
@@ -30,7 +42,8 @@ html::-webkit-scrollbar {
 :root {
   --background: transparent !important;
   --foreground: #171717 !important;
-  --font-primary: 'Helvetica Now Display', sans-serif;
+  --font-helvetica: "Helvetica Now Display", "Helvetica Neue", Arial, sans-serif;
+  --font-primary: var(--font-helvetica);
 }
 
 @theme inline {
@@ -38,7 +51,8 @@ html::-webkit-scrollbar {
   --color-foreground: var(--foreground);
   --color-primary: #FE5D0A;
   --color-secondary: #C0C0C0;
-  --font-primary: var(--font-primary);
+  --font-sans: var(--font-helvetica);
+  --font-primary: var(--font-helvetica);
 }
 
 /* ✅ Prevent GSAP pin-spacer from showing dark background or border seams */
@@ -57,7 +71,7 @@ html::-webkit-scrollbar {
 body {
   background: transparent;
   color: var(--foreground) !important;
-  font-family: var(--font-primary), sans-serif;
+  font-family: var(--font-helvetica);
   color-scheme: light !important;
   /* ✅ Ensure body is scrollable too */
   min-height: 100vh;
@@ -71,7 +85,7 @@ body::-webkit-scrollbar {
 
 @layer utilities {
   .font-primary {
-    font-family: var(--font-primary), sans-serif;
+    font-family: var(--font-helvetica);
   }
 
   /* Hide scrollbar but keep scroll behavior (strong so it wins everywhere) */

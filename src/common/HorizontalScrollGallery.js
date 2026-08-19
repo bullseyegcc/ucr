@@ -122,7 +122,7 @@ export default function HorizontalScrollGallery({ images = [] }) {
   };
 
   return (
-    <div className="w-full relative flex flex-col items-center justify-center lg:flex-row bg-white overflow-hidden">
+    <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] relative flex flex-col items-center justify-center lg:flex-row bg-white overflow-hidden">
       {/* Left blur overlay - premium smooth blur */}
       <div
         className="pointer-events-none absolute left-0 top-0 h-full w-4 md:w-14 z-20"
