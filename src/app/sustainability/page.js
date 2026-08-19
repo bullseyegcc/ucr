@@ -1,27 +1,31 @@
 'use client'
 
-import { Badge, Badgetextwhite } from "../../common/badge"
+import { Badge } from "../../common/badge"
 import Image from "next/image"
 import { VideoPlayer } from "../../common/video"
 import ParallaxSection from "../../animations/ParallaxSection"
 import CardAnimation from "../../animations/CardAnimation"
 import TextReveal from "../../animations/TextReveal"
-import FadeIn from "../../animations/FadeIn"
 import SlideIn from "../../animations/SlideIn"
+import FadeIn from "../../animations/FadeIn"
+import Hero from "@/components/shared/Hero"
 
 export default function sustainability() {
     return (
         <div>
-            <div className="rouned-b-2xl flex flex-col text-center min-h-[60vh] lg:min-h-[80vh] items-center justify-center  dark:bg-black gap-6 px-4 lg:px-0" style={{ background: "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/sustainbg.png') lightgray 50% / cover no-repeat" }}>
-                <SlideIn direction="bottom" duration={0.8} delay={0}>
-                    <Badgetextwhite title="Sustainability" />
-                </SlideIn>
-                <h1 className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white w-full lg:w-[70%]">
-                    <FadeIn duration={0.4} delay={0}>
-                        Creating value with a differentiated approach
-                    </FadeIn>
-                </h1>
-            </div>
+            <Hero
+                badge="Sustainability"
+                title="Creating value with a differentiated approach"
+                titleClassName="w-full lg:w-[70%]"
+                className="rouned-b-2xl dark:bg-black px-4 lg:px-0"
+                background={{
+                    type: "image-inline",
+                    style: {
+                        background:
+                            "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/sustainbg.png') lightgray 50% / cover no-repeat",
+                    },
+                }}
+            />
 
 
             {/* Our Mission */}

@@ -1,12 +1,12 @@
-"use client";
+﻿"use client";
 
-import { Badge, Badgetextwhite } from "../../common/badge";
+import { Badge } from "../../common/badge";
+import Hero from "@/components/shared/Hero";
 import { VideoCard } from "../../common/VideoCard.js";
 
 import { ArrowRight } from "lucide-react";
 
 import Image from "next/image";
-import { VideoPlayer } from "../../common/video";
 import JourneySection from "../../components/about/JourneySection";
 import ParallaxSection from "../../animations/ParallaxSection";
 import MissionValuesSection from "../../components/about/MissionValuesSection";
@@ -17,28 +17,21 @@ import HeroHeading from "@/components/home/HeroHeading";
 import FadeIn from "../../animations/FadeIn";
 import SlideIn from "../../animations/SlideIn";
 
+
 export default function AboutUs() {
   return (
     <div className="">
-      <div className=" mb-[80%] lg:mb-[30%] relative  min-h-[80vh]      bg-primary flex flex-col justify-center items-center ">
-        <SlideIn direction="bottom" duration={0.8} delay={0}>
-          <Badgetextwhite title="Crafting Sustainable Progress, One Copper Solution at a Time" />
-        </SlideIn>
-
-        <h1 className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle  text-white px-5 lg:w-[80%] mt-5 lg:mb-8">
-          <FadeIn>
-            Leading the region&apos;s copper transformation with cutting edge
-            technology
-          </FadeIn>
-        </h1>
-
-        <div className="absolute -bottom-[40%] lg:-bottom-[60%] w-[90%] lg:w-[80%] h-[50vh] lg:h-[70vh] ">
-          <VideoPlayer
-            src="/aboutvideo.mp4"
-            className="w-full h-full object-cover rounded-xl "
-          />
-        </div>
-      </div>
+      <Hero
+        badge="Crafting Sustainable Progress, One Copper Solution at a Time"
+        title="Leading the region's copper transformation with cutting edge technology"
+        titleClassName="px-5 lg:w-[80%] mt-5 lg:mb-8"
+        className="mb-[80%] lg:mb-[30%] flex flex-col justify-center items-center"
+        minHeightClass="min-h-[80vh]"
+        media={{
+          type: "video",
+          src: "/aboutvideo.mp4",
+        }}
+      />
 
       <div className="px-3 lg:px-10 py-20 flex flex-col lg:items-center justify-center">
         <Badge title="Who we are" />
@@ -253,3 +246,5 @@ export default function AboutUs() {
     </div>
   );
 }
+
+

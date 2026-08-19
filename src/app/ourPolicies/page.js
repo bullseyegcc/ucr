@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
-import FadeIn from "../../animations/FadeIn";
 import SlideIn from "../../animations/SlideIn";
-import { Badge, Badgetextwhite } from "../../common/badge";
+import { Badge } from "../../common/badge";
+import Hero from "@/components/shared/Hero";
 import { policies } from "../../assets/policies";
 
 function PolicyIcon({ className }) {
@@ -32,16 +32,20 @@ export default function OurPolicies() {
 
     return (
         <div>
-            <div className="flex flex-col items-center justify-center min-h-[50vh] lg:min-h-[70vh] font-medium bg-black bg-[url('/policiesbg.png')] bg-cover bg-center bg-no-repeat">
-                <div className="flex flex-col items-center gap-3 lg:gap-6 px-4">
-                    <SlideIn direction="bottom" duration={0.8} delay={0}>
-                        <Badgetextwhite title="UCR POLICIES" />
-                    </SlideIn>
-                    <FadeIn className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white" duration={0.4} delay={0}>
-                        Our Policies
-                    </FadeIn>
-                </div>
-            </div>
+            <Hero
+                badge="UCR POLICIES"
+                title="Our Policies"
+                titleDirectFade
+                titleInH1={false}
+                minHeightClass="min-h-[50vh] lg:min-h-[70vh]"
+                gapClass="gap-3 lg:gap-6"
+                contentClassName="px-4 font-medium"
+                background={{
+                    type: "image",
+                    src: "/policiesbg.png",
+                    imageClassName: "bg-center",
+                }}
+            />
 
             <div className="relative w-full overflow-hidden bg-[#F5F5F5] px-4 py-12 lg:px-20 lg:py-20">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(ellipse_at_top,_rgba(254,93,10,0.12)_0%,_transparent_70%)]" />

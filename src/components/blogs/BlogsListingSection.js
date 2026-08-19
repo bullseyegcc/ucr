@@ -14,10 +14,17 @@ function formatCardDate(dateString) {
   return `${day} ${month}, ${year}`;
 }
 
+// Varied heights per card — small/medium/tall rotate across columns, not fixed to center
 const imageSizes = [
-  "h-[280px] sm:h-[320px] lg:h-[380px]",
-  "h-[180px] sm:h-[200px] lg:h-[220px]",
-  "h-[240px] sm:h-[270px] lg:h-[300px]",
+  "h-[280px] sm:h-[320px] lg:h-[380px]", // tall
+  "h-[240px] sm:h-[270px] lg:h-[300px]", // medium (center col, row 1)
+  "h-[260px] sm:h-[300px] lg:h-[350px]", // medium-tall
+  "h-[260px] sm:h-[300px] lg:h-[350px]", // medium-tall
+  "h-[280px] sm:h-[320px] lg:h-[380px]", // tall (center col, row 2)
+  "h-[230px] sm:h-[260px] lg:h-[290px]", // compact
+  "h-[230px] sm:h-[260px] lg:h-[290px]", // compact
+  "h-[260px] sm:h-[300px] lg:h-[350px]", // medium-tall (center col, row 3)
+  "h-[280px] sm:h-[320px] lg:h-[380px]", // tall
 ];
 
 export default function BlogsListingSection({
@@ -68,7 +75,7 @@ export default function BlogsListingSection({
               <p className="mt-5 text-[11px] font-medium uppercase tracking-[0.12em] text-[#A3A3A3]">
                 {formatCardDate(item.date)}
               </p>
-              <h3 className="mt-2 text-[18px] font-semibold leading-[1.3] tracking-[-0.02em] text-black lg:text-[22px]">
+              <h3 className="mt-2 text-[20px] font-semibold leading-[1.3] tracking-[-0.02em] text-black lg:text-[24px]">
                 {item.title}
               </h3>
               <p className="mt-2 line-clamp-1 text-[14px] leading-[1.6] text-[#8A8A8A]">

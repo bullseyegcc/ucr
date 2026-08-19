@@ -154,7 +154,7 @@ export default function FadeIn({
   }, [duration, stagger, delay, scrollTrigger]);
 
   return (
-    <div ref={elementRef} className={className}>
+    <div ref={elementRef} className={className} style={{ opacity: 0 }}>
       {children}
     </div>
   );

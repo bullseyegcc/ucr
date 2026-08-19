@@ -1,7 +1,8 @@
-'use client'
+﻿'use client'
 
 import { VideoPlayer } from "../../common/video";
-import { Badge, Badgetextwhite } from "../../common/badge";
+import { Badge } from "../../common/badge";
+import Hero from "@/components/shared/Hero";
 import Image from "next/image";
 import SequentialSlideIn from "../../animations/SequentialSlideIn";
 import LogisticsAdvantageSection from "../../components/logistics/LogisticsAdvantageSection";
@@ -13,24 +14,27 @@ export default function Logistics() {
     return (
         <div className="bg-[#F5F5F5]">
 
-            {/* header */}
-            <div className=" mb-[50%] lg:mb-[30%] bg-[url('/logisticsbg.png')]  bg-cover  bg-bottom bg-no-repeat relative   min-h-[55vh] sm:min-h-[80vh]     flex flex-col items-center justify-center gap-2">
 
-                <SlideIn direction="bottom" duration={0.8} delay={0}>
-                    <Badgetextwhite title="Our Logistics" />
-                </SlideIn>
-
-                <FadeIn className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white lg:w-[65%] px-5" duration={0.4} delay={0}>
-                    UCR has a higher delivery capacity in the Copper Industry
-                </FadeIn>
-                <div className='absolute -bottom-[40%] lg:-bottom-[70%] h-60 sm:h-[70vh] w-[95%] overflow-hidden rounded-3xl' >
-                    <Image src="/logisticspic.png" alt="UCR logistics operations" fill className="object-cover" />
-                </div>
-
-
-
-            </div>
-
+            <Hero
+                badge="Our Logistics"
+                title="UCR has a higher delivery capacity in the Copper Industry"
+                titleClassName="lg:w-[65%] px-5"
+                titleDirectFade
+                titleInH1={false}
+                className="mb-[50%] lg:mb-[30%] flex flex-col items-center justify-center"
+                minHeightClass="min-h-[55vh] sm:min-h-[80vh]"
+                gapClass="gap-2"
+                background={{
+                    type: "image",
+                    src: "/logisticsbg.png",
+                    imageClassName: "bg-bottom bg-center",
+                }}
+                media={{
+                    type: "image",
+                    src: "/logisticspic.png",
+                    alt: "UCR logistics operations",
+                }}
+            />
 
             {/* What we're Capable of */}
 
@@ -218,3 +222,4 @@ export default function Logistics() {
 
     )
 }
+

@@ -3,13 +3,15 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { products } from "../../../assets/products";
-import { Badge, Badgetextwhite } from "../../../common/badge";
+import { Badge } from "../../../common/badge";
+import Hero from "@/components/shared/Hero";
 import Link from "next/link";
 import { useState } from "react";
 import { use } from "react";
 import { ChevronDown, Package, Wrench, Layers } from "lucide-react";
-import FadeIn from "../../../animations/FadeIn";
 import SlideIn from "../../../animations/SlideIn";
+import FadeIn from "../../../animations/FadeIn";
+
 
 export default function ProductDetail({ params }) {
     const { slug } = use(params);
@@ -32,16 +34,11 @@ export default function ProductDetail({ params }) {
     return (
         <div className="flex flex-col gap-7">
             {/* Header */}
-            <div className="relative h-[40vh] sm:h-[50vh] lg:h-[55vh] max-h-[80vh] font-medium flex items-center justify-center   dark:bg-black overflow-hidden">
-                <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#FF6A00] to-[#FF8C42]"></div>
-                <div className="absolute inset-0 z-10 pointer-events-none bg-[url('/productdetailbg.png')] bg-cover bg-center" ></div>
-                <h1 className="absolute top-[40%] w-[85%] sm:w-[70%] lg:w-[60%] z-20 font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-white flex flex-col items-center text-center align-middle capitalize gap-2 sm:gap-3 lg:gap-4 px-4 sm:px-0">
-                    <Badgetextwhite title='products' />
-                    <FadeIn>
-                        {product.name}
-                    </FadeIn>
-                </h1>
-            </div>
+            <Hero
+                variant="product-detail"
+                badge="products"
+                title={product.name}
+            />
 
             {/* Content */}
             <div className="min-h-screen   bg-[#F5F5F5] -mb-10">
@@ -83,7 +80,7 @@ export default function ProductDetail({ params }) {
 
                         </div>
                         <div className="w-full lg:w-1/2 mt-6 lg:mt-0">
-                            <Image src='/pdetail.png' alt={product.name} width={1200} height={600} className="w-full h-48 sm:h-72 lg:h-[420px] object-cover rounded-lg shadow" />
+                            <Image src='/pdetail.png' alt={product.name} width={1200} height={600} className="w-full h-48 sm:h-72 lg:h-[420px] object-cover rounded-lg shadow" priority quality={75} sizes="(max-width: 768px) 90vw, 50vw" />
                         </div>
                     </div>
 
@@ -116,7 +113,7 @@ export default function ProductDetail({ params }) {
 
 
                                 </div>
-                                <Image src="/applicationsbg.png" alt="Icon" width={900} height={0} className="w-90 absolute bottom-0 right-0 hidden lg:block" />
+                                <Image src="/applicationsbg.png" alt="" width={900} height={400} className="w-90 absolute bottom-0 right-0 hidden lg:block" loading="lazy" />
 
                             </div>
                         )}
@@ -209,7 +206,7 @@ export default function ProductDetail({ params }) {
                 <div className="w-full sm:w-[90%] lg:w-[85%] lg:w-[65%] flex items-center justify-center mx-auto px-6 sm:px-0">
 
 
-                    <Image src="/certificate.png" alt="Icon" width={900} height={0} className="w-full object-cover  " />
+                    <Image src="/certificate.png" alt="Certifications" width={900} height={600} className="w-full object-cover" loading="lazy" quality={75} />
                 </div>
 
             </div>
