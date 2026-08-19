@@ -74,8 +74,8 @@ export default function ProductsPageClient({ products }) {
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-3">
                             {products.map((product) => {
                                 return (
-                                    <Link key={product.id} href={`/products/${product.slug}`} className="group block">
-                                        <article className="rounded-lg border border-[#EBEBEB] bg-[#FCFCFC] p-3 lg:p-[12px] min-h-[300px] transition-all duration-300 cursor-pointer hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(0,0,0,0.14)] hover:bg-[#FF6A00] hover:border-[#FF6A00]">
+                                    <Link key={product.id} href={`/products/${product.slug}`} className="group block h-full">
+                                        <article className="h-full rounded-lg border border-[#EBEBEB] bg-[#FCFCFC] p-3 lg:p-[12px] min-h-[300px] transition-all duration-300 cursor-pointer hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(0,0,0,0.14)] hover:bg-[#FF6A00] hover:border-[#FF6A00]">
                                             <div className="h-full flex flex-col lg:flex-row items-stretch gap-5 lg:gap-4">
                                                 <div className="flex-1 lg:w-[52%] px-3 pt-3 pb-4 lg:px-4 lg:pt-4 lg:pb-4 flex flex-col">
                                                     <p
@@ -93,7 +93,7 @@ export default function ProductsPageClient({ products }) {
                                                     </h3>
 
                                                     <p
-                                                        className="mt-4 font-normal text-[16px] leading-[30px] tracking-[-0.25px] text-[#6F6F6F] transition-colors duration-300 group-hover:text-white/90"
+                                                        className="mt-4 font-normal text-[16px] leading-[30px] tracking-[-0.25px] text-[#6F6F6F] transition-colors duration-300 group-hover:text-white/90 line-clamp-3"
                                                         style={{ fontFamily }}
                                                     >
                                                         {product.description}
@@ -108,16 +108,14 @@ export default function ProductsPageClient({ products }) {
                                                     </span>
                                                 </div>
 
-                                                <div className="w-full lg:w-[48%] rounded-md overflow-hidden bg-white">
-                                                    <FadeIn scrollTrigger={true} duration={1.2}>
-                                                        <Image
-                                                            src={product.icon || "/drawnwire.png"}
-                                                            alt={product.name}
-                                                            width={560}
-                                                            height={360}
-                                                            className="w-full h-full object-cover min-h-[190px] lg:min-h-[290px]"
-                                                        />
-                                                    </FadeIn>
+                                                <div className="relative w-full lg:w-[48%] h-[190px] lg:h-[290px] shrink-0 rounded-md overflow-hidden bg-white">
+                                                    <Image
+                                                        src={product.icon || "/drawnwire.png"}
+                                                        alt={product.name}
+                                                        fill
+                                                        sizes="(min-width: 1024px) 24vw, 100vw"
+                                                        className="object-cover"
+                                                    />
                                                 </div>
                                             </div>
                                         </article>
