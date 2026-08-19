@@ -4,7 +4,8 @@ import { getPostBySlug, getPosts, getPostSlugs } from "../../../lib/wordpress/po
 import { Badgetextwhite } from "../../../common/badge";
 import Link from "next/link";
 import FadeIn from "../../../animations/FadeIn";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
+import BlogShare from "./BlogShare";
 
 const FALLBACK_IMAGE = "/blogsbg.png";
 
@@ -25,6 +26,12 @@ export async function generateMetadata({ params }) {
     };
 }
 
+function authorInitials(name) {
+    const parts = (name || "").trim().split(/\s+/).filter(Boolean);
+    if (!parts.length) return "U";
+    return parts.slice(0, 2).map((part) => part[0]).join("").toUpperCase();
+}
+
 export default async function BlogDetail({ params }) {
     const { slug } = await params;
     const post = await getPostBySlug(slug);
@@ -43,10 +50,8 @@ export default async function BlogDetail({ params }) {
                 </FadeIn>
             </div>
             <div className="px-8 lg:px-10 py-8 lg:py-12">
-                <div className="w-full flex flex-col items-end ">
-                    {/* Header Section: Title (left) + Description Box (right) */}
-                    <div className="mb-8 flex flex-col lg:flex-row lg:justify-between gap-6 items-start">
-                        {/* Left: Title */}
+                <div className="w-full flex flex-col items-center">
+                    <div className="w-full mb-8 flex flex-col lg:flex-row lg:justify-between gap-6 items-start">
                         <div className="w-full lg:w-[50%]">
                             <p className="text-xs font-semibold text-[#FA6E43] uppercase tracking-widest mb-3">Blog Details</p>
                             <div className=" rounded-lg  mb-4 inline-block">
@@ -57,7 +62,6 @@ export default async function BlogDetail({ params }) {
 
                         </div>
 
-                        {/* Right: Excerpt Box */}
                         <div className="lg:w-[35%] self-end rounded-3xl lg:p-6 bg-white">
                             <p className="   font-medium text-[20px] leading-[28px] tracking-[-0.2px] text-gray-700 align-middle">
                                 {post.excerpt || "Explore the latest insights and stories from our team."}
@@ -65,26 +69,48 @@ export default async function BlogDetail({ params }) {
                         </div>
                     </div>
 
-                    <div className="self-start flex flex-col items-start gap-2 ">
-                        <p className="   font-medium text-[16px] leading-[24px] tracking-[0%] text-gray-500 mb-1 mt-8 align-middle">Date: {post.date}</p>
+                    <div className="w-full max-w-3xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-2 mb-8">
+                        <div className="flex flex-wrap items-center gap-5">
+                            <div className="flex items-center gap-3">
+                                {post.authorImage ? (
+                                    <Image
+                                        src={post.authorImage}
+                                        alt={post.author || "Author"}
+                                        width={40}
+                                        height={40}
+                                        className="h-10 w-10 rounded-full object-cover"
+                                    />
+                                ) : (
+                                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FF6A00] text-sm font-medium text-white">
+                                        {authorInitials(post.author)}
+                                    </div>
+                                )}
+                                <span className="font-medium text-[16px] leading-[24px] text-[#4B4B4B]">
+                                    {post.author || "UCR"}
+                                </span>
+                            </div>
+                            <div className="flex items-center gap-2 text-[#6F6F6F]">
+                                <Calendar size={18} />
+                                <span className="font-medium text-[16px] leading-[24px]">{post.date}</span>
+                            </div>
+                        </div>
+                        <BlogShare title={post.title} />
                     </div>
 
-                    {/* Hero Image - Full Width Compact */}
                     {post.image && (
-                        <div className="h-auto lg:h-[90vh] mb-8 w-full">
+                        <div className="mb-10 w-full max-w-4xl overflow-hidden rounded-2xl">
                             <Image
                                 src={post.image}
                                 alt={post.title}
                                 width={1400}
                                 height={600}
-                                className="w-full h-full object-contain lg:object-cover"
+                                className="w-full h-auto max-h-[70vh] object-cover"
                             />
                         </div>
                     )}
 
-                    {/* Article Content */}
                     <article
-                        className="wp-content max-w-3xl self-start"
+                        className="wp-content w-full max-w-3xl"
                         dangerouslySetInnerHTML={{ __html: post.contentHtml }}
                     />
                 </div>

@@ -1,6 +1,12 @@
 import { wpRequest } from "./client";
 import { WP_CACHE_TAGS } from "./tags";
-import { GET_POSTS, GET_POST_BY_SLUG, GET_POST_SLUGS } from "./queries/posts";
+import {
+  GET_POSTS,
+  GET_POSTS_BASIC,
+  GET_POST_BY_SLUG,
+  GET_POST_BY_SLUG_BASIC,
+  GET_POST_SLUGS,
+} from "./queries/posts";
 import { mapPost } from "./mappers";
 
 const POST_TAGS = [WP_CACHE_TAGS.POSTS];
@@ -13,17 +19,29 @@ export async function getPosts() {
     return (data.posts?.nodes || [])
       .map(mapPost)
       .filter((post) => post && !SKIP_SLUGS.has(post.slug));
-  } catch (error) {
-    console.error("Failed to fetch WordPress posts", error);
-    return [];
+  } catch {
+    try {
+      const data = await wpRequest(GET_POSTS_BASIC, { first: 100 }, POST_TAGS);
+      return (data.posts?.nodes || [])
+        .map(mapPost)
+        .filter((post) => post && !SKIP_SLUGS.has(post.slug));
+    } catch (error) {
+      console.error("Failed to fetch WordPress posts", error);
+      return [];
+    }
   }
 }
 
 export async function getPostBySlug(slug) {
   try {
     if (SKIP_SLUGS.has(slug)) return null;
-    const data = await wpRequest(GET_POST_BY_SLUG, { slug }, POST_TAGS);
-    return mapPost(data.post);
+    try {
+      const data = await wpRequest(GET_POST_BY_SLUG, { slug }, POST_TAGS);
+      return mapPost(data.post);
+    } catch {
+      const data = await wpRequest(GET_POST_BY_SLUG_BASIC, { slug }, POST_TAGS);
+      return mapPost(data.post);
+    }
   } catch (error) {
     console.error("Failed to fetch WordPress post", slug, error);
     return null;

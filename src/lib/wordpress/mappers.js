@@ -188,17 +188,31 @@ export function formatDate(iso) {
 export function mapPost(node) {
   if (!node) return null;
 
+  const details = node.postDetails || {};
+  const excerpt =
+    stripHtml(node.excerpt) || excerptFromContent(node.content);
+
   return {
     id: node.databaseId,
     slug: node.slug,
     title: node.title,
-    excerpt: stripHtml(node.excerpt),
+    excerpt,
     image: mediaUrl(node.featuredImage),
     date: formatDate(node.date),
     category: node.categories?.nodes?.[0]?.name || "",
-    author: node.author?.node?.name || "",
+    author: details.authorName || node.author?.node?.name || "",
+    authorImage: mediaUrl(details.authorImage),
     contentHtml: rewriteHtmlUrls(node.content || ""),
   };
+}
+
+function excerptFromContent(html, max = 180) {
+  const text = stripHtml(html);
+  if (!text) return "";
+  if (text.length <= max) return text;
+  const trimmed = text.slice(0, max);
+  const lastSpace = trimmed.lastIndexOf(" ");
+  return `${trimmed.slice(0, lastSpace > 80 ? lastSpace : max)}…`;
 }
 
 export function mapProduct(node) {
