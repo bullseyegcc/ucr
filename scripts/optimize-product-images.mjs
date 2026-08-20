@@ -1,9 +1,10 @@
 /**
- * One-time / re-run helper: convert Figma-exported product SVGs
- * (huge base64 photo embeds) into listing-sized WebP.
+ * Optimize core-product listing images.
  *
- * Expects source files at public/products/product{1-5}.svg
- * Outputs public/products/product{1-5}.webp
+ * Prefers Figma SVG exports when present (huge base64 embeds),
+ * otherwise recompresses existing WebP sources into card-sized assets.
+ *
+ * Output: public/products/product{1-5}-card.webp
  */
 import fs from "fs";
 import path from "path";
@@ -13,25 +14,13 @@ import sharp from "sharp";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const productsDir = path.join(__dirname, "../public/products");
 const names = ["product1", "product2", "product3", "product4", "product5"];
-
-const missing = names.filter(
-  (name) => !fs.existsSync(path.join(productsDir, `${name}.svg`))
-);
-if (missing.length) {
-  console.error(
-    "Missing source SVGs:",
-    missing.map((n) => `${n}.svg`).join(", "),
-    "\nPlace Figma exports in public/products/ then re-run."
-  );
-  process.exit(1);
-}
+const CARD_WIDTH = 800;
+const QUALITY = 72;
 
 const tmpDir = path.join(productsDir, "_tmp");
-fs.mkdirSync(tmpDir, { recursive: true });
 
-async function convertWithLayout(name, { width = 1200, quality = 78 } = {}) {
+async function fromSvg(name) {
   const svgPath = path.join(productsDir, `${name}.svg`);
-  console.log("Processing", name, "...");
   let svg = fs.readFileSync(svgPath, "utf8");
 
   const re = /xlink:href="(data:image\/(png|jpeg|jpg|webp);base64,[^"]+)"/g;
@@ -45,16 +34,15 @@ async function convertWithLayout(name, { width = 1200, quality = 78 } = {}) {
       index: embeds.length,
     });
   }
+  if (!embeds.length) throw new Error("No embedded images in SVG");
 
-  if (!embeds.length) throw new Error("No embeds");
+  fs.mkdirSync(tmpDir, { recursive: true });
 
   for (const embed of embeds) {
     const ext =
       embed.mime === "jpeg" || embed.mime === "jpg" ? "jpg" : embed.mime;
-    const fileName = `${name}-embed-${embed.index}.${ext}`;
-    const filePath = path.join(tmpDir, fileName);
-    const buf = Buffer.from(embed.dataUri.split(",")[1], "base64");
-    fs.writeFileSync(filePath, buf);
+    const filePath = path.join(tmpDir, `${name}-embed-${embed.index}.${ext}`);
+    fs.writeFileSync(filePath, Buffer.from(embed.dataUri.split(",")[1], "base64"));
     const href = path.resolve(filePath).replace(/\\/g, "/");
     svg = svg.replace(embed.full, `xlink:href="file:///${href}"`);
   }
@@ -62,18 +50,84 @@ async function convertWithLayout(name, { width = 1200, quality = 78 } = {}) {
   const slimPath = path.join(tmpDir, `${name}-slim.svg`);
   fs.writeFileSync(slimPath, svg);
 
-  const out = path.join(productsDir, `${name}.webp`);
-  const info = await sharp(slimPath, { density: 300, limitInputPixels: false })
-    .resize({ width })
-    .webp({ quality })
-    .toFile(out);
+  return sharp(slimPath, { density: 300, limitInputPixels: false });
+}
 
-  console.log(name, "->", info.size, "bytes", `${info.width}x${info.height}`);
+async function cropWhiteCanvas(inputPath) {
+  const { data, info } = await sharp(inputPath)
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  const { width, height, channels } = info;
+  let minX = width;
+  let minY = height;
+  let maxX = 0;
+  let maxY = 0;
+
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const i = (y * width + x) * channels;
+      const r = data[i];
+      const g = data[i + 1];
+      const b = data[i + 2];
+      const a = data[i + 3];
+      if (a > 8 && (r < 245 || g < 245 || b < 245)) {
+        if (x < minX) minX = x;
+        if (y < minY) minY = y;
+        if (x > maxX) maxX = x;
+        if (y > maxY) maxY = y;
+      }
+    }
+  }
+
+  if (maxX <= minX || maxY <= minY) {
+    return sharp(inputPath);
+  }
+
+  const pad = 36;
+  const left = Math.max(0, minX - pad);
+  const top = Math.max(0, minY - pad);
+  const cropW = Math.min(width - left, maxX - minX + 1 + pad * 2);
+  const cropH = Math.min(height - top, maxY - minY + 1 + pad * 2);
+
+  return sharp(inputPath).extract({ left, top, width: cropW, height: cropH });
+}
+
+async function optimize(name) {
+  const svgPath = path.join(productsDir, `${name}.svg`);
+  const webpPath = path.join(productsDir, `${name}.webp`);
+  const outPath = path.join(productsDir, `${name}-card.webp`);
+
+  let pipeline;
+  let source;
+
+  if (fs.existsSync(svgPath)) {
+    source = "svg";
+    pipeline = await fromSvg(name);
+  } else if (fs.existsSync(webpPath)) {
+    source = "webp";
+    pipeline =
+      name === "product4"
+        ? await cropWhiteCanvas(webpPath)
+        : sharp(webpPath);
+  } else {
+    throw new Error(`Missing ${name}.svg and ${name}.webp`);
+  }
+
+  const info = await pipeline
+    .resize({ width: CARD_WIDTH, withoutEnlargement: true })
+    .webp({ quality: QUALITY, effort: 6, alphaQuality: 80 })
+    .toFile(outPath);
+
+  console.log(
+    `${name} (${source}) -> ${info.width}x${info.height} ${Math.round(info.size / 1024)}KB`
+  );
 }
 
 for (const name of names) {
   try {
-    await convertWithLayout(name);
+    await optimize(name);
   } catch (err) {
     console.error(name, "FAILED", err.message);
   }

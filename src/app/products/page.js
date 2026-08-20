@@ -74,6 +74,7 @@ export default function blogs() {
                             {products.map((product, index) => {
                                 const productIndex = String(product.id).padStart(2, "0");
                                 const isPriority = index < 2;
+                                const imageFit = product.imageFit === "contain" ? "object-contain" : "object-cover";
 
                                 return (
                                     <Link key={product.id} href={`/products/${product.slug}`} className="group block h-full">
@@ -127,11 +128,12 @@ export default function blogs() {
                                                                 src={product.icon || "/drawnwire.png"}
                                                                 alt={product.name}
                                                                 fill
-                                                                sizes="(max-width: 1024px) 92vw, 28vw"
-                                                                className="object-cover"
+                                                                sizes="(max-width: 640px) 88vw, (max-width: 1024px) 44vw, 420px"
+                                                                className={imageFit}
                                                                 quality={75}
                                                                 priority={isPriority}
                                                                 loading={isPriority ? undefined : "lazy"}
+                                                                decoding="async"
                                                                 placeholder="blur"
                                                                 blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmNGY0Ii8+PC9zdmc+"
                                                             />
