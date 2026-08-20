@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "compress-videos": "powershell -ExecutionPolicy Bypass -File ./scripts/compress-videos.ps1"
+    "compress-videos": "powershell -ExecutionPolicy Bypass -File ./scripts/compress-videos.ps1",
+    "optimize-product-images": "node ./scripts/optimize-product-images.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

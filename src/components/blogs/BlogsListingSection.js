@@ -22,7 +22,7 @@ const imageSizes = [
   "h-[260px] sm:h-[300px] lg:h-[350px]", // medium-tall
   "h-[280px] sm:h-[320px] lg:h-[380px]", // tall (center col, row 2)
   "h-[230px] sm:h-[260px] lg:h-[290px]", // compact
-  "h-[230px] sm:h-[260px] lg:h-[290px]", // compact
+  "h-[230px] sm:h-[260px] lg:h-[290inpx]", // compact
   "h-[260px] sm:h-[300px] lg:h-[350px]", // medium-tall (center col, row 3)
   "h-[280px] sm:h-[320px] lg:h-[380px]", // tall
 ];

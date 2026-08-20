@@ -30,6 +30,7 @@ export default function ScrollReveal({
   wordAnimationEnd = 'top 5%',
   as: Tag = 'h2',
   highlightWords = [],
+  highlightClassName = '',
   gradientHighlight = false,
 }) {
   const containerRef = useRef(null);
@@ -58,7 +59,11 @@ export default function ScrollReveal({
             (word) => word.toLowerCase() === part.toLowerCase()
           );
           span.className = `word inline-block${
-            isHighlighted && !gradientHighlight ? ' italic text-yellow-400' : ''
+            isHighlighted && !gradientHighlight && highlightClassName
+              ? ` ${highlightClassName}`
+              : isHighlighted && !gradientHighlight
+                ? ' italic text-yellow-400'
+                : ''
           }`;
           if (isHighlighted && gradientHighlight) {
             span.className =
@@ -204,6 +209,7 @@ export default function ScrollReveal({
     wordAnimationEnd,
     blurStrength,
     highlightWords,
+    highlightClassName,
     gradientHighlight,
   ]);
 

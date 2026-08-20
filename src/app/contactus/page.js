@@ -56,7 +56,6 @@ export default function contactus() {
                                         <p className="text-[#505050] text-base lg:text-base leading-6 lg:leading-6 mb-3 lg:mb-5 font-normal tracking-[-0.16px]">Whether you need quick answers or deep strategy talks, I'm here to make your journey smooth.</p>
                                         <a href="#" className="text-[#FF5703] text-base lg:text-base font-medium leading-6 inline-flex items-center gap-2 hover:gap-3 transition-all">
                                             Book a call directly with HR
-                                            <span>â†’</span>
                                         </a>
                                     </div>
                                 </div>
@@ -156,7 +155,6 @@ export default function contactus() {
 
                             <a href="#" className="text-[#FF5703] text-center text-base lg:text-base font-medium leading-6 inline-flex items-center gap-2 hover:gap-3 transition-all">
                                 Book a call directly with HR
-                                <span>â†’</span>
                             </a>
                         </div>
                     </SequentialSlideIn>
