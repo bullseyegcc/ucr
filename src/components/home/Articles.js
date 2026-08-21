@@ -5,12 +5,49 @@ import { ArrowRight } from 'lucide-react';
 import { WhiteBadge } from "../../common/badge.js";
 import Link from "next/link";
 
-function CardMeta({ title }) {
+const FALLBACK_POSTS = [
+  {
+    slug: "uae-copper-producer-expands-global-supply",
+    title: "UAE Copper Producer Expands Global Supply Network Across Asia & Europe",
+    author: "Bruce Sommers",
+    date: "Monday, April 28, 2026",
+    image: "/hblog1.png",
+  },
+  {
+    slug: "high-conductivity-copper-rods-energy-sector",
+    title: "Company Launches New High-Conductivity Copper Rods for Energy Sector",
+    author: "Bruce Sommers",
+    date: "Monday, April 28, 2026",
+    image: "/hblog2.png",
+  },
+  {
+    slug: "expected-supply-deficit-copper-prices",
+    title: "Expected Supply Deficit To Upset Copper Prices",
+    author: "Bruce Sommers",
+    date: "Monday, April 28, 2026",
+    image: "/blog2.png",
+  },
+];
+
+const CARD_FALLBACKS = ["/hblog1.png", "/hblog2.png", "/blog2.png"];
+
+function mapHomePosts(posts) {
+  if (!posts?.length) return FALLBACK_POSTS;
+  return posts.slice(0, 3).map((post, index) => ({
+    slug: post.slug,
+    title: post.title,
+    author: post.author || "UCR",
+    date: post.date,
+    image: post.image || CARD_FALLBACKS[index],
+  }));
+}
+
+function CardMeta({ title, author, date }) {
   return (
     <>
       <div className="relative z-10 px-5 lg:px-6 text-white flex justify-between gap-4 text-xs sm:text-sm font-light pt-5 lg:pt-6">
-        <span>Written by Bruce Sommers</span>
-        <span className="shrink-0">Monday, April 28, 2026</span>
+        <span>Written by {author}</span>
+        <span className="shrink-0">{date}</span>
       </div>
       <h2 className="relative z-10 text-xl sm:text-[1.65rem] lg:text-[1.85rem] leading-[1.2] px-5 lg:px-6 pr-8 text-white font-semibold">
         {title}
@@ -24,7 +61,12 @@ function CardMeta({ title }) {
   );
 }
 
-export default function Articles() {
+export default function Articles({ posts }) {
+  const items = mapHomePosts(posts);
+  const featured = items[0];
+  const second = items[1];
+  const third = items[2];
+
   const sectionRef = useRef(null);
   const badgeRef = useRef(null);
   const headingRef = useRef(null);
@@ -112,33 +154,40 @@ export default function Articles() {
             </h1>
           </div>
 
+          {featured ? (
           <Link
-            href="/blogs/uae-copper-producer-expands-global-supply"
-            className="relative flex-1 min-h-[22rem] lg:min-h-0 overflow-hidden rounded-2xl bg-[url('/hblog1.png')] bg-cover bg-center bg-no-repeat"
+            href={`/blogs/${featured.slug}`}
+            className="relative flex-1 min-h-[22rem] lg:min-h-0 overflow-hidden rounded-2xl bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url('${featured.image}')` }}
           >
-            <CardMeta title="UAE Copper Producer Expands Global Supply Network Across Asia & Europe" />
+            <CardMeta title={featured.title} author={featured.author} date={featured.date} />
           </Link>
+          ) : null}
         </div>
 
         {/* ── Right column ───────────────────────────────────────────────── */}
         <div className="flex flex-col gap-4 lg:gap-5 lg:h-full">
+          {second ? (
           <Link
             ref={rightTopRef}
-            href="/blogs/high-conductivity-copper-rods-energy-sector"
-            className="w-full flex-1 min-h-[16rem] sm:min-h-[18rem] lg:min-h-0 relative flex flex-col justify-start gap-4 rounded-2xl bg-[#6A3120] bg-[url('/hblog2.png')] bg-cover bg-center bg-no-repeat overflow-hidden"
-            style={{ willChange: 'transform, opacity' }}
+            href={`/blogs/${second.slug}`}
+            className="w-full flex-1 min-h-[16rem] sm:min-h-[18rem] lg:min-h-0 relative flex flex-col justify-start gap-4 rounded-2xl bg-[#6A3120] bg-cover bg-center bg-no-repeat overflow-hidden"
+            style={{ willChange: 'transform, opacity', backgroundImage: `url('${second.image}')` }}
           >
-            <CardMeta title="Company Launches New High-Conductivity Copper Rods for Energy Sector" />
+            <CardMeta title={second.title} author={second.author} date={second.date} />
           </Link>
+          ) : null}
 
+          {third ? (
           <Link
             ref={rightBotRef}
-            href="/blogs/expected-supply-deficit-copper-prices"
-            className="w-full flex-1 min-h-[16rem] lg:min-h-0 relative hidden lg:flex flex-col justify-start gap-4 rounded-2xl bg-[#6A3120] bg-[url('/blog2.png')] bg-cover bg-center bg-no-repeat overflow-hidden"
-            style={{ willChange: 'transform, opacity' }}
+            href={`/blogs/${third.slug}`}
+            className="w-full flex-1 min-h-[16rem] lg:min-h-0 relative hidden lg:flex flex-col justify-start gap-4 rounded-2xl bg-[#6A3120] bg-cover bg-center bg-no-repeat overflow-hidden"
+            style={{ willChange: 'transform, opacity', backgroundImage: `url('${third.image}')` }}
           >
-            <CardMeta title="Expected Supply Deficit To Upset Copper Prices" />
+            <CardMeta title={third.title} author={third.author} date={third.date} />
           </Link>
+          ) : null}
 
           <Link
             href="/blogs"

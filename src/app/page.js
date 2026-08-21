@@ -1,12 +1,4 @@
-import Image from "next/image";
-import { ArrowRight } from 'lucide-react';
-import coppericon from './../../public/coppericon.png';
-import badge_icon from '../../public/badge.png';
-
-import { Badge } from "../common/badge.js";
-import { WhiteBadge } from "../common/badge.js";
 import { VideoCard } from "../common/VideoCard.js";
-import StatsCard from "../common/StatsCard.js";
 import FeaturedProducts from "../components/home/FeaturedProducts.js";
 import WeCareSection from "../components/home/WeCareSection.js";
 import OurTechnology from "../components/home/OurTechnology.js";
@@ -16,8 +8,12 @@ import ParallaxSection from "../animations/ParallaxSection.js";
 import HorizontalScrollGallery from "../common/HorizontalScrollGallery.js";
 import WhyChooseUs from "../components/home/WhyChooseUs.js";
 import HomeHeroAbout from "../components/home/HomeHeroAbout.js";
+import { getProducts } from "../lib/wordpress/products";
+import { getPosts } from "../lib/wordpress/posts";
 
-export default function Home() {
+export default async function Home() {
+  const [products, posts] = await Promise.all([getProducts(), getPosts()]);
+
   return (
     <div className="bg-white">
  
@@ -47,7 +43,7 @@ export default function Home() {
 
       {/* FeaturedProducts: outside ParallaxSection so scale/overflow doesn't leave silver gaps around the image */}
       <div className="relative w-full" style={{ zIndex: 11 }}>
-        <FeaturedProducts />
+        <FeaturedProducts products={products} />
       </div>
 
       {/* WeCareSection: mounted outside ParallaxSection so mobile horizontal scroll works (no overflow-hidden + transform ancestor) */}
@@ -74,7 +70,7 @@ export default function Home() {
       </ParallaxSection>
 
       <div className="relative w-full" style={{ zIndex: 18 }}>
-        <Articles />
+        <Articles posts={posts} />
       </div>
 
     </div>
@@ -82,4 +78,4 @@ export default function Home() {
 
 
   );
-}       
+}

@@ -5,7 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import badge_icon from "../../../public/badge.png";
 
-const PRODUCTS = [
+const FALLBACK_PRODUCTS = [
   {
     id: 0,
     title: "ETP Copper Rod and wire",
@@ -33,7 +33,19 @@ const PRODUCTS = [
   },
 ];
 
-export default function FeaturedProducts() {
+const FALLBACK_BACKGROUNDS = FALLBACK_PRODUCTS.map((item) => item.backgroundImage);
+
+function mapHomeProducts(products) {
+  if (!products?.length) return FALLBACK_PRODUCTS;
+  return products.map((product, index) => ({
+    id: product.id,
+    title: product.name,
+    backgroundImage: FALLBACK_BACKGROUNDS[index % FALLBACK_BACKGROUNDS.length],
+  }));
+}
+
+export default function FeaturedProducts({ products }) {
+  const items = mapHomeProducts(products);
   const [activeTab, setActiveTab] = useState(0);
   const backgroundSliderRef = useRef(null);
 
@@ -45,7 +57,7 @@ export default function FeaturedProducts() {
 
     if (backgroundSliderRef.current) {
       gsap.to(backgroundSliderRef.current, {
-        xPercent: -tabIndex * (100 / PRODUCTS.length),
+        xPercent: -tabIndex * (100 / items.length),
         duration: 0.6,
         ease: "power2.inOut",
       });
@@ -60,14 +72,14 @@ export default function FeaturedProducts() {
         <div
           ref={backgroundSliderRef}
           className="flex h-full will-change-transform"
-          style={{ width: `${PRODUCTS.length * 100}%` }}
+          style={{ width: `${items.length * 100}%` }}
         >
-          {PRODUCTS.map((product) => (
+          {items.map((product) => (
             <div
               key={product.id}
               className="h-full shrink-0 bg-cover  bg-no-repeat"
               style={{
-                width: `${100 / PRODUCTS.length}%`,
+                width: `${100 / items.length}%`,
                 backgroundImage: `url(${product.backgroundImage})`,
               }}
             />
@@ -95,7 +107,7 @@ export default function FeaturedProducts() {
 
         {/* Product Tabs */}
         <div className="flex flex-col gap-[1rem] lg:gap-[1.35rem] xl:gap-[1.5rem]">
-          {PRODUCTS.map((product, index) => (
+          {items.map((product, index) => (
             <button
               key={product.id}
               onClick={() => handleTabChange(index)}
@@ -122,7 +134,7 @@ export default function FeaturedProducts() {
         {/* Indicator dots */}
         <div className="shrink-0 flex flex-col gap-4 pt-2">
           <div className="flex gap-2">
-            {PRODUCTS.map((_, index) => (
+            {items.map((_, index) => (
               <div
                 key={index}
                 onClick={() => handleTabChange(index)}
