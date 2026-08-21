@@ -1,4 +1,4 @@
-﻿import { Badge } from "../../common/badge"
+import { Badge } from "../../common/badge"
 import Hero from "@/components/shared/Hero"
 import QuoteSection from "@/components/shared/QuoteSection"
 import Image from "next/image"
