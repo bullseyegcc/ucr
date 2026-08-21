@@ -106,9 +106,19 @@ export default function BlogDetailClient({ post }) {
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-sm text-[#5e5e63]">
               <div className="inline-flex items-center gap-2.5">
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#111827] text-[11px] font-semibold tracking-wide text-white">
-                  {getInitials(authorName)}
-                </span>
+                {post.authorImage ? (
+                  <Image
+                    src={post.authorImage}
+                    alt={authorName}
+                    width={32}
+                    height={32}
+                    className="h-8 w-8 rounded-full object-cover"
+                  />
+                ) : (
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#111827] text-[11px] font-semibold tracking-wide text-white">
+                    {getInitials(authorName)}
+                  </span>
+                )}
                 <span>{authorName}</span>
               </div>
 
@@ -195,7 +205,12 @@ export default function BlogDetailClient({ post }) {
         )}
 
         <article className="mx-auto mt-12 w-full text-[#2d2d31] lg:max-w-[1050px]">
-          {post.content?.map((block, index) => {
+          {post.contentHtml ? (
+            <div
+              className="wp-content"
+              dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+            />
+          ) : post.content?.map((block, index) => {
             if (block.type === "heading") {
               return (
                 <h2

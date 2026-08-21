@@ -1,15 +1,18 @@
 import { notFound } from "next/navigation";
-import { blogs } from "../../../assets/blogs";
+import { getPostBySlug, getPosts, getPostSlugs } from "../../../lib/wordpress/posts";
 import BlogDetailClient from "../../../components/blogs/BlogDetailClient";
 import RelatedBlogs from "../../../components/blogs/RelatedBlogs";
 
 export async function generateStaticParams() {
-  return blogs.map((post) => ({ slug: post.slug }));
+  const slugs = await getPostSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
+
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const post = blogs.find((item) => item.slug === slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     return { title: "Blog Not Found" };
@@ -23,11 +26,13 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogDetail({ params }) {
   const { slug } = await params;
-  const post = blogs.find((item) => item.slug === slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) return notFound();
 
-  const related = blogs.filter((item) => item.slug !== post.slug).slice(0, 3);
+  const related = (await getPosts())
+    .filter((item) => item.slug !== post.slug)
+    .slice(0, 3);
 
   return (
     <div>
