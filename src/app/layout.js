@@ -1,7 +1,6 @@
 import "./globals.css";
 import { Navbar } from "../common/Navbar";
 import Footer from "@/components/shared/Footer";
-import QuoteSection from "@/components/shared/QuoteSection";
 import SmoothScroll from "../common/SmoothScroll";
 import SplashOverlay from "../common/SplashOverlay";
 
@@ -38,7 +37,6 @@ export default function RootLayout({ children }) {
         <SmoothScroll />
         <Navbar/>
         {children}
-        <QuoteSection />
         <Footer/>
       </body>
     </html>

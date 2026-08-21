@@ -253,6 +253,7 @@ function applyCatalogFallback(mapped) {
     description: mapped.description || fallback.description,
     sku: mapped.sku || fallback.sku,
     icon: mapped.icon || fallback.icon,
+    imageFit: mapped.imageFit || fallback.imageFit,
     longDescription: mapped.longDescription || fallback.longDescription,
     specifications: mapped.specifications.length
       ? mapped.specifications

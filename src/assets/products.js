@@ -7,7 +7,7 @@ export const products = [
       "High-purity copper rods for cable manufacturing and transformer/motor windings—engineered for consistent purity and conductivity.",
     sku: "01/05",
     featured: true,
-    icon: "/products/product1.svg",
+    icon: "/products/product1-card.webp",
     longDescription:
       "High-purity copper rods for wire drawing, cable manufacturing, and industrial applications requiring consistent quality.",
     applications: [
@@ -60,7 +60,7 @@ export const products = [
       "Copper wire for power cables manufacturers, communication cables, round/sector conductors, and high-conductivity electrical applications.",
     sku: "02/05",
     featured: false,
-    icon: "/products/product2.svg",
+    icon: "/products/product2-card.webp",
     longDescription:
       "Drawn copper wire used across power, communication, and transformer/motor winding applications.",
     applications: [
@@ -103,7 +103,7 @@ export const products = [
       "Tin-coated copper wire for solar cables manufacturers, earthing applications, and high-conductivity anti-corrosion wiring.",
     sku: "03/05",
     featured: false,
-    icon: "/products/product3.svg",
+    icon: "/products/product3-card.webp",
     longDescription:
       "Tin coated copper wire with protective tin coating designed for superior corrosion resistance and demanding applications.",
     applications: [
@@ -136,7 +136,8 @@ export const products = [
       "Drawn copper wire for food & beverage can weld, aerosol can weld, and industrial can/container body welding.",
     sku: "04/05",
     featured: false,
-    icon: "/products/product4.svg",
+    icon: "/products/product4-card.webp",
+    imageFit: "contain",
     longDescription:
       "Drawn copper wire for can welding applications including food & beverage, aerosol, and industrial containers.",
     applications: [
@@ -180,7 +181,7 @@ export const products = [
       "High-quality oxygen-free copper rods with an oxygen content of 3–5 ppm for fine/super-fine electrical wires and high-conductivity applications.",
     sku: "05/05",
     featured: false,
-    icon: "/products/product5.svg",
+    icon: "/products/product5-card.webp",
     longDescription:
       "Oxygen-free copper rods designed for high-conductivity and demanding electrical applications.",
     applications: [

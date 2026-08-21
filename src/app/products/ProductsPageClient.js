@@ -73,8 +73,10 @@ export default function ProductsPageClient({ products = [] }) {
                             <p className="text-center text-gray-500">No products published yet.</p>
                         ) : (
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[0.5rem] lg:gap-[0.75rem] auto-rows-[20.5rem] lg:auto-rows-[20.5rem]">
-                            {products.map((product) => {
+                            {products.map((product, index) => {
                                 const productIndex = String(product.id).padStart(2, "0");
+                                const isPriority = index < 2;
+                                const imageFit = product.imageFit === "contain" ? "object-contain" : "object-cover";
 
                                 return (
                                     <Link key={product.id} href={`/products/${product.slug}`} className="group block h-full">
@@ -128,10 +130,12 @@ export default function ProductsPageClient({ products = [] }) {
                                                                 src={product.icon || "/drawnwire.png"}
                                                                 alt={product.name}
                                                                 fill
-                                                                sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 28vw"
-                                                                className="object-cover"
+                                                                sizes="(max-width: 640px) 88vw, (max-width: 1024px) 44vw, 420px"
+                                                                className={imageFit}
                                                                 quality={75}
-                                                                loading="lazy"
+                                                                priority={isPriority}
+                                                                loading={isPriority ? undefined : "lazy"}
+                                                                decoding="async"
                                                                 placeholder="blur"
                                                                 blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmNGY0Ii8+PC9zdmc+"
                                                             />

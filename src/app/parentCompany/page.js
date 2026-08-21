@@ -3,12 +3,10 @@
 import { Badge } from "../../common/badge";
 import Hero from "@/components/shared/Hero";
 import Image from "next/image";
-import ColorChangeWithScroll from "../../animations/ColorChangeWithScroll";
-import CardAnimation from "../../animations/CardAnimation";
-import ScrollRevealCardsContainer from "../../animations/ScrollRevealCardsContainer";
 import CountUp from "../../animations/countup";
-import FadeIn from "../../animations/FadeIn";
 import SlideIn from "../../animations/SlideIn";
+import SequentialSlideIn from "../../animations/SequentialSlideIn";
+import ScrollReveal from "../../animations/ScrollReveal";
 
 
 export default function parentCompany() {
@@ -30,25 +28,30 @@ export default function parentCompany() {
         }}
       />
 
-      <div className="px-2 lg:px-10 lg:py-16 flex flex-col items-center justify-center bg-[#F5F5F5]">
-        <ColorChangeWithScroll initialColor="#8A8A8A" afterColor="#FF7A5C">
-          <p className="text-center  font-medium text-[24px] leading-[40px] tracking-[-0.53px] lg:px-10 mt-8 lg:font-normal lg:text-[32px] lg:leading-[48px] lg:tracking-[-1.4px]">
-            Ittihad International Investment LLC is a private holding and
-            multi-disciplinary conglomerate, engaged in a wide spectrum of
-            economic activities across the MENA region. We lead, manage, and
-            empower a diverse portfolio of companies to bring long-term value,
-            operational excellence, and sustainable growth.
-          </p>
-        </ColorChangeWithScroll>
+      <div className="bg-[#F5F5F5] px-2 lg:py-16">
+        <div className="mx-auto w-full max-w-[1600px] px-2 lg:px-10">
+          <ScrollReveal
+            as="p"
+            baseOpacity={0.2}
+            enableBlur
+            baseRotation={0}
+            blurStrength={0}
+            containerClassName="whitespace-pre-line text-center font-medium text-primary text-[28px] leading-[44px] tracking-[-0.53px] lg:text-[40px] lg:font-normal lg:leading-[56px] lg:tracking-[-1.4px]"
+          >
+            {`Ittihad International Investment LLC is a private holding and multi-disciplinary conglomerate, engaged in a wide spectrum of economic activities across the MENA region.
+We lead, manage, and empower a diverse portfolio of companies to bring long-term value, operational excellence, and sustainable growth.`}
+          </ScrollReveal>
+        </div>
       </div>
 
-      <ScrollRevealCardsContainer
-        className="min-h-[80vh] w-full flex items-center justify-center my-8 px-2 lg:px-10"
-        containerClassName="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6"
-        staggerDelay={0.5}
-        pin={false}
+      <SequentialSlideIn
+        className="mx-auto my-8 grid min-h-[80vh] w-full max-w-[1600px] grid-cols-1 items-stretch gap-6 px-2 sm:grid-cols-2 lg:px-10"
+        itemClassName="min-w-0 h-full"
+        start="top 85%"
+        end="bottom 65%"
+        stagger={0.18}
       >
-        <div className="min-h-[40vh] py-10 lg:h-full relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group transition-transform duration-500 ease-out">
+        <div className="min-h-[40vh] h-full py-10 relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group transition-transform duration-500 ease-out">
           <div className="pb-6">
             <h1 className="font-[Helvetica_Now_Display] font-medium text-[28px] leading-[37px] tracking-[-0.74px] lg:text-[52px] lg:leading-[69.07px] lg:tracking-[-1.38px] text-primary py-4 lg:py-6">
               Manufacturing
@@ -70,7 +73,7 @@ export default function parentCompany() {
           />
         </div>
 
-        <div className="relative py-5 rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group transition-transform duration-500 ease-out">
+        <div className="min-h-[40vh] h-full py-10 relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group transition-transform duration-500 ease-out">
           <div className="pb-6">
             <h1 className="font-[Helvetica_Now_Display] font-medium text-[28px] leading-[37px] tracking-[-0.74px] lg:text-[52px] lg:leading-[69.07px] lg:tracking-[-1.38px] text-primary py-4 lg:py-6">
               Trading
@@ -92,7 +95,7 @@ export default function parentCompany() {
           />
         </div>
 
-        <div className="min-h-[40vh] py-10 relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group transition-transform duration-500 ease-out">
+        <div className="min-h-[40vh] h-full py-10 relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group transition-transform duration-500 ease-out">
           <div className="pb-6">
             <h1 className="font-[Helvetica_Now_Display] font-medium text-[28px] leading-[37px] tracking-[-0.74px] lg:text-[52px] lg:leading-[69.07px] lg:tracking-[-1.38px] text-primary py-4 lg:py-6">
               Construction
@@ -114,7 +117,7 @@ export default function parentCompany() {
           />
         </div>
 
-        <div className="min-h-[40vh] py-10 relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group transition-transform duration-500 ease-out">
+        <div className="min-h-[40vh] h-full py-10 relative rounded-xl p-6 sm:p-8 flex flex-col gap-6 bg-white/60 group transition-transform duration-500 ease-out">
           <div className="pb-6">
             <h1 className="font-[Helvetica_Now_Display] font-medium text-[28px] leading-[37px] tracking-[-0.74px] lg:text-[52px] lg:leading-[69.07px] lg:tracking-[-1.38px] text-primary py-4 lg:py-6">
               Services
@@ -135,68 +138,67 @@ export default function parentCompany() {
             height={0}
           />
         </div>
-      </ScrollRevealCardsContainer>
+      </SequentialSlideIn>
 
-      <div className="w-full h-auto lg:h-full pt-12 lg:pt-16 px-4 lg:px-10 mb-8 bg-[url('/expertisebg.png')] bg-contain bg-top bg-no-repeat bg-cover flex flex-col justify-between">
-        <div>
-          <SlideIn direction="bottom" scrollTrigger={true} duration={0.8}>
+      <div className="mb-8 w-full bg-[url('/expertisebg.png')] bg-cover bg-top bg-no-repeat px-4 pt-12 lg:h-full lg:px-10 lg:pt-16">
+        <div className="mx-auto flex h-full w-full max-w-[1600px] flex-col justify-between">
+          <SlideIn direction="left" scrollTrigger={true} duration={0.8}>
             <Badge title="our expertise" />
-          </SlideIn>
-          <FadeIn scrollTrigger={true} duration={0.8}>
             <h1 className=" font-normal align-middle text-[32px] tracking-[-1.47px] lg:text-[52px] lg:leading-[99px] lg:tracking-[-2.5px]">
-              Our Expertise & Experiance
+              Our Experience & Expertise
             </h1>
-          </FadeIn>
-        </div>
-        <div className="mt-6 flex flex-col lg:flex-row gap-6 items-end">
-          <CardAnimation
-            index={0}
-            className="min-h-[55vh] lg:min-h-[65vh]  lg:rounded-t-2xl rounded-2xl w-full lg:w-1/3 bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400"
+          </SlideIn>
+          <SequentialSlideIn
+            className="mt-6 flex flex-col gap-6 items-end lg:flex-row"
+            itemClassName="min-w-0 w-full lg:w-1/3"
+            start="top 85%"
+            end="bottom 65%"
+            stagger={0.18}
           >
+          <div className="min-h-[48vh] lg:min-h-[58vh] lg:rounded-t-2xl rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 lg:pt-12 relative flex flex-col gap-3 h-auto lg:h-[50vh] overflow-hidden group transition-all duration-400">
             <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
               <span>
-                <CountUp to={20} duration={2} />+
+                $<CountUp to={2.2} duration={2} /> bn
               </span>{" "}
               <hr className="text-primary/30 w-[90%] shadow  " />
             </h1>
 
-            <div className="relative z-10 pb-6 ">
-              <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                Years Experience
+            <div className="relative z-10 pb-28 lg:pb-32">
+              <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-0 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
+                Global Exports
               </h1>
-              <p className=" lg:w-90 pr-0 lg:pr-4">
-                200,000 metric tons copper production line that is the largest
-                of its kind in the Middle East.
+              <p className="mt-1 lg:w-90 pr-0 lg:pr-4">
+                A significant export footprint connecting local manufacturing
+                capabilities with global markets. These exports reflect the
+                sector&apos;s growing competitiveness and international reach.
               </p>
             </div>
 
             <Image
-              src="/exp1.png"
-              alt="Expertise Icon"
+              src="/exp3.png"
+              alt="Global exports globe"
               width={290}
               height={80}
-              className="w-full absolute -bottom-0 right-0 z-0 rounded-b-2xl lg:rounded-none"
+              className="pointer-events-none absolute bottom-0 -right-6 z-0 w-[70%] max-w-none rounded-b-2xl lg:w-[82%]"
             />
-          </CardAnimation>
+          </div>
 
-          <CardAnimation
-            index={1}
-            className="min-h-[55vh] lg:min-h-[60vh] lg:rounded-t-2xl rounded-2xl w-full lg:w-1/3 bg-white px-6 lg:px-8 pt-8 overflow-x-hidden lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400"
-          >
+          <div className="min-h-[48vh] lg:min-h-[54vh] lg:rounded-t-2xl rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 overflow-x-hidden lg:pt-12 relative flex flex-col gap-3 h-auto lg:h-[50vh] overflow-hidden group transition-all duration-400">
             <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
               <span>
-                <CountUp to={1500} duration={2.5} />+
+                <CountUp to={10609} separator="," duration={2.5} />+
               </span>{" "}
               <hr className="text-primary/30 w-[90%] shadow  " />
             </h1>
 
-            <div className="relative z-10">
-              <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
+            <div className="relative z-10 pb-28 lg:pb-32">
+              <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-0 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
                 Employees
               </h1>
-              <p className="w-45 lg:w-55">
-                With over 150 experienced employees, we deliver quality and
-                reliability every day.
+              <p className="mt-1 w-45 lg:w-55">
+                A strong workforce powering the sector&apos;s continued growth
+                and operational capacity. Skilled talent plays a critical role
+                in supporting manufacturing, innovation, and expansion.
               </p>
             </div>
 
@@ -205,39 +207,38 @@ export default function parentCompany() {
               alt="Expertise Icon"
               width={180}
               height={80}
-              className="w-60 lg:w-76 absolute -bottom-0 -right-5 lg:right-0 z-0 rounded-b-2xl lg:rounded-none"
+              className="pointer-events-none absolute bottom-0 -right-5 z-0 w-60 rounded-b-2xl lg:right-0 lg:w-76"
             />
-          </CardAnimation>
+          </div>
 
-          <CardAnimation
-            index={2}
-            className="min-h-[55vh] lg:min-h-[55vh] lg:rounded-t-2xl rounded-2xl w-full lg:w-1/3 bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400"
-          >
+          <div className="min-h-[48vh] lg:min-h-[50vh] lg:rounded-t-2xl rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 lg:pt-12 relative flex flex-col gap-3 h-auto lg:h-[50vh] overflow-hidden group transition-all duration-400">
             <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
               <span>
-                <CountUp to={30} duration={2} />+
+                <CountUp to={4} duration={2} />%
               </span>{" "}
               <hr className="text-primary/30 w-[90%] shadow  " />
             </h1>
 
-            <div className="relative z-10">
-              <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                Global Sales
+            <div className="relative z-10 pb-36 lg:pb-40">
+              <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-0 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
+                Of UAE&apos;s Manufacturing Exports
               </h1>
-              <p className=" w-[70%] lg:w-80 pr-0 lg:pr-4">
-                We supplies products, services and solutions across over 30
-                countries in Australia, Asia, Africa, and the Middle East.
+              <p className="mt-1 w-full max-w-none pr-0 lg:pr-4">
+                A meaningful contribution to the UAE&apos;s overall manufacturing
+                export ecosystem. The figure highlights the sector&apos;s role in
+                strengthening the country&apos;s industrial economy.
               </p>
             </div>
 
             <Image
-              src="/exp3.png"
-              alt="Expertise Icon"
-              width={300}
-              height={80}
-              className=" absolute -bottom-0 right-0 z-0 rounded-b-2xl lg:rounded-none"
+              src="/anum.png"
+              alt="Copper rods"
+              width={600}
+              height={200}
+              className="pointer-events-none absolute bottom-0 left-0 right-0 z-0 h-[120px] w-full max-w-none rounded-b-2xl object-cover object-bottom lg:h-[150px]"
             />
-          </CardAnimation>
+          </div>
+          </SequentialSlideIn>
         </div>
       </div>
     </div>

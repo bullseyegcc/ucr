@@ -6,9 +6,31 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function SlideIn({ 
-  children, 
-  className = '', 
+let rafId = 0;
+let timeoutId = 0;
+
+function scheduleScrollTriggerRefresh(delayMs = 0) {
+  if (typeof window === 'undefined') return;
+
+  if (delayMs > 0) {
+    window.clearTimeout(timeoutId);
+    timeoutId = window.setTimeout(() => {
+      timeoutId = 0;
+      scheduleScrollTriggerRefresh(0);
+    }, delayMs);
+    return;
+  }
+
+  if (rafId) return;
+  rafId = window.requestAnimationFrame(() => {
+    rafId = 0;
+    ScrollTrigger.refresh();
+  });
+}
+
+export default function SlideIn({
+  children,
+  className = '',
   direction = 'left',
   duration = 2.2,
   delay = 0.1,
@@ -16,6 +38,8 @@ export default function SlideIn({
   triggerOnScroll = false,
   exist = false,
   exit = false,
+  startPercent,
+  endPercent,
 }) {
   const elementRef = useRef(null);
 
@@ -23,62 +47,70 @@ export default function SlideIn({
     const element = elementRef.current;
     if (!element) return;
 
-    // Step 1 & 3: Detect mobile and reduced motion
-    const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
-    const prefersReduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(max-width: 768px)').matches;
+    const prefersReduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Determine initial transform based on direction and mobile
     const getInitialTransform = () => {
-      if (isMobile) {
-        switch(direction) {
-          case 'left': return { x: -30, y: 0 };
-          case 'right': return { x: 30, y: 0 };
-          case 'top': return { x: 0, y: -30 };
-          case 'bottom': return { x: 0, y: 30 };
-          default: return { x: -30, y: 0 };
-        }
-      } else {
-        switch(direction) {
-          case 'left': return { x: -100, y: 0 };
-          case 'right': return { x: 100, y: 0 };
-          case 'top': return { x: 0, y: -100 };
-          case 'bottom': return { x: 0, y: 100 };
-          default: return { x: -100, y: 0 };
-        }
+      const distance = isMobile ? 24 : 72;
+
+      switch (direction) {
+        case 'left':
+          return { x: -distance, y: 0 };
+        case 'right':
+          return { x: distance, y: 0 };
+        case 'top':
+          return { x: 0, y: -distance };
+        case 'bottom':
+          return { x: 0, y: distance };
+        case 'fade':
+          return { x: 0, y: 0 };
+        default:
+          return { x: -distance, y: 0 };
       }
     };
 
     const initialTransform = getInitialTransform();
+    const isFade = direction === 'fade';
 
-    // Step 2: Respect reduced motion
     if (prefersReduced) {
       gsap.set(element, { x: 0, y: 0, opacity: 1, scale: 1, willChange: 'auto' });
       return;
     }
 
-    // Set initial state
     gsap.set(element, {
       x: initialTransform.x,
       y: initialTransform.y,
       opacity: 0,
-      scale: isMobile ? 0.97 : 0.95,
-      willChange: 'transform, opacity',
+      scale: isFade ? 1 : isMobile ? 0.99 : 0.98,
+      force3D: !isFade,
+      willChange: isFade ? 'opacity' : 'transform, opacity',
     });
 
     const useScrollTrigger = triggerOnScroll || scrollTrigger;
     const exitOnScroll = exist || exit;
 
-    // Create animation configuration
-    const animDuration = isMobile ? Math.min(duration * 0.4, 0.9) : duration;
-    const animScale = isMobile ? 0.97 : 0.95;
-    let animScrub;
-    if (exitOnScroll) {
-      animScrub = isMobile ? 0.2 : 0.5;
-    } else {
-      animScrub = isMobile ? false : 0.5;
-    }
-    const animStart = isMobile ? 'top 95%' : 'top 85%';
-    const animEnd = isMobile ? (exitOnScroll ? 'bottom 25%' : 'top 65%') : (exitOnScroll ? 'bottom 15%' : 'top 50%');
+    const startPct = startPercent ?? (isMobile ? 8 : 12);
+    const endPct = endPercent ?? (isMobile ? 65 : 78);
+    const endPctClamped = Math.min(100, Math.max(endPct, startPct + 15));
+
+    const visibleEnter = (pct) => `${pct}% bottom`;
+    const visibleExit = (pct) => `${100 - pct}% top`;
+
+    const animDuration = isMobile ? Math.min(duration * 0.5, 1.1) : duration;
+    const animScale = isMobile ? 0.99 : 0.98;
+    const animScrub = exitOnScroll
+      ? isMobile ? 0.6 : 1
+      : isMobile ? 0.8 : 1.4;
+    const animStart = visibleEnter(startPct);
+    const animEnd = exitOnScroll
+      ? visibleExit(endPctClamped)
+      : visibleEnter(endPctClamped);
+    const scrollEase = 'none';
+    const playEase = 'power3.out';
 
     const animationConfig = {
       x: 0,
@@ -86,8 +118,9 @@ export default function SlideIn({
       opacity: 1,
       scale: 1,
       duration: animDuration,
-      delay: delay,
-      ease: 'power1.inOut',
+      delay: useScrollTrigger ? 0 : delay,
+      ease: useScrollTrigger ? scrollEase : playEase,
+      force3D: true,
       clearProps: 'will-change',
     };
 
@@ -111,9 +144,9 @@ export default function SlideIn({
           opacity: 1,
           scale: 1,
           duration: animDuration,
-          ease: 'power1.inOut',
+          ease: scrollEase,
+          force3D: true,
         });
-        // Exit slide uses same mobile offset logic
         const exitTransform = getInitialTransform();
         timeline.to(element, {
           x: exitTransform.x,
@@ -121,36 +154,47 @@ export default function SlideIn({
           opacity: 0,
           scale: animScale,
           duration: animDuration,
-          ease: 'power1.inOut',
+          ease: scrollEase,
+          force3D: true,
           clearProps: 'will-change',
         });
       } else {
-        tween = gsap.to(element, { ...animationConfig, scrollTrigger: scrollConfig });
+        tween = gsap.to(element, {
+          ...animationConfig,
+          scrollTrigger: scrollConfig,
+        });
       }
+
+      scheduleScrollTriggerRefresh(50);
     } else {
       tween = gsap.to(element, animationConfig);
     }
 
-    // Cleanup
     return () => {
       if (tween) tween.kill();
       if (timeline) timeline.kill();
       if (useScrollTrigger) {
-        ScrollTrigger.getAll().forEach(trigger => {
+        ScrollTrigger.getAll().forEach((trigger) => {
           if (trigger.trigger === element) {
             trigger.kill();
           }
         });
       }
     };
-  }, [direction, duration, delay, scrollTrigger, triggerOnScroll, exist, exit]);
+  }, [
+    direction,
+    duration,
+    delay,
+    scrollTrigger,
+    triggerOnScroll,
+    exist,
+    exit,
+    startPercent,
+    endPercent,
+  ]);
 
   return (
-    <div 
-      ref={elementRef} 
-      className={className}
-      style={{ opacity: 0 }}
-    >
+    <div ref={elementRef} className={className} style={{ opacity: 0 }}>
       {children}
     </div>
   );

@@ -57,7 +57,7 @@ function SectionMediaBlock({ image, imageNote }) {
         <Image
           src={image.src}
           alt={image.alt}
-          width={760}
+          width={1050}
           height={360}
           className="h-auto max-h-[360px] w-full object-cover sm:max-h-[500px]"
         />
@@ -99,7 +99,7 @@ export default function BlogDetailClient({ post }) {
     <section className="bg-[#f3f3f3] pb-8 pt-16 sm:pt-36">
       <div className="mx-auto w-full max-w-[1800px] px-5 sm:px-8 lg:px-16">
         <header className="relative">
-          <div className="mx-auto flex min-h-[400px] max-w-[760px] flex-col items-center justify-center py-8 text-center sm:py-12">
+          <div className="mx-auto flex min-h-[400px] max-w-[1050px] flex-col items-center justify-center py-8 text-center sm:py-12">
             <h1 className="text-balance text-4xl font-medium leading-[1.05] tracking-[-0.03em] text-[#171717] sm:text-5xl md:text-6xl">
               {post.title}
             </h1>
@@ -204,7 +204,7 @@ export default function BlogDetailClient({ post }) {
           </div>
         )}
 
-        <article className="mx-auto mt-12 w-full text-[#2d2d31] lg:max-w-[760px]">
+        <article className="mx-auto mt-12 w-full text-[#2d2d31] lg:max-w-[1050px]">
           {post.contentHtml ? (
             <div
               className="wp-content"

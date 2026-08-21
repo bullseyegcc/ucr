@@ -23,6 +23,7 @@ export default function ProductDetailView({ product }) {
 
   const description = product.longDescription || product.description;
   const imageSrc = product.icon || "/pdetail.png";
+  const imageFit = product.imageFit === "contain" ? "object-contain" : "object-cover";
   const packagingEntries = product.packagingDimensions || [];
   const structuredParams = product.technicalParameters?.some(
     (row) => row.unit || row.astm || row.ucr,
@@ -111,7 +112,7 @@ export default function ProductDetailView({ product }) {
                 alt={product.name}
                 width={1200}
                 height={600}
-                className="w-full h-48 sm:h-72 lg:h-[420px] object-cover rounded-lg shadow"
+                className={`w-full h-48 sm:h-72 lg:h-[420px] ${imageFit} rounded-lg shadow bg-white`}
               />
             </div>
           </div>

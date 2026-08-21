@@ -1,5 +1,6 @@
 ﻿import { Badge } from "../../common/badge"
 import Hero from "@/components/shared/Hero"
+import QuoteSection from "@/components/shared/QuoteSection"
 import Image from "next/image"
 import SuccessStrengthSection from "../../components/team/SuccessStrengthSection"
 import TeamMemoriesSection from "../../components/team/TeamMemoriesSection"
@@ -68,6 +69,8 @@ export default function Team() {
             <ParallaxSection index={1}>
                 <TeamMemoriesSection />
             </ParallaxSection>
+
+            <QuoteSection />
         </div>
     )
 }

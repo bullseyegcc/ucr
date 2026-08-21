@@ -21,7 +21,7 @@ export default function Logistics() {
                 titleClassName="lg:w-[65%] px-5"
                 titleDirectFade
                 titleInH1={false}
-                className="mb-[50%] lg:mb-[30%] flex flex-col items-center justify-center"
+                className="mb-[42%] lg:mb-[22%] flex flex-col items-center justify-center"
                 minHeightClass="min-h-[55vh] sm:min-h-[80vh]"
                 gapClass="gap-2"
                 background={{
@@ -40,14 +40,14 @@ export default function Logistics() {
 
             <div className="bg-[#F5F5F5]">
                 {/* header */}
-                <div className="flex flex-col items-center justify-center text-center py-10 pb-20 ">
-                    <SlideIn direction="bottom" scrollTrigger={true} duration={0.8} className="mb-4 lg:mb-6">
+                <div className=" flex flex-col items-center justify-center text-center pt-6 pb-6 lg:pt-24 lg:pb-8">
+                    <SlideIn direction="bottom" scrollTrigger={true} duration={0.8} className="mb-2 lg:mb-3">
                         <Badge title="Strength" />
                     </SlideIn>
-                    <FadeIn className="font-medium text-3xl lg:text-6xl mt-4" duration={0.8} scrollTrigger={true}>
+                    <FadeIn className="font-medium text-3xl lg:text-6xl mt-2" duration={0.8} scrollTrigger={true}>
                         <h1>What we're capable of</h1>
                     </FadeIn>
-                    <FadeIn className="mt-4 lg:mt-6 max-w-xl px-6" duration={0.8} delay={0.15} scrollTrigger={true}>
+                    <FadeIn className="mt-3 lg:mt-4 max-w-xl px-6" duration={0.8} delay={0.15} scrollTrigger={true}>
                         <p className="text-base lg:text-xl leading-relaxed text-[#212225]/70">
                             A resilient responsible supply chain built to ensure continuity, reliability, and responsive delivery across global markets.
                         </p>
@@ -56,7 +56,7 @@ export default function Logistics() {
 
 
                 <SequentialSlideIn
-                    className=" px-6 lg:px-10 py-8 lg:py-10 flex flex-col lg:flex-row justify-center gap-6 items-end"
+                    className="mx-auto w-full max-w-[1600px] px-6 lg:px-10 pt-2 pb-8 lg:pt-4 lg:pb-10 flex flex-col lg:flex-row justify-center gap-6 items-end"
                     itemClassName="w-full lg:w-1/3"
                     start="top 85%"
                     end="bottom 70%"
@@ -124,7 +124,7 @@ export default function Logistics() {
 
 
                 <SequentialSlideIn
-                    className=" px-6 lg:px-10 py-8 lg:py-10 flex flex-col-reverse lg:flex-row-reverse justify-center gap-6 items-end"
+                    className="mx-auto w-full max-w-[1600px] px-6 lg:px-10 py-8 lg:py-10 flex flex-col-reverse lg:flex-row-reverse justify-center gap-6 items-end"
                     itemClassName="w-full lg:w-1/3"
                     start="top 85%"
                     end="bottom 70%"
@@ -191,10 +191,10 @@ export default function Logistics() {
 
 
 
-            <div className=" overflow-x-hidden min-h-[80vh] lg:min-h-screen bg-white  pt-20 flex flex-col  justify-end ">
+            <div className="bg-white pt-16 lg:pt-20 flex flex-col">
 
                 {/* Header */}
-                <div className="flex px-5 lg:px-10 flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-18 lg:gap-12 mb-12 lg:mb-16 lg:mb-20">
+                <div className="mx-auto w-full max-w-[1600px] flex px-5 lg:px-10 flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-18 lg:gap-12 mb-12 lg:mb-16 lg:mb-20">
 
                     <SlideIn direction="left" scrollTrigger={true} duration={0.8} className="flex-1">
                         <h1 className='text-lg  lg:text-2xl text-primary'>Global Presence</h1>
@@ -208,9 +208,9 @@ export default function Logistics() {
                     </div>
                 </div>
 
-                <div className="w-full h-[60vh] lg:h-screen relative z-50">
+                <div className="mx-auto w-full max-w-[1600px] h-[55vh] lg:h-[75vh] relative z-0 overflow-visible">
 
-                    <VideoPlayer src="/globalpresence.mp4" className="w-full h-full object-cover" />
+                    <VideoPlayer src="/globalpresence.mp4" className="w-full h-full object-contain" />
 
                 </div>
             </div>

@@ -78,7 +78,7 @@ export default function LogisticsAdvantageSection() {
         <Image src="/gradientcircle.png" alt="Logistics End Image" width={900} height={200} className="absolute -top-80 -right-20 w-[50vw] z-0" />
         <Image src="/vector.png" alt="Logistics End Image" width={300} height={0} className="absolute -top-10 -right-5 z-0" />
       </div>
-      <div className="relative z-10 flex flex-col items-start gap-12 px-6 lg:px-10 pt-20 pb-20">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col items-start gap-12 px-6 lg:px-10 pt-20 pb-20">
         <SlideIn direction="left" duration={0.8} scrollTrigger={true} className="w-full text-left">
           <h1 className="text-sm lg:text-xl lg:text-2xl text-primary uppercase">Strength</h1>
           <h1 className="text-2xl lg:text-4xl lg:text-5xl font-medium text-black mt-2 lg:mt-4 leading-tight lg:leading-snug">Major advantages</h1>
