@@ -16,7 +16,7 @@ export default function Team() {
             <Hero
                 badge="Our Team "
                 title="Meet the People Behind the Power of Copper"
-                titleClassName="px-5 lg:max-w-[50%]"
+                titleClassName="px-5 max-w-[95%] lg:max-w-none lg:whitespace-nowrap lg:text-[3.25rem] lg:leading-[1.15]"
                 titleDirectFade
                 titleInH1={false}
                 className="flex items-center lg:pt-40 flex-col justify-center lg:justify-start"

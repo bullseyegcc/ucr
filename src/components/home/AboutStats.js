@@ -56,7 +56,7 @@ export default function AboutStats() {
       >
         <div className="stat-card-item w-full min-w-0" style={{ opacity: 0 }}>
           <StatsCard
-            displayValue="17"
+            mainHeading={17}
             showPlus
             subHeading="Years of Excellence Experience"
             description="Delivering trusted copper solutions since 2008."
@@ -66,7 +66,8 @@ export default function AboutStats() {
         </div>
         <div className="stat-card-item w-full min-w-0" style={{ opacity: 0 }}>
           <StatsCard
-            displayValue="200K"
+            mainHeading={200}
+            suffix="K"
             showPlus
             subHeading="MT/Annual Capacity"
             description="State-of-the-art production facilities ensure consistent high-volume output."
@@ -76,7 +77,7 @@ export default function AboutStats() {
         </div>
         <div className="stat-card-item w-full min-w-0" style={{ opacity: 0 }}>
           <StatsCard
-            displayValue="250"
+            mainHeading={250}
             showPlus
             subHeading="Skilled Employees"
             description="A dedicated team of experts committed to quality and innovation."
@@ -86,7 +87,7 @@ export default function AboutStats() {
         </div>
         <div className="stat-card-item w-full min-w-0" style={{ opacity: 0 }}>
           <StatsCard
-            displayValue="50"
+            mainHeading={50}
             showPlus
             subHeading="Global Reach"
             description="Serving customers across more than 50 countries worldwide."

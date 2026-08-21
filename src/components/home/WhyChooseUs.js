@@ -26,11 +26,11 @@ export default function WhyChooseUs() {
         </FadeIn>
       </div>
 
-      <div className="lg:min-h-[32rem] grid grid-cols-1 grid-rows-auto sm:grid-cols-3 grid-rows-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 sm:grid-rows-2 gap-6 items-stretch">
 
         {/* ── Featured left card ─────────────────────────────────────── */}
         <div
-          className="h-[min(60vh,520px)] lg:h-full max-h-[720px] relative row-span-2 rounded-xl overflow-hidden group cursor-pointer transition-all duration-400 ease-out"
+          className="relative min-h-[min(50vh,420px)] sm:min-h-0 sm:row-span-2 sm:h-full rounded-xl overflow-hidden group cursor-pointer transition-all duration-400 ease-out"
           style={{ willChange: 'transform, opacity' }}
         >
           <div className="absolute inset-0">
@@ -82,9 +82,9 @@ export default function WhyChooseUs() {
               'We are introducing new products, and aspire to be a one stop shop, to effectively meet and surpass client needs',
           },
         ].map((card) => (
-          <CardAnimation key={card.title}>
+          <CardAnimation key={card.title} className="h-full min-h-0">
             <div
-              className="w-full h-full bg-white rounded-xl p-8 flex flex-col justify-between  group cursor-pointer transition-all duration-400 ease-out"
+              className="w-full h-full bg-white rounded-xl p-8 flex flex-col justify-between group cursor-pointer transition-all duration-400 ease-out"
             >
               <Image
                 data-ci

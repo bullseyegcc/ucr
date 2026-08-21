@@ -29,18 +29,18 @@ export default function Home() {
         <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] mt-8 flex flex-col lg:flex-row justify-center lg:min-h-[min(100vh,1000px)] lg:max-h-[1000px] gap-1 lg:gap-2 lg:py-8 bg-white">
         <VideoCard
           videoSrc="/moreabout.mp4"
-          badgeTitle="more about"
-          heading={"Union Copper Rod is undeniable the most trusted copper rod manufacturer in region"}
-          buttonText="Company Profile"
-          href="/aboutus"
+          badgeText="Our Company"
+          title={"Driven by excellence,\nUnion Copper Rod delivers premium copper products that support critical industries across the region and beyond"}
+          buttonText="Company profile"
+          buttonUrl="/aboutus"
         />
 
         <VideoCard
           videoSrc="/supplychain.mp4"
-          badgeTitle="Supplychain"
-          heading="UCR leads the region in copper rod production and has its sights on vastly expanding its enterprise"
-          buttonText="Know More"
-          href="/logistics"
+          badgeText="Supply Chain"
+          title="A resilient supply chain built to support reliable delivery across regional and global markets."
+          buttonText="Know more"
+          buttonUrl="/logistics"
         />
         </div>
       </ParallaxSection>

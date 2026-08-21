@@ -32,6 +32,11 @@ export default function SplashOverlay() {
     return () => window.removeEventListener('resize', updateViewport);
   }, []);
 
+  // Mark splash active during render so Lenis / SnippScrol see it before their effects run
+  if (typeof window !== 'undefined' && isHomepage) {
+    window.__splashActive = true;
+  }
+
   useEffect(() => {
 
     const overlay = overlayRef.current;
@@ -40,27 +45,53 @@ export default function SplashOverlay() {
     // Only show splash on homepage
     if (!isHomepage) {
       gsap.set(overlay, { display: 'none', pointerEvents: 'none' });
+      window.__splashActive = false;
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
       return;
     }
 
-    // --- Define scroll-blocking handlers inside useEffect for stable references ---
+    const listenerOpts = { passive: false, capture: true };
+
     function preventScroll(e) {
       e.preventDefault();
+      e.stopPropagation();
     }
     function preventKeyScroll(e) {
-      // Scroll keys: space(32), page up(33), page down(34), end(35), home(36), left(37), up(38), right(39), down(40)
-      const keys = [32, 33, 34, 35, 36, 37, 38, 39, 40];
-      if (keys.includes(e.keyCode)) {
+      const keys = new Set([' ', 'Spacebar', 'PageUp', 'PageDown', 'End', 'Home', 'ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown']);
+      if (keys.has(e.key)) {
         e.preventDefault();
+        e.stopPropagation();
       }
     }
     function lockScrollPosition() {
       window.scrollTo(0, 0);
+      window.lenisInstance?.scrollTo(0, { immediate: true });
     }
 
-    // Step 1: Set splash flag
+    function unlockScroll() {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      document.body.style.height = '';
+      document.documentElement.style.height = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.touchAction = '';
+      document.documentElement.style.touchAction = '';
+      document.body.style.WebkitOverflowScrolling = 'touch';
+
+      window.removeEventListener('wheel', preventScroll, listenerOpts);
+      window.removeEventListener('touchmove', preventScroll, listenerOpts);
+      window.removeEventListener('keydown', preventKeyScroll, listenerOpts);
+      window.removeEventListener('scroll', lockScrollPosition, true);
+
+      window.__splashActive = false;
+    }
+
+    // Step 1: Set splash flag and hard-lock scroll
     window.__splashActive = true;
+    window.lenisInstance?.stop();
 
     // Calculate responsive scale values - read from window, not state
     const isMobile = window.innerWidth < 768;
@@ -71,39 +102,30 @@ export default function SplashOverlay() {
     const startScale = isMobile ? 2.5 : 7.5;
     const endScale = isMobile ? 6 : 18.5;
 
-    // Prevent scroll while splash is visible
+    // Prevent scroll while splash is visible (inline overrides globals.css overflow-y: scroll)
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
     document.body.style.height = '100vh';
-    document.documentElement.style.overflow = 'hidden';
     document.documentElement.style.height = '100vh';
-    
-    // Add touch-action: none to block touch scrolling
+    document.body.style.position = 'fixed';
+    document.body.style.top = '0';
+    document.body.style.width = '100%';
     document.body.style.touchAction = 'none';
     document.documentElement.style.touchAction = 'none';
+    window.scrollTo(0, 0);
 
-    // Register scroll-blocking listeners
-    window.addEventListener('wheel', preventScroll, { passive: false });
-    window.addEventListener('touchmove', preventScroll, { passive: false });
-    window.addEventListener('keydown', preventKeyScroll, { passive: false });
-    window.addEventListener('scroll', lockScrollPosition);
+    // Capture-phase listeners so splash wins over SnippScrol / Lenis
+    window.addEventListener('wheel', preventScroll, listenerOpts);
+    window.addEventListener('touchmove', preventScroll, listenerOpts);
+    window.addEventListener('keydown', preventKeyScroll, listenerOpts);
+    window.addEventListener('scroll', lockScrollPosition, true);
 
     const timer = setTimeout(() => {
       if (!maskGroupRef.current || !outlineRef.current || !topRectRef.current || !bottomRectRef.current) return;
 
       const splashTl = gsap.timeline({
         onComplete: () => {
-          // Restore scroll styles: clear inline to let CSS rules win
-          document.body.style.overflow = '';
-          document.documentElement.style.overflow = '';
-          document.body.style.height = '';
-          document.documentElement.style.height = '';
-          
-          // Restore touch-action
-          document.body.style.touchAction = '';
-          document.documentElement.style.touchAction = '';
-
-          // Ensure scroll is enabled on mobile
-          document.body.style.WebkitOverflowScrolling = 'touch';
+          unlockScroll();
 
           // Hide overlay and container
           gsap.set([overlay, containerRef.current], { display: 'none', pointerEvents: 'none' });
@@ -112,14 +134,7 @@ export default function SplashOverlay() {
           gsap.set([maskGroupRef.current, outlineRef.current], { willChange: 'auto' });
           gsap.set(overlay, { willChange: 'auto' });
 
-          // Remove scroll-blocking listeners
-          window.removeEventListener('wheel', preventScroll, { passive: false });
-          window.removeEventListener('touchmove', preventScroll, { passive: false });
-          window.removeEventListener('keydown', preventKeyScroll, { passive: false });
-          window.removeEventListener('scroll', lockScrollPosition);
-
-          // Step 2: Dispatch splashComplete event and clear flag
-          window.__splashActive = false;
+          // Step 2: Dispatch splashComplete so Lenis / scroll animations can start
           window.dispatchEvent(new CustomEvent('splashComplete'));
         },
       });
@@ -199,33 +214,13 @@ export default function SplashOverlay() {
 
     return () => {
       clearTimeout(timer);
-      // Bulletproof scroll restoration on cleanup
-      setTimeout(() => {
-        document.body.style.overflow = '';
-        document.documentElement.style.overflow = '';
-        document.body.style.height = '';
-        document.documentElement.style.height = '';
-        
-        // Restore touch-action
-        document.body.style.touchAction = '';
-        document.documentElement.style.touchAction = '';
-        
-        // Only refresh ScrollTrigger on desktop
-        const isMobileCleanup = window.innerWidth < 768;
-        if (!isMobileCleanup && window.gsap && window.gsap.ScrollTrigger) {
-          window.gsap.ScrollTrigger.refresh(true);
-        }
-        
-        // Step 3: Also clear splash flag and dispatch event on cleanup
-        window.__splashActive = false;
-        window.dispatchEvent(new CustomEvent('splashComplete'));
+      unlockScroll();
+      window.dispatchEvent(new CustomEvent('splashComplete'));
 
-        // Remove scroll-blocking listeners (cleanup)
-        window.removeEventListener('wheel', preventScroll, { passive: false });
-        window.removeEventListener('touchmove', preventScroll, { passive: false });
-        window.removeEventListener('keydown', preventKeyScroll, { passive: false });
-        window.removeEventListener('scroll', lockScrollPosition);
-      }, 0);
+      const isMobileCleanup = window.innerWidth < 768;
+      if (!isMobileCleanup && window.gsap && window.gsap.ScrollTrigger) {
+        window.gsap.ScrollTrigger.refresh(true);
+      }
     };
   }, [isHomepage]);
 

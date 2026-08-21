@@ -13,6 +13,9 @@ export default function FadeIn({
   stagger = 0.025,
   delay = 0.3,
   scrollTrigger = false,
+  /** When false with scrollTrigger, plays once on enter instead of scrubbing with scroll */
+  scrub = true,
+  start = null,
 }) {
   const elementRef = useRef(null);
 
@@ -104,11 +107,15 @@ export default function FadeIn({
         }
 
         // Step 1: Mobile/desktop animation config
-        const animDuration = isMobile ? Math.min(duration * 0.4, 0.7) : duration * 0.8;
-        const animStagger = isMobile ? 0.01 : stagger;
-        const animScrub = isMobile ? false : 0.5;
-        const animStart = isMobile ? 'top 95%' : 'top 85%';
-        const animEnd = isMobile ? 'top 70%' : 'top 50%';
+        const useScrub = scrub && !isMobile;
+        const animDuration = isMobile
+          ? Math.min(duration * 0.4, 0.7)
+          : useScrub
+            ? duration * 0.8
+            : Math.min(duration, 0.55);
+        const animStagger = isMobile ? 0.01 : useScrub ? stagger : Math.min(stagger, 0.02);
+        const animStart = start ?? (isMobile ? 'top 95%' : 'top 90%');
+        const animEnd = isMobile ? 'top 70%' : 'top 55%';
 
         const animationConfig = {
           opacity: 1,
@@ -118,19 +125,26 @@ export default function FadeIn({
             from: 'start',
           },
           duration: animDuration,
-          delay: scrollTrigger ? 0 : delay,
-          ease: 'power1.inOut',
+          delay: scrollTrigger && useScrub ? 0 : delay,
+          ease: 'power1.out',
         };
 
         if (scrollTrigger) {
-          // Scroll-triggered animation
-          animationConfig.scrollTrigger = {
-            trigger: element,
-            start: animStart,
-            end: animEnd,
-            scrub: animScrub,
-            markers: false,
-          };
+          animationConfig.scrollTrigger = useScrub
+            ? {
+                trigger: element,
+                start: animStart,
+                end: animEnd,
+                scrub: 0.5,
+                markers: false,
+              }
+            : {
+                trigger: element,
+                start: animStart,
+                toggleActions: 'play none none none',
+                once: true,
+                markers: false,
+              };
         }
 
         gsap.to(wordSpans, animationConfig);
@@ -151,7 +165,7 @@ export default function FadeIn({
         });
       }
     };
-  }, [duration, stagger, delay, scrollTrigger]);
+  }, [duration, stagger, delay, scrollTrigger, scrub, start]);
 
   return (
     <div ref={elementRef} className={className} style={{ opacity: 0 }}>

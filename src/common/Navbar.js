@@ -187,7 +187,7 @@ export const Navbar = () => {
             >
                 {/* Menu Button - Dynamic color based on scroll state */}
                 <motion.div
-                    className="group inline-block cursor-pointer p-2 transition-all duration-300 ease-out hover:!bg-primary"
+                    className="group inline-block cursor-pointer p-2 transition-all duration-300 ease-out hover:!bg-black"
                     style={{ backgroundColor: menuBg }}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
@@ -230,7 +230,7 @@ export const Navbar = () => {
                 {/* Contact Button - Hidden on mobile, dynamic color */}
                 <Link href="/contactus" className="group hidden lg:block">
                     <motion.button
-                        className="flex w-36 items-center justify-between gap-2 rounded-full border px-3 py-2 text-sm transition-all duration-300 ease-out lg:w-40 lg:text-base hover:bg-primary hover:!border-primary hover:!text-white"
+                        className="flex w-36 items-center justify-between gap-2 rounded-full border px-3 py-2 text-sm transition-all duration-300 ease-out lg:w-40 lg:text-base hover:bg-black hover:!border-black hover:!text-white"
                         style={{ color: fgColor, borderColor }}
                     >
                         Contact Us

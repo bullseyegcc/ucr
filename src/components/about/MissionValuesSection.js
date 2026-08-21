@@ -82,7 +82,7 @@ export default function MissionValuesSection() {
   return (
     <div
       ref={containerRef}
-      className="min-h-[60vh] w-full flex items-center justify-center my-8 px-2 lg:px-10"
+      className="mx-auto min-h-[60vh] w-full max-w-[1600px] flex items-center justify-center my-8 px-2 lg:px-10"
     >
       <div className=" w-full flex flex-col lg:flex-row gap-6 items-stretch">
         {/* Mission Card */}
@@ -97,7 +97,14 @@ export default function MissionValuesSection() {
             }}
           >
             <WhiteBadge title="our mission" className="mb-6" />
-            <FadeIn duration={0.8} scrollTrigger={true}>
+            <FadeIn
+              duration={0.4}
+              stagger={0.015}
+              delay={0.08}
+              scrollTrigger={true}
+              scrub={false}
+              start="top 92%"
+            >
               <h1 className="text-2xl lg:text-4xl font-medium  leading-tight">
                 To deliver premium copper product and services that power progress and add value to a sustainable future
               </h1>
@@ -113,7 +120,14 @@ export default function MissionValuesSection() {
           <SlideIn direction="left" scrollTrigger={true} duration={0.8}>
             <Badge title="our values" className="mb-6" />
           </SlideIn>
-          <FadeIn duration={0.8} scrollTrigger={true}>
+          <FadeIn
+            duration={0.4}
+            stagger={0.015}
+            delay={0.12}
+            scrollTrigger={true}
+            scrub={false}
+            start="top 92%"
+          >
             <h1 className="text-2xl lg:text-4xl font-medium text-black leading-tight">
               To deliver premium copper product and services that power progress and add value to a sustainable future
             </h1>

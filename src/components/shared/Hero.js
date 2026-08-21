@@ -214,7 +214,9 @@ export default function Hero({
   fadeDelay = ENTRANCE.title.delay,
   className = "",
   contentClassName = "",
-  minHeightClass = "min-h-[60vh] lg:min-h-[80vh]",
+  // Use h-[min(vh,px)] (not min-h alone) so max-height can actually cap tall viewports
+  minHeightClass = "h-[min(60vh,720px)] lg:h-[min(80vh,900px)]",
+  maxHeightClass = "max-h-[900px]",
   children,
   badgeSlideClassName = "",
   contentLayout = "centered",
@@ -261,6 +263,7 @@ export default function Hero({
     hasOverlapMedia ? "overflow-visible" : "overflow-hidden",
     contentLayout === "absolute" ? "" : "flex flex-col items-center justify-center text-center",
     minHeightClass,
+    maxHeightClass,
     solidClassName || "bg-primary",
     !isSolid && background.type === "image" ? "bg-black" : "",
     className,

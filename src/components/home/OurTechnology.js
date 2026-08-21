@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { WhiteBadge } from "../../common/badge.js";
 import { technologyParallaxSlide } from "../../animations/technologyParallax";
 
@@ -45,10 +46,20 @@ const TECHNOLOGIES = [
   },
 ];
 
+const cardContentTransition = {
+  initial: { opacity: 0, y: 4 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -4 },
+  transition: { duration: 0.18, ease: [0.22, 1, 0.36, 1] },
+};
+
 export default function OurTechnology() {
   const [activeTab, setActiveTab] = useState(0);
   const backgroundSliderRef = useRef(null);
   const router = useRouter();
+
+  const activeTech = TECHNOLOGIES[activeTab];
+  const inactiveTechs = TECHNOLOGIES.filter((_, index) => index !== activeTab);
 
   const handleTabChange = (tabIndex) => {
     if (tabIndex === activeTab) return;
@@ -67,63 +78,49 @@ export default function OurTechnology() {
             </h1>
           </div>
 
-          <div className="flex flex-col gap-[1.25rem] lg:gap-[1.75rem]">
-            {TECHNOLOGIES.map((tech, index) => {
-              const isActive = activeTab === index;
-              return (
-                <div
-                  key={tech.id}
-                  onClick={() => handleTabChange(index)}
-                  className={`cursor-pointer rounded-xl transition-all duration-500 ease-out ${
-                    isActive
-                      ? "bg-white px-[1.25rem] py-[1.5rem] lg:px-[1.5rem] lg:py-[1.75rem] shadow-lg"
-                      : "px-[0.25rem] py-[0.15rem] hover:opacity-80"
-                  }`}
+          <div className="rounded-xl bg-white px-[1.25rem] py-[1.25rem] shadow-lg lg:px-[1.5rem] lg:py-[1.35rem]">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={activeTech.id}
+                initial={cardContentTransition.initial}
+                animate={cardContentTransition.animate}
+                exit={cardContentTransition.exit}
+                transition={cardContentTransition.transition}
+              >
+                <h2 className="font-primary font-normal text-primary text-[clamp(1.35rem,5.2cqi,2.75rem)] leading-none tracking-[-0.06rem]">
+                  {activeTech.title}
+                </h2>
+                <p className="mt-[0.6rem] min-h-[5.5rem] font-primary font-normal text-[0.875rem] leading-[1.6] tracking-[-0.02rem] text-black lg:min-h-[6.75rem] lg:text-[1.0625rem] lg:leading-[1.65] lg:tracking-[-0.02rem]">
+                  {activeTech.description}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => router.push("/technology")}
+                  className="mt-[0.75rem] inline-flex h-[2.25rem] items-center justify-center gap-[0.4rem] rounded-full border border-primary px-[1rem] text-primary transition-all duration-300 hover:bg-primary hover:text-white lg:h-[2.75rem] lg:px-[1.25rem]"
                 >
-                  <h2
-                    className={`font-primary font-normal flex items-center gap-[0.75rem] whitespace-nowrap leading-none tracking-[-0.06rem] transition-all duration-500 ${
-                      isActive
-                        ? "text-primary text-[clamp(1.35rem,5.2cqi,2.75rem)]"
-                        : "text-white text-[clamp(1.2rem,4.6cqi,2.5rem)]"
-                    }`}
-                  >
-                    <span
-                      className={`shrink-0 overflow-hidden transition-all duration-500 ${
-                        isActive ? "w-0 opacity-0" : "w-[1.4rem] opacity-100"
-                      }`}
-                    >
-                      <ArrowRight size={22} className="text-white" />
-                    </span>
-                    <span>{tech.title}</span>
-                  </h2>
+                  <span className="font-primary font-normal text-[0.8125rem] leading-none tracking-[-0.03rem] lg:text-[0.9375rem]">
+                    Know more
+                  </span>
+                  <ArrowRight size={16} />
+                </button>
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-                  <div
-                    className={`overflow-hidden transition-all duration-500 ease-out ${
-                      isActive
-                        ? "mt-[0.75rem] max-h-[24rem] opacity-100"
-                        : "mt-0 max-h-0 opacity-0"
-                    }`}
-                  >
-                    <p className="font-primary font-normal text-[0.75rem] leading-[1.6] tracking-[-0.02rem] text-black lg:text-[1.125rem] lg:leading-[1.7] lg:tracking-[-0.03rem]">
-                      {tech.description}
-                    </p>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        router.push("/technology");
-                      }}
-                      className="mt-[1rem] inline-flex h-[2.5rem] items-center justify-center gap-[0.5rem] rounded-full border border-primary px-[1.25rem] text-primary transition-all duration-300 hover:bg-primary hover:text-white lg:h-[3.5rem] lg:px-[1.5rem]"
-                    >
-                      <span className="font-primary font-normal text-[0.875rem] leading-none tracking-[-0.03rem] lg:text-[1.125rem]">
-                        Know more
-                      </span>
-                      <ArrowRight size={18} />
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+          <div className="flex flex-col gap-[1.75rem] lg:gap-[2.5rem]">
+            {inactiveTechs.map((tech) => (
+              <button
+                key={tech.id}
+                type="button"
+                onClick={() => handleTabChange(tech.id)}
+                className="flex cursor-pointer items-center gap-[0.75rem] px-[0.25rem] py-[0.35rem] text-left transition-opacity duration-300 hover:opacity-80"
+              >
+                <ArrowRight size={22} className="shrink-0 text-white" />
+                <span className="font-primary font-normal text-white text-[clamp(1.35rem,5.2cqi,2.25rem)] leading-none tracking-[-0.06rem]">
+                  {tech.title}
+                </span>
+              </button>
+            ))}
           </div>
         </div>
 

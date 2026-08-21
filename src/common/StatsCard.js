@@ -13,6 +13,7 @@ export default function StatsCard({
   subHeading,
   description,
   showPlus = true,
+  suffix = '',
   index = 0,
   skipEntrance = false,
 }) {
@@ -105,6 +106,7 @@ export default function StatsCard({
         {displayValue != null ? (
           <>
             {displayValue}
+            {suffix}
             {showPlus && <span>+</span>}
           </>
         ) : (
@@ -117,6 +119,7 @@ export default function StatsCard({
               duration={1}
               className="count-up-text"
             />
+            {suffix}
             {showPlus && <span>+</span>}
           </>
         )}

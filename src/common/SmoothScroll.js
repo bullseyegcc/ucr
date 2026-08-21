@@ -33,7 +33,7 @@ export default function SmoothScroll() {
 
       window.lenisInstance = lenis;
       window.dispatchEvent(new CustomEvent('lenisReady'));
-      if (window.__pageScrollLocked) {
+      if (window.__splashActive || window.__pageScrollLocked) {
         lenis.stop();
       }
 

@@ -3,7 +3,7 @@
 import { Badge } from "../../common/badge";
 import Hero from "@/components/shared/Hero";
 import Image from "next/image";
-import CountUp from "../../animations/countup";
+import ExpertiseCard from "@/components/shared/ExpertiseCard";
 import SlideIn from "../../animations/SlideIn";
 import SequentialSlideIn from "../../animations/SequentialSlideIn";
 import ScrollReveal from "../../animations/ScrollReveal";
@@ -148,97 +148,55 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
               Our Experience & Expertise
             </h1>
           </SlideIn>
-          <SequentialSlideIn
-            className="mt-6 flex flex-col gap-6 items-end lg:flex-row"
-            itemClassName="min-w-0 w-full lg:w-1/3"
-            start="top 85%"
-            end="bottom 65%"
-            stagger={0.18}
-          >
-          <div className="min-h-[48vh] lg:min-h-[58vh] lg:rounded-t-2xl rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 lg:pt-12 relative flex flex-col gap-3 h-auto lg:h-[50vh] overflow-hidden group transition-all duration-400">
-            <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-              <span>
-                $<CountUp to={2.2} duration={2} /> bn
-              </span>{" "}
-              <hr className="text-primary/30 w-[90%] shadow  " />
-            </h1>
+          <div className="mt-6 flex flex-col items-end gap-6 lg:flex-row">
+            <ExpertiseCard
+              index={0}
+              variant="tall"
+              number={2.2}
+              prefix="$"
+              suffix=" bn"
+              title="Global Exports"
+              description="A significant export footprint connecting local manufacturing capabilities with global markets. These exports reflect the sector's growing competitiveness and international reach."
+              image="/exp3.png"
+              imageAlt="Global exports globe"
+              imageWidth={290}
+              imageHeight={80}
+              descriptionClassName="pr-0 lg:pr-4 lg:max-w-[22rem]"
+              imageClassName="bottom-0 -right-6 w-[70%] rounded-b-2xl lg:w-[82%]"
+            />
 
-            <div className="relative z-10 pb-28 lg:pb-32">
-              <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-0 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                Global Exports
-              </h1>
-              <p className="mt-1 lg:w-90 pr-0 lg:pr-4">
-                A significant export footprint connecting local manufacturing
-                capabilities with global markets. These exports reflect the
-                sector&apos;s growing competitiveness and international reach.
-              </p>
-            </div>
+            <ExpertiseCard
+              index={1}
+              variant="medium"
+              number={10609}
+              separator=","
+              duration={2.5}
+              title="Employees"
+              description="A strong workforce powering the sector's continued growth and operational capacity. Skilled talent plays a critical role in supporting manufacturing, innovation, and expansion."
+              image="/exp2.png"
+              imageAlt="Employees"
+              imageWidth={180}
+              imageHeight={80}
+              descriptionClassName="max-w-[14rem] lg:max-w-[16rem]"
+              imageClassName="bottom-0 -right-5 w-60 rounded-b-2xl lg:right-0 lg:w-76"
+            />
 
-            <Image
-              src="/exp3.png"
-              alt="Global exports globe"
-              width={290}
-              height={80}
-              className="pointer-events-none absolute bottom-0 -right-6 z-0 w-[70%] max-w-none rounded-b-2xl lg:w-[82%]"
+            <ExpertiseCard
+              index={2}
+              variant="small"
+              number={4}
+              suffix="%"
+              title="Of UAE's Manufacturing Exports"
+              description="A meaningful contribution to the UAE's overall manufacturing export ecosystem. The figure highlights the sector's role in strengthening the country's industrial economy."
+              image="/anum.png"
+              imageAlt="Copper rods"
+              imageWidth={600}
+              imageHeight={200}
+              contentClassName="pb-[42%]"
+              descriptionClassName="w-full max-w-none pr-0 lg:pr-4"
+              imageClassName="bottom-0 left-0 right-0 h-[120px] w-full rounded-b-2xl object-cover object-bottom lg:h-[150px]"
             />
           </div>
-
-          <div className="min-h-[48vh] lg:min-h-[54vh] lg:rounded-t-2xl rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 overflow-x-hidden lg:pt-12 relative flex flex-col gap-3 h-auto lg:h-[50vh] overflow-hidden group transition-all duration-400">
-            <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-              <span>
-                <CountUp to={10609} separator="," duration={2.5} />+
-              </span>{" "}
-              <hr className="text-primary/30 w-[90%] shadow  " />
-            </h1>
-
-            <div className="relative z-10 pb-28 lg:pb-32">
-              <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-0 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                Employees
-              </h1>
-              <p className="mt-1 w-45 lg:w-55">
-                A strong workforce powering the sector&apos;s continued growth
-                and operational capacity. Skilled talent plays a critical role
-                in supporting manufacturing, innovation, and expansion.
-              </p>
-            </div>
-
-            <Image
-              src="/exp2.png"
-              alt="Expertise Icon"
-              width={180}
-              height={80}
-              className="pointer-events-none absolute bottom-0 -right-5 z-0 w-60 rounded-b-2xl lg:right-0 lg:w-76"
-            />
-          </div>
-
-          <div className="min-h-[48vh] lg:min-h-[50vh] lg:rounded-t-2xl rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 lg:pt-12 relative flex flex-col gap-3 h-auto lg:h-[50vh] overflow-hidden group transition-all duration-400">
-            <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-              <span>
-                <CountUp to={4} duration={2} />%
-              </span>{" "}
-              <hr className="text-primary/30 w-[90%] shadow  " />
-            </h1>
-
-            <div className="relative z-10 pb-36 lg:pb-40">
-              <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-0 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                Of UAE&apos;s Manufacturing Exports
-              </h1>
-              <p className="mt-1 w-full max-w-none pr-0 lg:pr-4">
-                A meaningful contribution to the UAE&apos;s overall manufacturing
-                export ecosystem. The figure highlights the sector&apos;s role in
-                strengthening the country&apos;s industrial economy.
-              </p>
-            </div>
-
-            <Image
-              src="/anum.png"
-              alt="Copper rods"
-              width={600}
-              height={200}
-              className="pointer-events-none absolute bottom-0 left-0 right-0 z-0 h-[120px] w-full max-w-none rounded-b-2xl object-cover object-bottom lg:h-[150px]"
-            />
-          </div>
-          </SequentialSlideIn>
         </div>
       </div>
     </div>

@@ -173,6 +173,24 @@ export default function SnippScrol({
         let lastPlaced = startPlaced;
         window.__heroAboutPlaced = startPlaced;
         window.__pageScrollLocked = locked;
+
+        const scrollPos = () => {
+          const lenis = window.lenisInstance;
+          if (lenis && typeof lenis.scroll === 'number') return lenis.scroll;
+          return window.scrollY || 0;
+        };
+
+        // Pin page to 0 whenever we re-enter the locked overlay. Otherwise Lenis
+        // momentum can freeze mid-page (scrollY > 0) while stop() is called, and
+        // upward wheel no longer drives reverse (atTop check fails) → stuck scroll.
+        const pinScrollTop = () => {
+          const lenis = window.lenisInstance;
+          if (lenis) {
+            lenis.scrollTo(0, { immediate: true });
+          }
+          window.scrollTo(0, 0);
+        };
+
         const emitCoverProgress = (p) => {
           const next = Math.max(0, Math.min(1, p));
           window.__heroAboutProgress = next;
@@ -190,13 +208,20 @@ export default function SnippScrol({
           }
         };
 
-        const setLocked = (next) => {
+        const setLocked = (next, { force = false } = {}) => {
+          if (!force && locked === next) {
+            // Lenis may have been created after we locked — keep it stopped
+            if (next) window.lenisInstance?.stop();
+            return;
+          }
           locked = next;
           window.__pageScrollLocked = next;
           const lenis = window.lenisInstance;
-          if (lenis) {
-            if (next) lenis.stop();
-            else lenis.start();
+          if (next) {
+            pinScrollTop();
+            lenis?.stop();
+          } else {
+            lenis?.start();
           }
           if (window.innerWidth < 768) {
             document.documentElement.style.overflow = next ? 'hidden' : '';
@@ -204,7 +229,7 @@ export default function SnippScrol({
           }
         };
 
-        setLocked(locked);
+        setLocked(locked, { force: true });
 
         const reportLockProgress = (p) => {
           if (!onLockProgress) return;
@@ -225,7 +250,7 @@ export default function SnippScrol({
           emitPlaced(current >= panelFraction);
           if (current >= 1 && target >= 1) {
             setLocked(false);
-          } else if (current < 1) {
+          } else if (current < 1 || target < 1) {
             setLocked(true);
           }
           rafId = current !== target ? requestAnimationFrame(tick) : 0;
@@ -234,20 +259,29 @@ export default function SnippScrol({
         const addProgress = (deltaPx) => {
           const panelHeight = container.offsetHeight || window.innerHeight;
           const dist = panelHeight * Math.max(totalDuration, 1) * 1.05;
-          target = Math.max(0, Math.min(1, target + deltaPx / dist));
+          const nextTarget = Math.max(0, Math.min(1, target + deltaPx / dist));
+          // Entering reverse from a fully placed page: lock + pin before animating
+          if (!locked && nextTarget < 1) {
+            setLocked(true);
+          } else if (locked) {
+            pinScrollTop();
+          }
+          target = nextTarget;
           if (!rafId) rafId = requestAnimationFrame(tick);
         };
 
-        const scrollPos = () => window.lenisInstance?.scroll ?? window.scrollY ?? 0;
+        // Only start reversing the hero when the page is truly at the top.
+        // Once already locked, always handle wheel so a non-zero freeze can't trap us.
+        const canReverseUp = () => locked || scrollPos() <= 2;
 
         const onWheel = (e) => {
-          const atTop = scrollPos() <= 1;
-          if (e.deltaY > 0 && target < 1) {
+          if (window.__splashActive) return;
+          if (e.deltaY > 0 && (locked || target < 1)) {
             e.preventDefault();
             addProgress(e.deltaY);
             return;
           }
-          if (e.deltaY < 0 && atTop && current > 0) {
+          if (e.deltaY < 0 && canReverseUp() && (current > 0 || target > 0)) {
             e.preventDefault();
             addProgress(e.deltaY);
           }
@@ -258,27 +292,27 @@ export default function SnippScrol({
           touchY = e.touches[0].clientY;
         };
         const onTouchMove = (e) => {
+          if (window.__splashActive) return;
           const y = e.touches[0].clientY;
           const dy = touchY - y;
           touchY = y;
-          const atTop = scrollPos() <= 1;
-          if (dy > 0 && target < 1) {
+          if (dy > 0 && (locked || target < 1)) {
             e.preventDefault();
             addProgress(dy);
             return;
           }
-          if (dy < 0 && atTop && current > 0) {
+          if (dy < 0 && canReverseUp() && (current > 0 || target > 0)) {
             e.preventDefault();
             addProgress(dy);
           }
         };
 
         const onKey = (e) => {
-          const atTop = scrollPos() <= 1;
-          if ((e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') && target < 1) {
+          if (window.__splashActive) return;
+          if ((e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') && (locked || target < 1)) {
             e.preventDefault();
             addProgress(e.key === 'PageDown' ? window.innerHeight * 0.9 : 80);
-          } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && atTop && current > 0) {
+          } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && canReverseUp() && (current > 0 || target > 0)) {
             e.preventDefault();
             addProgress(e.key === 'PageUp' ? -window.innerHeight * 0.9 : -80);
           }
@@ -289,7 +323,7 @@ export default function SnippScrol({
         window.addEventListener('touchmove', onTouchMove, { passive: false, capture: true });
         window.addEventListener('keydown', onKey, { capture: true });
 
-        const onLenisReady = () => setLocked(locked);
+        const onLenisReady = () => setLocked(locked, { force: true });
         window.addEventListener('lenisReady', onLenisReady);
         window.addEventListener('splashComplete', onLenisReady);
 
