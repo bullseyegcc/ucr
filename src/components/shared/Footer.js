@@ -26,11 +26,11 @@ export default function Footer() {
         }}
       />
 
-      <div className="relative z-10 md:absolute md:-bottom-[0%] w-full md:w-[80%] bg-[url(/footerbg.png)] bg-cover bg-bottom rounded-t-xl p-6 sm:p-10 md:p-16 flex flex-col gap-8 sm:gap-12">
+      <div className="relative z-10 md:absolute md:-bottom-[0%] w-full md:w-[80%] bg-[url(/shared/footerbg.png)] bg-cover bg-bottom rounded-t-xl p-6 sm:p-10 md:p-16 flex flex-col gap-8 sm:gap-12">
         <div className="flex flex-col sm:flex-row sm:justify-between items-center gap-6 sm:gap-0">
           <div className="flex items-center">
             <Image
-              src="/clogo.png"
+              src="/shared/clogo.png"
               alt="UCR Logo"
               width={250}
               height={70}

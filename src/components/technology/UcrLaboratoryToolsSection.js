@@ -8,9 +8,9 @@ import FadeIn from "../../animations/FadeIn";
 import SequentialSlideIn from "../../animations/SequentialSlideIn";
 
 const cards = [
-  { title: "Oxygen Analyzers", src: "/tool.jpg", alt: "Oxygen Analyzers" },
-  { title: "Thermo ARL Optical Emission Spectrometer", src: "/tool-2.png", alt: "Thermo ARL Optical Emission Spectrometer" },
-  { title: "Metallurgical Microscope", src: "/tool-3.png", alt: "Metallurgical Microscope" },
+  { title: "Oxygen Analyzers", src: "/technology/tool.jpg", alt: "Oxygen Analyzers" },
+  { title: "Thermo ARL Optical Emission Spectrometer", src: "/technology/tool-2.png", alt: "Thermo ARL Optical Emission Spectrometer" },
+  { title: "Metallurgical Microscope", src: "/technology/tool-3.png", alt: "Metallurgical Microscope" },
 ];
 
 function LaboratoryCard({ card, className = "", priority = false }) {

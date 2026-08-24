@@ -50,7 +50,7 @@ export default function contactus() {
                             {/* Person Card */}
                             <div className="bg-white rounded-lg p-4 lg:p-8 group transition-all duration-400">
                                 <div className="flex items-start gap-3 lg:gap-6">
-                                    <img src="/person.png" alt="Team member" className="w-16 lg:w-40 h-16 lg:h-40 rounded-lg object-cover flex-shrink-0" />
+                                    <img src="/contact/person.png" alt="Team member" className="w-16 lg:w-40 h-16 lg:h-40 rounded-lg object-cover flex-shrink-0" />
                                     <div className="flex-1">
                                         <h3 className="font-medium text-gray-900 text-base lg:text-base leading-6 mb-1 lg:mb-3">Hey there!</h3>
                                         <p className="text-[#505050] text-base lg:text-base leading-6 lg:leading-6 mb-3 lg:mb-5 font-normal tracking-[-0.16px]">Whether you need quick answers or deep strategy talks, I'm here to make your journey smooth.</p>
@@ -139,7 +139,7 @@ export default function contactus() {
                             <div className="flex items-start justify-between gap-3 lg:gap-6">
 
                                 <div className="w-1/2 flex items-center">
-                                    <img src="/person.png" alt="Team member" className="w-full h-full object-cover rounded-lg" />
+                                    <img src="/contact/person.png" alt="Team member" className="w-full h-full object-cover rounded-lg" />
 
                                 </div>
 

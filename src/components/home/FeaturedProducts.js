@@ -3,33 +3,33 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
-import badge_icon from "../../../public/badge.png";
+import badge_icon from "../../../public/shared/badge.png";
 
 const FALLBACK_PRODUCTS = [
   {
     id: 0,
     title: "ETP Copper Rod and wire",
-    backgroundImage: "/fp1-1.png",
+    backgroundImage: "/home/fp1-1.png",
   },
   {
     id: 1,
     title: "Drawn Copper Wire",
-    backgroundImage: "/fp2-2.png",
+    backgroundImage: "/home/fp2-2.png",
   },
   {
     id: 2,
     title: "Tin-Coated Copper Wire",
-    backgroundImage: "/fp3-3.png",
+    backgroundImage: "/home/fp3-3.png",
   },
   {
     id: 3,
     title: "Copper Welding Wire for cans",
-    backgroundImage: "/fp2.png",
+    backgroundImage: "/home/fp2.png",
   },
   {
     id: 4,
     title: "Oxygen free copper",
-    backgroundImage: "/fp3.png",
+    backgroundImage: "/home/fp3.png",
   },
 ];
 

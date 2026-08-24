@@ -11,42 +11,66 @@ import TechnologyLaboratorySection from "../../components/technology/TechnologyL
 
 const TECH_CARDS = [
     {
-        id: "southwire",
-        title: "South Wire Technology",
+        id: "ccr-technology",
+        title: "CCR Technology",
         number: "01",
-        total: "03",
+        total: "05",
         variant: "light",
-        image: "/southwire.png",
+        image: "/technology/southwire.png",
         paragraphs: [
-            "UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.",
-            "As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.",
+            "Union Copper Rod operates a Southwire SCR® Continuous Casting and Rolling system, engineered to produce premium Electrolytic Tough Pitch (ETP) copper rod with exceptional quality and efficiency. The system integrates charging, melting, casting, rolling, coiling, and packaging into one continuous manufacturing process. High-purity copper cathodes are melted, continuously cast, and immediately hot rolled before passing through the Non-Acid Pickling System (NAPS), wax coating, and automated coiling and packaging. This seamless process improves productivity, ensures consistent product quality, and minimizes material handling.",
+            "The SCR® combines advanced automation, precise process control, and integrated quality assurance to manufacture 8 mm, 12.5 mm, and 16 mm ETP copper rod that meets demanding international standards. The system also recycles internally generated copper scrap back into production, supporting resource efficiency and circular manufacturing. Today, UCR supplies high-performance copper rod to customers in more than 50 countries, serving the power, construction, telecommunications, automotive, and industrial sectors.",
         ],
     },
     {
-        id: "copper-treatments",
-        title: "Copper treatments",
+        id: "rod-breakdown",
+        title: "Rod Breakdown Technology",
         number: "02",
-        total: "03",
+        total: "05",
         variant: "dark",
-        image: "/coppertreatment.png",
+        image: "/home/tech2.webp",
         textWidth: "lg:w-[60%]",
         imageWidth: "lg:w-[40%]",
         paragraphs: [
-            "UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.",
-            "As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.",
+            "UCR's Rod Breakdown line utilizes Italian state-of-the-art drawing technology to continuously convert 8 mm copper rod into intermediate wire sizes with exceptional dimensional accuracy and surface quality. The line incorporates a multi-capstan drawing system, where the wire is progressively reduced through precision tungsten carbide drawing dies before entering an integrated Continuous Resistance Annealer (CRA), restoring ductility while maintaining excellent mechanical and electrical properties.",
+            "Following annealing, the wire passes through integrated cooling, drying, and an automatic take-up system, ensuring consistent winding quality and reliable continuous production. Automated process controls regulate drawing speed, annealing, and wire tension to deliver uniform product quality for downstream fine wire drawing, electrolytic tin plating, bunching, and cable manufacturing.",
         ],
     },
     {
-        id: "nexgen-sol",
-        title: "NexGen Sol",
+        id: "tin-coating",
+        title: "Tin Coating Technology",
         number: "03",
-        total: "03",
+        total: "05",
         variant: "light",
-        uppercase: false,
-        image: "/nextgensol.png",
+        image: "/home/tech3.webp",
         paragraphs: [
-            "UCR firmly believes that the primary advantage of any advanced technology lies in its ability to seamlessly enhance operational efficiency, ultimately leading to increased productivity. This boost not only empowers employees but also improves the quality and quantity of products produced.",
-            "As the largest facility of its kind in the Middle East, UCR boasts an impressive rod production capacity of over 200,000 metric tons annually. To manufacture its top-tier copper rods, UCR employs the state-of-the-art Southwire Continuous Rod Casting Technology from the United States, ensuring outstanding quality and performance.",
+            "UCR operates a modern continuous electrolytic tin plating line designed to produce consistently coated copper wire for downstream manufacturing. The process begins with a dedicated degreasing stage that removes surface contaminants, ensuring optimum adhesion before the wire enters the electrolytic tin plating section. Following plating, multiple rinsing stages remove residual chemicals, resulting in a clean and uniform finished surface.",
+            "The coating process is carefully controlled through parameters such as line speed, electrical current density, chemical concentration, and bath conditions, enabling consistent coating thickness and product quality. The system is capable of applying tin coatings from 1 to 20 microns on copper wire diameters ranging from 1.25 mm to 3.75 mm, supporting a wide range of customer specifications. The finished tinned copper wire offers improved resistance to oxidation and corrosion, enhanced solderability, and reliable long-term electrical performance, making it suitable for solar and instrumentation cable manufacturing, automotive, electronics, and other high-performance electrical applications.",
+        ],
+    },
+    {
+        id: "upwards-vertical-casting",
+        title: "Upwards Vertical Continuous Casting",
+        number: "04",
+        total: "05",
+        variant: "dark",
+        image: "/home/tech4.webp",
+        textWidth: "lg:w-[60%]",
+        imageWidth: "lg:w-[40%]",
+        paragraphs: [
+            "Unlike conventional horizontal casting, the Up Cast process solidifies molten copper by drawing it upward through precision graphite dies under carefully controlled conditions. This minimizes oxygen pickup to keep it within 3–5 ppm and produces oxygen-free high conductivity (OFHC) copper with outstanding mechanical and electrical properties.",
+            "The Rautomead system installed at Union Copper Rod is capable of producing copper rod in diameters ranging from 8 mm to 30 mm, supporting a wide range of downstream wire drawing and electrical manufacturing applications. The fully integrated plant combines melting, holding, casting, automatic cathode feeding, cooling systems, and automated coiling into one continuous production process.",
+        ],
+    },
+    {
+        id: "advanced-copper-recycling",
+        title: "Advanced Copper Recycling",
+        number: "05",
+        total: "05",
+        variant: "light",
+        image: "/home/tech5.webp",
+        paragraphs: [
+            "Our advanced copper recycling facility combines proven European recycling technologies to maximize copper recovery and extraction while removing contaminants before the material returns to production. This integrated processing line delivers consistent, high-purity recycled copper feedstock while maximizing material recovery, operational efficiency, and circular resource utilization.",
         ],
     },
 ]
@@ -144,7 +168,7 @@ export default function Technology() {
                                 Cutting-edge technology meets traditional craftsmanship. Discover how we&apos;re reshaping the future of copper manufacturing.
                             </p>
                         </div>
-                        <Image src="/technologyheaderbottom.png" alt="Icon" width={900} height={0} className="w-full absolute bottom-0" />
+                        <Image src="/technology/technologyheaderbottom.png" alt="Icon" width={900} height={0} className="w-full absolute bottom-0" />
                     </div>
                 </CardAnimation>
             </ParallaxSection>

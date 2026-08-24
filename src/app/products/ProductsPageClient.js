@@ -50,11 +50,11 @@ export default function ProductsPageClient({ products = [] }) {
 
                     </div>
 
-                    <Image src='/gradientcircle.png' alt="" width={300} height={300} className="rotate-180 hidden lg:block absolute overflow-hidden left-0 bottom-0" loading="lazy" />
+                    <Image src='/shared/gradientcircle.png' alt="" width={300} height={300} className="rotate-180 hidden lg:block absolute overflow-hidden left-0 bottom-0" loading="lazy" />
 
-                    <div className="absolute  -left-60 lg:left-[15%] bottom-0  bg-[url('/wireshadow.png')] bg-cover bg-center w-[150%] lg:w-[60%]" >
+                    <div className="absolute  -left-60 lg:left-[15%] bottom-0  bg-[url('/products/wireshadow.png')] bg-cover bg-center w-[150%] lg:w-[60%]" >
 
-                        <Image src="/weproduce.png" alt="We produce" width={900} height={600} className="object-cover w-full h-full" loading="lazy" quality={75} />
+                        <Image src="/products/weproduce.png" alt="We produce" width={900} height={600} className="object-cover w-full h-full" loading="lazy" quality={75} />
                     </div>
                 </div>
             </ParallaxSection>
@@ -127,7 +127,7 @@ export default function ProductsPageClient({ products = [] }) {
                                                     <div className="relative h-full w-full overflow-hidden rounded-[0.5rem] bg-white">
                                                         <FadeIn scrollTrigger={true} duration={1.2} className="relative h-full w-full">
                                                             <Image
-                                                                src={product.icon || "/drawnwire.png"}
+                                                                src={product.icon || "/products/drawnwire.png"}
                                                                 alt={product.name}
                                                                 fill
                                                                 sizes="(max-width: 640px) 88vw, (max-width: 1024px) 44vw, 420px"
@@ -172,7 +172,7 @@ export default function ProductsPageClient({ products = [] }) {
                     <div className="w-full sm:w-[80%] lg:w-[65%] flex items-center justify-center mx-auto px-6 sm:px-0">
 
 
-                        <Image src="/certificate.png" alt="Certifications" width={900} height={600} className="w-full object-cover" loading="lazy" quality={75} />
+                        <Image src="/shared/certificate.png" alt="Certifications" width={900} height={600} className="w-full object-cover" loading="lazy" quality={75} />
                     </div>
 
                 </div>
@@ -182,9 +182,9 @@ export default function ProductsPageClient({ products = [] }) {
             <ParallaxSection index={3}>
                 <div className="min-h-[85vh] px-4 pl-4 lg:pl-0 lg:min-h-[60vh] lg:min-h-[70vh] relative bg-[#272A2A] flex lg:flex-row flex-col-reverse  justify-center lg:justify-start   items-center   lg:px-10 lg:py-20 mt-8 rounded-lg overflow-hidden">
 
-                    <Image src='/gradientcircle.png' alt="" width={1200} height={1200} className="h-[90vh] top-[0%] absolute top-[26%] bottom-0 right-20 top-6 left-0 lg:right-0 lg:rotate-180" loading="lazy" />
+                    <Image src='/shared/gradientcircle.png' alt="" width={1200} height={1200} className="h-[90vh] top-[0%] absolute top-[26%] bottom-0 right-20 top-6 left-0 lg:right-0 lg:rotate-180" loading="lazy" />
 
-                    <Image src='/ctar.png' alt="CTA" width={900} height={600} className="absolute bottom-0 h-[55%] lg:top-0 -right-30 lg:w-[40%] lg:h-full object-cover" loading="lazy" quality={75} />
+                    <Image src='/products/ctar.png' alt="CTA" width={900} height={600} className="absolute bottom-0 h-[55%] lg:top-0 -right-30 lg:w-[40%] lg:h-full object-cover" loading="lazy" quality={75} />
 
 
                     <SlideIn direction="left" scrollTrigger={true} duration={0.8} className="lg:w-[60%]   p-5 lg:p-9 text-white flex flex-col items-start justify-between lg:justify-center gap-6 relative z-10">

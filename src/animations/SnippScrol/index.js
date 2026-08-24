@@ -84,6 +84,17 @@ export default function SnippScrol({
     const sections  = sectionsRef.current.filter(Boolean);
     if (!container || sections.length < 1) return;
 
+    // Capture lock state BEFORE cleanup. Browser zoom fires resize and often
+    // resets scrollY to 0 — without this, rebuild re-locks the page mid-scroll.
+    const savedPlaced = window.__heroAboutPlaced === true;
+    const savedProgress = typeof window.__heroAboutProgress === 'number'
+      ? window.__heroAboutProgress
+      : 0;
+    const savedScroll = Math.max(
+      window.scrollY || 0,
+      typeof window.lenisInstance?.scroll === 'number' ? window.lenisInstance.scroll : 0,
+    );
+
     // Clean up any prior run
     lockCleanupRef.current?.();
     lockCleanupRef.current = null;
@@ -162,9 +173,16 @@ export default function SnippScrol({
       // the incoming panel is fully placed (and lock-color hold finishes),
       // then unlock page scroll so Lenis never jerks at the start.
       if (lockPageUntilComplete) {
-        const startPlaced = (window.scrollY || 0) > 8;
-        let target = startPlaced ? 1 : 0;
-        let current = target;
+        // Zoom/resize can zero scrollY; trust prior placed/progress + Lenis scroll.
+        const startPlaced =
+          savedPlaced ||
+          savedScroll > 8 ||
+          savedProgress >= 0.999;
+        const restored = startPlaced
+          ? 1
+          : Math.max(0, Math.min(1, savedProgress));
+        let target = restored;
+        let current = restored;
         let rafId = 0;
         let locked = !startPlaced;
 
@@ -191,12 +209,22 @@ export default function SnippScrol({
           window.scrollTo(0, 0);
         };
 
+        const clearScrollLockStyles = () => {
+          // Always clear — zoom can cross the mobile breakpoint while overflow
+          // was set, then unlock on desktop and leave body/html stuck.
+          document.documentElement.style.overflow = '';
+          document.body.style.overflow = '';
+        };
+
         const emitCoverProgress = (p) => {
           const next = Math.max(0, Math.min(1, p));
           window.__heroAboutProgress = next;
           window.__onHeroAboutProgress?.(next);
+          window.dispatchEvent(new CustomEvent('heroAboutProgress', { detail: { progress: next } }));
         };
-        emitCoverProgress(current);
+        emitCoverProgress(
+          panelFraction > 0 ? Math.min(current, panelFraction) / panelFraction : current,
+        );
         const emitPlaced = (placed) => {
           if (placed === lastPlaced) return;
           lastPlaced = placed;
@@ -220,16 +248,26 @@ export default function SnippScrol({
           if (next) {
             pinScrollTop();
             lenis?.stop();
+            if (window.innerWidth < 768) {
+              document.documentElement.style.overflow = 'hidden';
+              document.body.style.overflow = 'hidden';
+            }
           } else {
             lenis?.start();
-          }
-          if (window.innerWidth < 768) {
-            document.documentElement.style.overflow = next ? 'hidden' : '';
-            document.body.style.overflow = next ? 'hidden' : '';
+            clearScrollLockStyles();
           }
         };
 
         setLocked(locked, { force: true });
+
+        // After unlock-on-rebuild, put the user back where zoom left them.
+        if (startPlaced && savedScroll > 8) {
+          requestAnimationFrame(() => {
+            const lenis = window.lenisInstance;
+            if (lenis) lenis.scrollTo(savedScroll, { immediate: true });
+            else window.scrollTo(0, savedScroll);
+          });
+        }
 
         const reportLockProgress = (p) => {
           if (!onLockProgress) return;
@@ -335,16 +373,15 @@ export default function SnippScrol({
           window.removeEventListener('keydown', onKey, { capture: true });
           window.removeEventListener('lenisReady', onLenisReady);
           window.removeEventListener('splashComplete', onLenisReady);
+          // Keep placed/progress so the next build() (zoom/resize) can restore.
+          // Full reset happens only on unmount.
           window.__pageScrollLocked = false;
-          window.__heroAboutPlaced = false;
-          window.__heroAboutProgress = 0;
-          window.__onHeroAboutProgress?.(0);
           window.lenisInstance?.start();
-          document.documentElement.style.overflow = '';
-          document.body.style.overflow = '';
+          clearScrollLockStyles();
         };
 
         if (startPlaced) reportLockProgress(1);
+        else reportLockProgress(current);
         return;
       }
 
@@ -360,6 +397,7 @@ export default function SnippScrol({
         const next = Math.max(0, Math.min(1, p));
         window.__heroAboutProgress = next;
         window.__onHeroAboutProgress?.(next);
+        window.dispatchEvent(new CustomEvent('heroAboutProgress', { detail: { progress: next } }));
       };
       emitCoverProgress(0);
       const emitPlaced = (placed) => {
@@ -440,10 +478,18 @@ export default function SnippScrol({
     });
 
     let resizeTimer;
+    let lastW = typeof window !== 'undefined' ? window.innerWidth : 0;
+    let lastH = typeof window !== 'undefined' ? window.innerHeight : 0;
     const onResize = () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
-        build();            // full rebuild on resize (re-reads vh)
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        // Skip no-op resize noise; still rebuild on zoom (CSS px size changes)
+        if (w === lastW && h === lastH) return;
+        lastW = w;
+        lastH = h;
+        build();            // full rebuild on resize (re-reads vh); state preserved in build()
         ScrollTrigger.refresh();
       }, 200);
     };
@@ -457,9 +503,13 @@ export default function SnippScrol({
       lockCleanupRef.current?.();
       lockCleanupRef.current = null;
       ctxRef.current?.revert();
+      window.__pageScrollLocked = false;
       window.__heroAboutPlaced = false;
       window.__heroAboutProgress = 0;
       window.__onHeroAboutProgress?.(0);
+      window.lenisInstance?.start();
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
     };
   }, [build]);
 

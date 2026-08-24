@@ -1,300 +1,393 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
-import Image from "next/image"
-import { Badge } from "../../common/badge"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRight } from "lucide-react";
+import { Badge } from "../../common/badge";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 const journeyData = [
-    {
-      year: "2009",
-      title: "Founded With Vision",
-      description: "Founded with a steadfast dedication to accuracy, quality, and innovation, our journey in copper production began with a clear purpose — to set new benchmarks in the industry. Every process, from sourcing to refinement, reflects our pursuit of perfection and reliability.",
-      image: "/2009img.png",
-      milestone: "Copper Excellence Begins"
-    },
-    {
-      year: "2013",
-      title: "Expansion & Growth",
-      description: "Four years into our journey, we expanded our production capacity and established ourselves as a trusted name in the regional copper industry. Our commitment to excellence and customer satisfaction drove unprecedented growth and market recognition.",
-      image: "/2009img.png",
-      milestone: "Regional Recognition"
-    },
-    {
-      year: "2018",
-      title: "Innovation & Technology",
-      description: "A decade of dedication led us to integrate cutting-edge technology into our manufacturing processes. We invested heavily in automation and quality control, setting new industry standards for precision and efficiency.",
-      image: "/2009img.png",
-      milestone: "Tech Innovation"
-    },
-    {
-      year: "2024",
-      title: "Global Excellence",
-      description: "Today, we stand as a beacon of quality and innovation in the global copper market. Our world-class facilities and commitment to sustainability position us as the partner of choice for enterprises worldwide.",
-      image: "/2009img.png",
-      milestone: "Global Leader"
-    }
-]
+  {
+    year: "2007",
+    tag: "The Foundation",
+    title: "Union Copper Rod Is Established",
+    description:
+      "UCR was established in Abu Dhabi with a clear ambition: to build a world-class copper rod manufacturing facility serving the region's growing electrical and industrial needs.",
+    image: "/about/2009img.png",
+  },
+  {
+    year: "2009",
+    tag: "Production Begins",
+    title: "From vision to manufacturing",
+    description:
+      "UCR commenced commercial production, bringing its advanced copper rod manufacturing capabilities into operation at Industrial City of Abu Dhabi.",
+    image: "/about/aboutimg.png",
+  },
+  {
+    year: "2012",
+    tag: "Quality Takes Shape",
+    title: "International standards from the start",
+    description:
+      "UCR achieved ISO 9001, ISO 14001 and OHSAS 18001 certifications, establishing quality, environmental management and occupational safety as core operating standards.",
+    image: "/home/excellence.png",
+  },
+  {
+    year: "2018",
+    tag: "Regional Scale",
+    title: "Growing beyond borders",
+    description:
+      "UCR reached a new level of regional maturity, strengthening its position as the Middle East's largest copper rod production facility and expanding its role in serving customers across the region.",
+    image: "/home/moreabout.png",
+  },
+  {
+    year: "2020",
+    tag: "Smarter Operations",
+    title: "Building a more connected business",
+    description:
+      "UCR began its SAP implementation, strengthening its operational, financial and supply-chain systems to support a growing manufacturing and distribution network.",
+    image: "/about/ourcompany.png",
+  },
+  {
+    year: "2024",
+    tag: "A More Sustainable Future",
+    title: "Quality meets responsibility",
+    description:
+      "UCR achieved EPD certification for its ETP Copper Rods and advanced its sustainability journey, providing transparent information on product environmental impact while reinforcing its commitment to responsible manufacturing.",
+    image: "/home/recycle.png",
+  },
+];
+
+const SECTION_BG =
+  "linear-gradient(180deg, #FFF8F4 0%, #F6D0C0 55%, #F0A888 100%)";
+
+function DiagonalRays() {
+  return (
+    <div
+      className="pointer-events-none absolute inset-y-0 right-0 w-[45%] overflow-hidden"
+      aria-hidden
+    >
+      {[
+        { top: "2%", width: "55%" },
+        { top: "10%", width: "70%" },
+        { top: "18%", width: "85%" },
+        { top: "26%", width: "68%" },
+        { top: "34%", width: "48%" },
+      ].map((ray, i) => (
+        <span
+          key={i}
+          className="absolute right-[-10%] h-[clamp(0.5rem,1.2cqi,0.875rem)] rounded-full bg-white/20"
+          style={{
+            top: ray.top,
+            width: ray.width,
+            transform: "rotate(36deg)",
+            transformOrigin: "right center",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function JourneyCard({ item, priority = false }) {
+  return (
+    <article className="relative flex h-full w-full flex-col overflow-hidden rounded-[1.75rem] bg-primary shadow-[0_16px_40px_rgba(254,93,10,0.18)] md:flex-row lg:rounded-[2rem]">
+      <div className="relative h-[36%] w-full shrink-0 overflow-hidden md:h-full md:w-1/2">
+        <Image
+          src={item.image}
+          alt={item.title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 90vw, 50vw"
+          priority={priority}
+        />
+      </div>
+
+      {/* @container so type/spacing scale with the orange panel, not the viewport */}
+      <div className="@container relative flex min-h-0 w-full flex-1 flex-col justify-between bg-primary p-[clamp(1.15rem,6cqi,2.75rem)] md:w-1/2">
+        <DiagonalRays />
+
+        <div className="relative z-10 flex shrink-0 flex-col gap-[clamp(0.5rem,2.4cqi,0.85rem)]">
+          <span className="inline-flex w-fit items-center rounded-md bg-white/20 px-[clamp(0.8rem,3cqi,1.15rem)] py-[clamp(0.4rem,1.4cqi,0.6rem)] text-[clamp(0.9375rem,3.2cqi,1.125rem)] font-medium leading-none text-white">
+            {item.tag}
+          </span>
+          <h3 className="font-primary text-[clamp(3.25rem,21cqi,7.5rem)] font-light leading-[0.95] tracking-[-0.04em] text-white">
+            {item.year}
+          </h3>
+        </div>
+
+        <div className="relative z-10 mt-[clamp(0.75rem,4cqi,1.5rem)] flex min-h-0 max-w-[36em] flex-col gap-[clamp(0.6rem,2.8cqi,1rem)] md:mt-0">
+          <h4 className="font-primary text-[clamp(1.45rem,6.2cqi,2.4rem)] font-semibold leading-[1.2] tracking-[-0.02em] text-white">
+            {item.title}
+          </h4>
+          <p className="font-primary text-[clamp(1.0625rem,4.2cqi,1.5rem)] font-normal leading-[1.6] text-white/95">
+            {item.description}
+          </p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function scrollToY(y, { immediate = false } = {}) {
+  if (typeof window === "undefined") return;
+  const lenis = window.lenisInstance;
+  if (lenis && typeof lenis.scrollTo === "function") {
+    lenis.scrollTo(y, { immediate, duration: immediate ? 0 : 1.1 });
+    return;
+  }
+  window.scrollTo({ top: y, behavior: immediate ? "auto" : "smooth" });
+}
 
 export default function JourneySection() {
-  const sectionRef = useRef(null)
-  const pinRef = useRef(null)
-  const trackRef = useRef(null)
-  const dotsRef = useRef([])
-  const yearsRef = useRef([])
-  const progressBarRef = useRef(null)
+  const sectionRef = useRef(null);
+  const pinRef = useRef(null);
+  const trackRef = useRef(null);
+  const viewportRef = useRef(null);
+  const scrollTriggerRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    const section = sectionRef.current
-    const pin = pinRef.current
-    const track = trackRef.current
+    const section = sectionRef.current;
+    const pin = pinRef.current;
+    const track = trackRef.current;
+    const viewport = viewportRef.current;
+    if (!section || !pin || !track || !viewport) return;
 
-    if (!section || !pin || !track) return
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-    // Dynamically set the section height so it stays pinned for the full horizontal scroll
-    const updateSectionHeight = () => {
-      const scrollDistance = track.scrollWidth - window.innerWidth
-      section.style.height = scrollDistance + window.innerHeight + 'px'
+    if (prefersReduced) {
+      gsap.set(track, { x: 0 });
+      return;
     }
 
-    window.addEventListener('resize', updateSectionHeight)
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    let ctx;
 
-    const timer = setTimeout(() => {
-      updateSectionHeight()
+    const setup = () => {
+      ctx?.revert();
+      scrollTriggerRef.current = null;
 
-      // Entry animation — targets the sticky inner panel
-      gsap.fromTo(
-        pin,
-        {
-          clipPath: "inset(4% 2% round 10px)",
-          opacity: 0.4,
-          scale: 0.97,
-        },
-        {
-          clipPath: "inset(0% 0% round 0px)",
-          opacity: 1,
-          scale: 1,
-          ease: "power2.inOut",
-          force3D: true,
-          scrollTrigger: {
-            trigger: section,
-            start: "top 90%",
-            end: "top 20%",
-            scrub: 1.5,
-          },
-        }
-      )
+      const syncTrackPad = () => {
+        const card = track.firstElementChild;
+        if (!card) return;
+        const pad = Math.max(
+          16,
+          (viewport.clientWidth - card.getBoundingClientRect().width) / 2
+        );
+        track.style.paddingLeft = `${pad}px`;
+        track.style.paddingRight = `${pad}px`;
+      };
 
-      // Horizontal track — no GSAP pin, CSS sticky handles the sticky position
-      // The outer section is tall (journeyData.length * 100vh), so the
-      // scrollTrigger runs from the moment the section hits top:top all the way
-      // to its bottom, giving us the full scroll budget for the animation.
-      gsap.fromTo(
-        track,
-        { x: 0 },
-        {
-          x: () => -(track.scrollWidth - window.innerWidth),
+      const getTravel = () => {
+        syncTrackPad();
+        return Math.max(0, track.scrollWidth - viewport.clientWidth);
+      };
+
+      ctx = gsap.context(() => {
+        gsap.set(track, { x: 0, force3D: true });
+
+        const tween = gsap.to(track, {
+          x: () => -getTravel(),
           ease: "none",
-          force3D: true,
           scrollTrigger: {
             trigger: section,
             start: "top top",
-            end: () => "+=" + (track.scrollWidth - window.innerWidth),
-            scrub: 1.5,
+            end: () =>
+              `+=${Math.max(
+                getTravel() * (isMobile ? 1.35 : 1.55),
+                window.innerHeight * 1.4
+              )}`,
+            pin: pin,
+            pinSpacing: true,
+            scrub: isMobile ? 0.5 : 0.8,
+            anticipatePin: 1,
             invalidateOnRefresh: true,
             fastScrollEnd: true,
+            snap: {
+              snapTo: 1 / Math.max(journeyData.length - 1, 1),
+              duration: { min: 0.12, max: 0.35 },
+              ease: "power1.inOut",
+              delay: 0.02,
+            },
             onUpdate: (self) => {
-              const activeIndex = Math.round(
-                self.progress * (journeyData.length - 1)
-              )
-
-              if (progressBarRef.current) {
-                const progress = self.progress * 100
-                progressBarRef.current.style.width = `${progress}%`
-              }
-
-              dotsRef.current.forEach((dot, index) => {
-                if (!dot) return
-                const isActive = index <= activeIndex
-                dot.style.borderColor = isActive ? '#FA6E43' : 'rgba(255,255,255,0.4)'
-                dot.style.background = isActive ? '#FA6E43' : 'rgba(255,255,255,0.15)'
-                dot.style.transform = isActive ? 'scale(1.1)' : 'scale(1)'
-              })
-
-              yearsRef.current.forEach((yr, idx) => {
-                if (!yr) return
-                const active = idx <= activeIndex
-                const isMobile = window.innerWidth < 640
-                yr.style.opacity = active ? '1' : '0.5'
-                yr.style.fontSize = active ? (isMobile ? '16px' : '18px') : (isMobile ? '12px' : '14px')
-                yr.style.fontWeight = active ? '700' : '600'
-                yr.style.transform = active ? 'scale(1.05)' : 'scale(1)'
-                yr.style.transition = 'all 0.3s ease-out'
-              })
+              const max = journeyData.length - 1;
+              const next = Math.round(self.progress * max);
+              setActiveIndex((prev) => (prev === next ? prev : next));
             },
           },
-        }
-      )
+        });
 
-      ScrollTrigger.refresh()
-    }, 150)
+        scrollTriggerRef.current = tween.scrollTrigger;
+      }, section);
+
+      ScrollTrigger.refresh();
+    };
+
+    const readyTimer = window.setTimeout(setup, 120);
+    const onReady = () => {
+      setup();
+    };
+
+    window.addEventListener("scrollAnimationsReady", onReady);
+    window.addEventListener("lenisReady", onReady);
 
     return () => {
-      clearTimeout(timer)
-      window.removeEventListener('resize', updateSectionHeight)
-      ScrollTrigger.getAll().forEach((st) => {
-        if (st.trigger === section || st.trigger === pin) st.kill()
-      })
+      window.clearTimeout(readyTimer);
+      window.removeEventListener("scrollAnimationsReady", onReady);
+      window.removeEventListener("lenisReady", onReady);
+      ctx?.revert();
+      scrollTriggerRef.current = null;
+    };
+  }, []);
+
+  const goTo = useCallback((index) => {
+    const next =
+      ((index % journeyData.length) + journeyData.length) % journeyData.length;
+    const st = scrollTriggerRef.current;
+
+    if (!st) {
+      setActiveIndex(next);
+      return;
     }
-  }, [])
+
+    const max = journeyData.length - 1;
+    const progress = max === 0 ? 0 : next / max;
+    const target = st.start + (st.end - st.start) * progress;
+    scrollToY(target);
+    setActiveIndex(next);
+  }, []);
 
   return (
-    // Outer section is tall — it provides the scroll budget for the horizontal animation
-    <section ref={sectionRef} className="relative w-full">
-      {/* CSS sticky panel — the browser handles sticking without GSAP pin */}
+    <section
+      ref={sectionRef}
+      className="relative w-full"
+      style={{ background: SECTION_BG }}
+      aria-label="Our journey"
+    >
       <div
         ref={pinRef}
-        className="w-screen h-screen overflow-hidden bg-[linear-gradient(164deg,#FFF_8.84%,#FA6E43_118.41%)] relative sticky top-0"
-        style={{ willChange: "transform, opacity", backfaceVisibility: "hidden" }}
+        className="relative flex h-screen w-full flex-col overflow-x-hidden"
+        style={{ background: SECTION_BG }}
       >
-        {/* Horizontal track */}
+        <div className="mx-auto w-full max-w-[1600px] shrink-0 px-4 pt-24 sm:px-6 sm:pt-28 lg:px-10 lg:pt-32 xl:px-12">
+          <div className="mb-8 flex flex-col items-center text-center sm:mb-10 lg:mb-12">
+            <Badge title="Our Story" />
+            <h2 className="mt-[clamp(0.75rem,1.2vw,1.25rem)] font-primary text-[clamp(1.75rem,3.5vw,3.25rem)] font-medium leading-[1.15] tracking-[-0.04em] text-[#1a1a1a] lg:tracking-[-0.06em]">
+              Over the years
+            </h2>
+          </div>
+        </div>
+
         <div
-          ref={trackRef}
-          className="flex h-full"
-          style={{ width: `${journeyData.length * 100}vw`, willChange: "transform" }}
+          ref={viewportRef}
+          className="relative flex min-h-0 w-full flex-1 items-center overflow-hidden"
         >
-          {journeyData.map((item, index) => (
-            <div
-              key={index}
-              className="w-screen min-h-screen flex flex-col lg:flex-row items-center justify-center flex-shrink-0 pb-28 lg:pb-0"
+          <div
+            ref={trackRef}
+            className="flex w-max items-center gap-[clamp(1.5rem,3vw,3.5rem)] will-change-transform"
+            style={{ touchAction: "pan-y" }}
+          >
+            {journeyData.map((item, i) => (
+              <div
+                key={item.year}
+                className="relative h-[clamp(22rem,58dvh,34rem)] w-[clamp(18rem,88vw,22rem)] shrink-0 md:h-[clamp(22rem,48dvh,30rem)] md:w-[clamp(40rem,86vw,68rem)]"
+                aria-hidden={i !== activeIndex}
+              >
+                <JourneyCard item={item} priority={i === 0} />
+              </div>
+            ))}
+          </div>
+
+          {activeIndex < journeyData.length - 1 && (
+            <button
+              type="button"
+              onClick={() => goTo(activeIndex + 1)}
+              aria-label="Next milestone"
+              className="absolute right-[max(0.75rem,calc((100%-min(86vw,68rem))/2-1.5rem))] top-1/2 z-20 flex h-[clamp(2.5rem,3.5vw,3rem)] w-[clamp(2.5rem,3.5vw,3rem)] -translate-y-1/2 items-center justify-center rounded-full border-[1.5px] border-white bg-transparent text-white transition-colors hover:bg-white/15"
             >
-              {/* Left: text */}
-              <div className="flex flex-col justify-center w-full lg:w-1/2 h-full">
-                <div className="flex flex-col gap-3 sm:gap-5 pt-10 lg:pt-0 px-8 lg:px-12 lg:px-16">
-                  {index === 0 && (
-                    <div className="mb-1">
-                      <Badge title="Our Story" />
-                    </div>
-                  )}
+              <ArrowRight className="h-5 w-5" strokeWidth={1.75} />
+            </button>
+          )}
+        </div>
 
-                  <span className="text-[#F26522] text-xs font-semibold uppercase tracking-widest">
-                    {String(index + 1).padStart(2, "0")} / {String(journeyData.length).padStart(2, "0")}
-                  </span>
+        <div className="relative mx-auto mt-8 w-[90%] max-w-[920px] shrink-0 px-4 pb-8 sm:mt-10 sm:pb-10 lg:mt-12 lg:pb-12">
+          <div className="relative mb-3 h-7 sm:mb-4 sm:h-8">
+            {journeyData.map((item, i) => {
+              const isActive = i === activeIndex;
+              const left =
+                journeyData.length === 1
+                  ? "50%"
+                  : `${(i / (journeyData.length - 1)) * 100}%`;
 
-                  <h1 className="text-[70px] sm:text-[100px] lg:text-[130px] font-light leading-none text-white select-none -mb-4">
+              return (
+                <button
+                  key={item.year}
+                  type="button"
+                  onClick={() => goTo(i)}
+                  className="absolute top-0 -translate-x-1/2 cursor-pointer"
+                  style={{ left }}
+                  aria-label={`Go to ${item.year}`}
+                  aria-current={isActive ? "true" : undefined}
+                >
+                  <span
+                    className={`block whitespace-nowrap font-primary transition-all duration-300 ${
+                      isActive
+                        ? "text-[clamp(0.9375rem,1.15vw,1.125rem)] font-bold text-white"
+                        : "text-[clamp(0.75rem,0.95vw,0.9rem)] font-semibold text-white/50"
+                    }`}
+                  >
                     {item.year}
-                  </h1>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
 
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#1a1a1a]">
-                    {item.title}
-                  </h2>
+          <div className="relative h-11 sm:h-12">
+            <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-white/50" />
 
-                  <p className="text-sm sm:text-base text-[#555] leading-relaxed max-w-md">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
+            {journeyData.map((item, i) => {
+              const isActive = i === activeIndex;
+              const left =
+                journeyData.length === 1
+                  ? "50%"
+                  : `${(i / (journeyData.length - 1)) * 100}%`;
 
-              {/* Right: image */}
-              <div className="w-full lg:w-1/2 flex-shrink-0 h-[30vh] sm:h-[38vh] lg:h-[62vh] px-8 lg:px-12 lg:px-16 py-4 lg:py-0">
-                <div className="h-full">
-                  <div className="relative rounded-2xl overflow-hidden shadow-2xl h-full w-full">
-                    <Image
-                      src={item.image}
-                      alt={item.year}
-                      fill
-                      className="object-cover"
+              return (
+                <button
+                  key={`dot-${item.year}`}
+                  type="button"
+                  onClick={() => goTo(i)}
+                  className="absolute top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+                  style={{ left }}
+                  aria-label={`Select ${item.year}`}
+                >
+                  <span
+                    className={`flex items-center justify-center rounded-full transition-all duration-300 ${
+                      isActive
+                        ? "h-10 w-10 bg-primary shadow-[0_0_0_7px_rgba(254,93,10,0.3)] sm:h-11 sm:w-11 sm:shadow-[0_0_0_8px_rgba(254,93,10,0.3)]"
+                        : "h-[18px] w-[18px] border border-white/55 bg-white/20 sm:h-5 sm:w-5"
+                    }`}
+                  >
+                    <span
+                      className={`rounded-full bg-white transition-all duration-300 ${
+                        isActive
+                          ? "h-2.5 w-2.5 sm:h-3 sm:w-3"
+                          : "h-1.5 w-1.5 opacity-80"
+                      }`}
                     />
-                    <div className="absolute bottom-0 left-0 right-0 px-6 py-5 bg-gradient-to-t from-black/60 to-transparent">
-                      <span className="text-white text-5xl font-light">{item.year}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* REDESIGNED Timeline indicator */}
-        <div className="absolute bottom-4 sm:bottom-8 left-0 right-0 flex flex-col items-center z-10 px-4 w-full">
-
-          {/* Years row - above timeline */}
-          <div className="relative w-[90%] mb-6 sm:mb-8 h-7">
-            {journeyData.map((item, i) => (
-              <div
-                key={i}
-                className="absolute top-0 flex justify-center w-12"
-                style={{
-                  left: `calc(${(i / (journeyData.length - 1)) * 100}% - 24px)`,
-                }}
-              >
-                <span
-                  ref={el => (yearsRef.current[i] = el)}
-                  className="text-white text-[12px] sm:text-[14px] font-bold tracking-wider transition-all whitespace-nowrap"
-                  style={{
-                    opacity: i === 0 ? 1 : 0.5,
-                    fontWeight: i === 0 ? '700' : '600',
-                    letterSpacing: '0.03em',
-                  }}
-                >
-                  {item.year}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          {/* Timeline line and circles */}
-          <div className="relative w-[90%] my-5 flex items-center">
-            {/* Background timeline track - Gray base line */}
-            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-0.5 sm:h-px bg-white rounded-full" style={{ opacity: 0.3 }} />
-            
-            {/* Progress bar - Pure white, clean */}
-            <div
-              ref={progressBarRef}
-              className="absolute left-0 top-1/2 -translate-y-1/2 h-0.5 sm:h-px rounded-full"
-              style={{
-                width: '0%',
-                background: 'white',
-                transition: 'width 0.3s ease-out',
-              }}
-            />
-
-            {/* Milestone dots */}
-            {journeyData.map((item, i) => (
-              <div
-                key={i}
-                className="absolute z-20 flex justify-center top-1/2 -translate-y-1/2"
-                style={{ left: `calc(${(i / (journeyData.length - 1)) * 100}% - 28px)` }}
-              >
-                {/* Main dot container - Minimal clean design */}
-                <div
-                  ref={el => (dotsRef.current[i] = el)}
-                  className="w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center rounded-full border-2 relative z-10"
-                  style={{
-                    borderColor: i === 0 ? '#FA6E43' : 'rgba(255,255,255,0.4)',
-                    background: i === 0 ? '#FA6E43' : 'rgba(255,255,255,0.15)',
-                    transition: 'all 0.3s ease-out',
-                    transform: i === 0 ? 'scale(1.1)' : 'scale(1)',
-                  }}
-                >
-                  {/* Inner white dot */}
-                  <div
-                    className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-white"
-                    style={{
-                      transition: 'opacity 0.3s ease',
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
-
       </div>
     </section>
-  )
+  );
 }
-  

@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import badgeIcon from '../../../public/badge.png';
+import badgeIcon from '../../../public/shared/badge.png';
 import gsap from 'gsap';
 
 const HEADING_TEXT =
@@ -79,7 +79,7 @@ export default function About({ lockProgressRef = null }) {
         <div className="relative w-full">
           <div className="hidden lg:block absolute right-0 top-[4.5rem] lg:top-[5rem] w-[38%] max-w-[42rem] pointer-events-none z-0">
             <Image
-              src="/aboutside.png"
+              src="/home/aboutside.png"
               alt="Copper coil"
               width={900}
               height={800}
@@ -98,7 +98,7 @@ export default function About({ lockProgressRef = null }) {
 
             <div className="lg:hidden flex justify-center">
               <Image
-                src="/aboutside.png"
+                src="/home/aboutside.png"
                 alt="Copper coil"
                 width={900}
                 height={800}

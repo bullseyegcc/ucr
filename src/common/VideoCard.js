@@ -32,7 +32,7 @@ export const VideoCard = ({
     <div
       className={
         className ||
-        "relative w-full lg:w-1/2 min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] max-h-[440px] sm:max-h-[500px] lg:max-h-[560px] lg:aspect-[4/5] overflow-hidden rounded-lg lg:rounded-xl mb-6 lg:mb-20 m-0 lg:m-2"
+        "relative w-full lg:w-1/2 min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] max-h-[440px] sm:max-h-[500px] lg:max-h-[560px] lg:aspect-[4/5] overflow-hidden rounded-lg lg:rounded-xl"
       }
     >
       <div className="absolute inset-0 pointer-events-none">

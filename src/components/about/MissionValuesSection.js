@@ -91,7 +91,7 @@ export default function MissionValuesSection() {
             ref={missionRef}
             className="min-h-96 rounded-3xl text-white px-10 py-8 flex flex-col justify-between"
             style={{
-              backgroundImage: "url('/missionbg.png')",
+              backgroundImage: "url('/about/missionbg.png')",
               backgroundSize: 'cover',
               backgroundPosition: 'top',
             }}

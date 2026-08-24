@@ -53,14 +53,14 @@ export default function OurPolicies() {
                 contentClassName="px-4 font-medium"
                 background={{
                     type: "image",
-                    src: "/policiesbg.png",
+                    src: "/policies/policiesbg.png",
                     imageClassName: "bg-center",
                 }}
             />
 
             <div className="relative w-full overflow-hidden bg-[#F5F5F5] px-4 py-12 lg:px-20 lg:py-20">
                 <Image
-                    src="/gradientcircle.png"
+                    src="/shared/gradientcircle.png"
                     alt=""
                     width={900}
                     height={900}

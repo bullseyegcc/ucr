@@ -10,17 +10,17 @@ const CARDS = [
   {
     title: 'Recycle & Reuse',
     desc:  'Maximizing resource efficiency by recycling copper and reducing waste.',
-    img:   '/recycle.png',
+    img:   '/home/recycle.png',
   },
   {
     title: 'Sustainable Sourcing',
     desc:  'Using responsibly sourced materials and ethical supply chains.',
-    img:   '/recycle.png',
+    img:   '/home/recycle.png',
   },
   {
     title: 'Energy Efficiency',
     desc:  'Reducing our carbon footprint through efficient operations.',
-    img:   '/recycle.png',
+    img:   '/home/recycle.png',
   },
 ];
 
@@ -139,7 +139,7 @@ export default function WeCareSection() {
     <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] my-5">
     <div
       ref={sectionRef}
-      className="relative min-h-[min(80vh,800px)] sm:h-[min(90vh,900px)] max-h-[1000px] pt-8 flex flex-col justify-between bg-[url('/care.jpg')] bg-cover bg-center rounded-xl lg:overflow-hidden"
+      className="relative min-h-[min(80vh,800px)] sm:h-[min(90vh,900px)] max-h-[1000px] pt-8 flex flex-col justify-between bg-[url('/home/care.jpg')] bg-cover bg-center rounded-xl lg:overflow-hidden"
     >
       <VideoPlayer src="/sustain.mp4" className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
 

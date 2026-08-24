@@ -11,7 +11,7 @@ const cards = [
     title: "Strategic Sourcing",
     description:
       "Reliable sourcing supported by trusted suppliers and strong market access.",
-    image: "/pdetail.png",
+    image: "/products/pdetail.png",
   },
   {
     index: 1,
@@ -19,7 +19,7 @@ const cards = [
     title: "Operational Excellence",
     description:
       "Integrated operations driven by efficiency, consistency, and quality excellence.",
-    image: "/blog6.png",
+    image: "/blogs/blog6.png",
   },
   {
     index: 2,
@@ -27,7 +27,7 @@ const cards = [
     title: "Global Shipping Network",
     description:
       "Strong partnerships with global shipping lines support reliable international delivery.",
-    image: "/blog8.png",
+    image: "/blogs/blog8.png",
   },
   {
     index: 3,
@@ -35,7 +35,7 @@ const cards = [
     title: "Government & Semi Government Relations",
     description:
       "Established institutional relationships support smooth trade, compliance, and business continuity.",
-    image: "/blog9.png",
+    image: "/blogs/blog9.png",
   },
 ];
 
@@ -46,7 +46,7 @@ export default function LogisticsAdvantageSection() {
   const getBgImageUrl = () => {
     const activeIndex = clickedCard ?? hoveredCard;
     const activeCard = cards.find((card) => card.index === activeIndex);
-    return activeCard?.image ?? "/fp3.png";
+    return activeCard?.image ?? "/home/fp3.png";
   };
 
   const isActive = (index) => clickedCard === index;
@@ -75,8 +75,8 @@ export default function LogisticsAdvantageSection() {
   return (
     <div className="relative w-full bg-white overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <Image src="/gradientcircle.png" alt="Logistics End Image" width={900} height={200} className="absolute -top-80 -right-20 w-[50vw] z-0" />
-        <Image src="/vector.png" alt="Logistics End Image" width={300} height={0} className="absolute -top-10 -right-5 z-0" />
+        <Image src="/shared/gradientcircle.png" alt="Logistics End Image" width={900} height={200} className="absolute -top-80 -right-20 w-[50vw] z-0" />
+        <Image src="/shared/vector.png" alt="Logistics End Image" width={300} height={0} className="absolute -top-10 -right-5 z-0" />
       </div>
       <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col items-start gap-12 px-6 lg:px-10 pt-20 pb-20">
         <SlideIn direction="left" duration={0.8} scrollTrigger={true} className="w-full text-left">

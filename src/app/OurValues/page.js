@@ -40,7 +40,7 @@ export default function OurValues() {
       <div className="relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#FFF_0%,#FFF5F1_45%,rgba(255,245,240,0.55)_100%)] px-6 py-12 lg:px-10 lg:py-20">
         {/* Gradient Image Centered, Low Z-Index */}
         <Image
-          src="/valuegrad.png"
+          src="/our-values/valuegrad.png"
           alt="Gradient Circle"
           width={900}
           height={900}
@@ -75,7 +75,7 @@ export default function OurValues() {
           >
             <div className={`${VALUE_CARD_BG} ${VALUE_CARD_LAYOUT} group`}>
               <Image
-                src="/excel.png"
+                src="/our-values/excel.png"
                 alt="Icon"
                 width={90}
                 height={90}
@@ -93,7 +93,7 @@ export default function OurValues() {
 
             <div className={`${VALUE_CARD_BG} ${VALUE_CARD_LAYOUT} group`}>
               <Image
-                src="/path.png"
+                src="/our-values/path.png"
                 alt="Icon"
                 width={90}
                 height={90}
@@ -111,7 +111,7 @@ export default function OurValues() {
 
             <div className={`${VALUE_CARD_BG} ${VALUE_CARD_LAYOUT} group`}>
               <Image
-                src="/reliable.png"
+                src="/our-values/reliable.png"
                 alt="Icon"
                 width={90}
                 height={90}
@@ -128,22 +128,21 @@ export default function OurValues() {
             </div>
 
             <div
-              className={`relative z-10 rounded-xl bg-white ${VALUE_CARD_LAYOUT} items-center justify-between text-center group`}
+              className={`relative z-10 overflow-hidden rounded-xl ${VALUE_CARD_LAYOUT} group`}
             >
-              <div className="relative min-h-[240px] w-full flex-1 overflow-hidden">
-                <VideoPlayer
-                  src="/ourvalues/morethanjustcooper.mp4"
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-              </div>
-              <h2 className="text-[30px] font-medium capitalize tracking-[-1.4px] text-[#A8A8AE] lg:text-[34px]">
+              <VideoPlayer
+                src="/ourvalues/morethanjustcooper.mp4"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/70 via-white/20 to-transparent" />
+              <h2 className="relative z-10 mt-auto w-full pb-2 text-center text-[30px] font-medium capitalize tracking-[-1.4px] text-[#A8A8AE] lg:pb-3 lg:text-[34px]">
                 More Than Copper
               </h2>
             </div>
 
             <div className={`${VALUE_CARD_BG} ${VALUE_CARD_LAYOUT} group`}>
               <Image
-                src="/careforfuture.png"
+                src="/our-values/careforfuture.png"
                 alt="Icon"
                 width={90}
                 height={90}
@@ -162,7 +161,7 @@ export default function OurValues() {
 
             <div className={`${VALUE_CARD_BG} ${VALUE_CARD_LAYOUT} group`}>
               <Image
-                src="/grow.png"
+                src="/our-values/grow.png"
                 alt="Icon"
                 width={90}
                 height={90}
@@ -197,7 +196,7 @@ export default function OurValues() {
 
         <FadeIn duration={0.8} scrollTrigger={true} className="mt-8 w-full lg:mt-12">
           <Image
-            src="/Our%20Values/peoplesection.svg"
+            src="/our-values/peoplesection.svg"
             alt="UCR team members"
             width={1440}
             height={545}

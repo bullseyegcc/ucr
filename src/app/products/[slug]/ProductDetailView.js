@@ -22,7 +22,7 @@ export default function ProductDetailView({ product }) {
   };
 
   const description = product.longDescription || product.description;
-  const imageSrc = product.icon || "/pdetail.png";
+  const imageSrc = product.icon || "/products/pdetail.png";
   const imageFit = product.imageFit === "contain" ? "object-contain" : "object-cover";
   const packagingEntries = product.packagingDimensions || [];
   const structuredParams = product.technicalParameters?.some(
@@ -34,7 +34,7 @@ export default function ProductDetailView({ product }) {
       {/* Header */}
       <div className="relative h-[40vh] sm:h-[50vh] lg:h-[55vh] max-h-[80vh] font-medium flex items-center justify-center   dark:bg-black overflow-hidden">
         <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#FF6A00] to-[#FF8C42]"></div>
-        <div className="absolute inset-0 z-10 pointer-events-none bg-[url('/productdetailbg.png')] bg-cover bg-center"></div>
+        <div className="absolute inset-0 z-10 pointer-events-none bg-[url('/products/productdetailbg.png')] bg-cover bg-center"></div>
         <h1 className="absolute top-[40%] w-[85%] sm:w-[70%] lg:w-[60%] z-20 font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-white flex flex-col items-center text-center align-middle capitalize gap-2 sm:gap-3 lg:gap-4 px-4 sm:px-0">
           <Badgetextwhite title="products" />
           <FadeIn>{product.name}</FadeIn>
@@ -127,7 +127,7 @@ export default function ProductDetailView({ product }) {
                 className={`w-12 sm:w-16 h-auto flex items-center justify-center rounded-l-lg transition-colors duration-300 ${expandedSections.applications ? "bg-orange-100" : "bg-gray-100"}`}
               >
                 <Image
-                  src="/applications.png"
+                  src="/products/applications.png"
                   alt="Applications"
                   width={32}
                   height={32}
@@ -166,7 +166,7 @@ export default function ProductDetailView({ product }) {
                   </div>
                 </div>
                 <Image
-                  src="/applicationsbg.png"
+                  src="/products/applicationsbg.png"
                   alt="Icon"
                   width={900}
                   height={0}
@@ -186,7 +186,7 @@ export default function ProductDetailView({ product }) {
                 className={`w-12 sm:w-16 h-auto flex items-center justify-center rounded-l-lg transition-colors duration-300 ${expandedSections.technical ? "bg-orange-100" : "bg-gray-100"}`}
               >
                 <Image
-                  src="/technical.png"
+                  src="/products/technical.png"
                   alt="Technical Parameters"
                   width={32}
                   height={32}
@@ -327,7 +327,7 @@ export default function ProductDetailView({ product }) {
 
         <div className="w-full sm:w-[90%] lg:w-[85%] lg:w-[65%] flex items-center justify-center mx-auto px-6 sm:px-0">
           <Image
-            src="/certificate.png"
+            src="/shared/certificate.png"
             alt="Icon"
             width={900}
             height={0}

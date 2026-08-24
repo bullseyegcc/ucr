@@ -1,5 +1,5 @@
-﻿import badge_icon from '../../public/badge.png';
-import white_badge_icon from '../../public/badge-w.png';
+﻿import badge_icon from '../../public/shared/badge.png';
+import white_badge_icon from '../../public/shared/badge-w.png';
 
 import Image from 'next/image';
 

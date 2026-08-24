@@ -23,7 +23,7 @@ export default function parentCompany() {
         gapClass="gap-6"
         background={{
           type: "image",
-          src: "/pcbg-1.png",
+          src: "/parent-company/pcbg-1.png",
           imageClassName: "bg-bottom bg-center",
         }}
       />
@@ -65,7 +65,7 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
             </p>
           </div>
           <Image
-            src="/pc1.png"
+            src="/parent-company/pc1.png"
             alt="Icon"
             className="absolute bottom-0 right-0 max-w-[45%] lg:max-w-[60%]"
             width={300}
@@ -87,7 +87,7 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
             </p>
           </div>
           <Image
-            src="/pc2.png"
+            src="/parent-company/pc2.png"
             alt="Icon"
             className="z-0 absolute bottom-0 right-0 max-w-[35%] lg:max-w-[55%]"
             width={250}
@@ -109,7 +109,7 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
             </p>
           </div>
           <Image
-            src="/pc3.png"
+            src="/parent-company/pc3.png"
             alt="Icon"
             className="z-0 absolute bottom-0 right-0 max-w-[35%] lg:max-w-[55%]"
             width={250}
@@ -131,7 +131,7 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
             </p>
           </div>
           <Image
-            src="/pc4.png"
+            src="/parent-company/pc4.png"
             alt="Icon"
             className="z-0 absolute bottom-3 right-3 max-w-[35%] lg:w-50"
             width={250}
@@ -140,7 +140,7 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
         </div>
       </SequentialSlideIn>
 
-      <div className="mb-8 w-full bg-[url('/expertisebg.png')] bg-cover bg-top bg-no-repeat px-4 pt-12 lg:h-full lg:px-10 lg:pt-16">
+      <div className="mb-8 w-full bg-[url('/about/expertisebg.png')] bg-cover bg-top bg-no-repeat px-4 pt-12 lg:h-full lg:px-10 lg:pt-16">
         <div className="mx-auto flex h-full w-full max-w-[1600px] flex-col justify-between">
           <SlideIn direction="left" scrollTrigger={true} duration={0.8}>
             <Badge title="our expertise" />
@@ -157,7 +157,7 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
               suffix=" bn"
               title="Global Exports"
               description="A significant export footprint connecting local manufacturing capabilities with global markets. These exports reflect the sector's growing competitiveness and international reach."
-              image="/exp3.png"
+              image="/about/exp3.png"
               imageAlt="Global exports globe"
               imageWidth={290}
               imageHeight={80}
@@ -173,7 +173,7 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
               duration={2.5}
               title="Employees"
               description="A strong workforce powering the sector's continued growth and operational capacity. Skilled talent plays a critical role in supporting manufacturing, innovation, and expansion."
-              image="/exp2.png"
+              image="/about/exp2.png"
               imageAlt="Employees"
               imageWidth={180}
               imageHeight={80}
@@ -188,7 +188,7 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
               suffix="%"
               title="Of UAE's Manufacturing Exports"
               description="A meaningful contribution to the UAE's overall manufacturing export ecosystem. The figure highlights the sector's role in strengthening the country's industrial economy."
-              image="/anum.png"
+              image="/about/anum.png"
               imageAlt="Copper rods"
               imageWidth={600}
               imageHeight={200}

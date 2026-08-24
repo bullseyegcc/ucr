@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "compress-videos": "powershell -ExecutionPolicy Bypass -File ./scripts/compress-videos.ps1",
-    "optimize-product-images": "node ./scripts/optimize-product-images.mjs"
+    "optimize-product-images": "node ./scripts/optimize-product-images.mjs",
+    "optimize-tech-images": "node ./scripts/optimize-tech-images.mjs",
+    "optimize-about-images": "node ./scripts/optimize-about-images.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

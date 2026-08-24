@@ -65,7 +65,7 @@ export default function BlogsListingSection({
             <Link key={item.slug} href={`/blogs/${item.slug}`} className="group block">
               <div className="overflow-hidden">
                 <Image
-                  src={item.image || "/blogsbg.png"}
+                  src={item.image || "/blogs/blogsbg.png"}
                   alt={item.title}
                   width={800}
                   height={500}

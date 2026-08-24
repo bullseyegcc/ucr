@@ -22,11 +22,11 @@ export default async function Home() {
 
       {/* video Cards */}
       <ParallaxSection index={0}>
-        <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] mt-8 flex flex-col lg:flex-row justify-center lg:min-h-[min(100vh,1000px)] lg:max-h-[1000px] gap-1 lg:gap-2 lg:py-8 bg-white">
+        <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] my-8 lg:my-8 flex flex-col lg:flex-row justify-center lg:max-h-[1000px] gap-1 lg:gap-2 bg-white">
         <VideoCard
           videoSrc="/moreabout.mp4"
           badgeText="Our Company"
-          title={"Driven by excellence,\nUnion Copper Rod delivers premium copper products that support critical industries across the region and beyond"}
+          title={"Driven by excellence,Union Copper Rod delivers premium copper products that support critical industries across the region and beyond"}
           buttonText="Company profile"
           buttonUrl="/aboutus"
         />
@@ -61,7 +61,7 @@ export default async function Home() {
 
       <ParallaxSection index={5}>
         <HorizontalScrollGallery 
-          images={['/slide1.png', '/slide2.png', '/slide3.png']}
+          images={['/home/slide1.png', '/home/slide2.png', '/home/slide3.png']}
         />
       </ParallaxSection>
 

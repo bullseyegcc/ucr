@@ -25,7 +25,7 @@ const LAB_EQUIPMENT = [
     imageHeight: 640,
   },
   {
-    image: "/lab3.png",
+    image: "/technology/lab3.png",
     title: "UTS (Ultimate Tensile Strength)",
     imageClassName: "h-[75%] lg:w-[90%] object-fit rounded-xl",
     imageWidth: 480,

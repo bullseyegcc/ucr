@@ -23,9 +23,9 @@ export default function Team() {
                 minHeightClass="min-h-[60vh] lg:min-h-[120vh]"
                 gapClass="gap-6 lg:gap-8 lg:gap-10"
             >
-                <Image src='/whitegradient.png' alt='Vector Image' width={1200} height={900} className=" hidden lg:block rotate-180  absolute -bottom-25 left-1/2 transform -translate-x-1/2  object-cover w-full" />
-                <Image src='/vector.png' alt='Vector Image' width={1200} height={900} className="rotate-180 opacity-70 absolute bottom-0 left-1/2 transform -translate-x-1/2  object-contain w-1/3" />
-                <Image src="/teamhero.png" alt="Team Image" width={1920} height={1080} className="w-full absolute -bottom-4 object-center lg:object-cover rounded-lg " />
+                <Image src='/shared/whitegradient.png' alt='Vector Image' width={1200} height={900} className=" hidden lg:block rotate-180  absolute -bottom-25 left-1/2 transform -translate-x-1/2  object-cover w-full" />
+                <Image src='/shared/vector.png' alt='Vector Image' width={1200} height={900} className="rotate-180 opacity-70 absolute bottom-0 left-1/2 transform -translate-x-1/2  object-contain w-1/3" />
+                <Image src="/team/teamhero.png" alt="Team Image" width={1920} height={1080} className="w-full absolute -bottom-4 object-center lg:object-cover rounded-lg " />
             </Hero>
 
             <div>
@@ -34,7 +34,7 @@ export default function Team() {
 
             <div className="relative w-full overflow-x-hidden bg-[#F5F5F5]">
 
-                <Image src="/gradientcircle.png" alt="Wave Image" width={1920} height={1080} className="w-[40%] absolute  top-80  right-0 opacity-70 z-0" />                <ParallaxSection index={0}>                <div className="relative z-10">
+                <Image src="/shared/gradientcircle.png" alt="Wave Image" width={1920} height={1080} className="w-[40%] absolute  top-80  right-0 opacity-70 z-0" />                <ParallaxSection index={0}>                <div className="relative z-10">
                     <SuccessStrengthSection />
                 </div>
 

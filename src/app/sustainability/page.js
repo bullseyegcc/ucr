@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Badge } from "../../common/badge"
 import Image from "next/image"
-import badge_icon from "../../../public/badge.png"
+import badge_icon from "../../../public/shared/badge.png"
 import FadeIn from "../../animations/FadeIn"
 import SlideIn from "../../animations/SlideIn"
 import SequentialSlideIn from "../../animations/SequentialSlideIn"
@@ -80,17 +80,17 @@ const CERTIFICATIONS = [
 
 const PILLARS = [
   {
-    image: "/eco1.png",
+    image: "/sustainability/eco1.png",
     title: "Environmental Stewardship",
     body: "Managing environmental impacts through responsible resource use, energy and water stewardship, pollution prevention, waste management, and continual improvement.",
   },
   {
-    image: "/eco3.png",
+    image: "/sustainability/eco3.png",
     title: "People & Safety",
     body: "Supporting people, communities, ethical business practices, stakeholder engagement, and responsible governance across our operations.",
   },
   {
-    image: "/eco2.png",
+    image: "/sustainability/eco2.png",
     title: "Circular Economy",
     body: "Promoting resource efficiency, material recovery, recycling, reuse, and circular manufacturing practices throughout our value chain.",
   },
@@ -120,7 +120,7 @@ const KNOW_MORE_ITEMS = [
 const ELEMENTS = [
   {
     id: "responsible-sourcing",
-    icon: "/ecofeature1.png",
+    icon: "/sustainability/ecofeature1.png",
     title: "Responsible Sourcing",
     body: "Responsible Materials. Trusted Partners.",
     modalBody:
@@ -131,7 +131,7 @@ const ELEMENTS = [
   },
   {
     id: "energy-conscious",
-    icon: "/ecofeature2.png",
+    icon: "/sustainability/ecofeature2.png",
     title: "Energy-Conscious Operations",
     body: "Smarter Energy. Better Performance.",
     modalBody:
@@ -140,7 +140,7 @@ const ELEMENTS = [
   },
   {
     id: "community-stakeholder",
-    icon: "/ecofeature3.png",
+    icon: "/sustainability/ecofeature3.png",
     title: "Community & Stakeholder Engagement",
     body: "Listening, collaborating, growing together",
     modalBody:
@@ -151,7 +151,7 @@ const ELEMENTS = [
   },
   {
     id: "governance-ethics",
-    icon: "/ecofeature4.png",
+    icon: "/sustainability/ecofeature4.png",
     title: "Governance & Ethical Business Practices",
     body: "Integrating in every decision",
     modalBody:

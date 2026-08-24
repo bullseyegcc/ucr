@@ -24,12 +24,12 @@ export default function Quality() {
           type: "image-inline",
           style: {
             background:
-              "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/qualitybg.png') lightgray 50% / cover no-repeat",
+              "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/quality/qualitybg.png') lightgray 50% / cover no-repeat",
           },
         }}
       >
         <Image
-          src="/ribbin.png"
+          src="/shared/ribbin.png"
           alt="Icon"
           width={300}
           height={0}
@@ -65,7 +65,7 @@ export default function Quality() {
 
           <div className="w-full sm:w-[80%] lg:w-[65%] flex items-center justify-center mx-auto px-6 sm:px-0">
             <Image
-              src="/gradientcircle.png"
+              src="/shared/gradientcircle.png"
               alt="Icon"
               width={400}
               height={0}
@@ -74,7 +74,7 @@ export default function Quality() {
 
             <CardAnimation index={0} className="w-full">
               <Image
-                src="/certificate.png"
+                src="/shared/certificate.png"
                 alt="Icon"
                 width={900}
                 height={0}
@@ -127,7 +127,7 @@ export default function Quality() {
               >
                 <div className="overflow-hidden rounded-2xl w-full h-[58vh] min-h-[62vh] lg:h-[72vh] lg:min-h-[72vh]">
                   <Image
-                    src="/Quality/card1.svg"
+                    src="/quality/card1.svg"
                     alt="Certification"
                     width={450}
                     height={567}
@@ -136,7 +136,7 @@ export default function Quality() {
                 </div>
                 <div className="bg-white relative overflow-hidden rounded-2xl w-full h-[58vh] min-h-[62vh] lg:h-[66vh] lg:min-h-[66vh]">
                   <Image
-                    src="/Quality/card2.svg"
+                    src="/quality/card2.svg"
                     alt="Certification"
                     width={450}
                     height={567}
@@ -145,7 +145,7 @@ export default function Quality() {
                 </div>
                 <div className="bg-white relative overflow-hidden rounded-2xl w-full h-[58vh] min-h-[62vh] lg:h-[66vh] lg:min-h-[66vh]">
                   <Image
-                    src="/Quality/card3.svg"
+                    src="/quality/card3.svg"
                     alt="Certification"
                     width={450}
                     height={567}
@@ -158,7 +158,7 @@ export default function Quality() {
 
           {/* transition bar — flush under cards, above quote section */}
           <Image
-            src="/orangebottom.png"
+            src="/quality/orangebottom.png"
             alt=""
             width={900}
             height={0}

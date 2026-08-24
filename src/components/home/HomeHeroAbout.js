@@ -15,11 +15,16 @@ export default function HomeHeroAbout() {
   }, []);
 
   useEffect(() => {
-    window.__pageScrollLocked = true;
-    window.lenisInstance?.stop();
+    // Only seed the lock flag for first paint. SnippScrol owns start/stop —
+    // forcing lenis.stop() here races zoom/resize rebuilds and can leave scroll stuck.
+    if (!window.__heroAboutPlaced) {
+      window.__pageScrollLocked = true;
+    }
     return () => {
       window.__pageScrollLocked = false;
       window.lenisInstance?.start();
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
     };
   }, []);
 

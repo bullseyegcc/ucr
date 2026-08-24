@@ -4,9 +4,9 @@ import Image from 'next/image';
 import CardAnimation from '../../animations/CardAnimation';
 
 const members = [
-  { src: '/chairman.png',      name: "Diam O'Sullivan", role: 'Honorable Chairman' },
-  { src: '/cofounder.png',     name: "Liam O'Sullivan", role: 'Co-Founder & COO' },
-  { src: '/cheftechnology.png',name: "Samantha Chen", role: 'Chief Technology Officer' },
+  { src: '/team/chairman.png',      name: "Diam O'Sullivan", role: 'Honorable Chairman' },
+  { src: '/team/cofounder.png',     name: "Liam O'Sullivan", role: 'Co-Founder & COO' },
+  { src: '/team/cheftechnology.png',name: "Samantha Chen", role: 'Chief Technology Officer' },
 ];
 
 export default function TeamCards() {

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { Badge, Badgetextwhite, WhiteBadge } from "@/common/badge";
@@ -114,6 +114,9 @@ function HeroOverlapMedia({ media }) {
     className = "",
     videoClassName = "w-full h-full object-cover rounded-xl",
     imageClassName = "object-cover",
+    priority = false,
+    sizes = "(max-width: 1024px) 95vw, 90vw",
+    quality = 90,
   } = media;
 
   const containerClass = className || OVERLAP_MEDIA;
@@ -122,7 +125,15 @@ function HeroOverlapMedia({ media }) {
     type === "video" ? (
       <VideoPlayer src={src} className={videoClassName} />
     ) : (
-      <Image src={src} alt={alt} fill className={imageClassName} />
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className={imageClassName}
+        priority={priority}
+        sizes={sizes}
+        quality={quality}
+      />
     );
 
   return (
@@ -238,7 +249,7 @@ export default function Hero({
           background={{
             type: "gradient",
             src: "from-[#FF6A00] to-[#FF8C42]",
-            imageSrc: "/productdetailbg.png",
+            imageSrc: "/products/productdetailbg.png",
           }}
         />
         <h1

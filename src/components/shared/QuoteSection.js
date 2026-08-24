@@ -5,10 +5,10 @@ import ScrollReveal from "../../animations/ScrollReveal";
 
 export default function QuoteSection() {
   return (
-    <div className="min-h-[60vh] lg:min-h-[80vh] rounded-t-lg bg-[url('/gradient-bg.png')] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center gap-4 lg:gap-6 px-6 text-center py-12 lg:py-20">
+    <div className="min-h-[60vh] lg:min-h-[80vh] rounded-t-lg bg-[url('/shared/gradient-bg.png')] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center gap-4 lg:gap-6 px-6 text-center py-12 lg:py-20">
       <div className="flex flex-col w-full lg:w-[80%]">
         <Image
-          src="/quote.png"
+          src="/shared/quote.png"
           alt="Icon"
           width={40}
           height={0}
@@ -33,7 +33,7 @@ export default function QuoteSection() {
             delivering lasting value.
           </ScrollReveal>
           <Image
-            src="/quote.png"
+            src="/shared/quote.png"
             alt="Icon"
             width={40}
             height={0}
@@ -44,7 +44,7 @@ export default function QuoteSection() {
 
       <div className="flex flex-col justify-center items-center gap-2 lg:gap-4">
         <Image
-          src="/diamsign.png"
+          src="/shared/diamsign.png"
           alt="Icon"
           width={150}
           height={0}

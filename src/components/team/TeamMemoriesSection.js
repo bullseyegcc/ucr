@@ -8,11 +8,11 @@ import { gsap } from "gsap";
 
 export default function TeamMemoriesSection() {
   const galleryItems = [
-    { image: "/t2-22.png", year: "2023", caption: "Team collaboration" },
-    { image: "/t1-11.png", year: "2024", caption: "New year celebration" },
-    { image: "/t3-33.png", year: "2022", caption: "Annual Picnic" },
-    { image: "/t4.jpg", year: "2021", caption: "Team moments" },
-    { image: "/t5.jpg", year: "2020", caption: "Team building" },
+    { image: "/team/t2-22.png", year: "2023", caption: "Team collaboration" },
+    { image: "/team/t1-11.png", year: "2024", caption: "New year celebration" },
+    { image: "/team/t3-33.png", year: "2022", caption: "Annual Picnic" },
+    { image: "/team/t4.jpg", year: "2021", caption: "Team moments" },
+    { image: "/team/t5.jpg", year: "2020", caption: "Team building" },
   ];
 
   const [activeIdx, setActiveIdx] = useState(1);

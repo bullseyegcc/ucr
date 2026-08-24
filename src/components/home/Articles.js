@@ -11,25 +11,25 @@ const FALLBACK_POSTS = [
     title: "UAE Copper Producer Expands Global Supply Network Across Asia & Europe",
     author: "Bruce Sommers",
     date: "Monday, April 28, 2026",
-    image: "/hblog1.png",
+    image: "/blogs/hblog1.png",
   },
   {
     slug: "high-conductivity-copper-rods-energy-sector",
     title: "Company Launches New High-Conductivity Copper Rods for Energy Sector",
     author: "Bruce Sommers",
     date: "Monday, April 28, 2026",
-    image: "/hblog2.png",
+    image: "/blogs/hblog2.png",
   },
   {
     slug: "expected-supply-deficit-copper-prices",
     title: "Expected Supply Deficit To Upset Copper Prices",
     author: "Bruce Sommers",
     date: "Monday, April 28, 2026",
-    image: "/blog2.png",
+    image: "/blogs/blog2.png",
   },
 ];
 
-const CARD_FALLBACKS = ["/hblog1.png", "/hblog2.png", "/blog2.png"];
+const CARD_FALLBACKS = ["/blogs/hblog1.png", "/blogs/hblog2.png", "/blogs/blog2.png"];
 
 function mapHomePosts(posts) {
   if (!posts?.length) return FALLBACK_POSTS;

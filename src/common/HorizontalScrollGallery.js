@@ -9,7 +9,7 @@ export default function HorizontalScrollGallery({ images = [] }) {
   const innerRef = useRef(null);
   const tweenRef = useRef(null);
 
-  const defaultImages = ['/slide1.png', '/slide2.png', '/slide3.png'];
+  const defaultImages = ['/home/slide1.png', '/home/slide2.png', '/home/slide3.png'];
   const imgs = images.length > 0 ? images : defaultImages;
   // Duplicate for seamless infinite loop
   const loopImgs = [...imgs, ...imgs];

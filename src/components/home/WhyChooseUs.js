@@ -21,9 +21,10 @@ export default function WhyChooseUs() {
         <SlideIn direction="bottom" scrollTrigger={true} duration={0.8}>
           <Badge title="Core Strength" />
         </SlideIn>
-        <FadeIn className=" mt-6" scrollTrigger={true} duration={0.8}>
+        <SlideIn direction="bottom" scrollTrigger={true} duration={0.8}>
+
           <h1 className="   font-medium text-[#272A2A] text-[32px] leading-[36px] tracking-[-1.4px] align-middle lg:text-[64px] lg:leading-[72px] lg:tracking-[-1.4px]">We are different</h1>
-        </FadeIn>
+        </SlideIn>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 sm:grid-rows-2 gap-6 items-stretch">
@@ -39,7 +40,15 @@ export default function WhyChooseUs() {
               className="h-full w-full object-cover rounded-xl"
             />
           </div>
-          <Image data-fi src="/sign.png" alt="Icon" width={80} height={0} className="absolute top-5 px-10 z-10" style={{ willChange: 'transform, opacity' }} />
+          <Image
+            data-fi
+            src="/home/sign.png"
+            alt=""
+            width={80}
+            height={80}
+            className="pointer-events-none absolute top-5 left-5 lg:top-6 lg:left-6 z-10 w-[3.5rem] lg:w-[5rem] h-auto"
+            style={{ willChange: "transform, opacity" }}
+          />
           <div className="text-white absolute bottom-10 px-10 z-10">
             <h1 data-ft className="text-3xl" style={{ willChange: 'transform, opacity' }}>UAE excellence</h1>
             <p data-fd className="text-sm mt-2" style={{ willChange: 'transform, opacity' }}>Factory in a world-class industrial hub</p>
@@ -50,7 +59,7 @@ export default function WhyChooseUs() {
 
         {[
           {
-            src: '/gn.png',
+            src: '/home/gn.png',
             h: 0,
             title: 'Global network',
             w: 140,
@@ -58,7 +67,7 @@ export default function WhyChooseUs() {
               "UCR's range of products, services, and solutions makes it a single source for various copper-related needs, with connection of international institutions",
           },
           {
-            src: '/p.png',
+            src: '/home/p.png',
             h: 40,
             title: 'Partnership approach',
             w: 140,
@@ -66,7 +75,7 @@ export default function WhyChooseUs() {
               'We strive to partner with those who share a genuine commitment to growing together. We work towards building long-term relationships',
           },
           {
-            src: '/sf.png',
+            src: '/home/sf.png',
             h: 40,
             title: 'Sustainable innovation',
             w: 140,
@@ -74,7 +83,7 @@ export default function WhyChooseUs() {
               'Making sure we meet the highest environmental standards, procure the relevant certifications, and focus on secondary copper recycling',
           },
           {
-            src: '/ribbin.png',
+            src: '/shared/ribbin.png',
             h: 40,
             title: 'Solution providers',
             w: 140,

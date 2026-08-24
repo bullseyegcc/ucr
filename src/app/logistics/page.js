@@ -26,12 +26,12 @@ export default function Logistics() {
                 gapClass="gap-2"
                 background={{
                     type: "image",
-                    src: "/logisticsbg.png",
+                    src: "/logistics/logisticsbg.png",
                     imageClassName: "bg-bottom bg-center",
                 }}
                 media={{
                     type: "image",
-                    src: "/logisticspic.png",
+                    src: "/logistics/logisticspic.png",
                     alt: "UCR logistics operations",
                 }}
             />
@@ -76,7 +76,7 @@ export default function Logistics() {
 
                         </div>
 
-                        <Image src="/logistics1.svg" alt="Supply chain truck" width={437} height={336} className="pointer-events-none absolute bottom-0 left-0 z-0 w-[92%] h-auto max-w-none" />
+                        <Image src="/logistics/logistics1.svg" alt="Supply chain truck" width={437} height={336} className="pointer-events-none absolute bottom-0 left-0 z-0 w-[92%] h-auto max-w-none" />
 
                     </div>
 
@@ -94,7 +94,7 @@ export default function Logistics() {
 
                         </div>
 
-                        <Image src="/logistics2.svg" alt="Yearly cargo container" width={257} height={446} className="pointer-events-none absolute -bottom-16 right-0 z-0 w-[68%] lg:w-[72%] h-auto max-w-none" />
+                        <Image src="/logistics/logistics2.svg" alt="Yearly cargo container" width={257} height={446} className="pointer-events-none absolute -bottom-16 right-0 z-0 w-[68%] lg:w-[72%] h-auto max-w-none" />
 
                     </div>
 
@@ -112,7 +112,7 @@ export default function Logistics() {
 
                         </div>
 
-                        <Image src="/logistics3.svg" alt="Global logistics ship" width={249} height={172} className="pointer-events-none absolute -bottom-2 -right-9 z-0 w-[58%] lg:w-[62%] h-auto max-w-none" />
+                        <Image src="/logistics/logistics3.svg" alt="Global logistics ship" width={249} height={172} className="pointer-events-none absolute -bottom-2 -right-9 z-0 w-[58%] lg:w-[62%] h-auto max-w-none" />
 
                     </div>
 
@@ -144,7 +144,7 @@ export default function Logistics() {
 
                         </div>
 
-                        <Image src="/logistics6.svg" alt="Warehousing facility" width={333} height={343} className="pointer-events-none absolute bottom-0 right-0 z-0 w-[72%] h-auto max-w-none" />
+                        <Image src="/logistics/logistics6.svg" alt="Warehousing facility" width={333} height={343} className="pointer-events-none absolute bottom-0 right-0 z-0 w-[72%] h-auto max-w-none" />
 
                     </div>
 
@@ -162,7 +162,7 @@ export default function Logistics() {
 
                         </div>
 
-                        <Image src="/logistics5.svg" alt="Port and customs container" width={320} height={329} className="pointer-events-none absolute bottom-0 right-0 z-0 w-[70%] h-auto max-w-none" />
+                        <Image src="/logistics/logistics5.svg" alt="Port and customs container" width={320} height={329} className="pointer-events-none absolute bottom-0 right-0 z-0 w-[70%] h-auto max-w-none" />
 
                     </div>
 
@@ -180,7 +180,7 @@ export default function Logistics() {
 
                         </div>
 
-                        <Image src="/exp3.png" alt="Global destinations globe" width={300} height={80} className="pointer-events-none absolute bottom-0 right-0 z-0 w-[82%] h-auto max-w-none" />
+                        <Image src="/about/exp3.png" alt="Global destinations globe" width={300} height={80} className="pointer-events-none absolute bottom-0 right-0 z-0 w-[82%] h-auto max-w-none" />
 
                     </div>
 

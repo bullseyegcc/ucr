@@ -15,6 +15,8 @@ import {
 
 /** Distance over which the bar eases from glass to solid. */
 const FADE_DISTANCE_PX = 280;
+/** Homepage: About panel starts driving the solid navbar in this final slide range. */
+const ABOUT_NAV_FADE_START = 0.82;
 
 const SPRING = {
     stiffness: 48,
@@ -31,6 +33,14 @@ function getScrollY() {
 function scrollToProgress(y) {
     const t = Math.min(1, Math.max(0, y / FADE_DISTANCE_PX));
     return t * t * (3 - 2 * t);
+}
+
+/** Map About slide progress → navbar solid as About's top reaches the bar. */
+function aboutSlideToNavProgress(aboutProgress) {
+    if (window.__heroAboutPlaced) return 1;
+    const p = Math.max(0, Math.min(1, aboutProgress ?? 0));
+    if (p <= ABOUT_NAV_FADE_START) return 0;
+    return (p - ABOUT_NAV_FADE_START) / (1 - ABOUT_NAV_FADE_START);
 }
 
 function isSolidNavbarPath(pathname) {
@@ -69,13 +79,21 @@ export const Navbar = () => {
     }, [solidByDefault]);
 
     const syncProgress = useCallback((instant = false) => {
-        const next = solidByDefault ? 1 : scrollToProgress(getScrollY());
+        let next = solidByDefault ? 1 : scrollToProgress(getScrollY());
+        // Homepage hero→About uses locked scroll (scrollY stays 0), so drive
+        // the solid state from About panel progress as it reaches the navbar.
+        if (!solidByDefault && pathname === '/') {
+            next = Math.max(
+                next,
+                aboutSlideToNavProgress(window.__heroAboutProgress ?? 0),
+            );
+        }
         if (instant || reducedMotion) {
             progress.jump(next);
         } else {
             progress.set(next);
         }
-    }, [progress, reducedMotion, solidByDefault]);
+    }, [pathname, progress, reducedMotion, solidByDefault]);
 
     useEffect(() => progress.on('change', applyOpaqueFlag), [applyOpaqueFlag, progress]);
 
@@ -108,10 +126,18 @@ export const Navbar = () => {
         attachLenis();
         window.addEventListener('lenisReady', attachLenis);
 
+        // Homepage About slide does not move window scroll — listen directly.
+        const onHeroAboutProgress = () => syncProgress();
+        const onHeroAboutPlaced = () => syncProgress(true);
+        window.addEventListener('heroAboutProgress', onHeroAboutProgress);
+        window.addEventListener('heroAboutPlaced', onHeroAboutPlaced);
+
         return () => {
             window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('lenisReady', attachLenis);
             attachedLenis?.off('scroll', handleScroll);
+            window.removeEventListener('heroAboutProgress', onHeroAboutProgress);
+            window.removeEventListener('heroAboutPlaced', onHeroAboutPlaced);
         };
     }, [syncProgress]);
 
@@ -208,7 +234,7 @@ export const Navbar = () => {
                 >
                     <motion.div className="absolute inset-0" style={{ opacity: logoLightOpacity }}>
                         <Image
-                            src="/logo.png"
+                            src="/shared/logo.png"
                             alt="Logo"
                             fill
                             priority
@@ -218,7 +244,7 @@ export const Navbar = () => {
                     </motion.div>
                     <motion.div className="absolute inset-0" style={{ opacity: logoDarkOpacity }}>
                         <Image
-                            src="/clogo.png"
+                            src="/shared/clogo.png"
                             alt=""
                             fill
                             sizes="144px"

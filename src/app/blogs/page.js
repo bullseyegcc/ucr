@@ -19,7 +19,7 @@ export default async function BlogsPage() {
           type: "image-inline",
           style: {
             background:
-              "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/blogsbg.png') lightgray 50% / cover no-repeat",
+              "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url('/blogs/blogsbg.png') lightgray 50% / cover no-repeat",
           },
         }}
       />
