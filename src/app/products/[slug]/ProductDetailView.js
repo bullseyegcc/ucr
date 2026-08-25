@@ -23,7 +23,7 @@ export default function ProductDetailView({ product }) {
 
   const description = product.longDescription || product.description;
   const imageSrc = product.icon || "/products/pdetail.png";
-  const imageFit = product.imageFit === "contain" ? "object-contain" : "object-cover";
+  const imageFit = product.imageFit === "cover" ? "object-cover" : "object-contain";
   const packagingEntries = product.packagingDimensions || [];
   const structuredParams = product.technicalParameters?.some(
     (row) => row.unit || row.astm || row.ucr,
@@ -107,13 +107,15 @@ export default function ProductDetailView({ product }) {
               </button>
             </div>
             <div className="w-full lg:w-1/2 mt-6 lg:mt-0">
-              <Image
-                src={imageSrc}
-                alt={product.name}
-                width={1200}
-                height={600}
-                className={`w-full h-48 sm:h-72 lg:h-[420px] ${imageFit} rounded-lg shadow bg-white`}
-              />
+              <div className="relative w-full h-48 sm:h-72 lg:h-[420px] overflow-hidden rounded-lg shadow bg-white">
+                <Image
+                  src={imageSrc}
+                  alt={product.name}
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className={`${imageFit} object-center p-3 sm:p-5`}
+                />
+              </div>
             </div>
           </div>
 

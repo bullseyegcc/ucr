@@ -77,7 +77,7 @@ export default function AboutUs() {
             blurStrength={0}
             containerClassName="whitespace-pre-line text-center font-medium text-primary text-[28px] leading-[44px] tracking-[-0.53px] lg:text-[40px] lg:font-normal lg:leading-[56px] lg:tracking-[-1.4px]"
           >
-            Since 2008, we&apos;ve delivered reliable, high performance copper
+            Since 2008, we’ve delivered reliable, high performance copper
             solutions to industries across more than 50+ countries, supported by
             advanced technology and a strong focus on environmental
             responsibility. Guided by our core values, we work to elevate
@@ -271,5 +271,3 @@ export default function AboutUs() {
     </div>
   );
 }
-
-

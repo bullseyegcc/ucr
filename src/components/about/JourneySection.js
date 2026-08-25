@@ -16,7 +16,7 @@ const journeyData = [
     title: "Union Copper Rod Is Established",
     description:
       "UCR was established in Abu Dhabi with a clear ambition: to build a world-class copper rod manufacturing facility serving the region's growing electrical and industrial needs.",
-    image: "/about/2009img.png",
+    image: "/about/story-1.png",
   },
   {
     year: "2009",
@@ -24,7 +24,7 @@ const journeyData = [
     title: "From vision to manufacturing",
     description:
       "UCR commenced commercial production, bringing its advanced copper rod manufacturing capabilities into operation at Industrial City of Abu Dhabi.",
-    image: "/about/aboutimg.png",
+    image: "/about/story-2.png",
   },
   {
     year: "2012",
@@ -32,7 +32,7 @@ const journeyData = [
     title: "International standards from the start",
     description:
       "UCR achieved ISO 9001, ISO 14001 and OHSAS 18001 certifications, establishing quality, environmental management and occupational safety as core operating standards.",
-    image: "/home/excellence.png",
+    image: "/about/story-3.png",
   },
   {
     year: "2018",
@@ -40,7 +40,7 @@ const journeyData = [
     title: "Growing beyond borders",
     description:
       "UCR reached a new level of regional maturity, strengthening its position as the Middle East's largest copper rod production facility and expanding its role in serving customers across the region.",
-    image: "/home/moreabout.png",
+    image: "/about/story-4.png",
   },
   {
     year: "2020",
@@ -48,7 +48,7 @@ const journeyData = [
     title: "Building a more connected business",
     description:
       "UCR began its SAP implementation, strengthening its operational, financial and supply-chain systems to support a growing manufacturing and distribution network.",
-    image: "/about/ourcompany.png",
+    image: "/about/story-5.png",
   },
   {
     year: "2024",
@@ -56,7 +56,7 @@ const journeyData = [
     title: "Quality meets responsibility",
     description:
       "UCR achieved EPD certification for its ETP Copper Rods and advanced its sustainability journey, providing transparent information on product environmental impact while reinforcing its commitment to responsible manufacturing.",
-    image: "/home/recycle.png",
+    image: "/about/story-6.png",
   },
 ];
 
@@ -401,7 +401,9 @@ export default function JourneySection() {
               return (
                 <div
                   key={item.year}
-                  className={`relative ${CARD_SHELL} ${isActive ? "z-10" : "z-0"}`}
+                  className={`relative ${CARD_SHELL} ${
+                    isActive ? "z-10" : "z-0"
+                  }`}
                   aria-hidden={!isActive}
                 >
                   <JourneyCard item={item} priority={i === 0} />
@@ -478,7 +480,10 @@ export default function JourneySection() {
               <div
                 className="h-full rounded-full bg-white transition-[width] duration-[400ms] ease-out"
                 style={{
-                  width: `${getTimelineProgress(activeIndex, journeyData.length)}%`,
+                  width: `${getTimelineProgress(
+                    activeIndex,
+                    journeyData.length
+                  )}%`,
                 }}
               />
             </div>
@@ -511,8 +516,8 @@ export default function JourneySection() {
                         isActive
                           ? "h-[clamp(2.25rem,5.2vh,3.25rem)] w-[clamp(2.25rem,5.2vh,3.25rem)] bg-[#FA6E43] shadow-[0_0_0_clamp(6px,1.2vh,16px)_rgba(250,140,90,0.42),0_0_clamp(14px,2.8vh,32px)_clamp(3px,0.6vh,8px)_rgba(250,110,67,0.2)]"
                           : isCompleted
-                            ? "h-[clamp(1rem,2.3vh,1.25rem)] w-[clamp(1rem,2.3vh,1.25rem)] bg-white"
-                            : "h-[clamp(0.875rem,2.1vh,1.125rem)] w-[clamp(0.875rem,2.1vh,1.125rem)] bg-white/50"
+                          ? "h-[clamp(1rem,2.3vh,1.25rem)] w-[clamp(1rem,2.3vh,1.25rem)] bg-white"
+                          : "h-[clamp(0.875rem,2.1vh,1.125rem)] w-[clamp(0.875rem,2.1vh,1.125rem)] bg-white/50"
                       }`}
                     >
                       {isActive ? (

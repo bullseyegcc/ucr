@@ -50,15 +50,25 @@ export default function OurValues() {
         <div className="relative z-10 mx-auto w-full">
           {/* Header */}
           <div className="w-full flex flex-col lg:flex-row lg:justify-between lg:items-start gap-4  lg:gap-12 mb-12 lg:mb-16">
-            <SlideIn direction="left" duration={0.8} scrollTrigger={true} className="">
+            <SlideIn
+              direction="left"
+              duration={0.8}
+              scrollTrigger={true}
+              className=""
+            >
               <p className="text-primary uppercase text-[1rem] tracking-[0.1em] lg:text-[1.125rem]">
                 Build on integrity, powered by innovation
               </p>
-              <h1 className="font-medium text-[26px] leading-[48px] tracking-[-1.4px] lg:w-[80%] lg:text-[50px] lg:leading-[64px] text-black mt-4 lg:mt-6 uppercase">
+              <h1 className="font-medium text-[26px] leading-[48px] tracking-[-1.4px] lg:w-[80%] lg:text-[50px] lg:leading-[64px] text-black mt-4 lg:mt-6">
                 Beyond copper, we build trust & reliability
               </h1>
             </SlideIn>
-            <SlideIn direction="right" duration={0.8} scrollTrigger={true} className=" lg:pt-12">
+            <SlideIn
+              direction="right"
+              duration={0.8}
+              scrollTrigger={true}
+              className=" lg:pt-12"
+            >
               <p className=" max-w-2xl text-ellipsis text-[#212225] text-[16px] font-normal leading-[30px] tracking-[-0.45px] lg:text-[22px]">
                 We don't just produce copper — we shape reliability, innovation,
                 and sustainability into every product we deliver.
@@ -85,8 +95,8 @@ export default function OurValues() {
                 <h2 className={VALUE_CARD_TITLE}>Excel always</h2>
                 <p className={VALUE_CARD_BODY}>
                   We ensure that every product we make and service we offer
-                  elevates industry standards through careful attention to detail
-                  and quality checks.
+                  elevates industry standards through careful attention to
+                  detail and quality checks.
                 </p>
               </div>
             </div>
@@ -194,7 +204,11 @@ export default function OurValues() {
           </FadeIn>
         </div>
 
-        <FadeIn duration={0.8} scrollTrigger={true} className="mt-8 w-full lg:mt-12">
+        <FadeIn
+          duration={0.8}
+          scrollTrigger={true}
+          className="mt-8 w-full lg:mt-12"
+        >
           <Image
             src="/our-values/peoplesection.svg"
             alt="UCR team members"
