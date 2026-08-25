@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Badge } from '../../common/badge';
-import { WhiteBadge } from '../../common/badge';
-import FadeIn from '../../animations/FadeIn';
-import SlideIn from '../../animations/SlideIn';
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Badge } from "../../common/badge";
+import { WhiteBadge } from "../../common/badge";
+import FadeIn from "../../animations/FadeIn";
+import SlideIn from "../../animations/SlideIn";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,18 +28,18 @@ export default function MissionValuesSection() {
 
     // GPU-accelerated transforms for jank-free rendering
     gsap.set([mission, values], {
-      willChange: 'transform, opacity',
+      willChange: "transform, opacity",
       force3D: true,
-      backfaceVisibility: 'hidden',
+      backfaceVisibility: "hidden",
     });
 
-    mm.add({ isDesktop: '(min-width: 1024px)' }, (context) => {
+    mm.add({ isDesktop: "(min-width: 1024px)" }, (context) => {
       const { isDesktop } = context.conditions;
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
-          start: 'center center',
+          start: "center center",
           end: () => `+=${Math.max(window.innerHeight * 0.8, 500)}`,
           scrub: 1.8,
           pin: true,
@@ -54,17 +54,22 @@ export default function MissionValuesSection() {
       tl.fromTo(
         values,
         { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, ease: 'power2.out', force3D: true },
+        { y: 0, opacity: 1, ease: "power2.out", force3D: true },
         0
       );
 
       // on desktop give a subtle horizontal entrance
       if (isDesktop) {
-        tl.fromTo(values, { x: 40 }, { x: 0, ease: 'power2.out', force3D: true }, 0);
+        tl.fromTo(
+          values,
+          { x: 40 },
+          { x: 0, ease: "power2.out", force3D: true },
+          0
+        );
       }
 
       // polish scale
-      tl.fromTo(values, { scale: 0.98 }, { scale: 1, ease: 'power2.out' }, 0);
+      tl.fromTo(values, { scale: 0.98 }, { scale: 1, ease: "power2.out" }, 0);
 
       tlRef.current = tl;
       return () => {
@@ -86,14 +91,19 @@ export default function MissionValuesSection() {
     >
       <div className=" w-full flex flex-col lg:flex-row gap-6 items-stretch">
         {/* Mission Card */}
-        <SlideIn direction="left" scrollTrigger={true} duration={0.8} className="w-full lg:w-1/2">
+        <SlideIn
+          direction="left"
+          scrollTrigger={true}
+          duration={0.8}
+          className="w-full lg:w-1/2"
+        >
           <div
             ref={missionRef}
             className="min-h-96 rounded-3xl text-white px-10 py-8 flex flex-col justify-between"
             style={{
               backgroundImage: "url('/about/missionbg.png')",
-              backgroundSize: 'cover',
-              backgroundPosition: 'top',
+              backgroundSize: "cover",
+              backgroundPosition: "top",
             }}
           >
             <WhiteBadge title="our mission" className="mb-6" />
@@ -106,7 +116,8 @@ export default function MissionValuesSection() {
               start="top 92%"
             >
               <h1 className="text-2xl lg:text-4xl font-medium  leading-tight">
-                To deliver premium copper product and services that power progress and add value to a sustainable future
+                To deliver premium copper product and services that power
+                progress and add value to a sustainable future
               </h1>
             </FadeIn>
           </div>
@@ -129,7 +140,8 @@ export default function MissionValuesSection() {
             start="top 92%"
           >
             <h1 className="text-2xl lg:text-4xl font-medium text-black leading-tight">
-              To deliver premium copper product and services that power progress and add value to a sustainable future
+              To elevate industry standards with superior, customised copper
+              solutions and environmental responsibility.
             </h1>
           </FadeIn>
         </div>

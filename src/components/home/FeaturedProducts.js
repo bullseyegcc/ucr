@@ -33,7 +33,9 @@ const FALLBACK_PRODUCTS = [
   },
 ];
 
-const FALLBACK_BACKGROUNDS = FALLBACK_PRODUCTS.map((item) => item.backgroundImage);
+const FALLBACK_BACKGROUNDS = FALLBACK_PRODUCTS.map(
+  (item) => item.backgroundImage
+);
 
 function mapHomeProducts(products) {
   if (!products?.length) return FALLBACK_PRODUCTS;
@@ -120,7 +122,7 @@ export default function FeaturedProducts({ products }) {
                   type="button"
                 >
                   <h2
-                    className={`font-primary whitespace-nowrap leading-[1.1] tracking-[-0.06rem] ${
+                    className={`font-primary leading-[1.1] tracking-[-0.06rem] ${
                       activeTab === index
                         ? "text-primary font-medium text-[1.5rem] sm:text-[1.75rem] lg:text-[2.5rem] xl:text-[2.85rem] 2xl:text-[3.1rem]"
                         : "text-secondary font-normal text-[1.35rem] sm:text-[1.5rem] lg:text-[2.25rem] xl:text-[2.55rem] 2xl:text-[2.75rem]"

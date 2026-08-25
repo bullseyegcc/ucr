@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import StatsCard from '../../common/StatsCard';
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import StatsCard from "../../common/StatsCard";
 
 export default function AboutStats() {
   const rowRef = useRef(null);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const items = rowRef.current?.querySelectorAll('.stat-card-item');
+    if (typeof window === "undefined") return;
+    const items = rowRef.current?.querySelectorAll(".stat-card-item");
     if (!items?.length) return;
 
     let played = false;
@@ -24,7 +24,7 @@ export default function AboutStats() {
         y: 0,
         duration: 0.75,
         stagger: 0.18,
-        ease: 'power3.out',
+        ease: "power3.out",
         overwrite: true,
       });
     };
@@ -40,10 +40,10 @@ export default function AboutStats() {
     };
 
     if (window.__heroAboutPlaced) play();
-    window.addEventListener('heroAboutPlaced', onAboutPlaced);
+    window.addEventListener("heroAboutPlaced", onAboutPlaced);
 
     return () => {
-      window.removeEventListener('heroAboutPlaced', onAboutPlaced);
+      window.removeEventListener("heroAboutPlaced", onAboutPlaced);
       gsap.killTweensOf(items);
     };
   }, []);
@@ -79,7 +79,7 @@ export default function AboutStats() {
           <StatsCard
             mainHeading={250}
             showPlus
-            subHeading="Skilled Employees"
+            subHeading="Our Team"
             description="A dedicated team of experts committed to quality and innovation."
             index={2}
             skipEntrance
