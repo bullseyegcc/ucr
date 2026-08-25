@@ -24,7 +24,7 @@ export default function parentCompany() {
         background={{
           type: "image",
           src: "/parent-company/pcbg-1.png",
-          imageClassName: "bg-bottom bg-center",
+          imageClassName: "object-bottom object-center",
         }}
       />
 
@@ -162,7 +162,7 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
               imageWidth={290}
               imageHeight={80}
               descriptionClassName="pr-0 lg:pr-4 lg:max-w-[22rem]"
-              imageClassName="bottom-0 -right-6 w-[70%] rounded-b-2xl lg:w-[82%]"
+              imageClassName="bottom-0 -right-0 w-[70%] rounded-b-2xl lg:w-[100%]"
             />
 
             <ExpertiseCard
@@ -178,7 +178,7 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
               imageWidth={180}
               imageHeight={80}
               descriptionClassName="max-w-[14rem] lg:max-w-[16rem]"
-              imageClassName="bottom-0 -right-5 w-60 rounded-b-2xl lg:right-0 lg:w-76"
+              imageClassName="bottom-0 -right-28 w-60 rounded-b-2xl lg:right-0 lg:w-86"
             />
 
             <ExpertiseCard
@@ -193,8 +193,8 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
               imageWidth={600}
               imageHeight={200}
               contentClassName="pb-[42%]"
-              descriptionClassName="w-full max-w-none pr-0 lg:pr-4"
-              imageClassName="bottom-0 left-0 right-0 h-[120px] w-full rounded-b-2xl object-cover object-bottom lg:h-[150px]"
+              descriptionClassName="w-full max-w-sm pr-0 lg:pr-4"
+              imageClassName="-bottom-14 left-0 right-50 h-[120px] w-full rounded-b-2xl object-cover object-bottom lg:h-[250px]"
             />
           </div>
         </div>

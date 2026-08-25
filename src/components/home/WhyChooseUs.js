@@ -11,7 +11,7 @@ import CardAnimation from "@/animations/CardAnimation.js";
 export default function WhyChooseUs() {
   return (
     <div
-      className="bg-gradient-to-b from-white via-[#FDD4BB] to-white py-20 lg:py-24 z-0"
+      className="bg-gradient-to-b from-white via-[#FDD4BB] to-white pt-8 pb-20 lg:pt-10 lg:pb-24 z-0"
     >
       <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
       <div
@@ -62,7 +62,7 @@ export default function WhyChooseUs() {
             src: '/home/gn.png',
             h: 0,
             title: 'Global network',
-            w: 140,
+            w: 96,
             description:
               "UCR's range of products, services, and solutions makes it a single source for various copper-related needs, with connection of international institutions",
           },
@@ -70,7 +70,7 @@ export default function WhyChooseUs() {
             src: '/home/p.png',
             h: 40,
             title: 'Partnership approach',
-            w: 140,
+            w: 96,
             description:
               'We strive to partner with those who share a genuine commitment to growing together. We work towards building long-term relationships',
           },
@@ -78,22 +78,22 @@ export default function WhyChooseUs() {
             src: '/home/sf.png',
             h: 40,
             title: 'Sustainable innovation',
-            w: 140,
+            w: 96,
             description:
               'Making sure we meet the highest environmental standards, procure the relevant certifications, and focus on secondary copper recycling',
           },
           {
-            src: '/shared/ribbin.png',
+            src: '/home/ribbin.png',
             h: 40,
             title: 'Solution providers',
-            w: 140,
+            w: 96,
             description:
               'We are introducing new products, and aspire to be a one stop shop, to effectively meet and surpass client needs',
           },
         ].map((card) => (
           <CardAnimation key={card.title} className="h-full min-h-0">
             <div
-              className="w-full h-full bg-white rounded-xl p-8 flex flex-col justify-between group cursor-pointer transition-all duration-400 ease-out"
+              className="w-full h-full bg-white rounded-3xl p-8 lg:p-10 flex flex-col group cursor-pointer transition-all duration-400 ease-out"
             >
               <Image
                 data-ci
@@ -101,20 +101,20 @@ export default function WhyChooseUs() {
                 alt={card.title}
                 width={card.w}
                 height={card.h}
-                className="mb-6 transition-transform duration-400"
+                className="mb-8 lg:mb-10 w-[6rem] h-auto transition-transform duration-400"
                 style={{ willChange: 'transform, opacity' }}
               />
-              <div>
+              <div className="flex flex-col gap-3 lg:gap-4">
                 <h1
                   data-ct
-                  className="   font-medium text-black text-[24px] leading-[42.63px] tracking-[-1.94px] align-middle lg:text-[32px] lg:leading-[52.8px] lg:tracking-[-1.4px]"
+                  className="font-medium text-black text-[24px] leading-[1.2] tracking-[-1.4px] lg:text-[32px] lg:tracking-[-1.4px]"
                   style={{ willChange: 'transform, opacity' }}
                 >
                   {card.title}
                 </h1>
                 <p
                   data-cd
-                  className="   font-normal text-[15.5px] leading-[23.74px] tracking-[-0.85px] align-middle lg:text-[19.2px] lg:leading-[29.4px] lg:tracking-[-1.05px]"
+                  className="font-normal text-[#212225] text-[15.5px] leading-[1.5] tracking-[-0.85px] lg:text-[19.2px] lg:leading-[1.5] lg:tracking-[-1.05px]"
                   style={{ willChange: 'transform, opacity' }}
                 >
                   {card.description}

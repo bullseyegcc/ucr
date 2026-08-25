@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Badge } from "../../common/badge";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -63,70 +63,106 @@ const journeyData = [
 const SECTION_BG =
   "linear-gradient(180deg, #FFF8F4 0%, #F6D0C0 55%, #F0A888 100%)";
 
-function DiagonalRays() {
-  return (
-    <div
-      className="pointer-events-none absolute inset-y-0 right-0 w-[45%] overflow-hidden"
-      aria-hidden
-    >
-      {[
-        { top: "2%", width: "55%" },
-        { top: "10%", width: "70%" },
-        { top: "18%", width: "85%" },
-        { top: "26%", width: "68%" },
-        { top: "34%", width: "48%" },
-      ].map((ray, i) => (
-        <span
-          key={i}
-          className="absolute right-[-10%] h-[clamp(0.5rem,1.2cqi,0.875rem)] rounded-full bg-white/20"
-          style={{
-            top: ray.top,
-            width: ray.width,
-            transform: "rotate(36deg)",
-            transformOrigin: "right center",
-          }}
-        />
-      ))}
-    </div>
-  );
+/** Soft side fades — horizontal + vertical so top/corners blend into the section */
+const EDGE_FADE_LEFT =
+  "linear-gradient(to right, black 0%, rgba(0,0,0,0.7) 40%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)";
+const EDGE_FADE_RIGHT =
+  "linear-gradient(to left, black 0%, rgba(0,0,0,0.7) 40%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)";
+const EDGE_FADE_MASK = {
+  WebkitMaskComposite: "source-in",
+  maskComposite: "intersect",
+};
+
+const ARROW_BTN =
+  "absolute top-1/2 z-30 flex h-[clamp(2.25rem,3.2vw,3rem)] w-[clamp(2.25rem,3.2vw,3rem)] -translate-y-1/2 items-center justify-center rounded-full border-[1.5px] transition-colors";
+
+/** Shared card width — track items + timeline stay aligned */
+const CARD_WIDTH =
+  "w-[min(88vw,21rem)] md:w-[min(76vw,54rem)] lg:w-[min(72vw,56rem)]";
+
+const CARD_SHELL = `h-full max-h-[min(70dvh,30rem)] shrink-0 self-center md:max-h-[min(74dvh,34rem)] lg:max-h-[min(78dvh,36rem)] ${CARD_WIDTH}`;
+
+const CARD_GAP = "gap-[clamp(4.5rem,11vw,10.5rem)]";
+
+/** Settle zones at pin start/end — no card movement during this portion of scroll */
+const PIN_BUFFER_RATIO = 0.075;
+
+function cardProgressToTimeline(cardProgress) {
+  return PIN_BUFFER_RATIO + cardProgress * (1 - 2 * PIN_BUFFER_RATIO);
 }
+
+function timelineProgressToCard(timelineProgress) {
+  if (timelineProgress <= PIN_BUFFER_RATIO) return 0;
+  if (timelineProgress >= 1 - PIN_BUFFER_RATIO) return 1;
+  return (timelineProgress - PIN_BUFFER_RATIO) / (1 - 2 * PIN_BUFFER_RATIO);
+}
+
+function getTimelineState(index, activeIndex) {
+  if (index < activeIndex) return "completed";
+  if (index === activeIndex) return "active";
+  return "upcoming";
+}
+
+function getTimelineProgress(activeIndex, total) {
+  if (total <= 1) return 100;
+  return (activeIndex / (total - 1)) * 100;
+}
+
+/** Shared horizontal inset — arrows + timeline use the same rail */
+const TIMELINE_X_PAD = "clamp(1rem, 5vw, 3.75rem)";
+
+const CORNER_SVG = "/about/corner%20svg.svg";
+const CORNER_SIZE =
+  "pointer-events-none absolute z-20 h-[clamp(3.25rem,14cqi,6.5rem)] w-[clamp(3.25rem,14cqi,6.5rem)] select-none object-contain";
 
 function JourneyCard({ item, priority = false }) {
   return (
-    <article className="relative flex h-full w-full flex-col overflow-hidden rounded-[1.75rem] bg-primary shadow-[0_16px_40px_rgba(254,93,10,0.18)] md:flex-row lg:rounded-[2rem]">
-      <div className="relative h-[36%] w-full shrink-0 overflow-hidden md:h-full md:w-1/2">
+    <article className="relative isolate flex h-full min-h-0 w-full flex-col overflow-hidden rounded-[1.5rem] bg-[#FA6E43] shadow-[0_18px_48px_rgba(250,110,67,0.28)] md:flex-row lg:rounded-[1.75rem]">
+      {/* Image side — narrower than content */}
+      <div className="relative h-[clamp(8.5rem,34%,12rem)] w-full shrink-0 overflow-hidden md:h-auto md:min-h-0 md:w-[42%] md:self-stretch">
         <Image
           src={item.image}
           alt={item.title}
           fill
           className="object-cover"
-          sizes="(max-width: 768px) 90vw, 50vw"
+          sizes="(max-width: 768px) 92vw, 38vw"
           priority={priority}
         />
       </div>
 
-      {/* @container so type/spacing scale with the orange panel, not the viewport */}
-      <div className="@container relative flex min-h-0 w-full flex-1 flex-col justify-between bg-primary p-[clamp(1.15rem,6cqi,2.75rem)] md:w-1/2">
-        <DiagonalRays />
-
-        <div className="relative z-10 flex shrink-0 flex-col gap-[clamp(0.5rem,2.4cqi,0.85rem)]">
-          <span className="inline-flex w-fit items-center rounded-md bg-white/20 px-[clamp(0.8rem,3cqi,1.15rem)] py-[clamp(0.4rem,1.4cqi,0.6rem)] text-[clamp(0.9375rem,3.2cqi,1.125rem)] font-medium leading-none text-white">
+      {/* Orange content — size container so type scales with both width & height */}
+      <div className="relative flex min-h-0 w-full flex-1 flex-col justify-between bg-[#FA6E43] px-[clamp(0.85rem,3.5cqmin,2rem)] py-[clamp(0.9rem,3.8cqmin,2.25rem)] [container-type:size] md:w-[58%]">
+        {/* Top block — badge + year */}
+        <div className="relative z-10 flex min-w-0 shrink-0 flex-col gap-[clamp(0.4rem,2.2cqmin,1.1rem)]">
+          <span className="inline-flex w-fit max-w-full items-center bg-white/10 px-[clamp(0.7rem,3.2cqmin,1.2rem)] py-[clamp(0.4rem,1.6cqmin,0.6rem)] text-[clamp(0.8125rem,3cqmin,1.0625rem)] font-medium leading-none tracking-[-0.01em] text-white">
             {item.tag}
           </span>
-          <h3 className="font-primary text-[clamp(3.25rem,21cqi,7.5rem)] font-light leading-[0.95] tracking-[-0.04em] text-white">
+
+          <h3 className="min-w-0 font-primary text-[clamp(2.75rem,min(19cqi,30cqb),6.75rem)] font-extralight leading-[0.92] tracking-[-0.04em] text-white">
             {item.year}
           </h3>
         </div>
 
-        <div className="relative z-10 mt-[clamp(0.75rem,4cqi,1.5rem)] flex min-h-0 max-w-[36em] flex-col gap-[clamp(0.6rem,2.8cqi,1rem)] md:mt-0">
-          <h4 className="font-primary text-[clamp(1.45rem,6.2cqi,2.4rem)] font-semibold leading-[1.2] tracking-[-0.02em] text-white">
+        {/* Bottom block — title + description */}
+        <div className="relative z-10 mt-[clamp(0.5rem,2.5cqmin,1.25rem)] flex min-h-0 min-w-0 flex-col gap-[clamp(0.45rem,2cqmin,0.9rem)]">
+          <h4 className="font-primary text-[clamp(1.2rem,min(6cqi,7.5cqb),2.35rem)] font-medium leading-[1.2] tracking-[-0.02em] text-white">
             {item.title}
           </h4>
-          <p className="font-primary text-[clamp(1.0625rem,4.2cqi,1.5rem)] font-normal leading-[1.6] text-white/95">
+          <p className="font-primary text-[clamp(0.875rem,min(3.7cqi,4.5cqb),1.125rem)] font-normal leading-[1.55] text-white/95">
             {item.description}
           </p>
         </div>
       </div>
+
+      {/* Decorative corner — top right */}
+      <Image
+        src={CORNER_SVG}
+        alt=""
+        width={141}
+        height={146}
+        aria-hidden
+        className={`${CORNER_SIZE} right-0 top-0`}
+      />
     </article>
   );
 }
@@ -166,9 +202,18 @@ export default function JourneySection() {
     }
 
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    // Desktop uses Lenis (native window scroll). Fixed pins reflow the document
+    // at engage/release and fight Lenis momentum — transform pin avoids that.
     let ctx;
 
     const setup = () => {
+      // Rebuild only once; later ready events just refresh + sync Lenis size
+      if (scrollTriggerRef.current) {
+        ScrollTrigger.refresh();
+        window.lenisInstance?.resize?.();
+        return;
+      }
+
       ctx?.revert();
       scrollTriggerRef.current = null;
 
@@ -183,55 +228,108 @@ export default function JourneySection() {
         track.style.paddingRight = `${pad}px`;
       };
 
+      /** Horizontal distance: first card center → last card center (both centered in viewport) */
       const getTravel = () => {
         syncTrackPad();
-        return Math.max(0, track.scrollWidth - viewport.clientWidth);
+        const cards = Array.from(track.children);
+        if (cards.length < 2) return 0;
+
+        const first = cards[0];
+        const last = cards[cards.length - 1];
+        const firstCenter = first.offsetLeft + first.offsetWidth / 2;
+        const lastCenter = last.offsetLeft + last.offsetWidth / 2;
+
+        return Math.max(0, lastCenter - firstCenter);
       };
+
+      /** Active card-scroll distance (~17% longer than before for smoother pacing) */
+      const getActiveScrollDistance = () => {
+        const steps = Math.max(journeyData.length - 1, 1);
+        const vhStep = isMobile ? 0.36 : 0.41;
+        return Math.max(
+          steps * window.innerHeight * vhStep,
+          window.innerHeight * 0.45
+        );
+      };
+
+      /** Total pinned scroll = active distance + start/end settle buffers */
+      const getTotalScrollDistance = () =>
+        getActiveScrollDistance() / (1 - 2 * PIN_BUFFER_RATIO);
 
       ctx = gsap.context(() => {
         gsap.set(track, { x: 0, force3D: true });
 
-        const tween = gsap.to(track, {
-          x: () => -getTravel(),
-          ease: "none",
+        const activeDuration = 1 - 2 * PIN_BUFFER_RATIO;
+
+        const tl = gsap.timeline({
           scrollTrigger: {
+            // Outer section owns the trigger/spacer; inner pin is the visual lock
             trigger: section,
-            start: "top top",
-            end: () =>
-              `+=${Math.max(
-                getTravel() * (isMobile ? 1.35 : 1.55),
-                window.innerHeight * 1.4
-              )}`,
             pin: pin,
+            start: "top top",
+            end: () => `+=${getTotalScrollDistance()}`,
             pinSpacing: true,
-            scrub: isMobile ? 0.5 : 0.8,
+            // Root-cause fix: transform pin avoids fixed↔static layout thrash
+            // that Lenis feels as a jolt at engage/release.
+            pinType: "transform",
             anticipatePin: 1,
-            invalidateOnRefresh: true,
+            scrub: 1,
+            // Complete scrub on fast flicks so unpin doesn't release mid-lag
             fastScrollEnd: true,
-            snap: {
-              snapTo: 1 / Math.max(journeyData.length - 1, 1),
-              duration: { min: 0.12, max: 0.35 },
-              ease: "power1.inOut",
-              delay: 0.02,
-            },
+            invalidateOnRefresh: true,
+            // No ScrollTrigger snap — it fights Lenis scroll position and
+            // amplifies pin boundary jolts. Card index still tracks progress;
+            // arrows/dots use lenis.scrollTo.
             onUpdate: (self) => {
+              const cardProgress = timelineProgressToCard(self.progress);
               const max = journeyData.length - 1;
-              const next = Math.round(self.progress * max);
+              const next = Math.round(cardProgress * max);
               setActiveIndex((prev) => (prev === next ? prev : next));
+            },
+            onLeaveBack: () => {
+              gsap.set(track, { x: 0 });
+              setActiveIndex(0);
+            },
+            onRefresh: (self) => {
+              const spacer = self.pin?.parentElement;
+              if (spacer?.classList?.contains("pin-spacer")) {
+                spacer.style.background = SECTION_BG;
+                spacer.style.boxSizing = "border-box";
+              }
+              // Keep Lenis document metrics in sync with pin-spacer height
+              window.lenisInstance?.resize?.();
             },
           },
         });
 
-        scrollTriggerRef.current = tween.scrollTrigger;
+        tl.to(track, { x: 0, duration: PIN_BUFFER_RATIO, ease: "none" })
+          .to(track, {
+            x: () => -getTravel(),
+            duration: activeDuration,
+            ease: "none",
+          })
+          .to(track, {
+            x: () => -getTravel(),
+            duration: PIN_BUFFER_RATIO,
+            ease: "none",
+          });
+
+        scrollTriggerRef.current = tl.scrollTrigger;
       }, section);
 
       ScrollTrigger.refresh();
+      window.lenisInstance?.resize?.();
     };
 
-    const readyTimer = window.setTimeout(setup, 120);
     const onReady = () => {
       setup();
     };
+
+    // Prefer building after Lenis on desktop so pin metrics match live scroll
+    const readyTimer = window.setTimeout(() => {
+      if (!isMobile && !window.lenisInstance) return;
+      setup();
+    }, 120);
 
     window.addEventListener("scrollAnimationsReady", onReady);
     window.addEventListener("lenisReady", onReady);
@@ -256,11 +354,15 @@ export default function JourneySection() {
     }
 
     const max = journeyData.length - 1;
-    const progress = max === 0 ? 0 : next / max;
-    const target = st.start + (st.end - st.start) * progress;
+    const cardProgress = max === 0 ? 0 : next / max;
+    const timelineProgress = cardProgressToTimeline(cardProgress);
+    const target = st.start + (st.end - st.start) * timelineProgress;
     scrollToY(target);
     setActiveIndex(next);
   }, []);
+
+  const isFirst = activeIndex === 0;
+  const isLast = activeIndex === journeyData.length - 1;
 
   return (
     <section
@@ -271,116 +373,152 @@ export default function JourneySection() {
     >
       <div
         ref={pinRef}
-        className="relative flex h-screen w-full flex-col overflow-x-hidden"
+        className="relative grid h-screen min-h-screen w-full grid-rows-[auto_minmax(0,1fr)_auto]"
         style={{ background: SECTION_BG }}
       >
-        <div className="mx-auto w-full max-w-[1600px] shrink-0 px-4 pt-24 sm:px-6 sm:pt-28 lg:px-10 lg:pt-32 xl:px-12">
-          <div className="mb-8 flex flex-col items-center text-center sm:mb-10 lg:mb-12">
+        {/* Header */}
+        <div className="mx-auto w-full max-w-[72rem] shrink-0 px-[clamp(1rem,4vw,2.5rem)] pt-[clamp(5.5rem,10.5vh,9rem)]">
+          <div className="mb-[clamp(0.65rem,1.8vh,2rem)] flex flex-col items-center text-center">
             <Badge title="Our Story" />
-            <h2 className="mt-[clamp(0.75rem,1.2vw,1.25rem)] font-primary text-[clamp(1.75rem,3.5vw,3.25rem)] font-medium leading-[1.15] tracking-[-0.04em] text-[#1a1a1a] lg:tracking-[-0.06em]">
+            <h2 className="mt-[clamp(0.5rem,1.2vh,1.25rem)] font-primary text-[clamp(1.625rem,min(3.5vw,5vh),3.25rem)] font-medium leading-[1.15] tracking-[-0.04em] text-[#1a1a1a] lg:tracking-[-0.06em]">
               Over the years
             </h2>
           </div>
         </div>
 
+        {/* Cards track — fills remaining viewport height */}
         <div
           ref={viewportRef}
-          className="relative flex min-h-0 w-full flex-1 items-center overflow-hidden"
+          className="relative flex min-h-0 w-full items-center overflow-hidden py-[clamp(0.25rem,1vh,0.75rem)]"
         >
           <div
             ref={trackRef}
-            className="flex w-max items-center gap-[clamp(1.5rem,3vw,3.5rem)] will-change-transform"
+            className={`flex h-full w-max items-center ${CARD_GAP} will-change-transform`}
             style={{ touchAction: "pan-y" }}
           >
-            {journeyData.map((item, i) => (
-              <div
-                key={item.year}
-                className="relative h-[clamp(22rem,58dvh,34rem)] w-[clamp(18rem,88vw,22rem)] shrink-0 md:h-[clamp(22rem,48dvh,30rem)] md:w-[clamp(40rem,86vw,68rem)]"
-                aria-hidden={i !== activeIndex}
-              >
-                <JourneyCard item={item} priority={i === 0} />
-              </div>
-            ))}
-          </div>
-
-          {activeIndex < journeyData.length - 1 && (
-            <button
-              type="button"
-              onClick={() => goTo(activeIndex + 1)}
-              aria-label="Next milestone"
-              className="absolute right-[max(0.75rem,calc((100%-min(86vw,68rem))/2-1.5rem))] top-1/2 z-20 flex h-[clamp(2.5rem,3.5vw,3rem)] w-[clamp(2.5rem,3.5vw,3rem)] -translate-y-1/2 items-center justify-center rounded-full border-[1.5px] border-white bg-transparent text-white transition-colors hover:bg-white/15"
-            >
-              <ArrowRight className="h-5 w-5" strokeWidth={1.75} />
-            </button>
-          )}
-        </div>
-
-        <div className="relative mx-auto mt-8 w-[90%] max-w-[920px] shrink-0 px-4 pb-8 sm:mt-10 sm:pb-10 lg:mt-12 lg:pb-12">
-          <div className="relative mb-3 h-7 sm:mb-4 sm:h-8">
             {journeyData.map((item, i) => {
               const isActive = i === activeIndex;
-              const left =
-                journeyData.length === 1
-                  ? "50%"
-                  : `${(i / (journeyData.length - 1)) * 100}%`;
+              return (
+                <div
+                  key={item.year}
+                  className={`relative ${CARD_SHELL} ${isActive ? "z-10" : "z-0"}`}
+                  aria-hidden={!isActive}
+                >
+                  <JourneyCard item={item} priority={i === 0} />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Soft blur fades — masked so top/corners blend into the bg */}
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 z-20 w-[clamp(5rem,16vw,11rem)] bg-gradient-to-r from-[#F6D0C0]/40 via-[#F6D0C0]/15 to-transparent backdrop-blur-[8px]"
+            style={{
+              ...EDGE_FADE_MASK,
+              WebkitMaskImage: EDGE_FADE_LEFT,
+              maskImage: EDGE_FADE_LEFT,
+            }}
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-y-0 right-0 z-20 w-[clamp(5rem,16vw,11rem)] bg-gradient-to-l from-[#F6D0C0]/40 via-[#F6D0C0]/15 to-transparent backdrop-blur-[8px]"
+            style={{
+              ...EDGE_FADE_MASK,
+              WebkitMaskImage: EDGE_FADE_RIGHT,
+              maskImage: EDGE_FADE_RIGHT,
+            }}
+            aria-hidden
+          />
+
+          {/* Arrows aligned to timeline rail (first/last year positions) */}
+          <button
+            type="button"
+            onClick={() => goTo(activeIndex - 1)}
+            disabled={isFirst}
+            aria-label="Previous milestone"
+            aria-disabled={isFirst}
+            className={`${ARROW_BTN} border-white ${
+              isFirst
+                ? "cursor-not-allowed border-white/40 text-white/40 opacity-40"
+                : "cursor-pointer border-white bg-transparent text-white hover:bg-white/15"
+            }`}
+            style={{ left: TIMELINE_X_PAD }}
+          >
+            <ArrowLeft className="h-5 w-5" strokeWidth={1.75} />
+          </button>
+
+          <button
+            type="button"
+            onClick={() => goTo(activeIndex + 1)}
+            disabled={isLast}
+            aria-label="Next milestone"
+            aria-disabled={isLast}
+            className={`${ARROW_BTN} border-white ${
+              isLast
+                ? "cursor-not-allowed border-white/40 text-white/40 opacity-40"
+                : "cursor-pointer border-white bg-transparent text-white hover:bg-white/15"
+            }`}
+            style={{ right: TIMELINE_X_PAD }}
+          >
+            <ArrowRight className="h-5 w-5" strokeWidth={1.75} />
+          </button>
+        </div>
+
+        {/* Timeline — same horizontal rail as arrows */}
+        <div
+          className="relative mx-auto w-full shrink-0 pb-[clamp(1.15rem,3.5vh,2.75rem)] pt-[clamp(0.65rem,1.8vh,1.15rem)]"
+          style={{ paddingLeft: TIMELINE_X_PAD, paddingRight: TIMELINE_X_PAD }}
+        >
+          <div className="relative flex items-start justify-between">
+            {/* Progress track — dim full width + white fill to active dot */}
+            <div
+              className="pointer-events-none absolute inset-x-0 bottom-[clamp(1.125rem,2.6vh,1.625rem)] z-0 h-[1.5px] -translate-y-1/2 overflow-hidden rounded-full bg-white/35"
+              aria-hidden
+            >
+              <div
+                className="h-full rounded-full bg-white transition-[width] duration-[400ms] ease-out"
+                style={{
+                  width: `${getTimelineProgress(activeIndex, journeyData.length)}%`,
+                }}
+              />
+            </div>
+
+            {journeyData.map((item, i) => {
+              const state = getTimelineState(i, activeIndex);
+              const isActive = state === "active";
+              const isCompleted = state === "completed";
 
               return (
                 <button
                   key={item.year}
                   type="button"
                   onClick={() => goTo(i)}
-                  className="absolute top-0 -translate-x-1/2 cursor-pointer"
-                  style={{ left }}
+                  className="relative z-10 flex cursor-pointer flex-col items-center gap-[clamp(0.7rem,1.9vh,1.15rem)]"
                   aria-label={`Go to ${item.year}`}
                   aria-current={isActive ? "true" : undefined}
                 >
                   <span
-                    className={`block whitespace-nowrap font-primary transition-all duration-300 ${
-                      isActive
-                        ? "text-[clamp(0.9375rem,1.15vw,1.125rem)] font-bold text-white"
-                        : "text-[clamp(0.75rem,0.95vw,0.9rem)] font-semibold text-white/50"
+                    className={`whitespace-nowrap font-primary text-[clamp(0.875rem,1.85vw,1.375rem)] font-semibold leading-none tracking-[-0.02em] transition-[color,opacity] duration-[400ms] ease-out md:font-bold ${
+                      state === "upcoming" ? "text-white/55" : "text-white"
                     }`}
                   >
                     {item.year}
                   </span>
-                </button>
-              );
-            })}
-          </div>
 
-          <div className="relative h-11 sm:h-12">
-            <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-white/50" />
-
-            {journeyData.map((item, i) => {
-              const isActive = i === activeIndex;
-              const left =
-                journeyData.length === 1
-                  ? "50%"
-                  : `${(i / (journeyData.length - 1)) * 100}%`;
-
-              return (
-                <button
-                  key={`dot-${item.year}`}
-                  type="button"
-                  onClick={() => goTo(i)}
-                  className="absolute top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
-                  style={{ left }}
-                  aria-label={`Select ${item.year}`}
-                >
-                  <span
-                    className={`flex items-center justify-center rounded-full transition-all duration-300 ${
-                      isActive
-                        ? "h-10 w-10 bg-primary shadow-[0_0_0_7px_rgba(254,93,10,0.3)] sm:h-11 sm:w-11 sm:shadow-[0_0_0_8px_rgba(254,93,10,0.3)]"
-                        : "h-[18px] w-[18px] border border-white/55 bg-white/20 sm:h-5 sm:w-5"
-                    }`}
-                  >
+                  <span className="relative flex h-[clamp(2.25rem,5.2vh,3.25rem)] w-[clamp(2.25rem,5.2vh,3.25rem)] items-center justify-center">
                     <span
-                      className={`rounded-full bg-white transition-all duration-300 ${
+                      className={`flex items-center justify-center rounded-full transition-all duration-[400ms] ease-out ${
                         isActive
-                          ? "h-2.5 w-2.5 sm:h-3 sm:w-3"
-                          : "h-1.5 w-1.5 opacity-80"
+                          ? "h-[clamp(2.25rem,5.2vh,3.25rem)] w-[clamp(2.25rem,5.2vh,3.25rem)] bg-[#FA6E43] shadow-[0_0_0_clamp(6px,1.2vh,16px)_rgba(250,140,90,0.42),0_0_clamp(14px,2.8vh,32px)_clamp(3px,0.6vh,8px)_rgba(250,110,67,0.2)]"
+                          : isCompleted
+                            ? "h-[clamp(1rem,2.3vh,1.25rem)] w-[clamp(1rem,2.3vh,1.25rem)] bg-white"
+                            : "h-[clamp(0.875rem,2.1vh,1.125rem)] w-[clamp(0.875rem,2.1vh,1.125rem)] bg-white/50"
                       }`}
-                    />
+                    >
+                      {isActive ? (
+                        <span className="h-[clamp(0.5rem,1.1vh,0.6875rem)] w-[clamp(0.5rem,1.1vh,0.6875rem)] rounded-full bg-white" />
+                      ) : null}
+                    </span>
                   </span>
                 </button>
               );

@@ -18,61 +18,61 @@ const SDG_GOALS = [
     titleLines: ["GOOD HEALTH", "AND WELL BEING"],
     cardClass: "bg-[#289A48]",
     badgeClass: "bg-[#1E7536]/70",
-    icon: "/sustainability/card1.svg",
+    icon: "/sustainability/card1.webp",
   },
   {
     number: "07",
     titleLines: ["AFFORDABLE AND", "CLEAN ENERGY"],
     cardClass: "bg-[#F9B713]",
     badgeClass: "bg-[#C48A0A]/70",
-    icon: "/sustainability/card2.svg",
+    icon: "/sustainability/card2.webp",
   },
   {
     number: "08",
     titleLines: ["DECENT WORK AND", "ECONOMIC GROWTH"],
     cardClass: "bg-[#8F1739]",
     badgeClass: "bg-[#6B112B]/70",
-    icon: "/sustainability/card3.svg",
+    icon: "/sustainability/card3.webp",
   },
   {
     number: "12",
     titleLines: ["RESPONSIBLE CONSUMPTION", "AND PRODUCTION"],
     cardClass: "bg-[#CD8E28]",
     badgeClass: "bg-[#9A6A1E]/70",
-    icon: "/sustainability/card4.svg",
+    icon: "/sustainability/card4.webp",
   },
   {
     number: "13",
     titleLines: ["CLIMATE", "ACTION"],
     cardClass: "bg-[#457740]",
     badgeClass: "bg-[#345A30]/70",
-    icon: "/sustainability/card5.svg",
+    icon: "/sustainability/card5.webp",
   },
 ]
 
 const CERTIFICATIONS = [
   {
-    src: "/sustainability/certifications/cert1.svg",
+    src: "/sustainability/certifications/cert1.webp",
     alt: "ISO 9001 — Quality management",
     label: "Quality management",
   },
   {
-    src: "/sustainability/certifications/cert2.svg",
+    src: "/sustainability/certifications/cert2.webp",
     alt: "ISO 14001 — Environment management",
     label: "Environment management",
   },
   {
-    src: "/sustainability/certifications/cert3.svg",
+    src: "/sustainability/certifications/cert3.webp",
     alt: "ISO 45001 — Health & safety management",
     label: "Health & safety management",
   },
   {
-    src: "/sustainability/certifications/cert4.svg",
+    src: "/sustainability/certifications/cert4.webp",
     alt: "ISO 50001 — Energy management",
     label: "Energy management",
   },
   {
-    src: "/sustainability/certifications/cert5.svg",
+    src: "/sustainability/certifications/cert5.webp",
     alt: "UKAS Management Systems 0015",
     label: "0015",
   },
@@ -80,17 +80,17 @@ const CERTIFICATIONS = [
 
 const PILLARS = [
   {
-    image: "/sustainability/eco1.png",
+    image: "/sustainability/eco1.webp",
     title: "Environmental Stewardship",
     body: "Managing environmental impacts through responsible resource use, energy and water stewardship, pollution prevention, waste management, and continual improvement.",
   },
   {
-    image: "/sustainability/eco3.png",
+    image: "/sustainability/eco3.webp",
     title: "People & Safety",
     body: "Supporting people, communities, ethical business practices, stakeholder engagement, and responsible governance across our operations.",
   },
   {
-    image: "/sustainability/eco2.png",
+    image: "/sustainability/eco2.webp",
     title: "Circular Economy",
     body: "Promoting resource efficiency, material recovery, recycling, reuse, and circular manufacturing practices throughout our value chain.",
   },
@@ -101,64 +101,64 @@ const KNOW_MORE_ITEMS = [
     id: 0,
     title: "Environmental Stewardship",
     body: "At Union Copper Rod, environmental stewardship is integrated into our operations and management systems. We manage the environmental impacts of manufacturing through efficient energy and water use, pollution prevention, and responsible waste management, while maintaining environmental compliance. Guided by ongoing monitoring, risk-based decision-making, and continual improvement, we work to strengthen resource efficiency and support long-term environmental resilience and sustainable industrial growth.",
-    backgroundImage: "/sustainability/knowmore1.svg",
+    backgroundImage: "/sustainability/knowmore1.webp",
   },
   {
     id: 1,
     title: "People, Communities & Governance",
     body: "We put people first through safe workplaces, fair labour practices, and ethical conduct across our operations. By engaging communities and stakeholders openly, and embedding responsible governance in every decision, we build trust, protect wellbeing, and strengthen the social foundation of sustainable growth.",
-    backgroundImage: "/sustainability/knowmore2.svg",
+    backgroundImage: "/sustainability/knowmore2.webp",
   },
   {
     id: 2,
     title: "Circular Economy & Resource Efficiency",
     body: "We advance circular manufacturing by recovering materials, reducing waste, and improving resource efficiency across our value chain. Through recycling, reuse, and smarter process design, we minimise environmental impact while delivering reliable copper products that support a more sustainable industrial future.",
-    backgroundImage: "/sustainability/knowmore3.svg",
+    backgroundImage: "/sustainability/knowmore3.webp",
   },
 ]
 
 const ELEMENTS = [
   {
     id: "responsible-sourcing",
-    icon: "/sustainability/ecofeature1.png",
+    icon: "/sustainability/ecofeature1.webp",
     title: "Responsible Sourcing",
     body: "Responsible Materials. Trusted Partners.",
     modalBody:
       "Responsible sourcing and supply chain engagement extend our sustainability commitment beyond direct operations. We promote transparency, ethical conduct, and responsible practices across supplier and business relationships, considering environmental and social factors alongside operational needs. Through supplier engagement, risk-based due diligence, and continual improvement, we work to strengthen sustainability performance throughout our value chain.",
     ctaLabel: "Responsible Sourcing Policy · Code Of Conduct →",
     ctaHref: "/ourPolicies",
-    modalImage: "/sustainability/modal-responsible.png",
+    modalImage: "/sustainability/modal-responsible.webp",
   },
   {
     id: "energy-conscious",
-    icon: "/sustainability/ecofeature2.png",
+    icon: "/sustainability/ecofeature2.webp",
     title: "Energy-Conscious Operations",
     body: "Smarter Energy. Better Performance.",
     modalBody:
       "Energy efficiency is embedded in our operational strategy through continual monitoring, process optimization, and investment in efficient technologies. We regularly evaluate opportunities to improve energy performance across production and supporting activities. By maintaining certified energy management systems, enhancing equipment performance, and tracking energy use, we drive initiatives that reduce unnecessary consumption and support long-term energy efficiency.",
-    modalImage: "/sustainability/modal-energy.png",
+    modalImage: "/sustainability/modal-energy.webp",
   },
   {
     id: "community-stakeholder",
-    icon: "/sustainability/ecofeature3.png",
+    icon: "/sustainability/ecofeature3.webp",
     title: "Community & Stakeholder Engagement",
     body: "Listening, collaborating, growing together",
     modalBody:
       "At Union Copper Rod, open and responsive stakeholder engagement supports transparency, accountability, and long-term sustainability. We maintain communication with employees, customers, suppliers, contractors, communities, and authorities to understand expectations, address concerns, and build trust. Through community relations, accessible feedback and grievance mechanisms, awareness initiatives, and continual improvement, we strengthen relationships and support informed decision-making.",
     ctaLabel: "Grievance Mechanism →",
     ctaHref: "/ourPolicies",
-    modalImage: "/sustainability/modal-community.png",
+    modalImage: "/sustainability/modal-community.webp",
   },
   {
     id: "governance-ethics",
-    icon: "/sustainability/ecofeature4.png",
+    icon: "/sustainability/ecofeature4.webp",
     title: "Governance & Ethical Business Practices",
     body: "Integrating in every decision",
     modalBody:
       "Strong governance underpins transparency, accountability, and responsible decision-making across our operations. At Union Copper Rod, it provides the foundation for managing risk, maintaining regulatory compliance, and supporting sustainable long-term performance. Guided by business integrity, robust policies and management systems, risk-based approaches, and continual improvement, we promote ethical conduct and responsible leadership throughout our activities.",
     ctaLabel: "Business Integrity Policy · Code Of Conduct →",
     ctaHref: "/ourPolicies",
-    modalImage: "/sustainability/modal-governance.png",
+    modalImage: "/sustainability/modal-governance.webp",
   },
 ]
 
@@ -373,11 +373,9 @@ export default function Sustainability() {
         minHeightClass="h-[min(70vh,720px)] lg:h-[min(85vh,900px)]"
         gapClass="gap-4 lg:gap-5"
         background={{
-          type: "image-inline",
-          style: {
-            background:
-              "linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.25) 100%), url('/sustainability/sustainbg.svg') lightgray 50% / cover no-repeat",
-          },
+          type: "image",
+          src: "/sustainability/sustainbg.png",
+          overlayClassName: "bg-black/75",
         }}
       >
         <FadeIn
@@ -535,7 +533,7 @@ export default function Sustainability() {
               className="relative col-span-2 min-h-[360px] overflow-hidden rounded-[28px] lg:col-span-1 lg:row-span-2 lg:min-h-0 lg:rounded-[32px]"
             >
               <Image
-                src="/sustainability/energyefficient.png"
+                src="/sustainability/energyefficient.webp"
                 alt="Electricity savings"
                 fill
                 sizes="(max-width: 1024px) 100vw, 33vw"
@@ -560,7 +558,7 @@ export default function Sustainability() {
               className="relative col-span-2 min-h-[260px] overflow-hidden rounded-[28px] lg:col-span-2 lg:min-h-[220px] lg:rounded-[32px]"
             >
               <Image
-                src="/sustainability/water.png"
+                src="/sustainability/water.webp"
                 alt="Water savings"
                 fill
                 sizes="(max-width: 1024px) 100vw, 66vw"
@@ -585,7 +583,7 @@ export default function Sustainability() {
               className="relative flex min-h-[200px] flex-col justify-center overflow-hidden rounded-[28px] p-6 lg:min-h-0 lg:rounded-[32px] lg:p-8"
             >
               <Image
-                src="/sustainability/cardbg.svg"
+                src="/sustainability/cardbg.webp"
                 alt=""
                 fill
                 sizes="(max-width: 1024px) 100vw, 33vw"
@@ -610,7 +608,7 @@ export default function Sustainability() {
               className="relative flex min-h-[200px] flex-col justify-center overflow-hidden rounded-[28px] p-6 lg:min-h-0 lg:rounded-[32px] lg:p-8"
             >
               <Image
-                src="/sustainability/cardbg.svg"
+                src="/sustainability/cardbg.webp"
                 alt=""
                 fill
                 sizes="(max-width: 1024px) 100vw, 33vw"

@@ -5,11 +5,11 @@ import CardAnimation from "@/animations/CardAnimation";
 import CountUp from "@/animations/countup";
 
 const VARIANT_STYLES = {
-  tall: "h-[24rem] max-h-[30rem] min-h-[24rem] lg:h-[30rem] lg:max-h-[30rem] lg:min-h-[30rem]",
+  tall: "h-[26rem] max-h-[33rem] min-h-[26rem] lg:h-[33rem] lg:max-h-[33rem] lg:min-h-[33rem]",
   medium:
-    "h-[23rem] max-h-[27rem] min-h-[23rem] lg:h-[27rem] lg:max-h-[27rem] lg:min-h-[27rem]",
+    "h-[25rem] max-h-[30rem] min-h-[25rem] lg:h-[30rem] lg:max-h-[30rem] lg:min-h-[30rem]",
   small:
-    "h-[22rem] max-h-[24rem] min-h-[22rem] lg:h-[24rem] lg:max-h-[24rem] lg:min-h-[24rem]",
+    "h-[24rem] max-h-[27rem] min-h-[24rem] lg:h-[27rem] lg:max-h-[27rem] lg:min-h-[27rem]",
 };
 
 const VARIANT_CONTENT_PAD = {
@@ -28,6 +28,7 @@ export default function ExpertiseCard({
   imageClassName = "",
   descriptionClassName = "",
   contentClassName = "",
+  numberClassName = "",
   className = "",
   prefix = "",
   suffix = "+",
@@ -36,20 +37,23 @@ export default function ExpertiseCard({
   index = 0,
   imageWidth = 600,
   imageHeight = 300,
+  animated = true,
+  fillContainer = false,
 }) {
   const variantClass = VARIANT_STYLES[variant] ?? VARIANT_STYLES.medium;
   const contentPad =
     contentClassName ||
     VARIANT_CONTENT_PAD[variant] ||
     VARIANT_CONTENT_PAD.medium;
+  const widthClass = fillContainer ? "w-full" : "w-full lg:w-1/3";
+  const cardClassName = `group relative flex ${widthClass} flex-col overflow-hidden rounded-2xl bg-white px-6 pt-8 transition-all duration-400 lg:rounded-t-2xl lg:px-8 lg:pt-12 ${variantClass} ${className}`;
 
-  return (
-    <CardAnimation
-      index={index}
-      className={`group relative flex w-full flex-col overflow-hidden rounded-2xl bg-white px-6 pt-8 transition-all duration-400 lg:w-1/3 lg:rounded-t-2xl lg:px-8 lg:pt-12 ${variantClass} ${className}`}
-    >
+  const content = (
+    <>
       <div className={`relative z-10 flex flex-col ${contentPad}`}>
-        <span className="bg-gradient-to-l from-white via-gray-200 to-[#FE5D0A] bg-clip-text text-[4.5rem] font-medium leading-none tracking-[-0.075rem] text-transparent lg:text-[5.25rem] lg:tracking-[-0.09rem]">
+        <span
+          className={`bg-gradient-to-l from-white via-gray-200 to-[#FE5D0A] bg-clip-text text-[4.5rem] font-medium leading-none tracking-[-0.075rem] text-transparent lg:text-[5.25rem] lg:tracking-[-0.09rem] ${numberClassName}`}
+        >
           {prefix}
           <CountUp to={number} duration={duration} separator={separator} />
           {suffix}
@@ -72,6 +76,16 @@ export default function ExpertiseCard({
         height={imageHeight}
         className={`pointer-events-none absolute z-0 max-w-none ${imageClassName}`}
       />
+    </>
+  );
+
+  if (!animated) {
+    return <div className={cardClassName}>{content}</div>;
+  }
+
+  return (
+    <CardAnimation index={index} className={cardClassName}>
+      {content}
     </CardAnimation>
   );
 }

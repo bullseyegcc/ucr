@@ -18,14 +18,14 @@ export default function SuccessStrengthSection() {
   ];
 
   return (
-    <section className="w-full mx-auto px-5 sm:px-10 py-30 flex flex-col justify-center">
+    <section className="mx-auto w-full max-w-[1600px] px-5 lg:px-10 py-30 flex flex-col justify-center">
       {/* Top Row */}
-      <div className="mx-auto flex w-full lg:max-w-10/12 flex-col items-center justify-center gap-16 lg:flex-row lg:gap-20">
+      <div className="flex w-full flex-col items-center justify-center gap-16 lg:flex-row lg:gap-20">
         {/* Left Side - Orange Circle Stat */}
         <div className="flex flex-col items-center gap-6 lg:items-start lg:basis-1/2">
           <div className="flex items-center gap-10 lg:gap-12">
             {/* Circle with Number */}
-            <div className="relative w-[220px] aspect-square shrink-0 rounded-full bg-[#F26101] flex items-center justify-center lg:-ml-6">
+            <div className="relative w-[220px] aspect-square shrink-0 rounded-full bg-[#F26101] flex items-center justify-center">
               <span className="text-8xl text-white mt-4">150</span>
 
               {/* Plus Icon */}
@@ -75,7 +75,7 @@ export default function SuccessStrengthSection() {
 
       {/* Bottom Row */}
       <div className="mt-16 flex justify-center pt-10">
-        <div className="flex w-full max-w-10/12 flex-col items-start justify-between gap-10 lg:flex-row lg:gap-4">
+        <div className="flex w-full flex-col items-start justify-between gap-10 lg:flex-row lg:gap-4">
           {stats.map((stat, index) => (
             <FadeIn
               key={index}

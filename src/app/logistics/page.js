@@ -3,10 +3,8 @@
 import { VideoPlayer } from "../../common/video";
 import { Badge } from "../../common/badge";
 import Hero from "@/components/shared/Hero";
-import Image from "next/image";
-import SequentialSlideIn from "../../animations/SequentialSlideIn";
+import ExpertiseCard from "@/components/shared/ExpertiseCard";
 import LogisticsAdvantageSection from "../../components/logistics/LogisticsAdvantageSection";
-import CountUp from "../../animations/countup";
 import FadeIn from "../../animations/FadeIn";
 import SlideIn from "../../animations/SlideIn";
 
@@ -26,13 +24,18 @@ export default function Logistics() {
                 gapClass="gap-2"
                 background={{
                     type: "image",
-                    src: "/logistics/logisticsbg.png",
-                    imageClassName: "bg-bottom bg-center",
+                    src: "/logistics/logisticsbg.webp",
+                    priority: true,
+                    quality: 80,
+                    imageClassName: "object-bottom object-center",
                 }}
                 media={{
                     type: "image",
-                    src: "/logistics/logisticspic.png",
+                    src: "/logistics/logisticspic.webp",
                     alt: "UCR logistics operations",
+                    priority: true,
+                    sizes: "(max-width: 1024px) 95vw, 90vw",
+                    quality: 85,
                 }}
             />
 
@@ -55,138 +58,110 @@ export default function Logistics() {
                 </div>
 
 
-                <SequentialSlideIn
-                    className="mx-auto w-full max-w-[1600px] px-6 lg:px-10 pt-2 pb-8 lg:pt-4 lg:pb-10 flex flex-col lg:flex-row justify-center gap-6 items-end"
-                    itemClassName="w-full lg:w-1/3"
-                    start="top 85%"
-                    end="bottom 70%"
-                >
+                <div className="mx-auto flex w-full max-w-[1600px] flex-col items-end justify-center gap-6 px-6 pt-2 pb-3 lg:flex-row lg:px-10 lg:pt-4 lg:pb-4">
+                    <ExpertiseCard
+                        index={0}
+                        variant="tall"
+                        number={200}
+                        title="Supply Chain partners Connected worldwide"
+                        description="Bringing together suppliers, logistics providers, and stakeholders through a unified global network."
+                        image="/logistics/logistics1.svg"
+                        imageAlt="Supply chain truck"
+                        imageWidth={437}
+                        imageHeight={336}
+                        descriptionClassName="max-w-[80%]"
+                        imageClassName="-bottom-5 left-0 h-auto w-[92%]"
+                    />
 
-                    <div className="overflow-hidden min-h-[55vh] lg:min-h-[65vh] rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
-                        <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-                            <span><CountUp to={200} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " />
-                        </h1>
+                    <ExpertiseCard
+                        index={1}
+                        variant="medium"
+                        number={400}
+                        duration={2.5}
+                        numberClassName="text-[2.5rem] leading-none lg:text-[3.625rem]"
+                        suffix={
+                            <>
+                                K+{" "}
+                                <sub className="text-[0.38em] leading-none">K-MT</sub>
+                            </>
+                        }
+                        title="handling yearly cargo"
+                        description="18K + Containers and land shipments annually managed with precision, efficiency, and operational excellence."
+                        image="/logistics/logistics2.svg"
+                        imageAlt="Yearly cargo container"
+                        imageWidth={257}
+                        imageHeight={446}
+                        descriptionClassName="max-w-[70%]"
+                        imageClassName="-bottom-16 right-0 h-auto w-[68%] lg:w-[72%]"
+                    />
 
+                    <ExpertiseCard
+                        index={2}
+                        variant="small"
+                        number={60}
+                        title="Global logistic partners"
+                        description="Trusted network of industry-leading logistics partners enables reliable, responsive, and seamless delivery across key international markets."
+                        image="/logistics/logistics3.svg"
+                        imageAlt="Global logistics ship"
+                        imageWidth={249}
+                        imageHeight={172}
+                        descriptionClassName="max-w-[70%]"
+                        imageClassName="-bottom-2 -right-9 h-auto w-[58%] lg:w-[62%]"
+                    />
+                </div>
 
-                        <div className="relative z-10 pb-6 ">
-                            <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                                Supply Chain partners Connected worldwide
-                            </h1>
-                            <p className="max-w-[80%]">Bringing together suppliers, logistics providers, and stakeholders through a unified global network.</p>
+                <div className="mx-auto flex w-full max-w-[1600px] flex-col-reverse items-start justify-center gap-6 px-6 pt-3 pb-8 lg:flex-row-reverse lg:px-10 lg:pt-4 lg:pb-10">
+                    <ExpertiseCard
+                        index={0}
+                        variant="tall"
+                        number={40}
+                        numberClassName="text-[2.5rem] leading-none lg:text-[3.625rem]"
+                        suffix={
+                            <>
+                                {" "}
+                                <sub className="text-[0.38em] leading-none">K-MT</sub>
+                            </>
+                        }
+                        title="Warehousing Management Capacity"
+                        description="Extensive storage infrastructure and equipment supporting operational agility and supply chain efficiency."
+                        image="/logistics/logistics6.svg"
+                        imageAlt="Warehousing facility"
+                        imageWidth={333}
+                        imageHeight={343}
+                        descriptionClassName="max-w-[80%]"
+                        imageClassName="bottom-0 right-0 h-auto w-[72%]"
+                    />
 
-                        </div>
+                    <ExpertiseCard
+                        index={1}
+                        variant="medium"
+                        number={24}
+                        duration={2.5}
+                        suffix=" hrs"
+                        title="Port & Customs Processing"
+                        description="Leveraging the UAE's world-class port infrastructure and efficient customs clearance to support reliable inbound and outbound cargo movement."
+                        image="/logistics/logistics5.svg"
+                        imageAlt="Port and customs container"
+                        imageWidth={320}
+                        imageHeight={329}
+                        descriptionClassName="max-w-[65%]"
+                        imageClassName="bottom-0 right-0 h-auto w-[70%]"
+                    />
 
-                        <Image src="/logistics/logistics1.svg" alt="Supply chain truck" width={437} height={336} className="pointer-events-none absolute bottom-0 left-0 z-0 w-[92%] h-auto max-w-none" />
-
-                    </div>
-
-                    <div className="overflow-hidden min-h-[55vh] lg:min-h-[60vh] rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
-                        <h1 className="text-[40px] leading-[42px] tracking-[-1.2px] lg:text-[58px] lg:leading-[58px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-                            <span><CountUp to={400} duration={2.5} />K+ <sub className="text-[0.38em] leading-none">K-MT</sub></span> <hr className="text-primary/30 w-[90%] shadow  " />
-                        </h1>
-
-
-                        <div className="relative z-10">
-                            <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                                handling yearly cargo
-                            </h1>
-                            <p className="max-w-[70%]">18K + Containers and land shipments annually managed with precision, efficiency, and operational excellence.</p>
-
-                        </div>
-
-                        <Image src="/logistics/logistics2.svg" alt="Yearly cargo container" width={257} height={446} className="pointer-events-none absolute -bottom-16 right-0 z-0 w-[68%] lg:w-[72%] h-auto max-w-none" />
-
-                    </div>
-
-                    <div className="overflow-hidden min-h-[55vh] lg:min-h-[55vh] rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
-                        <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-                            <span><CountUp to={60} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " />
-                        </h1>
-
-
-                        <div className="relative z-10">
-                            <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                                Global logistic partners
-                            </h1>
-                            <p className="max-w-[70%]">Trusted network of industry-leading logistics partners enables reliable, responsive, and seamless delivery across key international markets.</p>
-
-                        </div>
-
-                        <Image src="/logistics/logistics3.svg" alt="Global logistics ship" width={249} height={172} className="pointer-events-none absolute -bottom-2 -right-9 z-0 w-[58%] lg:w-[62%] h-auto max-w-none" />
-
-                    </div>
-
-
-
-                </SequentialSlideIn>
-
-
-
-
-                <SequentialSlideIn
-                    className="mx-auto w-full max-w-[1600px] px-6 lg:px-10 py-8 lg:py-10 flex flex-col-reverse lg:flex-row-reverse justify-center gap-6 items-end"
-                    itemClassName="w-full lg:w-1/3"
-                    start="top 85%"
-                    end="bottom 70%"
-                >
-
-                    <div className="overflow-hidden min-h-[55vh] lg:min-h-[65vh] rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
-                        <h1 className="text-[40px] leading-[42px] tracking-[-1.2px] lg:text-[58px] lg:leading-[58px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-                            <span><CountUp to={40} duration={2} /> <sub className="text-[0.38em] leading-none">K-MT</sub></span> <hr className="text-primary/30 w-[90%] shadow  " />
-                        </h1>
-
-
-                        <div className="relative z-10 pb-6 ">
-                            <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                                Warehousing Management Capacity
-                            </h1>
-                            <p className="max-w-[80%]">Extensive storage infrastructure and equipment supporting operational agility and supply chain efficiency.</p>
-
-                        </div>
-
-                        <Image src="/logistics/logistics6.svg" alt="Warehousing facility" width={333} height={343} className="pointer-events-none absolute bottom-0 right-0 z-0 w-[72%] h-auto max-w-none" />
-
-                    </div>
-
-                    <div className="overflow-hidden min-h-[55vh] lg:min-h-[60vh] rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
-                        <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-                            <span><CountUp to={24} duration={2.5} /> hrs</span> <hr className="text-primary/30 w-[90%] shadow  " />
-                        </h1>
-
-
-                        <div className="relative z-10">
-                            <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                                Port & Customs Processing
-                            </h1>
-                            <p className="max-w-[65%]">Leveraging the UAE's world-class port infrastructure and efficient customs clearance to support reliable inbound and outbound cargo movement.</p>
-
-                        </div>
-
-                        <Image src="/logistics/logistics5.svg" alt="Port and customs container" width={320} height={329} className="pointer-events-none absolute bottom-0 right-0 z-0 w-[70%] h-auto max-w-none" />
-
-                    </div>
-
-                    <div className="overflow-hidden min-h-[55vh] lg:min-h-[55vh] rounded-2xl w-full bg-white px-6 lg:px-8 pt-8 lg:pt-16 relative flex flex-col gap-8 h-[50vh] lg:h-[55vh] group transition-all duration-400">
-                        <h1 className="text-[73.03px] leading-[60.05px] tracking-[-1.2px] lg:text-[84px] lg:leading-[69.07px] lg:tracking-[-1.38px] font-medium text-primary relative z-10 flex flex-col gap-4 bg-gradient-to-l from-white via-gray-200 to-primary bg-clip-text text-transparent">
-                            <span><CountUp to={50} duration={2} />+</span> <hr className="text-primary/30 w-[90%] shadow  " />
-                        </h1>
-
-
-                        <div className="relative z-10">
-                            <h1 className="font-[Helvetica_Now_Display] font-medium align-middle text-[22.6px] leading-[24.34px] tracking-[-1.3px] mb-2 lg:text-[26px] lg:leading-[28px] lg:tracking-[-1.5px]">
-                                Global Destinations
-                            </h1>
-                            <p className="max-w-[80%]">Connecting partners across 50+ countries through a well-established international logistics network.</p>
-
-                        </div>
-
-                        <Image src="/about/exp3.png" alt="Global destinations globe" width={300} height={80} className="pointer-events-none absolute bottom-0 right-0 z-0 w-[82%] h-auto max-w-none" />
-
-                    </div>
-
-
-
-                </SequentialSlideIn>
+                    <ExpertiseCard
+                        index={2}
+                        variant="small"
+                        number={50}
+                        title="Global Destinations"
+                        description="Connecting partners across 50+ countries through a well-established international logistics network."
+                        image="/about/exp3.png"
+                        imageAlt="Global destinations globe"
+                        imageWidth={300}
+                        imageHeight={80}
+                        descriptionClassName="max-w-[80%]"
+                        imageClassName="bottom-0 right-0 h-auto w-[82%]"
+                    />
+                </div>
             </div>
 
 

@@ -74,7 +74,7 @@ export default function About({ lockProgressRef = null }) {
   }, [lockProgressRef]);
 
   return (
-    <div className="w-full shrink-0 max-h-[1000px] overflow-hidden pt-[4.5rem] sm:pt-[5rem] lg:pt-[5.5rem] pb-[1.25rem] lg:pb-[1.75rem]">
+    <div className="w-full min-h-0 shrink overflow-hidden pt-[4.5rem] sm:pt-[5rem] lg:pt-[5.5rem] pb-[1.25rem] lg:pb-[1.75rem]">
       <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
         <div className="relative w-full">
           <div className="hidden lg:block absolute right-0 top-[4.5rem] lg:top-[5rem] w-[38%] max-w-[42rem] pointer-events-none z-0">

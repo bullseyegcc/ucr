@@ -71,6 +71,8 @@ export default function SnippScrol({
   const sectionsRef  = useRef([]);
   const ctxRef       = useRef(null);
   const lockCleanupRef = useRef(null);
+  /** Live lock controller — resize/zoom must sync this, not tear it down. */
+  const lockApiRef = useRef(null);
   const instanceId   = useRef(newId());
 
   const childArray = Array.isArray(children)
@@ -90,12 +92,17 @@ export default function SnippScrol({
     const savedProgress = typeof window.__heroAboutProgress === 'number'
       ? window.__heroAboutProgress
       : 0;
+    const savedTimeline = typeof window.__heroAboutTimelineProgress === 'number'
+      ? window.__heroAboutTimelineProgress
+      : null;
     const savedScroll = Math.max(
       window.scrollY || 0,
       typeof window.lenisInstance?.scroll === 'number' ? window.lenisInstance.scroll : 0,
+      typeof window.__heroAboutLastScroll === 'number' ? window.__heroAboutLastScroll : 0,
     );
 
     // Clean up any prior run
+    lockApiRef.current = null;
     lockCleanupRef.current?.();
     lockCleanupRef.current = null;
     ctxRef.current?.revert();
@@ -174,28 +181,104 @@ export default function SnippScrol({
       // then unlock page scroll so Lenis never jerks at the start.
       if (lockPageUntilComplete) {
         // Zoom/resize can zero scrollY; trust prior placed/progress + Lenis scroll.
+        // __heroAboutProgress is slide-only (0–1); timeline includes lockAtEnd.
         const startPlaced =
           savedPlaced ||
           savedScroll > 8 ||
-          savedProgress >= 0.999;
+          savedProgress >= 0.999 ||
+          (savedTimeline != null && savedTimeline >= 0.999);
         const restored = startPlaced
           ? 1
-          : Math.max(0, Math.min(1, savedProgress));
+          : savedTimeline != null
+            ? Math.max(0, Math.min(1, savedTimeline))
+            : Math.max(0, Math.min(1, savedProgress * panelFraction));
         let target = restored;
         let current = restored;
         let rafId = 0;
+        let restoreRafId = 0;
         let locked = !startPlaced;
+        /** Last known unlocked scroll offset (current position, not peak). */
+        let lastUnlockedScroll = startPlaced
+          ? Math.max(
+              savedScroll,
+              typeof window.__heroAboutLastScroll === 'number' ? window.__heroAboutLastScroll : 0,
+            )
+          : 0;
+        /** Block false reverse-into-lock right after resize/zoom. */
+        let suppressReverseUntil = 0;
+        /** While true, ignore scroll=0 tracking updates (zoom wipe). */
+        let resizeGuardUntil = 0;
+        /** Timestamp when live scroll first hit ~0 while we had a mid-page offset. */
+        let zeroSince = 0;
+        let unsubLenisScroll = null;
 
         tl.progress(current);
 
         let lastPlaced = startPlaced;
         window.__heroAboutPlaced = startPlaced;
         window.__pageScrollLocked = locked;
+        window.__heroAboutTimelineProgress = current;
+        if (startPlaced && lastUnlockedScroll > 0) {
+          window.__heroAboutLastScroll = lastUnlockedScroll;
+        }
 
         const scrollPos = () => {
           const lenis = window.lenisInstance;
           if (lenis && typeof lenis.scroll === 'number') return lenis.scroll;
           return window.scrollY || 0;
+        };
+
+        const applyScrollY = (y) => {
+          if (!(y > 8)) return;
+          const live = window.lenisInstance;
+          live?.start?.();
+          if (live) live.scrollTo(y, { immediate: true });
+          window.scrollTo(0, y);
+          document.documentElement.scrollTop = y;
+          document.body.scrollTop = y;
+          lastUnlockedScroll = y;
+          window.__heroAboutLastScroll = y;
+        };
+
+        const trackUnlockedScroll = () => {
+          if (locked || current < 0.999) return;
+          const y = Math.max(scrollPos(), window.scrollY || 0);
+          const now = performance.now();
+
+          if (y > 8) {
+            lastUnlockedScroll = y;
+            window.__heroAboutLastScroll = y;
+            zeroSince = 0;
+            return;
+          }
+
+          // y ≈ 0. Zoom often zeros scroll BEFORE the resize event. Don't erase
+          // last mid-page offset unless zero has been stable (intentional top).
+          if (lastUnlockedScroll > 50) {
+            if (!zeroSince) zeroSince = now;
+            if (
+              now - zeroSince < 180 ||
+              now < resizeGuardUntil ||
+              now < suppressReverseUntil
+            ) {
+              return;
+            }
+          }
+          lastUnlockedScroll = y;
+          window.__heroAboutLastScroll = y;
+        };
+
+        const attachLenisScrollTracking = () => {
+          unsubLenisScroll?.();
+          unsubLenisScroll = null;
+          const lenis = window.lenisInstance;
+          if (!lenis?.on) return;
+          const onLenisScroll = () => trackUnlockedScroll();
+          lenis.on('scroll', onLenisScroll);
+          unsubLenisScroll = () => {
+            lenis.off('scroll', onLenisScroll);
+            unsubLenisScroll = null;
+          };
         };
 
         // Pin page to 0 whenever we re-enter the locked overlay. Otherwise Lenis
@@ -251,6 +334,8 @@ export default function SnippScrol({
             if (window.innerWidth < 768) {
               document.documentElement.style.overflow = 'hidden';
               document.body.style.overflow = 'hidden';
+            } else {
+              clearScrollLockStyles();
             }
           } else {
             lenis?.start();
@@ -261,11 +346,11 @@ export default function SnippScrol({
         setLocked(locked, { force: true });
 
         // After unlock-on-rebuild, put the user back where zoom left them.
-        if (startPlaced && savedScroll > 8) {
+        if (startPlaced && lastUnlockedScroll > 8) {
           requestAnimationFrame(() => {
             const lenis = window.lenisInstance;
-            if (lenis) lenis.scrollTo(savedScroll, { immediate: true });
-            else window.scrollTo(0, savedScroll);
+            if (lenis) lenis.scrollTo(lastUnlockedScroll, { immediate: true });
+            else window.scrollTo(0, lastUnlockedScroll);
           });
         }
 
@@ -280,15 +365,22 @@ export default function SnippScrol({
 
         const tick = () => {
           current += (target - current) * 0.22;
-          if (Math.abs(target - current) < 0.0008) current = target;
+          // Snap early — asymptotic lerp otherwise leaves current at ~0.98 forever,
+          // keeps locked=true, and wheel preventDefault swallows all page scroll.
+          if (Math.abs(target - current) < 0.002) current = target;
+          if (target >= 0.999 && current >= 0.999) {
+            current = 1;
+            target = 1;
+          }
+          window.__heroAboutTimelineProgress = current;
           const slideProgress = panelFraction > 0 ? Math.min(current, panelFraction) / panelFraction : current;
           tl.progress(totalDuration > 0 ? current : slideProgress);
           emitCoverProgress(slideProgress);
           reportLockProgress(current);
           emitPlaced(current >= panelFraction);
-          if (current >= 1 && target >= 1) {
+          if (current >= 0.999 && target >= 0.999) {
             setLocked(false);
-          } else if (current < 1 || target < 1) {
+          } else {
             setLocked(true);
           }
           rafId = current !== target ? requestAnimationFrame(tick) : 0;
@@ -305,15 +397,69 @@ export default function SnippScrol({
             pinScrollTop();
           }
           target = nextTarget;
+
+          // Hard-complete when the user finishes the lock distance. Asymptotic lerp
+          // otherwise leaves current≈0.96 + locked=true, and wheel preventDefault
+          // swallows all further page scroll (especially visible after resize).
+          if (target >= 1 && deltaPx > 0) {
+            target = 1;
+            current = 1;
+            window.__heroAboutTimelineProgress = 1;
+            tl.progress(1);
+            emitCoverProgress(1);
+            reportLockProgress(1);
+            emitPlaced(true);
+            setLocked(false);
+            if (rafId) {
+              cancelAnimationFrame(rafId);
+              rafId = 0;
+            }
+            return;
+          }
+          if (target <= 0 && deltaPx < 0) {
+            target = 0;
+            current = 0;
+            window.__heroAboutTimelineProgress = 0;
+            tl.progress(0);
+            emitCoverProgress(0);
+            reportLockProgress(0);
+            emitPlaced(false);
+            setLocked(true);
+            if (rafId) {
+              cancelAnimationFrame(rafId);
+              rafId = 0;
+            }
+            return;
+          }
+
           if (!rafId) rafId = requestAnimationFrame(tick);
         };
 
         // Only start reversing the hero when the page is truly at the top.
         // Once already locked, always handle wheel so a non-zero freeze can't trap us.
-        const canReverseUp = () => locked || scrollPos() <= 2;
+        // After resize/zoom, suppress reverse so a zeroed scrollY doesn't re-lock.
+        const canReverseUp = () => {
+          if (locked) return true;
+          if (performance.now() < suppressReverseUntil) return false;
+          // Prefer live scroll; lastUnlocked can lag one frame after scrollTo(0).
+          return scrollPos() <= 2 && (window.scrollY || 0) <= 2;
+        };
+
+        const isFullyComplete = () =>
+          current >= 0.999 && target >= 0.999 && window.__heroAboutPlaced === true;
 
         const onWheel = (e) => {
           if (window.__splashActive) return;
+          // Let the browser handle pinch/ctrl zoom — never drive the lock from it.
+          if (e.ctrlKey || e.metaKey) return;
+          // Fully unlocked: never swallow wheel — Lenis/native owns page scroll.
+          if (!locked && isFullyComplete()) {
+            if (e.deltaY < 0 && canReverseUp() && (current > 0 || target > 0)) {
+              e.preventDefault();
+              addProgress(e.deltaY);
+            }
+            return;
+          }
           if (e.deltaY > 0 && (locked || target < 1)) {
             e.preventDefault();
             addProgress(e.deltaY);
@@ -334,6 +480,13 @@ export default function SnippScrol({
           const y = e.touches[0].clientY;
           const dy = touchY - y;
           touchY = y;
+          if (!locked && isFullyComplete()) {
+            if (dy < 0 && canReverseUp() && (current > 0 || target > 0)) {
+              e.preventDefault();
+              addProgress(dy);
+            }
+            return;
+          }
           if (dy > 0 && (locked || target < 1)) {
             e.preventDefault();
             addProgress(dy);
@@ -347,6 +500,13 @@ export default function SnippScrol({
 
         const onKey = (e) => {
           if (window.__splashActive) return;
+          if (!locked && isFullyComplete()) {
+            if ((e.key === 'ArrowUp' || e.key === 'PageUp') && canReverseUp() && (current > 0 || target > 0)) {
+              e.preventDefault();
+              addProgress(e.key === 'PageUp' ? -window.innerHeight * 0.9 : -80);
+            }
+            return;
+          }
           if ((e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') && (locked || target < 1)) {
             e.preventDefault();
             addProgress(e.key === 'PageDown' ? window.innerHeight * 0.9 : 80);
@@ -356,25 +516,138 @@ export default function SnippScrol({
           }
         };
 
+        const onWindowScroll = () => trackUnlockedScroll();
+        window.addEventListener('scroll', onWindowScroll, { passive: true });
         window.addEventListener('wheel', onWheel, { passive: false, capture: true });
         window.addEventListener('touchstart', onTouchStart, { passive: true, capture: true });
         window.addEventListener('touchmove', onTouchMove, { passive: false, capture: true });
         window.addEventListener('keydown', onKey, { capture: true });
 
-        const onLenisReady = () => setLocked(locked, { force: true });
+        const onLenisReady = () => {
+          setLocked(locked, { force: true });
+          attachLenisScrollTracking();
+        };
         window.addEventListener('lenisReady', onLenisReady);
         window.addEventListener('splashComplete', onLenisReady);
+        attachLenisScrollTracking();
+
+        // Resize/zoom must NOT rebuild this controller — teardown races Lenis and
+        // often re-locks after the browser zeros scrollY. Just re-sync lock state.
+        const syncAfterResize = ({ sizeChanged = false } = {}) => {
+          const lenis = window.lenisInstance;
+          const liveY = Math.max(
+            typeof lenis?.scroll === 'number' ? lenis.scroll : 0,
+            window.scrollY || 0,
+          );
+          const storedY = Math.max(
+            lastUnlockedScroll,
+            typeof window.__heroAboutLastScroll === 'number' ? window.__heroAboutLastScroll : 0,
+          );
+          // Zoom often zeros live scroll; only then fall back to last known.
+          // If user scrolled up (live mid/low, stored higher), trust live — do not jump to peak.
+          const scrollWasZeroed = liveY < 2 && storedY > 8;
+          const restoreY = liveY > 8 ? liveY : (storedY > 8 ? storedY : liveY);
+
+          // Only suppress reverse when scroll was actually disrupted — visualViewport
+          // noise was keeping suppress forever and blocking hero reverse + feeling stuck.
+          if (scrollWasZeroed || sizeChanged) {
+            suppressReverseUntil = performance.now() + 700;
+            resizeGuardUntil = performance.now() + 700;
+          }
+
+          if (restoreY > 8) {
+            lastUnlockedScroll = restoreY;
+            window.__heroAboutLastScroll = restoreY;
+          }
+
+          lenis?.resize?.();
+
+          // Heal lerp-stuck lock: current can sit at ~0.98 with target=1 while
+          // wheel preventDefault still swallows page scroll.
+          const shouldBeUnlocked =
+            (!locked && current >= 0.999 && target >= 0.999) ||
+            (window.__heroAboutPlaced === true && target >= 0.999 && current >= 0.95);
+
+          if (shouldBeUnlocked) {
+            locked = false;
+            current = 1;
+            target = 1;
+            window.__heroAboutPlaced = true;
+            window.__pageScrollLocked = false;
+            window.__heroAboutTimelineProgress = 1;
+            tl.progress(1);
+            lenis?.start();
+            clearScrollLockStyles();
+
+            const applyRestore = () => {
+              const live = window.lenisInstance;
+              live?.resize?.();
+              live?.start?.();
+              clearScrollLockStyles();
+              window.__pageScrollLocked = false;
+              const stored = Math.max(
+                restoreY,
+                lastUnlockedScroll,
+                typeof window.__heroAboutLastScroll === 'number' ? window.__heroAboutLastScroll : 0,
+              );
+              if (scrollWasZeroed && stored > 8) {
+                applyScrollY(stored);
+              } else if (!scrollWasZeroed && liveY > 8) {
+                applyScrollY(liveY);
+              }
+            };
+
+            if (sizeChanged) {
+              ScrollTrigger.refresh();
+            }
+
+            if (restoreRafId) cancelAnimationFrame(restoreRafId);
+            // Refresh can settle late and wipe Y / clamp scroll — retry restore.
+            restoreRafId = requestAnimationFrame(() => {
+              applyRestore();
+              restoreRafId = requestAnimationFrame(() => {
+                applyRestore();
+                restoreRafId = 0;
+                window.setTimeout(applyRestore, 50);
+                window.setTimeout(applyRestore, 150);
+              });
+            });
+            return;
+          }
+
+          if (locked) {
+            window.__pageScrollLocked = true;
+            pinScrollTop();
+            lenis?.stop();
+            if (window.innerWidth < 768) {
+              document.documentElement.style.overflow = 'hidden';
+              document.body.style.overflow = 'hidden';
+            } else {
+              clearScrollLockStyles();
+            }
+          }
+
+          if (sizeChanged) {
+            ScrollTrigger.refresh();
+          }
+        };
+
+        lockApiRef.current = { syncAfterResize };
 
         lockCleanupRef.current = () => {
           if (rafId) cancelAnimationFrame(rafId);
+          if (restoreRafId) cancelAnimationFrame(restoreRafId);
+          unsubLenisScroll?.();
+          window.removeEventListener('scroll', onWindowScroll);
           window.removeEventListener('wheel', onWheel, { capture: true });
           window.removeEventListener('touchstart', onTouchStart, { capture: true });
           window.removeEventListener('touchmove', onTouchMove, { capture: true });
           window.removeEventListener('keydown', onKey, { capture: true });
           window.removeEventListener('lenisReady', onLenisReady);
           window.removeEventListener('splashComplete', onLenisReady);
-          // Keep placed/progress so the next build() (zoom/resize) can restore.
-          // Full reset happens only on unmount.
+          lockApiRef.current = null;
+          // Keep placed/progress so the next build() (HMR / remount) can restore.
+          // Full reset happens only on true unmount (separate effect).
           window.__pageScrollLocked = false;
           window.lenisInstance?.start();
           clearScrollLockStyles();
@@ -386,6 +659,13 @@ export default function SnippScrol({
       }
 
       // ── Pin container and scrub the timeline ──────────────────────────────
+      // Pin path keeps Lenis owning page scroll (TSB approach). Never leave
+      // overflow/lock flags stuck from a prior lockPageUntilComplete session.
+      window.__pageScrollLocked = false;
+      window.lenisInstance?.start?.();
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+
       const panelHeight   = container.offsetHeight || window.innerHeight;
       const panelScrollPx = (total - 1) * panelHeight;
       const lockScrollPx  = lockAtEnd * panelHeight;
@@ -450,7 +730,7 @@ export default function SnippScrol({
         onRefresh: () => {
           const spacer = container.closest('.pin-spacer') || container.parentElement;
           if (spacer && spacer.classList.contains('pin-spacer')) {
-            spacer.style.backgroundColor = 'white';
+            spacer.style.backgroundColor = '#F4F4F2';
           }
         },
       });
@@ -458,7 +738,7 @@ export default function SnippScrol({
       // ✅ Style the pin-spacer immediately (remove rAF to prevent extra repaints)
       const spacer = container.closest('.pin-spacer') || container.parentElement;
       if (spacer && spacer.classList.contains('pin-spacer')) {
-        spacer.style.backgroundColor = 'white';
+        spacer.style.backgroundColor = '#F4F4F2';
       }
 
       // Refresh ScrollTrigger after pin setup so child animations measure correctly
@@ -480,41 +760,86 @@ export default function SnippScrol({
     let resizeTimer;
     let lastW = typeof window !== 'undefined' ? window.innerWidth : 0;
     let lastH = typeof window !== 'undefined' ? window.innerHeight : 0;
+    let lastScale = typeof window !== 'undefined' ? (window.visualViewport?.scale ?? 1) : 1;
+
     const onResize = () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         const w = window.innerWidth;
         const h = window.innerHeight;
-        // Skip no-op resize noise; still rebuild on zoom (CSS px size changes)
-        if (w === lastW && h === lastH) return;
+        const scale = window.visualViewport?.scale ?? 1;
+        const sizeChanged = w !== lastW || h !== lastH;
+        const scaleChanged = Math.abs(scale - lastScale) > 0.001;
         lastW = w;
         lastH = h;
-        build();            // full rebuild on resize (re-reads vh); state preserved in build()
+        lastScale = scale;
+
+        // Lock mode already reads container.offsetHeight live in addProgress.
+        // Always sync on resize/zoom events — visualViewport can fire without
+        // layout size changes, and zoom often zeros scroll in that path.
+        // syncAfterResize itself no-ops harmlessly unless scroll was disrupted.
+        if (lockPageUntilComplete && lockApiRef.current) {
+          lockApiRef.current.syncAfterResize({ sizeChanged: sizeChanged || scaleChanged });
+          return;
+        }
+
+        // Pin path (TSB): refresh metrics + Lenis size — do not stop Lenis or
+        // capture wheel. Full rebuild only when layout size actually changes.
+        if (!sizeChanged && !scaleChanged) return;
+
+        window.__pageScrollLocked = false;
+        window.lenisInstance?.start?.();
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        window.lenisInstance?.resize?.();
+
+        if (sizeChanged) {
+          build();
+        }
         ScrollTrigger.refresh();
-      }, 200);
+        window.lenisInstance?.resize?.();
+      }, 150);
     };
 
     window.addEventListener('resize', onResize, { passive: true });
+    // Pinch-zoom often updates visualViewport without a matching window resize.
+    window.visualViewport?.addEventListener('resize', onResize, { passive: true });
 
     return () => {
       cancelAnimationFrame(raf);
       clearTimeout(resizeTimer);
       window.removeEventListener('resize', onResize);
+      window.visualViewport?.removeEventListener('resize', onResize);
+      lockApiRef.current = null;
       lockCleanupRef.current?.();
       lockCleanupRef.current = null;
       ctxRef.current?.revert();
+      // Do NOT zero __heroAboutPlaced/progress here — effect re-runs (HMR /
+      // dep identity) must not re-lock mid-page. True unmount resets below.
+      window.__pageScrollLocked = false;
+      window.lenisInstance?.start();
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    };
+  }, [build, lockPageUntilComplete]);
+
+  // Reset hero lock globals only when SnippScrol leaves the tree (navigation).
+  useEffect(() => {
+    return () => {
       window.__pageScrollLocked = false;
       window.__heroAboutPlaced = false;
       window.__heroAboutProgress = 0;
+      window.__heroAboutTimelineProgress = 0;
+      window.__heroAboutLastScroll = 0;
       window.__onHeroAboutProgress?.(0);
       window.lenisInstance?.start();
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
     };
-  }, [build]);
+  }, []);
 
   // ─── Render ────────────────────────────────────────────────────────────────
-  // The outer wrapper is 100vh and overflow:hidden.
+  // The outer wrapper is 100dvh and overflow:hidden.
   // GSAP will pin THIS element — everything outside (header, footer) is safe.
   return (
     <>
@@ -525,10 +850,10 @@ export default function SnippScrol({
         style={{
           position: 'relative',
           width: '100%',
-          height: 'min(100vh, 1000px)',
-          maxHeight: '1000px',
+          height: '100dvh',
+          maxHeight: '100dvh',
           overflow: 'hidden',
-          backgroundColor: 'white',
+          backgroundColor: '#F4F4F2',
         }}
       >
         {childArray.map((child, index) => (
@@ -552,14 +877,14 @@ export default function SnippScrol({
           </div>
         ))}
       </div>
-      {/* White seam-cover: overlaps the compositing gap that appears
-          at the bottom of the GSAP-pinned fixed layer during scroll */}
+      {/* Seam-cover: overlaps the compositing gap at the bottom of the
+          GSAP-pinned layer. Matches About panel bg so no white hairline. */}
       <div
         aria-hidden="true"
         style={{
           height:          '4px',
           marginTop:       '-4px',
-          backgroundColor: 'white',
+          backgroundColor: '#F4F4F2',
           position:        'relative',
           zIndex:          9999,
         }}

@@ -78,11 +78,24 @@ function HeroBackgroundLayer({ background }) {
 
   if (type === "image") {
     return (
-      <div
-        className={`absolute inset-0 z-0 bg-cover bg-no-repeat ${imageClassName}`}
-        style={{ backgroundImage: `url('${src}')`, ...style }}
-        aria-hidden
-      />
+      <div className="absolute inset-0 z-0 overflow-hidden" style={style} aria-hidden>
+        <Image
+          src={src}
+          alt=""
+          fill
+          priority={Boolean(background.priority)}
+          sizes="100vw"
+          quality={background.quality ?? 80}
+          className={`object-cover ${imageClassName}`.trim()}
+        />
+        {overlayClassName ? (
+          <div className={`absolute inset-0 z-10 pointer-events-none ${overlayClassName}`} aria-hidden />
+        ) : overlay === "gradient-20" ? (
+          <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: GRADIENT_OVERLAY }} aria-hidden />
+        ) : overlay ? (
+          <div className={`absolute inset-0 z-10 pointer-events-none ${overlay}`} aria-hidden />
+        ) : null}
+      </div>
     );
   }
 

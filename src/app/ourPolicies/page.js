@@ -54,7 +54,7 @@ export default function OurPolicies() {
                 background={{
                     type: "image",
                     src: "/policies/policiesbg.png",
-                    imageClassName: "bg-center",
+                    imageClassName: "object-center",
                 }}
             />
 

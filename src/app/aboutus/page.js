@@ -11,6 +11,7 @@ import ParallaxSection from "../../animations/ParallaxSection";
 import MissionValuesSection from "../../components/about/MissionValuesSection";
 import ExpertiseCard from "@/components/shared/ExpertiseCard";
 import SlideIn from "../../animations/SlideIn";
+import SequentialSlideIn from "../../animations/SequentialSlideIn";
 import ScrollReveal from "../../animations/ScrollReveal";
 
 const CORE_SECTORS = [
@@ -64,7 +65,7 @@ export default function AboutUs() {
         }}
       />
 
-      <div className="mx-auto w-full max-w-[1600px] px-3 lg:px-10 py-20 flex flex-col lg:items-center justify-center">
+      <div className="mx-auto w-full max-w-[1600px] px-3 lg:px-10 py-5 flex flex-col lg:items-center justify-center">
         <Badge title="Who we are" />
 
         <div className="mt-8 w-full max-w-[1300px] mx-auto">
@@ -91,8 +92,9 @@ export default function AboutUs() {
 
       {/* parent company / our verticals */}
 
-      <div className="mx-auto min-h-screen relative mb-8 lg:mb-0 w-full max-w-[1600px]">
-        <div className="relative min-h-[40vh] sm:min-h-[50vh] w-full overflow-hidden rounded-xl sm:rounded-2xl flex flex-col justify-end lg:justify-start px-4 sm:px-5 lg:px-16 py-8 sm:py-12">
+      <div className="relative mx-auto mb-8 w-full max-w-[1600px] lg:mb-0">
+        {/* Banner */}
+        <div className="relative flex min-h-[40vh] w-full flex-col justify-end overflow-hidden rounded-xl px-4 py-8 sm:min-h-[50vh] sm:rounded-2xl sm:px-5 sm:py-12 lg:px-16 lg:pb-20">
           <Image
             src="/about/parentcompanybg.webp"
             alt=""
@@ -101,73 +103,82 @@ export default function AboutUs() {
             sizes="(max-width: 1600px) 100vw, 1600px"
             quality={90}
           />
-          <div className="relative flex flex-col sm:flex-row justify-start items-center gap-2 sm:gap-3 text-white z-10 lg:absolute lg:left-16 lg:top-[calc(100%-70vh)]">
+          <div className="relative z-10 flex w-full items-center gap-3 text-white lg:max-w-[48%]">
             <Image
               src="/shared/badge-w.png"
-              alt="Badge Icon"
-              width={34}
-              height={34}
-              className="object-contain w-6 h-6 sm:w-8 sm:h-8 lg:w-[34px] lg:h-[34px]"
+              alt=""
+              width={56}
+              height={56}
+              className="h-8 w-8 object-contain sm:h-10 sm:w-10 lg:h-12 lg:w-12 xl:h-14 xl:w-14"
             />
-            <span className="text-2xl sm:text-3xl lg:text-4xl uppercase font-medium">
+            <span className="text-2xl font-medium uppercase tracking-wide sm:text-3xl lg:text-4xl xl:text-5xl">
               Our Verticals
             </span>
           </div>
         </div>
 
-        <div className="bg-[#FEF7F4] w-full px-4 sm:px-5 lg:px-16 py-8 sm:py-10 lg:h-[55vh]">
-          <SlideIn direction="left" scrollTrigger={true} duration={0.8}>
-            <h2 className="text-xl sm:text-2xl lg:text-2xl uppercase tracking-wide text-[#212225]/70  mb-4 sm:mb-6">
-              Our Core Sectors
-            </h2>
+        {/* Sectors + detail panel */}
+        <div className="relative grid w-full grid-cols-1 bg-[#FEF7F4] lg:grid-cols-2">
+          <div className="px-4 py-8 sm:px-5 sm:py-10 lg:px-16 lg:py-10">
+            <SlideIn direction="left" scrollTrigger={true} duration={0.8}>
+              <h2 className="mb-4 text-xl uppercase tracking-wide text-[#212225]/70 sm:mb-6 sm:text-2xl lg:text-2xl">
+                Our Core Sectors
+              </h2>
 
-            <div
-              className="text-xl sm:text-2xl lg:text-3xl flex flex-col gap-3 sm:gap-4 mt-4 sm:mt-6"
-              role="tablist"
-              aria-label="Core sectors"
-            >
-              {CORE_SECTORS.map((sector) => {
-                const isActive = sector.id === activeSectorId;
-                return (
-                  <button
-                    key={sector.id}
-                    type="button"
-                    role="tab"
-                    aria-selected={isActive}
-                    onClick={() => setActiveSectorId(sector.id)}
-                    className={`text-left transition-opacity cursor-pointer underline text-[#FE5D0A] ${
-                      isActive ? "font-medium opacity-100" : "opacity-80 hover:opacity-100"
-                    }`}
-                  >
-                    {sector.label}
-                  </button>
-                );
-              })}
+              <div
+                className="mt-4 flex flex-col gap-3 sm:mt-6 sm:gap-4"
+                role="tablist"
+                aria-label="Core sectors"
+              >
+                {CORE_SECTORS.map((sector) => {
+                  const isActive = sector.id === activeSectorId;
+                  return (
+                    <button
+                      key={sector.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={isActive}
+                      onClick={() => setActiveSectorId(sector.id)}
+                      className={`cursor-pointer text-left text-lg font-normal text-[#FE5D0A] underline decoration-1 underline-offset-4 transition-opacity sm:text-xl lg:text-[1.65rem] lg:leading-9 ${
+                        isActive
+                          ? "opacity-100 decoration-2"
+                          : "opacity-70 hover:opacity-100"
+                      }`}
+                    >
+                      {sector.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </SlideIn>
+          </div>
+
+          <div className="relative z-10 flex min-h-[50vh] flex-col items-center rounded-t-2xl bg-white px-8 pb-8 pt-10 sm:px-12 sm:pb-10 sm:pt-14 lg:-mt-[6%] lg:min-h-[70%] lg:rounded-2xl lg:px-16 lg:pb-12 lg:pt-16">
+            <div className="flex w-full min-h-[11rem] flex-1 items-start justify-center sm:min-h-[12.5rem] lg:min-h-[14rem]">
+              <SlideIn
+                key={activeSector.id}
+                direction="bottom"
+                scrollTrigger={false}
+                duration={0.4}
+                delay={0.05}
+                className="w-full"
+              >
+                <p className="mx-auto max-w-[34rem] text-center text-base leading-relaxed text-[#212225] sm:text-lg sm:leading-8 lg:text-[20px] lg:leading-[1.7]">
+                  {activeSector.description}
+                </p>
+              </SlideIn>
             </div>
-          </SlideIn>
-        </div>
 
-        <div className="bg-white rounded-t-2xl lg:rounded-2xl lg:absolute lg:right-0 lg:bottom-0 lg:w-1/2 px-8 sm:px-12 lg:px-16 pt-10 sm:pt-14 lg:pt-16 pb-28 sm:pb-32 lg:pb-36 relative flex flex-col items-center justify-start min-h-[50vh] lg:h-[70vh]">
-          <SlideIn
-            key={activeSector.id}
-            direction="bottom"
-            scrollTrigger={false}
-            duration={0.4}
-            delay={0.05}
-            className="w-full"
-          >
-            <p className="text-base sm:text-lg lg:text-[22px] lg:leading-8 text-center text-[#212225] leading-relaxed max-w-[34rem] mx-auto">
-              {activeSector.description}
-            </p>
-          </SlideIn>
-
-          <Image
-            src="/about/itihad.png"
-            alt="Itihad Logo"
-            width={200}
-            height={100}
-            className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 w-32 sm:w-40 lg:w-[200px] h-auto object-contain"
-          />
+            <div className="mt-auto flex w-full shrink-0 items-end justify-center pt-6 sm:pt-8">
+              <Image
+                src="/about/itihad.png"
+                alt="Itihad Logo"
+                width={220}
+                height={220}
+                className="h-auto w-28 object-contain sm:w-36 lg:w-[180px] xl:w-[210px]"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -181,9 +192,16 @@ export default function AboutUs() {
               Our expertise and experience
             </h1>
           </SlideIn>
-          <div className="mt-6 flex flex-col items-end gap-6 lg:flex-row">
+          <SequentialSlideIn
+            className="mt-6 flex flex-col items-end gap-6 lg:flex-row"
+            itemClassName="w-full min-w-0 lg:w-1/3"
+            start="top 85%"
+            end="bottom 70%"
+            stagger={0.15}
+          >
             <ExpertiseCard
-              index={0}
+              animated={false}
+              fillContainer
               variant="tall"
               number={200}
               title="Supply Chain partners Connected worldwide"
@@ -197,7 +215,8 @@ export default function AboutUs() {
             />
 
             <ExpertiseCard
-              index={1}
+              animated={false}
+              fillContainer
               variant="medium"
               number={150}
               duration={2.5}
@@ -212,7 +231,8 @@ export default function AboutUs() {
             />
 
             <ExpertiseCard
-              index={2}
+              animated={false}
+              fillContainer
               variant="small"
               number={60}
               title="Global logistic partners"
@@ -224,7 +244,7 @@ export default function AboutUs() {
               descriptionClassName="max-w-[70%] pr-0 lg:pr-4"
               imageClassName="bottom-2 right-0 h-auto w-[58%] lg:w-[78%]"
             />
-          </div>
+          </SequentialSlideIn>
         </div>
       </div>
 

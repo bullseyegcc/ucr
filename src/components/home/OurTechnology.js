@@ -171,7 +171,7 @@ export default function OurTechnology() {
 
             {cardReady && (
               <motion.div
-                className="absolute left-0 right-0 top-0 z-10 box-border flex h-[16rem] flex-col overflow-hidden rounded-xl bg-white px-[1.25rem] pt-[1.25rem] pb-[1.75rem] shadow-lg sm:h-[15.75rem] lg:h-[17.25rem] lg:px-[1.5rem] lg:pt-[1.35rem] lg:pb-[2rem]"
+                className="absolute left-0 right-0 top-0 z-10 box-border flex h-[16rem] flex-col overflow-hidden rounded-xl bg-white px-[1.25rem] pt-[1.25rem] pb-[1.75rem] shadow-none sm:h-[15.75rem] lg:h-[17.25rem] lg:px-[1.5rem] lg:pt-[1.35rem] lg:pb-[2rem]"
                 style={{ y: cardY }}
               >
                 <div className="relative min-h-0 w-full flex-1">

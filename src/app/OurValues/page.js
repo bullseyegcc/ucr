@@ -135,7 +135,7 @@ export default function OurValues() {
                 className="absolute inset-0 h-full w-full object-cover"
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/70 via-white/20 to-transparent" />
-              <h2 className="relative z-10 mt-auto w-full pb-2 text-center text-[30px] font-medium capitalize tracking-[-1.4px] text-[#A8A8AE] lg:pb-3 lg:text-[34px]">
+              <h2 className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 mt-auto w-full pb-2 text-center text-[30px] font-medium capitalize tracking-[-1.4px] text-[#A8A8AE] lg:pb-3 lg:text-[34px]">
                 More Than Copper
               </h2>
             </div>

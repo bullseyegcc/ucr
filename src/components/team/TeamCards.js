@@ -12,7 +12,7 @@ const members = [
 export default function TeamCards() {
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center py-8 px-2 lg:px-10">
+    <div className="w-full flex items-center justify-center py-8">
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {members.map((member, i) => (
           <CardAnimation key={member.name} index={i} className="h-full">

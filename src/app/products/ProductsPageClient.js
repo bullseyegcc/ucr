@@ -3,13 +3,13 @@
 import { Badgetextblack, Badge } from "../../common/badge"
 import Hero from "@/components/shared/Hero"
 import Image from "next/image"
-import Link from "next/link"
-import { ArrowRight, ArrowDown } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import UcrLaboratoryToolsSection from "../../components/technology/UcrLaboratoryToolsSection"
 import ParallaxSection from "../../animations/ParallaxSection"
 import SlideIn from "../../animations/SlideIn"
 import FadeIn from "../../animations/FadeIn";
 import ScrollReveal from "../../animations/ScrollReveal"
+import ProductCard from "../../components/products/ProductCard"
 
 export default function ProductsPageClient({ products = [] }) {
     return (
@@ -72,79 +72,20 @@ export default function ProductsPageClient({ products = [] }) {
                         {products.length === 0 ? (
                             <p className="text-center text-gray-500">No products published yet.</p>
                         ) : (
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-[0.5rem] lg:gap-[0.75rem] auto-rows-[20.5rem] lg:auto-rows-[20.5rem]">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-[0.5rem] lg:gap-[0.75rem]">
                             {products.map((product, index) => {
                                 const productIndex = String(product.id).padStart(2, "0");
                                 const isPriority = index < 2;
                                 const imageFit = product.imageFit === "contain" ? "object-contain" : "object-cover";
 
                                 return (
-                                    <Link key={product.id} href={`/products/${product.slug}`} className="group block h-full">
-                                        <article className="h-full rounded-[0.75rem] border border-[#EBEBEB] bg-[#FCFCFC] p-[0.75rem] cursor-pointer overflow-hidden transition-[transform,box-shadow,background-color,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-[0.25rem] hover:shadow-[0_0.875rem_2.5rem_rgba(0,0,0,0.14)] hover:bg-[#FF6A00] hover:border-[#FF6A00]">
-                                            <div className="grid h-full grid-cols-1 lg:grid-cols-[52%_48%] gap-[0.75rem] lg:gap-[1rem]">
-                                                <div className="flex h-full min-h-[10rem] lg:min-h-0 flex-col overflow-hidden px-[0.75rem] pt-[0.75rem] pb-[0.75rem] lg:px-[1rem] lg:pt-[1rem] lg:pb-[1rem]">
-                                                    <div className="flex flex-1 items-center transition-[flex] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:flex-[0_0_auto] group-hover:items-start">
-                                                        <div className="w-full">
-                                                            <p
-                                                                className="font-normal text-[0.75rem] leading-[1rem] text-[#8B8B8B] transition-colors duration-500 group-hover:text-white/95"
-                                                                style={{ fontFamily: 'Helvetica Now Display, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial' }}
-                                                            >
-                                                                /{productIndex}
-                                                            </p>
-
-                                                            <h3
-                                                                className="mt-[0.75rem] line-clamp-3 font-medium text-[2rem] leading-[2.5rem] tracking-[-0.0875rem] lg:text-[2.375rem] lg:leading-[3rem] text-[#4B4B4B] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-[1.75rem] group-hover:leading-[2rem] lg:group-hover:text-[2rem] lg:group-hover:leading-[2.25rem] group-hover:text-white"
-                                                                style={{ fontFamily: 'Helvetica Now Display, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial' }}
-                                                            >
-                                                                {product.name}
-                                                            </h3>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grid-rows-[1fr]">
-                                                        <div className="overflow-hidden">
-                                                            <div className="translate-y-[0.5rem] opacity-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] delay-75 group-hover:translate-y-0 group-hover:opacity-100">
-                                                                <p
-                                                                    className="mt-[0.625rem] line-clamp-3 font-normal text-[1rem] leading-[1.625rem] tracking-[-0.01rem] text-[#6F6F6F] transition-colors duration-500 group-hover:text-white/90"
-                                                                    style={{ fontFamily: 'Helvetica Now Display, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial' }}
-                                                                >
-                                                                    {product.description}
-                                                                </p>
-
-                                                                <span
-                                                                    className="mt-[0.875rem] inline-flex h-[2.875rem] w-full max-w-[14.5rem] items-center justify-center gap-[0.375rem] rounded-[3.125rem] border border-white bg-white px-[1rem] text-[#2D2F33] transition-colors duration-500 group-hover:bg-[#FFF6F0]"
-                                                                    style={{ fontFamily: 'Helvetica Now Display, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial' }}
-                                                                >
-                                                                    <span className="text-center font-normal text-[0.875rem] leading-[1.2] tracking-[-0.02rem]">Details about product</span>
-                                                                    <ArrowRight size={15} color="#FF6A00" />
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div className="relative h-full min-h-[10rem] pt-[0.875rem] pb-[0.875rem] pl-0 pr-[1rem] transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:pt-[1rem] group-hover:pb-[1rem] group-hover:pl-0 group-hover:pr-[1.25rem] lg:group-hover:pr-[1.5rem]">
-                                                    <div className="relative h-full w-full overflow-hidden rounded-[0.5rem] bg-white">
-                                                        <FadeIn scrollTrigger={true} duration={1.2} className="relative h-full w-full">
-                                                            <Image
-                                                                src={product.icon || "/products/drawnwire.png"}
-                                                                alt={product.name}
-                                                                fill
-                                                                sizes="(max-width: 640px) 88vw, (max-width: 1024px) 44vw, 420px"
-                                                                className={imageFit}
-                                                                quality={75}
-                                                                priority={isPriority}
-                                                                loading={isPriority ? undefined : "lazy"}
-                                                                decoding="async"
-                                                                placeholder="blur"
-                                                                blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmNGY0Ii8+PC9zdmc+"
-                                                            />
-                                                        </FadeIn>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </article>
-                                    </Link>
+                                    <ProductCard
+                                        key={product.id}
+                                        product={product}
+                                        productIndex={productIndex}
+                                        isPriority={isPriority}
+                                        imageFit={imageFit}
+                                    />
                                 );
                             })}
                         </div>

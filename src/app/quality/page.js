@@ -117,15 +117,15 @@ export default function Quality() {
               </FadeIn>
             </div>
 
-            {/* cards — stepped tall / mid / small with equal-width containers */}
+            {/* cards — equal size (match first), stepped vertical offset */}
             <div className="w-full">
               <SequentialSlideIn
-                className="mx-auto w-full max-w-[1600px] px-6 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-end"
+                className="mx-auto w-full max-w-[1600px] px-6 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-start"
                 itemClassName="w-full min-w-0"
                 start="top 85%"
                 end="bottom 70%"
               >
-                <div className="overflow-hidden rounded-2xl w-full h-[58vh] min-h-[62vh] lg:h-[72vh] lg:min-h-[72vh]">
+                <div className="overflow-hidden rounded-2xl w-full h-[52vh] min-h-[420px] lg:h-[72vh] lg:min-h-[72vh]">
                   <Image
                     src="/quality/card1.svg"
                     alt="Certification"
@@ -134,22 +134,22 @@ export default function Quality() {
                     className="w-full h-full object-cover object-bottom"
                   />
                 </div>
-                <div className="bg-white relative overflow-hidden rounded-2xl w-full h-[58vh] min-h-[62vh] lg:h-[66vh] lg:min-h-[66vh]">
+                <div className="bg-white relative overflow-hidden rounded-2xl w-full h-[52vh] min-h-[420px] lg:h-[72vh] lg:min-h-[72vh] lg:mt-16 xl:mt-20">
                   <Image
                     src="/quality/card2.svg"
                     alt="Certification"
                     width={450}
                     height={567}
-                    className="absolute  -bottom-7 w-full h-full object-cover object-bottom"
+                    className="absolute -bottom-7 w-full h-full object-cover object-bottom"
                   />
                 </div>
-                <div className="bg-white relative overflow-hidden rounded-2xl w-full h-[58vh] min-h-[62vh] lg:h-[66vh] lg:min-h-[66vh]">
+                <div className="bg-white relative overflow-hidden rounded-2xl w-full h-[52vh] min-h-[420px] lg:h-[72vh] lg:min-h-[72vh] lg:mt-32 xl:mt-40">
                   <Image
                     src="/quality/card3.svg"
                     alt="Certification"
                     width={450}
                     height={567}
-                    className="absolute  -bottom-7 w-full h-full object-cover object-bottom"
+                    className="absolute -bottom-7 w-full h-full object-cover object-bottom"
                   />
                 </div>
               </SequentialSlideIn>
