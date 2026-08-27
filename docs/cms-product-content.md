@@ -2,8 +2,11 @@
 
 Copy-paste ready fields for WordPress ACF Product. WYSIWYG HTML is shaped for the frontend parser (`htmlToLines` / HTML table).
 
-Figma file: [UCR sites (Copy)](https://www.figma.com/design/PYXFAmDvOQG42JHsS9sfRf/UCR-sites--Copy-)
+Figma files:
+- [UCR sites (Copy) — prior products](https://www.figma.com/design/PYXFAmDvOQG42JHsS9sfRf/UCR-sites--Copy-)
+- [UCR sites (Copy) — Copper Rod](https://www.figma.com/design/lB1inJ8ymRGMOkqRNG4Bl1/UCR-sites--Copy-?node-id=314-550)
 
+- [Copper Rod](#copper-rod)
 - [Drawn Wire](#drawn-wire)
 - [Tin Coated Copper Wire](#tin-coated-copper-wire)
 - [Drawn Copper Wire for Can Welding](#drawn-copper-wire-for-can-welding)
@@ -12,8 +15,114 @@ Figma file: [UCR sites (Copy)](https://www.figma.com/design/PYXFAmDvOQG42JHsS9sf
 Notes:
 
 - SKU, featured, and icon are not in Figma. Suggested SKU/featured values come from the local catalog (`src/assets/products.js`) where marked.
-- Most technical tables in Figma have 3 columns (Parameters, Unit, UCR Typical). The site table expects 4, so the ASTM column is left blank unless Figma already has a fourth column (Oxygen-Free Copper Rods).
+- Most technical tables in Figma have 3 columns (Parameters, Unit, UCR Typical). Copper Rod and Oxygen-Free include a 4th ASTM column.
 - Icon must be uploaded in WordPress media; GraphQL cannot write products without auth.
+
+---
+
+## Copper Rod
+
+- Figma: [Product details](https://www.figma.com/design/lB1inJ8ymRGMOkqRNG4Bl1/UCR-sites--Copy-?node-id=314-550&t=uW1mFnoEf6mvXcjx-4)
+- Suggested slug: `copper-rod`
+
+| Field | Name | Type | Value |
+| --- | --- | --- | --- |
+| Title | — | — | Copper Rod |
+| SKU | `sku` | Text | `01/05` *(not in Figma)* |
+| Featured | `featured` | True / False | `true` *(not in Figma; catalog featured)* |
+| Product specification | `product_specification` | Text | `Meets ASTM B49 & BS EN 1977 standards` |
+| Icon | `icon` | Image | Upload Figma product photo (coiled copper rod) |
+
+### Short description (`short_description`)
+
+Not in Figma. Suggested:
+
+```
+High-purity copper rods for cable manufacturing and transformer/motor windings—engineered for consistent purity and conductivity.
+```
+
+### Long description (`long_description`)
+
+```html
+<p>High-purity copper rods for wire drawing, cable manufacturing, and industrial applications requiring consistent quality.</p>
+```
+
+### Specifications (`specifications`)
+
+```html
+<p>Meets ASTM B49 &amp; BS EN 1977 standards</p>
+```
+
+### Applications (`applications`)
+
+```html
+<p>Cable manufacturing (power, communication)</p>
+<p>Super fine wire applications</p>
+<p>Round and sector conductor use</p>
+<p>Telephone and network cabling</p>
+<p>Automotive wire harnesses</p>
+<p>Enameled copper wire production</p>
+<p>Transformer and motor windings</p>
+<p>Electrical and mechanical uses requiring high conductivity</p>
+```
+
+### Technical parameters (`technical_parameters`)
+
+Figma spelling **Telurium** kept as designed. Unit for Telurium is `%min` in Figma.
+
+```html
+<table>
+  <thead>
+    <tr>
+      <th>Parameters</th>
+      <th>Unit</th>
+      <th>ASTM B49/BS-EN 1977</th>
+      <th>UCR Typical</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Copper, min</td><td>% min</td><td>99.90</td><td>&gt;99.95</td></tr>
+    <tr><td>Telurium, max</td><td>%min</td><td>2.0</td><td>&lt;2.0</td></tr>
+    <tr><td>Selenium, max</td><td>% max</td><td>2.0</td><td>&lt;2.0</td></tr>
+    <tr><td>Bismuth, max</td><td>ppm</td><td>1.0</td><td>&lt;1.0</td></tr>
+    <tr><td>Antimony, max</td><td>ppm</td><td>3.0</td><td>&lt;3.0</td></tr>
+    <tr><td>Tin, max</td><td>ppm</td><td>4.0</td><td>&lt;4.0</td></tr>
+    <tr><td>Lead, max</td><td>ppm</td><td>5.0</td><td>&lt;5.0</td></tr>
+    <tr><td>Iron, max</td><td>ppm</td><td>5.0</td><td>&lt;5.0</td></tr>
+    <tr><td>Nickel, max</td><td>ppm</td><td>5.0</td><td>&lt;5.0</td></tr>
+    <tr><td>Sulfur, max</td><td>ppm</td><td>10.0</td><td>&lt;10.0</td></tr>
+    <tr><td>Silver, max</td><td>ppm</td><td>10.0</td><td>&lt;15.0</td></tr>
+    <tr><td>Bismuth, min</td><td>ppm</td><td>15.0</td><td>&lt;25.0</td></tr>
+    <tr><td>Oxygen</td><td>ppm</td><td>25.0</td><td>200-350</td></tr>
+    <tr><td>Surface oxide</td><td>ppm</td><td>100-650</td><td>&lt;350</td></tr>
+    <tr><td>Elongation</td><td>%</td><td>Max 750</td><td>&gt;40%</td></tr>
+    <tr><td>Tensile strength</td><td>Mpa</td><td>Min 30</td><td>&lt;210</td></tr>
+    <tr><td>Diameter</td><td>Tolerance in mm</td><td>+0.38</td><td>+0.38</td></tr>
+    <tr><td>Rod conductivity</td><td>% IACS</td><td>Min 100%</td><td>&gt;101%</td></tr>
+  </tbody>
+</table>
+```
+
+### Sizes (`sizes`)
+
+```html
+<p>8 mm</p>
+<p>12.5 mm</p>
+<p>16 mm</p>
+```
+
+### Packaging dimensions (`packaging_dimensions`)
+
+Figma height value is `600 mml` (typo) → stored as `600 mm`. Last row is labeled “Coil Laid Type” again in Figma but content is packaging text → mapped to Packaging.
+
+```html
+<p>Outer Diameter: 1750 mm</p>
+<p>Inner Diameter: 900 mm</p>
+<p>Height of Coils: 600 mm</p>
+<p>Weight Ranges: 3050 - 4800 Kgs (Weld free with End seals on earth end)</p>
+<p>Coil Laid Type: Laid Type</p>
+<p>Packaging: Compacted, Strapped &amp; Wrapped with polyethylene wraps and complete protection of copper with tube cover seaworthy packaging</p>
+```
 
 ---
 
