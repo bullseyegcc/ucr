@@ -16,7 +16,7 @@ function decodeEntities(text) {
     .replace(/&#39;|&apos;/gi, "'")
     .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
     .replace(/&#x([0-9a-f]+);/gi, (_, hex) =>
-      String.fromCharCode(parseInt(hex, 16)),
+      String.fromCharCode(parseInt(hex, 16))
     );
 }
 
@@ -31,7 +31,11 @@ function htmlToLines(html) {
   if (!html || typeof html !== "string") return [];
   return html
     .split(/<\/p>|<\/li>|<br\s*\/?>|\r?\n/i)
-    .map((chunk) => stripHtml(chunk).replace(/^[-•]\s*/, "").trim())
+    .map((chunk) =>
+      stripHtml(chunk)
+        .replace(/^[-•]\s*/, "")
+        .trim()
+    )
     .filter(Boolean);
 }
 
@@ -45,14 +49,18 @@ function toParamRow(cells) {
 }
 
 function isHeaderRow(row) {
-  const label = `${row.parameter} ${row.unit} ${row.astm} ${row.ucr}`.toLowerCase();
+  const label =
+    `${row.parameter} ${row.unit} ${row.astm} ${row.ucr}`.toLowerCase();
   return /parameter/.test(label) && /unit/.test(label);
 }
 
 function splitDelimitedLine(line) {
   if (line.includes("|")) return line.split("|").map((part) => part.trim());
   if (line.includes("\t")) return line.split("\t").map((part) => part.trim());
-  const spaced = line.split(/\s{2,}/).map((part) => part.trim()).filter(Boolean);
+  const spaced = line
+    .split(/\s{2,}/)
+    .map((part) => part.trim())
+    .filter(Boolean);
   return spaced.length >= 4 ? spaced : [line];
 }
 
@@ -60,9 +68,9 @@ function parseHtmlTable(html) {
   const rows = [];
   const rowMatches = html.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi);
   for (const rowMatch of rowMatches) {
-    const cells = [...rowMatch[1].matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)].map(
-      (cell) => stripHtml(cell[1])
-    );
+    const cells = [
+      ...rowMatch[1].matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi),
+    ].map((cell) => stripHtml(cell[1]));
     if (cells.some(Boolean)) rows.push(toParamRow(cells));
   }
   return rows;
@@ -122,9 +130,7 @@ function parsePackagingLine(line) {
     ["weight range", "Weight"],
     ["weight", "Weight"],
     ["packaging", "Packaging"],
-  ].find(
-    ([prefix]) => lower === prefix || lower.startsWith(`${prefix} `),
-  );
+  ].find(([prefix]) => lower === prefix || lower.startsWith(`${prefix} `));
 
   if (known) {
     const [prefix, label] = known;
@@ -144,7 +150,9 @@ function parsePackagingLine(line) {
 
 function parsePackagingDimensions(html) {
   if (!html || typeof html !== "string") return [];
-  return htmlToLines(html).map(parsePackagingLine).filter((row) => row.label);
+  return htmlToLines(html)
+    .map(parsePackagingLine)
+    .filter((row) => row.label);
 }
 
 function normalizePackagingDimensions(value) {
@@ -189,8 +197,7 @@ export function mapPost(node) {
   if (!node) return null;
 
   const details = node.postDetails || {};
-  const excerpt =
-    stripHtml(node.excerpt) || excerptFromContent(node.content);
+  const excerpt = stripHtml(node.excerpt) || excerptFromContent(node.content);
 
   return {
     id: node.databaseId,
@@ -220,7 +227,9 @@ export function mapProduct(node) {
 
   const details = node.productDetails || {};
   const icon = mediaUrl(details.icon) || mediaUrl(node.featuredImage);
-  const technicalParametersHtml = rewriteHtmlUrls(details.technicalParameters || "");
+  const technicalParametersHtml = rewriteHtmlUrls(
+    details.technicalParameters || ""
+  );
   const mapped = {
     id: node.databaseId,
     slug: node.slug,
