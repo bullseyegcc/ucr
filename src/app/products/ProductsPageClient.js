@@ -74,7 +74,9 @@ export default function ProductsPageClient({ products = [] }) {
                         ) : (
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[0.5rem] lg:gap-[0.75rem]">
                             {products.map((product, index) => {
-                                const productIndex = String(product.id).padStart(2, "0");
+                                // Prefer SKU prefix (e.g. "01/05" → "01"); else list position after sort
+                                const skuPrefix = String(product.sku || "").match(/^(\d+)/)?.[1];
+                                const productIndex = (skuPrefix || String(index + 1)).padStart(2, "0");
                                 const isPriority = index < 2;
                                 const imageFit = product.imageFit === "contain" ? "object-contain" : "object-cover";
 

@@ -9,13 +9,23 @@ import { mapProduct } from "./mappers";
 
 const PRODUCT_TAGS = [WP_CACHE_TAGS.PRODUCTS];
 
+/** Leading number from SKU like "01/05" → 1; missing SKU sorts last. */
+function skuSortKey(sku) {
+  const match = String(sku || "").match(/^(\d+)/);
+  return match ? Number(match[1]) : Number.MAX_SAFE_INTEGER;
+}
+
 export async function getProducts() {
   try {
     const data = await wpRequest(GET_PRODUCTS, { first: 100 }, PRODUCT_TAGS);
     return (data.products?.nodes || [])
       .map(mapProduct)
       .filter(Boolean)
-      .sort((a, b) => Number(b.featured) - Number(a.featured));
+      .sort((a, b) => {
+        const bySku = skuSortKey(a.sku) - skuSortKey(b.sku);
+        if (bySku !== 0) return bySku;
+        return Number(b.featured) - Number(a.featured);
+      });
   } catch (error) {
     console.error("Failed to fetch WordPress products", error);
     return [];
