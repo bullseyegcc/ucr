@@ -174,6 +174,17 @@ function mediaUrl(media) {
   return toHttps(media?.node?.sourceUrl || media?.sourceUrl || "");
 }
 
+/** Prefer mediaItemUrl for File fields (sourceUrl can be a preview image). */
+function fileUrl(media) {
+  return toHttps(
+    media?.node?.mediaItemUrl ||
+      media?.mediaItemUrl ||
+      media?.node?.sourceUrl ||
+      media?.sourceUrl ||
+      ""
+  );
+}
+
 function rewriteHtmlUrls(html) {
   if (!html || typeof html !== "string") return "";
   return html
@@ -247,6 +258,7 @@ export function mapProduct(node) {
     packagingDimensions: parsePackagingDimensions(details.packagingDimensions),
     sizes: htmlToLines(details.sizes),
     productSpecification: details.productSpecification || "",
+    brochureUrl: fileUrl(details.brochure),
   };
 
   return applyCatalogFallback(mapped);
@@ -279,5 +291,6 @@ function applyCatalogFallback(mapped) {
     sizes: mapped.sizes.length ? mapped.sizes : fallback.sizes,
     productSpecification:
       mapped.productSpecification || fallback.productSpecification,
+    brochureUrl: mapped.brochureUrl || fallback.brochureUrl || "",
   };
 }
