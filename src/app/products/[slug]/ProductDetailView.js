@@ -103,9 +103,25 @@ export default function ProductDetailView({ product }) {
                 </div>
               )}
 
-              <button className="w-full sm:w-90 bg-[#FE5D0A] text-white rounded-full py-3 mt-4 sm:mt-20 text-sm sm:text-base font-medium hover:bg-[#E04D00] transition-colors">
-                Download Brochure
-              </button>
+              {product.brochureUrl ? (
+                <a
+                  href={product.brochureUrl}
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full sm:w-90 items-center justify-center bg-[#FE5D0A] text-white rounded-full py-3 mt-4 sm:mt-20 text-sm sm:text-base font-medium hover:bg-[#E04D00] transition-colors"
+                >
+                  Download Brochure
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  disabled
+                  className="w-full sm:w-90 cursor-not-allowed rounded-full bg-[#FE5D0A]/50 py-3 mt-4 sm:mt-20 text-sm sm:text-base font-medium text-white"
+                >
+                  Download Brochure
+                </button>
+              )}
             </div>
             <div className="w-full lg:w-1/2 mt-6 lg:mt-0">
               <div className="relative w-full h-48 sm:h-72 lg:h-[420px] overflow-hidden rounded-lg shadow bg-white">

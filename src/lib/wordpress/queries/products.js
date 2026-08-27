@@ -25,6 +25,14 @@ const PRODUCT_FIELDS = `
         altText
       }
     }
+    brochure {
+      node {
+        sourceUrl
+        mediaItemUrl
+        title
+        mimeType
+      }
+    }
   }
 `;
 
