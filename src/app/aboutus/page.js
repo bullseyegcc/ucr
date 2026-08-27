@@ -50,11 +50,15 @@ export default function AboutUs() {
   return (
     <div className="">
       <Hero
-        badge="Crafting Sustainable Progress, One Copper Solution at a Time"
         title="Leading the region's copper transformation with cutting edge technology"
-        titleClassName="px-5 lg:w-[80%] mt-5 lg:mb-8"
-        className="mb-[80%] lg:mb-[30%] flex flex-col justify-center items-center"
-        minHeightClass="min-h-[80vh]"
+        titleClassName="px-6 !text-[2rem] !leading-[2.5rem] tracking-[-0.04em] lg:px-5 lg:w-[80%] lg:mb-8 lg:!text-[4rem] lg:!leading-[5rem] lg:tracking-[-0.15625rem]"
+        titleDirectFade
+        titleInH1={false}
+        animateBadge={false}
+        className="mb-[40%] lg:mb-[30%] flex flex-col items-center justify-center pt-16 pb-[18%] lg:justify-center lg:pt-0 lg:pb-0"
+        minHeightClass="min-h-[52vh] lg:min-h-[80vh]"
+        gapClass="gap-3 lg:gap-[1.5rem]"
+        contentClassName="relative z-30 lg:z-10"
         media={{
           type: "image",
           src: "/about/abouthero.webp",
@@ -62,10 +66,12 @@ export default function AboutUs() {
           priority: true,
           sizes: "(max-width: 1024px) 95vw, 90vw",
           quality: 90,
+          className:
+            "absolute left-1/2 -translate-x-1/2 -bottom-[38%] z-20 w-[94%] h-[32vh] overflow-hidden rounded-[1.25rem] lg:-bottom-[60%] lg:w-[90%] lg:h-[70vh] lg:rounded-xl",
         }}
       />
 
-      <div className="mx-auto w-full max-w-[1600px] px-3 lg:px-10 py-5 flex flex-col lg:items-center justify-center">
+      <div className="mx-auto w-full max-w-[1600px] px-3 pt-14 pb-5 lg:px-10 lg:py-5 flex flex-col items-center justify-center">
         <Badge title="Who we are" />
 
         <div className="mt-8 w-full max-w-[1300px] mx-auto">
@@ -75,7 +81,7 @@ export default function AboutUs() {
             enableBlur
             baseRotation={0}
             blurStrength={0}
-            containerClassName="whitespace-pre-line text-center font-medium text-primary text-[28px] leading-[44px] tracking-[-0.53px] lg:text-[40px] lg:font-normal lg:leading-[56px] lg:tracking-[-1.4px]"
+            containerClassName="whitespace-pre-line text-center font-medium text-primary text-[20px] leading-[32px] tracking-[-0.4px] lg:text-[40px] lg:font-normal lg:leading-[56px] lg:tracking-[-1.4px]"
           >
             Since 2008, we’ve delivered reliable, high performance copper
             solutions to industries across more than 50+ countries, supported by
@@ -184,8 +190,8 @@ export default function AboutUs() {
 
       <JourneySection />
 
-      <div className="mb-8 w-full max-h-[90vh] bg-[url('/about/expertisebg.png')] bg-cover bg-top bg-no-repeat pt-12 lg:max-h-[95vh] lg:pt-16">
-        <div className="mx-auto flex h-full w-full max-w-[1600px] flex-col justify-between px-4 lg:px-10">
+      <div className="mb-8 w-full overflow-visible bg-[url('/about/expertisebg.png')] bg-cover bg-top bg-no-repeat pt-12 lg:max-h-[95vh] lg:overflow-hidden lg:pt-16">
+        <div className="mx-auto flex h-full w-full max-w-[1600px] flex-col justify-between px-4 pb-10 lg:px-10 lg:pb-0">
           <SlideIn direction="left" scrollTrigger={true} duration={0.8}>
             <Badge title="What we care" />
             <h1 className="align-middle text-[2rem] font-normal tracking-[-0.09rem] lg:text-[3.25rem] lg:leading-[6.2rem] lg:tracking-[-0.16rem]">
@@ -193,7 +199,7 @@ export default function AboutUs() {
             </h1>
           </SlideIn>
           <SequentialSlideIn
-            className="mt-6 flex flex-col items-end gap-6 lg:flex-row"
+            className="mt-6 flex flex-col items-stretch gap-6 lg:flex-row lg:items-end"
             itemClassName="w-full min-w-0 lg:w-1/3"
             start="top 85%"
             end="bottom 70%"
@@ -249,13 +255,13 @@ export default function AboutUs() {
       </div>
 
       <ParallaxSection index={0}>
-        <div className="mx-auto w-full max-w-[1600px] flex flex-col lg:flex-row justify-center items-stretch px-1 sm:px-6 lg:px-10 gap-4 sm:gap-6 lg:gap-8 pt-6 sm:pt-8 lg:pt-10 pb-6 lg:pb-8 relative -z-10">
+        <div className="mx-auto w-full max-w-[1600px] flex flex-col lg:flex-row justify-center items-stretch px-1 sm:px-6 lg:px-10 gap-4 sm:gap-6 lg:gap-8 pt-6 sm:pt-8 lg:pt-10 pb-6 lg:pb-8 relative z-0 lg:-z-10">
           <VideoCard
             videoSrc="/aboutvideo.mp4"
             badgeText="Our Company"
             title="Union Copper Rod is undeniably the most trusted copper rod manufacturer in the region"
-            buttonText="Company profile"
-            buttonUrl="/parentCompany"
+            buttonText="Know about the team"
+            buttonUrl="/team"
           />
 
           <VideoCard
@@ -263,7 +269,7 @@ export default function AboutUs() {
             badgeText="Sustainability Report"
             title="Our commitment to sustainability shapes every decision, from sourcing to production, creating value for the planet."
             buttonText="Download report"
-            buttonUrl="/policies/iii-sustainability-policy.pdf"
+            buttonUrl="/docs/sustainabilityreport.pdf"
             buttonIcon="down"
           />
         </div>

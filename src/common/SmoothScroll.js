@@ -7,15 +7,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * Lenis must run on mobile too — GSAP pin/scrub (SnippScrol) freezes native
+ * touch scroll without a JS scroll driver. TSB keeps Lenis on all breakpoints.
+ */
 export default function SmoothScroll() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
-
-    const isMobile = window.innerWidth < 768;
-    if (isMobile) {
-      document.documentElement.style.scrollBehavior = 'smooth';
-      return;
-    }
 
     let unsubscribe;
     let lenis;
@@ -24,10 +22,19 @@ export default function SmoothScroll() {
     let refreshTimer;
 
     const setupLenis = () => {
+      if (lenis) return;
+
+      const isMobile = window.innerWidth < 768;
+
+      document.documentElement.style.scrollBehavior = 'auto';
+
       lenis = new Lenis({
         smoothWheel: true,
         syncTouch: true,
-        lerp: 0.08,
+        // Slightly snappier touch tracking on phones
+        syncTouchLerp: isMobile ? 0.14 : 0.1,
+        touchMultiplier: isMobile ? 1.15 : 1,
+        lerp: isMobile ? 0.12 : 0.08,
         autoRaf: false,
       });
 
@@ -59,6 +66,7 @@ export default function SmoothScroll() {
     if (window.__splashActive) {
       splashListener = () => {
         setupLenis();
+        window.lenisInstance?.start?.();
         window.removeEventListener('splashComplete', splashListener);
       };
       window.addEventListener('splashComplete', splashListener);

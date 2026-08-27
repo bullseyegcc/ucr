@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { VideoPlayer } from "../../common/video";
 import { Badge } from "../../common/badge";
@@ -14,12 +14,13 @@ export default function Logistics() {
       <Hero
         badge="Our Logistics"
         title="UCR has a higher delivery capacity in the Copper Industry"
-        titleClassName="lg:w-[65%] px-5"
+        titleClassName="px-6 !text-[2rem] !leading-[2.5rem] tracking-[-0.04em] lg:!text-[4rem] lg:!leading-[5rem] lg:tracking-[-0.15625rem] lg:w-[65%] lg:px-5"
         titleDirectFade
         titleInH1={false}
-        className="mb-[42%] lg:mb-[22%] flex flex-col items-center justify-center"
-        minHeightClass="min-h-[55vh] sm:min-h-[80vh]"
-        gapClass="gap-2"
+        className="mb-[40%] lg:mb-[22%] flex flex-col items-center justify-center pt-16 pb-[18%] lg:justify-center lg:pt-0 lg:pb-0"
+        minHeightClass="min-h-[52vh] sm:min-h-[80vh]"
+        gapClass="gap-3 lg:gap-2"
+        contentClassName="relative z-30 lg:z-10"
         background={{
           type: "image",
           src: "/logistics/logisticsbg.webp",
@@ -34,14 +35,26 @@ export default function Logistics() {
           priority: true,
           sizes: "(max-width: 1024px) 95vw, 90vw",
           quality: 85,
+          className:
+            "absolute left-1/2 -translate-x-1/2 -bottom-[38%] z-20 w-[94%] h-[32vh] overflow-hidden rounded-[1.25rem] lg:-bottom-[60%] lg:w-[90%] lg:h-[70vh] lg:rounded-xl",
         }}
       />
 
       {/* What we're Capable of */}
 
-      <div className="bg-[#F5F5F5]">
+      <div className="relative overflow-hidden bg-[#F5F5F5]">
+        {/* Soft peach glow — mobile only, top of section */}
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-[45%] lg:hidden"
+          style={{
+            background:
+              "linear-gradient(270deg, rgba(253, 212, 187, 0.22) 0%, rgba(253, 212, 187, 0.12) 35%, rgba(245, 245, 245, 0) 78%)",
+          }}
+          aria-hidden="true"
+        />
+
         {/* header */}
-        <div className=" flex flex-col items-center justify-center text-center pt-6 pb-6 lg:pt-32 lg:pb-8">
+        <div className="relative z-10 flex flex-col items-center justify-center text-center pt-14 pb-6 lg:pt-32 lg:pb-8">
           <SlideIn
             direction="bottom"
             scrollTrigger={true}
@@ -70,7 +83,7 @@ export default function Logistics() {
           </FadeIn>
         </div>
 
-        <div className="mx-auto flex w-full max-w-[1600px] flex-col items-end justify-center gap-6 px-6 pt-2 pb-3 lg:flex-row lg:px-10 lg:pt-4 lg:pb-4">
+        <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col items-end justify-center gap-6 px-6 pt-2 pb-3 lg:flex-row lg:px-10 lg:pt-4 lg:pb-4">
           <ExpertiseCard
             index={0}
             variant="tall"

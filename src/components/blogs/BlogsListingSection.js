@@ -43,13 +43,13 @@ export default function BlogsListingSection({
       <div className="relative mx-auto w-full max-w-[1440px]">
         <div className="mb-12 lg:mb-16">
           <p className="mb-3 text-[13px] font-medium uppercase tracking-[0.16em] text-[#FA6E43] lg:text-[15px]">
-            Our blogs_
+            Our blogs
           </p>
           <div className="grid grid-cols-1 items-start gap-5 lg:grid-cols-2 lg:gap-10">
             <h2 className="max-w-[640px] text-[32px] font-medium leading-[1.12] tracking-[-0.04em] text-black lg:text-[52px] lg:leading-[1.12]">
               Latest news & insights
             </h2>
-            <p className="max-w-[340px] text-[15px] font-normal leading-[1.55] text-[#6B6B72] lg:ml-auto lg:pt-2 lg:text-[18px] lg:leading-[1.5]">
+            <p className="hidden md:block max-w-[340px] text-[15px] font-normal leading-[1.55] text-[#6B6B72] lg:ml-auto lg:pt-2 lg:text-[18px] lg:leading-[1.5]">
               Dive deep into fresh ideas, expert advice, and behind-the-scenes thinking.
             </p>
           </div>

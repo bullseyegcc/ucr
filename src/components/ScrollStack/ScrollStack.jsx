@@ -445,9 +445,9 @@ export default function ScrollStack({
   if (useWindowScroll) {
     return (
       <div ref={scrollerRef} className={`relative z-10 isolate w-full ${className}`.trim()}>
-        <div className="scroll-stack-inner pb-[10vh]">
+        <div className="scroll-stack-inner pb-2 lg:pb-[10vh]">
           {children}
-          <div className="scroll-stack-end w-full h-16 sm:h-[32vh]" aria-hidden />
+          <div className="scroll-stack-end h-2 w-full lg:h-[32vh]" aria-hidden />
         </div>
       </div>
     )

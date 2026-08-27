@@ -9,38 +9,69 @@ export default function HeroHeading({ children, className = '', delay = 0 }) {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
+    let ctx;
+    let cancelled = false;
+    let splashListener;
 
-      tl.fromTo(
-        wrapperRef.current,
-        { y: '40px', opacity: 0, filter: 'blur(12px)', letterSpacing: '0.28em' },
-        {
-          y: '0px',
-          opacity: 1,
-          filter: 'blur(0px)',
-          letterSpacing: '0.01em',
-          duration: 1.2,
-          ease: 'expo.out',
-          delay,
-        }
-      );
+    const play = (startDelay) => {
+      if (cancelled || !wrapperRef.current) return;
+      ctx = gsap.context(() => {
+        const tl = gsap.timeline();
 
-      tl.to(
-        wrapperRef.current,
-        {
-          scale: 1.018,
-          duration: 3.5,
-          ease: 'sine.inOut',
-          repeat: -1,
-          yoyo: true,
-        },
-        '+=0.2'
-      );
-    });
+        tl.fromTo(
+          wrapperRef.current,
+          { y: '40px', opacity: 0, filter: 'blur(12px)', letterSpacing: '0.28em' },
+          {
+            y: '0px',
+            opacity: 1,
+            filter: 'blur(0px)',
+            letterSpacing: '0.01em',
+            duration: 1.2,
+            ease: 'expo.out',
+            delay: startDelay,
+          }
+        );
 
-    return () => ctx.revert();
-  }, []);
+        tl.to(
+          wrapperRef.current,
+          {
+            scale: 1.018,
+            duration: 3.5,
+            ease: 'sine.inOut',
+            repeat: -1,
+            yoyo: true,
+          },
+          '+=0.2'
+        );
+      });
+    };
+
+    const startAfterSplashOrDelay = () => {
+      if (window.__splashActive) {
+        splashListener = () => {
+          window.removeEventListener('splashComplete', splashListener);
+          splashListener = null;
+          play(0.15);
+        };
+        window.addEventListener('splashComplete', splashListener);
+        return;
+      }
+      const isMobile = window.innerWidth < 768;
+      play(isMobile ? Math.min(delay, 0.35) : delay);
+    };
+
+    // One frame lets SplashOverlay claim __splashActive during its render
+    const raf = requestAnimationFrame(startAfterSplashOrDelay);
+
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(raf);
+      if (splashListener) {
+        window.removeEventListener('splashComplete', splashListener);
+      }
+      ctx?.revert();
+    };
+  }, [delay]);
 
   return (
     <div
@@ -58,4 +89,3 @@ export default function HeroHeading({ children, className = '', delay = 0 }) {
     </div>
   );
 }
-

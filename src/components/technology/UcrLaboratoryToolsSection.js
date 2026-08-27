@@ -48,12 +48,10 @@ export default function UcrLaboratoryToolsSection() {
   const sectionRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const translateXValue =
-    currentIndex === 0
-      ? "5vw"
-      : currentIndex === 1
-        ? "calc(50vw - 115vw - 1rem)"
-        : "calc(50vw - 185vw - 2rem)";
+  // Keep the active card centered in the full viewport
+  const cardWidthVw = 82;
+  const sidePadVw = (100 - cardWidthVw) / 2;
+  const translateXValue = `calc(${sidePadVw}vw - ${currentIndex} * (${cardWidthVw}vw + 1rem))`;
 
   return (
     <section ref={sectionRef} className="relative z-10 w-full bg-white px-5 py-20 lg:px-10">
@@ -71,59 +69,55 @@ export default function UcrLaboratoryToolsSection() {
         </FadeIn>
       </div>
 
-      <div className="block flex w-full max-w-[100vw] flex-col items-center overflow-x-clip sm:hidden">
-        <div className="relative flex w-full max-w-[100vw] flex-col items-stretch overflow-x-clip">
-          <div className="w-full min-w-0 max-w-[100vw] overflow-x-clip">
-            <div
-              className="flex flex-row items-center gap-4 transition-[transform] duration-300 ease-in-out"
-              style={{ transform: `translateX(${translateXValue})`, willChange: "transform" }}
-            >
-              {cards.map((card, idx) => {
-                const isActive = idx === currentIndex;
-                const isVisible = Math.abs(currentIndex - idx) <= 1;
+      <div className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 overflow-x-clip sm:hidden">
+        <div
+          className="flex flex-row items-center gap-4 transition-transform duration-300 ease-in-out will-change-transform"
+          style={{ transform: `translateX(${translateXValue})` }}
+        >
+          {cards.map((card, idx) => {
+            const isActive = idx === currentIndex;
 
-                return (
-                  <div
-                    key={card.title}
-                    className={`shrink-0 transition-[transform,opacity] duration-300 ease-in-out ${isActive ? "z-10 scale-100" : "z-0 scale-95 opacity-60"} ${!isVisible ? "hidden" : "block"}`}
-                    style={{
-                      flex: isActive ? "0 0 90vw" : "0 0 70vw",
-                      maxWidth: isActive ? "500px" : "350px",
-                      minWidth: 0,
-                      pointerEvents: isActive ? "auto" : "none",
-                    }}
-                  >
-                    <LaboratoryCard
-                      card={card}
-                      priority={idx === 0}
-                      className="h-[55vw] min-h-[340px] max-h-[420px] w-full"
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+            return (
+              <div
+                key={card.title}
+                className={`shrink-0 transition-[transform,opacity] duration-300 ease-in-out ${
+                  isActive ? "z-10 scale-100 opacity-100" : "z-0 scale-[0.96] opacity-60"
+                }`}
+                style={{
+                  width: `${cardWidthVw}vw`,
+                  flex: `0 0 ${cardWidthVw}vw`,
+                  pointerEvents: isActive ? "auto" : "none",
+                }}
+              >
+                <LaboratoryCard
+                  card={card}
+                  priority={idx === 0}
+                  className="h-[55vw] min-h-[340px] max-h-[420px] w-full"
+                />
+              </div>
+            );
+          })}
+        </div>
 
-          <div className="mt-6 flex items-center justify-center gap-6">
-            <button
-              className="flex h-8 w-8 items-center justify-center rounded-full border bg-white disabled:opacity-30"
-              style={{ borderColor: "#FA6E43", zIndex: 20 }}
-              onClick={() => setCurrentIndex((prev) => Math.max(prev - 1, 0))}
-              disabled={currentIndex === 0}
-              aria-label="Previous slide"
-            >
-              <svg width="18" height="18" fill="none" stroke="#FA6E43" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" /></svg>
-            </button>
-            <button
-              className="flex h-8 w-8 items-center justify-center rounded-full border bg-white disabled:opacity-30"
-              style={{ borderColor: "#D9D9D9", zIndex: 20 }}
-              onClick={() => setCurrentIndex((prev) => Math.min(prev + 1, cards.length - 1))}
-              disabled={currentIndex === cards.length - 1}
-              aria-label="Next slide"
-            >
-              <svg width="18" height="18" fill="none" stroke="#D9D9D9" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg>
-            </button>
-          </div>
+        <div className="mt-6 flex items-center justify-center gap-6 px-5">
+          <button
+            className="flex h-8 w-8 items-center justify-center rounded-full border bg-white disabled:opacity-30"
+            style={{ borderColor: "#FA6E43", zIndex: 20 }}
+            onClick={() => setCurrentIndex((prev) => Math.max(prev - 1, 0))}
+            disabled={currentIndex === 0}
+            aria-label="Previous slide"
+          >
+            <svg width="18" height="18" fill="none" stroke="#FA6E43" strokeWidth="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" /></svg>
+          </button>
+          <button
+            className="flex h-8 w-8 items-center justify-center rounded-full border bg-white disabled:opacity-30"
+            style={{ borderColor: currentIndex === cards.length - 1 ? "#D9D9D9" : "#FA6E43", zIndex: 20 }}
+            onClick={() => setCurrentIndex((prev) => Math.min(prev + 1, cards.length - 1))}
+            disabled={currentIndex === cards.length - 1}
+            aria-label="Next slide"
+          >
+            <svg width="18" height="18" fill="none" stroke={currentIndex === cards.length - 1 ? "#D9D9D9" : "#FA6E43"} strokeWidth="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg>
+          </button>
         </div>
       </div>
 

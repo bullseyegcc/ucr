@@ -16,9 +16,21 @@ export default function CardAnimation({ children, index = 0, className = '' }) {
 
     let tween;
 
+    function reveal() {
+      gsap.set(card, { opacity: 1, y: 0 });
+    }
+
     function initAnimation() {
       tween?.scrollTrigger?.kill();
       tween?.kill();
+
+      const rect = card.getBoundingClientRect();
+      const alreadyInView = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+      if (alreadyInView) {
+        reveal();
+        return;
+      }
+
       tween = gsap.fromTo(
         card,
         { opacity: 0, y: 40 },
@@ -33,6 +45,10 @@ export default function CardAnimation({ children, index = 0, className = '' }) {
             start: 'top 92%',
             toggleActions: 'play none none none',
             once: true,
+            invalidateOnRefresh: true,
+            onRefresh(self) {
+              if (self.progress > 0) reveal();
+            },
           },
         }
       );

@@ -8,11 +8,11 @@ import SlideIn from "@/animations/SlideIn";
 
 const TITLE = {
   default:
-    "font-medium text-[2rem] leading-[2.5rem] tracking-[-0.07375rem] sm:text-[4rem] sm:leading-[5rem] sm:tracking-[-0.15625rem] text-center align-middle capitalize text-white",
+    "font-medium text-[2.5rem] leading-[3rem] tracking-[-0.07375rem] sm:text-[4rem] sm:leading-[5rem] sm:tracking-[-0.15625rem] text-center align-middle capitalize text-white",
   blogs:
-    "font-medium text-[2rem] leading-[2.5rem] tracking-[-0.17125rem] sm:text-[4rem] sm:leading-[5rem] sm:tracking-[-0.15625rem] text-center align-middle capitalize text-white",
+    "font-medium text-[2.5rem] leading-[3rem] tracking-[-0.17125rem] sm:text-[4rem] sm:leading-[5rem] sm:tracking-[-0.15625rem] text-center align-middle capitalize text-white whitespace-nowrap",
   "parent-company":
-    "font-medium text-[2rem] leading-[2.5rem] tracking-[-0.17125rem] sm:text-[4rem] sm:leading-[5rem] sm:tracking-[-0.15625rem] text-center align-middle capitalize text-white",
+    "font-medium text-[2.25rem] leading-[2.75rem] tracking-[-0.25rem] sm:text-[4rem] sm:leading-[5rem] sm:tracking-[-0.28rem] text-center align-middle capitalize text-white",
 };
 
 function HeroBadgeContent({ badge, variant, useWhiteBadgeIcon }) {
@@ -252,6 +252,7 @@ export default function Hero({
   titleWrapperClass = "",
   solidClassName = "",
   animateBadge = true,
+  overflowVisible = false,
 }) {
   if (variant === "product-detail") {
     return (
@@ -284,7 +285,7 @@ export default function Hero({
 
   const sectionClass = [
     "relative",
-    hasOverlapMedia ? "overflow-visible" : "overflow-hidden",
+    hasOverlapMedia || overflowVisible ? "overflow-visible" : "overflow-hidden",
     contentLayout === "absolute" ? "" : "flex flex-col items-center justify-center text-center",
     minHeightClass,
     maxHeightClass,

@@ -26,11 +26,7 @@ const CARDS = [
 
 const CARD_WIDTH = 280;
 const CARD_GAP = 16;
-const MOBILE_PADDING = 32;
-const TOTAL_CARDS_WIDTH =
-  CARDS.length * CARD_WIDTH +
-  (CARDS.length - 1) * CARD_GAP +
-  MOBILE_PADDING * 2;
+const SIDE_PAD = `calc(50% - ${CARD_WIDTH / 2}px)`;
 
 export default function WeCareSection() {
   const sectionRef = useRef(null);
@@ -96,39 +92,76 @@ export default function WeCareSection() {
     return () => observer.disconnect();
   }, []);
 
-  // touch-drag fallback for mobile where native horizontal swipe may be blocked
+  // Smooth snap + touch-drag fallback so first/last cards can land centered
   useEffect(() => {
     const el = scrollViewportRef.current;
     if (!el) return;
+
     let startX = 0;
+    let startY = 0;
     let startScroll = 0;
     let isDragging = false;
+    let movedHorizontally = false;
+
+    function snapToNearest() {
+      const cards = mobileCardsRef.current.filter(Boolean);
+      if (!cards.length) return;
+
+      const viewportRect = el.getBoundingClientRect();
+      const viewportCenter = viewportRect.left + viewportRect.width / 2;
+      let nearest = cards[0];
+      let nearestDist = Infinity;
+
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.left + rect.width / 2;
+        const dist = Math.abs(cardCenter - viewportCenter);
+        if (dist < nearestDist) {
+          nearestDist = dist;
+          nearest = card;
+        }
+      });
+
+      const nearestRect = nearest.getBoundingClientRect();
+      const delta =
+        nearestRect.left +
+        nearestRect.width / 2 -
+        viewportCenter;
+      el.scrollTo({
+        left: el.scrollLeft + delta,
+        behavior: "smooth",
+      });
+    }
 
     function onTouchStart(e) {
       if (window.innerWidth >= 1024) return;
       const t = e.touches[0];
       startX = t.clientX;
+      startY = t.clientY;
       startScroll = el.scrollLeft;
       isDragging = true;
+      movedHorizontally = false;
     }
 
     function onTouchMove(e) {
       if (!isDragging) return;
       const t = e.touches[0];
       const dx = t.clientX - startX;
-      const dy = t.clientY - (e.touches[0].clientY || 0);
+      const dy = t.clientY - startY;
 
-      // if mostly horizontal movement, prevent vertical page scroll
-      if (Math.abs(dx) > Math.abs(dy)) e.preventDefault();
-
-      el.scrollLeft = startScroll - dx;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 6) {
+        movedHorizontally = true;
+        e.preventDefault();
+        el.scrollLeft = startScroll - dx;
+      }
     }
 
     function onTouchEnd() {
+      if (!isDragging) return;
       isDragging = false;
+      if (movedHorizontally) snapToNearest();
     }
 
-    // use non-passive listeners so we can call preventDefault when needed
     el.addEventListener("touchstart", onTouchStart, { passive: true });
     el.addEventListener("touchmove", onTouchMove, { passive: false });
     el.addEventListener("touchend", onTouchEnd, { passive: true });
@@ -138,13 +171,13 @@ export default function WeCareSection() {
       el.removeEventListener("touchmove", onTouchMove);
       el.removeEventListener("touchend", onTouchEnd);
     };
-  }, [scrollViewportRef.current]);
+  }, []);
 
   return (
     <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] my-5">
       <div
         ref={sectionRef}
-        className="relative min-h-[min(80vh,800px)] sm:h-[min(90vh,900px)] max-h-[1000px] pt-8 flex flex-col justify-between bg-[url('/home/care.jpg')] bg-cover bg-center rounded-xl lg:overflow-hidden"
+        className="relative h-[min(75vh,640px)] max-h-[640px] lg:h-[min(90vh,900px)] lg:max-h-[1000px] pt-8 flex flex-col justify-between bg-[url('/home/care.jpg')] bg-cover bg-center rounded-xl overflow-hidden"
       >
         <VideoPlayer
           src="/sustain.mp4"
@@ -161,30 +194,33 @@ export default function WeCareSection() {
           </h1>
         </div>
 
-        <div className="absolute bottom-4 left-0 right-0 w-full z-20 ml-5">
-          {/* Mobile: horizontal scroll — viewport + inner track so overflow is guaranteed and touch scroll works */}
+        <div className="absolute bottom-4 left-0 right-0 z-20">
+          {/* Mobile: horizontal scroll — side padding lets first/last snap to center */}
           <div
             ref={scrollViewportRef}
             role="region"
             aria-label="Sustainability cards - swipe to view all"
-            className="flex lg:hidden scrollbar-hide snap-x snap-proximity w-full"
+            className="flex lg:hidden scrollbar-hide snap-x snap-mandatory scroll-smooth w-full"
             style={{
               overflowX: "auto",
               overflowY: "hidden",
               WebkitOverflowScrolling: "touch",
               touchAction: "pan-x",
-              overscrollBehaviorX: "auto",
+              overscrollBehaviorX: "contain",
+              scrollPaddingInline: SIDE_PAD,
               minHeight: 260,
               maxWidth: "100%",
               position: "relative",
             }}
           >
             <div
-              className="flex gap-4 pl-8 pr-8 pb-2"
+              className="flex gap-4 pb-2"
               style={{
                 display: "inline-flex",
-                minWidth: `${TOTAL_CARDS_WIDTH}px`,
                 width: "max-content",
+                paddingLeft: SIDE_PAD,
+                paddingRight: SIDE_PAD,
+                gap: CARD_GAP,
               }}
             >
               {CARDS.map((card, i) => (
@@ -197,11 +233,12 @@ export default function WeCareSection() {
                     window.scrollTo({ top: 0, behavior: "smooth" });
                     router.push("/sustainability");
                   }}
-                  className="flex-none bg-white/20 backdrop-blur-sm text-center flex flex-col items-center py-10 px-5 rounded-xl gap-3 shadow-lg snap-start cursor-pointer hover:bg-white/30 transition-colors duration-300"
+                  className="flex-none bg-white/20 backdrop-blur-sm text-center flex flex-col items-center py-10 px-5 rounded-xl gap-3 shadow-lg snap-center cursor-pointer hover:bg-white/30 transition-colors duration-300"
                   style={{
                     width: CARD_WIDTH,
                     minWidth: CARD_WIDTH,
-                    ...(i === 0 && { paddingLeft: "24px" }),
+                    scrollSnapAlign: "center",
+                    scrollSnapStop: "always",
                   }}
                 >
                   <Image

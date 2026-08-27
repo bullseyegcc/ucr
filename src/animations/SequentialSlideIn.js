@@ -76,17 +76,21 @@ export default function SequentialSlideIn({
     }
 
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    const slideDistance = distance ?? (isMobile ? 24 : 72);
+    const slideDistance = distance ?? (isMobile ? 32 : 72);
     const fromVars = getFromVars(direction, slideDistance);
-    const cardDuration = duration ?? (isMobile ? 0.35 : 0.45);
-    const animScrub = scrub ?? (isMobile ? 0.8 : 1.2);
+    const cardDuration = duration ?? (isMobile ? 0.4 : 0.45);
+    const animScrub = scrub ?? (isMobile ? 0.55 : 1.2);
+    const resolvedStagger = isMobile ? Math.min(stagger, 0.1) : stagger;
     const totalDuration = Math.max(
-      (items.length - 1) * stagger + cardDuration,
+      (items.length - 1) * resolvedStagger + cardDuration,
       cardDuration
     );
 
+    // On mobile, use a shorter scrub window than desktop — but long enough to feel the sequence
     const scrollStart = start ?? `top ${startAt * 100}%`;
-    const scrollEnd = end ?? `bottom ${endAt * 100}%`;
+    const scrollEnd = isMobile
+      ? 'top 25%'
+      : end ?? `bottom ${endAt * 100}%`;
 
     gsap.set(items, {
       ...fromVars,
@@ -117,7 +121,7 @@ export default function SequentialSlideIn({
       });
 
       items.forEach((item, index) => {
-        const delay = index * stagger;
+        const delay = index * resolvedStagger;
         const itemDuration = Math.max(totalDuration - delay, cardDuration);
 
         timeline.fromTo(

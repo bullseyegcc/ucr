@@ -48,13 +48,13 @@ export default function contactus() {
                             end="bottom 70%"
                         >
                             {/* Person Card */}
-                            <div className="bg-white rounded-lg p-4 lg:p-8 group transition-all duration-400">
+                            <div className="bg-white rounded-lg p-4 lg:p-3 group transition-all duration-400">
                                 <div className="flex items-start gap-3 lg:gap-6">
-                                    <img src="/contact/person.png" alt="Team member" className="w-16 lg:w-40 h-16 lg:h-40 rounded-lg object-cover flex-shrink-0" />
+                                    <img src="/contact/person.png" alt="Team member" className="w-16 lg:w-40 h-16 lg:h-40  object-cover flex-shrink-0" />
                                     <div className="flex-1">
-                                        <h3 className="font-medium text-gray-900 text-base lg:text-base leading-6 mb-1 lg:mb-3">Hey there!</h3>
+                                        <h3 className="font-medium text-gray-900 text-base lg:text-base leading-6 mb-1 lg:mt-4 lg:mb-3">Hey there!</h3>
                                         <p className="text-[#505050] text-base lg:text-base leading-6 lg:leading-6 mb-3 lg:mb-5 font-normal tracking-[-0.16px]">Whether you need quick answers or deep strategy talks, I'm here to make your journey smooth.</p>
-                                        <a href="#" className="text-[#FF5703] text-base lg:text-base font-medium leading-6 inline-flex items-center gap-2 hover:gap-3 transition-all">
+                                        <a href="#" className="text-[#FF5703] pt-9 lg:pt-0 text-base lg:text-base font-medium leading-6 inline-flex items-center gap-2 hover:gap-3 transition-all">
                                             Book a call directly with HR
                                         </a>
                                     </div>
@@ -89,7 +89,7 @@ export default function contactus() {
                             {/* Box 2: Fax */}
                             <div className="h-full flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group transition-all duration-300 cursor-pointer">
                                 <h4 className="text-[#505050] text-xs lg:text-base mb-2 lg:mb-3">Fax</h4>
-                                <p className="text-[#FA6E43] text-lg lg:text-xl font-semibold leading-7 lg:leading-8">+971 2 550 3240</p>
+                                <p className="text-[#FA6E43] text-lg lg:text-xl font-semibold leading-7 lg:leading-8">+971 2 550 3241</p>
                             </div>
 
                             {/* Box 3: Reach Out */}
@@ -186,7 +186,7 @@ export default function contactus() {
                         {/* Box 2: Fax */}
                         <div className="h-full flex flex-col justify-between bg-white rounded-lg p-3 lg:p-6 group transition-all duration-300 cursor-pointer">
                             <h4 className="text-[#505050] text-base mb-2 lg:mb-3">Fax</h4>
-                            <p className="text-[#FA6E43] text-lg lg:text-xl font-semibold leading-7 lg:leading-8">+971 2 550 3240</p>
+                            <p className="text-[#FA6E43] text-lg lg:text-xl font-semibold leading-7 lg:leading-8">+971 2 550 3241</p>
                         </div>
 
                         {/* Box 3: Reach Out */}

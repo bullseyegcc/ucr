@@ -37,9 +37,40 @@ function formatPolicyHeading(title) {
         .join(' ');
 }
 
+function PolicyDetail({ policy, ctaLabel = "Download the Policy", className = "" }) {
+    return (
+        <div className={className}>
+            <h2 className="font-primary text-[28px] lg:text-[42px] leading-[1.15] tracking-[-0.04em] font-medium text-black mb-5 lg:mb-6">
+                {formatPolicyHeading(policy.title)}
+            </h2>
+            <p className="text-[#6B6B6B] text-sm lg:text-lg leading-relaxed lg:leading-[30px] max-w-3xl font-normal">
+                {policy.intro}
+            </p>
+
+            <a
+                href={policy.pdf}
+                download={`${policy.title}.pdf`}
+                className="inline-flex items-center gap-2.5 bg-primary hover:bg-[#e85409] text-white px-6 lg:px-7 py-3 rounded-full w-fit mt-8 lg:mt-10 transition-colors duration-300"
+            >
+                <span className="text-sm lg:text-base font-medium">{ctaLabel}</span>
+                <ArrowRight size={16} strokeWidth={2.2} />
+            </a>
+        </div>
+    );
+}
+
 export default function OurPolicies() {
     const [selectedPolicyId, setSelectedPolicyId] = useState(policies[0].id);
-    const selectedPolicy = policies.find((policy) => policy.id === selectedPolicyId) || policies[0];
+    const selectedPolicy =
+        policies.find((policy) => policy.id === selectedPolicyId) || policies[0];
+
+    const handleMobilePolicySelect = (policyId) => {
+        setSelectedPolicyId((current) => (current === policyId ? null : policyId));
+    };
+
+    const handleDesktopPolicySelect = (policyId) => {
+        setSelectedPolicyId(policyId);
+    };
 
     return (
         <div>
@@ -84,8 +115,61 @@ export default function OurPolicies() {
                     </SlideIn>
                 </div>
 
-                <div className="relative z-10 w-full flex flex-col lg:flex-row gap-6 lg:gap-12 items-stretch">
-                    <div className="w-full lg:w-[32%] flex flex-col bg-white">
+                {/* Mobile accordion — matches Figma */}
+                <div className="relative z-10 w-full overflow-hidden bg-white lg:hidden">
+                    {policies.map((policy, index) => {
+                        const isExpanded = policy.id === selectedPolicyId;
+                        const isLast = index === policies.length - 1;
+
+                        return (
+                            <div
+                                key={policy.id}
+                                className={!isExpanded && !isLast ? 'border-b border-[#E8E8E8]' : ''}
+                            >
+                                <button
+                                    type="button"
+                                    onClick={() => handleMobilePolicySelect(policy.id)}
+                                    aria-expanded={isExpanded}
+                                    className={`flex w-full items-center gap-3 px-5 py-4 text-left transition-colors duration-200 ${
+                                        isExpanded
+                                            ? 'bg-primary text-white'
+                                            : 'bg-white text-[#2A2A2A]'
+                                    }`}
+                                >
+                                    <PolicyIcon
+                                        className={`h-5 w-5 flex-shrink-0 ${
+                                            isExpanded ? 'text-white' : 'text-[#6B6B6B]'
+                                        }`}
+                                    />
+                                    <span className="text-base font-medium leading-snug tracking-[-0.02em]">
+                                        {policy.title}
+                                    </span>
+                                </button>
+
+                                <div
+                                    className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+                                        isExpanded
+                                            ? 'grid-rows-[1fr] opacity-100'
+                                            : 'pointer-events-none grid-rows-[0fr] opacity-0'
+                                    }`}
+                                    aria-hidden={!isExpanded}
+                                >
+                                    <div className="overflow-hidden">
+                                        <PolicyDetail
+                                            policy={policy}
+                                            ctaLabel="Download Policy"
+                                            className="bg-white px-5 py-8"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+
+                {/* Desktop side-by-side layout */}
+                <div className="relative z-10 hidden w-full lg:flex lg:flex-row lg:gap-12 lg:items-stretch">
+                    <div className="w-[32%] flex flex-col bg-white">
                         {policies.map((policy) => {
                             const isSelected = policy.id === selectedPolicy.id;
 
@@ -93,17 +177,19 @@ export default function OurPolicies() {
                                 <button
                                     key={policy.id}
                                     type="button"
-                                    onClick={() => setSelectedPolicyId(policy.id)}
-                                    className={`flex w-full items-center gap-3 px-5 py-4 lg:py-[18px] text-left transition-colors duration-200 ${
+                                    onClick={() => handleDesktopPolicySelect(policy.id)}
+                                    className={`flex w-full items-center gap-3 px-5 py-[18px] text-left transition-colors duration-200 ${
                                         isSelected
                                             ? 'bg-primary text-white'
                                             : 'bg-white text-[#2A2A2A] hover:bg-[#F5F5F5]'
                                     }`}
                                 >
                                     <PolicyIcon
-                                        className={`h-5 w-5 flex-shrink-0 ${isSelected ? 'text-white' : 'text-[#6B6B6B]'}`}
+                                        className={`h-5 w-5 flex-shrink-0 ${
+                                            isSelected ? 'text-white' : 'text-[#6B6B6B]'
+                                        }`}
                                     />
-                                    <span className="text-base lg:text-lg font-medium leading-snug tracking-[-0.02em]">
+                                    <span className="text-lg font-medium leading-snug tracking-[-0.02em]">
                                         {policy.title}
                                     </span>
                                 </button>
@@ -111,23 +197,10 @@ export default function OurPolicies() {
                         })}
                     </div>
 
-                    <div className="w-full lg:w-[68%] flex flex-col justify-start bg-white rounded-2xl lg:rounded-[32px] px-6 py-10 lg:px-14 lg:py-14">
-                        <h2 className="font-primary text-[28px] lg:text-[42px] leading-[1.15] tracking-[-0.04em] font-medium text-black mb-5 lg:mb-6">
-                            {formatPolicyHeading(selectedPolicy.title)}
-                        </h2>
-                        <p className="text-[#6B6B6B] text-sm lg:text-lg leading-relaxed lg:leading-[30px] max-w-3xl font-normal">
-                            {selectedPolicy.intro}
-                        </p>
-
-                        <a
-                            href={selectedPolicy.pdf}
-                            download={`${selectedPolicy.title}.pdf`}
-                            className="inline-flex items-center gap-2.5 bg-primary hover:bg-[#e85409] text-white px-6 lg:px-7 py-3 rounded-full w-fit mt-8 lg:mt-10 transition-colors duration-300"
-                        >
-                            <span className="text-sm lg:text-base font-medium">Download the Policy</span>
-                            <ArrowRight size={16} strokeWidth={2.2} />
-                        </a>
-                    </div>
+                    <PolicyDetail
+                        policy={selectedPolicy}
+                        className="w-[68%] flex flex-col justify-start bg-white rounded-[32px] px-14 py-14"
+                    />
                 </div>
             </div>
         </div>

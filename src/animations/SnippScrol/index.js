@@ -28,17 +28,19 @@
  *
  * Props
  * ─────
- *  scrub        {number}   scroll lag / inertia            (default 0.5)
- *  mobileScrub  {number}   scrub on ≤768 px                (default 0.3)
- *  snapDuration {number}   snap settle seconds             (default 0.5)
- *  enableSnap   {boolean}  GSAP snap to nearest panel      (default true)
- *  enableExit   {boolean}  scale+fade previous panel out   (default true)
- *  ease         {string}   panel slide ease (use 'none' for scrub) (default 'none')
- *  lockAtEnd    {number}   extra hold after last panel     (default 0)
+ *  scrub               {number}   scroll lag / inertia            (default 0.5)
+ *  mobileScrub         {number}   scrub on ≤768 px                (default 0.3)
+ *  mobileScrollFactor  {number}   vh multiplier for pin distance
+ *                                 on ≤768 px (default 0.5 = half desktop)
+ *  snapDuration        {number}   snap settle seconds             (default 0.5)
+ *  enableSnap          {boolean}  GSAP snap to nearest panel      (default true)
+ *  enableExit          {boolean}  scale+fade previous panel out   (default true)
+ *  ease                {string}   panel slide ease (use 'none' for scrub) (default 'none')
+ *  lockAtEnd           {number}   extra hold after last panel     (default 0)
  *  lockPageUntilComplete {boolean}  freeze page scroll until the last
  *                      panel is fully placed, then unlock  (default false)
- *  grain        {boolean}  cinematic grain overlay          (default false)
- *  grainOpacity {number}   grain strength                  (default 0.038)
+ *  grain               {boolean}  cinematic grain overlay          (default false)
+ *  grainOpacity        {number}   grain strength                  (default 0.038)
  */
 
 import { useEffect, useRef, useCallback } from 'react';
@@ -57,6 +59,7 @@ export default function SnippScrol({
   children,
   scrub          = 0.5,      // ✅ REDUCED further (from 0.8) - less lag with Lenis + trackpad
   mobileScrub    = 0.3,      // ✅ REDUCED further (from 0.5) - mobile trackpad performance
+  mobileScrollFactor = 0.5,  // shorter pin distance on mobile (TSB-style pin, less scroll)
   snapDuration   = 0.5,
   enableSnap     = true,
   enableExit     = true,
@@ -68,12 +71,14 @@ export default function SnippScrol({
   onLockProgress = null,
 }) {
   const containerRef = useRef(null);
+  const outerRef     = useRef(null);
   const sectionsRef  = useRef([]);
   const ctxRef       = useRef(null);
   const lockCleanupRef = useRef(null);
   /** Live lock controller — resize/zoom must sync this, not tear it down. */
   const lockApiRef = useRef(null);
   const instanceId   = useRef(newId());
+  const normalizeCleanupRef = useRef(null);
 
   const childArray = Array.isArray(children)
     ? children
@@ -105,7 +110,21 @@ export default function SnippScrol({
     lockApiRef.current = null;
     lockCleanupRef.current?.();
     lockCleanupRef.current = null;
+    normalizeCleanupRef.current?.();
+    normalizeCleanupRef.current = null;
     ctxRef.current?.revert();
+
+    // Always clear leftover splash/lock styles so mobile native scroll works
+    window.__pageScrollLocked = false;
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    document.body.style.touchAction = '';
+    document.documentElement.style.touchAction = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    document.body.style.height = '';
+    document.documentElement.style.height = '';
 
     const isMobile    = window.innerWidth < 768;
     const activeScrub = isMobile ? mobileScrub : scrub;
@@ -115,10 +134,40 @@ export default function SnippScrol({
 
     ctxRef.current = gsap.context(() => {
 
-      // ── Position all panels absolutely inside the 100vh container ────────
-      // overflow hidden so panels cannot steal wheel events from Lenis during pin
+      // Same panel slide on mobile + desktop.
+      // Mobile: sticky + scrub (no GSAP pin — pin freezes native touch without Lenis).
+      // Desktop: classic pin + scrub (TSB approach).
       const isMobile = window.innerWidth < 768;
       const lastPanelIndex = sections.length - 1;
+
+      let lastPlaced = false;
+      window.__heroAboutPlaced = false;
+      const emitCoverProgress = (p) => {
+        const next = Math.max(0, Math.min(1, p));
+        window.__heroAboutProgress = next;
+        window.__onHeroAboutProgress?.(next);
+        window.dispatchEvent(new CustomEvent('heroAboutProgress', { detail: { progress: next } }));
+      };
+      const emitPlaced = (placed) => {
+        if (placed === lastPlaced) return;
+        lastPlaced = placed;
+        window.__heroAboutPlaced = placed;
+        window.dispatchEvent(new CustomEvent('heroAboutPlaced', { detail: { placed } }));
+        if (placed) {
+          window.dispatchEvent(new CustomEvent('scrollAnimationsReady'));
+        }
+      };
+
+      // ── Position all panels absolutely inside the 100vh container ────────
+      // overflow hidden so panels cannot steal wheel events from Lenis during pin.
+      // CRITICAL: never use overscrollBehavior:'none' on full-viewport panels —
+      // it blocks scroll-chaining to the document on touch devices.
+      gsap.set(container, {
+        height: '100dvh',
+        maxHeight: '100dvh',
+        overflow: 'hidden',
+        touchAction: 'pan-y',
+      });
       sections.forEach((section, i) => {
         const isLastPanel = i === lastPanelIndex;
         gsap.set(section, {
@@ -131,7 +180,8 @@ export default function SnippScrol({
           yPercent: (i === 0 ? 0 : 100),
           overflowX: 'hidden',
           overflowY: 'hidden',
-          overscrollBehavior: 'none',
+          overscrollBehavior: 'auto',
+          touchAction: 'pan-y',
           scrollPaddingTop: isLastPanel
             ? (window.innerWidth >= 1024 ? '10rem' : '7rem')
             : undefined,
@@ -388,7 +438,10 @@ export default function SnippScrol({
 
         const addProgress = (deltaPx) => {
           const panelHeight = container.offsetHeight || window.innerHeight;
-          const dist = panelHeight * Math.max(totalDuration, 1) * 1.05;
+          const distanceUnit = isMobile
+            ? panelHeight * Math.max(0.25, Math.min(1, mobileScrollFactor))
+            : panelHeight;
+          const dist = distanceUnit * Math.max(totalDuration, 1) * 1.05;
           const nextTarget = Math.max(0, Math.min(1, target + deltaPx / dist));
           // Entering reverse from a fully placed page: lock + pin before animating
           if (!locked && nextTarget < 1) {
@@ -658,39 +711,47 @@ export default function SnippScrol({
         return;
       }
 
-      // ── Pin container and scrub the timeline ──────────────────────────────
-      // Pin path keeps Lenis owning page scroll (TSB approach). Never leave
-      // overflow/lock flags stuck from a prior lockPageUntilComplete session.
+      // ── Drive the timeline from scroll (pin + scrub, TSB approach) ───────
+      // Mobile also pins — Lenis syncTouch is required (see SmoothScroll.js).
+      // Shorter distance via mobileScrollFactor so phones finish sooner.
       window.__pageScrollLocked = false;
       window.lenisInstance?.start?.();
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+      document.documentElement.style.touchAction = '';
 
-      const panelHeight   = container.offsetHeight || window.innerHeight;
-      const panelScrollPx = (total - 1) * panelHeight;
-      const lockScrollPx  = lockAtEnd * panelHeight;
-      const totalScrollPx = panelScrollPx + lockScrollPx;
+      const outer = outerRef.current;
+      if (outer) {
+        gsap.set(outer, {
+          height: 'auto',
+          position: 'relative',
+          width: '100%',
+          touchAction: 'pan-y',
+        });
+      }
+      gsap.set(container, {
+        position: 'relative',
+        top: 'auto',
+        height: '100dvh',
+        maxHeight: '100dvh',
+        overflow: 'hidden',
+        width: '100%',
+        touchAction: 'pan-y',
+      });
 
-      let lastPlaced = false;
+      const panelHeight = container.offsetHeight || window.innerHeight;
+      const distanceUnit = isMobile
+        ? panelHeight * Math.max(0.25, Math.min(1, mobileScrollFactor))
+        : panelHeight;
+      const panelScrollPx = (total - 1) * distanceUnit;
+      const lockScrollPx  = lockAtEnd * distanceUnit;
+      const totalScrollPx = Math.max(panelScrollPx + lockScrollPx, 1);
+
+      lastPlaced = false;
       window.__heroAboutPlaced = false;
-      const emitCoverProgress = (p) => {
-        const next = Math.max(0, Math.min(1, p));
-        window.__heroAboutProgress = next;
-        window.__onHeroAboutProgress?.(next);
-        window.dispatchEvent(new CustomEvent('heroAboutProgress', { detail: { progress: next } }));
-      };
       emitCoverProgress(0);
-      const emitPlaced = (placed) => {
-        if (placed === lastPlaced) return;
-        lastPlaced = placed;
-        window.__heroAboutPlaced = placed;
-        window.dispatchEvent(new CustomEvent('heroAboutPlaced', { detail: { placed } }));
-        if (placed) {
-          window.dispatchEvent(new CustomEvent('scrollAnimationsReady'));
-        }
-      };
 
-      // Disable pinning on mobile to restore scroll
       ScrollTrigger.create({
         id:         `snip-${id}-master`,
         trigger:    container,
@@ -701,7 +762,8 @@ export default function SnippScrol({
         anticipatePin: 0,
         scrub:      activeScrub,
         animation:  tl,
-        snap: enableSnap && total > 1
+        // Snap feels sticky on touch — desktop only
+        snap: enableSnap && total > 1 && !isMobile
           ? {
               snapTo: (value) => {
                 if (value <= panelFraction) {
@@ -730,18 +792,17 @@ export default function SnippScrol({
         onRefresh: () => {
           const spacer = container.closest('.pin-spacer') || container.parentElement;
           if (spacer && spacer.classList.contains('pin-spacer')) {
-            spacer.style.backgroundColor = '#F4F4F2';
+            spacer.style.backgroundColor = '#FFFFFF';
           }
         },
       });
 
-      // ✅ Style the pin-spacer immediately (remove rAF to prevent extra repaints)
       const spacer = container.closest('.pin-spacer') || container.parentElement;
       if (spacer && spacer.classList.contains('pin-spacer')) {
-        spacer.style.backgroundColor = '#F4F4F2';
+        spacer.style.backgroundColor = '#FFFFFF';
       }
 
-      // Refresh ScrollTrigger after pin setup so child animations measure correctly
+      // Refresh ScrollTrigger after setup so child animations measure correctly
       requestAnimationFrame(() => {
         ScrollTrigger.refresh();
         window.dispatchEvent(new CustomEvent('scrollAnimationsReady'));
@@ -749,7 +810,7 @@ export default function SnippScrol({
 
     }, container);
 
-  }, [scrub, mobileScrub, snapDuration, enableSnap, enableExit, ease, lockAtEnd, lockPageUntilComplete, onLockProgress]);
+  }, [scrub, mobileScrub, mobileScrollFactor, snapDuration, enableSnap, enableExit, ease, lockAtEnd, lockPageUntilComplete, onLockProgress]);
 
   useEffect(() => {
     // Small rAF delay lets Next.js finish painting before GSAP measures
@@ -805,14 +866,29 @@ export default function SnippScrol({
     // Pinch-zoom often updates visualViewport without a matching window resize.
     window.visualViewport?.addEventListener('resize', onResize, { passive: true });
 
+    // Lenis boots after splash / 150ms — refresh pin metrics once it is ready
+    const onLenisReady = () => {
+      window.__pageScrollLocked = false;
+      window.lenisInstance?.start?.();
+      document.body.style.removeProperty('touch-action');
+      document.documentElement.style.removeProperty('touch-action');
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('lenisReady', onLenisReady);
+    window.addEventListener('splashComplete', onLenisReady);
+
     return () => {
       cancelAnimationFrame(raf);
       clearTimeout(resizeTimer);
       window.removeEventListener('resize', onResize);
       window.visualViewport?.removeEventListener('resize', onResize);
+      window.removeEventListener('lenisReady', onLenisReady);
+      window.removeEventListener('splashComplete', onLenisReady);
       lockApiRef.current = null;
       lockCleanupRef.current?.();
       lockCleanupRef.current = null;
+      normalizeCleanupRef.current?.();
+      normalizeCleanupRef.current = null;
       ctxRef.current?.revert();
       // Do NOT zero __heroAboutPlaced/progress here — effect re-runs (HMR /
       // dep identity) must not re-lock mid-page. True unmount resets below.
@@ -820,6 +896,8 @@ export default function SnippScrol({
       window.lenisInstance?.start();
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+      document.documentElement.style.touchAction = '';
     };
   }, [build, lockPageUntilComplete]);
 
@@ -835,58 +913,63 @@ export default function SnippScrol({
       window.lenisInstance?.start();
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+      document.documentElement.style.touchAction = '';
     };
   }, []);
 
   // ─── Render ────────────────────────────────────────────────────────────────
-  // The outer wrapper is 100dvh and overflow:hidden.
-  // GSAP will pin THIS element — everything outside (header, footer) is safe.
+  // Outer tracks scroll distance on mobile (sticky). Desktop pins the inner.
   return (
     <>
       {grain && <GrainOverlay opacity={grainOpacity} />}
 
-      <div
-        ref={containerRef}
-        style={{
-          position: 'relative',
-          width: '100%',
-          height: '100dvh',
-          maxHeight: '100dvh',
-          overflow: 'hidden',
-          backgroundColor: '#F4F4F2',
-        }}
-      >
-        {childArray.map((child, index) => (
-          <div
-            key={index}
-            ref={(el) => {
-              if (el) sectionsRef.current[index] = el;
-            }}
-            className="scrollbar-hide"
-            style={{
-              willChange: 'transform',
-              width: '100%',
-              height: '100%',
-              overflowX: 'hidden',
-              overflowY: 'hidden',
-              overscrollBehavior: 'none',
-              scrollPaddingTop: index === childArray.length - 1 ? '7rem' : undefined,
-            }}
-          >
-            {child}
-          </div>
-        ))}
+      <div ref={outerRef} style={{ position: 'relative', width: '100%' }}>
+        <div
+          ref={containerRef}
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '100dvh',
+            maxHeight: '100dvh',
+            overflow: 'hidden',
+            backgroundColor: '#FFFFFF',
+          }}
+        >
+          {childArray.map((child, index) => (
+            <div
+              key={index}
+              ref={(el) => {
+                if (el) sectionsRef.current[index] = el;
+              }}
+              className="scrollbar-hide"
+              style={{
+                willChange: 'transform',
+                width: '100%',
+                height: '100%',
+                overflowX: 'hidden',
+                overflowY: 'hidden',
+                overscrollBehavior: 'auto',
+                touchAction: 'pan-y',
+                scrollPaddingTop: index === childArray.length - 1 ? '7rem' : undefined,
+              }}
+            >
+              {child}
+            </div>
+          ))}
+        </div>
       </div>
       {/* Seam-cover: overlaps the compositing gap at the bottom of the
-          GSAP-pinned layer. Matches About panel bg so no white hairline. */}
+          GSAP-pinned layer. Matches About panel bg so no white hairline.
+          Keep z-index low so it never paints over following sections. */}
       <div
         aria-hidden="true"
         style={{
           height:          '4px',
           marginTop:       '-4px',
-          backgroundColor: '#F4F4F2',
+          backgroundColor: '#FFFFFF',
           position:        'relative',
-          zIndex:          9999,
+          zIndex:          1,
         }}
       />
     </>

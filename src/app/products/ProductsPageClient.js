@@ -31,11 +31,11 @@ export default function ProductsPageClient({ products = [] }) {
 
 
             <ParallaxSection index={0}>
-                <div className=" relative overflow-hidden min-h-screen lg:min-h-[90vh] lg:max-h-[90vh] flex flex-col justify-center lg:justify-start lg:pt-20 items-center px-2 lg:px-0 ">
-                    <div className=" flex flex-col items-center gap-4">
+                <div className="relative overflow-hidden flex flex-col justify-start items-center px-2 pt-10 pb-[65%] lg:min-h-[90vh] lg:max-h-[90vh] lg:justify-start lg:pt-20 lg:pb-0 lg:px-0">
+                    <div className="flex flex-col items-center gap-2 lg:gap-4">
 
                         <Badgetextblack title="What we produce" className="" />
-                        <div className="w-full px-5 lg:px-10 lg:w-[85%] mt-9">
+                        <div className="w-full px-5 mt-3 lg:mt-9 lg:px-10 lg:w-[85%]">
                             <ScrollReveal
                                 as="h1"
                                 baseOpacity={0.5}
@@ -94,6 +94,64 @@ export default function ProductsPageClient({ products = [] }) {
 
             </section>
 
+            {/* cta */}
+
+            <ParallaxSection index={3}>
+                <div className="relative mt-8 flex min-h-[80vh] items-stretch overflow-hidden rounded-lg bg-[#272A2A] px-4 lg:min-h-[70vh] lg:flex-row lg:items-center lg:justify-start lg:px-10 lg:py-20 lg:pl-0">
+
+                    <Image
+                        src="/shared/gradientcircle.png"
+                        alt=""
+                        width={1200}
+                        height={1200}
+                        className="pointer-events-none absolute left-0 top-6 h-[90vh]  lg:left-0 lg:rotate-180"
+                        loading="lazy"
+                    />
+
+                    {/* Mobile: rotated brochure image */}
+                    <Image
+                        src="/products/ctar.png"
+                        alt="Brochure"
+                        width={900}
+                        height={600}
+                        className="pointer-events-none absolute -right-[35%] -rotate-40 -bottom-[30%] z-[5] h-[130%] w-auto -rotate-[0deg] object-contain lg:hidden"
+                        loading="lazy"
+                        quality={75}
+                    />
+
+                    {/* Desktop: original side image */}
+                    <Image
+                        src="/products/ctar.png"
+                        alt="CTA"
+                        width={900}
+                        height={600}
+                        className="absolute bottom-0 -right-30 hidden h-[55%] object-cover lg:top-0 lg:block lg:h-full lg:w-[40%]"
+                        loading="lazy"
+                        quality={75}
+                    />
+
+                    <SlideIn
+                        direction="left"
+                        scrollTrigger={true}
+                        duration={0.8}
+                        className="relative z-10 flex min-h-[80vh] w-full flex-col items-start justify-between gap-4 p-5 pb-8 text-white lg:min-h-0 lg:w-[60%] lg:justify-center lg:gap-6 lg:p-9"
+                    >
+                        <div className="flex flex-col items-start gap-4 lg:gap-6">
+                            <Badge title="Brochure" />
+                            <h1 className="pr-2 text-[1.85rem] font-medium leading-[1.25] tracking-[-0.03em] lg:text-5xl lg:font-normal lg:leading-tight lg:tracking-normal">
+                                Download our brochure to discover our full capabilities, precision technologies, and quality-driven manufacturing approach.
+                            </h1>
+                        </div>
+
+                        <button className="z-20 mx-auto flex w-[85%] max-w-sm items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-center text-base font-medium text-black transition-all duration-300 ease-in-out hover:bg-gray-100 lg:mx-0 lg:mt-6 lg:w-80 lg:self-start lg:px-6 lg:py-4 lg:text-xl lg:font-normal">
+                            Download Our Brochure
+                            <ArrowDown className="h-5 w-5 lg:h-6 lg:w-6" color="black" />
+                        </button>
+                    </SlideIn>
+                </div>
+            </ParallaxSection>
+            <UcrLaboratoryToolsSection />
+
             {/* certifications */}
 
             <ParallaxSection index={2}>
@@ -118,26 +176,7 @@ export default function ProductsPageClient({ products = [] }) {
 
                 </div>
             </ParallaxSection>
-            {/* cta */}
-
-            <ParallaxSection index={3}>
-                <div className="min-h-[85vh] px-4 pl-4 lg:pl-0 lg:min-h-[60vh] lg:min-h-[70vh] relative bg-[#272A2A] flex lg:flex-row flex-col-reverse  justify-center lg:justify-start   items-center   lg:px-10 lg:py-20 mt-8 rounded-lg overflow-hidden">
-
-                    <Image src='/shared/gradientcircle.png' alt="" width={1200} height={1200} className="h-[90vh] top-[0%] absolute top-[26%] bottom-0 right-20 top-6 left-0 lg:right-0 lg:rotate-180" loading="lazy" />
-
-                    <Image src='/products/ctar.png' alt="CTA" width={900} height={600} className="absolute bottom-0 h-[55%] lg:top-0 -right-30 lg:w-[40%] lg:h-full object-cover" loading="lazy" quality={75} />
-
-
-                    <SlideIn direction="left" scrollTrigger={true} duration={0.8} className="lg:w-[60%]   p-5 lg:p-9 text-white flex flex-col items-start justify-between lg:justify-center gap-6 relative z-10">
-                        <Badge title="Brocher" />
-                        <h1 className="text-3xl lg:text-5xl pr-2">Download our brochure to discover our full capabilities, precision technologies, and quality-driven manufacturing approach.</h1>
-
-                        <button className="self-center lg:self-start text-xl text-center w-80  mt-[34vh] lg:mt-6 bg-white hover:bg-gray-100 text-black px-6 py-6 lg:py-4 rounded-full transition-all duration-300 ease-in-out flex items-center justify-center  gap-2">Download Our Brocher<ArrowDown size={24} color='black' /></button>
-                    </SlideIn>
-                </div>
-            </ParallaxSection>
-
-            <UcrLaboratoryToolsSection />
+           
 
         </div>
     )

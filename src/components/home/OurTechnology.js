@@ -60,12 +60,15 @@ function getCardOffset(itemEls, activeIndex, gap) {
 export default function OurTechnology() {
   const [activeTab, setActiveTab] = useState(0);
   const [cardReady, setCardReady] = useState(false);
+  const [cardHeight, setCardHeight] = useState(null);
   const listRef = useRef(null);
   const itemRefs = useRef([]);
+  const measureRefs = useRef([]);
   const cardY = useMotionValue(0);
   const pendingFromY = useRef(null);
   const activeTabRef = useRef(0);
   const slideControlsRef = useRef(null);
+  const cardHeightRef = useRef(null);
   const router = useRouter();
 
   const activeTech = TECHNOLOGIES[activeTab];
@@ -77,40 +80,72 @@ export default function OurTechnology() {
     return parseFloat(styles.rowGap || styles.gap) || 24;
   }, []);
 
-  useLayoutEffect(() => {
-    const toY = getCardOffset(itemRefs.current, activeTab, getGap());
-    const fromY = pendingFromY.current;
+  const measureMaxCardHeight = useCallback(() => {
+    let max = 0;
+    measureRefs.current.forEach((el) => {
+      if (!el) return;
+      max = Math.max(max, Math.ceil(el.getBoundingClientRect().height));
+    });
+    return max > 0 ? max : null;
+  }, []);
 
-    if (fromY === null) {
-      cardY.set(toY);
+  const applyActiveSpacerHeight = useCallback((height) => {
+    itemRefs.current.forEach((el, i) => {
+      if (!el) return;
+      el.style.height = i === activeTabRef.current ? `${height}px` : "";
+    });
+  }, []);
+
+  const syncCardLayout = useCallback(
+    (animateSlide) => {
+      const nextHeight = measureMaxCardHeight();
+      if (nextHeight == null) return;
+
+      if (cardHeightRef.current !== nextHeight) {
+        cardHeightRef.current = nextHeight;
+        setCardHeight(nextHeight);
+      }
+
+      applyActiveSpacerHeight(nextHeight);
+
+      const toY = getCardOffset(itemRefs.current, activeTabRef.current, getGap());
+      const fromY = animateSlide ? pendingFromY.current : null;
+
+      if (fromY === null) {
+        cardY.set(toY);
+      } else {
+        pendingFromY.current = null;
+        slideControlsRef.current?.stop();
+        cardY.set(fromY);
+        slideControlsRef.current = animate(cardY, toY, { duration: 0.45, ease: EASE });
+      }
+
       setCardReady(true);
-      return;
-    }
+    },
+    [applyActiveSpacerHeight, cardY, getGap, measureMaxCardHeight]
+  );
 
-    pendingFromY.current = null;
-    slideControlsRef.current?.stop();
-    cardY.set(fromY);
-    slideControlsRef.current = animate(cardY, toY, { duration: 0.45, ease: EASE });
-    setCardReady(true);
-  }, [activeTab, cardY, getGap]);
+  useLayoutEffect(() => {
+    syncCardLayout(true);
+  }, [activeTab, syncCardLayout]);
 
   useLayoutEffect(() => {
     const list = listRef.current;
     if (!list || typeof ResizeObserver === "undefined") return;
 
-    const onResize = () => {
-      const y = getCardOffset(itemRefs.current, activeTabRef.current, getGap());
-      cardY.set(y);
-    };
+    const onResize = () => syncCardLayout(false);
 
     const observer = new ResizeObserver(onResize);
     observer.observe(list);
+    measureRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
     window.addEventListener("resize", onResize);
     return () => {
       observer.disconnect();
       window.removeEventListener("resize", onResize);
     };
-  }, [cardY, getGap]);
+  }, [syncCardLayout]);
 
   const handleTabChange = (tabIndex) => {
     if (tabIndex === activeTab) return;
@@ -120,6 +155,8 @@ export default function OurTechnology() {
     activeTabRef.current = tabIndex;
     setActiveTab(tabIndex);
   };
+
+  const activeItemStyle = cardHeight ? { height: cardHeight } : undefined;
 
   return (
     <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
@@ -142,11 +179,8 @@ export default function OurTechnology() {
                   ref={(el) => {
                     itemRefs.current[index] = el;
                   }}
-                      className={
-                    isActive
-                      ? "relative h-[16rem] w-full sm:h-[15.75rem] lg:h-[17.25rem]"
-                      : "relative w-full"
-                  }
+                  className="relative w-full"
+                  style={isActive ? activeItemStyle : undefined}
                 >
                   <motion.button
                     type="button"
@@ -169,12 +203,41 @@ export default function OurTechnology() {
               );
             })}
 
-            {cardReady && (
+            {/* Off-screen: measure every tech so card height stays constant */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute left-0 right-0 top-0 -z-10 opacity-0"
+            >
+              {TECHNOLOGIES.map((tech, index) => (
+                <div
+                  key={tech.id}
+                  ref={(el) => {
+                    measureRefs.current[index] = el;
+                  }}
+                  className="box-border flex flex-col rounded-xl bg-white px-[1.25rem] pt-[1.25rem] pb-[1.75rem] lg:px-[1.5rem] lg:pt-[1.35rem] lg:pb-[2rem]"
+                >
+                  <h2 className="shrink-0 font-primary font-normal text-primary text-[clamp(1.35rem,5.2cqi,2.75rem)] leading-none tracking-[-0.06rem]">
+                    {tech.title}
+                  </h2>
+                  <p className="mt-[0.6rem] font-primary font-normal text-[0.875rem] leading-[1.6] tracking-[-0.02rem] text-black lg:text-[1.0625rem] lg:leading-[1.65]">
+                    {tech.description}
+                  </p>
+                  <div className="mt-[0.85rem] inline-flex h-[2.25rem] w-fit shrink-0 items-center justify-center gap-[0.4rem] rounded-full border border-primary px-[1rem] lg:mt-[1rem] lg:h-[2.75rem] lg:px-[1.25rem]">
+                    <span className="font-primary font-normal text-[0.8125rem] leading-none tracking-[-0.03rem] lg:text-[0.9375rem]">
+                      Know more
+                    </span>
+                    <ArrowRight size={16} />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {cardReady && cardHeight != null && (
               <motion.div
-                className="absolute left-0 right-0 top-0 z-10 box-border flex h-[16rem] flex-col overflow-hidden rounded-xl bg-white px-[1.25rem] pt-[1.25rem] pb-[1.75rem] shadow-none sm:h-[15.75rem] lg:h-[17.25rem] lg:px-[1.5rem] lg:pt-[1.35rem] lg:pb-[2rem]"
-                style={{ y: cardY }}
+                className="absolute left-0 right-0 top-0 z-10 box-border overflow-hidden rounded-xl bg-white px-[1.25rem] pt-[1.25rem] pb-[1.75rem] shadow-none lg:px-[1.5rem] lg:pt-[1.35rem] lg:pb-[2rem]"
+                style={{ y: cardY, height: cardHeight }}
               >
-                <div className="relative min-h-0 w-full flex-1">
+                <div className="relative h-full w-full">
                   <AnimatePresence initial={false}>
                     <motion.div
                       key={activeTech.id}
@@ -182,12 +245,12 @@ export default function OurTechnology() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.12, ease: "easeInOut" }}
-                      className="absolute inset-x-0 top-0 bottom-0 flex flex-col"
+                      className="absolute inset-0 flex flex-col"
                     >
                       <h2 className="shrink-0 font-primary font-normal text-primary text-[clamp(1.35rem,5.2cqi,2.75rem)] leading-none tracking-[-0.06rem]">
                         {activeTech.title}
                       </h2>
-                      <p className="mt-[0.6rem] min-h-0 flex-1 overflow-hidden font-primary font-normal text-[0.875rem] leading-[1.6] tracking-[-0.02rem] text-black lg:text-[1.0625rem] lg:leading-[1.65]">
+                      <p className="mt-[0.6rem] font-primary font-normal text-[0.875rem] leading-[1.6] tracking-[-0.02rem] text-black lg:text-[1.0625rem] lg:leading-[1.65]">
                         {activeTech.description}
                       </p>
                       <button

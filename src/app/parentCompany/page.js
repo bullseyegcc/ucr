@@ -25,10 +25,11 @@ export default function parentCompany() {
           type: "image",
           src: "/parent-company/pcbg-1.png",
           imageClassName: "object-bottom object-center",
+          overlay: "gradient-20",
         }}
       />
 
-      <div className="bg-[#F5F5F5] px-2 lg:py-16">
+      <div className="bg-[#F5F5F5] px-2 pt-10 lg:py-16">
         <div className="mx-auto w-full max-w-[1600px] px-2 lg:px-10">
           <ScrollReveal
             as="p"
@@ -36,7 +37,7 @@ export default function parentCompany() {
             enableBlur
             baseRotation={0}
             blurStrength={0}
-            containerClassName="whitespace-pre-line text-center font-medium text-primary text-[28px] leading-[44px] tracking-[-0.53px] lg:text-[40px] lg:font-normal lg:leading-[56px] lg:tracking-[-1.4px]"
+            containerClassName="whitespace-pre-line text-center font-medium text-primary text-[20px] leading-[32px] tracking-[-0.4px] lg:text-[40px] lg:font-normal lg:leading-[56px] lg:tracking-[-1.4px]"
           >
             {`Ittihad International Investment LLC is a private holding and multi-disciplinary conglomerate, engaged in a wide spectrum of economic activities across the MENA region.
 We lead, manage, and empower a diverse portfolio of companies to bring long-term value, operational excellence, and sustainable growth.`}

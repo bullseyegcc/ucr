@@ -4,6 +4,37 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import StatsCard from "../../common/StatsCard";
 
+const STATS = [
+  {
+    mainHeading: 2009,
+    showPlus: false,
+    subHeading: "Established in",
+    description:
+      "Since then, our excellence has made us a trusted name in copper manufacturing.",
+  },
+  {
+    mainHeading: 20,
+    suffix: "k",
+    showPlus: true,
+    subHeading: "MT/Annum",
+    description: "Produces 20,000 metric tons of copper per year.",
+  },
+  {
+    mainHeading: 150,
+    showPlus: true,
+    subHeading: "Employees",
+    description:
+      "With over 150 experienced employees, we deliver quality and reliability every day.",
+  },
+  {
+    mainHeading: 50,
+    showPlus: true,
+    subHeading: "Global sales",
+    description:
+      "With a presence in 50+ countries, we serve clients on every continent.",
+  },
+];
+
 export default function AboutStats() {
   const rowRef = useRef(null);
 
@@ -12,26 +43,45 @@ export default function AboutStats() {
     const items = rowRef.current?.querySelectorAll(".stat-card-item");
     if (!items?.length) return;
 
-    let played = false;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const distance = isMobile ? 32 : 56;
+    const stagger = isMobile ? 0.1 : 0.15;
+    const duration = isMobile ? 0.45 : 0.55;
 
-    gsap.set(items, { opacity: 0, y: 56 });
+    let played = false;
+    let tl;
+
+    gsap.set(items, { opacity: 0, y: distance, force3D: true });
 
     const play = () => {
       if (played) return;
       played = true;
-      gsap.to(items, {
-        opacity: 1,
-        y: 0,
-        duration: 0.75,
-        stagger: 0.18,
-        ease: "power3.out",
-        overwrite: true,
+      tl?.kill();
+      if (prefersReduced) {
+        gsap.set(items, { opacity: 1, y: 0 });
+        return;
+      }
+      tl = gsap.timeline();
+      items.forEach((item, index) => {
+        tl.to(
+          item,
+          {
+            opacity: 1,
+            y: 0,
+            duration,
+            ease: "power2.out",
+            overwrite: true,
+          },
+          index * stagger
+        );
       });
     };
 
     const reset = () => {
       played = false;
-      gsap.set(items, { opacity: 0, y: 56 });
+      tl?.kill();
+      gsap.set(items, { opacity: 0, y: distance });
     };
 
     const onAboutPlaced = (e) => {
@@ -44,57 +94,30 @@ export default function AboutStats() {
 
     return () => {
       window.removeEventListener("heroAboutPlaced", onAboutPlaced);
+      tl?.kill();
       gsap.killTweensOf(items);
     };
   }, []);
 
   return (
-    <div className="w-full shrink-0 bg-[#F4F4F2]">
+    <div className="w-full shrink-0 bg-white">
       <div
         ref={rowRef}
-        className="max-w-[1600px] mx-auto grid grid-cols-2 lg:grid-cols-4 px-[1rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] pt-[1.25rem] pb-[1.5rem] lg:pt-[2rem] lg:pb-[2rem] gap-[0.75rem] lg:gap-[1.25rem]"
+        className="mx-auto grid max-w-[1600px] grid-cols-2 gap-[0.75rem] px-[1rem] pt-0 pb-[0.75rem] lg:grid-cols-4 lg:gap-[1.25rem] lg:px-[3rem] lg:pt-[1.25rem] lg:pb-[2rem] xl:px-[4rem] 2xl:px-[5rem]"
       >
-        <div className="stat-card-item w-full min-w-0" style={{ opacity: 0 }}>
-          <StatsCard
-            mainHeading={17}
-            showPlus
-            subHeading="Years of Excellence Experience"
-            description="Delivering trusted copper solutions since 2008."
-            index={0}
-            skipEntrance
-          />
-        </div>
-        <div className="stat-card-item w-full min-w-0" style={{ opacity: 0 }}>
-          <StatsCard
-            mainHeading={200}
-            suffix="K"
-            showPlus
-            subHeading="MT/Annual Capacity"
-            description="State-of-the-art production facilities ensure consistent high-volume output."
-            index={1}
-            skipEntrance
-          />
-        </div>
-        <div className="stat-card-item w-full min-w-0" style={{ opacity: 0 }}>
-          <StatsCard
-            mainHeading={250}
-            showPlus
-            subHeading="Our Team"
-            description="A dedicated team of experts committed to quality and innovation."
-            index={2}
-            skipEntrance
-          />
-        </div>
-        <div className="stat-card-item w-full min-w-0" style={{ opacity: 0 }}>
-          <StatsCard
-            mainHeading={50}
-            showPlus
-            subHeading="Global Reach"
-            description="Serving customers across more than 50 countries worldwide."
-            index={3}
-            skipEntrance
-          />
-        </div>
+        {STATS.map((stat, index) => (
+          <div
+            key={stat.subHeading}
+            className="stat-card-item w-full min-w-0"
+            style={{ opacity: 0 }}
+          >
+            <StatsCard
+              {...stat}
+              index={index}
+              skipEntrance
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
