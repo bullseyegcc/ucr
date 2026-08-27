@@ -73,7 +73,7 @@ export default function Footer() {
           <div className="flex flex-col gap-4">
             <h3 className="text-primary font-bold text-sm uppercase">Phone</h3>
             <div className="text-gray-700 text-sm">
-              <p className="font-medium text-[18px]">+971 2 550 3240</p>
+              <p className="font-medium text-[18px]">+971 2 550 3241</p>
             </div>
           </div>
 
