@@ -11,7 +11,6 @@ export default async function BlogsPage() {
         badge="Things to Read"
         title="News"
         titleVariant="blogs"
-        titleClassName="w-[80%]"
         titleDirectFade
         badgeSlideClassName="text-[#FA6E43] text-[0.875rem] font-semibold uppercase tracking-[0.1em]"
         className="rounded-b-2xl dark:bg-black"

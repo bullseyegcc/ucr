@@ -19,28 +19,30 @@ export default async function Home() {
       {/* Hero → About with scroll-locked heading colour animation */}
       <HomeHeroAbout />
 
-      {/* video Cards */}
-      <ParallaxSection index={0}>
-        <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] my-8 lg:my-8 flex flex-col lg:flex-row justify-center lg:max-h-[1000px] gap-1 lg:gap-2 bg-white">
-          <VideoCard
-            videoSrc="/moreabout.mp4"
-            badgeText="Our Company"
-            title={
-              "Driven by excellence, Union Copper Rod delivers premium copper products that support critical industries across the region and beyond"
-            }
-            buttonText="Company profile"
-            buttonUrl="/aboutus"
-          />
+      {/* video Cards — above About panel’s empty bottom when pulled up on mobile */}
+      <div className="relative z-10 w-full bg-white">
+        <ParallaxSection index={0}>
+          <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] mt-8 mb-8 lg:my-8 flex flex-col lg:flex-row justify-center lg:max-h-[1000px] gap-1 lg:gap-2 bg-white">
+            <VideoCard
+              videoSrc="/moreabout.mp4"
+              badgeText="Our Company"
+              title={
+                "Driven by excellence, Union Copper Rod delivers premium copper products that support critical industries across the region and beyond"
+              }
+              buttonText="Company profile"
+              buttonUrl="/aboutus"
+            />
 
-          <VideoCard
-            videoSrc="/supplychain.mp4"
-            badgeText="Supply Chain"
-            title="A resilient supply chain built to support reliable delivery across regional and global markets."
-            buttonText="Know more"
-            buttonUrl="/logistics"
-          />
-        </div>
-      </ParallaxSection>
+            <VideoCard
+              videoSrc="/supplychain.mp4"
+              badgeText="Supply Chain"
+              title="A resilient supply chain built to support reliable delivery across regional and global markets."
+              buttonText="Know more"
+              buttonUrl="/logistics"
+            />
+          </div>
+        </ParallaxSection>
+      </div>
 
       {/* FeaturedProducts: outside ParallaxSection so scale/overflow doesn't leave silver gaps around the image */}
       <div className="relative w-full" style={{ zIndex: 11 }}>
@@ -56,9 +58,10 @@ export default async function Home() {
         <OurTechnology />
       </div>
 
-      <ParallaxSection index={4}>
+      {/* Outside ParallaxSection: transform ancestors break CardAnimation ScrollTriggers (cards stuck opacity:0) */}
+      <div className="relative w-full" style={{ zIndex: 14 }}>
         <WhyChooseUs />
-      </ParallaxSection>
+      </div>
 
       <ParallaxSection index={5}>
         <HorizontalScrollGallery
@@ -66,9 +69,10 @@ export default async function Home() {
         />
       </ParallaxSection>
 
-      <ParallaxSection index={6}>
+      {/* Outside ParallaxSection: negative y + overflow-hidden was clipping CTA headline */}
+      <div className="relative w-full" style={{ zIndex: 17 }}>
         <CTA />
-      </ParallaxSection>
+      </div>
 
       <div className="relative w-full" style={{ zIndex: 18 }}>
         <Articles posts={posts} />

@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { Badge, Badgetextwhite } from "../../../common/badge";
+import { Badgetextblack, Badgetextwhite } from "../../../common/badge";
 import { useState } from "react";
 import { ChevronDown, Package } from "lucide-react";
 import FadeIn from "../../../animations/FadeIn";
 import SlideIn from "../../../animations/SlideIn";
+import SequentialSlideIn from "../../../animations/SequentialSlideIn";
 
 export default function ProductDetailView({ product }) {
   const [expandedSections, setExpandedSections] = useState({
@@ -302,39 +303,54 @@ export default function ProductDetailView({ product }) {
       </div>
 
       {/* certifications */}
+      <div className="relative z-20 flex flex-col items-center justify-center pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-16 lg:pb-20 bg-[#FFF8F4]">
+        <div className="flex flex-col gap-10 sm:gap-12 lg:gap-16 items-center w-full sm:px-6">
+          <div className="flex flex-col items-center text-center">
+            <SlideIn
+              direction="bottom"
+              scrollTrigger={true}
+              className="mb-3 lg:mb-5"
+              duration={0.8}
+            >
+              <Badgetextblack title="Certificates" />
+            </SlideIn>
+            <FadeIn
+              scrollTrigger={true}
+              duration={0.8}
+              className="px-9 font-medium text-[32px] leading-[52px] tracking-[-1.4px] text-center capitalize mt-3 sm:mt-4 lg:text-[52px] lg:leading-[52px] lg:tracking-[-1.4px] lg:mt-5 lg:mt-6"
+            >
+              <h1>We've achieved so far</h1>
+            </FadeIn>
+          </div>
 
-      <div className="relative lg:min-h-screen mt-8">
-        {/* header */}
-        <div className="w-screen flex flex-col gap-3 sm:gap-4 lg:gap-5 items-center justify-center text-center py-8 sm:py-12 lg:py-16 lg:py-20 px-6">
-          <SlideIn
-            direction="bottom"
-            scrollTrigger={true}
-            duration={0.8}
-            delay={0}
-          >
-            <Badge title="Core Strength" />
-          </SlideIn>
-
-          <FadeIn
-            duration={0.4}
-            delay={0}
-            scrollTrigger={true}
-            className="flex justify-center"
-          >
-            <h1 className="font-medium text-[32px] leading-[52px] tracking-[-1.18px] sm:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize mt-2 sm:mt-3 lg:mt-4 w-full sm:w-[85%] lg:w-[75%] lg:w-[60%]">
-              Our products meet global quality and safety standards.
-            </h1>
-          </FadeIn>
-        </div>
-
-        <div className="w-full sm:w-[90%] lg:w-[85%] lg:w-[65%] flex items-center justify-center mx-auto px-6 sm:px-0">
-          <Image
-            src="/shared/certificate.png"
-            alt="Icon"
-            width={900}
-            height={0}
-            className="w-full object-cover  "
-          />
+          <div className="w-full">
+            <SequentialSlideIn
+              className="mx-auto w-full max-w-[1800px] px-4 sm:px-5 lg:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-6 items-start"
+              itemClassName="w-full min-w-0"
+              start="top 85%"
+              end="bottom 70%"
+            >
+              {[
+                { src: "/certifications/c1.png", offset: "" },
+                { src: "/certifications/c2.png", offset: "lg:mt-6 xl:mt-8" },
+                { src: "/certifications/c3.png", offset: "lg:mt-12 xl:mt-16" },
+                { src: "/certifications/c4.png", offset: "lg:mt-20 xl:mt-24" },
+              ].map((cert) => (
+                <div
+                  key={cert.src}
+                  className={`overflow-hidden rounded-2xl w-full h-[44vh] min-h-[360px] lg:h-[60vh] lg:min-h-[520px] ${cert.offset}`}
+                >
+                  <Image
+                    src={cert.src}
+                    alt="Certification"
+                    width={450}
+                    height={567}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </SequentialSlideIn>
+          </div>
         </div>
       </div>
     </div>

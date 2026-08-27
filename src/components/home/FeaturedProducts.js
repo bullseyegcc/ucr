@@ -69,7 +69,7 @@ export default function FeaturedProducts({ products }) {
   return (
     <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
       {/* Explicit h- (not min-h) so percentage heights on the card resolve */}
-      <div className="relative h-[min(100vh,1000px)] lg:h-[min(90vh,1000px)] max-h-[1000px]">
+      <div className="relative h-[min(75vh,640px)] max-h-[640px] lg:h-[min(90vh,1000px)] lg:max-h-[1000px]">
         {/* Background fills the container, clipped to rounded corners */}
         <div className="absolute inset-0 overflow-hidden rounded-xl">
           <div

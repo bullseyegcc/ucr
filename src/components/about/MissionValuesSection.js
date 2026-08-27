@@ -99,7 +99,7 @@ export default function MissionValuesSection() {
         >
           <div
             ref={missionRef}
-            className="min-h-96 rounded-3xl text-white px-10 py-8 flex flex-col justify-between"
+            className="min-h-96 rounded-3xl text-white px-5 py-8 flex flex-col justify-between lg:px-10"
             style={{
               backgroundImage: "url('/about/missionbg.png')",
               backgroundSize: "cover",
@@ -126,7 +126,7 @@ export default function MissionValuesSection() {
         {/* Values Card */}
         <div
           ref={valuesRef}
-          className="w-full lg:w-1/2 min-h-96 rounded-3xl bg-[#F5F5F5] px-10 py-8 flex flex-col justify-between"
+          className="w-full lg:w-1/2 min-h-96 rounded-3xl bg-[#F5F5F5] px-5 py-8 flex flex-col justify-between lg:px-10"
         >
           <SlideIn direction="left" scrollTrigger={true} duration={0.8}>
             <Badge title="our values" className="mb-6" />

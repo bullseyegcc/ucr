@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from "react"
+import { createPortal } from "react-dom"
 import { Badge } from "../../common/badge"
 import Image from "next/image"
 import badge_icon from "../../../public/shared/badge.png"
@@ -163,7 +164,15 @@ const ELEMENTS = [
 ]
 
 function ElementsModal({ item, onClose }) {
+  const [mounted, setMounted] = useState(false)
+
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!item) return
+
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = "hidden"
 
@@ -176,20 +185,20 @@ function ElementsModal({ item, onClose }) {
       document.body.style.overflow = previousOverflow
       window.removeEventListener("keydown", onKeyDown)
     }
-  }, [onClose])
+  }, [item, onClose])
 
-  if (!item) return null
+  if (!item || !mounted) return null
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/55 p-4 sm:p-6"
+      className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto overscroll-contain bg-black/55 p-4 sm:p-6"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="elements-modal-title"
     >
       <div
-        className="relative max-h-[min(92vh,880px)] w-full max-w-[720px] overflow-y-auto rounded-[28px] bg-white p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8 lg:rounded-[32px] lg:p-10"
+        className="relative my-auto max-h-[min(85dvh,880px)] w-full max-w-[720px] overflow-y-auto rounded-[28px] bg-white p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-8 lg:rounded-[32px] lg:p-10"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-4">
@@ -241,7 +250,8 @@ function ElementsModal({ item, onClose }) {
           />
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 
@@ -265,7 +275,7 @@ function KnowMoreSection() {
   return (
     <section className="bg-white py-14 lg:py-20">
       <div className="mx-auto w-full max-w-[1600px] px-2 lg:px-10">
-        <div className="relative h-[min(100vh,920px)] max-h-[920px] lg:h-[min(90vh,900px)]">
+        <div className="relative min-h-[min(70vh,560px)] h-auto lg:h-[min(90vh,900px)] lg:max-h-[920px] lg:min-h-0">
           <div className="absolute inset-0 overflow-hidden rounded-xl lg:rounded-2xl">
             <div
               ref={backgroundSliderRef}
@@ -286,7 +296,7 @@ function KnowMoreSection() {
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/25 via-transparent to-transparent" />
           </div>
 
-          <div className="relative z-10 flex h-full items-end p-4 sm:p-5 lg:items-stretch lg:p-6 lg:pr-0">
+          <div className="relative z-10 flex h-full min-h-[min(70vh,560px)] items-end p-4 sm:p-5 lg:min-h-0 lg:items-stretch lg:p-6 lg:pr-0">
             <div className="relative flex h-auto w-full flex-col justify-between gap-8 rounded-xl bg-white px-7 py-8 shadow-2xl transition-all duration-700 sm:px-8 sm:py-10 lg:h-full lg:w-[58%] lg:gap-10 lg:rounded-2xl lg:px-12 lg:py-12 xl:w-[54%] xl:px-14 xl:py-14">
               <div className="flex shrink-0 items-center gap-3">
                 <Image
@@ -374,7 +384,9 @@ export default function Sustainability() {
         gapClass="gap-4 lg:gap-5"
         background={{
           type: "image",
-          src: "/sustainability/sustainbg.png",
+          src: "/sustainability/sustainbg.webp",
+          priority: true,
+          quality: 80,
           overlayClassName: "bg-black/75",
         }}
       >
@@ -398,13 +410,13 @@ export default function Sustainability() {
           </SlideIn>
 
           <FadeIn scrollTrigger duration={0.7} className="mt-5 lg:mt-7">
-            <h2 className="text-center text-[28px] font-medium leading-tight tracking-[-1px] text-[#212225] sm:text-[36px] lg:text-[52px] lg:leading-[60px] lg:tracking-[-1.4px]">
+            <h2 className="text-center text-3xl font-medium leading-tight tracking-[-1px] text-[#212225] sm:text-[36px] lg:text-[52px] lg:leading-[60px] lg:tracking-[-1.4px]">
               Our Sustainability Approach
             </h2>
           </FadeIn>
 
           <FadeIn scrollTrigger duration={0.7} delay={0.1} className="mt-5 max-w-4xl lg:mt-7">
-            <p className="text-center text-[15px] font-normal leading-7 text-[#212225] sm:text-base lg:text-lg lg:leading-8">
+            <p className="text-center text-[15px] font-normal  text-[#212225] sm:text-base lg:text-lg lg:leading-8">
               Sustainability is embedded in Union Copper Rod&apos;s management
               systems, operations, and decisionmaking. Guided by internationally
               recognized principles and continuous improvement, our approach spans
@@ -415,14 +427,17 @@ export default function Sustainability() {
           </FadeIn>
 
           <FadeIn scrollTrigger duration={0.7} delay={0.15} className="mt-8 lg:mt-10">
-            <p className="text-center text-xs font-medium uppercase tracking-[0.12em] text-primary sm:text-xs lg:text-sm">
+            <p className="text-center text-base font-medium uppercase tracking-[0.12em] text-primary sm:text-xs lg:text-sm">
               Aligned with leading international standards &amp; frameworks
             </p>
           </FadeIn>
 
           <SequentialSlideIn
-            className="mt-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:mt-12 lg:grid-cols-5 lg:gap-4 xl:gap-5"
+            className="mt-8 grid w-full grid-cols-2 gap-4 sm:grid-cols-2 sm:gap-5 lg:mt-12 lg:grid-cols-5 lg:gap-4 xl:gap-5"
             itemClassName="min-w-0 h-full"
+            getItemClassName={(index) =>
+              index === SDG_GOALS.length - 1 ? "col-span-2 lg:col-span-1" : undefined
+            }
             start="top 85%"
             end="bottom 70%"
             stagger={0.12}
@@ -439,10 +454,10 @@ export default function Sustainability() {
                 </span>
 
                 <div className="mt-6 flex flex-1 flex-col items-center lg:mt-8">
-                  <span className="text-[48px] font-bold leading-none tracking-[-0.06em] text-white/45 sm:text-[48px] lg:text-[36px]">
+                  <span className="text-[64px] font-bold leading-none tracking-[-0.06em] text-white/45 sm:text-[64px] lg:text-[48px]">
                     {goal.number}
                   </span>
-                  <h3 className="mt-3 text-center text-base font-bold uppercase leading-[1.15] tracking-[-0.04em] text-white sm:text-base lg:mt-4 lg:text-[24px] lg:leading-[1.2]">
+                  <h3 className="mt-3 text-center text-xl font-bold uppercase leading-[1.15] tracking-[-0.04em] text-white sm:text-xl lg:mt-4 lg:text-[28px] lg:leading-[1.2]">
                     {goal.titleLines.map((line) => (
                       <span key={line} className="block">
                         {line}
@@ -455,9 +470,9 @@ export default function Sustainability() {
                   <Image
                     src={goal.icon}
                     alt=""
-                    width={153}
-                    height={88}
-                    className="h-14 w-auto object-contain sm:h-16 lg:h-[4.5rem]"
+                    width={200}
+                    height={120}
+                    className="h-20 w-auto object-contain sm:h-24 lg:h-[6.5rem]"
                   />
                 </div>
               </div>
@@ -471,8 +486,8 @@ export default function Sustainability() {
         <div className="mx-auto w-full max-w-[1600px] px-2 lg:px-10">
           <div className="rounded-[28px] bg-white px-4 py-8 sm:px-6 sm:py-10 lg:rounded-[32px] lg:px-8 lg:py-12">
             <SequentialSlideIn
-              className="grid grid-cols-2 items-end justify-items-center gap-6 sm:grid-cols-3 sm:gap-8 lg:grid-cols-5 lg:gap-6 xl:gap-10"
-              itemClassName="flex w-full max-w-[220px] flex-col items-center"
+              className="grid grid-cols-2 items-start justify-items-center gap-6 sm:grid-cols-3 sm:gap-8 lg:grid-cols-5 lg:gap-6 xl:gap-10"
+              itemClassName="flex h-full w-full max-w-[220px] flex-col items-center"
               start="top 90%"
               end="bottom 75%"
               stagger={0.12}
@@ -480,15 +495,15 @@ export default function Sustainability() {
               {CERTIFICATIONS.map((cert) => (
                 <div
                   key={cert.src}
-                  className="flex w-full flex-col items-center text-center"
+                  className="flex h-full w-full flex-col items-center text-center"
                 >
-                  <div className="relative aspect-[262/329] w-full max-w-[180px] sm:max-w-[200px] lg:max-w-[220px]">
+                  <div className="relative aspect-[262/329] w-full max-w-[180px] shrink-0 sm:max-w-[200px] lg:max-w-[220px]">
                     <Image
                       src={cert.src}
                       alt={cert.alt}
                       fill
                       sizes="(max-width: 1024px) 40vw, 220px"
-                      className="object-contain"
+                      className="object-contain object-top"
                     />
                   </div>
                   <p className="mt-3 text-sm font-normal leading-snug text-[#212225] sm:text-[15px] lg:mt-4 lg:text-base">
@@ -512,7 +527,7 @@ export default function Sustainability() {
           </SlideIn>
 
           <FadeIn scrollTrigger duration={0.7} className="mt-5 lg:mt-7">
-            <h2 className="text-center text-[28px] font-medium leading-tight tracking-[-1px] text-[#212225] sm:text-[36px] lg:text-[52px] lg:leading-[60px] lg:tracking-[-1.4px]">
+          <h2 className="text-center text-3xl font-medium leading-tight tracking-[-1px] text-[#212225] sm:text-[36px] lg:text-[52px] lg:leading-[60px] lg:tracking-[-1.4px]">
               Our Sustainability Impact
             </h2>
           </FadeIn>
@@ -594,7 +609,7 @@ export default function Sustainability() {
                 <span className="inline-block w-fit rounded-full border border-[#D0D0D0] bg-white/80 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-[#4A4A4A] lg:text-xs">
                   Natural Gas
                 </span>
-                <p className="mt-4 text-3xl font-semibold tracking-tight text-[#3F7E44] lg:text-[40px] lg:leading-none">
+                <p className="mt-4 text-2xl font-semibold tracking-tight text-[#3F7E44] lg:text-[40px] lg:leading-none">
                   9% reduced
                 </p>
                 <p className="mt-3 max-w-xs text-sm leading-relaxed text-[#4A4A4A] lg:text-base">
@@ -619,7 +634,7 @@ export default function Sustainability() {
                 <span className="inline-block w-fit rounded-full border border-[#D0D0D0] bg-white/80 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-[#4A4A4A] lg:text-xs">
                   GHG Reduced
                 </span>
-                <p className="mt-4 text-3xl font-semibold tracking-tight text-[#3F7E44] lg:text-[40px] lg:leading-none">
+                <p className="mt-4 text-2xl font-semibold tracking-tight text-[#3F7E44] lg:text-[40px] lg:leading-none">
                   800+ tons
                 </p>
                 <p className="mt-3 max-w-sm text-sm leading-relaxed text-[#4A4A4A] lg:text-base">
@@ -703,7 +718,7 @@ export default function Sustainability() {
             end="bottom 70%"
             stagger={0.12}
           >
-            <div className="relative h-full min-h-[48vh] overflow-hidden rounded-xl group transition-all duration-400 lg:min-h-0">
+            <div className="mx-2 lg:mx-0 relative h-full min-h-[48vh] overflow-hidden rounded-xl group transition-all duration-400 lg:min-h-0">
               <VideoPlayer
                 src="/wecarethenature.mp4"
                 width={600}

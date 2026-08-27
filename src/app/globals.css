@@ -143,7 +143,9 @@ body {
   color-scheme: light !important;
   /* ✅ Ensure body is scrollable too */
   min-height: 100vh;
-  overflow-x: clip;
+  /* Use hidden (not clip) — overflow-x:clip can force overflow-y:auto and
+     break sticky/pin scroll chaining on mobile browsers */
+  overflow-x: hidden;
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
 }

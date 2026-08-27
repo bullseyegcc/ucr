@@ -144,6 +144,7 @@ export default function OurValues() {
                 src="/ourvalues/morethanjustcooper.mp4"
                 className="absolute inset-0 h-full w-full object-cover"
               />
+              <div className="pointer-events-none absolute inset-0 bg-black/10" />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/70 via-white/20 to-transparent" />
               <h2 className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 mt-auto w-full pb-2 text-center text-[30px] font-medium capitalize tracking-[-1.4px] text-[#A8A8AE] lg:pb-3 lg:text-[34px]">
                 More Than Copper
@@ -191,13 +192,13 @@ export default function OurValues() {
       </div>
 
       {/* people */}
-      <section className="bg-white pt-12 lg:pt-20 pb-0">
-        <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-4 px-6 text-center lg:max-w-none lg:gap-5 lg:px-10">
+      <section className="overflow-x-visible bg-white pt-16 pb-0 lg:overflow-x-hidden lg:pt-20">
+        <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-5 px-6 pt-6 pb-2 text-center lg:max-w-none lg:gap-5 lg:px-10 lg:py-0">
           <SlideIn direction="bottom" duration={0.8} scrollTrigger={true}>
             <Badge title="people" />
           </SlideIn>
           <FadeIn
-            className="text-2xl leading-tight text-[#5F5F66] lg:text-5xl lg:leading-snug lg:whitespace-nowrap"
+            className="text-[1.85rem] leading-[1.1] text-[#5F5F66] lg:text-5xl lg:leading-snug lg:whitespace-nowrap"
             duration={0.8}
           >
             <h1>Treating all employees with respect and dignity</h1>
@@ -207,14 +208,14 @@ export default function OurValues() {
         <FadeIn
           duration={0.8}
           scrollTrigger={true}
-          className="mt-8 w-full lg:mt-12"
+          className="mt-8 w-full overflow-visible lg:mt-12"
         >
           <Image
             src="/our-values/peoplesection.svg"
             alt="UCR team members"
             width={1440}
             height={545}
-            className="block h-auto w-full"
+            className="relative left-1/2 block h-[min(52vh,26rem)] w-[155%] max-w-none -translate-x-1/2 object-cover object-center lg:left-0 lg:h-auto lg:w-full lg:max-w-full lg:translate-x-0 lg:object-contain"
           />
         </FadeIn>
       </section>

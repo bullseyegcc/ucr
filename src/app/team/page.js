@@ -18,43 +18,36 @@ export default function Team() {
                 title={
                     <>
                         Meet the people behind the power of
-                        <br />
                         copper
                     </>
                 }
-                titleClassName="!normal-case px-[5vw] w-full max-w-[92vw] sm:max-w-[78vw] lg:max-w-[68vw] !text-[clamp(1.75rem,calc(1.1rem+2.8vw),3.25rem)] !leading-[1.15] !tracking-[-0.04em] sm:!leading-[1.12]"
+                titleClassName="!normal-case px-[clamp(1rem,4vw,1.25rem)] w-full max-w-[clamp(20rem,80vw,56rem)] mt-0 !text-[clamp(2rem,calc(1.15rem+3.5vw),4rem)] !leading-[clamp(2.5rem,calc(1.4rem+4vw),5rem)] !tracking-[clamp(-0.08rem,-0.2vw,-0.16rem)]"
                 titleDirectFade
                 titleInH1={false}
-                className="flex flex-col items-center justify-start pt-[clamp(5.5rem,14vh,9rem)] pb-[clamp(11rem,38vh,22rem)]"
-                minHeightClass="h-[clamp(34rem,100svh,56rem)]"
-                maxHeightClass="max-h-none"
-                gapClass="gap-[clamp(0.75rem,1.8vh,1.25rem)]"
+                className="flex flex-col items-center justify-start text-center pt-[clamp(5rem,14vh,6.5rem)] pb-[clamp(10rem,40%,14rem)] lg:justify-center lg:pt-0 lg:pb-[clamp(9rem,28vh,16rem)]"
+                minHeightClass="h-[min(65vh,540px)] max-h-[65vh] lg:h-auto lg:min-h-[80vh] lg:max-h-none"
+                maxHeightClass="max-h-[65vh] lg:max-h-[900px]"
+                gapClass="gap-2"
                 contentClassName="relative z-20"
             >
-                <Image
-                    src="/shared/whitegradient.png"
-                    alt=""
-                    width={1200}
-                    height={900}
-                    aria-hidden
-                    className="pointer-events-none absolute bottom-0 left-1/2 hidden w-full -translate-x-1/2 rotate-180 object-cover opacity-90 lg:block h-[clamp(14rem,42vh,26rem)]"
-                />
+              
                 <Image
                     src="/shared/vector.png"
                     alt=""
                     width={1200}
                     height={900}
                     aria-hidden
-                    className="pointer-events-none absolute bottom-[clamp(2rem,8vh,5rem)] left-1/2 w-[clamp(10rem,32vw,22rem)] -translate-x-1/2 rotate-180 object-contain opacity-60"
+                    className="pointer-events-none absolute bottom-[clamp(1.5rem,6vh,3.5rem)] left-1/2 w-[clamp(9rem,28vw,20rem)] -translate-x-1/2 rotate-180 object-contain opacity-60"
                 />
                 <Image
-                    src="/team/teamhero.png"
+                    src="/team/bg.webp"
                     alt="Team Image"
                     width={1920}
                     height={1080}
                     priority
-                    sizes="(max-width: 768px) 100vw, 90vw"
-                    className="pointer-events-none absolute bottom-0 left-1/2 z-10 h-auto w-[min(100%,92vw)] max-h-[clamp(12rem,42vh,24rem)] -translate-x-1/2 object-contain object-bottom select-none"
+                    sizes="100vw"
+                    quality={90}
+                    className="pointer-events-none absolute bottom-0 left-0 z-10 h-[46%] w-full object-cover object-[center_30%] select-none lg:left-1/2 lg:h-auto lg:w-[clamp(28rem,140vw,120rem)] lg:max-h-[clamp(16rem,70vh,48rem)] lg:-translate-x-1/2 lg:-bottom-[clamp(5rem,22vh,11rem)] lg:object-contain lg:object-bottom"
                 />
             </Hero>
 

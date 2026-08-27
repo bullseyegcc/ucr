@@ -13,10 +13,13 @@ import {
     useTransform,
 } from 'motion/react';
 
-/** Distance over which the bar eases from glass to solid. */
+/** Distance over which the bar eases from glass to solid (non-homepage). */
 const FADE_DISTANCE_PX = 280;
-/** Homepage: About panel starts driving the solid navbar in this final slide range. */
-const ABOUT_NAV_FADE_START = 0.82;
+/**
+ * Homepage: start fading to solid when About's top is this close to the
+ * viewport top (slide progress 0–1). Completes at 1 = About fully docked.
+ */
+const ABOUT_NAV_FADE_START = 0.86;
 
 const SPRING = {
     stiffness: 48,
@@ -37,7 +40,7 @@ function scrollToProgress(y) {
 
 /** Map About slide progress → navbar solid as About's top reaches the bar. */
 function aboutSlideToNavProgress(aboutProgress) {
-    if (window.__heroAboutPlaced) return 1;
+    if (typeof window !== 'undefined' && window.__heroAboutPlaced) return 1;
     const p = Math.max(0, Math.min(1, aboutProgress ?? 0));
     if (p <= ABOUT_NAV_FADE_START) return 0;
     return (p - ABOUT_NAV_FADE_START) / (1 - ABOUT_NAV_FADE_START);
@@ -79,15 +82,27 @@ export const Navbar = () => {
     }, [solidByDefault]);
 
     const syncProgress = useCallback((instant = false) => {
-        let next = solidByDefault ? 1 : scrollToProgress(getScrollY());
-        // Homepage hero→About uses locked scroll (scrollY stays 0), so drive
-        // the solid state from About panel progress as it reaches the navbar.
-        if (!solidByDefault && pathname === '/') {
-            next = Math.max(
-                next,
-                aboutSlideToNavProgress(window.__heroAboutProgress ?? 0),
-            );
+        let next = solidByDefault ? 1 : 0;
+
+        if (!solidByDefault) {
+            if (pathname === '/') {
+                // Hero→About is GSAP-pinned: window scrollY advances through the
+                // pin distance while the hero is still on screen. Using scrollY
+                // here would turn the bar solid too early. Drive only from About
+                // slide progress; stay solid once About is docked at the top.
+                const aboutP = window.__heroAboutProgress ?? 0;
+                const aboutPlaced = window.__heroAboutPlaced === true;
+                if (aboutPlaced || aboutP > 0) {
+                    next = aboutSlideToNavProgress(aboutP);
+                } else {
+                    // Past the snipp block (or cold load at top): normal scroll fade.
+                    next = scrollToProgress(getScrollY());
+                }
+            } else {
+                next = scrollToProgress(getScrollY());
+            }
         }
+
         if (instant || reducedMotion) {
             progress.jump(next);
         } else {
@@ -126,9 +141,19 @@ export const Navbar = () => {
         attachLenis();
         window.addEventListener('lenisReady', attachLenis);
 
-        // Homepage About slide does not move window scroll — listen directly.
-        const onHeroAboutProgress = () => syncProgress();
-        const onHeroAboutPlaced = () => syncProgress(true);
+        // Homepage About slide — listen directly (pin progress ≠ reliable scrollY).
+        const onHeroAboutProgress = (e) => {
+            if (typeof e?.detail?.progress === 'number') {
+                window.__heroAboutProgress = e.detail.progress;
+            }
+            syncProgress();
+        };
+        const onHeroAboutPlaced = (e) => {
+            if (typeof e?.detail?.placed === 'boolean') {
+                window.__heroAboutPlaced = e.detail.placed;
+            }
+            syncProgress(true);
+        };
         window.addEventListener('heroAboutProgress', onHeroAboutProgress);
         window.addEventListener('heroAboutPlaced', onHeroAboutPlaced);
 
@@ -213,13 +238,21 @@ export const Navbar = () => {
             >
                 {/* Menu Button - Dynamic color based on scroll state */}
                 <motion.div
-                    className="group inline-block cursor-pointer p-2 transition-all duration-300 ease-out hover:!bg-black"
+                    className={`group inline-block cursor-pointer p-2 transition-all duration-300 ease-out ${
+                        isScrolled
+                            ? 'hover:!bg-primary'
+                            : 'hover:!bg-white'
+                    }`}
                     style={{ backgroundColor: menuBg }}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
                     <motion.span
                         style={{ color: fgColor }}
-                        className="block transition-colors duration-300 ease-out group-hover:!text-white"
+                        className={`block transition-colors duration-300 ease-out ${
+                            isScrolled
+                                ? 'group-hover:!text-white'
+                                : 'group-hover:!text-primary'
+                        }`}
                     >
                         <Menu size={24} className="sm:h-7 sm:w-7" />
                     </motion.span>
@@ -256,13 +289,21 @@ export const Navbar = () => {
                 {/* Contact Button - Hidden on mobile, dynamic color */}
                 <Link href="/contactus" className="group hidden lg:block">
                     <motion.button
-                        className="flex w-36 items-center justify-between gap-2 rounded-full border px-3 py-2 text-sm transition-all duration-300 ease-out lg:w-40 lg:text-base hover:bg-black hover:!border-black hover:!text-white"
+                        className={`flex w-36 items-center justify-between gap-2 rounded-full border px-3 py-2 text-sm transition-all duration-300 ease-out lg:w-40 lg:text-base ${
+                            isScrolled
+                                ? 'hover:!bg-primary hover:!border-primary hover:!text-white'
+                                : 'hover:!bg-white hover:!border-transparent hover:!text-primary'
+                        }`}
                         style={{ color: fgColor, borderColor }}
                     >
                         Contact Us
                         <motion.span
                             style={{ color: fgColor }}
-                            className="block transition-transform duration-300 ease-out group-hover:translate-x-1 group-hover:!text-white"
+                            className={`block transition-transform duration-300 ease-out group-hover:translate-x-1 ${
+                                isScrolled
+                                    ? 'group-hover:!text-white'
+                                    : 'group-hover:!text-primary'
+                            }`}
                         >
                             <ArrowRight size={18} />
                         </motion.span>

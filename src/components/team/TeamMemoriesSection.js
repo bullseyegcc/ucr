@@ -17,7 +17,6 @@ export default function TeamMemoriesSection() {
   const [isMobile, setIsMobile] = useState(false);
   const headerRef = useRef(null);
   const memoriesRef = useRef(null);
-  const centerTextRef = useRef(null);
 
   // Initial page load animations - run only once
   useEffect(() => {
@@ -50,17 +49,6 @@ export default function TeamMemoriesSection() {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  // Smooth transition for center card text when active image changes
-  useEffect(() => {
-    if (centerTextRef.current) {
-      gsap.fromTo(
-        centerTextRef.current,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
-      );
-    }
-  }, [activeIdx]);
 
   // Helper to get the correct indices for left, center, right, far left, far right (circular)
   const getIndices = () => {
@@ -103,7 +91,7 @@ export default function TeamMemoriesSection() {
                   className="flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden border border-orange-200 transition-all duration-500"
                   style={{
                     width: isMobile ? "40vw" : "18vw",
-                    aspectRatio: isMobile ? "3/4" : "1/1.2",
+                    aspectRatio: isMobile ? "3/3.8" : "1/1.1",
                     height: "auto",
                     filter: "blur(6px)",
                     opacity: 0.7,
@@ -124,15 +112,34 @@ export default function TeamMemoriesSection() {
                 {[leftIdx, centerIdx, rightIdx].map((idx, i) => (
                   <div
                     key={`${idx}-${i}`}
-                    className={`flex flex-col items-center bg-white rounded-lg shadow-lg border ${
+                    className={`relative bg-white rounded-lg shadow-lg border overflow-hidden ${
                       i === 1 ? "border-orange-400" : "border-orange-200"
                     } transition-all duration-500 ease-out`}
                     style={{
                       flex: isMobile ? "0 0 auto" : "1 1 0",
-                      maxWidth: isMobile ? (i === 1 ? "72vw" : "60vw") : "28vw",
-                      minWidth: isMobile ? (i === 1 ? "72vw" : "60vw") : "18vw",
+                      maxWidth: isMobile
+                        ? i === 1
+                          ? "76vw"
+                          : "64vw"
+                        : i === 1
+                          ? "32vw"
+                          : "24vw",
+                      minWidth: isMobile
+                        ? i === 1
+                          ? "76vw"
+                          : "64vw"
+                        : i === 1
+                          ? "32vw"
+                          : "21vw",
+                      aspectRatio:
+                        i === 1
+                          ? isMobile
+                            ? "3/3.3"
+                            : "1/1.05"
+                          : isMobile
+                            ? "3/3.8"
+                            : "1/1.1",
                       height: "auto",
-                      overflow: "visible",
                     }}
                     onMouseEnter={(e) =>
                       gsap.to(e.currentTarget, {
@@ -150,60 +157,13 @@ export default function TeamMemoriesSection() {
                     }
                     onClick={() => i !== 1 && setActiveIdx(idx)}
                   >
-                    <div
-                      className="w-full relative overflow-hidden rounded-t-lg transition-all duration-500"
-                      style={{ aspectRatio: "1/1.2", height: "auto" }}
-                    >
-                      <Image
-                        src={galleryItems[idx].image}
-                        alt={galleryItems[idx].caption}
-                        fill
-                        className="object-cover transition-opacity duration-500"
-                        sizes="(max-width: 1200px) 33vw, 400px"
-                        style={{ zIndex: 1 }}
-                      />
-                    </div>
-                    {i === 1 && (
-                      <div
-                        ref={centerTextRef}
-                        className="w-full flex flex-col items-center justify-center text-center bg-white"
-                        style={{
-                          padding: isMobile
-                            ? "5vw 4vw 6vw 4vw"
-                            : "1.5vw 1vw 2vw 1vw",
-                          borderRadius: "0 0 1vw 1vw",
-                          borderTop: "none",
-                          background: "#fff",
-                          position: "relative",
-                          zIndex: 10,
-                        }}
-                      >
-                        <div
-                          style={{
-                            color: "#ff6a00",
-                            fontSize: isMobile ? "3vw" : "0.9vw",
-                            fontWeight: 600,
-                            letterSpacing: "0.1em",
-                            marginBottom: "0.5vw",
-                          }}
-                        >
-                          {galleryItems[idx].year}
-                        </div>
-                        <div
-                          style={{
-                            color: "#222",
-                            fontSize: isMobile ? "5vw" : "1.8vw",
-                            fontWeight: 500,
-                            fontFamily: "sans-serif",
-                            letterSpacing: "-0.01em",
-                            textAlign: "center",
-                            lineHeight: "1.2",
-                          }}
-                        >
-                          {galleryItems[idx].caption}
-                        </div>
-                      </div>
-                    )}
+                    <Image
+                      src={galleryItems[idx].image}
+                      alt={galleryItems[idx].caption}
+                      fill
+                      className="object-cover transition-opacity duration-500"
+                      sizes="(max-width: 1200px) 33vw, 400px"
+                    />
                   </div>
                 ))}
                 {/* Far right blurred card - only 20% visible */}
@@ -211,7 +171,7 @@ export default function TeamMemoriesSection() {
                   className="flex-shrink-0 bg-white rounded-lg shadow-lg overflow-hidden border border-orange-200 transition-all duration-500"
                   style={{
                     width: isMobile ? "40vw" : "18vw",
-                    aspectRatio: isMobile ? "3/4" : "1/1.2",
+                    aspectRatio: isMobile ? "3/3.8" : "1/1.1",
                     height: "auto",
                     filter: "blur(6px)",
                     opacity: 0.7,

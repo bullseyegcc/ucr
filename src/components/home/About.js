@@ -7,8 +7,12 @@ import { ArrowRight } from 'lucide-react';
 import badgeIcon from '../../../public/shared/badge.png';
 import gsap from 'gsap';
 
-const HEADING_TEXT =
-  'Shaping the Future With Copper From the UAE to global markets, we deliver premium copper solutions engineered for performance, reliability, and sustainable progress.';
+const HEADING_ORANGE =
+  'Our UAE factory combines advanced technology with global';
+const HEADING_GREY =
+  'expertise to produce high-quality copper products that meet international standards.';
+const HEADING_TEXT = `${HEADING_ORANGE} ${HEADING_GREY}`;
+const ORANGE_WORD_COUNT = HEADING_ORANGE.trim().split(/\s+/).length;
 
 function splitIntoWordSpans(element) {
   const wordSpans = [];
@@ -24,7 +28,6 @@ function splitIntoWordSpans(element) {
             const span = document.createElement('span');
             span.textContent = word;
             span.className = 'word-span';
-            span.style.color = '#C8C8C8';
             fragment.appendChild(span);
             wordSpans.push(span);
           } else if (word) {
@@ -56,11 +59,16 @@ export default function About({ lockProgressRef = null }) {
       const wordSpans = splitIntoWordSpans(heading);
       if (!wordSpans.length) return;
 
+      wordSpans.forEach((span, i) => {
+        span.style.color = i < ORANGE_WORD_COUNT ? '#FA6E43' : '#C8C8C8';
+      });
+
       const targetColor = '#FA6E43';
       colorTl = gsap.timeline({ paused: true });
 
       wordSpans.forEach((span, i) => {
-        colorTl.to(span, { color: targetColor, duration: 1, ease: 'none' }, i);
+        if (i < ORANGE_WORD_COUNT) return;
+        colorTl.to(span, { color: targetColor, duration: 1, ease: 'none' }, i - ORANGE_WORD_COUNT);
       });
 
       lockProgressRef.current = (progress) => colorTl.progress(progress);
@@ -74,52 +82,44 @@ export default function About({ lockProgressRef = null }) {
   }, [lockProgressRef]);
 
   return (
-    <div className="w-full min-h-0 shrink overflow-hidden pt-[4.5rem] sm:pt-[5rem] lg:pt-[5.5rem] pb-[1.25rem] lg:pb-[1.75rem]">
-      <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
-        <div className="relative w-full">
-          <div className="hidden lg:block absolute right-0 top-[4.5rem] lg:top-[5rem] w-[38%] max-w-[42rem] pointer-events-none z-0">
-            <Image
-              src="/home/aboutside.png"
-              alt="Copper coil"
-              width={900}
-              height={800}
-              priority
-              className="w-full h-auto object-contain object-right max-h-[min(52vh,34rem)] xl:max-h-[min(56vh,36rem)]"
-            />
-          </div>
-
-          <div className="relative z-10 flex flex-col gap-[0.625rem] sm:gap-[0.75rem] lg:gap-[1rem] w-full lg:max-w-[58%] xl:max-w-[62%]">
-            <div className="flex items-center gap-[0.625rem]">
-              <Image src={badgeIcon} alt="" width={20} height={20} className="object-contain shrink-0" />
-              <span className="text-[#9A9A9A] uppercase text-[0.6875rem] lg:text-[0.75rem] tracking-[0.14em] font-medium">
+    <div className="relative w-full shrink-0 overflow-visible bg-white pt-0 sm:pt-1 lg:pt-[5.5rem] pb-6 sm:pb-8 lg:pb-0">
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-3 lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
+        <div className="relative w-full lg:max-w-[58%] xl:max-w-[62%]">
+          <div className="flex flex-col items-center text-center gap-[0.625rem] sm:gap-[0.75rem] lg:items-start lg:text-left lg:gap-[1rem]">
+            <div className="flex items-center justify-center gap-[0.625rem] lg:justify-start">
+              <Image src={badgeIcon} alt="" width={20} height={20} className="shrink-0 object-contain" />
+              <span className="font-medium uppercase tracking-[0.14em] text-primary text-[0.6875rem] lg:text-[0.75rem]">
                 About Us
               </span>
             </div>
 
-            <div className="lg:hidden flex justify-center">
-              <Image
-                src="/home/aboutside.png"
-                alt="Copper coil"
-                width={900}
-                height={800}
-                priority
-                className="w-full max-w-[18rem] sm:max-w-[20rem] h-auto object-contain max-h-[28vh]"
-              />
-            </div>
-
             <h1
               ref={headingRef}
-              className="font-primary font-medium w-full max-w-[40rem] sm:max-w-[42rem] lg:max-w-[46rem] xl:max-w-[50rem] 2xl:max-w-[54rem] text-[clamp(1.75rem,1.2rem+1.55vw,3.375rem)] leading-[1.28] tracking-[-0.03em]"
+              className="font-primary font-medium w-full max-w-none text-[1.75rem] leading-[1.32] tracking-[-0.03em] text-primary lg:max-w-[46rem] lg:text-[clamp(1.75rem,1.05rem+1.4vw,3.375rem)] lg:leading-[1.28] xl:max-w-[50rem] 2xl:max-w-[54rem]"
             >
               {HEADING_TEXT}
             </h1>
 
-            <Link href="/aboutus">
-              <button className="bg-primary text-[0.875rem] lg:text-[1rem] min-w-[8.75rem] lg:min-w-[11.25rem] h-[2.5rem] lg:h-[3rem] px-[1.125rem] lg:px-[1.5rem] text-white inline-flex justify-between items-center gap-[0.625rem] rounded-full border border-white/30">
-                <span className="font-primary font-normal tracking-[-0.025em]">Know more</span>
-                <ArrowRight size={18} color="white" className="shrink-0" />
-              </button>
-            </Link>
+            <div className="relative z-10 flex w-full items-center justify-center min-h-[3.75rem] sm:min-h-[4.5rem] lg:min-h-0 lg:justify-start">
+              <Link href="/aboutus" className="relative z-10">
+                <button className="inline-flex h-[2.5rem] min-w-[8.75rem] items-center justify-between gap-[0.625rem] rounded-full border border-white/30 bg-primary px-[1.125rem] text-[0.875rem] text-white lg:h-[3rem] lg:min-w-[11.25rem] lg:px-[1.5rem] lg:text-[1rem]">
+                  <span className="font-primary font-normal tracking-[-0.025em]">Know more</span>
+                  <ArrowRight size={18} color="white" className="shrink-0" />
+                </button>
+              </Link>
+            </div>
+          </div>
+
+          {/* Mobile / tablet: sit beside Know more (circled spot). Desktop: right of copy. */}
+          <div className="pointer-events-none absolute right-[-1.25rem] bottom-[-0.25rem] z-0 w-[48%] max-w-[11.5rem] sm:right-[-0.5rem] sm:bottom-[-0.5rem] sm:max-w-[14rem] lg:right-[-42%] lg:top-[10%] lg:bottom-auto lg:w-[78%] lg:max-w-[28rem] xl:right-[-48%] xl:max-w-[34rem]">
+            <Image
+              src="/home/aboutside.png"
+              alt=""
+              width={900}
+              height={800}
+              priority
+              className="h-auto w-full object-contain object-right max-h-[9.5rem] sm:max-h-[12rem] lg:max-h-[min(48vh,30rem)] xl:max-h-[min(52vh,34rem)]"
+            />
           </div>
         </div>
       </div>

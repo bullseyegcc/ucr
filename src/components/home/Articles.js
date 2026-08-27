@@ -191,9 +191,9 @@ export default function Articles({ posts }) {
 
           <Link
             href="/blogs"
-            className="border my-8 border-primary w-[80%] px-5 py-3 text-primary lg:hidden flex justify-center items-center gap-3 rounded-full text-lg"
+            className="border my-8 border-primary w-fit self-center px-6 py-2.5 text-primary lg:hidden flex justify-center items-center gap-2 rounded-full text-base"
           >
-            Read more <ArrowRight size={22} className="text-primary" />
+            Read more <ArrowRight size={18} className="text-primary" />
           </Link>
         </div>
       </div>

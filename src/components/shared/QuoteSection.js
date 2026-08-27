@@ -24,13 +24,10 @@ export default function QuoteSection() {
             blurStrength={0.5}
             containerClassName="w-full text-[24px] leading-[48px] italic tracking-[0px] text-center align-middle lg:text-[32px] lg:leading-[48px]"
           >
-            At UCR, we are grounded in vision, trust, and a commitment to
-            excellence. We believe success is measured not just by financial
-            gains but by the positive impact we have on our communities and
-            future generations. We have broadened our investments across
-            various sectors with a clear strategy. As global markets change,
-            we remain focused on responsible growth, continuous innovation, and
-            delivering lasting value.
+            Through our recycling initiatives and circular economy model, we
+            reintegrate valuable materials back into the supply chain, reducing
+            waste and supporting the UAE&apos;s broader sustainability
+            objectives.
           </ScrollReveal>
           <Image
             src="/shared/quote.png"
@@ -50,8 +47,8 @@ export default function QuoteSection() {
           height={0}
           className="w-24 lg:w-[150px]"
         />
-        <h1 className="text-2xl lg:text-4xl font-medium">Diam O'Sullivan</h1>
-        <p className="text-base lg:text-2xl font-light">Honorable Chairman</p>
+        <h1 className="text-2xl lg:text-4xl font-medium">Mohammad Salman</h1>
+        <p className="text-base lg:text-2xl font-light">General Manager</p>
       </div>
     </div>
   );
