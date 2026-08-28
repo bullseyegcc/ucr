@@ -252,7 +252,7 @@ export default function contactus() {
                   href="tel:+971255033240"
                   className="text-[#FA6E43] text-lg lg:text-xl font-semibold leading-7 lg:leading-8 hover:text-orange-600 transition-colors duration-300 block"
                 >
-                  +971 2 550 3240
+                  +971 2 550 3241
                 </a>
               </div>
             </div>
