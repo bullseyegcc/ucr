@@ -178,8 +178,8 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
               imageAlt="Employees"
               imageWidth={180}
               imageHeight={80}
-              descriptionClassName="max-w-[14rem] lg:max-w-[16rem]"
-              imageClassName="bottom-0 -right-28 w-60 rounded-b-2xl lg:right-0 lg:w-86"
+              descriptionClassName="max-w-[12rem] lg:max-w-[13rem]"
+              imageClassName="bottom-0 -right-10 w-60 rounded-b-2xl lg:-right-8 lg:w-74"
             />
 
             <ExpertiseCard
@@ -195,7 +195,7 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
               imageHeight={200}
               contentClassName="pb-[42%]"
               descriptionClassName="w-full max-w-sm pr-0 lg:pr-4"
-              imageClassName="-bottom-14 left-0 right-50 h-[120px] w-full rounded-b-2xl object-cover object-bottom lg:h-[250px]"
+              imageClassName="-bottom-14 left-0 right-50 h-[170px] w-full rounded-b-2xl object-cover object-bottom lg:h-[250px]"
             />
           </div>
         </div>

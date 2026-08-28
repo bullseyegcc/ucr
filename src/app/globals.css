@@ -153,6 +153,17 @@ body::-webkit-scrollbar {
   display: none !important;
 }
 
+/* Mobile only: keep horizontal clip on html so body does not become a
+   nested overflow-y scrollport (breaks Lenis window scroll to footer end). */
+@media (max-width: 1023px) {
+  html {
+    overflow-x: hidden;
+  }
+  body {
+    overflow-x: visible;
+  }
+}
+
 @layer utilities {
   .font-primary {
     font-family: var(--font-helvetica);

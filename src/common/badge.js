@@ -5,9 +5,9 @@ import Image from 'next/image';
 
 export  function Badge({ title }) {
     return (
-        <div className="flex items-start gap-2 text-white z-0 lg:gap-[0.75rem]">   
+        <div className="flex items-center gap-1.5 text-white z-0 lg:gap-2">   
             <Image src={badge_icon} alt="Badge Icon" width={24} height={24} className='h-4 w-4 shrink-0 object-contain lg:h-[1.5rem] lg:w-[1.5rem]' />
-            <span className='text-primary uppercase text-sm lg:text-[1.125rem] tracking-[0.1em]'>{title}</span>
+            <span className='text-primary uppercase text-sm lg:text-[1.125rem] font-medium tracking-[0.04em]'>{title}</span>
         </div>
     )
 }

@@ -50,11 +50,12 @@ export default function AboutUs() {
   return (
     <div className="">
       <Hero
+        badge="Crafting Sustainable Progress, One Copper Solution at a Time"
         title="Leading the region's copper transformation with cutting edge technology"
         titleClassName="px-6 !text-[2rem] !leading-[2.5rem] tracking-[-0.04em] lg:px-5 lg:w-[80%] lg:mb-8 lg:!text-[4rem] lg:!leading-[5rem] lg:tracking-[-0.15625rem]"
         titleDirectFade
         titleInH1={false}
-        animateBadge={false}
+        badgeSlideClassName="hidden lg:block"
         className="mb-[40%] lg:mb-[30%] flex flex-col items-center justify-center pt-16 pb-[18%] lg:justify-center lg:pt-0 lg:pb-0"
         minHeightClass="min-h-[52vh] lg:min-h-[80vh]"
         gapClass="gap-3 lg:gap-[1.5rem]"

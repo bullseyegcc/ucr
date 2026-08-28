@@ -12,7 +12,7 @@ import SlideIn from "../../animations/SlideIn"
 export default function Team() {
 
     return (
-        <div >
+        <div className="overflow-x-hidden">
             <Hero
                 badge="Our Team "
                 title={
@@ -21,14 +21,15 @@ export default function Team() {
                         copper
                     </>
                 }
-                titleClassName="!normal-case px-[clamp(1rem,4vw,1.25rem)] w-full max-w-[clamp(20rem,80vw,56rem)] mt-0 !text-[clamp(2rem,calc(1.15rem+3.5vw),4rem)] !leading-[clamp(2.5rem,calc(1.4rem+4vw),5rem)] !tracking-[clamp(-0.08rem,-0.2vw,-0.16rem)]"
+                titleClassName="!normal-case px-[clamp(1rem,4vw,1.25rem)] w-full max-w-[clamp(20rem,80vw,56rem)] mt-0 !text-[clamp(1.75rem,calc(1rem+2.8vw),3.25rem)] !leading-[clamp(2.25rem,calc(1.2rem+3.2vw),4rem)] !tracking-[clamp(-0.06rem,-0.15vw,-0.12rem)]"
                 titleDirectFade
                 titleInH1={false}
-                className="flex flex-col items-center justify-start text-center pt-[clamp(5rem,14vh,6.5rem)] pb-[clamp(10rem,40%,14rem)] lg:justify-center lg:pt-0 lg:pb-[clamp(9rem,28vh,16rem)]"
-                minHeightClass="h-[min(65vh,540px)] max-h-[65vh] lg:h-auto lg:min-h-[80vh] lg:max-h-none"
-                maxHeightClass="max-h-[65vh] lg:max-h-[900px]"
+                className="flex flex-col items-center justify-start text-center pt-[clamp(5rem,14vh,6.5rem)] pb-[clamp(6rem,28%,10rem)] lg:justify-center lg:pt-0 lg:pb-[clamp(9rem,28vh,16rem)]"
+                minHeightClass="h-[55vh] lg:h-auto lg:min-h-[100vh] lg:max-h-none"
+                maxHeightClass="max-h-[55vh] lg:max-h-[1200px]"
                 gapClass="gap-2"
                 contentClassName="relative z-20"
+                overflowVisible
             >
               
                 <Image
@@ -47,7 +48,7 @@ export default function Team() {
                     priority
                     sizes="100vw"
                     quality={90}
-                    className="pointer-events-none absolute bottom-0 left-0 z-10 h-[46%] w-full object-cover object-[center_30%] select-none lg:left-1/2 lg:h-auto lg:w-[clamp(28rem,140vw,120rem)] lg:max-h-[clamp(16rem,70vh,48rem)] lg:-translate-x-1/2 lg:-bottom-[clamp(5rem,22vh,11rem)] lg:object-contain lg:object-bottom"
+                    className="pointer-events-none absolute bottom-0 left-0 z-10 h-[46%] w-full object-cover object-[center_30%] select-none lg:inset-x-0 lg:h-[80%] lg:w-full lg:max-h-none lg:translate-x-0 lg:-bottom-[clamp(4rem,10vh,8rem)] lg:object-cover lg:object-top"
                 />
             </Hero>
 
@@ -66,14 +67,22 @@ export default function Team() {
                     {/* our people */}
                     <div className="relative z-10 mx-auto w-full max-w-[1600px] px-5 lg:px-10">
                         {/* Header */}
-                        <div className="flex py-12 flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-28 mb-12 lg:mb-16">
-                            <SlideIn direction="left" duration={0.8} scrollTrigger={true} className="flex-1">
+                        <div className="mb-12 pt-12 lg:mb-16 lg:pt-16">
+                            <SlideIn direction="left" duration={0.8} scrollTrigger={true}>
                                 <Badge title="Core Strength" />
-                                <h1 className="text-4xl lg:text-5xl font-semibold text-black mt-4 lg:mt-6 leading-tight lg:leading-snug">Our people</h1>
                             </SlideIn>
-                            <SlideIn direction="right" duration={0.8} scrollTrigger={true} className="flex-1 lg:w-1/2 text-xs lg:text-sm text-gray-600 lg:pt-12">
-                                <p className="w-full text-xl">Our team represents decades of industrial mastery and modern innovation. Each member contributes deep technical knowledge, precision, and a shared commitment to sustainable growth. </p>
-                            </SlideIn>
+                            <div className="mt-3 flex flex-col gap-6 lg:mt-4 lg:flex-row lg:items-start lg:justify-between lg:gap-28">
+                                <SlideIn direction="left" duration={0.8} scrollTrigger={true} className="shrink-0">
+                                    <h1 className="font-primary font-light text-[2rem] leading-[1.15] tracking-[-0.03em] text-[#212225] lg:text-[3.25rem] lg:leading-[1.1] lg:tracking-[-0.06em]">
+                                        Our people
+                                    </h1>
+                                </SlideIn>
+                                <SlideIn direction="right" duration={0.8} scrollTrigger={true} className="w-full max-w-[34rem] lg:ml-auto">
+                                    <p className="font-primary font-normal text-base leading-7 tracking-[-0.02em] text-[#6B6B6B] lg:text-xl lg:leading-[1.45]">
+                                        Our team represents decades of industrial mastery and modern innovation. Each member contributes deep technical knowledge, precision, and a shared commitment to sustainable growth.
+                                    </p>
+                                </SlideIn>
+                            </div>
                         </div>
 
                         {/* Team Members Grid */}

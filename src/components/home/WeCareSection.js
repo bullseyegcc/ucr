@@ -251,7 +251,7 @@ export default function WeCareSection() {
                   <h1 className="font-primary font-normal text-[24.42px] leading-[27.13px] tracking-[-1.02px] text-white capitalize">
                     {card.title}
                   </h1>
-                  <p className="font-primary font-normal text-[10.85px] leading-[18.99px] tracking-[-0.46px] text-secondary">
+                  <p className="font-primary font-normal text-[10.85px] leading-[18.99px] text-secondary">
                     {card.desc}
                   </p>
                 </div>
@@ -283,7 +283,7 @@ export default function WeCareSection() {
                 <h1 className="font-primary font-normal text-[24.42px] leading-[27.13px] tracking-[-1.02px] text-white capitalize lg:text-[36px] lg:leading-[40px] lg:tracking-[-1.5px]">
                   {card.title}
                 </h1>
-                <p className="font-primary font-normal text-[10.85px] leading-[18.99px] tracking-[-0.46px] text-secondary lg:text-[16px] lg:leading-[28px] lg:tracking-[-0.68px]">
+                <p className="font-primary font-normal text-[10.85px] leading-[18.99px] text-secondary lg:text-[16px] lg:leading-[28px]">
                   {card.desc}
                 </p>
               </div>

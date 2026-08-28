@@ -114,7 +114,7 @@ export default function WhyChooseUs() {
                 </h1>
                 <p
                   data-cd
-                  className="font-normal text-[#212225] text-[15.5px] leading-[1.5] tracking-[-0.85px] lg:text-[19.2px] lg:leading-[1.5] lg:tracking-[-1.05px]"
+                  className="font-normal text-[#212225] text-[15.5px] leading-[1.5] lg:text-[19.2px] lg:leading-[1.5]"
                   style={{ willChange: 'transform, opacity' }}
                 >
                   {card.description}

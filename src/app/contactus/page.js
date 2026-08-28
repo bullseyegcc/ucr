@@ -48,11 +48,11 @@ export default function contactus() {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 lg:items-stretch">
           {/* Left Column */}
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex lg:h-full lg:min-h-0 lg:flex-col">
             <SequentialSlideIn
-              className="mb-8 lg:mb-12"
+              className="mb-8 shrink-0 lg:mb-12"
               start="top 85%"
               end="bottom 70%"
             >
@@ -84,7 +84,7 @@ export default function contactus() {
             </SequentialSlideIn>
 
             <SequentialSlideIn
-              className="grid grid-cols-2 items-stretch gap-3 lg:gap-2"
+              className="grid min-h-0 flex-1 grid-cols-2 grid-rows-2 items-stretch gap-3 lg:gap-2"
               itemClassName="h-full min-h-0"
               start="top 85%"
               end="bottom 70%"
@@ -157,12 +157,12 @@ export default function contactus() {
 
           {/* Right Column - Contact Form */}
           <SequentialSlideIn
-            className="h-full"
+            className="h-full min-h-0"
             itemClassName="h-full"
             start="top 85%"
             end="bottom 70%"
           >
-            <div className="bg-white rounded-lg p-4 lg:p-12 group transition-all duration-300 h-full">
+            <div className="bg-white rounded-lg p-4 lg:p-12 group transition-all duration-300 h-full flex flex-col">
               <h3 className="text-xl lg:text-4xl font-bold text-gray-900 mb-5 lg:mb-8">
                 Contact us
               </h3>
@@ -252,7 +252,7 @@ export default function contactus() {
                   href="tel:+971255033240"
                   className="text-[#FA6E43] text-lg lg:text-xl font-semibold leading-7 lg:leading-8 hover:text-orange-600 transition-colors duration-300 block"
                 >
-                  +971 2 550 3240
+                   +971 2 550 3241
                 </a>
               </div>
             </div>

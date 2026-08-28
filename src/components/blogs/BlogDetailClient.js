@@ -114,7 +114,7 @@ export default function BlogDetailClient({ post }) {
   const encodedTitle = encodeURIComponent(post.title);
 
   return (
-    <section className="bg-[#f3f3f3] pb-8 pt-16 sm:pt-36">
+    <section className="bg-white pb-8 pt-16 sm:pt-36">
       <div className="mx-auto w-full max-w-[1800px] px-5 sm:px-8 lg:px-16">
         <header className="relative">
           <div className="mx-auto flex min-h-[400px] max-w-[1050px] flex-col items-center justify-center py-8 text-center sm:py-12">

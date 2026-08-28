@@ -12,7 +12,7 @@ const TITLE = {
   blogs:
     "font-medium text-[2.5rem] leading-[3rem] tracking-[-0.17125rem] sm:text-[4rem] sm:leading-[5rem] sm:tracking-[-0.15625rem] text-center align-middle capitalize text-white whitespace-nowrap",
   "parent-company":
-    "font-medium text-[2.25rem] leading-[2.75rem] tracking-[-0.25rem] sm:text-[4rem] sm:leading-[5rem] sm:tracking-[-0.28rem] text-center align-middle capitalize text-white",
+    "font-medium text-[2.25rem] leading-[2.75rem] tracking-normal sm:text-[4rem] sm:leading-[5rem] text-center align-middle capitalize text-white",
 };
 
 function HeroBadgeContent({ badge, variant, useWhiteBadgeIcon }) {

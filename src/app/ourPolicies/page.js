@@ -1,10 +1,8 @@
 'use client'
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import SlideIn from "../../animations/SlideIn";
-import { Badge } from "../../common/badge";
 import Hero from "@/components/shared/Hero";
 import { policies } from "../../assets/policies";
 
@@ -90,21 +88,17 @@ export default function OurPolicies() {
             />
 
             <div className="relative w-full overflow-hidden bg-[#F5F5F5] px-4 py-12 lg:px-20 lg:py-20">
-                <Image
-                    src="/shared/gradientcircle.png"
-                    alt=""
-                    width={900}
-                    height={900}
-                    className="pointer-events-none absolute -top-10 right-0 z-0 w-[70%] max-w-[720px] opacity-80 select-none lg:-top-16 lg:right-[-40px] lg:w-[48%]"
+                <div
+                    className="pointer-events-none absolute top-[-60px] left-[40%] z-0 h-[420px] w-[420px] rounded-full bg-[#FA6E43]/22 blur-[140px] select-none lg:top-[-120px] lg:left-[48%] lg:h-[720px] lg:w-[720px] lg:bg-[#FA6E43]/24 lg:blur-[180px]"
                     aria-hidden="true"
                 />
 
                 <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 mb-12 lg:mb-20 leading-tight">
                     <SlideIn direction="left" duration={0.9}>
-                        <div className="mb-3 lg:mb-4">
-                            <Badge title="Simple, Transparent, and Fair." />
-                        </div>
-                        <h1 className="font-primary font-medium text-[32px] lg:text-[62px] leading-[48px] lg:leading-[70px] tracking-[-1.86px] text-black">
+                        <p className="mb-3 lg:mb-4 text-primary uppercase text-sm lg:text-[1.125rem] font-medium tracking-[0.04em]">
+                            Simple, Transparent, and Fair.
+                        </p>
+                        <h1 className="font-primary font-medium text-[32px] lg:text-[55px] leading-[48px] lg:leading-[70px] tracking-[-1.86px] text-black">
                             Built For Your Trust. Designed To Keep You Informed.
                         </h1>
                     </SlideIn>
@@ -116,7 +110,7 @@ export default function OurPolicies() {
                 </div>
 
                 {/* Mobile accordion — matches Figma */}
-                <div className="relative z-10 w-full overflow-hidden bg-white lg:hidden">
+                <div className="relative z-10 w-full overflow-hidden bg-gradient-to-b from-white to-transparent lg:hidden">
                     {policies.map((policy, index) => {
                         const isExpanded = policy.id === selectedPolicyId;
                         const isLast = index === policies.length - 1;
@@ -158,7 +152,7 @@ export default function OurPolicies() {
                                         <PolicyDetail
                                             policy={policy}
                                             ctaLabel="Download Policy"
-                                            className="bg-white px-5 py-8"
+                                            className="bg-gradient-to-b from-white to-transparent px-5 py-8"
                                         />
                                     </div>
                                 </div>
@@ -169,7 +163,7 @@ export default function OurPolicies() {
 
                 {/* Desktop side-by-side layout */}
                 <div className="relative z-10 hidden w-full lg:flex lg:flex-row lg:gap-12 lg:items-stretch">
-                    <div className="w-[32%] flex flex-col bg-white">
+                    <div className="w-[32%] flex flex-col bg-gradient-to-b from-white to-transparent">
                         {policies.map((policy) => {
                             const isSelected = policy.id === selectedPolicy.id;
 
@@ -199,7 +193,7 @@ export default function OurPolicies() {
 
                     <PolicyDetail
                         policy={selectedPolicy}
-                        className="w-[68%] flex flex-col justify-start bg-white rounded-[32px] px-14 py-14"
+                        className="w-[68%] flex flex-col justify-start bg-gradient-to-b from-white to-transparent rounded-xl px-14 py-14"
                     />
                 </div>
             </div>

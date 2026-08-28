@@ -86,9 +86,9 @@ export default function About({ lockProgressRef = null }) {
       <div className="relative z-10 mx-auto w-full max-w-[1600px] px-3 lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
         <div className="relative w-full lg:max-w-[58%] xl:max-w-[62%]">
           <div className="flex flex-col items-center text-center gap-[0.625rem] sm:gap-[0.75rem] lg:items-start lg:text-left lg:gap-[1rem]">
-            <div className="flex items-center justify-center gap-[0.625rem] lg:justify-start">
+            <div className="hidden lg:flex items-center justify-start gap-[0.625rem]">
               <Image src={badgeIcon} alt="" width={20} height={20} className="shrink-0 object-contain" />
-              <span className="font-medium uppercase tracking-[0.14em] text-primary text-[0.6875rem] lg:text-[0.75rem]">
+              <span className="font-medium uppercase tracking-[0.14em] text-primary text-[0.75rem]">
                 About Us
               </span>
             </div>
@@ -110,15 +110,15 @@ export default function About({ lockProgressRef = null }) {
             </div>
           </div>
 
-          {/* Mobile / tablet: sit beside Know more (circled spot). Desktop: right of copy. */}
-          <div className="pointer-events-none absolute right-[-1.25rem] bottom-[-0.25rem] z-0 w-[48%] max-w-[11.5rem] sm:right-[-0.5rem] sm:bottom-[-0.5rem] sm:max-w-[14rem] lg:right-[-42%] lg:top-[10%] lg:bottom-auto lg:w-[78%] lg:max-w-[28rem] xl:right-[-48%] xl:max-w-[34rem]">
+          {/* Desktop only: right of copy. */}
+          <div className="pointer-events-none absolute right-[-42%] top-[10%] z-0 hidden w-[78%] max-w-[28rem] lg:block xl:right-[-48%] xl:max-w-[34rem]">
             <Image
               src="/home/aboutside.png"
               alt=""
               width={900}
               height={800}
               priority
-              className="h-auto w-full object-contain object-right max-h-[9.5rem] sm:max-h-[12rem] lg:max-h-[min(48vh,30rem)] xl:max-h-[min(52vh,34rem)]"
+              className="h-auto w-full max-h-[min(48vh,30rem)] object-contain object-right xl:max-h-[min(52vh,34rem)]"
             />
           </div>
         </div>
