@@ -260,7 +260,7 @@ export const Navbar = () => {
                     href="/"
                     aria-label="Go to homepage"
                     onClick={() => setIsMenuOpen(false)}
-                    className="relative h-9 w-[125px] sm:h-12 sm:w-[167px] lg:absolute lg:left-1/2 lg:-translate-x-1/2"
+                    className="relative h-7 w-[97px] sm:h-12 sm:w-[167px] lg:absolute lg:left-1/2 lg:-translate-x-1/2"
                 >
                     <motion.div className="absolute inset-0" style={{ opacity: logoLightOpacity }}>
                         <Image
@@ -269,7 +269,7 @@ export const Navbar = () => {
                             width={209}
                             height={60}
                             priority
-                            sizes="167px"
+                            sizes="(max-width: 639px) 97px, 167px"
                             className="h-full w-full object-contain object-center"
                         />
                     </motion.div>
@@ -279,7 +279,7 @@ export const Navbar = () => {
                             alt=""
                             width={209}
                             height={60}
-                            sizes="167px"
+                            sizes="(max-width: 639px) 97px, 167px"
                             className="h-full w-full object-contain object-center"
                         />
                     </motion.div>

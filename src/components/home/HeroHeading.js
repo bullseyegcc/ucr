@@ -75,14 +75,15 @@ export default function HeroHeading({ children, className = '', delay = 0 }) {
 
   return (
     <div
-      className={`absolute inset-0 z-10 flex flex-col items-center pointer-events-none px-4
-                  justify-start pt-[42%] md:justify-center md:pt-0 ${className}`}
+      className={`absolute inset-0 z-10 flex flex-col items-center pointer-events-none px-2 sm:px-4
+                  justify-start pt-[52%] md:justify-center md:pt-0 ${className}`}
     >
       <div
         ref={wrapperRef}
-        className="flex flex-wrap justify-center gap-x-[0.35em] gap-y-2 font-primary mt-8 sm:mt-12 lg:mt-16
-                   font-[550] text-[32px] leading-[52px] tracking-[-1.18px] lg:text-[64px] sm:leading-[99px] sm:tracking-[-2.5px] text-center align-middle capitalize text-white
-                   select-none"
+        className="font-primary mt-8 w-full whitespace-nowrap text-center capitalize text-white select-none
+                   font-[550] text-[clamp(1.125rem,7.6vw,2rem)] leading-none tracking-[-0.05em]
+                   sm:mt-12 sm:text-[32px] sm:leading-[52px] sm:tracking-[-1.18px]
+                   lg:mt-16 lg:text-[64px] lg:leading-[99px] lg:tracking-[-2.5px]"
         style={{ willChange: 'transform, opacity, filter, letter-spacing', opacity: 0 }}
       >
         {children}

@@ -103,7 +103,7 @@ export default function HomeHeroAbout() {
         {/* Panel 1: Hero */}
         <div className="relative flex h-full items-center justify-center bg-black overflow-hidden">
           <VideoPlayer src="/hero.mp4" priority className="absolute inset-0 w-full h-full object-cover" />
-          <div className="pointer-events-none absolute inset-0 z-[1] bg-black/20" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 z-[1] bg-black/30" aria-hidden="true" />
           <HeroHeading delay={4}>UCR shaping the future</HeroHeading>
         </div>
 
