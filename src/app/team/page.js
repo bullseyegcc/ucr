@@ -73,7 +73,7 @@ export default function Team() {
                             </SlideIn>
                             <div className="mt-3 flex flex-col gap-6 lg:mt-4 lg:flex-row lg:items-start lg:justify-between lg:gap-28">
                                 <SlideIn direction="left" duration={0.8} scrollTrigger={true} className="shrink-0">
-                                    <h1 className="font-primary font-light text-[2rem] leading-[1.15] tracking-[-0.03em] text-[#212225] lg:text-[3.25rem] lg:leading-[1.1] lg:tracking-[-0.06em]">
+                                    <h1 className="font-primary font-medium text-[2rem] leading-[1.15] tracking-[-0.03em] text-[#212225] lg:text-[3.25rem] lg:leading-[1.1] lg:tracking-[-0.06em]">
                                         Our people
                                     </h1>
                                 </SlideIn>

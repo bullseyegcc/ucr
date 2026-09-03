@@ -82,11 +82,11 @@ export default function About({ lockProgressRef = null }) {
   }, [lockProgressRef]);
 
   return (
-    <div className="relative w-full shrink-0 overflow-visible bg-white pt-0 sm:pt-1 lg:pt-[5.5rem] pb-6 sm:pb-8 lg:pb-0">
-      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-3 lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
-        <div className="relative w-full lg:max-w-[58%] xl:max-w-[62%]">
-          <div className="flex flex-col items-center text-center gap-[0.625rem] sm:gap-[0.75rem] lg:items-start lg:text-left lg:gap-[1rem]">
-            <div className="hidden lg:flex items-center justify-start gap-[0.625rem]">
+    <div className="relative w-full shrink-0 overflow-visible bg-white pt-[4.75rem] sm:pt-[5.25rem] lg:pt-[clamp(4.5rem,8vh,6rem)] pb-1 sm:pb-2 lg:pb-0">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col px-3 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:px-[3rem] xl:gap-10 xl:px-[4rem] 2xl:px-[5rem]">
+        <div className="relative w-full lg:max-w-[56%] xl:max-w-[58%]">
+          <div className="flex flex-col items-center text-center gap-[0.5rem] sm:gap-[0.625rem] lg:items-start lg:text-left lg:gap-[clamp(0.75rem,1.5vh,1.25rem)]">
+            <div className="relative z-20 flex items-center justify-center gap-[0.625rem] lg:justify-start">
               <Image src={badgeIcon} alt="" width={20} height={20} className="shrink-0 object-contain" />
               <span className="font-medium uppercase tracking-[0.14em] text-primary text-[0.75rem]">
                 About Us
@@ -95,12 +95,12 @@ export default function About({ lockProgressRef = null }) {
 
             <h1
               ref={headingRef}
-              className="font-primary font-medium w-full max-w-none text-[1.75rem] leading-[1.32] tracking-[-0.03em] text-primary lg:max-w-[46rem] lg:text-[clamp(1.75rem,1.05rem+1.4vw,3.375rem)] lg:leading-[1.28] xl:max-w-[50rem] 2xl:max-w-[54rem]"
+              className="font-primary font-medium w-full max-w-none mt-1 text-[1.5rem] leading-[1.3] tracking-[-0.03em] text-primary sm:text-[1.625rem] lg:mt-0 lg:max-w-[48rem] lg:text-[clamp(2rem,1.2rem+1.7vw,3.75rem)] lg:leading-[1.24] xl:max-w-[52rem] 2xl:max-w-[56rem]"
             >
               {HEADING_TEXT}
             </h1>
 
-            <div className="relative z-10 flex w-full items-center justify-center min-h-[3.75rem] sm:min-h-[4.5rem] lg:min-h-0 lg:justify-start">
+            <div className="relative z-10 flex w-full items-center justify-center min-h-[3.25rem] sm:min-h-[4rem] lg:min-h-0 lg:justify-start">
               <Link href="/aboutus" className="relative z-10">
                 <button className="inline-flex h-[2.5rem] min-w-[8.75rem] items-center justify-between gap-[0.625rem] rounded-full border border-white/30 bg-primary px-[1.125rem] text-[0.875rem] text-white lg:h-[3rem] lg:min-w-[11.25rem] lg:px-[1.5rem] lg:text-[1rem]">
                   <span className="font-primary font-normal tracking-[-0.025em]">Know more</span>
@@ -109,18 +109,18 @@ export default function About({ lockProgressRef = null }) {
               </Link>
             </div>
           </div>
+        </div>
 
-          {/* Desktop only: right of copy. */}
-          <div className="pointer-events-none absolute right-[-42%] top-[10%] z-0 hidden w-[78%] max-w-[28rem] lg:block xl:right-[-48%] xl:max-w-[34rem]">
-            <Image
-              src="/home/aboutside.png"
-              alt=""
-              width={900}
-              height={800}
-              priority
-              className="h-auto w-full max-h-[min(48vh,30rem)] object-contain object-right xl:max-h-[min(52vh,34rem)]"
-            />
-          </div>
+        {/* Desktop: copper icon beside the heading */}
+        <div className="pointer-events-none relative z-0 hidden w-full shrink-0 lg:flex lg:w-[40%] xl:w-[38%] 2xl:w-[36%] lg:items-center lg:justify-end">
+          <Image
+            src="/home/aboutside.png"
+            alt=""
+            width={900}
+            height={800}
+            priority
+            className="h-auto w-full max-h-[min(42vh,28rem)] object-contain object-right xl:max-h-[min(48vh,32rem)] 2xl:max-h-[min(50vh,34rem)]"
+          />
         </div>
       </div>
     </div>

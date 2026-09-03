@@ -22,10 +22,10 @@ export default async function Home() {
       {/* video Cards — above About panel’s empty bottom when pulled up on mobile */}
       <div className="relative z-10 w-full bg-white">
         <ParallaxSection index={0}>
-          <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] mt-8 mb-8 lg:my-8 flex flex-col lg:flex-row justify-center lg:max-h-[1000px] gap-1 lg:gap-2 bg-white">
+          <div className="max-w-[1600px] mx-auto w-full px-[1rem] sm:px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] mt-8 mb-8 lg:my-8 flex flex-col lg:flex-row justify-center lg:max-h-[1000px] gap-3 lg:gap-2 bg-white">
             <VideoCard
               videoSrc="/moreabout.mp4"
-              badgeText="Our Company"
+              badgeText="More about"
               title={
                 "Driven by excellence, Union Copper Rod delivers premium copper products that support critical industries across the region and beyond"
               }
@@ -63,11 +63,11 @@ export default async function Home() {
         <WhyChooseUs />
       </div>
 
-      <ParallaxSection index={5}>
+      <div className="relative w-full lg:my-8 mt-0 mb-4" style={{ zIndex: 15 }}>
         <HorizontalScrollGallery
           images={["/home/slide1.png", "/home/slide2.png", "/home/slide3.png"]}
         />
-      </ParallaxSection>
+      </div>
 
       {/* Outside ParallaxSection: negative y + overflow-hidden was clipping CTA headline */}
       <div className="relative w-full" style={{ zIndex: 17 }}>

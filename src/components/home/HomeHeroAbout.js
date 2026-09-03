@@ -16,8 +16,8 @@ export default function HomeHeroAbout() {
     lockProgressRef.current?.(p);
   }, []);
 
-  // Mobile: after About+Stats are centered in the 100dvh panel, pull the next
-  // section up by the leftover bottom space so it fills that gap.
+  // Mobile: after About+Stats sit under the nav, pull the next section up
+  // by the leftover bottom space in the 100dvh panel.
   useEffect(() => {
     const collapseBottomGap = () => {
       const wrap = wrapRef.current;
@@ -39,8 +39,8 @@ export default function HomeHeroAbout() {
       });
 
       const panelH = panel.clientHeight || window.innerHeight;
-      // justify-center splits leftover space equally above & below
-      const bottomGap = Math.max(0, (panelH - used) / 2);
+      // justify-start: leftover space sits below content — pull next section up
+      const bottomGap = Math.max(0, panelH - used);
       wrap.style.marginBottom = bottomGap > 8 ? `${-(bottomGap - 4)}px` : '';
     };
 
@@ -69,18 +69,20 @@ export default function HomeHeroAbout() {
         snapDuration={0.5}
         enableExit={false}
         lockAtEnd={1}
+        lockPageUntilComplete
         onLockProgress={handleLockProgress}
       >
         {/* Panel 1: Hero */}
         <div className="relative flex h-full items-center justify-center bg-black overflow-hidden">
           <VideoPlayer src="/hero.mp4" priority className="absolute inset-0 w-full h-full object-cover" />
+          <div className="pointer-events-none absolute inset-0 z-[1] bg-black/20" aria-hidden="true" />
           <HeroHeading delay={4}>UCR shaping the future</HeroHeading>
         </div>
 
-        {/* Panel 2: mobile centers About+Stats; next section is pulled up to fill bottom gap */}
+        {/* Panel 2: mobile stacks tightly; desktop balances About ↔ stats ↔ edges */}
         <div
           ref={aboutPanelRef}
-          className="flex h-full min-h-0 w-full flex-col justify-center gap-6 overflow-hidden bg-white pt-0 pb-8 scroll-pt-24 sm:gap-7 sm:pb-10 lg:justify-between lg:gap-6 lg:pb-0 lg:scroll-pt-28"
+          className="flex h-full min-h-0 w-full flex-col justify-start gap-3 overflow-hidden bg-white pt-0 pb-4 scroll-pt-24 sm:gap-4 sm:pb-6 lg:justify-evenly lg:gap-[clamp(1rem,2.5vh,2rem)] lg:pb-[clamp(1.25rem,3vh,2.5rem)] lg:scroll-pt-28"
         >
           <About lockProgressRef={lockProgressRef} />
           <AboutStats />

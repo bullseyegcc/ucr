@@ -125,8 +125,8 @@ export default function StatsCard({
         )}
       </h2>
       <hr className="border-t border-[#D0D0CE] transition-all duration-400 ease-out group-hover:border-primary" />
-      <div className="transition-transform duration-400 ease-out group-hover:translate-x-1">
-        <h3 className="font-primary font-medium text-[1rem] lg:text-[1.5rem] leading-tight tracking-[-0.03em] text-[#212225]">
+      <div className="mt-1 transition-transform duration-400 ease-out group-hover:translate-x-1 lg:mt-0">
+        <h3 className="font-primary font-medium text-[0.875rem] lg:text-[1.5rem] leading-tight tracking-[-0.03em] text-[#212225]">
           {subHeading}
         </h3>
         <p className="font-primary font-normal text-[0.875rem] lg:text-[1.125rem] leading-[1.45] tracking-[-0.02em] mt-[0.5rem] lg:mt-[0.75rem] text-[#212225]/50">

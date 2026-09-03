@@ -1,5 +1,6 @@
 "use client";
 
+import { useLayoutEffect } from "react";
 import Image from "next/image";
 import { Badgetextblack } from "../../common/badge";
 import Hero from "@/components/shared/Hero";
@@ -9,6 +10,76 @@ import ScrollStack, {
   ScrollStackItem,
 } from "@/components/ScrollStack/ScrollStack";
 import TechnologyLaboratorySection from "../../components/technology/TechnologyLaboratorySection";
+
+/** Document Y via offset chain — ignores CSS transforms (ScrollStack). */
+function getDocumentTop(element) {
+  let top = 0;
+  let node = element;
+  while (node) {
+    top += node.offsetTop;
+    node = node.offsetParent;
+  }
+  return top;
+}
+
+function scrollWindowTo(y, { immediate = false } = {}) {
+  const lenis = window.lenisInstance;
+  if (lenis && typeof lenis.scrollTo === "function") {
+    lenis.scrollTo(y, {
+      immediate,
+      // Longer + softer ease-in-out so the settle feels gentler
+      duration: immediate ? 0 : 1.85,
+      easing: (t) =>
+        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
+    });
+    return;
+  }
+  window.scrollTo({ top: y, behavior: immediate ? "auto" : "smooth" });
+}
+
+function getTechnologyScrollY(el) {
+  // Match ScrollStack desktop pin so the card arrives from above, not after an overshoot
+  const isDesktop = window.innerWidth >= 1024;
+  const cards = Array.from(document.querySelectorAll(".scroll-stack-card"));
+  const index = Math.max(0, cards.indexOf(el));
+  const stackOffset = isDesktop
+    ? window.innerHeight * 0.14 + 20 * index
+    : 80;
+  return Math.max(0, getDocumentTop(el) - stackOffset);
+}
+
+/** Prefer data-tech-id so the browser never hard-jumps to a matching #id. */
+function findTechnologyCard(techId) {
+  if (!techId) return null;
+  return (
+    document.querySelector(`[data-tech-id="${techId}"]`) ||
+    document.getElementById(techId)
+  );
+}
+
+function getRequestedTechId() {
+  const params = new URLSearchParams(window.location.search);
+  const fromQuery = params.get("tech");
+  if (fromQuery) return fromQuery;
+  const hash = window.location.hash.replace(/^#/, "");
+  return hash || null;
+}
+
+function scrollToTechnology(techId, { immediate = false } = {}) {
+  if (!techId) return false;
+  const el = findTechnologyCard(techId);
+  if (!el) return false;
+  scrollWindowTo(getTechnologyScrollY(el), { immediate });
+  return true;
+}
+
+function syncTechUrl(techId) {
+  if (!techId) return;
+  const next = `/technology#${techId}`;
+  if (`${window.location.pathname}${window.location.hash}` === next) return;
+  // replaceState keeps shareable hash URLs without triggering native scroll
+  window.history.replaceState(null, "", next);
+}
 
 const TECH_CARDS = [
   {
@@ -139,6 +210,93 @@ function TechnologyCard({ card }) {
 }
 
 export default function Technology() {
+  useLayoutEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const techId = getRequestedTechId();
+    if (!techId) return;
+
+    let cancelled = false;
+    let retryTimer;
+    let animateTimer;
+    let hasStartedDown = false;
+    const prevRestoration = history.scrollRestoration;
+
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+
+    const pinToTop = () => {
+      scrollWindowTo(0, { immediate: true });
+    };
+
+    // Start at hero — no native #id hard-jump possible (cards use data-tech-id)
+    pinToTop();
+    syncTechUrl(techId);
+
+    const startDownwardScroll = (attempt = 0) => {
+      if (cancelled) return;
+
+      const el = findTechnologyCard(techId);
+      if (!el) {
+        pinToTop();
+        if (attempt < 40) {
+          retryTimer = window.setTimeout(
+            () => startDownwardScroll(attempt + 1),
+            50
+          );
+        }
+        return;
+      }
+
+      // Hold at the hero for a beat, then smooth-scroll down to the tech card
+      pinToTop();
+      animateTimer = window.setTimeout(() => {
+        if (cancelled) return;
+        pinToTop();
+        requestAnimationFrame(() => {
+          if (cancelled) return;
+          hasStartedDown = true;
+          scrollToTechnology(techId, { immediate: false });
+        });
+      }, 850);
+    };
+
+    const onLenisReady = () => {
+      if (!cancelled && !hasStartedDown) pinToTop();
+    };
+
+    const onHashChange = () => {
+      const next = window.location.hash.replace(/^#/, "");
+      if (!next || cancelled) return;
+      hasStartedDown = false;
+      pinToTop();
+      window.clearTimeout(animateTimer);
+      animateTimer = window.setTimeout(() => {
+        requestAnimationFrame(() => {
+          if (cancelled) return;
+          hasStartedDown = true;
+          scrollToTechnology(next, { immediate: false });
+        });
+      }, 850);
+    };
+
+    retryTimer = window.setTimeout(() => startDownwardScroll(0), 80);
+    window.addEventListener("lenisReady", onLenisReady);
+    window.addEventListener("hashchange", onHashChange);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(retryTimer);
+      window.clearTimeout(animateTimer);
+      window.removeEventListener("lenisReady", onLenisReady);
+      window.removeEventListener("hashchange", onHashChange);
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = prevRestoration || "auto";
+      }
+    };
+  }, []);
+
   return (
     <div className="bg-[#F2F2F2]">
       <Hero
@@ -201,7 +359,11 @@ export default function Technology() {
         disableStackOnMobile
       >
         {TECH_CARDS.map((card) => (
-          <ScrollStackItem key={card.id} itemClassName={STACK_ITEM_CLASS}>
+          <ScrollStackItem
+            key={card.id}
+            techId={card.id}
+            itemClassName={STACK_ITEM_CLASS}
+          >
             <TechnologyCard card={card} />
           </ScrollStackItem>
         ))}
