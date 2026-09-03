@@ -9,6 +9,7 @@ import { WhiteBadge } from "../../common/badge.js";
 const TECHNOLOGIES = [
   {
     id: 0,
+    slug: "ccr-technology",
     title: "CCR Technology",
     description:
       "Southwire SCR®-4500 Continuous Casting and Rolling Technology. Our Southwire SCR®-4500 technology continuously transforms high-purity copper cathodes into premium 8 mm, 12.5 mm, and 16 mm ETP copper rod, delivering exceptional quality, efficiency, and production reliability.",
@@ -16,6 +17,7 @@ const TECHNOLOGIES = [
   },
   {
     id: 1,
+    slug: "rod-breakdown",
     title: "Rod Breakdown Technology",
     description:
       "Precision Multi-Wire Drawing for High-Quality Copper Wire. UCR's Rod Breakdown Technology converts 8 mm copper rod into precision intermediate wire sizes through continuous multi-wire drawing, delivering excellent dimensional accuracy, surface finish, and consistent product quality.",
@@ -23,6 +25,7 @@ const TECHNOLOGIES = [
   },
   {
     id: 2,
+    slug: "tin-coating",
     title: "Tin Coating Technology",
     description:
       "High-Performance Electrolytic Tin Coating for Copper Wire. Our Electrolytic Tin Plating Technology applies a uniform tin coating to copper wire, enhancing corrosion resistance, solderability, and long-term reliability while maintaining excellent electrical conductivity.",
@@ -30,6 +33,7 @@ const TECHNOLOGIES = [
   },
   {
     id: 3,
+    slug: "upwards-vertical-casting",
     title: "Upwards Vertical Continuous Casting",
     description:
       "UCR's Upward Continuous Casting Technology produces premium oxygen-free copper and copper alloy rod with exceptional conductivity, metallurgical quality, and consistent performance for demanding electrical and industrial applications.",
@@ -37,6 +41,7 @@ const TECHNOLOGIES = [
   },
   {
     id: 4,
+    slug: "advanced-copper-recycling",
     title: "Advanced Copper Recycling",
     description:
       "Our Advanced Copper Recycling facility transforms industrial copper scrap into high-quality recycled copper feedstock using automated shredding, intelligent separation, and precision material recovery technologies.",
@@ -255,7 +260,9 @@ export default function OurTechnology() {
                       </p>
                       <button
                         type="button"
-                        onClick={() => router.push("/technology")}
+                        onClick={() =>
+                          router.push(`/technology?tech=${activeTech.slug}`)
+                        }
                         className="mt-auto inline-flex h-[2.25rem] w-fit shrink-0 items-center justify-center gap-[0.4rem] rounded-full border border-primary px-[1rem] text-primary transition-all duration-300 hover:bg-primary hover:text-white lg:h-[2.75rem] lg:px-[1.25rem]"
                       >
                         <span className="font-primary font-normal text-[0.8125rem] leading-none tracking-[-0.03rem] lg:text-[0.9375rem]">

@@ -35,6 +35,10 @@ const STATS = [
   },
 ];
 
+/** About near navbar — start card cascade earlier in the dock. */
+const PLAY_AT = 0.55;
+const RESET_BELOW = 0.35;
+
 export default function AboutStats() {
   const rowRef = useRef(null);
 
@@ -84,15 +88,31 @@ export default function AboutStats() {
       gsap.set(items, { opacity: 0, y: distance });
     };
 
-    const onAboutPlaced = (e) => {
-      if (e.detail?.placed) play();
-      else reset();
+    const syncFromProgress = (raw) => {
+      const p = Math.max(0, Math.min(1, raw ?? 0));
+      if (p >= PLAY_AT || window.__heroAboutPlaced) play();
+      else if (p < RESET_BELOW) reset();
     };
 
-    if (window.__heroAboutPlaced) play();
+    const onAboutProgress = (e) => {
+      const p =
+        typeof e?.detail?.progress === "number"
+          ? e.detail.progress
+          : window.__heroAboutProgress ?? 0;
+      syncFromProgress(p);
+    };
+
+    const onAboutPlaced = (e) => {
+      if (e.detail?.placed) play();
+      else syncFromProgress(window.__heroAboutProgress ?? 0);
+    };
+
+    syncFromProgress(window.__heroAboutProgress ?? 0);
+    window.addEventListener("heroAboutProgress", onAboutProgress);
     window.addEventListener("heroAboutPlaced", onAboutPlaced);
 
     return () => {
+      window.removeEventListener("heroAboutProgress", onAboutProgress);
       window.removeEventListener("heroAboutPlaced", onAboutPlaced);
       tl?.kill();
       gsap.killTweensOf(items);
@@ -103,7 +123,7 @@ export default function AboutStats() {
     <div className="w-full shrink-0 bg-white">
       <div
         ref={rowRef}
-        className="mx-auto grid max-w-[1600px] grid-cols-2 gap-[0.75rem] px-[1rem] pt-0 pb-[0.75rem] lg:grid-cols-4 lg:gap-[1.25rem] lg:px-[3rem] lg:pt-[1.25rem] lg:pb-[2rem] xl:px-[4rem] 2xl:px-[5rem]"
+        className="mx-auto grid max-w-[1600px] grid-cols-2 gap-x-[0.75rem] gap-y-[1.5rem] px-[1rem] pt-2 pb-[0.75rem] lg:grid-cols-4 lg:gap-x-[1.25rem] lg:gap-y-[1.25rem] lg:px-[3rem] lg:pt-0 lg:pb-[clamp(0.75rem,2vh,1.5rem)] xl:px-[4rem] 2xl:px-[5rem]"
       >
         {STATS.map((stat, index) => (
           <div

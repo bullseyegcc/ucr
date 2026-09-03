@@ -414,6 +414,7 @@ export default function SnippScrol({
         };
 
         const tick = () => {
+          // Scroll sets the target; About always eases to it (fast flick still settles smoothly).
           current += (target - current) * 0.22;
           // Snap early — asymptotic lerp otherwise leaves current at ~0.98 forever,
           // keeps locked=true, and wheel preventDefault swallows all page scroll.
@@ -421,6 +422,10 @@ export default function SnippScrol({
           if (target >= 0.999 && current >= 0.999) {
             current = 1;
             target = 1;
+          }
+          if (target <= 0.001 && current <= 0.001) {
+            current = 0;
+            target = 0;
           }
           window.__heroAboutTimelineProgress = current;
           const slideProgress = panelFraction > 0 ? Math.min(current, panelFraction) / panelFraction : current;
@@ -451,37 +456,16 @@ export default function SnippScrol({
           }
           target = nextTarget;
 
-          // Hard-complete when the user finishes the lock distance. Asymptotic lerp
-          // otherwise leaves current≈0.96 + locked=true, and wheel preventDefault
-          // swallows all further page scroll (especially visible after resize).
+          // Finish the lock distance smoothly — never hard-jump current to 1/0
+          // (that made About + navbar snap with a jerk on fast scroll).
           if (target >= 1 && deltaPx > 0) {
             target = 1;
-            current = 1;
-            window.__heroAboutTimelineProgress = 1;
-            tl.progress(1);
-            emitCoverProgress(1);
-            reportLockProgress(1);
-            emitPlaced(true);
-            setLocked(false);
-            if (rafId) {
-              cancelAnimationFrame(rafId);
-              rafId = 0;
-            }
+            if (!rafId) rafId = requestAnimationFrame(tick);
             return;
           }
           if (target <= 0 && deltaPx < 0) {
             target = 0;
-            current = 0;
-            window.__heroAboutTimelineProgress = 0;
-            tl.progress(0);
-            emitCoverProgress(0);
-            reportLockProgress(0);
-            emitPlaced(false);
-            setLocked(true);
-            if (rafId) {
-              cancelAnimationFrame(rafId);
-              rafId = 0;
-            }
+            if (!rafId) rafId = requestAnimationFrame(tick);
             return;
           }
 
@@ -774,7 +758,7 @@ export default function SnippScrol({
               },
               duration: { min: 0.2, max: snapDuration },
               ease:     'power2.inOut',
-              delay:    0.05,
+              delay:    0.02,
             }
           : undefined,
         onUpdate: (self) => {

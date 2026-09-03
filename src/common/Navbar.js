@@ -86,16 +86,12 @@ export const Navbar = () => {
 
         if (!solidByDefault) {
             if (pathname === '/') {
-                // Hero→About is GSAP-pinned: window scrollY advances through the
-                // pin distance while the hero is still on screen. Using scrollY
-                // here would turn the bar solid too early. Drive only from About
-                // slide progress; stay solid once About is docked at the top.
+                // Drive from About slide progress so navbar eases with the panel dock.
                 const aboutP = window.__heroAboutProgress ?? 0;
                 const aboutPlaced = window.__heroAboutPlaced === true;
                 if (aboutPlaced || aboutP > 0) {
                     next = aboutSlideToNavProgress(aboutP);
                 } else {
-                    // Past the snipp block (or cold load at top): normal scroll fade.
                     next = scrollToProgress(getScrollY());
                 }
             } else {
@@ -141,7 +137,6 @@ export const Navbar = () => {
         attachLenis();
         window.addEventListener('lenisReady', attachLenis);
 
-        // Homepage About slide — listen directly (pin progress ≠ reliable scrollY).
         const onHeroAboutProgress = (e) => {
             if (typeof e?.detail?.progress === 'number') {
                 window.__heroAboutProgress = e.detail.progress;
@@ -152,7 +147,8 @@ export const Navbar = () => {
             if (typeof e?.detail?.placed === 'boolean') {
                 window.__heroAboutPlaced = e.detail.placed;
             }
-            syncProgress(true);
+            // Never jump — keep easing with About’s settle.
+            syncProgress();
         };
         window.addEventListener('heroAboutProgress', onHeroAboutProgress);
         window.addEventListener('heroAboutPlaced', onHeroAboutPlaced);
@@ -230,12 +226,13 @@ export const Navbar = () => {
         <>
             {/* Top Navigation Bar — live transparent → opaque, Bullseye-style */}
             <motion.div
-                className="fixed top-0 left-0 z-50 flex h-16 w-full flex-row-reverse items-center justify-between px-4 backdrop-blur-sm sm:h-20 sm:px-6 lg:flex-row lg:px-12"
+                className="fixed top-0 left-0 z-50 h-16 w-full backdrop-blur-sm sm:h-20"
                 style={{
                     backgroundColor,
                     boxShadow,
                 }}
             >
+                <div className="relative mx-auto flex h-full w-full max-w-[1600px] flex-row-reverse items-center justify-between px-4 sm:px-6 lg:flex-row lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
                 {/* Menu Button - Dynamic color based on scroll state */}
                 <motion.div
                     className={`group inline-block cursor-pointer p-2 transition-all duration-300 ease-out ${
@@ -258,30 +255,32 @@ export const Navbar = () => {
                     </motion.span>
                 </motion.div>
 
-                {/* Logo - Centered on mobile, left on desktop */}
+                {/* Logo — both assets are 209×60; shared box keeps crossfade size-stable */}
                 <Link
                     href="/"
                     aria-label="Go to homepage"
                     onClick={() => setIsMenuOpen(false)}
-                    className="relative h-20 w-20 sm:h-20 sm:w-36 lg:absolute lg:left-1/2 lg:-translate-x-1/2"
+                    className="relative h-10 w-[139px] sm:h-12 sm:w-[167px] lg:absolute lg:left-1/2 lg:-translate-x-1/2"
                 >
                     <motion.div className="absolute inset-0" style={{ opacity: logoLightOpacity }}>
                         <Image
                             src="/shared/logo.png"
                             alt="Logo"
-                            fill
+                            width={209}
+                            height={60}
                             priority
-                            sizes="144px"
-                            className="object-contain"
+                            sizes="167px"
+                            className="h-full w-full object-contain object-center"
                         />
                     </motion.div>
                     <motion.div className="absolute inset-0" style={{ opacity: logoDarkOpacity }}>
                         <Image
                             src="/shared/clogo.png"
                             alt=""
-                            fill
-                            sizes="144px"
-                            className="object-contain"
+                            width={209}
+                            height={60}
+                            sizes="167px"
+                            className="h-full w-full object-contain object-center"
                         />
                     </motion.div>
                 </Link>
@@ -309,6 +308,7 @@ export const Navbar = () => {
                         </motion.span>
                     </motion.button>
                 </Link>
+                </div>
             </motion.div>
 
             {/* Slide-in Menu - Fully Responsive */}
