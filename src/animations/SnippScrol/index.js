@@ -911,6 +911,7 @@ export default function SnippScrol({
       <div ref={outerRef} style={{ position: 'relative', width: '100%' }}>
         <div
           ref={containerRef}
+          data-snipp-scrol-container
           style={{
             position: 'relative',
             width: '100%',

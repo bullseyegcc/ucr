@@ -16,46 +16,74 @@ export default function HomeHeroAbout() {
     lockProgressRef.current?.(p);
   }, []);
 
-  // Mobile: after About+Stats sit under the nav, pull the next section up
-  // by the leftover bottom space in the 100dvh panel.
+  // Mobile: once About is placed, shrink/grow the 100dvh clip to the real
+  // content height. Pulling the next section up with negative margin stacked
+  // the video cards over the stats on shorter phones.
   useEffect(() => {
-    const collapseBottomGap = () => {
+    const BOTTOM_PAD = 16;
+
+    const getContainer = () =>
+      wrapRef.current?.querySelector('[data-snipp-scrol-container]');
+
+    const resetContainer = () => {
+      const wrap = wrapRef.current;
+      const container = getContainer();
+      if (wrap) wrap.style.marginBottom = '';
+      if (!container) return;
+      container.style.height = '100dvh';
+      container.style.maxHeight = '100dvh';
+    };
+
+    const fitToContent = () => {
       const wrap = wrapRef.current;
       const panel = aboutPanelRef.current;
-      if (!wrap || !panel) return;
+      const container = getContainer();
+      if (!wrap || !panel || !container) return;
 
-      if (window.matchMedia('(min-width: 1024px)').matches) {
-        wrap.style.marginBottom = '';
+      if (window.matchMedia('(min-width: 1024px)').matches || !window.__heroAboutPlaced) {
+        resetContainer();
         return;
       }
 
-      const styles = getComputedStyle(panel);
-      const gap = parseFloat(styles.rowGap || styles.gap) || 0;
+      wrap.style.marginBottom = '';
+
       const kids = Array.from(panel.children);
-      let used = 0;
-      kids.forEach((el, i) => {
-        used += el.offsetHeight;
-        if (i < kids.length - 1) used += gap;
+      if (!kids.length) return;
+
+      const panelTop = panel.getBoundingClientRect().top;
+      let contentBottom = panelTop;
+      kids.forEach((el) => {
+        contentBottom = Math.max(contentBottom, el.getBoundingClientRect().bottom);
       });
 
-      const panelH = panel.clientHeight || window.innerHeight;
-      // justify-start: leftover space sits below content — pull next section up
-      const bottomGap = Math.max(0, panelH - used);
-      wrap.style.marginBottom = bottomGap > 8 ? `${-(bottomGap - 4)}px` : '';
+      const nextH = Math.ceil(contentBottom - panelTop + BOTTOM_PAD);
+      if (nextH < 120) return;
+
+      if (Math.abs(container.offsetHeight - nextH) < 2) return;
+      container.style.height = `${nextH}px`;
+      container.style.maxHeight = 'none';
     };
 
-    collapseBottomGap();
-    const t1 = setTimeout(collapseBottomGap, 120);
-    const t2 = setTimeout(collapseBottomGap, 450);
-    window.addEventListener('resize', collapseBottomGap);
-    window.addEventListener('heroAboutPlaced', collapseBottomGap);
+    fitToContent();
+    const t1 = setTimeout(fitToContent, 120);
+    const t2 = setTimeout(fitToContent, 450);
+    const t3 = setTimeout(fitToContent, 900);
+    window.addEventListener('resize', fitToContent);
+    window.addEventListener('heroAboutPlaced', fitToContent);
+    window.visualViewport?.addEventListener('resize', fitToContent);
+
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(fitToContent) : null;
+    if (aboutPanelRef.current) ro?.observe(aboutPanelRef.current);
 
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
-      window.removeEventListener('resize', collapseBottomGap);
-      window.removeEventListener('heroAboutPlaced', collapseBottomGap);
-      if (wrapRef.current) wrapRef.current.style.marginBottom = '';
+      clearTimeout(t3);
+      window.removeEventListener('resize', fitToContent);
+      window.removeEventListener('heroAboutPlaced', fitToContent);
+      window.visualViewport?.removeEventListener('resize', fitToContent);
+      ro?.disconnect();
+      resetContainer();
     };
   }, []);
 

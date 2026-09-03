@@ -259,7 +259,7 @@ export default function Technology() {
           hasStartedDown = true;
           scrollToTechnology(techId, { immediate: false });
         });
-      }, 850);
+      }, 1300);
     };
 
     const onLenisReady = () => {
@@ -278,7 +278,7 @@ export default function Technology() {
           hasStartedDown = true;
           scrollToTechnology(next, { immediate: false });
         });
-      }, 850);
+      }, 1300);
     };
 
     retryTimer = window.setTimeout(() => startDownwardScroll(0), 80);
