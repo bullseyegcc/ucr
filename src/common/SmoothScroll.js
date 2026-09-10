@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,7 +12,16 @@ gsap.registerPlugin(ScrollTrigger);
  * Lenis must run on mobile too — GSAP pin/scrub (SnippScrol) freezes native
  * touch scroll without a JS scroll driver. TSB keeps Lenis on all breakpoints.
  */
+function syncScrollMetrics() {
+  if (typeof window === 'undefined') return;
+  window.lenisInstance?.resize?.();
+  ScrollTrigger.refresh();
+  window.dispatchEvent(new CustomEvent('scrollAnimationsReady'));
+}
+
 export default function SmoothScroll() {
+  const pathname = usePathname();
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -57,10 +67,7 @@ export default function SmoothScroll() {
 
       lenis.on('scroll', ScrollTrigger.update);
 
-      refreshTimer = setTimeout(() => {
-        ScrollTrigger.refresh();
-        window.dispatchEvent(new CustomEvent('scrollAnimationsReady'));
-      }, 100);
+      refreshTimer = setTimeout(syncScrollMetrics, 100);
     };
 
     if (window.__splashActive) {
@@ -87,6 +94,36 @@ export default function SmoothScroll() {
       }
     };
   }, []);
+
+  // Client navigations skip Lenis boot, so ScrollTrigger keeps stale start/end
+  // and entrance animations stay at opacity 0 until a full reload.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    window.__pageScrollLocked = false;
+    const lenis = window.lenisInstance;
+    lenis?.start?.();
+    if (!window.location.hash) {
+      lenis?.scrollTo(0, { immediate: true });
+    }
+
+    let cancelled = false;
+    const sync = () => {
+      if (cancelled) return;
+      syncScrollMetrics();
+    };
+
+    const raf = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(sync);
+    });
+    const later = window.setTimeout(sync, 280);
+
+    return () => {
+      cancelled = true;
+      window.cancelAnimationFrame(raf);
+      window.clearTimeout(later);
+    };
+  }, [pathname]);
 
   return null;
 }

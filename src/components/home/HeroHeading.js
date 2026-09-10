@@ -81,9 +81,9 @@ export default function HeroHeading({ children, className = '', delay = 0 }) {
       <div
         ref={wrapperRef}
         className="font-primary mt-8 w-full whitespace-nowrap text-center capitalize text-white select-none
-                   font-[550] text-[clamp(1.125rem,7.6vw,2rem)] leading-none tracking-[-0.05em]
-                   sm:mt-12 sm:text-[32px] sm:leading-[52px] sm:tracking-[-1.18px]
-                   lg:mt-16 lg:text-[64px] lg:leading-[99px] lg:tracking-[-2.5px]"
+                   font-[550] text-[clamp(1.25rem,8.2vw,2.25rem)] leading-none tracking-[-0.05em]
+                   sm:mt-12 sm:text-[36px] sm:leading-[56px] sm:tracking-[-1.18px]
+                   lg:mt-16 lg:text-[72px] lg:leading-[108px] lg:tracking-[-2.5px]"
         style={{ willChange: 'transform, opacity, filter, letter-spacing', opacity: 0 }}
       >
         {children}

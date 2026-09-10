@@ -93,7 +93,7 @@ export default function FeaturedProducts({ products }) {
 
         {/* Content Card — fixed mobile height (no flicker on tab change); left panel on desktop */}
         <div className="relative z-10 flex h-full items-center justify-center p-[0.85rem] lg:items-stretch lg:justify-start lg:p-[1.5rem] lg:pr-0">
-          <div className="relative mx-auto flex h-[min(58vh,460px)] w-full max-w-[24.5rem] flex-col justify-between gap-[1.15rem] rounded-xl bg-white px-[1.5rem] py-[1.75rem] shadow-2xl sm:h-[min(58vh,480px)] sm:max-w-[27rem] sm:gap-[1.35rem] sm:px-[1.75rem] sm:py-[2rem] lg:mx-0 lg:h-full lg:max-w-none lg:w-[58%] lg:gap-[2.25rem] lg:px-0 lg:py-0 lg:pt-[3rem] lg:pb-[3rem] lg:pl-[3rem] lg:pr-[4rem] xl:w-[56%] xl:pt-[3.5rem] xl:pb-[3.5rem] xl:pl-[3.5rem] xl:pr-[4.75rem] 2xl:w-[54%]">
+          <div className="relative mx-auto flex h-[min(58vh,460px)] w-full max-w-[24.5rem] flex-col justify-start gap-[1.15rem] rounded-xl bg-white px-[1.5rem] py-[1.75rem] shadow-2xl sm:h-[min(58vh,480px)] sm:max-w-[27rem] sm:gap-[1.35rem] sm:px-[1.75rem] sm:py-[2rem] lg:mx-0 lg:h-full lg:max-w-none lg:w-[58%] lg:gap-[2.25rem] lg:px-0 lg:py-0 lg:pt-[3rem] lg:pb-[3rem] lg:pl-[3rem] lg:pr-[4rem] xl:w-[56%] xl:pt-[3.5rem] xl:pb-[3.5rem] xl:pl-[3.5rem] xl:pr-[4.75rem] 2xl:w-[54%]">
             {/* Header */}
             <div className="shrink-0 flex items-center gap-[0.75rem]">
               <Image
@@ -130,23 +130,6 @@ export default function FeaturedProducts({ products }) {
                   </h2>
                 </button>
               ))}
-            </div>
-
-            {/* Indicator dots — same height active/inactive so row never reflows */}
-            <div className="flex shrink-0 flex-col gap-4 pt-1 lg:pt-2">
-              <div className="flex h-3 items-center gap-2 sm:h-4">
-                {items.map((_, index) => (
-                  <div
-                    key={index}
-                    onClick={() => handleTabChange(index)}
-                    className={`cursor-pointer rounded-full transition-[width,background-color] duration-300 ${
-                      activeTab === index
-                        ? "h-3 w-6 bg-primary sm:h-4 sm:w-8"
-                        : "h-3 w-3 bg-gray-300 hover:bg-gray-400 sm:h-4 sm:w-6"
-                    }`}
-                  />
-                ))}
-              </div>
             </div>
           </div>
         </div>
