@@ -188,9 +188,11 @@ export default function SequentialSlideIn({
     scheduleScrollTriggerRefresh(50);
 
     const syncTimers = [80, 280, 700].map((ms) => window.setTimeout(onReady, ms));
+    let resizeSyncTimer = 0;
     const onResize = () => {
       scheduleScrollTriggerRefresh(100);
-      window.setTimeout(syncProgress, 120);
+      window.clearTimeout(resizeSyncTimer);
+      resizeSyncTimer = window.setTimeout(syncProgress, 120);
     };
 
     window.addEventListener('resize', onResize, { passive: true });
@@ -211,6 +213,7 @@ export default function SequentialSlideIn({
 
     return () => {
       syncTimers.forEach((id) => window.clearTimeout(id));
+      window.clearTimeout(resizeSyncTimer);
       window.removeEventListener('resize', onResize);
       window.removeEventListener('scrollAnimationsReady', onReady);
       io.disconnect();
