@@ -52,7 +52,7 @@ export default function AboutUs() {
       <Hero
         badge="Crafting Sustainable Progress, One Copper Solution at a Time"
         title="Leading the region's copper transformation with cutting edge technology"
-        titleClassName="px-6 !text-[2rem] !leading-[2.5rem] tracking-[-0.04em] lg:px-5 lg:w-[80%] lg:mb-8 lg:!text-[4rem] lg:!leading-[5rem] lg:tracking-[-0.15625rem]"
+        titleClassName="px-6 !text-[2rem] !leading-[2.5rem] tracking-[-0.04em] lg:px-5 lg:w-[90%] lg:mb-8 lg:!text-[4rem] lg:!leading-[5rem] lg:tracking-[-0.15625rem]"
         titleDirectFade
         titleInH1={false}
         badgeSlideClassName="hidden lg:block"

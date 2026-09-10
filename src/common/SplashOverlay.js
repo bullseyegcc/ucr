@@ -4,8 +4,6 @@ import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
 
-const SPLASH_SESSION_KEY = 'ucr-splash-done';
-
 const LOGO_PATHS = (
   <g transform="translate(21.82, 18.57) scale(0.55) translate(-21.82, -18.57)">
     <path d="M37.2256 2.54971C38.0078 2.54997 38.6689 3.20385 38.6689 3.95694C38.6689 4.14032 38.6667 4.23403 38.6357 4.3251L38.6299 4.34171L38.627 4.35928C38.5916 4.56658 38.4869 4.78571 38.208 5.01944L38.2021 5.02432C28.7217 13.5479 19.2685 22.1316 9.74414 30.6982L9.74316 30.6991C7.8036 32.4603 5.87981 34.2033 3.96387 35.9413C5.04654 34.8348 6.13067 33.7267 7.21582 32.62C9.04746 30.752 10.8785 28.8829 12.6992 27.0146L12.7002 27.0155C18.5001 21.1242 24.2552 15.2326 30.0098 9.34171L30.0088 9.34073C32.0295 7.27697 34.1018 5.20798 36.082 3.09561L36.0811 3.09464C36.1311 3.04458 36.1784 2.98758 36.1992 2.96378C36.2273 2.93182 36.2381 2.92522 36.2432 2.92276L36.2744 2.90714L36.2998 2.88272L36.3447 2.83878C36.3441 2.83937 36.3478 2.83624 36.3594 2.82803C36.3705 2.82009 36.3837 2.81121 36.4014 2.79971C36.4192 2.78806 36.4459 2.76582 36.4756 2.74307C36.7239 2.62254 36.9582 2.54971 37.2256 2.54971Z" fill="black" />
@@ -17,19 +15,11 @@ const LOGO_PATHS = (
   </g>
 );
 
-function markSplashDone() {
-  try {
-    sessionStorage.setItem(SPLASH_SESSION_KEY, '1');
-  } catch {
-    /* ignore */
-  }
-  window.__splashCompleted = true;
-}
-
-function emitSplashComplete() {
+function emitSplashComplete(skipped = false) {
   window.__splashActive = false;
   window.__splashCompleted = true;
-  window.dispatchEvent(new CustomEvent('splashComplete'));
+  window.__splashSkipped = skipped;
+  window.dispatchEvent(new CustomEvent('splashComplete', { detail: { skipped } }));
 }
 
 export default function SplashOverlay() {
@@ -40,18 +30,21 @@ export default function SplashOverlay() {
   const rectRef = useRef(null);
   const pathname = usePathname();
   const isHomepage = pathname === '/';
+  // Survives client navigations (layout stays mounted); resets on full reload.
+  const canPlaySplashRef = useRef(true);
 
-  // Claim splash before child effects run (HeroHeading / Lenis), but never
-  // re-lock after the session splash has already finished.
-  if (typeof window !== 'undefined' && isHomepage && !window.__splashCompleted) {
-    let alreadyShown = false;
-    try {
-      alreadyShown = sessionStorage.getItem(SPLASH_SESSION_KEY) === '1';
-    } catch {
-      /* ignore */
-    }
-    if (!alreadyShown) {
+  // Claim splash before child effects run (HeroHeading / Lenis). Play only
+  // on the initial homepage document load — skip when returning from other pages.
+  if (typeof window !== 'undefined') {
+    if (!isHomepage) {
+      canPlaySplashRef.current = false;
+      window.__splashActive = false;
+    } else if (canPlaySplashRef.current) {
       window.__splashActive = true;
+      window.__splashSkipped = false;
+    } else {
+      window.__splashActive = false;
+      window.__splashSkipped = true;
     }
   }
 
@@ -62,33 +55,36 @@ export default function SplashOverlay() {
     const rect = rectRef.current;
 
     if (!isHomepage) {
+      canPlaySplashRef.current = false;
       if (overlay) gsap.set(overlay, { display: 'none', pointerEvents: 'none' });
-      window.__splashActive = false;
+      emitSplashComplete(true);
       return;
     }
 
     let reducedMotion = false;
-    let alreadyShown = false;
     try {
       reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      alreadyShown = sessionStorage.getItem(SPLASH_SESSION_KEY) === '1';
     } catch {
       /* ignore */
     }
 
-    const hideAndFinish = () => {
+    const hideAndFinish = (skipped = true) => {
       if (overlay || container) {
         gsap.set([overlay, container].filter(Boolean), {
           display: 'none',
           pointerEvents: 'none',
         });
       }
-      markSplashDone();
-      emitSplashComplete();
+      emitSplashComplete(skipped);
     };
 
-    if (reducedMotion || alreadyShown) {
-      hideAndFinish();
+    if (!canPlaySplashRef.current) {
+      hideAndFinish(true);
+      return;
+    }
+
+    if (reducedMotion) {
+      hideAndFinish(true);
       return;
     }
 
@@ -167,8 +163,7 @@ export default function SplashOverlay() {
           pointerEvents: 'none',
         });
       }
-      markSplashDone();
-      emitSplashComplete();
+      emitSplashComplete(false);
     }
 
     window.__splashActive = true;
@@ -259,15 +254,11 @@ export default function SplashOverlay() {
       clearTimeout(failsafe);
       splashTl?.kill();
       unlockScroll();
-      if (!completed) {
-        completed = true;
-        markSplashDone();
-        emitSplashComplete();
-      }
+      window.__splashActive = false;
     };
   }, [isHomepage]);
 
-  if (!isHomepage) return null;
+  if (!isHomepage || !canPlaySplashRef.current) return null;
 
   return (
     <div

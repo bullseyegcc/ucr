@@ -13,7 +13,7 @@ export default function HeroHeading({ children, className = '', delay = 0 }) {
     let cancelled = false;
     let splashListener;
 
-    const play = (startDelay) => {
+    const play = (startDelay, fast = false) => {
       if (cancelled || !wrapperRef.current) return;
       ctx = gsap.context(() => {
         const tl = gsap.timeline();
@@ -26,7 +26,7 @@ export default function HeroHeading({ children, className = '', delay = 0 }) {
             opacity: 1,
             filter: 'blur(0px)',
             letterSpacing: '0.01em',
-            duration: 1.2,
+            duration: fast ? 1 : 1.2,
             ease: 'expo.out',
             delay: startDelay,
           }
@@ -48,12 +48,17 @@ export default function HeroHeading({ children, className = '', delay = 0 }) {
 
     const startAfterSplashOrDelay = () => {
       if (window.__splashActive) {
-        splashListener = () => {
+        splashListener = (event) => {
           window.removeEventListener('splashComplete', splashListener);
           splashListener = null;
-          play(0.15);
+          const skipped = event?.detail?.skipped === true;
+          play(skipped ? 0 : 0.15, skipped);
         };
         window.addEventListener('splashComplete', splashListener);
+        return;
+      }
+      if (window.__splashSkipped) {
+        play(0, true);
         return;
       }
       const isMobile = window.innerWidth < 768;
