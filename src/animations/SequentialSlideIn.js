@@ -111,6 +111,9 @@ export default function SequentialSlideIn({
           scrub: animScrub,
           invalidateOnRefresh: true,
           fastScrollEnd: true,
+          onRefresh(self) {
+            if (self.animation) self.animation.progress(self.progress);
+          },
           onLeave: () => {
             gsap.set(items, { willChange: 'auto' });
           },
@@ -136,7 +139,6 @@ export default function SequentialSlideIn({
             opacity: 1,
             duration: itemDuration,
             ease: 'power2.out',
-            immediateRender: false,
           },
           delay
         );
@@ -145,42 +147,73 @@ export default function SequentialSlideIn({
       timeline.duration(totalDuration);
     }, containerRef);
 
-    scheduleScrollTriggerRefresh(50);
-
     const syncProgress = () => {
       const scrollTrigger = timeline?.scrollTrigger;
       if (!scrollTrigger || !timeline) return;
 
-      const rect = container.getBoundingClientRect();
-      const inView = rect.top < window.innerHeight && rect.bottom > 0;
-      if (
-        inView &&
-        scrollTrigger.progress === 0 &&
-        scrollTrigger.scroll() > scrollTrigger.start
-      ) {
-        const range = scrollTrigger.end - scrollTrigger.start;
-        if (range > 0) {
-          timeline.progress(
-            Math.min(1, (scrollTrigger.scroll() - scrollTrigger.start) / range)
-          );
-        }
+      scrollTrigger.refresh();
+
+      const scroll = scrollTrigger.scroll();
+      const range = scrollTrigger.end - scrollTrigger.start;
+      let progress = 0;
+      if (range > 0) {
+        progress = gsap.utils.clamp(0, 1, (scroll - scrollTrigger.start) / range);
+      } else if (scroll >= scrollTrigger.start) {
+        progress = 1;
       }
+
+      const rect = container.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      const inView = rect.top < vh && rect.bottom > 0;
+
+      // After client navigation, start/end can sit too far down while the
+      // grid is already on screen — cards would stay at opacity 0.
+      if (progress === 0 && inView && rect.top < vh * 0.88) {
+        const visualRange = Math.max(rect.height + vh * 0.15, 1);
+        progress = gsap.utils.clamp(0, 1, (vh * 0.85 - rect.top) / visualRange);
+      }
+
+      if (rect.bottom < vh * 0.2) {
+        progress = 1;
+      }
+
+      timeline.progress(progress);
     };
 
-    const syncTimer = window.setTimeout(syncProgress, 200);
-    const onResize = () => scheduleScrollTriggerRefresh(100);
     const onReady = () => {
       scheduleScrollTriggerRefresh(0);
       syncProgress();
     };
 
+    scheduleScrollTriggerRefresh(50);
+
+    const syncTimers = [80, 280, 700].map((ms) => window.setTimeout(onReady, ms));
+    const onResize = () => {
+      scheduleScrollTriggerRefresh(100);
+      window.setTimeout(syncProgress, 120);
+    };
+
     window.addEventListener('resize', onResize, { passive: true });
     window.addEventListener('scrollAnimationsReady', onReady);
 
+    // Lenis already booted on SPA navigations, so the one-shot ready event
+    // will never fire again for this mount.
+    if (window.lenisInstance) onReady();
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        onReady();
+      },
+      { threshold: [0, 0.08, 0.2], rootMargin: '15% 0px' }
+    );
+    io.observe(container);
+
     return () => {
-      clearTimeout(syncTimer);
+      syncTimers.forEach((id) => window.clearTimeout(id));
       window.removeEventListener('resize', onResize);
       window.removeEventListener('scrollAnimationsReady', onReady);
+      io.disconnect();
       ctx.revert();
     };
   }, [
