@@ -79,6 +79,17 @@ const CERTIFICATIONS = [
   },
 ]
 
+const RECOGNITIONS = [
+  {
+    src: "/sustainability/recognition/recongnition1.png",
+    alt: "Abu Dhabi Chamber Certificate of Recognition — Silver, Union Copper Rod L.L.C.",
+  },
+  {
+    src: "/sustainability/recognition/recongnition2.png",
+    alt: "Environmental Product Declaration — ETP Copper Rod",
+  },
+]
+
 const PILLARS = [
   {
     image: "/sustainability/eco1.webp",
@@ -513,6 +524,42 @@ export default function Sustainability() {
               ))}
             </SequentialSlideIn>
           </div>
+        </div>
+      </section>
+
+      {/* Sustainability & ESG Certifications / Recognition */}
+      <section className="bg-[#F5F5F5] pb-14 pt-2 lg:pb-20 lg:pt-4">
+        <div className="mx-auto w-full max-w-[1600px] px-2 lg:px-10">
+          <FadeIn scrollTrigger duration={0.7}>
+            <h2 className="text-center text-3xl font-medium leading-tight tracking-[-0.5px] text-[#6B6B6B] sm:text-4xl lg:text-[52px] lg:leading-[60px] lg:tracking-[-1.4px]">
+              Sustainability &amp; ESG Certifications / Recognition
+            </h2>
+          </FadeIn>
+
+          <SequentialSlideIn
+            className="mt-8 grid grid-cols-1 gap-5 sm:mt-10 sm:gap-6 md:grid-cols-2 lg:mt-12 lg:gap-8"
+            itemClassName="h-full w-full"
+            start="top 90%"
+            end="bottom 75%"
+            stagger={0.14}
+          >
+            {RECOGNITIONS.map((item) => (
+              <div
+                key={item.src}
+                className="overflow-hidden rounded-[20px] sm:rounded-[24px] lg:rounded-[28px]"
+              >
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[14px] sm:rounded-[18px]">
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-contain object-center"
+                  />
+                </div>
+              </div>
+            ))}
+          </SequentialSlideIn>
         </div>
       </section>
 

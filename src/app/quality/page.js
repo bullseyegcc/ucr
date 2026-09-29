@@ -63,22 +63,25 @@ export default function Quality() {
             </p>
           </SlideIn>
 
-          <div className="w-full sm:w-[80%] lg:w-[65%] flex items-center justify-center mx-auto px-6 sm:px-0">
-            <Image
-              src="/shared/gradientcircle.png"
-              alt="Icon"
-              width={400}
-              height={0}
-              className="w-full object-cover hidden lg:block postion absolute overflow-hidden left-0 top-0"
-            />
+          {/* Soft glow must be full-bleed — not inside the 65% certificate column */}
+          <Image
+            src="/shared/gradientcircle.png"
+            alt=""
+            width={900}
+            height={900}
+            className="pointer-events-none absolute left-1/2 top-[18%] z-0 hidden w-[min(100vw,1200px)] -translate-x-1/2 object-contain lg:block"
+          />
 
-            <CardAnimation index={0} className="w-full">
+          <div className="relative z-10 mx-auto flex w-full items-center justify-center px-6 sm:w-[80%] sm:px-0 lg:w-[65%]">
+            <CardAnimation index={0} className="relative z-10 w-full">
               <Image
                 src="/shared/certificate.png"
-                alt="Icon"
-                width={900}
-                height={0}
-                className="w-full object-cover"
+                alt="ISO 9001:2015 Certificate of Registration — Union Copper Rod LLC"
+                width={1200}
+                height={900}
+                sizes="(max-width: 1024px) 90vw, 65vw"
+                className="h-auto w-full object-contain"
+                priority
               />
             </CardAnimation>
           </div>

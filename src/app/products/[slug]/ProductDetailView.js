@@ -6,7 +6,6 @@ import { useState } from "react";
 import { ChevronDown, Package } from "lucide-react";
 import FadeIn from "../../../animations/FadeIn";
 import SlideIn from "../../../animations/SlideIn";
-import SequentialSlideIn from "../../../animations/SequentialSlideIn";
 
 export default function ProductDetailView({ product }) {
   const [expandedSections, setExpandedSections] = useState({
@@ -319,8 +318,8 @@ export default function ProductDetailView({ product }) {
       </div>
 
       {/* certifications */}
-      <div className="relative z-20 flex flex-col items-center justify-center pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-16 lg:pb-20 bg-[#FFF8F4]">
-        <div className="flex flex-col gap-10 sm:gap-12 lg:gap-16 items-center w-full sm:px-6">
+      <div className="relative z-20 flex flex-col items-center justify-center pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-16 lg:pb-20 bg-white">
+        <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12 items-center w-full px-4 sm:px-6">
           <div className="flex flex-col items-center text-center">
             <SlideIn
               direction="bottom"
@@ -328,45 +327,29 @@ export default function ProductDetailView({ product }) {
               className="mb-3 lg:mb-5"
               duration={0.8}
             >
-              <Badgetextblack title="Certificates" />
+              <Badgetextblack title="CORESTRENGTH" />
             </SlideIn>
             <FadeIn
               scrollTrigger={true}
               duration={0.8}
               className="px-9 font-medium text-[32px] leading-[52px] tracking-[-1.4px] text-center capitalize mt-3 sm:mt-4 lg:text-[52px] lg:leading-[52px] lg:tracking-[-1.4px] lg:mt-5 lg:mt-6"
             >
-              <h1>We've achieved so far</h1>
+              <h1>Product &amp; Regulatory Certifications</h1>
             </FadeIn>
           </div>
 
-          <div className="w-full">
-            <SequentialSlideIn
-              className="mx-auto w-full max-w-[1800px] px-4 sm:px-5 lg:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-6 items-start"
-              itemClassName="w-full min-w-0"
-              start="top 85%"
-              end="bottom 70%"
-            >
-              {[
-                { src: "/certifications/c1.png", offset: "" },
-                { src: "/certifications/c2.png", offset: "lg:mt-6 xl:mt-8" },
-                { src: "/certifications/c3.png", offset: "lg:mt-12 xl:mt-16" },
-                { src: "/certifications/c4.png", offset: "lg:mt-20 xl:mt-24" },
-              ].map((cert) => (
-                <div
-                  key={cert.src}
-                  className={`overflow-hidden rounded-2xl w-full h-[44vh] min-h-[360px] lg:h-[60vh] lg:min-h-[520px] ${cert.offset}`}
-                >
-                  <Image
-                    src={cert.src}
-                    alt="Certification"
-                    width={450}
-                    height={567}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ))}
-            </SequentialSlideIn>
-          </div>
+          <FadeIn scrollTrigger={true} duration={0.9} className="w-full flex justify-center">
+            <div className="relative w-full max-w-[560px] sm:max-w-[680px] lg:max-w-[820px]">
+              <Image
+                src="/products/certificate.png"
+                alt="Bureau of Indian Standards Compliance Mark — IS:12444, CM/L-4100178686"
+                width={1000}
+                height={1250}
+                className="w-full h-auto object-contain"
+                priority={false}
+              />
+            </div>
+          </FadeIn>
         </div>
       </div>
     </div>
