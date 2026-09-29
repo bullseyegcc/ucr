@@ -63,13 +63,13 @@ export default function Quality() {
             </p>
           </SlideIn>
 
-          {/* Soft glow must be full-bleed — not inside the 65% certificate column */}
+          {/* Soft glow pinned to the right edge of the section */}
           <Image
             src="/shared/gradientcircle.png"
             alt=""
             width={900}
             height={900}
-            className="pointer-events-none absolute left-1/2 top-[18%] z-0 hidden w-[min(100vw,1200px)] -translate-x-1/2 object-contain lg:block"
+            className="pointer-events-none absolute right-0 top-0 z-0 hidden h-full w-[55vw] max-w-none object-cover object-right lg:block"
           />
 
           <div className="relative z-10 mx-auto flex w-full items-center justify-center px-6 sm:w-[80%] sm:px-0 lg:w-[65%]">
