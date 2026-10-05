@@ -77,9 +77,10 @@ export default function Quality() {
               <Image
                 src="/shared/certificate.png"
                 alt="ISO 9001:2015 Certificate of Registration — Union Copper Rod LLC"
-                width={1200}
-                height={900}
-                sizes="(max-width: 1024px) 90vw, 65vw"
+                width={3405}
+                height={2243}
+                sizes="(max-width: 1024px) 100vw, min(65vw, 1400px)"
+                quality={95}
                 className="h-auto w-full object-contain"
                 priority
               />
@@ -130,29 +131,35 @@ export default function Quality() {
               >
                 <div className="overflow-hidden rounded-2xl w-full h-[52vh] min-h-[420px] lg:h-[72vh] lg:min-h-[72vh]">
                   <Image
-                    src="/quality/card1.svg"
+                    src="/quality/cert1.png"
                     alt="Certification"
-                    width={450}
-                    height={567}
+                    width={1350}
+                    height={1701}
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    quality={95}
                     className="w-full h-full object-cover object-bottom"
                   />
                 </div>
-                <div className="bg-white relative overflow-hidden rounded-2xl w-full h-[52vh] min-h-[420px] lg:h-[72vh] lg:min-h-[72vh] lg:mt-16 xl:mt-20">
+                <div className="relative overflow-hidden rounded-2xl w-full h-[52vh] min-h-[420px] lg:h-[72vh] lg:min-h-[72vh] lg:mt-16 xl:mt-20">
                   <Image
-                    src="/quality/card2.svg"
+                    src="/quality/cert2.png"
                     alt="Certification"
-                    width={450}
-                    height={567}
-                    className="absolute -bottom-7 w-full h-full object-cover object-bottom"
+                    width={900}
+                    height={1134}
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    quality={95}
+                    className="w-full h-full object-cover object-bottom"
                   />
                 </div>
-                <div className="bg-white relative overflow-hidden rounded-2xl w-full h-[52vh] min-h-[420px] lg:h-[72vh] lg:min-h-[72vh] lg:mt-32 xl:mt-40">
+                <div className="relative overflow-hidden rounded-2xl w-full h-[52vh] min-h-[420px] lg:h-[72vh] lg:min-h-[72vh] lg:mt-32 xl:mt-40">
                   <Image
-                    src="/quality/card3.svg"
+                    src="/quality/cert3.png"
                     alt="Certification"
-                    width={450}
-                    height={567}
-                    className="absolute -bottom-7 w-full h-full object-cover object-bottom"
+                    width={900}
+                    height={1134}
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    quality={95}
+                    className="w-full h-full object-cover object-bottom"
                   />
                 </div>
               </SequentialSlideIn>
