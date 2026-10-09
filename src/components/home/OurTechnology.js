@@ -12,7 +12,7 @@ const TECHNOLOGIES = [
     slug: "ccr-technology",
     title: "CCR Technology",
     description:
-      "Southwire SCR®-4500 Continuous Casting and Rolling Technology. Our Southwire SCR®-4500 technology continuously transforms high-purity copper cathodes into premium 8 mm, 12.5 mm, and 16 mm ETP copper rod, delivering exceptional quality, efficiency, and production reliability.",
+      "Southwire SCR® Continuous Casting and Rolling Technology. Our Southwire SCR®  technology continuously transforms high-purity copper cathodes into premium 8 mm, 12.5 mm, and 16 mm ETP copper rod, delivering exceptional quality, efficiency, and production reliability.",
     backgroundImage: "url('/home/tech1.webp')",
   },
   {
