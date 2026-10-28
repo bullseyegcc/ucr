@@ -1,4 +1,5 @@
 import { products as catalog } from "../../assets/products";
+import { sanitizeCmsHtml } from "../sanitize-html";
 
 function toHttps(url) {
   if (!url || typeof url !== "string") return "";
@@ -185,6 +186,20 @@ function fileUrl(media) {
   );
 }
 
+/** Brochure downloads must stay on the WordPress uploads host. */
+function allowedBrochureUrl(url) {
+  if (!url || typeof url !== "string") return "";
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:") return "";
+    if (parsed.hostname !== "ucr.bullseyetechbrands.com") return "";
+    if (!parsed.pathname.startsWith("/wp-content/")) return "";
+    return parsed.href;
+  } catch {
+    return "";
+  }
+}
+
 function rewriteHtmlUrls(html) {
   if (!html || typeof html !== "string") return "";
   return html
@@ -220,7 +235,7 @@ export function mapPost(node) {
     category: node.categories?.nodes?.[0]?.name || "",
     author: details.authorName || node.author?.node?.name || "",
     authorImage: mediaUrl(details.authorImage),
-    contentHtml: rewriteHtmlUrls(node.content || ""),
+    contentHtml: sanitizeCmsHtml(rewriteHtmlUrls(node.content || "")),
   };
 }
 
@@ -238,8 +253,8 @@ export function mapProduct(node) {
 
   const details = node.productDetails || {};
   const icon = mediaUrl(details.icon) || mediaUrl(node.featuredImage);
-  const technicalParametersHtml = rewriteHtmlUrls(
-    details.technicalParameters || ""
+  const technicalParametersHtml = sanitizeCmsHtml(
+    rewriteHtmlUrls(details.technicalParameters || "")
   );
   const mapped = {
     id: node.databaseId,
@@ -250,7 +265,9 @@ export function mapProduct(node) {
     icon,
     featured: Boolean(details.featured),
     longDescription: stripHtml(details.longDescription),
-    longDescriptionHtml: rewriteHtmlUrls(details.longDescription || ""),
+    longDescriptionHtml: sanitizeCmsHtml(
+      rewriteHtmlUrls(details.longDescription || "")
+    ),
     specifications: htmlToLines(details.specifications),
     applications: htmlToLines(details.applications),
     technicalParameters: parseTechnicalParameters(details.technicalParameters),
@@ -258,7 +275,7 @@ export function mapProduct(node) {
     packagingDimensions: parsePackagingDimensions(details.packagingDimensions),
     sizes: htmlToLines(details.sizes),
     productSpecification: details.productSpecification || "",
-    brochureUrl: fileUrl(details.brochure),
+    brochureUrl: allowedBrochureUrl(fileUrl(details.brochure)),
   };
 
   return applyCatalogFallback(mapped);
@@ -291,6 +308,8 @@ function applyCatalogFallback(mapped) {
     sizes: mapped.sizes.length ? mapped.sizes : fallback.sizes,
     productSpecification:
       mapped.productSpecification || fallback.productSpecification,
-    brochureUrl: mapped.brochureUrl || fallback.brochureUrl || "",
+    brochureUrl: allowedBrochureUrl(
+      mapped.brochureUrl || fallback.brochureUrl || ""
+    ),
   };
 }

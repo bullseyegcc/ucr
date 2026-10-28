@@ -74,6 +74,7 @@ export default function ExpertiseCard({
         alt={imageAlt || title}
         width={imageWidth}
         height={imageHeight}
+        unoptimized={typeof image === "string" && image.toLowerCase().includes(".svg")}
         className={`pointer-events-none absolute z-0 max-w-none ${imageClassName}`}
       />
     </>

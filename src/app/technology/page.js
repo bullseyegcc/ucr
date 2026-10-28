@@ -48,9 +48,17 @@ function getTechnologyScrollY(el) {
   return Math.max(0, getDocumentTop(el) - stackOffset);
 }
 
+const ALLOWED_TECH_IDS = new Set([
+  "ccr-technology",
+  "rod-breakdown",
+  "tin-coating",
+  "upwards-vertical-casting",
+  "advanced-copper-recycling",
+]);
+
 /** Prefer data-tech-id so the browser never hard-jumps to a matching #id. */
 function findTechnologyCard(techId) {
-  if (!techId) return null;
+  if (!techId || !ALLOWED_TECH_IDS.has(techId)) return null;
   return (
     document.querySelector(`[data-tech-id="${techId}"]`) ||
     document.getElementById(techId)
@@ -60,9 +68,10 @@ function findTechnologyCard(techId) {
 function getRequestedTechId() {
   const params = new URLSearchParams(window.location.search);
   const fromQuery = params.get("tech");
-  if (fromQuery) return fromQuery;
+  if (fromQuery && ALLOWED_TECH_IDS.has(fromQuery)) return fromQuery;
   const hash = window.location.hash.replace(/^#/, "");
-  return hash || null;
+  if (hash && ALLOWED_TECH_IDS.has(hash)) return hash;
+  return null;
 }
 
 function scrollToTechnology(techId, { immediate = false } = {}) {

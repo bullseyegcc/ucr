@@ -215,6 +215,7 @@ export default function OurValues() {
             alt="UCR team members"
             width={1440}
             height={545}
+            unoptimized
             className="relative left-1/2 block h-[min(52vh,26rem)] w-[155%] max-w-none -translate-x-1/2 object-cover object-center lg:left-0 lg:h-auto lg:w-full lg:max-w-full lg:translate-x-0 lg:object-contain"
           />
         </FadeIn>

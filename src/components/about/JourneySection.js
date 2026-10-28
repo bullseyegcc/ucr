@@ -169,6 +169,7 @@ function JourneyCard({ item, priority = false }) {
         alt=""
         width={141}
         height={146}
+        unoptimized
         aria-hidden
         className={`${CORNER_SIZE} right-0 top-0`}
       />

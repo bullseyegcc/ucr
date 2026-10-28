@@ -33,7 +33,7 @@ export function buildContactEmail(data) {
   ];
 
   return {
-    subject: `New contact enquiry from ${data.firstName}`,
+    subject: `New contact enquiry from ${data.firstName.replace(/[\r\n]+/g, "")}`,
     text: buildTextBody("New contact enquiry", rows),
     html: `<h2 style="font-family:Arial,sans-serif;color:#111;">New contact enquiry</h2>${buildHtmlTable(rows)}`,
     replyTo: data.email,

@@ -1,10 +1,12 @@
 import nodemailer from "nodemailer";
 
-function requireEnv(name) {
+function requireMailEnv(name) {
   const value = process.env[name];
 
   if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
+    const error = new Error("contact_mail_config");
+    error.code = "contact_mail_config";
+    throw error;
   }
 
   return value;
@@ -17,12 +19,12 @@ export function getSmtpConfig(overrides = {}) {
     (process.env.SMTP_SECURE !== "false" && port === 465);
 
   return {
-    host: process.env.SMTP_HOST ?? "business701-1.web-hosting.com",
+    host: requireMailEnv("SMTP_HOST"),
     port,
     secure,
     auth: {
-      user: requireEnv("SMTP_USER"),
-      pass: requireEnv("SMTP_PASS"),
+      user: requireMailEnv("SMTP_USER"),
+      pass: requireMailEnv("SMTP_PASS"),
     },
     ...overrides,
   };
@@ -33,9 +35,9 @@ export function createSmtpTransporter(config) {
 }
 
 export function getDefaultMailFrom() {
-  return process.env.SMTP_FROM ?? requireEnv("SMTP_USER");
+  return process.env.SMTP_FROM ?? requireMailEnv("SMTP_USER");
 }
 
 export function getDefaultMailTo() {
-  return process.env.SMTP_TO ?? "jahangeer9182@gmail.com";
+  return requireMailEnv("SMTP_TO");
 }
