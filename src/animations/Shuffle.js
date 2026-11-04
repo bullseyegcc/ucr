@@ -33,7 +33,12 @@ const Shuffle = ({
   triggerOnHover = true
 }) => {
   const ref = useRef(null);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
+  const [fontsLoaded, setFontsLoaded] = useState(() => {
+    if (typeof document === 'undefined' || !('fonts' in document)) {
+      return typeof document !== 'undefined';
+    }
+    return document.fonts.status === 'loaded';
+  });
   const [ready, setReady] = useState(false);
 
   const splitRef = useRef(null);
@@ -57,11 +62,16 @@ const Shuffle = ({
   }, [threshold, rootMargin]);
 
   useEffect(() => {
-    if ('fonts' in document) {
-      if (document.fonts.status === 'loaded') setFontsLoaded(true);
-      else document.fonts.ready.then(() => setFontsLoaded(true));
-    } else setFontsLoaded(true);
-  }, []);
+    if (fontsLoaded || !('fonts' in document)) return undefined;
+
+    let cancelled = false;
+    document.fonts.ready.then(() => {
+      if (!cancelled) setFontsLoaded(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [fontsLoaded]);
 
   useGSAP(
     () => {

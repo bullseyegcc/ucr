@@ -66,19 +66,6 @@ export default function ScrollStack({
   const propsRef = useRef({})
   const updateRef = useRef(() => {})
 
-  propsRef.current = {
-    itemScale,
-    itemStackDistance,
-    stackPosition,
-    scaleEndPosition,
-    baseScale,
-    rotationAmount,
-    blurAmount,
-    useWindowScroll,
-    disableStackOnMobile,
-    onStackComplete,
-  }
-
   const parsePercentage = useCallback((value, containerHeight) => {
     if (typeof value === 'string' && value.includes('%')) {
       return (parseFloat(value) / 100) * containerHeight
@@ -247,7 +234,33 @@ export default function ScrollStack({
     [parsePercentage],
   )
 
-  updateRef.current = updateCardTransforms
+  useLayoutEffect(() => {
+    propsRef.current = {
+      itemScale,
+      itemStackDistance,
+      stackPosition,
+      scaleEndPosition,
+      baseScale,
+      rotationAmount,
+      blurAmount,
+      useWindowScroll,
+      disableStackOnMobile,
+      onStackComplete,
+    }
+    updateRef.current = updateCardTransforms
+  }, [
+    itemScale,
+    itemStackDistance,
+    stackPosition,
+    scaleEndPosition,
+    baseScale,
+    rotationAmount,
+    blurAmount,
+    useWindowScroll,
+    disableStackOnMobile,
+    onStackComplete,
+    updateCardTransforms,
+  ])
 
   useLayoutEffect(() => {
     if (!useWindowScroll && !scrollerRef.current) return

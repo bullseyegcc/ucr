@@ -126,7 +126,7 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
             <p className="relative z-10 text-[#5F5F66] font-[Helvetica_Now_Display] font-normal text-sm leading-[24px] tracking-[-0.43px] mt-3 w-full lg:w-4/5 lg:text-[20px] lg:leading-[36px] lg:tracking-[-0.8px]">
               From logistics and facility management to specialized industrial
               services, we deliver essential support functions that strengthen
-              our group's operational backbone. Our service companies allow
+              our group&apos;s operational backbone. Our service companies allow
               other subsidiaries to focus on their core business while
               benefiting from dependable, optimized support systems.
             </p>

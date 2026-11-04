@@ -157,9 +157,9 @@ export default function FadeIn({
       if (wordSpans && wordSpans.length > 0) {
         gsap.set(wordSpans, { willChange: 'auto', opacity: 1, filter: 'none' });
       }
-      if (elementRef.current && scrollTrigger) {
+      if (element && scrollTrigger) {
         ScrollTrigger.getAll().forEach(trigger => {
-          if (trigger.trigger === elementRef.current) {
+          if (trigger.trigger === element) {
             trigger.kill();
           }
         });

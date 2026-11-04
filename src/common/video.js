@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 function getPosterSrc(src) {
   if (!src) return '';
@@ -13,9 +14,9 @@ function getObjectFit(className) {
   return 'object-cover';
 }
 
-function markVideoReady(video, setIsReady) {
+function markVideoReady(video, onReady) {
   if (video.readyState >= 2) {
-    setIsReady(true);
+    onReady();
   }
 }
 
@@ -30,7 +31,8 @@ export function VideoPlayer({
   const containerRef = useRef(null);
   const videoRef = useRef(null);
   const [shouldLoad, setShouldLoad] = useState(priority);
-  const [isReady, setIsReady] = useState(false);
+  const [readySrc, setReadySrc] = useState(null);
+  const isReady = readySrc === src;
 
   const posterSrc = poster ?? getPosterSrc(src);
   const objectFit = getObjectFit(className);
@@ -56,20 +58,19 @@ export function VideoPlayer({
   }, [priority]);
 
   useEffect(() => {
-    setIsReady(false);
-  }, [src]);
-
-  useEffect(() => {
     if (!shouldLoad) return;
 
     const video = videoRef.current;
     if (!video) return;
 
-    markVideoReady(video, setIsReady);
+    const frame = requestAnimationFrame(() => {
+      markVideoReady(video, () => setReadySrc(src));
+    });
     video.play().catch(() => {});
+    return () => cancelAnimationFrame(frame);
   }, [shouldLoad, src]);
 
-  const handleReady = () => setIsReady(true);
+  const handleReady = () => setReadySrc(src);
 
   return (
     <div
@@ -93,9 +94,11 @@ export function VideoPlayer({
         className={`h-full w-full min-h-full ${objectFit}`}
       />
       {posterSrc && (
-        <img
+        <Image
           src={posterSrc}
           alt=""
+          width={width}
+          height={height}
           aria-hidden="true"
           className={`h-full w-full min-h-full ${objectFit} z-[1] transition-opacity duration-500 ${
             isReady ? 'pointer-events-none opacity-0' : 'opacity-100'

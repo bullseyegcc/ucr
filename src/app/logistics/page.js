@@ -68,7 +68,7 @@ export default function Logistics() {
             duration={0.8}
             scrollTrigger={true}
           >
-            <h1>What we're capable of</h1>
+            <h1>What we&apos;re capable of</h1>
           </FadeIn>
           <FadeIn
             className="mt-3 lg:mt-4 max-w-xl px-6"

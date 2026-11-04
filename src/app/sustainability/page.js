@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useSyncExternalStore } from "react"
 import { createPortal } from "react-dom"
 import { Badge } from "../../common/badge"
 import Image from "next/image"
@@ -174,12 +174,12 @@ const ELEMENTS = [
   },
 ]
 
-function ElementsModal({ item, onClose }) {
-  const [mounted, setMounted] = useState(false)
+function subscribeToClient() {
+  return () => {}
+}
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+function ElementsModal({ item, onClose }) {
+  const mounted = useSyncExternalStore(subscribeToClient, () => true, () => false)
 
   useEffect(() => {
     if (!item) return

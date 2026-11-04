@@ -155,7 +155,7 @@ export default function ScrollRevealCardsContainer({
     return () => {
       ctx.revert();
     };
-  }, [pinOnMobile, scrub, staggerDelay]);
+  }, [pinOnMobile, scrub, staggerDelay, mobileDuration, mobileStaggerDelay, pin]);
 
   return (
     <div ref={containerRef} className={className}>

@@ -117,7 +117,7 @@ export default function Quality() {
                 duration={0.8}
                 className="px-9 font-medium text-[32px] leading-[52px] tracking-[-1.4px] text-center capitalize mt-3 sm:mt-4 lg:text-[52px] lg:leading-[52px] lg:tracking-[-1.4px] lg:mt-5 lg:mt-6"
               >
-                <h1>We've also achieved so far</h1>
+                <h1>We&apos;ve also achieved so far</h1>
               </FadeIn>
             </div>
 

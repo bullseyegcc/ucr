@@ -64,12 +64,12 @@ function getCardOffset(itemEls, activeIndex, gap) {
 
 export default function OurTechnology() {
   const [activeTab, setActiveTab] = useState(0);
-  const [cardReady, setCardReady] = useState(false);
-  const [cardHeight, setCardHeight] = useState(null);
   const listRef = useRef(null);
   const itemRefs = useRef([]);
   const measureRefs = useRef([]);
   const cardY = useMotionValue(0);
+  const cardHeightMv = useMotionValue(0);
+  const cardVisibility = useMotionValue("hidden");
   const pendingFromY = useRef(null);
   const activeTabRef = useRef(0);
   const slideControlsRef = useRef(null);
@@ -108,10 +108,11 @@ export default function OurTechnology() {
 
       if (cardHeightRef.current !== nextHeight) {
         cardHeightRef.current = nextHeight;
-        setCardHeight(nextHeight);
+        cardHeightMv.set(nextHeight);
       }
 
       applyActiveSpacerHeight(nextHeight);
+      cardVisibility.set("visible");
 
       const toY = getCardOffset(itemRefs.current, activeTabRef.current, getGap());
       const fromY = animateSlide ? pendingFromY.current : null;
@@ -124,10 +125,8 @@ export default function OurTechnology() {
         cardY.set(fromY);
         slideControlsRef.current = animate(cardY, toY, { duration: 0.45, ease: EASE });
       }
-
-      setCardReady(true);
     },
-    [applyActiveSpacerHeight, cardY, getGap, measureMaxCardHeight]
+    [applyActiveSpacerHeight, cardHeightMv, cardVisibility, cardY, getGap, measureMaxCardHeight]
   );
 
   useLayoutEffect(() => {
@@ -161,8 +160,6 @@ export default function OurTechnology() {
     setActiveTab(tabIndex);
   };
 
-  const activeItemStyle = cardHeight ? { height: cardHeight } : undefined;
-
   return (
     <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
       <div className="flex flex-col lg:flex-row gap-[0.25rem] items-stretch">
@@ -185,7 +182,6 @@ export default function OurTechnology() {
                     itemRefs.current[index] = el;
                   }}
                   className="relative w-full"
-                  style={isActive ? activeItemStyle : undefined}
                 >
                   <motion.button
                     type="button"
@@ -237,10 +233,9 @@ export default function OurTechnology() {
               ))}
             </div>
 
-            {cardReady && cardHeight != null && (
-              <motion.div
+            <motion.div
                 className="absolute left-0 right-0 top-0 z-10 box-border overflow-hidden rounded-xl bg-white px-[1.25rem] pt-[1.25rem] pb-[1.75rem] shadow-none lg:px-[1.5rem] lg:pt-[1.35rem] lg:pb-[2rem]"
-                style={{ y: cardY, height: cardHeight }}
+                style={{ y: cardY, height: cardHeightMv, visibility: cardVisibility }}
               >
                 <div className="relative h-full w-full">
                   <AnimatePresence initial={false}>
@@ -273,8 +268,7 @@ export default function OurTechnology() {
                     </motion.div>
                   </AnimatePresence>
                 </div>
-              </motion.div>
-            )}
+            </motion.div>
           </div>
         </div>
 

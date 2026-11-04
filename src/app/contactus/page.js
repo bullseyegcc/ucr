@@ -5,6 +5,7 @@ import SlideIn from "../../animations/SlideIn";
 import ContactForm from "../../components/contact/ContactForm";
 import { socialLinks } from "../../assets/social-links";
 import Hero from "@/components/shared/Hero";
+import Image from "next/image";
 
 export default function contactus() {
   return (
@@ -28,7 +29,7 @@ export default function contactus() {
               </p>
 
               <h2 className="font-primary font-medium text-[32px] lg:text-[62px] leading-[48px] lg:leading-[70px] tracking-[-1.86px] align-middle text-black">
-                Let's connect
+                Let&apos;s connect
               </h2>
             </SlideIn>
           </div>
@@ -40,7 +41,7 @@ export default function contactus() {
           >
             <div className="flex items-start self-center">
               <p className="text-gray-700 text-base leading-7 tracking-[-0.2px] lg:text-xl lg:leading-[28px] max-w-[361px] lg:max-w-lg ml-auto font-medium lg:font-medium">
-                Whether you're ready to start or just curious, we'd love to hear
+                Whether you&apos;re ready to start or just curious, we&apos;d love to hear
                 from you.
               </p>
             </div>
@@ -59,17 +60,20 @@ export default function contactus() {
               {/* Person Card */}
               <div className="bg-white rounded-lg p-4 lg:p-3 group transition-all duration-400">
                 <div className="flex items-start gap-3 lg:gap-6">
-                  <img
+                  <Image
                     src="/contact/person.png"
                     alt="Team member"
-                    className="w-16 lg:w-40 h-16 lg:h-40  object-cover flex-shrink-0"
+                    width={160}
+                    height={160}
+                    priority
+                    className="h-16 w-16 shrink-0 object-cover lg:h-40 lg:w-40"
                   />
                   <div className="flex-1">
                     <h3 className="font-medium text-gray-900 text-base lg:text-base leading-6 mb-1 lg:mt-4 lg:mb-3">
                       Hey there!
                     </h3>
                     <p className="text-[#505050] text-base lg:text-base leading-6 lg:leading-6 mb-3 lg:mb-5 font-normal tracking-[-0.16px]">
-                      Whether you need quick answers or deep strategy talks, I'm
+                      Whether you need quick answers or deep strategy talks, I&apos;m
                       here to make your journey smooth.
                     </p>
                     <a
@@ -177,10 +181,12 @@ export default function contactus() {
             <div className="flex flex-col items-center bg-white rounded-lg p-4 lg:p-8 group transition-all duration-400">
               <div className="flex items-start justify-between gap-3 lg:gap-6">
                 <div className="w-1/2 flex items-center">
-                  <img
+                  <Image
                     src="/contact/person.png"
                     alt="Team member"
-                    className="w-full h-full object-cover rounded-lg"
+                    width={640}
+                    height={640}
+                    className="h-auto w-full rounded-lg object-cover"
                   />
                 </div>
 
@@ -189,7 +195,7 @@ export default function contactus() {
                     Hey there!
                   </h3>
                   <p className="text-[#505050] text-sm lg:text-base leading-6 lg:leading-6 mb-3 lg:mb-5 font-normal tracking-[-0.16px]">
-                    Whether you need quick answers or deep strategy talks, I'm
+                    Whether you need quick answers or deep strategy talks, I&apos;m
                     here to make your journey smooth.
                   </p>
                 </div>

@@ -97,7 +97,10 @@ export default function BlogDetailClient({ post }) {
   const publishedAt = formatDate(post.date);
 
   useEffect(() => {
-    setShareUrl(window.location.href);
+    const frame = requestAnimationFrame(() => {
+      setShareUrl(window.location.href);
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   const handleCopy = async () => {

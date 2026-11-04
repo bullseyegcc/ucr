@@ -70,7 +70,7 @@ export default function OurValues() {
               className=" lg:pt-12"
             >
               <p className=" max-w-2xl text-ellipsis text-[#212225] text-[16px] font-normal leading-[30px] tracking-[-0.45px] lg:text-[22px]">
-                We don't just produce copper — we shape reliability, innovation,
+                We don&apos;t just produce copper — we shape reliability, innovation,
                 and sustainability into every product we deliver.
               </p>
             </SlideIn>

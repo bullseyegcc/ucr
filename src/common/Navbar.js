@@ -82,9 +82,13 @@ export const Navbar = () => {
     }, [solidByDefault]);
 
     const syncProgress = useCallback((instant = false) => {
-        let next = solidByDefault ? 1 : 0;
+        const solidPage =
+            solidByDefault ||
+            (typeof document !== 'undefined' &&
+                Boolean(document.querySelector('[data-solid-nav]')));
+        let next = solidPage ? 1 : 0;
 
-        if (!solidByDefault) {
+        if (!solidPage) {
             if (pathname === '/') {
                 // Drive from About slide progress so navbar eases with the panel dock.
                 const aboutP = window.__heroAboutProgress ?? 0;
@@ -104,7 +108,8 @@ export const Navbar = () => {
         } else {
             progress.set(next);
         }
-    }, [pathname, progress, reducedMotion, solidByDefault]);
+        applyOpaqueFlag(next);
+    }, [applyOpaqueFlag, pathname, progress, reducedMotion, solidByDefault]);
 
     useEffect(() => progress.on('change', applyOpaqueFlag), [applyOpaqueFlag, progress]);
 

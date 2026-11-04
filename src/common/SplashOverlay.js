@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
 
@@ -22,6 +22,26 @@ function emitSplashComplete(skipped = false) {
   window.dispatchEvent(new CustomEvent('splashComplete', { detail: { skipped } }));
 }
 
+// Survives client navigations (layout stays mounted) and resets on a full reload.
+let splashStillAllowed = true;
+
+function claimSplash(isHomepage) {
+  if (!isHomepage) {
+    splashStillAllowed = false;
+    window.__splashActive = false;
+    return;
+  }
+
+  if (splashStillAllowed) {
+    window.__splashActive = true;
+    window.__splashSkipped = false;
+    return;
+  }
+
+  window.__splashActive = false;
+  window.__splashSkipped = true;
+}
+
 export default function SplashOverlay() {
   const containerRef = useRef(null);
   const overlayRef = useRef(null);
@@ -30,23 +50,12 @@ export default function SplashOverlay() {
   const rectRef = useRef(null);
   const pathname = usePathname();
   const isHomepage = pathname === '/';
-  // Survives client navigations (layout stays mounted); resets on full reload.
-  const canPlaySplashRef = useRef(true);
 
   // Claim splash before child effects run (HeroHeading / Lenis). Play only
   // on the initial homepage document load — skip when returning from other pages.
-  if (typeof window !== 'undefined') {
-    if (!isHomepage) {
-      canPlaySplashRef.current = false;
-      window.__splashActive = false;
-    } else if (canPlaySplashRef.current) {
-      window.__splashActive = true;
-      window.__splashSkipped = false;
-    } else {
-      window.__splashActive = false;
-      window.__splashSkipped = true;
-    }
-  }
+  useLayoutEffect(() => {
+    claimSplash(isHomepage);
+  }, [isHomepage]);
 
   useEffect(() => {
     const overlay = overlayRef.current;
@@ -55,7 +64,7 @@ export default function SplashOverlay() {
     const rect = rectRef.current;
 
     if (!isHomepage) {
-      canPlaySplashRef.current = false;
+      splashStillAllowed = false;
       if (overlay) gsap.set(overlay, { display: 'none', pointerEvents: 'none' });
       emitSplashComplete(true);
       return;
@@ -78,7 +87,7 @@ export default function SplashOverlay() {
       emitSplashComplete(skipped);
     };
 
-    if (!canPlaySplashRef.current) {
+    if (!splashStillAllowed) {
       hideAndFinish(true);
       return;
     }
@@ -258,7 +267,7 @@ export default function SplashOverlay() {
     };
   }, [isHomepage]);
 
-  if (!isHomepage || !canPlaySplashRef.current) return null;
+  if (!isHomepage || !splashStillAllowed) return null;
 
   return (
     <div
