@@ -85,7 +85,7 @@ export default function WeCareSection() {
           }
         });
       },
-      { threshold: 0.18 }
+      { threshold: 0.18 },
     );
 
     cards.forEach((card) => observer.observe(card));
@@ -96,7 +96,7 @@ export default function WeCareSection() {
     <div className="mx-auto my-5 w-full max-w-[1600px] px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
       <div
         ref={sectionRef}
-        className="relative flex h-[min(75vh,640px)] max-h-[640px] flex-col justify-between overflow-hidden rounded-xl bg-[url('/home/care.jpg')] bg-cover bg-center pt-8 lg:h-[min(90vh,900px)] lg:max-h-[1000px]"
+        className="relative flex h-[min(75vh,640px)] max-h-[640px] flex-col justify-between overflow-hidden rounded-xl bg-[url('/home/care.jpg')] bg-cover bg-center pt-8 lg:h-[min(90vh,900px)] lg:max-h-[800px]"
       >
         <VideoPlayer
           src="/sustain.mp4"
