@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import badge_icon from "../../../public/shared/badge.png";
+import { SITE_SHELL } from "../../lib/layout";
 
 const FALLBACK_PRODUCTS = [
   {
@@ -34,7 +35,7 @@ const FALLBACK_PRODUCTS = [
 ];
 
 const FALLBACK_BACKGROUNDS = FALLBACK_PRODUCTS.map(
-  (item) => item.backgroundImage
+  (item) => item.backgroundImage,
 );
 
 function mapHomeProducts(products) {
@@ -67,9 +68,9 @@ export default function FeaturedProducts({ products }) {
   };
 
   return (
-    <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
+    <div className={SITE_SHELL}>
       {/* Explicit h- (not min-h) so percentage heights on the card resolve */}
-      <div className="relative h-[min(75vh,640px)] max-h-[640px] lg:h-[min(90vh,1000px)] lg:max-h-[1000px]">
+      <div className="relative h-[min(75vh,640px)] max-h-[640px] lg:h-[min(90vh,1000px)] lg:max-h-[700px]">
         {/* Background fills the container, clipped to rounded corners */}
         <div className="absolute inset-0 overflow-hidden rounded-xl">
           <div
@@ -122,7 +123,7 @@ export default function FeaturedProducts({ products }) {
                   type="button"
                 >
                   <h2
-                    className={`font-primary text-[1.625rem] font-medium leading-[1.15] tracking-[-0.06rem] sm:text-[1.875rem] lg:text-[2.5rem] lg:leading-[1.1] xl:text-[2.85rem] 2xl:text-[3.1rem] ${
+                    className={`font-primary text-[1.625rem] font-normal leading-[1.15] tracking-[-0.06rem] sm:text-[1.875rem] lg:text-[2.5rem] lg:leading-[1.1] xl:text-[2.85rem] 2xl:text-[3.1rem] ${
                       activeTab === index ? "text-primary" : "text-secondary"
                     }`}
                   >

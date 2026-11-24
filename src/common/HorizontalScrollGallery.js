@@ -1,18 +1,25 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { SITE_SHELL } from "../lib/layout";
 
-const MOBILE_SLIDE_CLASS = 'w-[min(88vw,380px)]';
+// Account for SITE_SHELL padding: px-4 (2rem) / sm:px-6 (3rem)
+const MOBILE_SLIDE_CLASS =
+  "w-[min(calc(100vw-3.5rem),360px)] sm:w-[min(calc(100vw-4.5rem),360px)]";
 const MOBILE_SPACER_CLASS =
-  'w-[max(0px,calc((100vw-min(88vw,380px))/2))] shrink-0 grow-0 basis-auto';
+  "w-[max(0px,calc((100vw-2rem-min(calc(100vw-3.5rem),360px))/2))] sm:w-[max(0px,calc((100vw-3rem-min(calc(100vw-4.5rem),360px))/2))] shrink-0 grow-0 basis-auto";
 
 export default function HorizontalScrollGallery({ images = [] }) {
   const wrapperRef = useRef(null);
   const innerRef = useRef(null);
 
-  const defaultImages = ['/home/slide1.png', '/home/slide2.png', '/home/slide3.png'];
+  const defaultImages = [
+    "/home/slide1.png",
+    "/home/slide2.png",
+    "/home/slide3.png",
+  ];
   const imgs = images.length > 0 ? images : defaultImages;
   const middleIndex = Math.floor(imgs.length / 2);
 
@@ -24,12 +31,12 @@ export default function HorizontalScrollGallery({ images = [] }) {
 
   useEffect(() => {
     const onResize = () => {
-      if (typeof window === 'undefined') return;
+      if (typeof window === "undefined") return;
       setIsMobile(window.innerWidth < 768);
     };
     onResize();
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   // Desktop continuous marquee (duplicated track)
@@ -44,32 +51,32 @@ export default function HorizontalScrollGallery({ images = [] }) {
     const duration = Math.max(8, imgs.length * 4);
     const animName = `hsg-scroll-${Date.now()}`;
 
-    styleEl = document.createElement('style');
+    styleEl = document.createElement("style");
     styleEl.dataset.hsg = animName;
     styleEl.innerHTML = `@keyframes ${animName} { from { transform: translateX(0); } to { transform: translateX(-${singleSetWidth}px); } }`;
     document.head.appendChild(styleEl);
 
-    inner.style.willChange = 'transform';
+    inner.style.willChange = "transform";
     inner.style.animation = `${animName} ${duration}s linear infinite`;
 
     const onResize = () => {
       const newSingle = inner.scrollWidth / 2;
       if (styleEl?.parentNode) styleEl.parentNode.removeChild(styleEl);
-      styleEl = document.createElement('style');
+      styleEl = document.createElement("style");
       styleEl.dataset.hsg = animName;
       styleEl.innerHTML = `@keyframes ${animName} { from { transform: translateX(0); } to { transform: translateX(-${newSingle}px); } }`;
       document.head.appendChild(styleEl);
       inner.style.animation = `${animName} ${duration}s linear infinite`;
     };
 
-    window.addEventListener('resize', onResize);
+    window.addEventListener("resize", onResize);
 
     return () => {
-      window.removeEventListener('resize', onResize);
+      window.removeEventListener("resize", onResize);
       if (styleEl?.parentNode) styleEl.parentNode.removeChild(styleEl);
       if (inner) {
-        inner.style.animation = '';
-        inner.style.willChange = '';
+        inner.style.animation = "";
+        inner.style.willChange = "";
       }
     };
   }, [imgs.length, isMobile]);
@@ -77,11 +84,11 @@ export default function HorizontalScrollGallery({ images = [] }) {
   /** Child index in the track (accounts for leading spacer on mobile). */
   const slideChildIndex = useCallback(
     (slideIndex) => (isMobile ? slideIndex + 1 : slideIndex),
-    [isMobile]
+    [isMobile],
   );
 
   const scrollToIndex = useCallback(
-    (idx, behavior = 'smooth') => {
+    (idx, behavior = "smooth") => {
       const wrapper = wrapperRef.current;
       const inner = innerRef.current;
       if (!wrapper || !inner) return;
@@ -104,7 +111,7 @@ export default function HorizontalScrollGallery({ images = [] }) {
       });
       setCurrentIndex(clamped);
     },
-    [imgs.length, slideChildIndex]
+    [imgs.length, slideChildIndex],
   );
 
   // Sync index from manual swipe — slide closest to viewport center
@@ -138,14 +145,14 @@ export default function HorizontalScrollGallery({ images = [] }) {
       });
     };
 
-    wrapper.addEventListener('scroll', onScroll, { passive: true });
-    return () => wrapper.removeEventListener('scroll', onScroll);
+    wrapper.addEventListener("scroll", onScroll, { passive: true });
+    return () => wrapper.removeEventListener("scroll", onScroll);
   }, [imgs.length, isMobile, slideChildIndex]);
 
   // Middle slide starts centered; go left for earlier, right for later
   useEffect(() => {
     if (!isMobile) return;
-    const run = () => scrollToIndex(middleIndex, 'auto');
+    const run = () => scrollToIndex(middleIndex, "auto");
     const id1 = requestAnimationFrame(run);
     const id2 = window.setTimeout(run, 80);
     const id3 = window.setTimeout(run, 250);
@@ -159,31 +166,31 @@ export default function HorizontalScrollGallery({ images = [] }) {
   const displayImgs = isMobile ? imgs : [...imgs, ...imgs];
 
   return (
-    <div className="relative mx-auto flex w-full max-w-[1920px] flex-col items-center justify-center overflow-hidden bg-white px-0 lg:flex-row">
+    <div className={`relative flex flex-col items-center justify-center overflow-hidden bg-white lg:flex-row ${SITE_SHELL}`}>
       {!isMobile && (
         <>
           <div
             className="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 lg:w-24 xl:w-28"
             style={{
-              background: 'transparent',
-              WebkitBackdropFilter: 'blur(10px)',
-              backdropFilter: 'blur(10px)',
+              background: "transparent",
+              WebkitBackdropFilter: "blur(10px)",
+              backdropFilter: "blur(10px)",
               WebkitMaskImage:
-                'linear-gradient(to right, black 0%, black 25%, transparent 100%)',
+                "linear-gradient(to right, black 0%, black 25%, transparent 100%)",
               maskImage:
-                'linear-gradient(to right, black 0%, black 25%, transparent 100%)',
+                "linear-gradient(to right, black 0%, black 25%, transparent 100%)",
             }}
           />
           <div
             className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 lg:w-24 xl:w-28"
             style={{
-              background: 'transparent',
-              WebkitBackdropFilter: 'blur(10px)',
-              backdropFilter: 'blur(10px)',
+              background: "transparent",
+              WebkitBackdropFilter: "blur(10px)",
+              backdropFilter: "blur(10px)",
               WebkitMaskImage:
-                'linear-gradient(to left, black 0%, black 25%, transparent 100%)',
+                "linear-gradient(to left, black 0%, black 25%, transparent 100%)",
               maskImage:
-                'linear-gradient(to left, black 0%, black 25%, transparent 100%)',
+                "linear-gradient(to left, black 0%, black 25%, transparent 100%)",
             }}
           />
         </>
@@ -192,11 +199,14 @@ export default function HorizontalScrollGallery({ images = [] }) {
       <div
         ref={wrapperRef}
         className={`relative w-full lg:overflow-hidden ${
-          isMobile ? 'scrollbar-hide overflow-x-auto' : 'overflow-hidden'
+          isMobile ? "scrollbar-hide overflow-x-auto" : "overflow-hidden"
         }`}
         style={
           isMobile
-            ? { scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }
+            ? {
+                scrollSnapType: "x mandatory",
+                WebkitOverflowScrolling: "touch",
+              }
             : undefined
         }
       >
@@ -204,12 +214,16 @@ export default function HorizontalScrollGallery({ images = [] }) {
           <div
             ref={innerRef}
             className={`flex will-change-transform ${
-              isMobile ? 'snap-x snap-mandatory touch-pan-x gap-3' : 'gap-5 lg:gap-8'
+              isMobile
+                ? "snap-x snap-mandatory touch-pan-x gap-3"
+                : "gap-5 lg:gap-8"
             }`}
-            style={{ alignItems: 'stretch' }}
+            style={{ alignItems: "stretch" }}
           >
             {/* Spacers let first & last slides sit in the true center */}
-            {isMobile ? <div className={MOBILE_SPACER_CLASS} aria-hidden /> : null}
+            {isMobile ? (
+              <div className={MOBILE_SPACER_CLASS} aria-hidden />
+            ) : null}
 
             {displayImgs.map((image, index) => {
               const slideIndex = index % imgs.length;
@@ -217,19 +231,19 @@ export default function HorizontalScrollGallery({ images = [] }) {
               return (
                 <div
                   key={index}
-                  className={`flex-shrink-0 ${isMobile ? 'snap-center' : ''} ${
+                  className={`flex-shrink-0 ${isMobile ? "snap-center" : ""} ${
                     isMobile
                       ? `${MOBILE_SLIDE_CLASS} rounded-xl`
                       : isWide
-                        ? 'w-[1120px] rounded-2xl xl:w-[1240px]'
-                        : 'w-[780px] rounded-2xl xl:w-[880px]'
-                  } h-[240px] overflow-hidden shadow-lg sm:h-[320px] lg:h-[440px]`}
+                        ? "w-[860px] rounded-2xl xl:w-[980px] 2xl:w-[1080px]"
+                        : "w-[620px] rounded-2xl xl:w-[700px] 2xl:w-[760px]"
+                  } h-[240px] overflow-hidden shadow-lg sm:h-[320px] lg:h-[540px]`}
                 >
                   <Image
                     src={image}
                     alt={`Slide ${slideIndex + 1}`}
-                    width={1240}
-                    height={440}
+                    width={1080}
+                    height={540}
                     className="h-full w-full object-cover"
                     quality={95}
                   />
@@ -237,7 +251,9 @@ export default function HorizontalScrollGallery({ images = [] }) {
               );
             })}
 
-            {isMobile ? <div className={MOBILE_SPACER_CLASS} aria-hidden /> : null}
+            {isMobile ? (
+              <div className={MOBILE_SPACER_CLASS} aria-hidden />
+            ) : null}
           </div>
         </div>
       </div>
@@ -249,8 +265,8 @@ export default function HorizontalScrollGallery({ images = [] }) {
           disabled={atStart}
           className={`relative h-9 w-9 shrink-0 rounded-full border bg-white shadow-sm transition-opacity ${
             atStart
-              ? 'cursor-not-allowed border-gray-200 text-gray-300 opacity-40'
-              : 'border-[#FA6E43] text-[#FA6E43]'
+              ? "cursor-not-allowed border-gray-200 text-gray-300 opacity-40"
+              : "border-[#FA6E43] text-[#FA6E43]"
           }`}
           aria-label="Previous"
         >
@@ -267,8 +283,8 @@ export default function HorizontalScrollGallery({ images = [] }) {
           disabled={atEnd}
           className={`relative h-9 w-9 shrink-0 rounded-full border bg-white shadow-sm transition-opacity ${
             atEnd
-              ? 'cursor-not-allowed border-gray-200 text-gray-300 opacity-40'
-              : 'border-[#FA6E43] text-[#FA6E43]'
+              ? "cursor-not-allowed border-gray-200 text-gray-300 opacity-40"
+              : "border-[#FA6E43] text-[#FA6E43]"
           }`}
           aria-label="Next"
         >

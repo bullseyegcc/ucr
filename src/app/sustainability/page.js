@@ -12,6 +12,7 @@ import CardAnimation from "../../animations/CardAnimation"
 import Hero from "@/components/shared/Hero"
 import { VideoPlayer } from "@/common/video"
 import gsap from "gsap"
+import { SITE_SHELL } from "../../lib/layout"
 
 const SDG_GOALS = [
   {
@@ -285,7 +286,7 @@ function KnowMoreSection() {
 
   return (
     <section className="bg-white py-14 lg:py-20">
-      <div className="mx-auto w-full max-w-[1600px] px-2 lg:px-10">
+      <div className={SITE_SHELL}>
         <div className="relative min-h-[min(70vh,560px)] h-auto lg:h-[min(90vh,900px)] lg:max-h-[920px] lg:min-h-0">
           <div className="absolute inset-0 overflow-hidden rounded-xl lg:rounded-2xl">
             <div
@@ -415,7 +416,7 @@ export default function Sustainability() {
 
       {/* Our Sustainability Approach */}
       <section className="bg-[#F5F5F5] py-14 lg:py-20">
-        <div className="mx-auto flex w-full max-w-[1600px] flex-col items-center px-2 lg:px-10">
+        <div className={`${SITE_SHELL} flex flex-col items-center`}>
           <SlideIn direction="bottom" scrollTrigger duration={0.7}>
             <Badge title="Our Approach" />
           </SlideIn>
@@ -494,7 +495,7 @@ export default function Sustainability() {
 
       {/* Certifications */}
       <section className="bg-[#F5F5F5] pb-14 lg:pb-20">
-        <div className="mx-auto w-full max-w-[1600px] px-2 lg:px-10">
+        <div className={SITE_SHELL}>
           <div className="rounded-[28px] bg-white px-4 py-8 sm:px-6 sm:py-10 lg:rounded-[32px] lg:px-8 lg:py-12">
             <SequentialSlideIn
               className="grid grid-cols-2 items-start justify-items-center gap-6 sm:grid-cols-3 sm:gap-8 lg:grid-cols-5 lg:gap-6 xl:gap-10"
@@ -529,7 +530,7 @@ export default function Sustainability() {
 
       {/* Sustainability & ESG Certifications / Recognition */}
       <section className="bg-[#F5F5F5] pb-14 pt-2 lg:pb-20 lg:pt-4">
-        <div className="mx-auto w-full max-w-[1600px] px-2 lg:px-10">
+        <div className={SITE_SHELL}>
           <FadeIn scrollTrigger duration={0.7}>
             <h2 className="text-center text-3xl font-medium leading-tight tracking-[-0.5px] text-[#6B6B6B] sm:text-4xl lg:text-[52px] lg:leading-[60px] lg:tracking-[-1.4px]">
               Sustainability &amp; ESG Certifications / Recognition
@@ -568,7 +569,7 @@ export default function Sustainability() {
         id="sustainability-impact"
         className="bg-white py-14 lg:py-20"
       >
-        <div className="mx-auto flex w-full max-w-[1600px] flex-col items-center px-2 lg:px-10">
+        <div className={`${SITE_SHELL} flex flex-col items-center`}>
           <SlideIn direction="bottom" scrollTrigger duration={0.7}>
             <Badge title="Since2020" />
           </SlideIn>
@@ -695,7 +696,7 @@ export default function Sustainability() {
 
       {/* Three Pillars */}
       <section className="bg-[#F5F5F5] py-14 lg:py-20">
-        <div className="mx-auto flex w-full max-w-[1600px] flex-col items-center px-5 sm:px-8 lg:px-10">
+        <div className={`${SITE_SHELL} flex flex-col items-center`}>
           <SlideIn direction="bottom" scrollTrigger duration={0.7}>
             <Badge title="Pillars" />
           </SlideIn>
@@ -739,7 +740,7 @@ export default function Sustainability() {
 
       {/* Core Strength / Elements */}
       <section className="bg-[#F5F5F5] py-14 lg:py-20">
-        <div className="mx-auto flex w-full max-w-[1600px] flex-col items-center px-2 lg:px-10">
+        <div className={`${SITE_SHELL} flex flex-col items-center`}>
           <SlideIn direction="bottom" scrollTrigger duration={0.7}>
             <Badge title="Core Strength" />
           </SlideIn>

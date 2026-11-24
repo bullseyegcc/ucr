@@ -3,6 +3,7 @@ import SlideIn from "../../animations/SlideIn";
 import SequentialSlideIn from "../../animations/SequentialSlideIn";
 import LogisticsAdvantageCard from "./LogisticsAdvantageCard";
 import { useState } from "react";
+import { SITE_SHELL } from "../../lib/layout";
 
 const cards = [
   {
@@ -104,7 +105,7 @@ export default function LogisticsAdvantageSection() {
           className="absolute -top-10 -right-5 z-0"
         />
       </div>
-      <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col items-start gap-12 px-6 lg:px-10 pt-20 pb-20">
+      <div className={`${SITE_SHELL} relative z-10 flex flex-col items-start gap-12 pt-20 pb-20`}>
         <SlideIn
           direction="left"
           duration={0.8}

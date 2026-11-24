@@ -7,13 +7,14 @@ import SlideIn from "../../animations/SlideIn";
 import FadeIn from "../../animations/FadeIn";
 import ScrollRevealCardsContainer from "../../animations/ScrollRevealCardsContainer";
 import CardAnimation from "@/animations/CardAnimation.js";
+import { SITE_SHELL } from "../../lib/layout";
 
 export default function WhyChooseUs() {
   return (
     <div
       className="bg-gradient-to-b from-white via-[#FDD4BB] to-white pt-8 pb-6 lg:pt-10 lg:pb-24 z-0"
     >
-      <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
+      <div className={SITE_SHELL}>
       <div
         className="text-center mb-16 flex flex-col items-center"
         style={{ willChange: 'transform, opacity' }}

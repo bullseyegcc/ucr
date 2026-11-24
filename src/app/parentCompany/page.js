@@ -7,7 +7,7 @@ import ExpertiseCard from "@/components/shared/ExpertiseCard";
 import SlideIn from "../../animations/SlideIn";
 import SequentialSlideIn from "../../animations/SequentialSlideIn";
 import ScrollReveal from "../../animations/ScrollReveal";
-
+import { SITE_SHELL } from "../../lib/layout";
 
 export default function parentCompany() {
   return (
@@ -30,7 +30,7 @@ export default function parentCompany() {
       />
 
       <div className="bg-[#F5F5F5] px-2 pt-10 lg:py-16">
-        <div className="mx-auto w-full max-w-[1600px] px-2 lg:px-10">
+        <div className={SITE_SHELL}>
           <ScrollReveal
             as="p"
             baseOpacity={0.2}
@@ -46,7 +46,7 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
       </div>
 
       <SequentialSlideIn
-        className="mx-auto my-8 grid min-h-[80vh] w-full max-w-[1600px] grid-cols-1 items-stretch gap-6 px-2 sm:grid-cols-2 lg:px-10"
+        className={`${SITE_SHELL} my-8 grid min-h-[80vh] grid-cols-1 items-stretch gap-6 sm:grid-cols-2`}
         itemClassName="min-w-0 h-full"
         start="top 85%"
         end="bottom 65%"
@@ -141,8 +141,8 @@ We lead, manage, and empower a diverse portfolio of companies to bring long-term
         </div>
       </SequentialSlideIn>
 
-      <div className="mb-8 w-full bg-[url('/about/expertisebg.png')] bg-cover bg-top bg-no-repeat px-4 pt-12 lg:h-full lg:px-10 lg:pt-16">
-        <div className="mx-auto flex h-full w-full max-w-[1600px] flex-col justify-between">
+      <div className="mb-8 w-full bg-[url('/about/expertisebg.png')] bg-cover bg-top bg-no-repeat pt-12 lg:h-full lg:pt-16">
+        <div className={`${SITE_SHELL} flex h-full flex-col justify-between`}>
           <SlideIn direction="left" scrollTrigger={true} duration={0.8}>
             <Badge title="our expertise" />
             <h1 className=" font-normal align-middle text-[32px] tracking-[-1.47px] lg:text-[52px] lg:leading-[99px] lg:tracking-[-2.5px]">

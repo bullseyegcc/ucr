@@ -10,6 +10,7 @@ import WhyChooseUs from "../components/home/WhyChooseUs.js";
 import HomeHeroAbout from "../components/home/HomeHeroAbout.js";
 import { getProducts } from "../lib/wordpress/products";
 import { getPosts } from "../lib/wordpress/posts";
+import { SITE_SHELL } from "../lib/layout";
 
 export default async function Home() {
   const [products, posts] = await Promise.all([getProducts(), getPosts()]);
@@ -22,7 +23,7 @@ export default async function Home() {
       {/* video Cards follow the About panel (panel height matches content on mobile) */}
       <div className="relative z-10 w-full bg-white">
         <ParallaxSection index={0}>
-          <div className="max-w-[1600px] mx-auto w-full px-[1rem] sm:px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] mt-8 mb-8 lg:my-8 flex flex-col lg:flex-row justify-center lg:max-h-[1000px] gap-3 lg:gap-2 bg-white">
+          <div className={`${SITE_SHELL} mt-8 mb-8 lg:my-8 flex flex-col lg:flex-row justify-center lg:max-h-[1000px] gap-3 lg:gap-2 bg-white`}>
             <VideoCard
               videoSrc="/moreabout.mp4"
               badgeText="More about"

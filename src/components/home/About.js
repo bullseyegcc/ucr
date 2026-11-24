@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import badgeIcon from '../../../public/shared/badge.png';
 import gsap from 'gsap';
+import { SITE_SHELL } from '../../lib/layout';
 
 const HEADING_ORANGE =
   'Our UAE factory combines advanced technology with global';
@@ -83,7 +84,7 @@ export default function About({ lockProgressRef = null }) {
 
   return (
     <div className="relative w-full shrink-0 overflow-visible bg-white pt-[4.75rem] sm:pt-[5.25rem] lg:pt-[clamp(4.5rem,8vh,6rem)] pb-1 sm:pb-2 lg:pb-0">
-      <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col px-3 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:px-[3rem] xl:gap-10 xl:px-[4rem] 2xl:px-[5rem]">
+      <div className={`relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-8 xl:gap-10 ${SITE_SHELL}`}>
         <div className="relative w-full lg:max-w-[56%] xl:max-w-[58%]">
           <div className="flex flex-col items-center text-center gap-[0.5rem] sm:gap-[0.625rem] lg:items-start lg:text-left lg:gap-[clamp(0.75rem,1.5vh,1.25rem)]">
             <div className="relative z-20 flex items-center justify-center gap-[0.625rem] lg:justify-start">

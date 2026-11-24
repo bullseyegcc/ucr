@@ -7,7 +7,7 @@ import TeamMemoriesSection from "../../components/team/TeamMemoriesSection"
 import TeamCards from "../../components/team/TeamCards"
 import ParallaxSection from "../../animations/ParallaxSection"
 import SlideIn from "../../animations/SlideIn"
-
+import { SITE_SHELL } from "../../lib/layout"
 
 export default function Team() {
 
@@ -65,7 +65,7 @@ export default function Team() {
                     </div>
 
                     {/* our people */}
-                    <div className="relative z-10 mx-auto w-full max-w-[1600px] px-5 lg:px-10">
+                    <div className={`relative z-10 ${SITE_SHELL}`}>
                         {/* Header */}
                         <div className="mb-12 pt-12 lg:mb-16 lg:pt-16">
                             <SlideIn direction="left" duration={0.8} scrollTrigger={true}>

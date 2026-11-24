@@ -10,6 +10,7 @@ import ScrollStack, {
   ScrollStackItem,
 } from "@/components/ScrollStack/ScrollStack";
 import TechnologyLaboratorySection from "../../components/technology/TechnologyLaboratorySection";
+import { SITE_SHELL } from "../../lib/layout";
 
 /** Document Y via offset chain — ignores CSS transforms (ScrollStack). */
 function getDocumentTop(element) {
@@ -170,10 +171,11 @@ function TechnologyCard({ card }) {
   return (
     <div
       className={[
-        "flex max-lg:h-auto h-full min-h-0 w-full flex-col max-lg:overflow-visible overflow-hidden px-5 sm:px-8 lg:px-10",
+        "flex max-lg:h-auto h-full min-h-0 w-full flex-col max-lg:overflow-visible overflow-hidden",
         isDark ? "text-white bg-[#272A2A]" : "bg-white",
       ].join(" ")}
     >
+      <div className={SITE_SHELL}>
       <div className="flex shrink-0 flex-col gap-2 border-b border-secondary/40 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:py-8 lg:py-10">
         <h2 className={titleClass}>{card.title}</h2>
         <p className="text-primary whitespace-nowrap text-base font-semibold leading-tight sm:text-xl lg:text-3xl">
@@ -213,6 +215,7 @@ function TechnologyCard({ card }) {
             />
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import ContactForm from "../../components/contact/ContactForm";
 import { socialLinks } from "../../assets/social-links";
 import Hero from "@/components/shared/Hero";
 import Image from "next/image";
+import { SITE_SHELL } from "../../lib/layout";
 
 export default function contactus() {
   return (
@@ -19,7 +20,8 @@ export default function contactus() {
       />
 
       {/* Let's Connect Section */}
-      <div className="w-full px-4 lg:px-10 lg:px-20 py-12 lg:py-16 lg:py-20 bg-[#F5F5F5] leading-tight">
+      <div className="w-full py-12 lg:py-16 lg:py-20 bg-[#F5F5F5] leading-tight">
+        <div className={SITE_SHELL}>
         {/* Header Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-6 mb-12 lg:mb-16 leading-tight">
           <div>
@@ -274,6 +276,7 @@ export default function contactus() {
               </div>
             </div>
           </SequentialSlideIn>
+        </div>
         </div>
       </div>
     </div>

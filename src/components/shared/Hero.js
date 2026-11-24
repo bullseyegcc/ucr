@@ -5,6 +5,7 @@ import { Badge, Badgetextwhite, WhiteBadge } from "@/common/badge";
 import { VideoPlayer } from "@/common/video";
 import FadeIn from "@/animations/FadeIn";
 import SlideIn from "@/animations/SlideIn";
+import { SITE_SHELL_MEDIA } from "@/lib/layout";
 
 const TITLE = {
   default:
@@ -22,7 +23,7 @@ function HeroBadgeContent({ badge, variant, useWhiteBadgeIcon }) {
 }
 
 const OVERLAP_MEDIA =
-  "absolute left-1/2 -translate-x-1/2 -bottom-[40%] lg:-bottom-[60%] z-20 w-[95%] lg:w-[90%] h-[50vh] lg:h-[70vh] overflow-hidden rounded-xl";
+  `absolute left-1/2 -translate-x-1/2 -bottom-[40%] lg:-bottom-[60%] z-20 ${SITE_SHELL_MEDIA} h-[50vh] lg:h-[70vh] overflow-hidden rounded-xl`;
 
 const GRADIENT_OVERLAY =
   "linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%)";

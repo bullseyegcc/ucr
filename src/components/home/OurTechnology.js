@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { AnimatePresence, motion, useMotionValue, animate } from "framer-motion";
 import { WhiteBadge } from "../../common/badge.js";
+import { SITE_SHELL } from "../../lib/layout";
 
 const TECHNOLOGIES = [
   {
@@ -161,7 +162,7 @@ export default function OurTechnology() {
   };
 
   return (
-    <div className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
+    <div className={SITE_SHELL}>
       <div className="flex flex-col lg:flex-row gap-[0.25rem] items-stretch">
         <div className="@container flex w-full lg:w-1/2 flex-col gap-[1.75rem] lg:gap-[2rem] rounded-xl bg-primary px-[1.25rem] py-[2rem] sm:px-[1.75rem] lg:px-[2.5rem] lg:py-[2.5rem]">
           <div>

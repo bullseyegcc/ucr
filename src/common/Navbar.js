@@ -12,6 +12,7 @@ import {
     useSpring,
     useTransform,
 } from 'motion/react';
+import { SITE_SHELL } from '../lib/layout';
 
 /** Distance over which the bar eases from glass to solid (non-homepage). */
 const FADE_DISTANCE_PX = 280;
@@ -66,15 +67,17 @@ export const Navbar = () => {
     );
     const shadowOpacity = useTransform(progress, [0.35, 1], [0, 0.08]);
     const boxShadow = useMotionTemplate`0 10px 15px -3px rgba(0,0,0,${shadowOpacity}), 0 4px 6px -4px rgba(0,0,0,${shadowOpacity})`;
-    const fgColor = useTransform(progress, [0, 1], ['#ffffff', '#1a1a1a']);
-    const borderColor = useTransform(progress, [0, 1], ['#C0C0C0', '#1a1a1a']);
+    // Snap text/border to dark by the same point the bar goes opaque,
+    // so Contact Us never sits white-on-light mid-fade.
+    const fgColor = useTransform(progress, [0, 0.45], ['#ffffff', '#1a1a1a']);
+    const borderColor = useTransform(progress, [0, 0.45], ['#ffffff', '#1a1a1a']);
     const menuBg = useTransform(
         progress,
         [0, 1],
         ['rgba(192,192,192,0.2)', 'rgb(243,244,246)']
     );
-    const logoLightOpacity = useTransform(progress, [0, 0.8], [1, 0]);
-    const logoDarkOpacity = useTransform(progress, [0.2, 1], [0, 1]);
+    const logoLightOpacity = useTransform(progress, [0, 0.45], [1, 0]);
+    const logoDarkOpacity = useTransform(progress, [0, 0.45], [0, 1]);
 
     const applyOpaqueFlag = useCallback((value) => {
         const opaque = solidByDefault || value > 0.45;
@@ -237,7 +240,7 @@ export const Navbar = () => {
                     boxShadow,
                 }}
             >
-                <div className="relative mx-auto flex h-full w-full max-w-[1600px] flex-row-reverse items-center justify-between px-4 sm:px-6 lg:flex-row lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
+                <div className={`relative flex h-full flex-row-reverse items-center justify-between lg:flex-row ${SITE_SHELL}`}>
                 {/* Menu Button - Dynamic color based on scroll state */}
                 <motion.div
                     className={`group inline-block cursor-pointer p-2 transition-all duration-300 ease-out ${

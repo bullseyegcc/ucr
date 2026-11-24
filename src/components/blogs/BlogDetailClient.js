@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { CalendarDays, Check, Copy, Link2 } from "lucide-react";
+import { SITE_SHELL } from "../../lib/layout";
 
 function getInitials(name) {
   if (!name) return "U";
@@ -118,7 +119,7 @@ export default function BlogDetailClient({ post }) {
 
   return (
     <section className="bg-white pb-8 pt-16 sm:pt-36">
-      <div className="mx-auto w-full max-w-[1800px] px-5 sm:px-8 lg:px-16">
+      <div className={SITE_SHELL}>
         <header className="relative">
           <div className="mx-auto flex min-h-[400px] max-w-[1050px] flex-col items-center justify-center py-8 text-center sm:py-12">
             <h1 className="text-balance text-4xl font-medium leading-[1.05] tracking-[-0.03em] text-[#171717] sm:text-5xl md:text-6xl">

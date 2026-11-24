@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Badge } from "../../common/badge";
+import { SITE_SHELL } from "../../lib/layout";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -400,7 +401,7 @@ export default function JourneySection() {
         className={`relative grid w-full grid-rows-[auto_auto_auto] md:h-screen md:min-h-screen md:grid-rows-[auto_minmax(0,1fr)_auto] ${SECTION_BG_CLASS}`}
       >
         {/* Header — slightly lower on mobile; desktop padding unchanged */}
-        <div className="mx-auto w-full max-w-[72rem] shrink-0 px-[clamp(1rem,4vw,2.5rem)] pt-[clamp(5rem,9vh,6.25rem)] md:pt-[clamp(5.5rem,10.5vh,9rem)]">
+        <div className={`${SITE_SHELL} shrink-0 pt-[clamp(5rem,9vh,6.25rem)] md:pt-[clamp(5.5rem,10.5vh,9rem)]`}>
           <div className="mb-[clamp(0.35rem,1vh,0.85rem)] flex flex-col items-center text-center md:mb-[clamp(0.65rem,1.8vh,2rem)]">
             <Badge title="Our Story" />
             <h2 className="mt-[clamp(0.4rem,1vh,1rem)] font-primary text-[clamp(1.5rem,min(3.5vw,5vh),3.25rem)] font-medium leading-[1.15] tracking-[-0.04em] text-[#1a1a1a] md:mt-[clamp(0.5rem,1.2vh,1.25rem)] lg:tracking-[-0.06em]">

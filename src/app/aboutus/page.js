@@ -13,6 +13,7 @@ import ExpertiseCard from "@/components/shared/ExpertiseCard";
 import SlideIn from "../../animations/SlideIn";
 import SequentialSlideIn from "../../animations/SequentialSlideIn";
 import ScrollReveal from "../../animations/ScrollReveal";
+import { SITE_SHELL, SITE_SHELL_MEDIA } from "../../lib/layout";
 
 const CORE_SECTORS = [
   {
@@ -52,27 +53,27 @@ export default function AboutUs() {
       <Hero
         badge="Crafting Sustainable Progress, One Copper Solution at a Time"
         title="Leading the region's copper transformation with cutting edge technology"
-        titleClassName="px-6 !text-[2rem] !leading-[2.5rem] tracking-[-0.04em] lg:px-5 lg:w-[90%] lg:mb-8 lg:!text-[4rem] lg:!leading-[5rem] lg:tracking-[-0.15625rem]"
+        titleClassName="w-full !text-[2rem] !leading-[2.5rem] tracking-[-0.04em] lg:mb-8 lg:!text-[4rem] lg:!leading-[5rem] lg:tracking-[-0.15625rem]"
         titleDirectFade
         titleInH1={false}
         badgeSlideClassName="hidden lg:block"
         className="mb-[40%] lg:mb-[30%] flex flex-col items-center justify-center pt-16 pb-[18%] lg:justify-center lg:pt-0 lg:pb-0"
         minHeightClass="min-h-[52vh] lg:min-h-[80vh]"
         gapClass="gap-3 lg:gap-[1.5rem]"
-        contentClassName="relative z-30 lg:z-10"
+        contentClassName={`relative z-30 lg:z-10 ${SITE_SHELL_MEDIA}`}
         media={{
           type: "image",
           src: "/about/abouthero.webp",
           alt: "About Union Copper Rod",
           priority: true,
-          sizes: "(max-width: 1024px) 95vw, 90vw",
+          sizes: "(max-width: 1600px) calc(100vw - 6rem), 1500px",
           quality: 90,
           className:
-            "absolute left-1/2 -translate-x-1/2 -bottom-[38%] z-20 w-[94%] h-[32vh] overflow-hidden rounded-[1.25rem] lg:-bottom-[60%] lg:w-[90%] lg:h-[70vh] lg:rounded-xl",
+            `absolute left-1/2 -translate-x-1/2 -bottom-[38%] z-20 ${SITE_SHELL_MEDIA} h-[32vh] overflow-hidden rounded-[1.25rem] lg:-bottom-[60%] lg:h-[70vh] lg:rounded-xl`,
         }}
       />
 
-      <div className="mx-auto w-full max-w-[1600px] px-3 pt-14 pb-5 lg:px-10 lg:py-5 flex flex-col items-center justify-center">
+      <div className={`${SITE_SHELL} pt-14 pb-5 lg:py-5 flex flex-col items-center justify-center`}>
         <Badge title="Who we are" />
 
         <div className="mt-8 w-full max-w-[1300px] mx-auto">
@@ -99,7 +100,7 @@ export default function AboutUs() {
 
       {/* parent company / our verticals */}
 
-      <div className="relative mx-auto mb-8 w-full max-w-[1600px] lg:mb-0">
+      <div className={`relative mb-8 lg:mb-0 ${SITE_SHELL}`}>
         {/* Banner */}
         <div className="relative flex min-h-[40vh] w-full flex-col justify-end overflow-hidden rounded-xl px-4 py-8 sm:min-h-[50vh] sm:rounded-2xl sm:px-5 sm:py-12 lg:px-16 lg:pb-20">
           <Image
@@ -192,7 +193,7 @@ export default function AboutUs() {
       <JourneySection />
 
       <div className="mb-8 w-full overflow-visible bg-[url('/about/expertisebg.png')] bg-cover bg-top bg-no-repeat pt-12 lg:max-h-[95vh] lg:overflow-hidden lg:pt-16">
-        <div className="mx-auto flex h-full w-full max-w-[1600px] flex-col justify-between px-4 pb-10 lg:px-10 lg:pb-0">
+        <div className={`${SITE_SHELL} flex h-full flex-col justify-between pb-10 lg:pb-0`}>
           <SlideIn direction="left" scrollTrigger={true} duration={0.8}>
             <Badge title="What we care" />
             <h1 className="align-middle text-[2rem] font-normal tracking-[-0.09rem] lg:text-[3.25rem] lg:leading-[6.2rem] lg:tracking-[-0.16rem]">
@@ -256,7 +257,7 @@ export default function AboutUs() {
       </div>
 
       <ParallaxSection index={0}>
-        <div className="mx-auto w-full max-w-[1600px] flex flex-col lg:flex-row justify-center items-stretch px-1 sm:px-6 lg:px-10 gap-4 sm:gap-6 lg:gap-8 pt-6 sm:pt-8 lg:pt-10 pb-6 lg:pb-8 relative z-0 lg:-z-10">
+        <div className={`${SITE_SHELL} flex flex-col lg:flex-row justify-center items-stretch gap-4 sm:gap-6 lg:gap-8 pt-6 sm:pt-8 lg:pt-10 pb-6 lg:pb-8 relative z-0 lg:-z-10`}>
           <VideoCard
             videoSrc="/aboutvideo.mp4"
             badgeText="Our Company"
