@@ -7,6 +7,7 @@ import ExpertiseCard from "@/components/shared/ExpertiseCard";
 import LogisticsAdvantageSection from "../../components/logistics/LogisticsAdvantageSection";
 import FadeIn from "../../animations/FadeIn";
 import SlideIn from "../../animations/SlideIn";
+import { SITE_SHELL, SITE_SHELL_MEDIA } from "../../lib/layout";
 
 export default function Logistics() {
   return (
@@ -36,7 +37,7 @@ export default function Logistics() {
           sizes: "(max-width: 1024px) 95vw, 90vw",
           quality: 85,
           className:
-            "absolute left-1/2 -translate-x-1/2 -bottom-[38%] z-20 w-[94%] h-[32vh] overflow-hidden rounded-[1.25rem] lg:-bottom-[60%] lg:w-[90%] lg:h-[70vh] lg:rounded-xl",
+            `absolute left-1/2 -translate-x-1/2 -bottom-[38%] z-20 ${SITE_SHELL_MEDIA} h-[32vh] overflow-hidden rounded-[1.25rem] lg:-bottom-[60%] lg:h-[70vh] lg:rounded-xl`,
         }}
       />
 
@@ -83,7 +84,7 @@ export default function Logistics() {
           </FadeIn>
         </div>
 
-        <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-col items-end justify-center gap-6 px-6 pt-2 pb-3 lg:flex-row lg:px-10 lg:pt-4 lg:pb-4">
+        <div className={`${SITE_SHELL} relative z-10 flex flex-col items-end justify-center gap-6 pt-2 pb-3 lg:flex-row lg:pt-4 lg:pb-4`}>
           <ExpertiseCard
             index={0}
             variant="tall"
@@ -134,7 +135,7 @@ export default function Logistics() {
           />
         </div>
 
-        <div className="mx-auto flex w-full max-w-[1600px] flex-col-reverse items-start justify-center gap-6 px-6 pt-3 pb-8 lg:flex-row-reverse lg:px-10 lg:pt-4 lg:pb-10">
+        <div className={`${SITE_SHELL} flex flex-col-reverse items-start justify-center gap-6 pt-3 pb-8 lg:flex-row-reverse lg:pt-4 lg:pb-10`}>
           <ExpertiseCard
             index={0}
             variant="tall"
@@ -190,7 +191,7 @@ export default function Logistics() {
 
       <div className="bg-white pt-16 lg:pt-20 flex flex-col">
         {/* Header */}
-        <div className="mx-auto w-full max-w-[1600px] flex px-5 lg:px-10 flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-18 lg:gap-12 mb-12 lg:mb-16 lg:mb-20">
+        <div className={`${SITE_SHELL} flex flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-12 mb-12 lg:mb-16 lg:mb-20`}>
           <SlideIn
             direction="left"
             scrollTrigger={true}
@@ -220,7 +221,7 @@ export default function Logistics() {
           </div>
         </div>
 
-        <div className="mx-auto w-full max-w-[1600px] h-[55vh] lg:h-[75vh] relative z-0 overflow-visible">
+        <div className={`${SITE_SHELL} h-[55vh] lg:h-[75vh] relative z-0 overflow-visible`}>
           <VideoPlayer
             src="/globalpresence.mp4"
             className="w-full h-full object-contain"

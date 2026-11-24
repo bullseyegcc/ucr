@@ -1,5 +1,6 @@
 import FadeIn from "@/animations/FadeIn";
 import SlideIn from "../../animations/SlideIn";
+import { SITE_SHELL } from "../../lib/layout";
 
 export default function SuccessStrengthSection() {
   const stats = [
@@ -18,7 +19,7 @@ export default function SuccessStrengthSection() {
   ];
 
   return (
-    <section className="mx-auto w-full max-w-[1600px] px-5 lg:px-10 py-10 lg:py-30 flex flex-col justify-center">
+    <section className={`${SITE_SHELL} py-10 lg:py-30 flex flex-col justify-center`}>
       {/* Top Row */}
       <div className="flex w-full flex-col items-center justify-center gap-16 lg:flex-row lg:gap-20">
         {/* Left Side - Orange Circle Stat */}

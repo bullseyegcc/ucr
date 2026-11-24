@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import SlideIn from "../../animations/SlideIn";
 import Hero from "@/components/shared/Hero";
 import { policies } from "../../assets/policies";
+import { SITE_SHELL } from "../../lib/layout";
 
 function PolicyIcon({ className }) {
     return (
@@ -87,12 +88,13 @@ export default function OurPolicies() {
                 }}
             />
 
-            <div className="relative w-full overflow-hidden bg-[#F5F5F5] px-4 py-12 lg:px-20 lg:py-20">
+            <div className="relative w-full overflow-hidden bg-[#F5F5F5] py-12 lg:py-20">
                 <div
                     className="pointer-events-none absolute top-[-60px] left-[40%] z-0 h-[420px] w-[420px] rounded-full bg-[#FA6E43]/22 blur-[140px] select-none lg:top-[-120px] lg:left-[48%] lg:h-[720px] lg:w-[720px] lg:bg-[#FA6E43]/24 lg:blur-[180px]"
                     aria-hidden="true"
                 />
 
+                <div className={SITE_SHELL}>
                 <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 mb-12 lg:mb-20 leading-tight">
                     <SlideIn direction="left" duration={0.9}>
                         <p className="mb-3 lg:mb-4 text-primary uppercase text-sm lg:text-[1.125rem] font-medium tracking-[0.04em]">
@@ -195,6 +197,7 @@ export default function OurPolicies() {
                         policy={selectedPolicy}
                         className="w-[68%] flex flex-col justify-start bg-gradient-to-b from-white to-transparent rounded-xl px-14 py-14"
                     />
+                </div>
                 </div>
             </div>
         </div>

@@ -6,6 +6,7 @@ import { Badge } from "../../common/badge";
 import SlideIn from "../../animations/SlideIn";
 import FadeIn from "../../animations/FadeIn";
 import SequentialSlideIn from "../../animations/SequentialSlideIn";
+import { SITE_SHELL } from "../../lib/layout";
 
 const cards = [
   { title: "Oxygen Analyzers", src: "/technology/tool.jpg", alt: "Oxygen Analyzers" },
@@ -54,8 +55,8 @@ export default function UcrLaboratoryToolsSection() {
   const translateXValue = `calc(${sidePadVw}vw - ${currentIndex} * (${cardWidthVw}vw + 1rem))`;
 
   return (
-    <section ref={sectionRef} className="relative z-10 w-full bg-white px-5 py-20 lg:px-10">
-      <div className="mb-14 flex flex-col items-center gap-5 text-center">
+    <section ref={sectionRef} className="relative z-10 w-full bg-white py-20">
+      <div className={`${SITE_SHELL} mb-14 flex flex-col items-center gap-5 text-center`}>
         <SlideIn direction="bottom" scrollTrigger={true} duration={0.8}>
           <Badge title="UCR Laboratory" />
         </SlideIn>
@@ -121,6 +122,7 @@ export default function UcrLaboratoryToolsSection() {
         </div>
       </div>
 
+      <div className={SITE_SHELL}>
       <SequentialSlideIn
         scrollTriggerRef={sectionRef}
         className="mt-16 hidden grid-cols-1 gap-4 sm:grid sm:grid-cols-2 sm:gap-8 lg:grid-cols-3"
@@ -139,6 +141,7 @@ export default function UcrLaboratoryToolsSection() {
           />
         ))}
       </SequentialSlideIn>
+      </div>
     </section>
   );
 }

@@ -8,6 +8,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { VideoPlayer } from "@/common/video";
 import { socialLinks } from "@/assets/social-links";
+import { SITE_SHELL } from "@/lib/layout";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -68,7 +69,8 @@ export default function Footer() {
 
       {/* Mobile: in-flow → drives footer height. Desktop: bottom-aligned in 90vh. */}
       <div className="relative z-10 col-start-1 row-start-1 flex w-full flex-col items-center pt-20 lg:absolute lg:inset-x-0 lg:bottom-0 lg:min-h-[90vh] lg:justify-end lg:pt-0">
-        <div className="flex w-[90%] md:w-[80%] flex-col gap-6 rounded-t-xl bg-[url(/shared/footerbg.png)] bg-cover bg-bottom p-6 pb-16 sm:gap-12 sm:p-10 sm:pb-12 md:p-16 lg:gap-12 lg:pb-16">
+        <div className={SITE_SHELL}>
+        <div className="flex w-full flex-col gap-6 rounded-t-xl bg-[url(/shared/footerbg.png)] bg-cover bg-bottom p-6 pb-16 sm:gap-12 sm:p-10 sm:pb-12 md:p-16 lg:gap-12 lg:pb-16">
           <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between sm:gap-0">
             <div className="flex items-center">
               <Image
@@ -188,6 +190,7 @@ export default function Footer() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

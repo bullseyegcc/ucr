@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { WhiteBadge } from "../../common/badge.js";
 import Link from "next/link";
+import { SITE_SHELL } from "../../lib/layout";
 
 const FALLBACK_POSTS = [
   {
@@ -132,7 +133,7 @@ export default function Articles({ posts }) {
   return (
     <div
       ref={sectionRef}
-      className="max-w-[1600px] mx-auto w-full px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] py-8 lg:py-10 mb-4"
+      className={`${SITE_SHELL} py-8 lg:py-10 mb-4`}
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-5 lg:h-[min(88vh,860px)] lg:min-h-[680px] items-stretch">
         {/* ── Left feature column ──── */}

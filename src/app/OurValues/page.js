@@ -6,6 +6,7 @@ import SlideIn from "../../animations/SlideIn";
 import FadeIn from "../../animations/FadeIn";
 import Hero from "@/components/shared/Hero";
 import { VideoPlayer } from "../../common/video";
+import { SITE_SHELL } from "../../lib/layout";
 
 const VALUE_CARD_BG =
   "relative z-10 rounded-xl bg-[linear-gradient(180deg,rgba(255,255,255,0.88)_0%,rgba(255,255,255,0.58)_52%,rgba(255,255,255,0.14)_100%)]";
@@ -37,7 +38,7 @@ export default function OurValues() {
       />
 
       {/* Trust & Reliability Section */}
-      <div className="relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#FFF_0%,#FFF5F1_45%,rgba(255,245,240,0.55)_100%)] px-6 py-12 lg:px-10 lg:py-20">
+      <div className="relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#FFF_0%,#FFF5F1_45%,rgba(255,245,240,0.55)_100%)] py-12 lg:py-20">
         {/* Gradient Image Centered, Low Z-Index */}
         <Image
           src="/our-values/valuegrad.png"
@@ -47,7 +48,7 @@ export default function OurValues() {
           className=" rotate-270 w-[80%]  absolute left-1/2 top-[60%] -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none select-none"
         />
 
-        <div className="relative z-10 mx-auto w-full">
+        <div className={`relative z-10 ${SITE_SHELL}`}>
           {/* Header */}
           <div className="w-full flex flex-col lg:flex-row lg:justify-between lg:items-start gap-4  lg:gap-12 mb-12 lg:mb-16">
             <SlideIn
@@ -193,7 +194,7 @@ export default function OurValues() {
 
       {/* people */}
       <section className="overflow-x-visible bg-white pt-16 pb-0 lg:overflow-x-hidden lg:pt-20">
-        <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-5 px-6 pt-6 pb-2 text-center lg:max-w-none lg:gap-5 lg:px-10 lg:py-0">
+        <div className={`${SITE_SHELL} flex flex-col items-center gap-5 pt-6 pb-2 text-center lg:gap-5 lg:py-0`}>
           <SlideIn direction="bottom" duration={0.8} scrollTrigger={true}>
             <Badge title="people" />
           </SlideIn>

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { VideoPlayer } from "../../common/video";
 import { WhiteBadge } from "../../common/badge.js";
+import { SITE_SHELL } from "../../lib/layout";
 
 const CARDS = [
   {
@@ -93,7 +94,7 @@ export default function WeCareSection() {
   }, []);
 
   return (
-    <div className="mx-auto my-5 w-full max-w-[1600px] px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem]">
+    <div className={`${SITE_SHELL} my-5`}>
       <div
         ref={sectionRef}
         className="relative flex h-[min(75vh,640px)] max-h-[640px] flex-col justify-between overflow-hidden rounded-xl bg-[url('/home/care.jpg')] bg-cover bg-center pt-8 lg:h-[min(90vh,900px)] lg:max-h-[800px]"

@@ -3,11 +3,13 @@
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { SITE_SHELL } from "../lib/layout";
 
-// Account for parent px-[1.5rem] (3rem total) when sizing/centering slides
-const MOBILE_SLIDE_CLASS = "w-[min(calc(100vw-4.5rem),360px)]";
+// Account for SITE_SHELL padding: px-4 (2rem) / sm:px-6 (3rem)
+const MOBILE_SLIDE_CLASS =
+  "w-[min(calc(100vw-3.5rem),360px)] sm:w-[min(calc(100vw-4.5rem),360px)]";
 const MOBILE_SPACER_CLASS =
-  "w-[max(0px,calc((100vw-3rem-min(calc(100vw-4.5rem),360px))/2))] shrink-0 grow-0 basis-auto";
+  "w-[max(0px,calc((100vw-2rem-min(calc(100vw-3.5rem),360px))/2))] sm:w-[max(0px,calc((100vw-3rem-min(calc(100vw-4.5rem),360px))/2))] shrink-0 grow-0 basis-auto";
 
 export default function HorizontalScrollGallery({ images = [] }) {
   const wrapperRef = useRef(null);
@@ -164,7 +166,7 @@ export default function HorizontalScrollGallery({ images = [] }) {
   const displayImgs = isMobile ? imgs : [...imgs, ...imgs];
 
   return (
-    <div className="relative mx-auto flex w-full max-w-[1600px] flex-col items-center justify-center overflow-hidden bg-white px-[1.5rem] lg:px-[3rem] xl:px-[4rem] 2xl:px-[5rem] lg:flex-row">
+    <div className={`relative flex flex-col items-center justify-center overflow-hidden bg-white lg:flex-row ${SITE_SHELL}`}>
       {!isMobile && (
         <>
           <div

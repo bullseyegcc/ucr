@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import SequentialSlideIn from "../../animations/SequentialSlideIn";
+import { SITE_SHELL } from "../../lib/layout";
 
 function formatCardDate(dateString) {
   if (!dateString) return "";
@@ -37,10 +38,10 @@ export default function BlogsListingSection({
   const items = typeof limit === "number" ? posts.slice(0, limit) : posts;
 
   return (
-    <section className="relative overflow-hidden bg-[#F3F3F3] px-5 py-16 sm:px-8 sm:py-20 lg:px-16 lg:py-24">
+    <section className="relative overflow-hidden bg-[#F3F3F3] py-16 sm:py-20 lg:py-24">
       <div className="pointer-events-none absolute -bottom-32 -right-16 h-[420px] w-[420px] rounded-full bg-[#FA6E43]/30 blur-[110px]" />
 
-      <div className="relative mx-auto w-full max-w-[1440px]">
+      <div className={`relative ${SITE_SHELL}`}>
         <div className="mb-12 lg:mb-16">
           <p className="mb-3 text-[13px] font-medium uppercase tracking-[0.16em] text-[#FA6E43] lg:text-[15px]">
             Our blogs

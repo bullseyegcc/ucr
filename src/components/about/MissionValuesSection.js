@@ -7,6 +7,7 @@ import { Badge } from "../../common/badge";
 import { WhiteBadge } from "../../common/badge";
 import FadeIn from "../../animations/FadeIn";
 import SlideIn from "../../animations/SlideIn";
+import { SITE_SHELL } from "../../lib/layout";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -87,7 +88,7 @@ export default function MissionValuesSection() {
   return (
     <div
       ref={containerRef}
-      className="mx-auto min-h-[60vh] w-full max-w-[1600px] flex items-center justify-center my-8 px-2 lg:px-10"
+      className={`${SITE_SHELL} min-h-[60vh] flex items-center justify-center my-8`}
     >
       <div className=" w-full flex flex-col lg:flex-row gap-6 items-stretch">
         {/* Mission Card */}

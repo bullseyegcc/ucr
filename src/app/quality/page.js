@@ -7,6 +7,7 @@ import CardAnimation from "../../animations/CardAnimation";
 import SequentialSlideIn from "../../animations/SequentialSlideIn";
 import FadeIn from "../../animations/FadeIn";
 import SlideIn from "../../animations/SlideIn";
+import { SITE_SHELL } from "../../lib/layout";
 
 export default function Quality() {
   return (
@@ -124,7 +125,7 @@ export default function Quality() {
             {/* cards — equal size (match first), stepped vertical offset */}
             <div className="w-full">
               <SequentialSlideIn
-                className="mx-auto w-full max-w-[1600px] px-6 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-start"
+                className={`${SITE_SHELL} grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-start`}
                 itemClassName="w-full min-w-0"
                 start="top 85%"
                 end="bottom 70%"

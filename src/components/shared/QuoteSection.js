@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import ScrollReveal from "../../animations/ScrollReveal";
+import { SITE_SHELL } from "../../lib/layout";
 
 export default function QuoteSection() {
   return (
-    <div className="min-h-[60vh] lg:min-h-[80vh] rounded-t-lg bg-[url('/shared/gradient-bg.png')] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center gap-4 lg:gap-6 px-6 text-center py-12 lg:py-20 overflow-x-hidden">
-      <div className="flex flex-col w-full lg:w-[80%]">
+    <div className="min-h-[60vh] lg:min-h-[80vh] rounded-t-lg bg-[url('/shared/gradient-bg.png')] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center gap-4 lg:gap-6 text-center py-12 lg:py-20 overflow-x-hidden">
+      <div className={`${SITE_SHELL} flex flex-col`}>
         <Image
           src="/shared/quote.png"
           alt="Icon"

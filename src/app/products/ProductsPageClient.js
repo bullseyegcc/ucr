@@ -10,6 +10,7 @@ import SlideIn from "../../animations/SlideIn";
 import FadeIn from "../../animations/FadeIn";
 import ScrollReveal from "../../animations/ScrollReveal";
 import ProductCard from "../../components/products/ProductCard";
+import { SITE_SHELL } from "../../lib/layout";
 
 export default function ProductsPageClient({ products = [] }) {
   return (
@@ -30,10 +31,10 @@ export default function ProductsPageClient({ products = [] }) {
       />
 
       <ParallaxSection index={0}>
-        <div className="relative overflow-hidden flex flex-col justify-start items-center px-2 pt-10 pb-[65%] lg:min-h-[90vh] lg:max-h-[90vh] lg:justify-start lg:pt-20 lg:pb-0 lg:px-0">
-          <div className="flex flex-col items-center gap-2 lg:gap-4">
+        <div className="relative overflow-hidden flex flex-col justify-start items-center pt-10 pb-[65%] lg:min-h-[90vh] lg:max-h-[90vh] lg:justify-start lg:pt-20 lg:pb-0">
+          <div className={`${SITE_SHELL} flex flex-col items-center gap-2 lg:gap-4`}>
             <Badgetextblack title="What we produce" className="" />
-            <div className="w-full px-5 mt-3 lg:mt-9 lg:px-10 lg:w-[85%]">
+            <div className="mt-3 w-full lg:mt-9">
               <ScrollReveal
                 as="h1"
                 baseOpacity={0.5}
@@ -72,7 +73,7 @@ export default function ProductsPageClient({ products = [] }) {
         </div>
       </ParallaxSection>
 
-      <section className="relative w-full bg-[#F5F4F4] min-h-screen flex flex-col items-center justify-center lg:px-10 py-20 gap-10">
+      <section className="relative w-full bg-[#F5F4F4] min-h-screen flex flex-col items-center justify-center py-20 gap-10">
         {/* Header */}
         <div className="flex flex-col gap-1 items-center justify-center">
           <Badge title="Collections" />
@@ -81,7 +82,7 @@ export default function ProductsPageClient({ products = [] }) {
           </h1>
         </div>
 
-        <div className="w-full px-2 lg:px-10">
+        <div className={SITE_SHELL}>
           {products.length === 0 ? (
             <p className="text-center text-gray-500">
               No products published yet.

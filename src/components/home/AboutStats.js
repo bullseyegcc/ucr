@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import StatsCard from "../../common/StatsCard";
+import { SITE_SHELL } from "../../lib/layout";
 
 const STATS = [
   {
@@ -123,7 +124,7 @@ export default function AboutStats() {
     <div className="w-full shrink-0 bg-white">
       <div
         ref={rowRef}
-        className="mx-auto grid max-w-[1600px] grid-cols-2 gap-x-[0.75rem] gap-y-[1.5rem] px-[1rem] pt-2 pb-[0.75rem] lg:grid-cols-4 lg:gap-x-[1.25rem] lg:gap-y-[1.25rem] lg:px-[3rem] lg:pt-0 lg:pb-[clamp(0.75rem,2vh,1.5rem)] xl:px-[4rem] 2xl:px-[5rem]"
+        className={`${SITE_SHELL} grid grid-cols-2 gap-x-[0.75rem] gap-y-[1.5rem] pt-2 pb-[0.75rem] lg:grid-cols-4 lg:gap-x-[1.25rem] lg:gap-y-[1.25rem] lg:pt-0 lg:pb-[clamp(0.75rem,2vh,1.5rem)]`}
       >
         {STATS.map((stat, index) => (
           <div
